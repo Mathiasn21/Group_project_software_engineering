@@ -1,4 +1,11 @@
 *.idea
+*.idea/
 *.iml
-CMakeLists.txt
+*.project
+output/
+out/
+posters/
+poster/
 idea/
+cmake-build-debug/
+CMakeLists.txt
