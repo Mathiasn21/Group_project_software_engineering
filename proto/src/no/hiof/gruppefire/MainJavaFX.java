@@ -11,6 +11,8 @@ import no.hiof.gruppefire.model.Arrangement;
 
 import java.io.IOException;
 
+//Hei
+
 public class MainJavaFX extends Application {
 
     private static MainJavaFX application;
