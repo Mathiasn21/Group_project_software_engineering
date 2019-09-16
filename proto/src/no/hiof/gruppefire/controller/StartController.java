@@ -1,5 +1,11 @@
 package no.hiof.gruppefire.controller;
 
+import javafx.fxml.FXML;
+
 public class StartController {
-    //fhuidgufhssg
+
+    @FXML
+    public void newArrangementClicked(){
+
+    }
 }
