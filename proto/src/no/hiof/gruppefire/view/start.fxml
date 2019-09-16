@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="no.hiof.gruppefire.controller.startController"
-            prefHeight="400.0" prefWidth="600.0">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="no.hiof.gruppefire.controller.StartController">
+   <children>
+      <ListView layoutX="14.0" layoutY="14.0" prefHeight="376.0" prefWidth="200.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0" />
+      <HBox layoutX="333.0" layoutY="295.0" prefHeight="33.0" prefWidth="271.0" spacing="10.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
+         <children>
+            <Button fx:id="newArrangementBtn" mnemonicParsing="false" onAction="#newArrangementClicked" text="New arrangement" />
+            <Button fx:id="editBtn" mnemonicParsing="false" text="Edit" />
+            <Button fx:id="deleteBtn" mnemonicParsing="false" text="Delete" />
+         </children>
+      </HBox>
+   </children>
 </AnchorPane>
