@@ -20,7 +20,7 @@ public class StartController {
     @FXML
     private Button newArrangementBtn;
     @FXML
-    private ListView<Arrangement>listview;
+    private ListView<Arrangement>listview = new ListView<>();
     @FXML
     public void newArrangementClicked() throws IOException {
 
@@ -36,17 +36,16 @@ public class StartController {
             redigerStage.initOwner(stage);
 
             redigerStage.setScene(redigerScene);
-            redigerStage.setTitle("Redigering");
+            redigerStage.setTitle("Registrering new arrangement");
             redigerStage.show();
         }
 
         public void addArrangementToList (Arrangement a){
-
             arrangementList.add(a);
 
             for(Arrangement arrangement : arrangementList){
                 System.out.println(arrangement.getName());
             }
-            //listview.setItems(arrangementList);
+            listview.setItems(arrangementList);
         }
     }
