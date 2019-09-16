@@ -6,8 +6,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import no.hiof.gruppefire.model.Arrangement;
+
 import java.io.IOException;
 
 public class NewArrangementController {
@@ -15,8 +18,12 @@ public class NewArrangementController {
     @FXML
     private Button cancelBtn;
     @FXML
+    private TextField nameInput, sportInput;
+    @FXML
     public void saveClicked(ActionEvent actionEvent){
-        System.out.println("save");
+        System.out.println(new Arrangement(nameInput.getText(),sportInput.getText()));
+        Stage stage = (Stage) cancelBtn.getScene().getWindow();
+        stage.close();
     }
 
     @FXML
