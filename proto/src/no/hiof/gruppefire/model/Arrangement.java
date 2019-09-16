@@ -4,61 +4,63 @@ import java.time.LocalDate;
 
 public class Arrangement {
 
-    private String navn;
-    private String idrett;
-    private int antallPlasser;
-    private LocalDate startDato;
-    private LocalDate sluttDato;
-    //hughgrahguareugarhigaruhhguari
+    private String name;
+    private String sport;
+    private int participants;
+    private LocalDate startDate;
+    private LocalDate endDate;
 
-    public Arrangement(){
+    public Arrangement() {
+
     }
 
-    public Arrangement(String navn, String idrett, int antallPlasser, LocalDate startDato, LocalDate sluttDato) {
-        this.navn = navn;
-        this.idrett = idrett;
-        this.antallPlasser = antallPlasser;
-        this.startDato = startDato;
-        this.sluttDato = sluttDato;
+    public Arrangement(String name, String sport, int participants, LocalDate startDate, LocalDate endDate) {
+        this.name = name;
+        this.sport = sport;
+        this.participants = participants;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
-    public String getNavn() {
-        return navn;
+    public String getName() {
+        return name;
     }
 
-    public void setNavn(String navn) {
-        this.navn = navn;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getIdrett() {
-        return idrett;
+    public String getSport() {
+        return sport;
     }
 
-    public void setIdrett(String idrett) {
-        this.idrett = idrett;
+    public void setSport(String sport) {
+        this.sport = sport;
     }
 
-    public int getAntallPlasser() {
-        return antallPlasser;
+    public int getParticipants() {
+        return participants;
     }
 
-    public void setAntallPlasser(int antallPlasser) {
-        this.antallPlasser = antallPlasser;
+    public void setParticipants(int participants) {
+        this.participants = participants;
     }
 
-    public LocalDate getStartDato() {
-        return startDato;
+    public LocalDate getStartDate() {
+        return startDate;
     }
 
-    public void setStartDato(LocalDate startDato) {
-        this.startDato = startDato;
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
     }
 
-    public LocalDate getSluttDato() {
-        return sluttDato;
+    public LocalDate getEndDate() {
+        return endDate;
     }
 
-    public void setSluttDato(LocalDate sluttDato) {
-        this.sluttDato = sluttDato;
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
     }
 }
+
+
