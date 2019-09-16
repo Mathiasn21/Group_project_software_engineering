@@ -13,16 +13,16 @@ import java.io.IOException;
 public class NewArrangementController {
 
     @FXML
+    private Button cancelBtn;
+    @FXML
     public void saveClicked(ActionEvent actionEvent){
         System.out.println("save");
-//Hoi
-
-
     }
 
     @FXML
     public void cancelClicked(ActionEvent actionEvent){
-        System.out.println("cancel");
+        Stage stage = (Stage) cancelBtn.getScene().getWindow();
+        stage.close();
     }
 
 }
