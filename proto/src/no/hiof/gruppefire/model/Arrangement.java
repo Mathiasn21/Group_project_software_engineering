@@ -65,6 +65,11 @@ public class Arrangement {
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
+
+    @Override
+    public String toString(){
+        return name + " " + sport;
+    }
 }
 
 
