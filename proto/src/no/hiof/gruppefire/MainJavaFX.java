@@ -12,6 +12,7 @@ import no.hiof.gruppefire.model.Arrangement;
 import java.io.IOException;
 
 //Hei
+//god aften
 
 public class MainJavaFX extends Application {
 
