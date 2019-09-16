@@ -9,6 +9,7 @@ public class Arrangement {
     private int antallPlasser;
     private LocalDate startDato;
     private LocalDate sluttDato;
+    //hughgrahguareugarhigaruhhguari
 
     public Arrangement(){
     }
