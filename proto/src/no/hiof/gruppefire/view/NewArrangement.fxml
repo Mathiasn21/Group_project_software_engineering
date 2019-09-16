@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="no.hiof.gruppefire.controller.NewArrangementController" />
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="no.hiof.gruppefire.controller.NewArrangementController">
+   <children>
+      <VBox layoutX="14.0" layoutY="14.0" prefHeight="176.0" prefWidth="218.0" spacing="5.0" AnchorPane.bottomAnchor="220.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="377.0" AnchorPane.topAnchor="30.0">
+         <children>
+            <TextField />
+            <TextField />
+            <TextField />
+            <DatePicker />
+            <DatePicker />
+         </children>
+      </VBox>
+      <VBox layoutX="231.0" layoutY="5.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="220.0" AnchorPane.leftAnchor="231.0" AnchorPane.rightAnchor="269.0" AnchorPane.topAnchor="30.0" />
+      <Text layoutX="33.0" layoutY="6.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New Arrangement" AnchorPane.bottomAnchor="400.048828125" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="473.74755859375" AnchorPane.topAnchor="5.0" />
+   </children>
+</AnchorPane>

@@ -1,8 +1,31 @@
 package no.hiof.gruppefire;
 
+import no.hiof.gruppefire.model.*;
+
+import java.util.ArrayList;
+
+
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println("hello world");
+
+
+
+        //Sick codexxxxxxdddd
+        Arrangement arrangement1 = new Arrangement("HaldenLøpet", "Marathon");
+        Arrangement arrangement2 = new Arrangement("KongsvingerLøpet", "Marathon");
+
+        System.out.println(arrangement1.getName());
+
+        ArrayList<Arrangement>liste = new ArrayList<>();
+
+        liste.add(arrangement1);
+        liste.add(arrangement2);
+
+        for(Arrangement a : liste){
+            System.out.println(a.getName());
+        }
+
+
     }
 }
