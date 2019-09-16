@@ -1,18 +1,24 @@
 package no.hiof.gruppefire.model;
 
+import java.time.LocalDate;
+
 public class Arrangement {
 
     private String navn;
     private String idrett;
     private int antallPlasser;
+    private LocalDate startDato;
+    private LocalDate sluttDato;
 
     public Arrangement(){
     }
 
-    public Arrangement(String navn, int antallPlasser, String idrett){
+    public Arrangement(String navn, String idrett, int antallPlasser, LocalDate startDato, LocalDate sluttDato) {
         this.navn = navn;
         this.idrett = idrett;
         this.antallPlasser = antallPlasser;
+        this.startDato = startDato;
+        this.sluttDato = sluttDato;
     }
 
     public String getNavn() {
@@ -37,5 +43,21 @@ public class Arrangement {
 
     public void setAntallPlasser(int antallPlasser) {
         this.antallPlasser = antallPlasser;
+    }
+
+    public LocalDate getStartDato() {
+        return startDato;
+    }
+
+    public void setStartDato(LocalDate startDato) {
+        this.startDato = startDato;
+    }
+
+    public LocalDate getSluttDato() {
+        return sluttDato;
+    }
+
+    public void setSluttDato(LocalDate sluttDato) {
+        this.sluttDato = sluttDato;
     }
 }
