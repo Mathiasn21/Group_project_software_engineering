@@ -15,8 +15,8 @@ public class NewArrangementController {
     @FXML
     public void saveClicked(ActionEvent actionEvent){
         System.out.println("save");
+//Hoi
 
-        
 
     }
 
