@@ -10,7 +10,6 @@ public class Main {
     public static void main(String[] args) {
 
 
-
         //Sick codexxxxxxdddd
         Arrangement arrangement1 = new Arrangement("HaldenLøpet", "Marathon");
         Arrangement arrangement2 = new Arrangement("KongsvingerLøpet", "Marathon");

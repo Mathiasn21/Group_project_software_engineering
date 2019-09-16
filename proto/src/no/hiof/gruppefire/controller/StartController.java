@@ -1,18 +1,26 @@
 package no.hiof.gruppefire.controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import no.hiof.gruppefire.model.Arrangement;
+
 import java.io.IOException;
 
 public class StartController {
 
+    private final static ObservableList<Arrangement>arrangementList = FXCollections.observableArrayList();
     @FXML
     private Button newArrangementBtn;
+    @FXML
+    private ListView<Arrangement>listview;
     @FXML
     public void newArrangementClicked() throws IOException {
 
@@ -30,5 +38,15 @@ public class StartController {
             redigerStage.setScene(redigerScene);
             redigerStage.setTitle("Redigering");
             redigerStage.show();
+        }
+
+        public void addArrangementToList (Arrangement a){
+
+            arrangementList.add(a);
+
+            for(Arrangement arrangement : arrangementList){
+                System.out.println(arrangement.getName());
+            }
+            //listview.setItems(arrangementList);
         }
     }

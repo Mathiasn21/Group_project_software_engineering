@@ -21,7 +21,9 @@ public class NewArrangementController {
     private TextField nameInput, sportInput;
     @FXML
     public void saveClicked(ActionEvent actionEvent){
-        System.out.println(new Arrangement(nameInput.getText(),sportInput.getText()));
+
+        StartController startController = new StartController();
+        startController.addArrangementToList(new Arrangement(nameInput.getText(),sportInput.getText()));
         Stage stage = (Stage) cancelBtn.getScene().getWindow();
         stage.close();
     }
