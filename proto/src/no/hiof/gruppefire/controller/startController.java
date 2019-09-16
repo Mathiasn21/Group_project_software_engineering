@@ -1,6 +1,7 @@
 package no.hiof.gruppefire.controller;
 
 import javafx.fxml.FXML;
+import no.hiof.gruppefire.model.Arrangement;
 
 public class StartController {
 

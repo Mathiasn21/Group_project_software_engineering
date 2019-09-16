@@ -33,28 +33,7 @@ public class MainJavaFX extends Application {
             e.printStackTrace();
         }
     }
-
-    public boolean newArrangement(Arrangement newArrangement){
-        try{
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("view/NewArrangement"));
-            Parent layout = loader.load();
-            Stage stage = new Stage();
-            stage.setTitle("New arrangement");
-            stage.initModality(Modality.WINDOW_MODAL);
-            stage.initOwner(primaryStage);
-            Scene scene =new Scene(layout);
-            stage.setScene(scene);
-
-            NewArrangementController newArrangementController = loader.getController();
-
-
-
-        }catch (IOException | IllegalStateException exception) {
-            exception.printStackTrace();
-            return false;
-        }
-    }
+    
 
     public static void main(String[] args) {
         launch(args);
