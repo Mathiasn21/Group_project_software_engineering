@@ -13,7 +13,7 @@ import java.io.IOException;
 public class MainJavaFX extends Application {
 
     private Stage primaryStage;
-    //test
+
     @Override
     public void start(Stage primaryStage){
         try{
