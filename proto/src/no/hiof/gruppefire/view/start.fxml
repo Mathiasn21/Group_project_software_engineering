@@ -8,11 +8,12 @@
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="no.hiof.gruppefire.controller.StartController">
    <children>
       <ListView fx:id="listview" layoutX="14.0" layoutY="14.0" prefHeight="376.0" prefWidth="200.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0" />
-      <HBox layoutX="333.0" layoutY="295.0" prefHeight="33.0" prefWidth="271.0" spacing="10.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
+      <HBox layoutX="333.0" layoutY="295.0" prefHeight="33.0" prefWidth="272.0" spacing="5.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
          <children>
-            <Button fx:id="newArrangementBtn" mnemonicParsing="false" onAction="#newArrangementClicked" text="New arrangement" />
+            <Button fx:id="newArrangementBtn" mnemonicParsing="false" onAction="#newArrangementClicked" prefHeight="25.0" prefWidth="112.0" text="New arrangement" />
             <Button fx:id="editBtn" mnemonicParsing="false" onAction="#editClicked" text="Edit" />
             <Button fx:id="deleteBtn" mnemonicParsing="false" onAction="#deleteClicked" text="Delete" />
+            <Button fx:id="refreshBtn" mnemonicParsing="false" onAction="#refreshClicked" text="Refresh" />
          </children>
       </HBox>
    </children>

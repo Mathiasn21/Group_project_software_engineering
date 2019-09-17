@@ -21,11 +21,14 @@ import java.util.ArrayList;
 
 public class StartController{
 
-    private File arrangementsFilePath;
+    private String arrangementsFilepath = "src/no/hiof/gruppefire/files/arrangements.json";
 
-    private final static ArrayList<Arrangement>arrangementList = new ArrayList<>();//ObservableList<Arrangement>arrangementList = FXCollections.observableArrayList();
+
+    private final static ArrayList<Arrangement>arrangementList = new ArrayList<>();
+
     @FXML
     private Button newArrangementBtn;
+
     @FXML
     private ListView<Arrangement>listview = new ListView<>();
 
@@ -54,14 +57,33 @@ public class StartController{
     }
 
     @FXML
+    public void refreshClicked(ActionEvent actionEvent){
+        listview.setItems(getArrangementListObservable());
+    }
+
+    @FXML
     public void deleteClicked(ActionEvent actionEvent){
         System.out.println("delete");
+    }
+
+    @FXML
+    public void initialize(){
+        listview.setItems(getArrangementListObservable());
+    }
+
+    public ObservableList<Arrangement> getArrangementListObservable() {
+
+        ObservableList<Arrangement>arrangementListObservable = FXCollections.observableArrayList(DataHandler.readFromJSONFil(arrangementsFilepath));
+
+        return arrangementListObservable;
     }
 
     public void addArrangementToList (Arrangement a){
 
         arrangementList.add(a);
-        DataHandler.writeToJSONFile(arrangementList, arrangementsFilePath);
+
+        DataHandler.writeToJSONFile(arrangementList, new File(arrangementsFilepath));
     }
+
 
 }
