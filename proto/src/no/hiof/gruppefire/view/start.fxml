@@ -11,8 +11,8 @@
       <HBox layoutX="333.0" layoutY="295.0" prefHeight="33.0" prefWidth="271.0" spacing="10.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
          <children>
             <Button fx:id="newArrangementBtn" mnemonicParsing="false" onAction="#newArrangementClicked" text="New arrangement" />
-            <Button fx:id="editBtn" mnemonicParsing="false" text="Edit" />
-            <Button fx:id="deleteBtn" mnemonicParsing="false" text="Delete" />
+            <Button fx:id="editBtn" mnemonicParsing="false" onAction="#editClicked" text="Edit" />
+            <Button fx:id="deleteBtn" mnemonicParsing="false" onAction="#deleteClicked" text="Delete" />
          </children>
       </HBox>
    </children>

@@ -10,9 +10,6 @@ public class Arrangement {
     private LocalDate startDate;
     private LocalDate endDate;
 
-    public Arrangement() {
-    }
-
     public Arrangement(String name, String sport){
         this.name = name;
         this.sport = sport;

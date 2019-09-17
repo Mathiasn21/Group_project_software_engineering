@@ -34,4 +34,6 @@ public class NewArrangementController {
         stage.close();
     }
 
+
+
 }

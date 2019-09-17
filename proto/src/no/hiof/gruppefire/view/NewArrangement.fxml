@@ -17,9 +17,12 @@
             <TextField fx:id="nameInput" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Sport" />
             <TextField fx:id="sportInput" />
-            <TextField />
-            <DatePicker />
-            <DatePicker />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Participants" />
+            <TextField fx:id="participantsInput" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Start date" />
+            <DatePicker fx:id="startDateInput" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="End date" />
+            <DatePicker fx:id="endDateInput" />
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0">
                <children>
                   <Button fx:id="saveBtn" mnemonicParsing="false" onAction="#saveClicked" text="Save" />

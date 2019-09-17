@@ -8,15 +8,10 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import no.hiof.gruppefire.controller.NewArrangementController;
 import no.hiof.gruppefire.model.Arrangement;
-
 import java.io.IOException;
-
-//Hei
-//god aften
 
 public class MainJavaFX extends Application {
 
-    private static MainJavaFX application;
     private Stage primaryStage;
 
     @Override
@@ -36,7 +31,6 @@ public class MainJavaFX extends Application {
             e.printStackTrace();
         }
     }
-    
 
     public static void main(String[] args) {
         launch(args);

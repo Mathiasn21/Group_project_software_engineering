@@ -2,6 +2,7 @@ package no.hiof.gruppefire.controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -21,6 +22,7 @@ public class StartController {
     private Button newArrangementBtn;
     @FXML
     private ListView<Arrangement>listview = new ListView<>();
+
     @FXML
     public void newArrangementClicked() throws IOException {
 
@@ -28,7 +30,7 @@ public class StartController {
             fxmlInnlaster.setLocation(getClass().getResource("../view/NewArrangement.fxml"));
             Parent redigerLayout = fxmlInnlaster.load();
 
-            Scene redigerScene = new Scene(redigerLayout, 500, 300);
+            Scene redigerScene = new Scene(redigerLayout, 300, 350);
             Stage redigerStage = new Stage();
 
             redigerStage.initModality(Modality.APPLICATION_MODAL);
@@ -40,12 +42,22 @@ public class StartController {
             redigerStage.show();
         }
 
-        public void addArrangementToList (Arrangement a){
-            arrangementList.add(a);
+    @FXML
+    public void editClicked(ActionEvent actionEvent){
+        System.out.println("edit");
+    }
 
-            for(Arrangement arrangement : arrangementList){
-                System.out.println(arrangement.getName());
-            }
-            listview.setItems(arrangementList);
+    @FXML
+    public void deleteClicked(ActionEvent actionEvent){
+        System.out.println("delete");
+    }
+
+    public void addArrangementToList (Arrangement a){
+        arrangementList.add(a);
+
+        for(Arrangement arrangement : arrangementList){
+            System.out.println(arrangement.getName());
+        }
+        listview.setItems(arrangementList);
         }
     }
