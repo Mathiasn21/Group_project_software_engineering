@@ -10,9 +10,10 @@ public class Arrangement {
     private LocalDate startDate;
     private LocalDate endDate;
 
-    public Arrangement(String name, String sport){
+    public Arrangement(String name, String sport, int participants){
         this.name = name;
         this.sport = sport;
+        this.participants = participants;
     }
 
     public Arrangement(String name, String sport, int participants, LocalDate startDate, LocalDate endDate) {

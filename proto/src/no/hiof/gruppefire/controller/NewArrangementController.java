@@ -13,17 +13,19 @@ import no.hiof.gruppefire.model.Arrangement;
 
 import java.io.IOException;
 
+import static java.lang.Integer.parseInt;
+
 public class NewArrangementController {
 
     @FXML
     private Button cancelBtn;
     @FXML
-    private TextField nameInput, sportInput;
+    private TextField nameInput, sportInput, participantsInput;
     @FXML
     public void saveClicked(ActionEvent actionEvent){
 
         StartController startController = new StartController();
-        startController.addArrangementToList(new Arrangement(nameInput.getText(),sportInput.getText()));
+        startController.addArrangementToList(new Arrangement(nameInput.getText(),sportInput.getText(), parseInt(participantsInput.getText())));
         Stage stage = (Stage) cancelBtn.getScene().getWindow();
         stage.close();
     }
@@ -33,7 +35,4 @@ public class NewArrangementController {
         Stage stage = (Stage) cancelBtn.getScene().getWindow();
         stage.close();
     }
-
-
-
 }

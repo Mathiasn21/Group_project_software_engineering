@@ -1,5 +1,6 @@
 package no.hiof.gruppefire.controller;
 
+import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,13 +12,18 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import no.hiof.gruppefire.data.DataHandler;
 import no.hiof.gruppefire.model.Arrangement;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
-public class StartController {
+public class StartController{
 
-    private final static ObservableList<Arrangement>arrangementList = FXCollections.observableArrayList();
+    private File arrangementsFilePath;
+
+    private final static ArrayList<Arrangement>arrangementList = new ArrayList<>();//ObservableList<Arrangement>arrangementList = FXCollections.observableArrayList();
     @FXML
     private Button newArrangementBtn;
     @FXML
@@ -40,7 +46,7 @@ public class StartController {
             redigerStage.setScene(redigerScene);
             redigerStage.setTitle("Registrering new arrangement");
             redigerStage.show();
-        }
+    }
 
     @FXML
     public void editClicked(ActionEvent actionEvent){
@@ -53,11 +59,9 @@ public class StartController {
     }
 
     public void addArrangementToList (Arrangement a){
-        arrangementList.add(a);
 
-        for(Arrangement arrangement : arrangementList){
-            System.out.println(arrangement.getName());
-        }
-        listview.setItems(arrangementList);
-        }
+        arrangementList.add(a);
+        DataHandler.writeToJSONFile(arrangementList, arrangementsFilePath);
     }
+
+}

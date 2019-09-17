@@ -11,8 +11,8 @@ public class Main {
 
 
         //Klassetest
-        Arrangement arrangement1 = new Arrangement("HaldenLøpet", "Marathon");
-        Arrangement arrangement2 = new Arrangement("KongsvingerLøpet", "Marathon");
+        Arrangement arrangement1 = new Arrangement("HaldenLøpet", "Marathon", 100);
+        Arrangement arrangement2 = new Arrangement("KongsvingerLøpet", "Marathon", 300);
 
         System.out.println(arrangement1.getName());
 
