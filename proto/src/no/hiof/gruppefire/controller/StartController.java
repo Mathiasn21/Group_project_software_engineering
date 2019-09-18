@@ -14,7 +14,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import no.hiof.gruppefire.data.DataHandler;
 import no.hiof.gruppefire.model.Arrangement;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -84,6 +83,4 @@ public class StartController{
 
         DataHandler.writeToJSONFile(arrangementList, new File(arrangementsFilepath));
     }
-
-
 }

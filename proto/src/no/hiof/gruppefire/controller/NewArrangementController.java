@@ -10,7 +10,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import no.hiof.gruppefire.model.Arrangement;
-
 import java.io.IOException;
 
 import static java.lang.Integer.parseInt;
