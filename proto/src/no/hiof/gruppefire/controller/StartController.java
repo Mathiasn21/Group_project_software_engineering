@@ -13,6 +13,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import no.hiof.gruppefire.data.DataHandler;
 import no.hiof.gruppefire.model.Arrangement;
+import org.junit.jupiter.api.Test;
+
 import java.io.IOException;
 
 public class StartController{
@@ -29,7 +31,6 @@ public class StartController{
 
     @FXML
     public void newArrangementClicked() throws IOException {
-
             FXMLLoader fxmlInnlaster = new FXMLLoader();
             fxmlInnlaster.setLocation(getClass().getResource("../view/NewArrangement.fxml"));
             Parent redigerLayout = fxmlInnlaster.load();
