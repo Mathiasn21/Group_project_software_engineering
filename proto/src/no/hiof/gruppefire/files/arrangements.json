@@ -18,20 +18,5 @@
     "name": "Hello",
     "sport": "World",
     "participants": 123
-  },
-  {
-    "name": "Yolo",
-    "sport": "xXxBlazeItxXx",
-    "participants": 477,
-    "startDate": {
-      "year": 2019,
-      "month": 9,
-      "day": 20
-    },
-    "endDate": {
-      "year": 2019,
-      "month": 9,
-      "day": 27
-    }
   }
 ]

@@ -67,6 +67,10 @@ public class DataHandler {
         arrangementer.add(a);
     }
 
+    public static void removeArrangementer(Arrangement a) {
+        arrangementer.remove(a);
+    }
+
     public static void printArrangementer() {
         System.out.println(arrangementer);
     }

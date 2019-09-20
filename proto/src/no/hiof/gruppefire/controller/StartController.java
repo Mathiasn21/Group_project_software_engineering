@@ -53,7 +53,9 @@ public class StartController{
 
     @FXML
     public void deleteClicked(ActionEvent actionEvent){
-        System.out.println("delete");
+        Arrangement selectedItem = listview.getSelectionModel().getSelectedItem();
+        arrangementListObservable.remove(selectedItem);
+        DataHandler.removeArrangementer(selectedItem);
     }
 
     @FXML
