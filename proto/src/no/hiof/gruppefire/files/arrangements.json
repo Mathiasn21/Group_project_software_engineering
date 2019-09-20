@@ -1,12 +1,17 @@
 [
   {
-    "name": "hoi",
-    "sport": "haha",
-    "participants": 69
-  },
-  {
-    "name": "hoi",
-    "sport": "oiio",
-    "participants": 1234
+    "name": "jaggu",
+    "sport": "lommetennis",
+    "participants": 420,
+    "startDate": {
+      "year": 2019,
+      "month": 9,
+      "day": 3
+    },
+    "endDate": {
+      "year": 2019,
+      "month": 9,
+      "day": 28
+    }
   }
 ]

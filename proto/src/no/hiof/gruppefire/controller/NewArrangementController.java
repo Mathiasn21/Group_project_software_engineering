@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -21,10 +22,12 @@ public class NewArrangementController {
     @FXML
     private TextField nameInput, sportInput, participantsInput;
     @FXML
+    private DatePicker startDateInput, endDateInput;
+    @FXML
     public void saveClicked(ActionEvent actionEvent){
 
         StartController startController = new StartController();
-        startController.addArrangementToList(new Arrangement(nameInput.getText(),sportInput.getText(), parseInt(participantsInput.getText())));
+        startController.addArrangementToList(new Arrangement(nameInput.getText(),sportInput.getText(), parseInt(participantsInput.getText()),startDateInput.getValue(),endDateInput.getValue()));
         Stage stage = (Stage) cancelBtn.getScene().getWindow();
         stage.close();
     }
