@@ -1,15 +1,11 @@
 package no.hiof.gruppefire;
 
 import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import no.hiof.gruppefire.controller.NewArrangementController;
 import no.hiof.gruppefire.data.DataHandler;
-import no.hiof.gruppefire.model.Arrangement;
 
 import java.io.File;
 import java.io.IOException;

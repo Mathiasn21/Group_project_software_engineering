@@ -1,6 +1,5 @@
 package no.hiof.gruppefire.controller;
 
-import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,16 +13,12 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import no.hiof.gruppefire.data.DataHandler;
 import no.hiof.gruppefire.model.Arrangement;
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class StartController{
 
     private String arrangementsFilepath = "src/no/hiof/gruppefire/files/arrangements.json";
 
-
-    //private final static ArrayList<Arrangement>arrangementList = new ArrayList<>();
     private static ObservableList<Arrangement>arrangementListObservable;
 
     @FXML
