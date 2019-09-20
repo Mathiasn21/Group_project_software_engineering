@@ -13,7 +13,6 @@
             <Button fx:id="newArrangementBtn" mnemonicParsing="false" onAction="#newArrangementClicked" prefHeight="25.0" prefWidth="112.0" text="New arrangement" />
             <Button fx:id="editBtn" mnemonicParsing="false" onAction="#editClicked" text="Edit" />
             <Button fx:id="deleteBtn" mnemonicParsing="false" onAction="#deleteClicked" text="Delete" />
-            <Button fx:id="refreshBtn" mnemonicParsing="false" onAction="#refreshClicked" text="Refresh" />
          </children>
       </HBox>
    </children>

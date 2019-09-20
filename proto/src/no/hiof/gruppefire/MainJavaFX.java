@@ -8,7 +8,10 @@ import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import no.hiof.gruppefire.controller.NewArrangementController;
+import no.hiof.gruppefire.data.DataHandler;
 import no.hiof.gruppefire.model.Arrangement;
+
+import java.io.File;
 import java.io.IOException;
 
 public class MainJavaFX extends Application {
@@ -31,6 +34,12 @@ public class MainJavaFX extends Application {
         }catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void stop(){
+        String arrangementsFilepath = "src/no/hiof/gruppefire/files/arrangements.json";
+        DataHandler.writeToJSONFile(new File(arrangementsFilepath));
     }
 
     public static void main(String[] args) {

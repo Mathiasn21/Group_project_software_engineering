@@ -6,15 +6,19 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+
+
 public class DataHandler {
 
-    public static void writeToJSONFile(ArrayList<Arrangement>arrangemenList, File filepath){
+    private static ArrayList<Arrangement> arrangementer = new ArrayList<>();
+
+    public static void writeToJSONFile(File filepath){
 
         GsonBuilder gsonBuilder = new GsonBuilder().setPrettyPrinting();
 
         Gson gson = gsonBuilder.create();
 
-        String jsonTextList = gson.toJson(arrangemenList);
+        String jsonTextList = gson.toJson(arrangementer);
 
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filepath))) {
             bufferedWriter.write(jsonTextList);
@@ -23,7 +27,7 @@ public class DataHandler {
         }
     }
 
-    public static ArrayList<Arrangement> readFromJSONFil(String filepath) {
+    public static void readFromJSONFil(String filepath) {
 
         GsonBuilder gsonBuilder = new GsonBuilder().setPrettyPrinting();
 
@@ -48,6 +52,22 @@ public class DataHandler {
             System.out.println(ioexc.getMessage());
         }
 
-        return arrangementListFromFile;
+        setArrangementer(arrangementListFromFile);
+    }
+
+    public static ArrayList<Arrangement> getArrangementer() {
+        return arrangementer;
+    }
+
+    public static void setArrangementer(ArrayList<Arrangement> arrangementer) {
+        DataHandler.arrangementer = arrangementer;
+    }
+
+    public static void addArrangementer(Arrangement a) {
+        arrangementer.add(a);
+    }
+
+    public static void printArrangementer() {
+        System.out.println(arrangementer);
     }
 }

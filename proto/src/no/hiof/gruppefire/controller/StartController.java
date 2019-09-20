@@ -23,7 +23,8 @@ public class StartController{
     private String arrangementsFilepath = "src/no/hiof/gruppefire/files/arrangements.json";
 
 
-    private final static ArrayList<Arrangement>arrangementList = new ArrayList<>();
+    //private final static ArrayList<Arrangement>arrangementList = new ArrayList<>();
+    private static ObservableList<Arrangement>arrangementListObservable;
 
     @FXML
     private Button newArrangementBtn;
@@ -56,31 +57,26 @@ public class StartController{
     }
 
     @FXML
-    public void refreshClicked(ActionEvent actionEvent){
-        listview.setItems(getArrangementListObservable());
-    }
-
-    @FXML
     public void deleteClicked(ActionEvent actionEvent){
         System.out.println("delete");
     }
 
     @FXML
     public void initialize(){
-        listview.setItems(getArrangementListObservable());
+        populateListView();
     }
 
-    public ObservableList<Arrangement> getArrangementListObservable() {
+    public void populateListView() {
+        DataHandler.readFromJSONFil(arrangementsFilepath);
+        arrangementListObservable = FXCollections.observableArrayList(DataHandler.getArrangementer());
 
-        ObservableList<Arrangement>arrangementListObservable = FXCollections.observableArrayList(DataHandler.readFromJSONFil(arrangementsFilepath));
-
-        return arrangementListObservable;
+        listview.setItems(arrangementListObservable);
     }
 
     public void addArrangementToList (Arrangement a){
-
-        arrangementList.add(a);
-
-        DataHandler.writeToJSONFile(arrangementList, new File(arrangementsFilepath));
+        arrangementListObservable.add(a);
+        DataHandler.addArrangementer(a);
     }
+
+
 }
