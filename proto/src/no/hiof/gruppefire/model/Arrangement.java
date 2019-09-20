@@ -66,7 +66,7 @@ public class Arrangement {
 
     @Override
     public String toString(){
-        return name + " " + sport + " " + participants;
+        return name + " " + sport + " " + participants + " " + startDate + " " + endDate;
     }
 }
 
