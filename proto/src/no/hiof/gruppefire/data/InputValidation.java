@@ -18,16 +18,4 @@ public class InputValidation {
         }
         return true;
     }
-
-    public static boolean numberCheck(String ...num){
-        String numbers = "^(?!\\s*$)[0-9]*$";
-        Pattern pattern = Pattern.compile(numbers);
-
-        for(String n : num){
-            Matcher matcher = pattern.matcher(n);
-            if(!matcher.matches())
-                return matcher.matches();
-        }
-        return true;
-    }
 }
