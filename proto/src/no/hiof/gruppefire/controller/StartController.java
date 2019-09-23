@@ -67,7 +67,6 @@ public class StartController{
     public void populateListView() {
         DataHandler.readFromJSONFil(arrangementsFilepath);
         arrangementListObservable = FXCollections.observableArrayList(DataHandler.getArrangementer());
-
         listview.setItems(arrangementListObservable);
     }
 

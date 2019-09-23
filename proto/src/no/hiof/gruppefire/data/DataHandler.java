@@ -30,28 +30,22 @@ public class DataHandler {
     public static void readFromJSONFil(String filepath) {
 
         GsonBuilder gsonBuilder = new GsonBuilder().setPrettyPrinting();
-
         Gson gson = gsonBuilder.create();
 
         ArrayList<Arrangement> arrangementListFromFile = new ArrayList<>();
-
-        String line = "";
-
+        String line;
         StringBuilder jsonTextFromFile = new StringBuilder();
 
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filepath))) {
             while ((line = bufferedReader.readLine()) != null) {
                 jsonTextFromFile.append(line);
             }
-
             Arrangement[] arrangementArray = gson.fromJson(jsonTextFromFile.toString(), Arrangement[].class);
-
             arrangementListFromFile.addAll(Arrays.asList(arrangementArray));
 
         }catch (IOException ioexc) {
             System.out.println(ioexc.getMessage());
         }
-
         setArrangementer(arrangementListFromFile);
     }
 
