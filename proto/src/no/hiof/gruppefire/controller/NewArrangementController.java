@@ -28,9 +28,14 @@ public class NewArrangementController {
     public void saveClicked(ActionEvent actionEvent){
 
         StartController startController = new StartController();
-        startController.addArrangementToList(new Arrangement(nameInput.getText(),sportInput.getText(), parseInt(participantsInput.getText()),startDateInput.getValue(),endDateInput.getValue()));
-        
-        close();
+
+        if(InputValidation.arrangementInputValidation(nameInput.getText(),sportInput.getText(), participantsInput.getText(),startDateInput.getValue(),endDateInput.getValue())){
+            startController.addArrangementToList(new Arrangement(nameInput.getText(),sportInput.getText(), parseInt(participantsInput.getText()),startDateInput.getValue(),endDateInput.getValue()));
+            close();
+        }
+
+        else
+            System.out.println("Feil input");
     }
 
     @FXML
