@@ -25,7 +25,6 @@ public class StartController{
 
     @FXML
     private Button newArrangementBtn;
-
     @FXML
     private ListView<Arrangement>listview = new ListView<>();
 

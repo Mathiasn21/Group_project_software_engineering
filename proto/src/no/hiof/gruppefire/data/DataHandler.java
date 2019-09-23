@@ -6,18 +6,13 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-
-
 public class DataHandler {
-
     private static ArrayList<Arrangement> arrangementer = new ArrayList<>();
 
     public static void writeToJSONFile(File filepath){
 
         GsonBuilder gsonBuilder = new GsonBuilder().setPrettyPrinting();
-
         Gson gson = gsonBuilder.create();
-
         String jsonTextList = gson.toJson(arrangementer);
 
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filepath))) {
