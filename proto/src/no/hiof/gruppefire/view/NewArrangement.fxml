@@ -19,9 +19,9 @@
             <TextField fx:id="sportInput" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Participants" />
             <TextField fx:id="participantsInput" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Start date (fungerer ikke enda) " />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Start date " />
             <DatePicker fx:id="startDateInput" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="End date (fungerer ikke enda)" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="End date" />
             <DatePicker fx:id="endDateInput" />
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0">
                <children>

@@ -10,6 +10,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import no.hiof.gruppefire.data.InputValidation;
 import no.hiof.gruppefire.model.Arrangement;
 import java.io.IOException;
 
@@ -28,12 +29,16 @@ public class NewArrangementController {
 
         StartController startController = new StartController();
         startController.addArrangementToList(new Arrangement(nameInput.getText(),sportInput.getText(), parseInt(participantsInput.getText()),startDateInput.getValue(),endDateInput.getValue()));
-        Stage stage = (Stage) cancelBtn.getScene().getWindow();
-        stage.close();
+        
+        close();
     }
 
     @FXML
     public void cancelClicked(ActionEvent actionEvent){
+        close();
+    }
+
+    private void close(){
         Stage stage = (Stage) cancelBtn.getScene().getWindow();
         stage.close();
     }
