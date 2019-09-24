@@ -56,6 +56,12 @@ public class DataHandler {
 
         ArrayList arraylist = new ArrayList();
 
+        arraylist.add("Fotball");
+        arraylist.add("Basketball");
+        arraylist.add("Friidrett");
+        arraylist.add("Sykkelritt");
+        arraylist.add("Skirenn");
+        arraylist.add("Annet");
 
         return arraylist;
 

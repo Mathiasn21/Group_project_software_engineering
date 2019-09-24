@@ -1,76 +1,9 @@
 [
   {
-    "name": "hgfgb",
-    "sport": "hbdsg",
-    "participants": 123,
-    "adress": "dwfd",
-    "gruppe": true,
-    "startDate": {
-      "year": 2019,
-      "month": 9,
-      "day": 3
-    },
-    "endDate": {
-      "year": 2019,
-      "month": 9,
-      "day": 13
-    }
-  },
-  {
-    "name": "fdgfd",
-    "sport": "dfhdf",
-    "participants": 123,
-    "adress": "dwfd",
-    "gruppe": true,
-    "startDate": {
-      "year": 2019,
-      "month": 8,
-      "day": 26
-    },
-    "endDate": {
-      "year": 2019,
-      "month": 9,
-      "day": 12
-    }
-  },
-  {
-    "name": "dfghjhjb",
-    "sport": "jhgfjhf",
-    "participants": 123,
-    "adress": "dwfd",
-    "gruppe": true,
-    "startDate": {
-      "year": 2019,
-      "month": 9,
-      "day": 3
-    },
-    "endDate": {
-      "year": 2019,
-      "month": 9,
-      "day": 29
-    }
-  },
-  {
-    "name": "dsgkjfh",
-    "sport": "kjshfdjhb",
-    "participants": 123,
-    "adress": "dwfd",
-    "gruppe": false,
-    "startDate": {
-      "year": 2019,
-      "month": 9,
-      "day": 3
-    },
-    "endDate": {
-      "year": 2019,
-      "month": 9,
-      "day": 14
-    }
-  },
-  {
-    "name": "kfrejgbhk",
-    "participants": 123,
-    "adress": "kjfghfdkjg",
+    "name": "Fotballturnering",
+    "sport": "Fotball",
+    "participants": 300,
+    "adress": "B R A veien",
     "gruppe": true,
     "startDate": {
       "year": 2019,

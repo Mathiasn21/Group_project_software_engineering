@@ -13,6 +13,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import no.hiof.gruppefire.data.DataHandler;
 import no.hiof.gruppefire.data.InputValidation;
 import no.hiof.gruppefire.model.Arrangement;
 import java.io.IOException;
@@ -37,8 +38,8 @@ public class NewArrangementController {
 
     public void initialize(){
 
-
         groupOrIndividualsComboBox();
+        SportComboBox();
     }
 
     @FXML
@@ -49,7 +50,6 @@ public class NewArrangementController {
 
         close();
     }
-
 
     @FXML
     public void cancelClicked(ActionEvent actionEvent){
@@ -68,7 +68,10 @@ public class NewArrangementController {
         groupInput.setItems(groupIndividualCombobox);
     }
 
-
+    private void SportComboBox(){
+        ObservableList<String>sportsComboBox = FXCollections.observableArrayList(DataHandler.sportsToComboBox());
+        sportComboBoxInput.setItems(sportsComboBox);
+    }
 
     private boolean trueOrFalse(){
         if(groupInput.getSelectionModel().getSelectedItem() == "Group")
@@ -77,7 +80,6 @@ public class NewArrangementController {
     }
 
     private String chosenSport(){
-
         return sportComboBoxInput.getSelectionModel().getSelectedItem();
     }
 }

@@ -35,7 +35,7 @@ public class StartController{
             fxmlInnlaster.setLocation(getClass().getResource("../view/NewArrangement.fxml"));
             Parent redigerLayout = fxmlInnlaster.load();
 
-            Scene redigerScene = new Scene(redigerLayout, 300, 350);
+            Scene redigerScene = new Scene(redigerLayout, 300, 450);
             Stage redigerStage = new Stage();
 
             redigerStage.initModality(Modality.APPLICATION_MODAL);

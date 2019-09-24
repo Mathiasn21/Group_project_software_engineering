@@ -16,8 +16,6 @@
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name" />
             <TextField fx:id="nameInput" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Sport" />
-            <TextField fx:id="sportInput" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Participants" />
             <TextField fx:id="participantsInput" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Adress" />
