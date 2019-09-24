@@ -11,9 +11,7 @@ public class Arrangement {
     private LocalDate endDate;
 
     public Arrangement(String name, String sport, int participants){
-        this.name = name;
-        this.sport = sport;
-        this.participants = participants;
+        this(name, sport, participants, null, null);
     }
 
     public Arrangement(String name, String sport, int participants, LocalDate startDate, LocalDate endDate) {
