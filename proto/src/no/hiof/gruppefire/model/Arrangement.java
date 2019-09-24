@@ -1,5 +1,7 @@
 package no.hiof.gruppefire.model;
 
+import javafx.application.Application;
+
 import java.time.LocalDate;
 
 public class Arrangement {
@@ -7,17 +9,23 @@ public class Arrangement {
     private String name;
     private String sport;
     private int participants;
+    private String adress;
+    private boolean gruppe;
     private LocalDate startDate;
     private LocalDate endDate;
 
-    public Arrangement(String name, String sport, int participants){
-        this(name, sport, participants, null, null);
+
+
+    public Arrangement(String name, String sport, int participants, String adress, boolean gruppe){
+        this(name, sport, participants, adress, gruppe, null, null);
     }
 
-    public Arrangement(String name, String sport, int participants, LocalDate startDate, LocalDate endDate) {
+    public Arrangement(String name, String sport, int participants, String adress, boolean gruppe, LocalDate startDate, LocalDate endDate) {
         this.name = name;
         this.sport = sport;
         this.participants = participants;
+        this.adress = adress;
+        this.gruppe = gruppe;
         this.startDate = startDate;
         this.endDate = endDate;
     }

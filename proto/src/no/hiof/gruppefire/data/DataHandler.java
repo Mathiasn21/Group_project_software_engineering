@@ -52,6 +52,15 @@ public class DataHandler {
         DataHandler.arrangementer = arrangementer;
     }
 
+    public static ArrayList<String>sportsToComboBox(){
+
+        ArrayList arraylist = new ArrayList();
+
+
+        return arraylist;
+
+    }
+
     public static void addArrangementer(Arrangement a) {
         arrangementer.add(a);
     }

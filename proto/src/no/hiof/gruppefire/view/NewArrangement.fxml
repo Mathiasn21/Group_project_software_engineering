@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -19,10 +20,16 @@
             <TextField fx:id="sportInput" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Participants" />
             <TextField fx:id="participantsInput" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Adress" />
+            <TextField fx:id="adressInput" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Sport" />
+            <ComboBox fx:id="sportComboBoxInput" prefWidth="150.0" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Start date " />
             <DatePicker fx:id="startDateInput" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="End date" />
             <DatePicker fx:id="endDateInput" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Groups or individuals" />
+            <ComboBox fx:id="groupInput" prefWidth="150.0" />
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0">
                <children>
                   <Button fx:id="saveBtn" mnemonicParsing="false" onAction="#saveClicked" text="Save" />
