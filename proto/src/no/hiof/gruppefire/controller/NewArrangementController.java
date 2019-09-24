@@ -36,24 +36,34 @@ public class NewArrangementController {
     @FXML
     private ComboBox<String>sportComboBoxInput;
 
-    public void initialize(){
-
-        groupOrIndividualsComboBox();
-        SportComboBox();
-    }
 
     @FXML
     public void saveClicked(ActionEvent actionEvent){
 
-        StartController startController = new StartController();
-        startController.addArrangementToList(new Arrangement(nameInput.getText(),chosenSport(), parseInt(participantsInput.getText()),adressInput.getText(), trueOrFalse(), startDateInput.getValue(),endDateInput.getValue()));
+        if(InputValidation.arrangementInputValidation(
+                nameInput.getText(),
+                chosenSport(),
+                parseInt(participantsInput.getText()),
+                adressInput.getText(), trueOrFalse(),
+                startDateInput.getValue(),
+                endDateInput.getValue())){
 
-        close();
+            addArrangementToList();
+            close();
+        }
+        else
+            System.out.println("what");
     }
 
     @FXML
     public void cancelClicked(ActionEvent actionEvent){
         close();
+    }
+
+    public void initialize(){
+
+        groupOrIndividualsComboBox();
+        SportComboBox();
     }
 
     private void close(){
@@ -81,5 +91,17 @@ public class NewArrangementController {
 
     private String chosenSport(){
         return sportComboBoxInput.getSelectionModel().getSelectedItem();
+    }
+
+    private void addArrangementToList(){
+        StartController startController = new StartController();
+
+        startController.addArrangementToList(new Arrangement(
+                nameInput.getText(),
+                chosenSport(),
+                parseInt(participantsInput.getText()),
+                adressInput.getText(), trueOrFalse(),
+                startDateInput.getValue(),
+                endDateInput.getValue()));
     }
 }

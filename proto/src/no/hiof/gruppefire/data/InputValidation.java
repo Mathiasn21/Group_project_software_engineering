@@ -12,5 +12,20 @@ import java.util.zip.DataFormatException;
 
 public class InputValidation {
 
+    public static boolean arrangementInputValidation(String name, String sport, int participants, String adress, boolean gruppe, LocalDate startDate, LocalDate endDate) {
+        /*
+        String validtext = "([A-Z])\\w+";
+        Pattern validnNumbers = Pattern.compile("[0-9]");
+        Pattern validAdress = Pattern.compile("[a-zA-Z0-9æøå.]");
 
+
+
+        if(!Pattern.matches(validtext, name))
+            return false;
+
+        else
+            return true;
+    } */
+        return true;
+    }
 }

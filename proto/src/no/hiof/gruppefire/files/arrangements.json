@@ -15,5 +15,39 @@
       "month": 9,
       "day": 21
     }
+  },
+  {
+    "name": "s",
+    "sport": "Fotball",
+    "participants": 123,
+    "adress": "s",
+    "gruppe": true,
+    "startDate": {
+      "year": 2019,
+      "month": 9,
+      "day": 3
+    },
+    "endDate": {
+      "year": 2019,
+      "month": 9,
+      "day": 12
+    }
+  },
+  {
+    "name": "SFDGH",
+    "sport": "Basketball",
+    "participants": 123,
+    "adress": "dfghfgj",
+    "gruppe": true,
+    "startDate": {
+      "year": 2019,
+      "month": 9,
+      "day": 6
+    },
+    "endDate": {
+      "year": 2019,
+      "month": 9,
+      "day": 12
+    }
   }
 ]

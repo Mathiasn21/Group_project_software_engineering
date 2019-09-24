@@ -14,8 +14,6 @@ public class Arrangement {
     private LocalDate startDate;
     private LocalDate endDate;
 
-
-
     public Arrangement(String name, String sport, int participants, String adress, boolean gruppe){
         this(name, sport, participants, adress, gruppe, null, null);
     }
