@@ -15,6 +15,7 @@ import no.hiof.gruppefire.data.DataHandler;
 import no.hiof.gruppefire.model.Arrangement;
 import org.junit.jupiter.api.Test;
 
+
 import java.io.IOException;
 
 public class StartController{
@@ -69,6 +70,7 @@ public class StartController{
         listview.setItems(arrangementListObservable);
     }
 
+    @Test
     public void addArrangementToList (Arrangement a){
         arrangementListObservable.add(a);
         DataHandler.addArrangementer(a);
