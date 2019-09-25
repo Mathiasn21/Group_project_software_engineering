@@ -1,87 +1,19 @@
 [
   {
-    "name": "ertyte",
-    "sport": "Friidrett",
-    "participants": 123,
-    "adress": "gfjghfj",
-    "gruppe": true,
-    "startDate": {
-      "year": 2019,
-      "month": 9,
-      "day": 4
-    },
-    "endDate": {
-      "year": 2019,
-      "month": 9,
-      "day": 13
-    }
-  },
-  {
-    "name": "hei",
-    "sport": "Friidrett",
-    "participants": 123,
-    "adress": "gfjghfj",
+    "name": "Dølisjøen rundt",
+    "sport": "Sykkelritt",
+    "participants": 250,
+    "adress": "Oppstadbakken 21",
     "gruppe": false,
     "startDate": {
       "year": 2019,
       "month": 9,
-      "day": 4
+      "day": 2
     },
     "endDate": {
-      "year": 2019,
-      "month": 9,
-      "day": 13
-    }
-  },
-  {
-    "name": "what",
-    "sport": "Friidrett",
-    "participants": 123345,
-    "adress": "sdgdfg",
-    "gruppe": true,
-    "startDate": {
-      "year": 2019,
-      "month": 9,
-      "day": 13
-    },
-    "endDate": {
-      "year": 2019,
-      "month": 9,
-      "day": 20
-    }
-  },
-  {
-    "name": "hææ",
-    "sport": "Friidrett",
-    "participants": 123,
-    "adress": "gfjghfj",
-    "gruppe": true,
-    "startDate": {
       "year": 2019,
       "month": 9,
       "day": 4
-    },
-    "endDate": {
-      "year": 2019,
-      "month": 9,
-      "day": 13
-    }
-  },
-  {
-    "name": "tyyj",
-    "sport": "Friidrett",
-    "participants": 123,
-    "adress": "gfjghfj",
-    "gruppe": true,
-    "startDate": {
-      "year": 2019,
-      "month": 9,
-      "day": 4
-    },
-    "endDate": {
-      "year": 2019,
-      "month": 9,
-      "day": 13
     }
   }
 ]
