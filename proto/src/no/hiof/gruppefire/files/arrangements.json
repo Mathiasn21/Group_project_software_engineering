@@ -1,53 +1,87 @@
 [
   {
-    "name": "Fotballturnering",
-    "sport": "Fotball",
-    "participants": 300,
-    "adress": "B R A veien",
+    "name": "ertyte",
+    "sport": "Friidrett",
+    "participants": 123,
+    "adress": "gfjghfj",
     "gruppe": true,
     "startDate": {
       "year": 2019,
       "month": 9,
-      "day": 3
+      "day": 4
     },
     "endDate": {
       "year": 2019,
       "month": 9,
-      "day": 21
+      "day": 13
     }
   },
   {
-    "name": "s",
-    "sport": "Fotball",
+    "name": "hei",
+    "sport": "Friidrett",
     "participants": 123,
-    "adress": "s",
-    "gruppe": true,
+    "adress": "gfjghfj",
+    "gruppe": false,
     "startDate": {
       "year": 2019,
       "month": 9,
-      "day": 3
+      "day": 4
     },
     "endDate": {
       "year": 2019,
       "month": 9,
-      "day": 12
+      "day": 13
     }
   },
   {
-    "name": "SFDGH",
-    "sport": "Basketball",
-    "participants": 123,
-    "adress": "dfghfgj",
+    "name": "what",
+    "sport": "Friidrett",
+    "participants": 123345,
+    "adress": "sdgdfg",
     "gruppe": true,
     "startDate": {
       "year": 2019,
       "month": 9,
-      "day": 6
+      "day": 13
     },
     "endDate": {
       "year": 2019,
       "month": 9,
-      "day": 12
+      "day": 20
+    }
+  },
+  {
+    "name": "hææ",
+    "sport": "Friidrett",
+    "participants": 123,
+    "adress": "gfjghfj",
+    "gruppe": true,
+    "startDate": {
+      "year": 2019,
+      "month": 9,
+      "day": 4
+    },
+    "endDate": {
+      "year": 2019,
+      "month": 9,
+      "day": 13
+    }
+  },
+  {
+    "name": "tyyj",
+    "sport": "Friidrett",
+    "participants": 123,
+    "adress": "gfjghfj",
+    "gruppe": true,
+    "startDate": {
+      "year": 2019,
+      "month": 9,
+      "day": 4
+    },
+    "endDate": {
+      "year": 2019,
+      "month": 9,
+      "day": 13
     }
   }
 ]

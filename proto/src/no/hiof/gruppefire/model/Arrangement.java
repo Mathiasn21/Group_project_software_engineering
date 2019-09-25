@@ -14,6 +14,9 @@ public class Arrangement {
     private LocalDate startDate;
     private LocalDate endDate;
 
+    public Arrangement(){
+    }
+
     public Arrangement(String name, String sport, int participants, String adress, boolean gruppe){
         this(name, sport, participants, adress, gruppe, null, null);
     }
@@ -67,6 +70,24 @@ public class Arrangement {
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
+
+    public String getAdress() {
+        return adress;
+    }
+
+    public void setAdress(String adress) {
+        this.adress = adress;
+    }
+
+    public boolean isGruppe() {
+        return gruppe;
+    }
+
+    public void setGruppe(boolean gruppe) {
+        this.gruppe = gruppe;
+    }
+
+
 
     @Override
     public String toString(){

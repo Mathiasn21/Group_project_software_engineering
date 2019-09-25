@@ -56,6 +56,7 @@ public class DataHandler {
 
         ArrayList arraylist = new ArrayList();
 
+        //Skal egentlig hentes fra fil. Dette er bare midlertidig
         arraylist.add("Fotball");
         arraylist.add("Basketball");
         arraylist.add("Friidrett");

@@ -13,6 +13,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import no.hiof.gruppefire.MainJavaFX;
 import no.hiof.gruppefire.data.DataHandler;
 import no.hiof.gruppefire.data.InputValidation;
 import no.hiof.gruppefire.model.Arrangement;
@@ -23,12 +24,18 @@ import javax.swing.JFrame;
 
 import static java.lang.Integer.parseInt;
 
-public class NewArrangementController {
+public class NewAlterArrangementController {
+
+    private Stage stage;
+
+    private MainJavaFX application = MainJavaFX.getApplication();
+
+    private String title;
 
     @FXML
     private Button cancelBtn;
     @FXML
-    private TextField nameInput, sportInput, participantsInput, adressInput;
+    private TextField nameInput,participantsInput, adressInput;
     @FXML
     private DatePicker startDateInput, endDateInput;
     @FXML
@@ -44,7 +51,8 @@ public class NewArrangementController {
                 nameInput.getText(),
                 chosenSport(),
                 parseInt(participantsInput.getText()),
-                adressInput.getText(), trueOrFalse(),
+                adressInput.getText(),
+                trueOrFalse(),
                 startDateInput.getValue(),
                 endDateInput.getValue())){
 
@@ -61,19 +69,30 @@ public class NewArrangementController {
     }
 
     public void initialize(){
+        Arrangement arrangement = application.getArrangementToEdit();
 
         groupOrIndividualsComboBox();
         SportComboBox();
-    }
 
-    private void close(){
-        Stage stage = (Stage) cancelBtn.getScene().getWindow();
-        stage.close();
+        if(arrangement != null){
+
+            nameInput.setText(arrangement.getName());
+            sportComboBoxInput.getSelectionModel().select(arrangement.getSport());
+            if(arrangement.getParticipants() > 0)
+                participantsInput.setText(Integer.toString(arrangement.getParticipants()));
+            adressInput.setText(arrangement.getAdress());
+            if(arrangement.isGruppe())
+                groupInput.getSelectionModel().select("Groups");
+            else
+                groupInput.getSelectionModel().select("Individuals");
+            startDateInput.setValue(arrangement.getStartDate());
+            endDateInput.setValue(arrangement.getEndDate());
+        }
     }
 
     private void groupOrIndividualsComboBox(){
         ObservableList<String>groupIndividualCombobox = FXCollections.observableArrayList();
-        groupIndividualCombobox.add("Group");
+        groupIndividualCombobox.add("Groups");
         groupIndividualCombobox.add("Individuals");
         groupInput.setItems(groupIndividualCombobox);
     }
@@ -84,7 +103,7 @@ public class NewArrangementController {
     }
 
     private boolean trueOrFalse(){
-        if(groupInput.getSelectionModel().getSelectedItem() == "Group")
+        if(groupInput.getSelectionModel().getSelectedItem() == "Groups")
             return true;
         return false;
     }
@@ -103,5 +122,17 @@ public class NewArrangementController {
                 adressInput.getText(), trueOrFalse(),
                 startDateInput.getValue(),
                 endDateInput.getValue()));
+    }
+
+    public void close(){
+        application.close(stage);
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

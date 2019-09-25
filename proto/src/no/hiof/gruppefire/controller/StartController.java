@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import no.hiof.gruppefire.MainJavaFX;
 import no.hiof.gruppefire.data.DataHandler;
 import no.hiof.gruppefire.model.Arrangement;
 import org.junit.jupiter.api.Test;
@@ -21,8 +22,8 @@ import java.io.IOException;
 public class StartController{
 
     private String arrangementsFilepath = "src/no/hiof/gruppefire/files/arrangements.json";
-
     private static ObservableList<Arrangement>arrangementListObservable;
+    private MainJavaFX application = MainJavaFX.getApplication();
 
     @FXML
     private Button newArrangementBtn;
@@ -31,32 +32,25 @@ public class StartController{
 
     @FXML
     public void newArrangementClicked() throws IOException {
-            FXMLLoader fxmlInnlaster = new FXMLLoader();
-            fxmlInnlaster.setLocation(getClass().getResource("../view/NewArrangement.fxml"));
-            Parent redigerLayout = fxmlInnlaster.load();
 
-            Scene redigerScene = new Scene(redigerLayout, 300, 450);
-            Stage redigerStage = new Stage();
-
-            redigerStage.initModality(Modality.APPLICATION_MODAL);
-            Stage stage = (Stage) newArrangementBtn.getScene().getWindow();
-            redigerStage.initOwner(stage);
-
-            redigerStage.setScene(redigerScene);
-            redigerStage.setTitle("Registrering new arrangement");
-            redigerStage.show();
+            application.newAlterWindow(new Arrangement(), "New");
     }
 
     @FXML
-    public void editClicked(ActionEvent actionEvent){
-        System.out.println("edit");
+    public void editClicked(ActionEvent actionEvent) throws IOException{
+
+        if(listview.getSelectionModel().getSelectedItem() != null){
+            application.newAlterWindow(listview.getSelectionModel().getSelectedItem(), "Edit");
+            deleteArrangement();
+        }
+
+        else
+            System.out.println("You have not choosen an arrangement");
     }
 
     @FXML
     public void deleteClicked(ActionEvent actionEvent){
-        Arrangement selectedItem = listview.getSelectionModel().getSelectedItem();
-        arrangementListObservable.remove(selectedItem);
-        DataHandler.removeArrangementer(selectedItem);
+        deleteArrangement();
     }
 
     @FXML
@@ -70,11 +64,14 @@ public class StartController{
         listview.setItems(arrangementListObservable);
     }
 
-    @Test
     public void addArrangementToList (Arrangement a){
         arrangementListObservable.add(a);
         DataHandler.addArrangementer(a);
     }
 
-
+    public void deleteArrangement(){
+        Arrangement selectedItem = listview.getSelectionModel().getSelectedItem();
+        arrangementListObservable.remove(selectedItem);
+        DataHandler.removeArrangementer(selectedItem);
+    }
 }
