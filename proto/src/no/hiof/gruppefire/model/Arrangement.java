@@ -91,7 +91,7 @@ public class Arrangement {
 
     @Override
     public String toString(){
-        return name + " " + sport + " " + participants + " " + startDate + " " + endDate;
+        return name + " " + sport + " " + participants + " " + adress + " " + gruppe + " " + startDate + " " + endDate;
     }
 }
 

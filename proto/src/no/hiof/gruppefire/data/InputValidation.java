@@ -18,6 +18,10 @@ public class InputValidation {
         //Pattern validnNumbers = Pattern.compile("[0-9]");
         //Pattern validAdress = Pattern.compile("[a-zA-Z0-9æøå.]");
 
+        if(Pattern.matches("[a-zA-Z]+", Integer.toString(participants))) {
+            // participants innholder bokstaver
+        }
+
         return true;
     }
 }

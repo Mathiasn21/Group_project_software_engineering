@@ -1,9 +1,9 @@
 [
   {
-    "name": "Dølisjøen rundt",
-    "sport": "Sykkelritt",
-    "participants": 250,
-    "adress": "Oppstadbakken 21",
+    "name": "Test Arrengement",
+    "sport": "Annet",
+    "participants": 420,
+    "adress": "Oppibakken 15",
     "gruppe": false,
     "startDate": {
       "year": 2019,
