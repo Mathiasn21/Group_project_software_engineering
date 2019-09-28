@@ -3,13 +3,14 @@ package no.hiof.gruppefire.tests;
 import static org.junit.jupiter.api.Assertions.*;
 
 import no.hiof.gruppefire.data.DataHandler;
+import no.hiof.gruppefire.data.InputValidation;
 import no.hiof.gruppefire.model.Arrangement;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class DataHandlingTest {
+public class GenerallTests {
 
     @Test
     public void DataRetrievalJsonTest() {
@@ -40,5 +41,14 @@ public class DataHandlingTest {
         }
         // Av en SYKT rar grunn så greier ikke assertSame eller AsserEquals å sammenligne disse to objektene selvom de er identiske. Må derfor lage en egen sammenligning
         //assertSame(expectedArrangementer.get(0),DataHandler.getArrangementer().get(0));
+    }
+
+    @Test
+    public void inputValidationTest() {
+        //InputValidation.arrangementInputValidation("Magnus", "Annet", 420 , "Somewhere rd. 5", false, LocalDate.of(2019,9,30),LocalDate.of(2019,10,1));
+        assertTrue(InputValidation.arrangementInputValidation("Some kind of name", "Annet", 420 , "Somewhere rd 5", false, LocalDate.of(2019,9,30),LocalDate.of(2019,10,1)));
+        assertTrue(InputValidation.arrangementInputValidation("Some kind of name", "Annet", 420 , "Somewhere rd 5", false, LocalDate.of(2019,9,30),LocalDate.of(2019,9,30)));
+        assertFalse(InputValidation.arrangementInputValidation("b", "Niet Comrade", -1 , "Somewhere rd. 5", false, LocalDate.of(2019,9,30),LocalDate.of(2019,9,1)));
+        assertFalse(InputValidation.arrangementInputValidation("This tittle is way to long which is why it will not work", "Something else", 1000000000 , "Rainbow roooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooad", false, LocalDate.of(2019,9,30),LocalDate.of(2019,9,1)));
     }
 }
