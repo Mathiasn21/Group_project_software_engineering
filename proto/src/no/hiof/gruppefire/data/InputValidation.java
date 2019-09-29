@@ -14,15 +14,11 @@ public class InputValidation {
 
     public static boolean arrangementInputValidation(String name, String sport, int participants, String adress, boolean gruppe, LocalDate startDate, LocalDate endDate) {
 
-        //String notValidtext = "";
-        //Pattern validnNumbers = Pattern.compile("[0-9]");
-        //Pattern validAdress = Pattern.compile("[a-zA-Z0-9æøå.]");
 
         int validations = 0;
 
         if(Pattern.matches("[A-Za-z0-9 ]+", name) && name.length() < 30 && name.length() > 2)
             validations++;
-
 
         if(sport == "Fotball" || sport == "Basketball" || sport == "Friidrett" || sport == "Sykkelritt" || sport == "Skirenn" || sport == "Annet")
             validations++;
@@ -41,10 +37,6 @@ public class InputValidation {
         } else {
             return false;
         }
-
-        /*if(Pattern.matches("[a-zA-Z]+", Integer.toString(participants))) {
-            // participants innholder bokstaver
-        }*/
     }
 }
 
