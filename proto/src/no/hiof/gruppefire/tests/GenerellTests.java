@@ -15,18 +15,22 @@ import java.util.ArrayList;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class GenerellTests {
 
-    private ArrayList<Arrangement> actualArragementer;
+    private ArrayList<Arrangement> actualArragementer = new ArrayList<>();
     private ArrayList<Arrangement> expectedArrangementer = new ArrayList<>();
+    private Arrangement addRemoveTest = new Arrangement("Test Arrengement3","Basketball", 69,"Hakkebakken 420",false,LocalDate.of(2019,10,2),LocalDate.of(2019,10,4));
 
-    @BeforeAll
+    @BeforeEach
     public void setup() {
-        DataHandler.readFromJSONFil("src/no/hiof/gruppefire/files/arrangementsTest.json");
+        expectedArrangementer.clear();
+        expectedArrangementer.add(new Arrangement("Test Arrengement","Annet", 420,"Oppibakken 15",false,LocalDate.of(2019,9,2),LocalDate.of(2019,9,4)));
+        expectedArrangementer.add(new Arrangement("Test Arrengement2","Basketball", 69,"Hakkebakken 420",false,LocalDate.of(2019,10,2),LocalDate.of(2019,10,4)));
     }
 
     @AfterAll
     public void end() {
         DataHandler.clearArrangementer();
         DataHandler.addArrangementer(new Arrangement("Test Arrengement","Annet", 420,"Oppibakken 15",false,LocalDate.of(2019,9,2),LocalDate.of(2019,9,4)));
+        DataHandler.addArrangementer(new Arrangement("Test Arrengement2","Basketball", 69,"Hakkebakken 420",false,LocalDate.of(2019,10,2),LocalDate.of(2019,10,4)));
         DataHandler.writeToJSONFile(new File("src/no/hiof/gruppefire/files/arrangementsTest.json"));
     }
 
@@ -42,7 +46,7 @@ public class GenerellTests {
     @Test
     @Order(2)
     public void DataRetrievalJsonTest() {
-        expectedArrangementer.add(new Arrangement("Test Arrengement","Annet", 420,"Oppibakken 15",false,LocalDate.of(2019,9,2),LocalDate.of(2019,9,4)));
+        DataHandler.readFromJSONFil("src/no/hiof/gruppefire/files/arrangementsTest.json");
 
         if(compareArrangementArrays(expectedArrangementer, DataHandler.getArrangementer())) {
             System.out.println("Data succesfully retrieved!");
@@ -54,9 +58,8 @@ public class GenerellTests {
     @Test
     @Order(3)
     public void ArrangementAddTest() {
-        Arrangement tempArrangement = new Arrangement("Test Arrengement","Basketball", 69,"Hakkebakken 420",false,LocalDate.of(2019,10,2),LocalDate.of(2019,10,4));
-        expectedArrangementer.add(tempArrangement);
-        DataHandler.addArrangementer(tempArrangement);
+        expectedArrangementer.add(addRemoveTest);
+        DataHandler.addArrangementer(addRemoveTest);
         if(compareArrangementArrays(expectedArrangementer,DataHandler.getArrangementer())) {
             System.out.println("Arrangement added succesfully!");
         } else {
@@ -67,9 +70,7 @@ public class GenerellTests {
     @Test
     @Order(4)
     public void ArrangementRemoveTest() {
-        Arrangement removeArrangement = new Arrangement("Test Arrengement","Basketball", 69,"Hakkebakken 420",false,LocalDate.of(2019,10,2),LocalDate.of(2019,10,4));
-        expectedArrangementer.remove(removeArrangement);
-        DataHandler.removeArrangementer(removeArrangement);
+        DataHandler.removeArrangementer(addRemoveTest);
         if(compareArrangementArrays(expectedArrangementer,DataHandler.getArrangementer())) {
             System.out.println("Arrengement removed succesfully!");
         } else {
