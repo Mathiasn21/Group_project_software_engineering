@@ -76,6 +76,10 @@ public class DataHandler {
         arrangementer.remove(a);
     }
 
+    public static void clearArrangementer() {
+        arrangementer.clear();
+    }
+
     public static void printArrangementer() {
         System.out.println(arrangementer);
     }
