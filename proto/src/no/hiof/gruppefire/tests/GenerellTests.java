@@ -20,14 +20,14 @@ public class GenerellTests {
 
     @BeforeAll
     public void setup() {
-        DataHandler.readFromJSONFil("src/no/hiof/gruppefire/files/arrangements.json");
+        DataHandler.readFromJSONFil("src/no/hiof/gruppefire/files/arrangementsTest.json");
     }
 
     @AfterAll
     public void end() {
         DataHandler.clearArrangementer();
         DataHandler.addArrangementer(new Arrangement("Test Arrengement","Annet", 420,"Oppibakken 15",false,LocalDate.of(2019,9,2),LocalDate.of(2019,9,4)));
-        DataHandler.writeToJSONFile(new File("src/no/hiof/gruppefire/files/arrangements.json"));
+        DataHandler.writeToJSONFile(new File("src/no/hiof/gruppefire/files/arrangementsTest.json"));
     }
 
     @Test
@@ -83,8 +83,8 @@ public class GenerellTests {
         Arrangement saveArrangement = new Arrangement("Test Arrengement","Skirenn", 12,"Hakkebakken 420",false,LocalDate.of(2019,10,2),LocalDate.of(2019,10,4));
         expectedArrangementer.add(saveArrangement);
         DataHandler.addArrangementer(saveArrangement);
-        DataHandler.writeToJSONFile(new File("src/no/hiof/gruppefire/files/arrangements.json"));
-        DataHandler.readFromJSONFil("src/no/hiof/gruppefire/files/arrangements.json");
+        DataHandler.writeToJSONFile(new File("src/no/hiof/gruppefire/files/arrangementsTest.json"));
+        DataHandler.readFromJSONFil("src/no/hiof/gruppefire/files/arrangementsTest.json");
         if(compareArrangementArrays(expectedArrangementer,DataHandler.getArrangementer())) {
             System.out.println("Data saved succesfully!");
         } else {

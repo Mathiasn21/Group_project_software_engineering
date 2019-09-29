@@ -1,0 +1,19 @@
+[
+  {
+    "name": "Test Arrengement",
+    "sport": "Annet",
+    "participants": 420,
+    "adress": "Oppibakken 15",
+    "gruppe": false,
+    "startDate": {
+      "year": 2019,
+      "month": 9,
+      "day": 2
+    },
+    "endDate": {
+      "year": 2019,
+      "month": 9,
+      "day": 4
+    }
+  }
+]
