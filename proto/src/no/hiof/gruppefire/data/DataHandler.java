@@ -6,14 +6,29 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class DataHandler {
-    private static ArrayList<Arrangement> arrangementer = new ArrayList<>();
+/**
+ * DataHandler is a class that handles data.
+ *
+ * @author Gruppe4
+ */
 
+public class DataHandler {
+
+    /**
+     * A list with arrangements.
+     */
+    private static ArrayList<Arrangement> arrangements = new ArrayList<>();
+
+
+    /**
+     * Writes arrangement data to a JSON file.
+     * @param filepath
+     */
     public static void writeToJSONFile(File filepath){
 
         GsonBuilder gsonBuilder = new GsonBuilder().setPrettyPrinting();
         Gson gson = gsonBuilder.create();
-        String jsonTextList = gson.toJson(arrangementer);
+        String jsonTextList = gson.toJson(arrangements);
 
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filepath))) {
             bufferedWriter.write(jsonTextList);
@@ -22,6 +37,10 @@ public class DataHandler {
         }
     }
 
+    /**
+     * Reads data from a JSON file.
+     * @param filepath
+     */
     public static void readFromJSONFil(String filepath) {
 
         GsonBuilder gsonBuilder = new GsonBuilder().setPrettyPrinting();
@@ -44,14 +63,10 @@ public class DataHandler {
         setArrangementer(arrangementListFromFile);
     }
 
-    public static ArrayList<Arrangement> getArrangementer() {
-        return arrangementer;
-    }
-
-    public static void setArrangementer(ArrayList<Arrangement> arrangementer) {
-        DataHandler.arrangementer = arrangementer;
-    }
-
+    /**
+     * Adds sport alternatives to a list.
+     * @return arrayList with sports
+     */
     public static ArrayList<String>sportsToComboBox(){
 
         ArrayList arraylist = new ArrayList();
@@ -68,19 +83,34 @@ public class DataHandler {
 
     }
 
+    /**
+     * Adds arrangements to the arrangements list.
+     * @param a
+     */
     public static void addArrangementer(Arrangement a) {
-        arrangementer.add(a);
+        arrangements.add(a);
     }
 
+    /**
+     * Removes an arrangement the arrangements list.
+     * @param a
+     */
     public static void removeArrangementer(Arrangement a) {
-        arrangementer.remove(a);
+        arrangements.remove(a);
     }
 
+    /**
+     * Clears the arrangements list.
+     */
     public static void clearArrangementer() {
-        arrangementer.clear();
+        arrangements.clear();
     }
 
-    public static void printArrangementer() {
-        System.out.println(arrangementer);
+    public static ArrayList<Arrangement> getArrangementer() {
+        return arrangements;
+    }
+
+    public static void setArrangementer(ArrayList<Arrangement> arrangementer) {
+        DataHandler.arrangements = arrangementer;
     }
 }

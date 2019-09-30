@@ -1,31 +1,31 @@
 [
   {
-    "name": "plis",
-    "sport": "Sykkelritt",
-    "participants": 123,
-    "adress": "rtghfgj",
-    "gruppe": false,
+    "name": "Testnavn",
+    "sport": "Fotball",
+    "participants": 555,
+    "adress": "posijfdg",
+    "group": true,
     "startDate": {
       "year": 2019,
       "month": 9,
-      "day": 5
+      "day": 4
     },
     "endDate": {
       "year": 2019,
       "month": 9,
-      "day": 21
+      "day": 29
     }
   },
   {
-    "name": "555",
-    "sport": "Fotball",
-    "participants": 1000,
-    "adress": "rtghfgj",
-    "gruppe": false,
+    "name": "testnavn2",
+    "sport": "Annet",
+    "participants": 455,
+    "adress": "eodpsjf",
+    "group": false,
     "startDate": {
       "year": 2019,
       "month": 9,
-      "day": 5
+      "day": 3
     },
     "endDate": {
       "year": 2019,

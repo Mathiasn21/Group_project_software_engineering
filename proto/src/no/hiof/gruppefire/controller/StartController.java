@@ -2,77 +2,111 @@ package no.hiof.gruppefire.controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import no.hiof.gruppefire.MainJavaFX;
 import no.hiof.gruppefire.data.DataHandler;
 import no.hiof.gruppefire.model.Arrangement;
-import org.junit.jupiter.api.Test;
 
+/**
+ * StartController is a class that controls the "start" view.
+ * Holds information about arrangementsFilepath, arrangementList and application.
+ *
+ * @author Gruppe4
+ */
 
 import java.io.IOException;
 
 public class StartController{
 
+    /**
+     * Location to where the arrangement data is stored.
+     */
     private String arrangementsFilepath = "src/no/hiof/gruppefire/files/arrangements.json";
+    /**
+     * A list with arrangements.
+     */
     private static ObservableList<Arrangement>arrangementListObservable;
+    /**
+     * An instance of the MainJavaFX class.
+     */
     private MainJavaFX application = MainJavaFX.getApplication();
-
-    @FXML
-    private Button newArrangementBtn;
+    /**
+     * A listView with all of the arrangements.
+     */
     @FXML
     private ListView<Arrangement>listview = new ListView<>();
 
-    @FXML
-    public void newArrangementClicked() throws IOException {
-
-            application.newAlterWindow(new Arrangement(), "New");
-    }
-
-    @FXML
-    public void editClicked(ActionEvent actionEvent) throws IOException{
-
-        if(listview.getSelectionModel().getSelectedItem() != null){
-            application.newAlterWindow(listview.getSelectionModel().getSelectedItem(), "Edit");
-        }
-
-        else
-            System.out.println("Du har ikke valgt et arrangement");
-    }
-
-    @FXML
-    public void deleteClicked(ActionEvent actionEvent){
-        deleteArrangement();
-    }
-
+    /**
+     * Calls method populateListView() when the view is opening.
+     */
     @FXML
     public void initialize(){
         populateListView();
     }
 
+    /**
+     * Calls method newAlterWinow when the new arrangement button is clicked.
+     * @throws IOException
+     */
+    @FXML
+    public void newArrangementClicked() throws IOException {
+
+            application.newAlterWindow(new Arrangement(), "Ny");
+    }
+
+    /**
+     * Opens a new window with the title "edit" when the edit arrangement button is clicked.
+     * @throws IOException
+     */
+    @FXML
+    public void editClicked() throws IOException{
+
+        if(listview.getSelectionModel().getSelectedItem() != null){
+            application.newAlterWindow(listview.getSelectionModel().getSelectedItem(), "Rediger");
+        }
+        else
+            System.out.println("Du har ikke valgt et arrangement");
+    }
+
+    /**
+     * Calls deletArrangement() method when the delete button is clicked.
+     */
+    @FXML
+    public void deleteClicked(){
+        deleteArrangement();
+    }
+
+    /**
+     * Puts data into a listView.
+     */
     public void populateListView() {
         DataHandler.readFromJSONFil(arrangementsFilepath);
         arrangementListObservable = FXCollections.observableArrayList(DataHandler.getArrangementer());
         listview.setItems(arrangementListObservable);
     }
 
+    /**
+     * Adds an arrangement to a list.
+     * @param a
+     */
     public void addArrangementToList (Arrangement a){
         arrangementListObservable.add(a);
         DataHandler.addArrangementer(a);
     }
 
+    /**
+     * Refreshes a listView.
+     * @param ar
+     */
     public void updateListview(Arrangement ar){
         arrangementListObservable.add(ar);
         arrangementListObservable.remove(ar);
     }
 
+    /**
+     * Deletes an existing arrangement.
+     */
     public void deleteArrangement(){
         Arrangement selectedItem = listview.getSelectionModel().getSelectedItem();
         arrangementListObservable.remove(selectedItem);

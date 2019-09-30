@@ -1,19 +1,28 @@
 package no.hiof.gruppefire.data;
 
-import javax.xml.datatype.DatatypeConfigurationException;
-import javax.xml.datatype.DatatypeFactory;
-import javax.xml.datatype.XMLGregorianCalendar;
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.GregorianCalendar;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.zip.DataFormatException;
+
+/**
+ * InputValidation is a class that handles inputs from a user.
+ *
+ * @author Gruppe4
+ */
 
 public class InputValidation {
 
+    /**
+     * Validates arrangement input data from user.
+     * @param name
+     * @param sport
+     * @param participants
+     * @param adress
+     * @param gruppe
+     * @param startDate
+     * @param endDate
+     * @return True if input is valid. False if input is not valid.
+     */
     public static boolean arrangementInputValidation(String name, String sport, int participants, String adress, boolean gruppe, LocalDate startDate, LocalDate endDate) {
-
 
         int validations = 0;
 
