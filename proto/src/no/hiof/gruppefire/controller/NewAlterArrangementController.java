@@ -30,7 +30,7 @@ public class NewAlterArrangementController {
 
     private MainJavaFX application = MainJavaFX.getApplication();
 
-    private String title;
+    private Arrangement arrangementToEdit;
 
     @FXML
     private Button cancelBtn;
@@ -69,24 +69,24 @@ public class NewAlterArrangementController {
     }
 
     public void initialize(){
-        Arrangement arrangement = application.getArrangementToEdit();
+        arrangementToEdit = application.getArrangementToEdit();
 
         groupOrIndividualsComboBox();
         SportComboBox();
 
-        if(arrangement != null){
+        if(arrangementToEdit != null){
 
-            nameInput.setText(arrangement.getName());
-            sportComboBoxInput.getSelectionModel().select(arrangement.getSport());
-            if(arrangement.getParticipants() > 0)
-                participantsInput.setText(Integer.toString(arrangement.getParticipants()));
-            adressInput.setText(arrangement.getAdress());
-            if(arrangement.isGruppe())
+            nameInput.setText(arrangementToEdit.getName());
+            sportComboBoxInput.getSelectionModel().select(arrangementToEdit.getSport());
+            if(arrangementToEdit.getParticipants() > 0)
+                participantsInput.setText(Integer.toString(arrangementToEdit.getParticipants()));
+            adressInput.setText(arrangementToEdit.getAdress());
+            if(arrangementToEdit.isGruppe())
                 groupInput.getSelectionModel().select("Groups");
             else
                 groupInput.getSelectionModel().select("Individuals");
-            startDateInput.setValue(arrangement.getStartDate());
-            endDateInput.setValue(arrangement.getEndDate());
+            startDateInput.setValue(arrangementToEdit.getStartDate());
+            endDateInput.setValue(arrangementToEdit.getEndDate());
         }
     }
 
@@ -115,13 +115,27 @@ public class NewAlterArrangementController {
     private void addArrangementToList(){
         StartController startController = new StartController();
 
-        startController.addArrangementToList(new Arrangement(
-                nameInput.getText(),
-                chosenSport(),
-                parseInt(participantsInput.getText()),
-                adressInput.getText(), trueOrFalse(),
-                startDateInput.getValue(),
-                endDateInput.getValue()));
+        if(arrangementToEdit.getName() == null){
+            startController.addArrangementToList(new Arrangement(
+                    nameInput.getText(),
+                    chosenSport(),
+                    parseInt(participantsInput.getText()),
+                    adressInput.getText(),
+                    trueOrFalse(),
+                    startDateInput.getValue(),
+                    endDateInput.getValue()));
+        }
+        else{
+            arrangementToEdit.setName(nameInput.getText());
+            arrangementToEdit.setSport(chosenSport());
+            arrangementToEdit.setParticipants(parseInt(participantsInput.getText()));
+            arrangementToEdit.setAdress(adressInput.getText());
+            arrangementToEdit.setGruppe(trueOrFalse());
+            arrangementToEdit.setStartDate(startDateInput.getValue());
+            arrangementToEdit.setEndDate(endDateInput.getValue());
+
+            startController.updateListview(arrangementToEdit);
+        }
     }
 
     public void close(){
@@ -130,9 +144,5 @@ public class NewAlterArrangementController {
 
     public void setStage(Stage stage) {
         this.stage = stage;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 }

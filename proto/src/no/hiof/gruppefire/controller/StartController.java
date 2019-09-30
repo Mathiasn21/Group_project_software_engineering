@@ -41,11 +41,10 @@ public class StartController{
 
         if(listview.getSelectionModel().getSelectedItem() != null){
             application.newAlterWindow(listview.getSelectionModel().getSelectedItem(), "Edit");
-            deleteArrangement();
         }
 
         else
-            System.out.println("You have not choosen an arrangement");
+            System.out.println("Du har ikke valgt et arrangement");
     }
 
     @FXML
@@ -67,6 +66,11 @@ public class StartController{
     public void addArrangementToList (Arrangement a){
         arrangementListObservable.add(a);
         DataHandler.addArrangementer(a);
+    }
+
+    public void updateListview(Arrangement ar){
+        arrangementListObservable.add(ar);
+        arrangementListObservable.remove(ar);
     }
 
     public void deleteArrangement(){

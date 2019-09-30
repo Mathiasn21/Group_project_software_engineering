@@ -14,24 +14,24 @@
    <children>
       <VBox layoutX="14.0" layoutY="14.0" prefHeight="176.0" prefWidth="218.0" spacing="5.0" AnchorPane.bottomAnchor="220.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="50.0">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Navn" />
             <TextField fx:id="nameInput" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Participants" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Deltakere" />
             <TextField fx:id="participantsInput" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Adress" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Adresse" />
             <TextField fx:id="adressInput" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Sport" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Idrett" />
             <ComboBox fx:id="sportComboBoxInput" prefWidth="150.0" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Start date " />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Start dato" />
             <DatePicker fx:id="startDateInput" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="End date" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Slutt dato" />
             <DatePicker fx:id="endDateInput" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Groups or individuals" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Lag eller individuell" />
             <ComboBox fx:id="groupInput" prefWidth="150.0" />
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0">
                <children>
-                  <Button fx:id="saveBtn" mnemonicParsing="false" onAction="#saveClicked" text="Save" />
-                  <Button fx:id="cancelBtn" mnemonicParsing="false" onAction="#cancelClicked" text="Cancel" />
+                  <Button fx:id="saveBtn" mnemonicParsing="false" onAction="#saveClicked" text="Lagre" />
+                  <Button fx:id="cancelBtn" mnemonicParsing="false" onAction="#cancelClicked" text="Avbryt" />
                </children>
             </HBox>
          </children>

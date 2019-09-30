@@ -1,19 +1,36 @@
 [
   {
-    "name": "Test Arrengement",
-    "sport": "Annet",
-    "participants": 420,
-    "adress": "Oppibakken 15",
+    "name": "plis",
+    "sport": "Sykkelritt",
+    "participants": 123,
+    "adress": "rtghfgj",
     "gruppe": false,
     "startDate": {
       "year": 2019,
       "month": 9,
-      "day": 2
+      "day": 5
     },
     "endDate": {
       "year": 2019,
       "month": 9,
-      "day": 4
+      "day": 21
+    }
+  },
+  {
+    "name": "555",
+    "sport": "Fotball",
+    "participants": 1000,
+    "adress": "rtghfgj",
+    "gruppe": false,
+    "startDate": {
+      "year": 2019,
+      "month": 9,
+      "day": 5
+    },
+    "endDate": {
+      "year": 2019,
+      "month": 9,
+      "day": 28
     }
   }
 ]

@@ -87,11 +87,9 @@ public class Arrangement {
         this.gruppe = gruppe;
     }
 
-
-
     @Override
     public String toString(){
-        return name + " " + sport + " " + participants + " " + adress + " " + gruppe + " " + startDate + " " + endDate;
+        return name + " " + sport + " " + participants + " " + adress + " " + startDate + " " + endDate;
     }
 }
 
