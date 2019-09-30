@@ -22,24 +22,40 @@ public class InputValidation {
      * @param endDate
      * @return True if input is valid. False if input is not valid.
      */
-    public static boolean arrangementInputValidation(String name, String sport, int participants, String adress, boolean gruppe, LocalDate startDate, LocalDate endDate) {
+    public static boolean arrangementInputValidation(String name, String sport, String participants, String adress, boolean gruppe, LocalDate startDate, LocalDate endDate) {
 
         int validations = 0;
 
+
         if(Pattern.matches("[A-Za-z0-9 ]+", name) && name.length() < 30 && name.length() > 2)
             validations++;
+        else
+            System.out.println("Sett inn et gyldig navn");
 
-        if(sport == "Fotball" || sport == "Basketball" || sport == "Friidrett" || sport == "Sykkelritt" || sport == "Skirenn" || sport == "Annet")
+        if(sport != null)
             validations++;
+        else
+            System.out.println("Velg en idrett");
 
-        if(participants < 1000000 && participants >= 0)
-            validations++;
+        if(Pattern.matches("[0-9 ]+", participants)){
+            int participantsInt = Integer.parseInt(participants);
+            if(participantsInt < 1000000 && participantsInt >= 1)
+                validations++;
+            else
+                System.out.println("Et arrangement må ha 1 eller flere deltakere");
+        }
+        else
+            System.out.println("Deltakere må være et nummmer");
 
         if(Pattern.matches("[A-Za-z0-9 ]+", adress) && adress.length() < 100)
             validations++;
+        else
+            System.out.println("Sett inn gydlig adresse");
 
         if(startDate.isBefore(endDate) || startDate.isEqual(endDate))
             validations++;
+        else
+            System.out.println("Sett inn gydlig dato");
 
         if(validations == 5) {
             return true;

@@ -17,20 +17,20 @@
     }
   },
   {
-    "name": "testnavn2",
-    "sport": "Annet",
-    "participants": 455,
-    "adress": "eodpsjf",
-    "group": false,
+    "name": "cdfgcv",
+    "sport": "Basketball",
+    "participants": 67,
+    "adress": "fdhg",
+    "group": true,
     "startDate": {
       "year": 2019,
       "month": 9,
-      "day": 3
+      "day": 2
     },
     "endDate": {
       "year": 2019,
       "month": 9,
-      "day": 28
+      "day": 21
     }
   }
 ]

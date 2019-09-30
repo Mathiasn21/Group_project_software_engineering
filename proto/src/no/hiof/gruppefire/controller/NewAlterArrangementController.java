@@ -56,7 +56,7 @@ public class NewAlterArrangementController {
         if(InputValidation.arrangementInputValidation(
                 nameInput.getText(),
                 chosenSport(),
-                parseInt(participantsInput.getText()),
+                participantsInput.getText(),
                 adressInput.getText(),
                 trueOrFalse(),
                 startDateInput.getValue(),
@@ -65,8 +65,6 @@ public class NewAlterArrangementController {
             addArrangementToList();
             close();
         }
-        else
-            System.out.println("what");
     }
 
     /**
