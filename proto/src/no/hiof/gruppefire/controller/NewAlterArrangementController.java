@@ -27,9 +27,7 @@ import static java.lang.Integer.parseInt;
 public class NewAlterArrangementController {
 
     private Stage stage;
-
     private MainJavaFX application = MainJavaFX.getApplication();
-
     private Arrangement arrangementToEdit;
 
     @FXML
