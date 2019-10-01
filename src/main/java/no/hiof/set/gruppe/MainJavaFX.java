@@ -30,18 +30,24 @@ public class MainJavaFX extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("start"));
+        scene = new Scene(loadFXML("Arrangement"));
         stage.setScene(scene);
         stage.setTitle("Arrangementer");
-        stage.show();
-
         stage.setMinHeight(500);
         this.stage = stage;
+        MainJavaFX.application = this;
+        stage.show();
+
     }
 
+
+    /**
+     * Let be. This will be used for later in order to dynamically switch between windows.
+     * */
     static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
     }
+
 
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MainJavaFX.class.getResource(fxml + ".fxml"));
@@ -97,7 +103,7 @@ public class MainJavaFX extends Application {
     }
 
     public static MainJavaFX getApplication() {
-        return application;
+        return MainJavaFX.application;
     }
 
     public Arrangement getArrangementToEdit() {

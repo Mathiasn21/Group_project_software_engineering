@@ -34,7 +34,7 @@ public class StartController{
     /**
      * An instance of the MainJavaFX class.
      */
-    private MainJavaFX application = MainJavaFX.getApplication();
+    private MainJavaFX application;
     /**
      * A listView with all of the arrangements.
      */
@@ -47,6 +47,7 @@ public class StartController{
     @FXML
     public void initialize(){
         populateListView();
+        application = MainJavaFX.getApplication();
     }
 
     /**
@@ -55,7 +56,6 @@ public class StartController{
      */
     @FXML
     public void newArrangementClicked() throws IOException {
-
             application.newAlterWindow(new Arrangement(), "Ny");
     }
 

@@ -20,11 +20,11 @@ import static java.lang.Integer.parseInt;
  *
  * @author Gruppe4
  */
-
 public class NewAlterArrangementController {
 
     private Stage stage;
     private Arrangement arrangementToEdit;
+
     /**
      * An instance of the MainJavaFX class.
      */
