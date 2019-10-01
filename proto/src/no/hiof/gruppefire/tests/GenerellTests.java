@@ -15,7 +15,6 @@ import java.util.ArrayList;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class GenerellTests {
 
-    private ArrayList<Arrangement> actualArragementer = new ArrayList<>();
     private ArrayList<Arrangement> expectedArrangementer = new ArrayList<>();
     private Arrangement addRemoveTest = new Arrangement("Test Arrengement3","Basketball", 69,"Hakkebakken 420",false,LocalDate.of(2019,10,2),LocalDate.of(2019,10,4));
 

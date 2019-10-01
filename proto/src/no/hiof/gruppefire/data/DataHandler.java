@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * DataHandler is a class that handles data.
- *
  * @author Gruppe4
  */
 
@@ -21,7 +19,6 @@ public class DataHandler {
 
 
     /**
-     * Writes arrangement data to a JSON file.
      * @param filepath
      */
     public static void writeToJSONFile(File filepath){
@@ -38,7 +35,6 @@ public class DataHandler {
     }
 
     /**
-     * Reads data from a JSON file.
      * @param filepath
      */
     public static void readFromJSONFil(String filepath) {
@@ -92,7 +88,7 @@ public class DataHandler {
     }
 
     /**
-     * Removes an arrangement the arrangements list.
+     * Removes an arrangement from the arrangements list.
      * @param a
      */
     public static void removeArrangementer(Arrangement a) {

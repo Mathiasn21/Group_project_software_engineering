@@ -95,7 +95,7 @@ public class MainJavaFX extends Application {
     }
 
     /**
-     * Calls writeToJSONFile when the application is closing.
+     * Calls {@link DataHandler#writeToJSONFile(File)} when the application is closing.
      */
     @Override
     public void stop(){

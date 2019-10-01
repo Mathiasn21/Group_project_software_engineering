@@ -39,10 +39,10 @@ public class InputValidation {
 
         if(Pattern.matches("[0-9 ]+", participants)){
             int participantsInt = Integer.parseInt(participants);
-            if(participantsInt < 1000000 && participantsInt >= 1)
+            if(participantsInt < 1000000 && participantsInt >= 0)
                 validations++;
             else
-                System.out.println("Et arrangement må ha 1 eller flere deltakere");
+                System.out.println("Et arrangement må ha 0 eller flere deltakere");
         }
         else
             System.out.println("Deltakere må være et nummmer");
