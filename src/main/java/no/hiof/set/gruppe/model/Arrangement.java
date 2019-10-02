@@ -1,4 +1,4 @@
-package no.hiof.gruppefire.model;
+package no.hiof.set.gruppe.model;
 
 import java.time.LocalDate;
 
@@ -13,16 +13,17 @@ public class Arrangement {
 
     private String name;
     private String sport;
-    private int participants;
     private String adress;
+
+    private int participants;
     private boolean group;
+
     private LocalDate startDate;
     private LocalDate endDate;
 
-    /**
-     * Empty constructor.
-     */
+
     public Arrangement(){
+        this("", "", 0, "", false);
     }
 
     public Arrangement(String name, String sport, int participants, String adress, boolean gruppe){
@@ -31,13 +32,13 @@ public class Arrangement {
 
     /**
      * Constructor used to make an Arrangement instance.
-     * @param name
-     * @param sport
-     * @param participants
-     * @param adress
-     * @param gruppe
-     * @param startDate
-     * @param endDate
+     * @param name String
+     * @param sport String
+     * @param participants int
+     * @param adress String
+     * @param gruppe boolean
+     * @param startDate LocalDate
+     * @param endDate LocalDate
      */
     public Arrangement(String name, String sport, int participants, String adress, boolean gruppe, LocalDate startDate, LocalDate endDate) {
         this.name = name;
@@ -53,48 +54,24 @@ public class Arrangement {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getSport() {
         return sport;
-    }
-
-    public void setSport(String sport) {
-        this.sport = sport;
     }
 
     public int getParticipants() {
         return participants;
     }
 
-    public void setParticipants(int participants) {
-        this.participants = participants;
-    }
-
     public LocalDate getStartDate() {
         return startDate;
-    }
-
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
     }
 
     public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
-    }
-
     public String getAdress() {
         return adress;
-    }
-
-    public void setAdress(String adress) {
-        this.adress = adress;
     }
 
     public boolean isGruppe() {
@@ -103,6 +80,9 @@ public class Arrangement {
 
     public void setGruppe(boolean gruppe) {
         this.group = gruppe;
+    }
+    public void setParticipants(int participants) {
+        this.participants = participants;
     }
 
     @Override

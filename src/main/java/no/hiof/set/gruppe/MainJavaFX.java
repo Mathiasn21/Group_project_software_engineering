@@ -6,11 +6,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import no.hiof.gruppefire.model.Arrangement;
-import no.hiof.set.gruppe.controller.NewAlterArrangementController;
-import no.hiof.set.gruppe.data.DataHandler;
-
-import java.io.File;
+import no.hiof.set.gruppe.Exceptions.DataFormatException;
+import no.hiof.set.gruppe.controller.*;
 import java.io.IOException;
 
 /**
@@ -20,93 +17,73 @@ import java.io.IOException;
  * @author Gruppe4
  */
 
-public class MainJavaFX extends Application {
-
-    private static MainJavaFX application;
-    public Arrangement arrangementToSend;
-
+public class MainJavaFX extends Application implements SetupWindow {
     private static Scene scene;
     private Stage stage;
-
-    @Override
-    public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("Arrangement"));
-        stage.setScene(scene);
-        stage.setTitle("Arrangementer");
-        stage.setMinHeight(500);
-        this.stage = stage;
-        MainJavaFX.application = this;
-        stage.show();
-
-    }
-
-
-    /**
-     * Let be. This will be used for later in order to dynamically switch between windows.
-     * */
-    static void setRoot(String fxml) throws IOException {
-        scene.setRoot(loadFXML(fxml));
-    }
-
-
-    private static Parent loadFXML(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(MainJavaFX.class.getResource(fxml + ".fxml"));
-        return fxmlLoader.load();
-    }
-
-    /**
-     * Creates a new window to either edit or create a new arrangement.
-     * @param arrangement
-     * @param title
-     * @throws IOException
-     */
-    public void newAlterWindow(Arrangement arrangement, String title) throws IOException{
-
-        arrangementToSend = arrangement;
-
-        Stage editStage = new Stage();
-
-        FXMLLoader fxmlInnlaster = new FXMLLoader();
-        fxmlInnlaster.setLocation(getClass().getResource("./view/NewAlterArrangement.fxml"));
-        Parent editLayout = fxmlInnlaster.load();
-
-        NewAlterArrangementController newAlterArrangementController = fxmlInnlaster.getController();
-
-        Scene editScene = new Scene(editLayout, 230, 450);
-        newAlterArrangementController.setStage(editStage);
-
-        editStage.setScene(editScene);
-        editStage.initModality(Modality.APPLICATION_MODAL);
-        editStage.initOwner(stage);
-        editStage.setTitle(title);
-        editStage.showAndWait();
-    }
 
     public static void main(String[] args) {
         launch(args);
     }
 
-    /**
-     * Closing a Stage s.
-     * @param s Stage
-     */
-    public void close(Stage s){
-        s.close();
+    @Override
+    public void start(Stage stage) throws IOException {
+        this.stage = stage;
+
+        FXMLLoader loader = new FXMLLoader(MainJavaFX.class.getResource("Arrangement.fxml"));
+        Parent editLayout = loader.load();
+
+        ((Controller)loader.getController()).setMainController(this);
+        Scene scene = new Scene(editLayout, 230, 450);
+        stage.setScene(scene);
+        stage.setMinHeight(500);
+        stage.setMinWidth(500);
+        stage.setTitle("Arrangementer");
+        stage.show();
     }
 
+    public void setupWindow(IController controller)throws IOException{
+        Stage stage = new Stage();
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(MainJavaFX.class.getResource(controller.getName()));
+        Parent editLayout = loader.load();
+
+        Scene editScene = new Scene(editLayout, 230, 450);
+        stage.setScene(editScene);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(this.stage);
+        stage.setTitle(controller.getTitle());
+        controller.setMainController(this);
+        System.out.println(this);
+
+        stage.show();
+    }
+
+
+    public void setupWindow(IControllerDataTransfer<Object> controller, Object object){
+        try{
+            System.out.println("setting up data: " + object);
+            controller.setDataFields(object);
+            setupWindow(controller);
+        }catch (DataFormatException | IOException dataEx){
+            dataEx.printStackTrace();
+        }
+    }
+
+
     /**
-     * Calls {@link DataHandler#writeToJSONFile(File)} when the application is closing.
-     */
+     * Let be. This will be used for later in order to dynamically switching between windows.
+     * */
+    static void setRoot(String fxml) throws IOException {
+        scene.setRoot(loadFXML(fxml));
+    }
+    private static Parent loadFXML(String fxml) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(MainJavaFX.class.getResource(fxml + ".fxml"));
+        return fxmlLoader.load();
+    }
+
     @Override
     public void stop(){
-        DataHandler.writeToJSONFile(new File("./files/arrangements.json"));
-    }
-
-    public static MainJavaFX getApplication() {
-        return MainJavaFX.application;
-    }
-
-    public Arrangement getArrangementToEdit() {
-        return arrangementToSend;
+        //DataHandler.writeToJSONFile(new File("./files/arrangements.json"));
     }
 }

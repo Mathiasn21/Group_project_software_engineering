@@ -1,63 +1,83 @@
 package no.hiof.set.gruppe.data;
+/*Guide
+ * 1. Import Statements
+ * 2. Constructors
+ * 3. Getters
+ * 4. Setters
+ * 5. Overridden Methods
+ * */
 
+
+// --------------------------------------------------//
+//                1.Import Statements                //
+// --------------------------------------------------//
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import no.hiof.gruppefire.model.Arrangement;
+import no.hiof.set.gruppe.model.Arrangement;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 
 /**
+ * This class handles data. Interacting with this object is done via the interface IDataHandler.
  * @author Gruppe4
  */
+public class DataHandler implements IDataHandler {
+    //static preLoader
 
-public class DataHandler {
 
+    // --------------------------------------------------//
+    //                2.Local Fields                     //
+    // --------------------------------------------------//
     /**
      * A list with arrangements.
      */
     private static ArrayList<Arrangement> arrangements = new ArrayList<>();
+    private static String arrangementFName = "arrangements.json";
 
 
-    /**
-     * @param filepath
-     */
-    public static void writeToJSONFile(File filepath){
 
-        GsonBuilder gsonBuilder = new GsonBuilder().setPrettyPrinting();
-        Gson gson = gsonBuilder.create();
-        String jsonTextList = gson.toJson(arrangements);
+    private static String readFromFile(String fName){
+        String line;
+        StringBuilder textFromFile = new StringBuilder();
 
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filepath))) {
-            bufferedWriter.write(jsonTextList);
+        String filepath = "/files/" + fName;
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(new File("").getAbsolutePath() + filepath))) {
+            while ((line = bufferedReader.readLine()) != null) {
+                textFromFile.append(line);
+            }
+            return textFromFile.toString();
+        }catch (IOException ioexc) {
+            ioexc.printStackTrace();
+        }
+        return "";
+    }
+    private static void writeToFile(String str, String fName){
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(new File("").getAbsolutePath() + fName))) {
+            bufferedWriter.write(str);
         } catch (IOException ioexc) {
             System.out.println(ioexc.getMessage());
         }
     }
 
-    /**
-     * @param filepath
-     */
-    public static void readFromJSONFil(String filepath) {
-
+    private static<T> List<T> listFromJson(Class<T[]> type, String jsonTextFromFile) {
         GsonBuilder gsonBuilder = new GsonBuilder().setPrettyPrinting();
         Gson gson = gsonBuilder.create();
 
-        ArrayList<Arrangement> arrangementListFromFile = new ArrayList<>();
-        String line;
-        StringBuilder jsonTextFromFile = new StringBuilder();
+        T[] arrangementArray = gson.fromJson(jsonTextFromFile, type);
+        return (Arrays.asList(arrangementArray));
+    }
 
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(new File("").getAbsolutePath() + filepath))) {
-            while ((line = bufferedReader.readLine()) != null) {
-                jsonTextFromFile.append(line);
-            }
-            Arrangement[] arrangementArray = gson.fromJson(jsonTextFromFile.toString(), Arrangement[].class);
-            arrangementListFromFile.addAll(Arrays.asList(arrangementArray));
-
-        }catch (IOException ioexc) {
-            System.out.println(ioexc.getMessage());
-        }
-        setArrangementer(arrangementListFromFile);
+    private static<T> String toJson(Class<T[]> type, T[] array){
+        GsonBuilder gsonBuilder = new GsonBuilder().setPrettyPrinting();
+        Gson gson = gsonBuilder.create();
+        return gson.toJson(array, type);
+    }
+    public static Collection<? extends Arrangement> getArrangementsData() {
+        return listFromJson(Arrangement[].class, readFromFile(arrangementFName));
     }
 
     /**
@@ -65,9 +85,7 @@ public class DataHandler {
      * @return arrayList with sports
      */
     public static ArrayList<String>sportsToComboBox(){
-
         ArrayList arraylist = new ArrayList();
-
         //Skal egentlig hentes fra fil. Dette er bare midlertidig
         arraylist.add("Fotball");
         arraylist.add("Basketball");
@@ -75,9 +93,17 @@ public class DataHandler {
         arraylist.add("Sykkelritt");
         arraylist.add("Skirenn");
         arraylist.add("Annet");
-
         return arraylist;
+    }
 
+    @Override
+    public void storeArrangementsData(Arrangement arrangement) {
+
+    }
+
+    @Override
+    public void storeArrangementsData(Collection<Arrangement> arrangement) {
+        writeToFile(toJson(Arrangement[].class, (Arrangement[]) arrangement.toArray()), arrangementFName);
     }
 
     /**
@@ -96,18 +122,4 @@ public class DataHandler {
         arrangements.remove(a);
     }
 
-    /**
-     * Clears the arrangements list.
-     */
-    public static void clearArrangementer() {
-        arrangements.clear();
-    }
-
-    public static ArrayList<Arrangement> getArrangementer() {
-        return arrangements;
-    }
-
-    public static void setArrangementer(ArrayList<Arrangement> arrangementer) {
-        DataHandler.arrangements = arrangementer;
-    }
 }

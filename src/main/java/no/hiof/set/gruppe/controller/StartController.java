@@ -1,15 +1,30 @@
 package no.hiof.set.gruppe.controller;
 
+/*Guide
+ * 1. Import Statements
+ * 2. Constructors
+ * 3. Getters
+ * 4. Setters
+ * 5. Overridden Methods
+ * */
+
+
+// --------------------------------------------------//
+//                1.Import Statements                //
+// --------------------------------------------------//
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
-import no.hiof.gruppefire.model.Arrangement;
+import javafx.scene.input.MouseEvent;
 import no.hiof.set.gruppe.MainJavaFX;
+import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.data.DataHandler;
-
-import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 /**
  * StartController is a class that controls the "start" view.
@@ -17,103 +32,101 @@ import java.io.IOException;
  *
  * @author Gruppe4
  */
-
-public class StartController{
-
-    public Button newArrangementBtn;
-    public Button editBtn;
-    public Button deleteBtn;
-    /**
-     * Location to where the arrangement data is stored.
-     */
-    private String arrangementsFilepath = "/files/arrangements.json";
-    /**
-     * A list with arrangements.
-     */
-    private static ObservableList<Arrangement>arrangementListObservable;
-    /**
-     * An instance of the MainJavaFX class.
-     */
-    private MainJavaFX application;
-    /**
-     * A listView with all of the arrangements.
-     */
+public class StartController extends Controller {
+    // --------------------------------------------------//
+    //                2.Local Fields                     //
+    // --------------------------------------------------//
+    private String title = "";
+    private String name = "NewAlterArrangement.fxml";
+    private ObservableList<Arrangement>arrangementListObservable;
+    private Arrangement currentArrangement = null;
+    // --------------------------------------------------//
+    //                3.FXML Fields                      //
+    // --------------------------------------------------//
+    @FXML
+    private Button newArrangementBtn;
+    @FXML
+    private Button editBtn;
+    @FXML
+    private Button deleteBtn;
     @FXML
     private ListView<Arrangement>listview = new ListView<>();
 
-    /**
-     * Calls method populateListView() when the view is opening.
-     */
-    @FXML
-    public void initialize(){
-        populateListView();
-        application = MainJavaFX.getApplication();
+    // --------------------------------------------------//
+    //                3.On Action Methods                //
+    // --------------------------------------------------//
+    private void onClick(ActionEvent event) {
+        title = "Ny";
+        createNewView(this);
     }
 
-    /**
-     * Calls method newAlterWinow when the new arrangement button is clicked.
-     * @throws IOException
-     */
-    @FXML
-    public void newArrangementClicked() throws IOException {
-            application.newAlterWindow(new Arrangement(), "Ny");
-    }
-
-    /**
-     * Opens a new window with the title "edit" when the edit arrangement button is clicked.
-     * @throws IOException
-     */
-    @FXML
-    public void editClicked() throws IOException{
-
+    private void onEditClick(ActionEvent event){
         if(listview.getSelectionModel().getSelectedItem() != null){
-            application.newAlterWindow(listview.getSelectionModel().getSelectedItem(), "Rediger");
+            title = "Rediger";
+            createNewView(this, currentArrangement);
+            System.out.println("Engaging edit btn");
         }
         else
             System.out.println("Du har ikke valgt et arrangement");
     }
 
-    /**
-     * Calls deletArrangement() method when the delete button is clicked.
-     */
-    @FXML
-    public void deleteClicked(){
+    private void onDelete(ActionEvent event){
+        if(listview.getSelectionModel().getSelectedItem() == null)
+            return;
         deleteArrangement();
     }
 
-    /**
-     * Puts data into a listView.
-     */
-    public void populateListView() {
-        DataHandler.readFromJSONFil(arrangementsFilepath);
-        arrangementListObservable = FXCollections.observableArrayList(DataHandler.getArrangementer());
+    // --------------------------------------------------//
+    //                2.Private Methods                  //
+    // --------------------------------------------------//
+    private void populateListView() {
+        arrangementListObservable = FXCollections.observableArrayList(DataHandler.getArrangementsData());
         listview.setItems(arrangementListObservable);
+        listview.refresh();
     }
-
-    /**
-     * Adds an arrangement to a list.
-     * @param a
-     */
-    public void addArrangementToList (Arrangement a){
+    private void addArrangementToList (Arrangement a){
         arrangementListObservable.add(a);
         DataHandler.addArrangementer(a);
     }
 
-    /**
-     * Refreshes a listView.
-     * @param ar
-     */
-    public void updateListview(Arrangement ar){
-        arrangementListObservable.add(ar);
-        arrangementListObservable.remove(ar);
-    }
-
-    /**
-     * Deletes an existing arrangement.
-     */
-    public void deleteArrangement(){
+    private void deleteArrangement(){
         Arrangement selectedItem = listview.getSelectionModel().getSelectedItem();
         arrangementListObservable.remove(selectedItem);
         DataHandler.removeArrangementer(selectedItem);
+    }
+
+    // --------------------------------------------------//
+    //                5.Overridden Methods               //
+    // --------------------------------------------------//
+    @Override
+    public String getTitle() {
+        return title;
+    }
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public Object getDataObject() {
+        return listview.getSelectionModel().getSelectedItem();
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        deleteBtn.setOnAction(this::onDelete);
+        editBtn.setOnAction(this::onEditClick);
+        newArrangementBtn.setOnAction(this::onClick);
+        listview.setOnMouseClicked(this::onClickListView);
+        populateListView();
+        //listview.refresh();
+    }
+
+    private void onClickListView(MouseEvent mouseEvent) {
+        Arrangement arrangement = listview.getSelectionModel().getSelectedItem();
+        if(currentArrangement == null || currentArrangement.equals(arrangement)){
+            currentArrangement = arrangement;
+        }
+        System.out.println(currentArrangement);
     }
 }

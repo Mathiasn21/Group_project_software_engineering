@@ -2,7 +2,8 @@ no\hiof\set\gruppe\controller\StartController.class
 no\hiof\set\gruppe\data\DataHandler.class
 no\hiof\set\gruppe\controller\NewAlterArrangementController.class
 no\hiof\set\gruppe\Main.class
-no\hiof\gruppefire\model\Arrangement.class
+no\hiof\set\gruppe\controller\IController.class
 no\hiof\set\gruppe\MainJavaFX.class
+no\hiof\set\gruppe\model\Arrangement.class
 no\hiof\set\gruppe\data\InputValidation.class
 no\hiof\set\gruppe\tests\GenerellTests.class

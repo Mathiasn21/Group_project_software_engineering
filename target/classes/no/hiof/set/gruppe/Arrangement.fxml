@@ -14,9 +14,9 @@
             <ListView fx:id="listview" prefHeight="369.0" prefWidth="255.0" />
             <HBox prefHeight="33.0" prefWidth="272.0" spacing="5.0">
                <children>
-                  <Button fx:id="newArrangementBtn" mnemonicParsing="false" onAction="#newArrangementClicked" prefHeight="25.0" prefWidth="112.0" text="Nytt arrangement" />
-                  <Button fx:id="editBtn" mnemonicParsing="false" onAction="#editClicked" text="Rediger" />
-                  <Button fx:id="deleteBtn" mnemonicParsing="false" onAction="#deleteClicked" text="Slett" />
+                  <Button fx:id="newArrangementBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="112.0" text="Nytt arrangement" />
+                  <Button fx:id="editBtn" mnemonicParsing="false" text="Rediger" />
+                  <Button fx:id="deleteBtn" mnemonicParsing="false" text="Slett" />
                </children>
                <padding>
                   <Insets bottom="5.0" left="5.0" top="5.0" />
