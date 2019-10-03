@@ -2,9 +2,9 @@
   {
     "name": "Test Arrengement",
     "sport": "Annet",
-    "participants": 420,
     "adress": "Oppibakken 15",
-    "gruppe": false,
+    "participants": 420,
+    "group": false,
     "startDate": {
       "year": 2019,
       "month": 9,
@@ -17,11 +17,11 @@
     }
   },
   {
-    "name": "Test Arrengement2",
+    "name": "Hakkebakken 420",
     "sport": "Basketball",
-    "participants": 69,
     "adress": "Hakkebakken 420",
-    "gruppe": false,
+    "participants": 69,
+    "group": false,
     "startDate": {
       "year": 2019,
       "month": 10,

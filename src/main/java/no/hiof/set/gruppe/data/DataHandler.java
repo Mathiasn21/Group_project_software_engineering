@@ -55,10 +55,11 @@ public class DataHandler implements IDataHandler {
         return "";
     }
     private static void writeToFile(String str, String fName){
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(new File("").getAbsolutePath() + fName))) {
+        String filepath = "/files/" + fName;
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(new File("").getAbsolutePath() + filepath))) {
             bufferedWriter.write(str);
         } catch (IOException ioexc) {
-            System.out.println(ioexc.getMessage());
+            ioexc.printStackTrace();
         }
     }
 
@@ -97,12 +98,11 @@ public class DataHandler implements IDataHandler {
 
     @Override
     public void storeArrangementsData(Arrangement arrangement) {
-
     }
 
     @Override
     public void storeArrangementsData(Collection<Arrangement> arrangement) {
-        writeToFile(toJson(Arrangement[].class, (Arrangement[]) arrangement.toArray()), arrangementFName);
+        writeToFile(toJson(Arrangement[].class, arrangement.toArray(Arrangement[]::new)), arrangementFName);
     }
 
     /**

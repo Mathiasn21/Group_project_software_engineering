@@ -126,6 +126,7 @@ public class StartController extends Controller {
 
     @Override
     public void onCloseStoreInformation() {
+        System.out.println("Storing information");
         new DataHandler().storeArrangementsData(arrangementListObservable);
     }
 

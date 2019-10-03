@@ -32,7 +32,10 @@ public class MainJavaFX extends Application implements SetupWindow {
         FXMLLoader loader = new FXMLLoader(MainJavaFX.class.getResource("Arrangement.fxml"));
         Parent editLayout = loader.load();
 
-        ((Controller)loader.getController()).setMainController(this);
+        IController controller= (loader.getController());
+        controller.setMainController(this);
+
+        stage.setOnHidden((Event)-> controller.onCloseStoreInformation());
         Scene scene = new Scene(editLayout, 230, 450);
         stage.setScene(scene);
         stage.setMinHeight(500);
@@ -47,7 +50,7 @@ public class MainJavaFX extends Application implements SetupWindow {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(MainJavaFX.class.getResource(controller.getName()));
         Parent editLayout = loader.load();
-
+        stage.setOnHidden((Event)-> controller.onCloseStoreInformation());
         Scene editScene = new Scene(editLayout, 400, 450);
         stage.setScene(editScene);
         stage.initModality(Modality.APPLICATION_MODAL);
@@ -71,7 +74,8 @@ public class MainJavaFX extends Application implements SetupWindow {
 
             controller = loader.getController();
             controller.setDataFields(object);
-            controller.onCloseStoreInformation();
+            IControllerDataTransfer<Object> finalController = controller;
+            stage.setOnHidden((Event)-> finalController.onCloseStoreInformation());
 
             Scene editScene = new Scene(editLayout, 400, 450);
             stage.setScene(editScene);

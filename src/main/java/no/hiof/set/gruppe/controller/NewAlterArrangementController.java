@@ -64,6 +64,7 @@ public class NewAlterArrangementController extends Controller{
         arrangementToEdit.setName(nameInput.getText());
         arrangementToEdit.setName(participantsInput.getText());
         arrangementToEdit.setName(adressInput.getText());
+        System.out.println("saving arrangement: " + arrangementToEdit);
         ((Stage)saveBtn.getScene().getWindow()).close();
     }
 
@@ -88,6 +89,7 @@ public class NewAlterArrangementController extends Controller{
     public String getName() {
         return name;
     }
+
     @Override
     public Object getDataObject() {
         return arrangementToEdit;

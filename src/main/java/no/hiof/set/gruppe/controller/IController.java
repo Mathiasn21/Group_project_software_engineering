@@ -8,4 +8,5 @@ public interface IController {
     String getName();
     void setMainController(MainJavaFX mainController);
     void createNewView(Controller controller) throws IOException;
+    void onCloseStoreInformation();
 }
