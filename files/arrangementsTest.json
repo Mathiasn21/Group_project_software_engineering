@@ -5,16 +5,8 @@
     "participants": 420,
     "adress": "Oppibakken 15",
     "gruppe": false,
-    "startDate": {
-      "year": 2019,
-      "month": 9,
-      "day": 2
-    },
-    "endDate": {
-      "year": 2019,
-      "month": 9,
-      "day": 4
-    }
+    "startDate": "2019-10-02",
+    "endDate": "2019-10-04"
   },
   {
     "name": "Test Arrengement2",
@@ -22,15 +14,7 @@
     "participants": 69,
     "adress": "Hakkebakken 420",
     "gruppe": false,
-    "startDate": {
-      "year": 2019,
-      "month": 10,
-      "day": 2
-    },
-    "endDate": {
-      "year": 2019,
-      "month": 10,
-      "day": 4
-    }
+    "startDate": "2019-10-02",
+    "endDate": "2019-10-04"
   }
 ]

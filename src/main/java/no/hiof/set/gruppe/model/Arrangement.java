@@ -18,19 +18,11 @@ public class Arrangement {
         this.name = name;
     }
 
-    public void setSport(String sport) {
-        this.sport = sport;
-    }
-
-    public void setAdress(String adress) {
-        this.adress = adress;
-    }
-
     private int participants;
     private boolean group;
 
-    private LocalDate startDate;
-    private LocalDate endDate;
+    private String startDate;
+    private String endDate;
 
 
     public Arrangement(){
@@ -48,10 +40,10 @@ public class Arrangement {
      * @param participants int
      * @param adress String
      * @param gruppe boolean
-     * @param startDate LocalDate
-     * @param endDate LocalDate
+     * @param startDate String
+     * @param endDate String
      */
-    public Arrangement(String name, String sport, int participants, String adress, boolean gruppe, LocalDate startDate, LocalDate endDate) {
+    public Arrangement(String name, String sport, int participants, String adress, boolean gruppe, String startDate, String endDate) {
         this.name = name;
         this.sport = sport;
         this.participants = participants;
@@ -60,6 +52,7 @@ public class Arrangement {
         this.startDate = startDate;
         this.endDate = endDate;
     }
+
 
     public String getName() {
         return name;
@@ -74,11 +67,11 @@ public class Arrangement {
     }
 
     public LocalDate getStartDate() {
-        return startDate;
+        return LocalDate.parse(startDate);
     }
 
     public LocalDate getEndDate() {
-        return endDate;
+        return LocalDate.parse(endDate);
     }
 
     public String getAdress() {
@@ -95,6 +88,29 @@ public class Arrangement {
     public void setParticipants(int participants) {
         this.participants = participants;
     }
+
+    public void setSport(String sport) {
+        this.sport = sport;
+    }
+
+    public void setAdress(String adress) {
+        this.adress = adress;
+    }
+
+    public void setGroup(boolean group) {
+        this.group = group;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+
+
+
 
     @Override
     public String toString(){

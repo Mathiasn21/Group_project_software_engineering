@@ -5,32 +5,16 @@
     "adress": "Oppibakken 15",
     "participants": 420,
     "group": false,
-    "startDate": {
-      "year": 2019,
-      "month": 9,
-      "day": 2
-    },
-    "endDate": {
-      "year": 2019,
-      "month": 9,
-      "day": 4
-    }
+    "startDate": "2019-10-02",
+    "endDate": "2019-10-04"
   },
   {
-    "name": "Hakkebakken 420",
+    "name": "Test Arrengement2",
     "sport": "Basketball",
     "adress": "Hakkebakken 420",
     "participants": 69,
     "group": false,
-    "startDate": {
-      "year": 2019,
-      "month": 10,
-      "day": 2
-    },
-    "endDate": {
-      "year": 2019,
-      "month": 10,
-      "day": 4
-    }
+    "startDate": "2019-10-02",
+    "endDate": "2019-10-04"
   }
 ]

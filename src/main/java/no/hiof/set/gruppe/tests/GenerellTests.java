@@ -16,19 +16,19 @@ import static org.junit.jupiter.api.Assertions.*;
 public class GenerellTests {
 
     private ArrayList<Arrangement> expectedArrangementer = new ArrayList<>();
-    private Arrangement addRemoveTest = new Arrangement("Test Arrengement3","Basketball", 69,"Hakkebakken 420",false,LocalDate.of(2019,10,2),LocalDate.of(2019,10,4));
+    private Arrangement addRemoveTest = new Arrangement("Test Arrengement3","Basketball", 69,"Hakkebakken 420",false,"2019-10-02)","2019-10-04");
 
     @BeforeEach
     public void setup() {
         expectedArrangementer.clear();
-        expectedArrangementer.add(new Arrangement("Test Arrengement","Annet", 420,"Oppibakken 15",false,LocalDate.of(2019,9,2),LocalDate.of(2019,9,4)));
-        expectedArrangementer.add(new Arrangement("Test Arrengement2","Basketball", 69,"Hakkebakken 420",false,LocalDate.of(2019,10,2),LocalDate.of(2019,10,4)));
+        expectedArrangementer.add(new Arrangement("Test Arrengement","Annet", 420,"Oppibakken 15",false,"2019-10-02)","2019-10-04"));
+        expectedArrangementer.add(new Arrangement("Test Arrengement2","Basketball", 69,"Hakkebakken 420",false,"2019-10-02)","2019-10-04"));
     }
 
     @AfterAll
     public void end() {
-        DataHandler.addArrangementer(new Arrangement("Test Arrengement","Annet", 420,"Oppibakken 15",false,LocalDate.of(2019,9,2),LocalDate.of(2019,9,4)));
-        DataHandler.addArrangementer(new Arrangement("Test Arrengement2","Basketball", 69,"Hakkebakken 420",false,LocalDate.of(2019,10,2),LocalDate.of(2019,10,4)));
+        DataHandler.addArrangementer(new Arrangement("Test Arrengement","Annet", 420,"Oppibakken 15",false,"2019-09-02","2019-09-04"));
+        DataHandler.addArrangementer(new Arrangement("Test Arrengement2","Basketball", 69,"Hakkebakken 420",false,"2019-10-02)","2019-10-04"));
     }
 
     @Test

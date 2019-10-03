@@ -62,8 +62,8 @@ public class NewAlterArrangementController extends Controller{
             arrangementToEdit = new Arrangement();
 
         arrangementToEdit.setName(nameInput.getText());
-        arrangementToEdit.setName(participantsInput.getText());
-        arrangementToEdit.setName(adressInput.getText());
+        arrangementToEdit.setParticipants(Integer.parseInt(participantsInput.getText()));
+        arrangementToEdit.setAdress(adressInput.getText());
         System.out.println("saving arrangement: " + arrangementToEdit);
         ((Stage)saveBtn.getScene().getWindow()).close();
     }
