@@ -1,7 +1,6 @@
 package no.hiof.set.gruppe.controller;
 
 import javafx.fxml.Initializable;
-import no.hiof.set.gruppe.Exceptions.DataFormatException;
 import no.hiof.set.gruppe.MainJavaFX;
 
 import java.io.IOException;
@@ -28,7 +27,7 @@ public abstract class Controller implements IControllerDataTransfer, Initializab
         }
     }
 
-    public void createNewView(IControllerDataTransfer<Object> controller, Object object) {
+    void createNewView(IControllerDataTransfer<Object> controller, Object object) {
         mainController.setupWindow(controller, object);
     }
 
