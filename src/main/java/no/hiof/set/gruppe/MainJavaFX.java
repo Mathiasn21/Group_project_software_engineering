@@ -59,7 +59,6 @@ public class MainJavaFX extends Application implements SetupWindow {
         stage.show();
     }
 
-
     public void setupWindow(IControllerDataTransfer<Object> controller, Object object){
         try{
             System.out.println("setting up data: " + object);
@@ -72,6 +71,7 @@ public class MainJavaFX extends Application implements SetupWindow {
 
             controller = loader.getController();
             controller.setDataFields(object);
+            controller.onCloseStoreInformation();
 
             Scene editScene = new Scene(editLayout, 400, 450);
             stage.setScene(editScene);

@@ -24,6 +24,8 @@ import no.hiof.set.gruppe.Exceptions.DataFormatException;
 import no.hiof.set.gruppe.MainJavaFX;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.data.DataHandler;
+
+import javax.xml.crypto.Data;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -115,7 +117,16 @@ public class StartController extends Controller {
 
     @Override
     public void setDataFields(Object object) throws DataFormatException {
+        if (!(object == null || object instanceof Arrangement)){
+            throw new DataFormatException();
+        }
+        System.out.println("Adding arrangement: " + object);
+        arrangementListObservable.add((Arrangement) object);
+    }
 
+    @Override
+    public void onCloseStoreInformation() {
+        new DataHandler().storeArrangementsData(arrangementListObservable);
     }
 
     @Override
@@ -125,6 +136,7 @@ public class StartController extends Controller {
         newArrangementBtn.setOnAction(this::onClick);
         listview.setOnMouseClicked(this::onClickListView);
         populateListView();
+
         //listview.refresh();
     }
 
@@ -135,5 +147,4 @@ public class StartController extends Controller {
         }
         System.out.println(currentArrangement);
     }
-    
 }

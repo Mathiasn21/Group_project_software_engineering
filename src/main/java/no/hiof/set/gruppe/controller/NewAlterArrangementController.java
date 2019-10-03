@@ -15,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import no.hiof.set.gruppe.Exceptions.DataFormatException;
 import no.hiof.set.gruppe.model.Arrangement;
 
@@ -57,7 +58,13 @@ public class NewAlterArrangementController extends Controller{
     // --------------------------------------------------//
     @FXML
     public void saveClicked(){
-        //Any changes tracked are saved
+        if(arrangementToEdit == null)
+            arrangementToEdit = new Arrangement();
+
+        arrangementToEdit.setName(nameInput.getText());
+        arrangementToEdit.setName(participantsInput.getText());
+        arrangementToEdit.setName(adressInput.getText());
+        ((Stage)saveBtn.getScene().getWindow()).close();
     }
 
     @FXML

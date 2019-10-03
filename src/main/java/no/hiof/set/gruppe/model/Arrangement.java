@@ -14,6 +14,18 @@ public class Arrangement {
     private String sport;
     private String adress;
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSport(String sport) {
+        this.sport = sport;
+    }
+
+    public void setAdress(String adress) {
+        this.adress = adress;
+    }
+
     private int participants;
     private boolean group;
 

@@ -39,7 +39,6 @@ public class DataHandler implements IDataHandler {
     private static String arrangementFName = "arrangements.json";
 
 
-
     private static String readFromFile(String fName){
         String line;
         StringBuilder textFromFile = new StringBuilder();
