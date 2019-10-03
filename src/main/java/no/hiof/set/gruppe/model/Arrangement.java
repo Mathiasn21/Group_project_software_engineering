@@ -8,7 +8,6 @@ import java.time.LocalDate;
  *
  * @author Gruppe4
  */
-
 public class Arrangement {
 
     private String name;

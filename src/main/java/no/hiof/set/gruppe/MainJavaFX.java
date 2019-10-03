@@ -48,7 +48,7 @@ public class MainJavaFX extends Application implements SetupWindow {
         loader.setLocation(MainJavaFX.class.getResource(controller.getName()));
         Parent editLayout = loader.load();
 
-        Scene editScene = new Scene(editLayout, 230, 450);
+        Scene editScene = new Scene(editLayout, 400, 450);
         stage.setScene(editScene);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initOwner(this.stage);
@@ -63,8 +63,25 @@ public class MainJavaFX extends Application implements SetupWindow {
     public void setupWindow(IControllerDataTransfer<Object> controller, Object object){
         try{
             System.out.println("setting up data: " + object);
+            System.out.println("Type: " + controller.getClass());
+            Stage stage = new Stage();
+
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainJavaFX.class.getResource(controller.getName()));
+            Parent editLayout = loader.load();
+
+            controller = loader.getController();
             controller.setDataFields(object);
-            setupWindow(controller);
+
+            Scene editScene = new Scene(editLayout, 400, 450);
+            stage.setScene(editScene);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initOwner(this.stage);
+            stage.setTitle(controller.getTitle());
+            controller.setMainController(this);
+            System.out.println(this);
+
+            stage.show();
         }catch (DataFormatException | IOException dataEx){
             dataEx.printStackTrace();
         }

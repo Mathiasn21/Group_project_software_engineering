@@ -29,8 +29,6 @@ import java.util.ResourceBundle;
  */
 public class NewAlterArrangementController extends Controller{
 
-
-
     // --------------------------------------------------//
     //                2.Local Fields                     //
     // --------------------------------------------------//

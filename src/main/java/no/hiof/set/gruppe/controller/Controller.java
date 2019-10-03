@@ -30,8 +30,4 @@ public abstract class Controller implements IControllerDataTransfer, Initializab
     public void createNewView(IControllerDataTransfer<Object> controller, Object object) {
         mainController.setupWindow(controller, object);
     }
-
-    @Override
-    public void setDataFields(Object object) throws DataFormatException {
-    }
 }

@@ -20,6 +20,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
+import no.hiof.set.gruppe.Exceptions.DataFormatException;
 import no.hiof.set.gruppe.MainJavaFX;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.data.DataHandler;
@@ -113,6 +114,11 @@ public class StartController extends Controller {
     }
 
     @Override
+    public void setDataFields(Object object) throws DataFormatException {
+
+    }
+
+    @Override
     public void initialize(URL location, ResourceBundle resources) {
         deleteBtn.setOnAction(this::onDelete);
         editBtn.setOnAction(this::onEditClick);
@@ -129,4 +135,5 @@ public class StartController extends Controller {
         }
         System.out.println(currentArrangement);
     }
+    
 }
