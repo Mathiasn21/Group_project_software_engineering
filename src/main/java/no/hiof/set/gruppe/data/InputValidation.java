@@ -27,7 +27,7 @@ public class InputValidation {
         int validations = 0;
 
 
-        if(Pattern.matches("[A-Za-z0-9(æøå)(ÆØÅ)]+", name) && name.length() < 30 && name.length() > 2)
+        if(Pattern.matches("[A-Za-z0-9]+", name) && name.length() < 50 && name.length() > 2)
             validations++;
         else
             System.out.println("Sett inn et gyldig navn");
