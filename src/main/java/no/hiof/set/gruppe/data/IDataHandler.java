@@ -4,6 +4,5 @@ import no.hiof.set.gruppe.model.Arrangement;
 import java.util.Collection;
 
 public interface IDataHandler {
-    void storeArrangementsData(Arrangement arrangement);
     void storeArrangementsData(Collection<Arrangement> arrangement);
 }

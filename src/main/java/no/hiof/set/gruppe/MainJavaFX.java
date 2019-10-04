@@ -64,8 +64,6 @@ public class MainJavaFX extends Application implements SetupWindow {
 
     public void setupWindow(IControllerDataTransfer<Object> controller, Object object){
         try{
-            System.out.println("setting up data: " + object);
-            System.out.println("Type: " + controller.getClass());
             Stage stage = new Stage();
 
             FXMLLoader loader = new FXMLLoader();
@@ -90,7 +88,6 @@ public class MainJavaFX extends Application implements SetupWindow {
             dataEx.printStackTrace();
         }
     }
-
 
     /**
      * Let be. This will be used for later in order to dynamically switching between windows.

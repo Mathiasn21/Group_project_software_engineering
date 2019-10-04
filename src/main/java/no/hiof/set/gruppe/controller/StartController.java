@@ -87,10 +87,6 @@ public class StartController extends Controller {
         listview.setItems(arrangementListObservable);
         listview.refresh();
     }
-    private void addArrangementToList (Arrangement a){
-        arrangementListObservable.add(a);
-        DataHandler.addArrangementer(a);
-    }
 
     private void deleteArrangement(){
         Arrangement selectedItem = listview.getSelectionModel().getSelectedItem();

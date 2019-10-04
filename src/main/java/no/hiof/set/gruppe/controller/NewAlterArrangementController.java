@@ -10,6 +10,7 @@ package no.hiof.set.gruppe.controller;
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -18,6 +19,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import no.hiof.set.gruppe.Exceptions.DataFormatException;
 import no.hiof.set.gruppe.model.Arrangement;
+import no.hiof.set.gruppe.model.GroupCategory;
+import no.hiof.set.gruppe.model.SportCategory;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -45,9 +48,9 @@ public class NewAlterArrangementController extends Controller{
     @FXML
     private DatePicker startDateInput, endDateInput;
     @FXML
-    private ComboBox<String> groupInput = new ComboBox<>();
+    private ComboBox<GroupCategory> groupInput;
     @FXML
-    private ComboBox<String> sportComboBoxInput;
+    private ComboBox<SportCategory> sportComboBoxInput;
     @FXML
     public Button saveBtn;
     @FXML
@@ -78,7 +81,13 @@ public class NewAlterArrangementController extends Controller{
     // --------------------------------------------------//
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
-        //Get current selected Arrangement
+
+        //setting up combo boxes
+        sportComboBoxInput.setItems(FXCollections.observableArrayList(SportCategory.values()));
+        groupInput.setItems(FXCollections.observableArrayList(GroupCategory.values()));
+
+        sportComboBoxInput.getSelectionModel().select(0);
+        groupInput.getSelectionModel().select(0);
     }
 
     @Override

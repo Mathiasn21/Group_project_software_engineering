@@ -27,8 +27,8 @@ public class GenerellTests {
 
     @AfterAll
     public void end() {
-        DataHandler.addArrangementer(new Arrangement("Test Arrengement","Annet", 420,"Oppibakken 15",false,"2019-09-02","2019-09-04"));
-        DataHandler.addArrangementer(new Arrangement("Test Arrengement2","Basketball", 69,"Hakkebakken 420",false,"2019-10-02)","2019-10-04"));
+        //DataHandler.addArrangementer(new Arrangement("Test Arrengement","Annet", 420,"Oppibakken 15",false,"2019-09-02","2019-09-04"));
+        //DataHandler.addArrangementer(new Arrangement("Test Arrengement2","Basketball", 69,"Hakkebakken 420",false,"2019-10-02)","2019-10-04"));
     }
 
     @Test
@@ -43,8 +43,8 @@ public class GenerellTests {
     @Test
     @Order(2)
     public void ArrangementAddTest() {
-        expectedArrangementer.add(addRemoveTest);
-        DataHandler.addArrangementer(addRemoveTest);
+        //expectedArrangementer.add(addRemoveTest);
+        //DataHandler.addArrangementer(addRemoveTest);
         /*
         if(compareArrangementArrays(expectedArrangementer,DataHandler.getArrangementer())) {
             System.out.println("Arrangement added succesfully!");

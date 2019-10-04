@@ -26,16 +26,9 @@ import java.util.List;
  * @author Gruppe4
  */
 public class DataHandler implements IDataHandler {
-    //static preLoader
-
-
     // --------------------------------------------------//
     //                2.Local Fields                     //
     // --------------------------------------------------//
-    /**
-     * A list with arrangements.
-     */
-    private static ArrayList<Arrangement> arrangements = new ArrayList<>();
     private static String arrangementFName = "arrangements.json";
 
 
@@ -80,45 +73,8 @@ public class DataHandler implements IDataHandler {
         return listFromJson(Arrangement[].class, readFromFile(arrangementFName));
     }
 
-    /**
-     * Adds sport alternatives to a list.
-     * @return arrayList with sports
-     */
-    public static ArrayList<String>sportsToComboBox(){
-        ArrayList arraylist = new ArrayList();
-        //Skal egentlig hentes fra fil. Dette er bare midlertidig
-        arraylist.add("Fotball");
-        arraylist.add("Basketball");
-        arraylist.add("Friidrett");
-        arraylist.add("Sykkelritt");
-        arraylist.add("Skirenn");
-        arraylist.add("Annet");
-        return arraylist;
-    }
-
-    @Override
-    public void storeArrangementsData(Arrangement arrangement) {
-    }
-
     @Override
     public void storeArrangementsData(Collection<Arrangement> arrangement) {
         writeToFile(toJson(Arrangement[].class, arrangement.toArray(Arrangement[]::new)), arrangementFName);
     }
-
-    /**
-     * Adds arrangements to the arrangements list.
-     * @param a
-     */
-    public static void addArrangementer(Arrangement a) {
-        arrangements.add(a);
-    }
-
-    /**
-     * Removes an arrangement from the arrangements list.
-     * @param a
-     */
-    public static void removeArrangementer(Arrangement a) {
-        arrangements.remove(a);
-    }
-
 }
