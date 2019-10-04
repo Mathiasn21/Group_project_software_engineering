@@ -69,7 +69,6 @@ public class MainJavaFX extends Application implements SetupWindow {
      * This function is responsible for setting up a new window.
      * This is custom made for controllers that implement the interface: {@link IController}
      * @param controller {@link IController}
-     * @throws IOException {@link IOException}
      */
     public void setupWindow(IController controller)throws IOException{
         Stage stage = new Stage();
