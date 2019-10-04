@@ -1,11 +1,9 @@
 package no.hiof.set.gruppe.tests;
 
 import no.hiof.set.gruppe.model.Arrangement;
-import no.hiof.set.gruppe.data.DataHandler;
 import no.hiof.set.gruppe.data.InputValidation;
 import org.junit.jupiter.api.*;
 
-import java.io.File;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -96,7 +94,7 @@ public class GenerellTests {
                     ex.getSport().equals(ac.getSport()) &&
                     ex.getParticipants() == ac.getParticipants() &&
                     ex.getAdress().equals(ac.getAdress()) &&
-                    ex.isGruppe() == ac.isGruppe() &&
+                    ex.isGroup() == ac.isGroup() &&
                     ex.getStartDate().equals(ac.getStartDate()) &&
                     ex.getEndDate().equals(ac.getEndDate())) {
             } else {

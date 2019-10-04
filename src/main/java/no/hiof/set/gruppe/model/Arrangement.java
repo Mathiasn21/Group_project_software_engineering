@@ -1,40 +1,48 @@
 package no.hiof.set.gruppe.model;
+/*Guide
+ * 1. Import Statements
+ * 2. Constructors
+ * 3. Getters
+ * 4. Setters
+ * 5.Public Methods
+ * 6. Overridden Methods
+ * */
 
+// --------------------------------------------------//
+//                1.Import Statements                //
+// --------------------------------------------------//
 import java.time.LocalDate;
 
 /**
- * Arrangement is a class that represent an arrangement.
- * Holds information about name, sport, participants, adress, group, startDate and endDate.
- *
+ * Arrangement holds information about a possible arrangement.
  * @author Gruppe4
  */
 public class Arrangement {
 
+
+    // --------------------------------------------------//
+    //                2.Local Fields                     //
+    // --------------------------------------------------//
     private String name;
     private String sport;
     private String adress;
-
-    public void setName(String name) {
-        this.name = name;
-    }
+    private String startDate;
+    private String endDate;
 
     private int participants;
     private boolean group;
 
-    private String startDate;
-    private String endDate;
 
-
+    // --------------------------------------------------//
+    //                2.Constructors                     //
+    // --------------------------------------------------//
     public Arrangement(){
         this("", "", 0, "", false);
     }
-
     public Arrangement(String name, String sport, int participants, String adress, boolean gruppe){
         this(name, sport, participants, adress, gruppe, null, null);
     }
-
     /**
-     * Constructor used to make an Arrangement instance.
      * @param name String
      * @param sport String
      * @param participants int
@@ -53,65 +61,59 @@ public class Arrangement {
         this.endDate = endDate;
     }
 
-
+    // --------------------------------------------------//
+    //                3.Getters                          //
+    // --------------------------------------------------//
     public String getName() {
         return name;
     }
-
     public String getSport() {
         return sport;
     }
-
     public int getParticipants() {
         return participants;
     }
-
     public LocalDate getStartDate() {
         return LocalDate.parse(startDate);
     }
-
     public LocalDate getEndDate() {
         return LocalDate.parse(endDate);
     }
-
     public String getAdress() {
         return adress;
     }
 
-    public boolean isGruppe() {
-        return group;
-    }
-
+    // --------------------------------------------------//
+    //                4.Setters                          //
+    // --------------------------------------------------//
+    public void setName(String name) {this.name = name;}
     public void setGruppe(boolean gruppe) {
         this.group = gruppe;
     }
     public void setParticipants(int participants) {
         this.participants = participants;
     }
-
     public void setSport(String sport) {
         this.sport = sport;
     }
-
     public void setAdress(String adress) {
         this.adress = adress;
     }
+    public void setStartDate(String startDate) {this.startDate = startDate;}
+    public void setEndDate(String endDate) {this.endDate = endDate;}
 
-    public void setGroup(boolean group) {
-        this.group = group;
+
+    // --------------------------------------------------//
+    //                5.Public Methods                   //
+    // --------------------------------------------------//
+    public boolean isGroup() {
+        return group;
     }
 
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
-    }
 
-    public void setEndDate(String endDate) {
-        this.endDate = endDate;
-    }
-
-
-
-
+    // --------------------------------------------------//
+    //                6.Overridden Methods               //
+    // --------------------------------------------------//
     @Override
     public String toString(){
         return name + " " + sport + " " + participants + " " + adress + " " + startDate + " til " + endDate;

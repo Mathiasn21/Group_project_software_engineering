@@ -17,7 +17,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import no.hiof.set.gruppe.Exceptions.DataFormatException;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.GroupCategory;
 import no.hiof.set.gruppe.model.SportCategory;
@@ -26,9 +25,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * NewArrangementController is a class that controls the "NewAlterArrangement" view.
- * Holds information about stage, application and arrangement.
- *
+ * This controller deals with the logic pertaining to either editing
+ * or a new creation of an arrangement.
  * @author Gruppe4
  */
 public class NewAlterArrangementController extends Controller{
@@ -105,17 +103,19 @@ public class NewAlterArrangementController extends Controller{
     public String getName() {
         return name;
     }
-
     @Override
     public Object getDataObject() {
         return arrangementToEdit;
     }
-
     @Override
     public boolean hasNewObject(){
         return createdNewObject;
     }
 
+    /**
+     * Setups the view and its data fields.
+     * @param object Object
+     */
     @Override
     public void setDataFields(Object object){
         if (object instanceof Arrangement){
@@ -128,8 +128,4 @@ public class NewAlterArrangementController extends Controller{
             endDateInput.setValue(arrangement.getEndDate());
         }
     }
-
-    // --------------------------------------------------//
-    //                2.Private Methods                  //
-    // --------------------------------------------------//
 }

@@ -2,10 +2,10 @@ package no.hiof.set.gruppe.controller;
 
 /*Guide
  * 1. Import Statements
- * 2. Constructors
- * 3. Getters
- * 4. Setters
- * 5. Overridden Methods
+ * 2. Local Fields
+ * 3. FXML Fields
+ * 4. On Action Methods
+ * 5. Private Methods
  * */
 
 
@@ -26,9 +26,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * StartController is a class that controls the "start" view.
- * Holds information about arrangementsFilepath, arrangementList and application.
- *
+ * This controller controls all functionality and logic pertaining
+ * to the ArrangementView
  * @author Gruppe4
  */
 public class StartController extends Controller {
@@ -39,6 +38,7 @@ public class StartController extends Controller {
     private String name = "NewAlterArrangement.fxml";
     private ObservableList<Arrangement>arrangementListObservable;
     private Arrangement currentArrangement = null;
+
     // --------------------------------------------------//
     //                3.FXML Fields                      //
     // --------------------------------------------------//
@@ -52,7 +52,7 @@ public class StartController extends Controller {
     private ListView<Arrangement>listview = new ListView<>();
 
     // --------------------------------------------------//
-    //                3.On Action Methods                //
+    //                4.On Action Methods                //
     // --------------------------------------------------//
     private void onClick(ActionEvent event) {
         title = "Ny";
@@ -75,7 +75,7 @@ public class StartController extends Controller {
     }
 
     // --------------------------------------------------//
-    //                2.Private Methods                  //
+    //                5.Private Methods                  //
     // --------------------------------------------------//
     private void populateListView() {
         arrangementListObservable = FXCollections.observableArrayList(DataHandler.getArrangementsData());
@@ -89,9 +89,18 @@ public class StartController extends Controller {
         listview.getSelectionModel().selectFirst();
     }
 
+    private void onClickListView(MouseEvent mouseEvent) {
+        Arrangement arrangement = listview.getSelectionModel().getSelectedItem();
+        if(currentArrangement == null || currentArrangement.equals(arrangement)){
+            currentArrangement = arrangement;
+        }
+        System.out.println(currentArrangement);
+    }
+
     // --------------------------------------------------//
-    //                5.Overridden Methods               //
+    //                6.Overridden Methods               //
     // --------------------------------------------------//
+    //handles the title and name of current view. Here name is the local path
     @Override
     public String getTitle() {
         return title;
@@ -106,6 +115,11 @@ public class StartController extends Controller {
         return listview.getSelectionModel().getSelectedItem();
     }
 
+    /**
+     * Handles data setup and interaction from other controllers.
+     * @param object Object
+     * @throws DataFormatException Exception
+     */
     @Override
     public void setDataFields(Object object) throws DataFormatException {
         if (!(object instanceof Arrangement)){
@@ -130,11 +144,4 @@ public class StartController extends Controller {
         populateListView();
     }
 
-    private void onClickListView(MouseEvent mouseEvent) {
-        Arrangement arrangement = listview.getSelectionModel().getSelectedItem();
-        if(currentArrangement == null || currentArrangement.equals(arrangement)){
-            currentArrangement = arrangement;
-        }
-        System.out.println(currentArrangement);
-    }
 }

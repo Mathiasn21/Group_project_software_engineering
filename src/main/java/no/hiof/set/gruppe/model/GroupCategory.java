@@ -1,5 +1,9 @@
 package no.hiof.set.gruppe.model;
 
+/**
+ * This enum represents the possible answer to the question:
+ * Does this meant for groups?
+ */
 public enum GroupCategory {
 
     TRUE(true, "true"),

@@ -1,5 +1,16 @@
 package no.hiof.set.gruppe;
 
+/*Guide Controllers
+ * 1. Import Statements
+ * 2. Local Fields
+ * 3. Overridden Methods
+ * 4. Public Methods
+ * 5. Static Methods
+ * */
+
+// --------------------------------------------------//
+//                1.Import Statements                //
+// --------------------------------------------------//
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,12 +23,14 @@ import java.io.IOException;
 
 /**
  * MainJavaFX is a class that controls all of the windows in the application.
- * Holds information about primaryStage, application and arrangementToSend.
+ * Its primary goal is to controll and mediate between all other controllers.
  *
  * @author Gruppe4
  */
-
 public class MainJavaFX extends Application implements SetupWindow {
+    // --------------------------------------------------//
+    //                2.Local Fields                     //
+    // --------------------------------------------------//
     private static Scene scene;
     private Stage stage;
 
@@ -25,6 +38,10 @@ public class MainJavaFX extends Application implements SetupWindow {
         launch(args);
     }
 
+
+    // --------------------------------------------------//
+    //                3.Overridden Methods               //
+    // --------------------------------------------------//
     @Override
     public void start(Stage stage) throws IOException {
         this.stage = stage;
@@ -44,6 +61,16 @@ public class MainJavaFX extends Application implements SetupWindow {
         stage.show();
     }
 
+
+    // --------------------------------------------------//
+    //                4.Public Methods                   //
+    // --------------------------------------------------//
+    /**
+     * This function is responsible for setting up a new window.
+     * This is custom made for controllers that implement the interface: {@link IController}
+     * @param controller {@link IController}
+     * @throws IOException {@link IOException}
+     */
     public void setupWindow(IController controller)throws IOException{
         Stage stage = new Stage();
 
@@ -62,6 +89,13 @@ public class MainJavaFX extends Application implements SetupWindow {
         stage.show();
     }
 
+    /**
+     * This function is responsible for setting up a new window.
+     * This is custom made for controllers that implement the interface: {@link IControllerDataTransfer}
+     * And as such mediates between controllers that requires this.
+     * @param controller {@link IControllerDataTransfer}
+     * @param object {@link Object}
+     */
     public void setupWindow(IControllerDataTransfer<Object> controller, Object object){
         try{
             Stage stage = new Stage();
@@ -99,19 +133,22 @@ public class MainJavaFX extends Application implements SetupWindow {
         }
     }
 
+
+    // --------------------------------------------------//
+    //                5.Static Methods                   //
+    // --------------------------------------------------//
     /**
      * Let be. This will be used for later in order to dynamically switching between windows.
      * */
-    static void setRoot(String fxml) throws IOException {
-        scene.setRoot(loadFXML(fxml));
-    }
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MainJavaFX.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();
     }
 
-    @Override
-    public void stop(){
-        //DataHandler.writeToJSONFile(new File("./files/arrangements.json"));
+    /**
+     * Let be. This will be used for later in order to dynamically switching between windows.
+     * */
+    static void setRoot(String fxml) throws IOException {
+        scene.setRoot(loadFXML(fxml));
     }
 }

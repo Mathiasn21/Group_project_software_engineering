@@ -1,5 +1,8 @@
 package no.hiof.set.gruppe.model;
 
+/**
+ * This enum represents the different sports categories
+ */
 public enum SportCategory {
 
     OTHER("Annet"),
