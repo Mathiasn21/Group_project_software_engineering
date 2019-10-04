@@ -9,12 +9,21 @@
     "endDate": "2019-10-04"
   },
   {
-    "name": "Test Arrengement2",
-    "sport": "Basketball",
+    "name": "Gresskarfun 3",
+    "sport": "Annet",
     "adress": "Hakkebakken 420",
     "participants": 69,
-    "group": false,
+    "group": true,
     "startDate": "2019-10-02",
     "endDate": "2019-10-04"
+  },
+  {
+    "name": "dwadwa",
+    "sport": "Annet",
+    "adress": "dwadwa",
+    "participants": 22,
+    "group": true,
+    "startDate": "2019-10-02",
+    "endDate": "2019-10-11"
   }
 ]

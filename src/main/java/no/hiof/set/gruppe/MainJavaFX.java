@@ -70,10 +70,20 @@ public class MainJavaFX extends Application implements SetupWindow {
             loader.setLocation(MainJavaFX.class.getResource(controller.getName()));
             Parent editLayout = loader.load();
 
+            IControllerDataTransfer<Object> oldController = controller;
             controller = loader.getController();
             controller.setDataFields(object);
             IControllerDataTransfer<Object> finalController = controller;
-            stage.setOnHidden((Event)-> finalController.onCloseStoreInformation());
+            stage.setOnHidden((Event)->{
+                if(finalController.hasNewObject()){
+                    try {
+                        oldController.setDataFields(finalController.getDataObject());
+                    } catch (DataFormatException e) {
+                        e.printStackTrace();
+                    }
+                }
+                finalController.onCloseStoreInformation();
+            });
 
             Scene editScene = new Scene(editLayout, 400, 450);
             stage.setScene(editScene);

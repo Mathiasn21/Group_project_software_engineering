@@ -15,17 +15,13 @@ package no.hiof.set.gruppe.controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import no.hiof.set.gruppe.Exceptions.DataFormatException;
-import no.hiof.set.gruppe.MainJavaFX;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.data.DataHandler;
-
-import javax.xml.crypto.Data;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -60,14 +56,13 @@ public class StartController extends Controller {
     // --------------------------------------------------//
     private void onClick(ActionEvent event) {
         title = "Ny";
-        createNewView(this);
+        createNewView(this, null);
     }
 
     private void onEditClick(ActionEvent event){
         if(listview.getSelectionModel().getSelectedItem() != null){
             title = "Rediger";
             createNewView(this, currentArrangement);
-            System.out.println("Engaging edit btn");
         }
         else
             System.out.println("Du har ikke valgt et arrangement");
@@ -91,7 +86,7 @@ public class StartController extends Controller {
     private void deleteArrangement(){
         Arrangement selectedItem = listview.getSelectionModel().getSelectedItem();
         arrangementListObservable.remove(selectedItem);
-        DataHandler.removeArrangementer(selectedItem);
+        listview.getSelectionModel().selectFirst();
     }
 
     // --------------------------------------------------//
@@ -113,16 +108,16 @@ public class StartController extends Controller {
 
     @Override
     public void setDataFields(Object object) throws DataFormatException {
-        if (!(object == null || object instanceof Arrangement)){
+        if (!(object instanceof Arrangement)){
             throw new DataFormatException();
         }
         System.out.println("Adding arrangement: " + object);
         arrangementListObservable.add((Arrangement) object);
+        listview.refresh();
     }
 
     @Override
     public void onCloseStoreInformation() {
-        System.out.println("Storing information");
         new DataHandler().storeArrangementsData(arrangementListObservable);
     }
 
@@ -133,8 +128,6 @@ public class StartController extends Controller {
         newArrangementBtn.setOnAction(this::onClick);
         listview.setOnMouseClicked(this::onClickListView);
         populateListView();
-
-        //listview.refresh();
     }
 
     private void onClickListView(MouseEvent mouseEvent) {

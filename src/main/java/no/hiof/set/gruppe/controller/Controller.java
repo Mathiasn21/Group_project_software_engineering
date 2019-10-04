@@ -12,7 +12,6 @@ public abstract class Controller implements IControllerDataTransfer, Initializab
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
-
     }
 
     public void setMainController(MainJavaFX mainController){
@@ -33,6 +32,9 @@ public abstract class Controller implements IControllerDataTransfer, Initializab
 
     @Override
     public void onCloseStoreInformation(){
-
     }
+    public boolean hasNewObject(){
+        return false;
+    }
+
 }

@@ -38,7 +38,8 @@ public class NewAlterArrangementController extends Controller{
     // --------------------------------------------------//
     private String name = "NewAlterArrangement.fxml";
     private String title = "arrangement";
-    private Arrangement arrangementToEdit;
+    private Arrangement arrangementToEdit = null;
+    private boolean createdNewObject = false;
 
     // --------------------------------------------------//
     //                3.FXML Fields                      //
@@ -61,19 +62,25 @@ public class NewAlterArrangementController extends Controller{
     // --------------------------------------------------//
     @FXML
     public void saveClicked(){
-        if(arrangementToEdit == null)
+        if(arrangementToEdit == null) {
             arrangementToEdit = new Arrangement();
-
+            createdNewObject = true;
+        }
         arrangementToEdit.setName(nameInput.getText());
         arrangementToEdit.setParticipants(Integer.parseInt(participantsInput.getText()));
         arrangementToEdit.setAdress(adressInput.getText());
+        arrangementToEdit.setGruppe(groupInput.getSelectionModel().getSelectedItem().isGroup);
+        arrangementToEdit.setSport(sportComboBoxInput.getSelectionModel().getSelectedItem().toString());
+        arrangementToEdit.setStartDate(startDateInput.getValue().toString());
+        arrangementToEdit.setEndDate(endDateInput.getValue().toString());
+
         System.out.println("saving arrangement: " + arrangementToEdit);
         ((Stage)saveBtn.getScene().getWindow()).close();
     }
 
     @FXML
     public void cancelClicked(){
-        //Calls hide on current stage, does not track changes
+        ((Stage)cancelBtn.getScene().getWindow()).close();
     }
 
     // --------------------------------------------------//
@@ -105,17 +112,21 @@ public class NewAlterArrangementController extends Controller{
     }
 
     @Override
-    public void setDataFields(Object object) throws DataFormatException {
-        if (!(object == null || object instanceof Arrangement)){
-            throw new DataFormatException();
+    public boolean hasNewObject(){
+        return createdNewObject;
+    }
+
+    @Override
+    public void setDataFields(Object object){
+        if (object instanceof Arrangement){
+            Arrangement arrangement = (Arrangement)object;
+            arrangementToEdit = arrangement;
+            nameInput.setText(arrangement.getName());
+            adressInput.setText(arrangement.getAdress());
+            participantsInput.setText(Integer.toString(arrangement.getParticipants()));
+            startDateInput.setValue(arrangement.getStartDate());
+            endDateInput.setValue(arrangement.getEndDate());
         }
-        Arrangement arrangement = (Arrangement)object;
-        arrangementToEdit = arrangement;
-        nameInput.setText(arrangement.getName());
-        adressInput.setText(arrangement.getAdress());
-        participantsInput.setText(Integer.toString(arrangement.getParticipants()));
-        startDateInput.setValue(arrangement.getStartDate());
-        endDateInput.setValue(arrangement.getEndDate());
     }
 
     // --------------------------------------------------//
