@@ -16,21 +16,21 @@ public class GenerellTests {
     private ArrayList<Arrangement> expectedArrangementer = new ArrayList<>();
     private Arrangement addRemoveTest = new Arrangement("Test Arrengement3","Basketball", 69,"Hakkebakken 420",false,"2019-10-02)","2019-10-04");
 
-    @BeforeEach
+    //@BeforeEach
     public void setup() {
         expectedArrangementer.clear();
         expectedArrangementer.add(new Arrangement("Test Arrengement","Annet", 420,"Oppibakken 15",false,"2019-10-02)","2019-10-04"));
         expectedArrangementer.add(new Arrangement("Test Arrengement2","Basketball", 69,"Hakkebakken 420",false,"2019-10-02)","2019-10-04"));
     }
 
-    @AfterAll
-    public void end() {
+    //@AfterAll
+    public void wrapup() {
         //DataHandler.addArrangementer(new Arrangement("Test Arrengement","Annet", 420,"Oppibakken 15",false,"2019-09-02","2019-09-04"));
         //DataHandler.addArrangementer(new Arrangement("Test Arrengement2","Basketball", 69,"Hakkebakken 420",false,"2019-10-02)","2019-10-04"));
     }
 
-    @Test
-    @Order(1)
+    //@Test
+    //@Order(1)
     public void inputValidationTest() {
         //assertTrue(InputValidation.arrangementInputValidation("Some kind of name", "Annet", "420" , "Somewhere rd 5", false, LocalDate.of(2019,9,30),LocalDate.of(2019,10,1)));
         //assertTrue(InputValidation.arrangementInputValidation("Some kind of name", "Fotball", "420" , "Somewhere rd 5", false, LocalDate.of(2019,9,30),LocalDate.of(2019,9,29)));
@@ -63,6 +63,11 @@ public class GenerellTests {
             fail("Arrangement was not removed?");
         }
         */
+    }
+
+    //@Test
+    public void DataLoadJsonTest() {
+
     }
 
     //@Test
