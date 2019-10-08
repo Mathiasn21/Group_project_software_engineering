@@ -91,7 +91,7 @@ public class StartController extends Controller {
 
     private void onClickListView(MouseEvent mouseEvent) {
         Arrangement arrangement = listview.getSelectionModel().getSelectedItem();
-        if(currentArrangement == null || currentArrangement.equals(arrangement)){
+        if(currentArrangement == null || !currentArrangement.equals(arrangement)){
             currentArrangement = arrangement;
         }
         System.out.println(currentArrangement);

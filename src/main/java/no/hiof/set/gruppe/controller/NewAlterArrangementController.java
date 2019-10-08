@@ -67,6 +67,7 @@ public class NewAlterArrangementController extends Controller{
         arrangementToEdit.setName(nameInput.getText());
         arrangementToEdit.setParticipants(Integer.parseInt(participantsInput.getText()));
         arrangementToEdit.setAdress(adressInput.getText());
+
         arrangementToEdit.setGruppe(groupInput.getSelectionModel().getSelectedItem().isGroup);
         arrangementToEdit.setSport(sportComboBoxInput.getSelectionModel().getSelectedItem().toString());
         arrangementToEdit.setStartDate(startDateInput.getValue().toString());
