@@ -1,0 +1,29 @@
+[
+  {
+    "name": "Test Arrengement",
+    "sport": "Annet",
+    "adress": "Oppibakken 15",
+    "startDate": "2019-10-02",
+    "endDate": "2019-10-04",
+    "participants": 420,
+    "group": false
+  },
+  {
+    "name": "Gresskarfun 3",
+    "sport": "Annet",
+    "adress": "Hakkebakken 420",
+    "startDate": "2019-10-02",
+    "endDate": "2019-10-04",
+    "participants": 69,
+    "group": true
+  },
+  {
+    "name": "dwadwa",
+    "sport": "Annet",
+    "adress": "dwadwa",
+    "startDate": "2019-10-02",
+    "endDate": "2019-10-11",
+    "participants": 22,
+    "group": true
+  }
+]
