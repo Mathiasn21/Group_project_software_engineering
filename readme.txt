@@ -11,9 +11,9 @@ VM options:
 --module-path "PATH TO FOLDER\SET_gruppe\libraries\javafx-sdk-13\lib" --add-modules javafx.controls,javafx.fxml 
 
 
-1: Legg til vm options da maven sitt launch system ikke fungere helt riktig enda pga refleksjon.
+1: Legg til vm options da maven sitt launch system ikke fungerer helt riktig enda pga. refleksjon.
 
-2: launch ved å bruke MainJavaFX i intellij j, ikke med maven
+2: launch ved å bruke MainJavaFX i IntelliJ, ikke med Maven.
 
 Husk å endre den gamle JDK-en i systemet deres fra før, til den nye nr 13. Dette gjelder da under: Project settings, og videre under div faner i menyen.
 
