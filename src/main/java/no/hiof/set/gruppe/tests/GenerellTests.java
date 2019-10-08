@@ -38,8 +38,8 @@ public class GenerellTests {
         assertFalse(InputValidation.arrangementInputValidation("This tittle is way to long which is why it will not work", "Something else", "1000000000" , "Rainbow roooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooad", false, LocalDate.of(2019,9,30),LocalDate.of(2019,9,1)));
     }
 
-    @Test
-    @Order(2)
+    //@Test
+    //@Order(2)
     public void ArrangementAddTest() {
         //expectedArrangementer.add(addRemoveTest);
         //DataHandler.addArrangementer(addRemoveTest);
@@ -52,8 +52,8 @@ public class GenerellTests {
         */
     }
 
-    @Test
-    @Order(3)
+    //@Test
+    //@Order(3)
     public void ArrangementRemoveTest() {
         /*
         DataHandler.removeArrangementer(addRemoveTest);
@@ -65,8 +65,8 @@ public class GenerellTests {
         */
     }
 
-    @Test
-    @Order(4)
+    //@Test
+    //@Order(4)
     public void DataSaveJsonTest() {
         /*
         Arrangement saveArrangement = new Arrangement("Test Arrengement","Skirenn", 12,"Hakkebakken 420",false,LocalDate.of(2019,10,2),LocalDate.of(2019,10,4));
