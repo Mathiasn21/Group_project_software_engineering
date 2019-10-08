@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="300.0" maxWidth="600.0" minHeight="300.0" minWidth="600.0" prefHeight="300.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="no.hiof.set.gruppe.controller.LoginController">
+   <children>
+      <VBox prefHeight="298.0" prefWidth="600.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Innlogging">
+               <font>
+                  <Font size="25.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="40.0" left="240.0" top="20.0" />
+               </VBox.margin>
+            </Text>
+            <HBox prefHeight="69.0" prefWidth="346.0">
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="150.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Brukernavn" textAlignment="CENTER" wrappingWidth="148.6708984375">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="10.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Passord" textAlignment="CENTER" wrappingWidth="148.6708984375">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin>
+                        </Text>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="150.0">
+                     <children>
+                        <TextField fx:id="username" />
+                        <PasswordField fx:id="password">
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin>
+                        </PasswordField>
+                     </children>
+                  </VBox>
+               </children>
+               <VBox.margin>
+                  <Insets left="150.0" />
+               </VBox.margin>
+            </HBox>
+            <Button fx:id="loggInn" mnemonicParsing="false" prefHeight="31.0" prefWidth="98.0" text="Logg inn">
+               <VBox.margin>
+                  <Insets left="250.0" top="10.0" />
+               </VBox.margin></Button>
+            <HBox prefHeight="31.0" prefWidth="594.0">
+               <children>
+                  <Button fx:id="adminLogin" mnemonicParsing="false" text="Brukernavn/Passord admin">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="8.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="arrangLogin" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Brukernavn/Passord arrangør">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="userLogin" layoutX="208.0" layoutY="10.0" mnemonicParsing="false" text="Brukernavn/Passord bruker">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets top="60.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

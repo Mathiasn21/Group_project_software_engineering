@@ -7,5 +7,6 @@ out/
 posters/
 poster/
 idea/
+target/
 cmake-build-debug/
 CMakeLists.txt
