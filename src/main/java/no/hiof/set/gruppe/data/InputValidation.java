@@ -36,22 +36,22 @@ public class InputValidation {
         if(sport != null)
             validations++;
         else
-            System.out.println("Velg en idrett");
+            System.out.println("Velg en idrett!");
 
         if(Pattern.matches("[0-9 ]+", participants)){
             int participantsInt = Integer.parseInt(participants);
             if(participantsInt < 1000000 && participantsInt >= 0)
                 validations++;
             else
-                System.out.println("Et arrangement må ha 0 eller flere deltakere");
+                System.out.println("Et arrangement må ha 0 eller flere deltakere!");
         }
         else
-            System.out.println("Deltakere må være et nummmer");
+            System.out.println("Deltakere må være et nummmer!");
 
         if(Pattern.matches("[A-Za-z0-9 ]+", adress) && adress.length() < 100)
             validations++;
         else
-            System.out.println("Sett inn gydlig adresse");
+            System.out.println("Sett inn gydlig adresse!");
 
         if(startDate.isBefore(endDate) || startDate.isEqual(endDate))
             validations++;

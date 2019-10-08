@@ -19,6 +19,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import no.hiof.set.gruppe.Exceptions.DataFormatException;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.data.DataHandler;
@@ -48,6 +49,8 @@ public class StartController extends Controller {
     private Button editBtn;
     @FXML
     private Button deleteBtn;
+    @FXML
+    private Text arrangementNameView, arrangementAdressView, arrangementDateView, arrangementParticipantsView, arrangementGorIView, arrangementSportView;
     @FXML
     private ListView<Arrangement>listview = new ListView<>();
 
@@ -93,8 +96,25 @@ public class StartController extends Controller {
         Arrangement arrangement = listview.getSelectionModel().getSelectedItem();
         if(currentArrangement == null || !currentArrangement.equals(arrangement)){
             currentArrangement = arrangement;
+            setInformationAboutArrangementInView(currentArrangement);
         }
         System.out.println(currentArrangement);
+    }
+
+    private void setInformationAboutArrangementInView(Arrangement arrangement){
+
+        arrangementNameView.setText(arrangement.getName());
+        arrangementSportView.setText(arrangement.getSport());
+        arrangementAdressView.setText(arrangement.getAdress());
+        arrangementDateView.setText(arrangement.getStartDate().toString() + " til " + arrangement.getEndDate().toString());
+        arrangementParticipantsView.setText(Integer.toString(arrangement.getParticipants()));
+        arrangementGorIView.setText(groupsOrIndividuals(arrangement));
+    }
+
+    private String groupsOrIndividuals(Arrangement arrangement){
+        if(arrangement.isGroup())
+            return "Lagkonkurranse";
+        return "Indivuiduell konkurranse";
     }
 
     // --------------------------------------------------//
