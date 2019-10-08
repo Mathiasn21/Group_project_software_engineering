@@ -27,8 +27,9 @@ public class InputValidation {
         int validations = 0;
 
 
-        //Could be done with:[^\p{L}\p{Nd}]+
-        if(Pattern.matches("[\\p{L}\\p{Nd}\\p{Zs}\\p{Po}]+", name) && name.length() < 50 && name.length() > 2)
+        //[\p{L}\p{Nd}\p{Zs}\p{Po}]+ Converted to double negation as to save some cpu cycles and therefore less strain
+        //on the overall memory
+        if(!Pattern.matches("[^\\p{L}\\p{Nd}\\p{Zs}\\p{Po}]+", name) && name.length() < 50 && name.length() > 2)
             validations++;
         else
             System.out.println("Sett inn et gyldig navn");
