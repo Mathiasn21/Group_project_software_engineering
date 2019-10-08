@@ -27,6 +27,7 @@ public class InputValidation {
         int validations = 0;
 
 
+        //Could be done with:[^\p{L}\p{Nd}]+
         if(Pattern.matches("[A-Za-z0-9]+", name) && name.length() < 50 && name.length() > 2)
             validations++;
         else
