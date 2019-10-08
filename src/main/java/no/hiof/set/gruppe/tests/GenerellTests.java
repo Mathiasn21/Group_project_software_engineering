@@ -6,6 +6,7 @@ import org.junit.jupiter.api.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -29,13 +30,20 @@ public class GenerellTests {
         //DataHandler.addArrangementer(new Arrangement("Test Arrengement2","Basketball", 69,"Hakkebakken 420",false,"2019-10-02)","2019-10-04"));
     }
 
-    //@Test
+    @Test
     //@Order(1)
     public void inputValidationTest() {
+        /*
+        if(Pattern.matches("[\\p{L}\\p{Nd}\\p{Zs}\\p{Po}]+","Børre's sports dag"))
+            return;
+        else
+            fail("Not valid");
+        */
         //assertTrue(InputValidation.arrangementInputValidation("Some kind of name", "Annet", "420" , "Somewhere rd 5", false, LocalDate.of(2019,9,30),LocalDate.of(2019,10,1)));
+        assertTrue(InputValidation.arrangementInputValidation("Børre's sports dag","Annet","25","Heggedal 5", true,LocalDate.of(2019,10,5),LocalDate.of(2019,10,6)));
         //assertTrue(InputValidation.arrangementInputValidation("Some kind of name", "Fotball", "420" , "Somewhere rd 5", false, LocalDate.of(2019,9,30),LocalDate.of(2019,9,29)));
-        assertFalse(InputValidation.arrangementInputValidation("b", "Niet Comrade", "-1" , "Somewhere rd. 5", false, LocalDate.of(2019,9,30),LocalDate.of(2019,9,1)));
-        assertFalse(InputValidation.arrangementInputValidation("This tittle is way to long which is why it will not work", "Something else", "1000000000" , "Rainbow roooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooad", false, LocalDate.of(2019,9,30),LocalDate.of(2019,9,1)));
+        //assertFalse(InputValidation.arrangementInputValidation("b", "Niet Comrade", "-1" , "Somewhere rd. 5", false, LocalDate.of(2019,9,30),LocalDate.of(2019,9,1)));
+        //assertFalse(InputValidation.arrangementInputValidation("This tittle is way to long which is why it will not work", "Something else", "1000000000" , "Rainbow roooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooad", false, LocalDate.of(2019,9,30),LocalDate.of(2019,9,1)));
     }
 
     //@Test

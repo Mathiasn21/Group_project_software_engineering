@@ -28,7 +28,7 @@ public class InputValidation {
 
 
         //Could be done with:[^\p{L}\p{Nd}]+
-        if(Pattern.matches("[A-Za-z0-9]+", name) && name.length() < 50 && name.length() > 2)
+        if(Pattern.matches("[\\p{L}\\p{Nd}\\p{Zs}\\p{Po}]+", name) && name.length() < 50 && name.length() > 2)
             validations++;
         else
             System.out.println("Sett inn et gyldig navn");
