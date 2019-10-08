@@ -35,7 +35,7 @@ public class NewAlterArrangementController extends Controller{
     //                2.Local Fields                     //
     // --------------------------------------------------//
     private String name = "NewAlterArrangement.fxml";
-    private String title = "arrangement";
+    private String title = "Arrangement";
     private Arrangement arrangementToEdit = null;
     private boolean createdNewObject = false;
 

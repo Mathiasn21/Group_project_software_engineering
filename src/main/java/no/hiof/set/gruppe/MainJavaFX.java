@@ -57,7 +57,7 @@ public class MainJavaFX extends Application implements SetupWindow {
         stage.setScene(scene);
         stage.setMinHeight(500);
         stage.setMinWidth(500);
-        stage.setTitle("Arrangementer");
+        stage.setTitle("Mine Arrangementer");
         stage.show();
     }
 
