@@ -10,7 +10,7 @@
    <children>
       <HBox layoutX="-2.0" layoutY="359.0" prefHeight="39.0" prefWidth="279.0" spacing="5.0">
          <children>
-            <Button fx:id="newArrangementBtn" mnemonicParsing="false" prefHeight="31.0" prefWidth="139.0" text="Nytt arrangement" />
+            <Button fx:id="newArrangementBtn" mnemonicParsing="false" text="Nytt arrangement" />
             <Button fx:id="editBtn" mnemonicParsing="false" text="Rediger" />
             <Button fx:id="deleteBtn" mnemonicParsing="false" text="Slett" />
          </children>
