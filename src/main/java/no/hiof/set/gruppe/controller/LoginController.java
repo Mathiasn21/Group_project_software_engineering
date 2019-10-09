@@ -7,7 +7,7 @@ import no.hiof.set.gruppe.Exceptions.DataFormatException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class LoginController extends Controller {
+public class LoginController extends Controller implements ILoginValidation {
     // --------------------------------------------------//
     //                2.Local Fields                     //
     // --------------------------------------------------//
@@ -64,5 +64,20 @@ public class LoginController extends Controller {
     @Override
     public String getName() {
         return null;
+    }
+
+
+
+    /*
+    * Needs valid logic
+    * */
+    @Override
+    public boolean isValidUName(String str) {
+        return false;
+    }
+
+    @Override
+    public boolean isValidPass(String str) {
+        return false;
     }
 }
