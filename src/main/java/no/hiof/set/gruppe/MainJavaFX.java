@@ -53,7 +53,7 @@ public class MainJavaFX extends Application implements SetupWindow {
         controller.setMainController(this);
 
         stage.setOnHidden((Event)-> controller.onCloseStoreInformation());
-        Scene scene = new Scene(editLayout, 800, 450);
+        Scene scene = new Scene(editLayout, 800, 600);
         stage.setScene(scene);
         stage.setResizable(false);
         stage.setTitle("Mine Arrangementer");
@@ -76,7 +76,7 @@ public class MainJavaFX extends Application implements SetupWindow {
         loader.setLocation(MainJavaFX.class.getResource(controller.getName()));
         Parent editLayout = loader.load();
         stage.setOnHidden((Event)-> controller.onCloseStoreInformation());
-        Scene editScene = new Scene(editLayout, 400, 450);
+        Scene editScene = new Scene(editLayout, 800, 600);
         stage.setScene(editScene);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initOwner(this.stage);
@@ -117,7 +117,7 @@ public class MainJavaFX extends Application implements SetupWindow {
                 finalController.onCloseStoreInformation();
             });
 
-            Scene editScene = new Scene(editLayout, 186, 441);
+            Scene editScene = new Scene(editLayout, 400, 500);
             stage.setScene(editScene);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initOwner(this.stage);
