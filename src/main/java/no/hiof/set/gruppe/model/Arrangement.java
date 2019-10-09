@@ -12,6 +12,7 @@ package no.hiof.set.gruppe.model;
 //                1.Import Statements                //
 // --------------------------------------------------//
 import java.time.LocalDate;
+import java.util.Objects;
 
 /**
  * Arrangement holds information about a possible arrangement.
@@ -114,6 +115,25 @@ public class Arrangement {
     // --------------------------------------------------//
     //                6.Overridden Methods               //
     // --------------------------------------------------//
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Arrangement that = (Arrangement) o;
+        return participants == that.participants &&
+                group == that.group &&
+                name.equals(that.name) &&
+                sport.equals(that.sport) &&
+                adress.equals(that.adress) &&
+                startDate.equals(that.startDate) &&
+                endDate.equals(that.endDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, sport, adress, startDate, endDate, participants, group);
+    }
+
     @Override
     public String toString(){
         return name + " " + sport + " " + participants + " " + adress + " " + startDate + " til " + endDate;
