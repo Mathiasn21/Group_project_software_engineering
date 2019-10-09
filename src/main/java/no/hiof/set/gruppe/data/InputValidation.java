@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
  * @author Gruppe4
  */
 
-public class InputValidation {
+public class InputValidation implements IInputValidation{
 
     /**
      * Validates arrangement input data from user.

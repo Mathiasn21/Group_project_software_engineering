@@ -17,9 +17,10 @@ public class GenerellTests {
     public void wrapup() {
     }
 
-    @Test
+    //@Test
     //@Order(1)
     public void inputValidationTest() {
+
 
     }
 
