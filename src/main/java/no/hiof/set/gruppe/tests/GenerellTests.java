@@ -44,16 +44,22 @@ public class GenerellTests {
 
     }
 
+
     private boolean compareArrangementArrays(ArrayList<Arrangement> exArr, ArrayList<Arrangement> acArr) {
 
-        if(exArr.size() != acArr.size())
+        /*if(exArr.size() != acArr.size())
             return false;
 
         for(int i = 0; i < exArr.size() && i < acArr.size() ;i++) {
             Arrangement ex = exArr.get(i);
             Arrangement ac = acArr.get(i);
             return ex.equals(ac);
+
         }
-        return true;
+
+          return true;
+        */
+
+        return exArr.equals(acArr);
     }
 }
