@@ -23,6 +23,12 @@ public class InputValidation {
      * @return True if input is valid. False if input is not valid.
      */
     public static boolean arrangementInputValidation(String name, String sport, String participants, String adress, boolean gruppe, LocalDate startDate, LocalDate endDate) {
+        /*
+        * This whole class can be truncated, where the reg patterns are put onto the top the application.
+        * A method could be used to test for the actual string, given pattern.
+        * Should use double negation as thi save quite a few cpu cycles.
+        * */
+
 
         int validations = 0;
 

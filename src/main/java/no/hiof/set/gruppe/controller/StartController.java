@@ -57,6 +57,15 @@ public class StartController extends Controller {
     // --------------------------------------------------//
     //                4.On Action Methods                //
     // --------------------------------------------------//
+    /*
+    * Needs to be extended with logic for the following items:
+    * Search AND sort after category
+    * Add numb of participants for text field
+    *
+    * */
+
+
+
     private void onClick(ActionEvent event) {
         title = "Ny";
         createNewView(this, null);
