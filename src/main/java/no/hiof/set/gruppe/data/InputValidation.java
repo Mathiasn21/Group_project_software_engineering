@@ -27,6 +27,10 @@ public class InputValidation {
         * This whole class can be truncated, where the reg patterns are put onto the top the application.
         * A method could be used to test for the actual string, given pattern.
         * Should use double negation as thi save quite a few cpu cycles.
+        *
+        * Each if could and should be calling a validation function
+        * Every message should just be added with stringbuilder.
+        *
         * */
 
 
