@@ -114,7 +114,7 @@ public class StartController extends Controller {
     private String groupsOrIndividuals(Arrangement arrangement){
         if(arrangement.isGroup())
             return "Lagkonkurranse";
-        return "Indivuiduell konkurranse";
+        return "Individuell konkurranse";
     }
 
     // --------------------------------------------------//
