@@ -46,14 +46,14 @@ public class MainJavaFX extends Application implements SetupWindow {
     public void start(Stage stage) throws IOException {
         this.stage = stage;
 
-        FXMLLoader loader = new FXMLLoader(MainJavaFX.class.getResource("Arrangement.fxml"));
+        FXMLLoader loader = new FXMLLoader(MainJavaFX.class.getResource("Organizer.fxml"));
         Parent editLayout = loader.load();
 
         IController controller= (loader.getController());
         controller.setMainController(this);
 
         stage.setOnHidden((Event)-> controller.onCloseStoreInformation());
-        Scene scene = new Scene(editLayout, 800, 600);
+        Scene scene = new Scene(editLayout, 800, 450);
         stage.setScene(scene);
         stage.setResizable(false);
         stage.setTitle("Mine Arrangementer");
