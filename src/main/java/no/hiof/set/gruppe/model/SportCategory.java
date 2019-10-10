@@ -6,10 +6,11 @@ package no.hiof.set.gruppe.model;
 public enum SportCategory {
 
     OTHER("Annet"),
+    FOOTBALL("Fotball"),
+    BASKETBALL("Basketball"),
+    ATHLETICS("Friidrett"),
     BICYCLING("Sykkelritt"),
-    SKIING("Skirenn"),
-    MARATHON("Maraton"),
-    ;
+    SKIING("Skirenn");
 
     String category;
     int id;
