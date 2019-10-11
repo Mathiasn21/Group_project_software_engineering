@@ -20,20 +20,14 @@ public class ArrrengementTests {
     public void wrapup() {
     }
 
-    //@Test
-    //@Order(1)
-    public void inputValidationTest() {
-        boolean test = InputValidation.arrangementInputValidation("pes","Annet","420","Hakkebakkeskogen", true, LocalDate.of(2019,10,10), LocalDate.of(2019,10,11));
-        System.out.println(test);
-    }
 
     //@Test
-    //@Order(2)
+    //@Order(1)
     public void ArrangementAddTest() {
     }
 
     //@Test
-    //@Order(3)
+    //@Order(2)
     public void ArrangementRemoveTest() {
     }
 
@@ -43,7 +37,6 @@ public class ArrrengementTests {
     }
 
     //@Test
-    //@Order(4)
     public void DataSaveJsonTest() {
 
     }
