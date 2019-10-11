@@ -1,20 +1,20 @@
 [
   {
+    "name": "ertyhtr",
+    "sport": "Annet",
+    "adress": "Hakkebakken 420",
+    "startDate": "2019-10-02",
+    "endDate": "2019-10-04",
+    "participants": 69,
+    "group": true
+  },
+  {
     "name": "yikes",
     "sport": "Annet",
     "adress": "Oppibakken 15",
     "startDate": "2019-10-02",
     "endDate": "2019-10-04",
     "participants": 420,
-    "group": true
-  },
-  {
-    "name": "ertyhtr",
-    "sport": "Friidrett",
-    "adress": "Hakkebakken 420",
-    "startDate": "2019-10-02",
-    "endDate": "2019-10-04",
-    "participants": 69,
     "group": true
   }
 ]

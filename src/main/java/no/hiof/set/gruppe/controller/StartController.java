@@ -6,6 +6,7 @@ package no.hiof.set.gruppe.controller;
  * 3. FXML Fields
  * 4. On Action Methods
  * 5. Private Methods
+ * 6. Overridden Methods
  * */
 
 
@@ -89,6 +90,15 @@ public class StartController extends Controller {
     // --------------------------------------------------//
     //                5.Private Methods                  //
     // --------------------------------------------------//
+    private void changedView(){
+        Arrangement arrangement = listview.getSelectionModel().getSelectedItem();
+        if(currentArrangement == null || !currentArrangement.equals(arrangement)){
+            currentArrangement = arrangement;
+        }
+        setInformationAboutArrangementInView(currentArrangement);
+        listview.refresh();
+    }
+
     private void populateListView() {
         arrangementListObservable = FXCollections.observableArrayList(DataHandler.getArrangementsData());
         listview.setItems(arrangementListObservable);
@@ -102,12 +112,9 @@ public class StartController extends Controller {
     }
 
     private void onClickListView(MouseEvent mouseEvent) {
-        Arrangement arrangement = listview.getSelectionModel().getSelectedItem();
-        if(currentArrangement == null || !currentArrangement.equals(arrangement)){
-            currentArrangement = arrangement;
-            setInformationAboutArrangementInView(currentArrangement);
-        }
+        changedView();
         System.out.println(currentArrangement);
+        listview.refresh();
     }
 
     private void setInformationAboutArrangementInView(Arrangement arrangement){
@@ -144,6 +151,7 @@ public class StartController extends Controller {
         return listview.getSelectionModel().getSelectedItem();
     }
 
+
     /**
      * Handles data setup and interaction from other controllers.
      * @param object Object
@@ -157,11 +165,17 @@ public class StartController extends Controller {
         System.out.println("Adding arrangement: " + object);
         arrangementListObservable.add((Arrangement) object);
         listview.refresh();
+        changedView();
     }
 
     @Override
     public void onCloseStoreInformation() {
         new DataHandler().storeArrangementsData(arrangementListObservable);
+    }
+    @Override
+    public void updateView(){
+        if(currentArrangement == null){return;}
+        changedView();
     }
 
     @Override
@@ -172,5 +186,4 @@ public class StartController extends Controller {
         listview.setOnMouseClicked(this::onClickListView);
         populateListView();
     }
-
 }

@@ -114,6 +114,7 @@ public class MainJavaFX extends Application implements SetupWindow {
                         e.printStackTrace();
                     }
                 }
+                oldController.updateView();
                 finalController.onCloseStoreInformation();
             });
 

@@ -41,4 +41,7 @@ public abstract class Controller implements IControllerDataTransfer, Initializab
         return false;
     }
 
+    @Override
+    public void updateView(){}
+
 }
