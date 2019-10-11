@@ -6,4 +6,5 @@ public interface IControllerDataTransfer<T> extends IController{
     T getDataObject();
     boolean hasNewObject();
     void setDataFields(T object) throws DataFormatException;
+    void updateView();
 }
