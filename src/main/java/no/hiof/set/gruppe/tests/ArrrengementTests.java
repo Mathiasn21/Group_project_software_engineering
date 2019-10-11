@@ -1,12 +1,15 @@
 package no.hiof.set.gruppe.tests;
 
+import no.hiof.set.gruppe.data.InputValidation;
 import no.hiof.set.gruppe.model.Arrangement;
 import org.junit.jupiter.api.*;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class GenerellTests {
+public class ArrrengementTests {
 
 
     //@BeforeEach
@@ -20,8 +23,8 @@ public class GenerellTests {
     //@Test
     //@Order(1)
     public void inputValidationTest() {
-
-
+        boolean test = InputValidation.arrangementInputValidation("pes","Annet","420","Hakkebakkeskogen", true, LocalDate.of(2019,10,10), LocalDate.of(2019,10,11));
+        System.out.println(test);
     }
 
     //@Test

@@ -41,7 +41,7 @@ public class InputValidation implements IInputValidation{
 
         //[\p{L}\p{Nd}\p{Zs}\p{Po}]+ Converted to double negation as to save some cpu cycles and therefore less strain
         //on the overall memory
-        if(!Pattern.matches("[^\\p{L}\\p{Nd}\\p{Zs}\\p{Po}]", name) && name.length() < 50 && name.length() > 2)
+        if(!Pattern.matches("\\00", name) && name.length() < 50 && name.length() > 2)
             validations++;
         else
             System.out.println("Sett inn et gyldig navn");
@@ -61,7 +61,7 @@ public class InputValidation implements IInputValidation{
         else
             System.out.println("Deltakere må være et nummmer!");
 
-        if(Pattern.matches("[A-Za-z0-9 ]+", adress) && adress.length() < 100)
+        if(Pattern.matches("[A-Za-z0-9. ]+", adress) && adress.length() < 100)
             validations++;
         else
             System.out.println("Sett inn gydlig adresse!");
