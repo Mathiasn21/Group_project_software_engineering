@@ -3,7 +3,7 @@ JDK version: 13, no new language features
 JFX version: 13
 
 --EDIT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-Det er ikke lenger med instillingene nederst men de hjelper. Dette grunnet at maven nå er fungerende både på kompilering og launching gjennom plugin modulen, med underscriptene: javafx:compile og javafx:run :D
+Det er ikke lenger nødvendig med instillingene nederst, men de hjelper. Dette grunnet at maven nå er fungerende både på kompilering og launching gjennom plugin modulen, med underscriptene: javafx:compile og javafx:run :D
 
 
 

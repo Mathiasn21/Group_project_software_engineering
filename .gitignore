@@ -1,7 +1,13 @@
+# Ignore Files
+CMakeLists.txt
+
+#Ignore Filetypes
 *.idea
 *.idea/
 *.iml
 *.project
+
+#Ignore Folders
 output/
 out/
 posters/
@@ -9,4 +15,3 @@ poster/
 idea/
 target/
 cmake-build-debug/
-CMakeLists.txt
