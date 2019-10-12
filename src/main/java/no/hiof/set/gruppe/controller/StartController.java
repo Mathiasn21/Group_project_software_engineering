@@ -15,10 +15,12 @@ package no.hiof.set.gruppe.controller;
 // --------------------------------------------------//
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import no.hiof.set.gruppe.Exceptions.DataFormatException;
@@ -39,6 +41,7 @@ public class StartController extends Controller {
     private String title = "";
     private String name = "NewAlterArrangement.fxml";
     private ObservableList<Arrangement>arrangementListObservable;
+    private FilteredList<Arrangement> filteredList;
     private Arrangement currentArrangement = null;
 
     // --------------------------------------------------//
@@ -53,6 +56,8 @@ public class StartController extends Controller {
     @FXML
     private Text arrangementNameView, arrangementAdressView, arrangementDateView, arrangementParticipantsView, arrangementGorIView, arrangementSportView;
     @FXML
+    private TextField arrSearch;
+    @FXML
     private ListView<Arrangement>listview = new ListView<>();
 
     // --------------------------------------------------//
@@ -66,6 +71,11 @@ public class StartController extends Controller {
     * */
 
 
+    private void search(ActionEvent actionEvent){
+        filteredList.setPredicate(this::lowerCaseTitleSearch);
+        listview.setItems(filteredList);
+        listview.refresh();
+    }
 
     private void onClick(ActionEvent event) {
         title = "Ny";
@@ -99,9 +109,28 @@ public class StartController extends Controller {
         listview.refresh();
     }
 
+    private void setupFilteredList(){
+        filteredList = arrangementListObservable.filtered(arrangement -> true);
+        listview.setItems(filteredList);
+        arrSearch.setText("");
+    }
+
+
+    /**
+     * Returns a Boolean based on if the Arrangement name contains
+     * the given search string.
+     * @param arrangement Arrangement
+     * @return boolean
+     */
+    private boolean lowerCaseTitleSearch(Arrangement arrangement){
+        String title = arrangement.getName().toLowerCase();
+        String search = arrSearch.getText().toLowerCase();
+        return title.contains(search);
+    }
+
     private void populateListView() {
         arrangementListObservable = FXCollections.observableArrayList(DataHandler.getArrangementsData());
-        listview.setItems(arrangementListObservable);
+        setupFilteredList();
         listview.refresh();
     }
 
@@ -118,7 +147,6 @@ public class StartController extends Controller {
     }
 
     private void setInformationAboutArrangementInView(Arrangement arrangement){
-
         arrangementNameView.setText(arrangement.getName());
         arrangementSportView.setText(arrangement.getSport());
         arrangementAdressView.setText(arrangement.getAdress());
@@ -184,6 +212,7 @@ public class StartController extends Controller {
         editBtn.setOnAction(this::onEditClick);
         newArrangementBtn.setOnAction(this::onClick);
         listview.setOnMouseClicked(this::onClickListView);
+        arrSearch.setOnAction(this::search);
         populateListView();
     }
 }
