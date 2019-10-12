@@ -26,7 +26,7 @@
             <DatePicker fx:id="startDateInput" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Slutt dato" />
             <DatePicker fx:id="endDateInput" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Lag eller individuelt" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Konkurranseform" />
             <ComboBox fx:id="groupInput" prefWidth="150.0" />
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0">
                <children>

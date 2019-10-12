@@ -6,8 +6,8 @@ package no.hiof.set.gruppe.model;
  */
 public enum GroupCategory {
 
-    TRUE(true, "Gruppe"),
-    FALSE(false, "Individuell");
+    TRUE(true, "Lagkonkurranse"),
+    FALSE(false, "Individuell konkurranse");
 
     public final boolean isGroup;
     public final String str;
