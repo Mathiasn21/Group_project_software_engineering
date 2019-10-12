@@ -11,8 +11,8 @@ public class LoginController extends Controller implements ILoginValidation {
     // --------------------------------------------------//
     //                2.Local Fields                     //
     // --------------------------------------------------//
-    String name = "Admin";
-    String title = "Admin Interface";
+    private String name = "Login";
+    private String title = "Innlogging";
 
 
     // --------------------------------------------------//
@@ -34,8 +34,12 @@ public class LoginController extends Controller implements ILoginValidation {
     // --------------------------------------------------//
     //                2.Private Methods                  //
     // --------------------------------------------------//
-
-
+    private int checkCredentials(String user){
+        //should take an input that is a user enum
+        //Test for valid and what the valid credentials are, eg admin, organizer or user
+        //Might be a enum that returns a given view name
+        return 0;
+    }
 
 
     // --------------------------------------------------//
@@ -58,12 +62,12 @@ public class LoginController extends Controller implements ILoginValidation {
 
     @Override
     public String getTitle() {
-        return null;
+        return title;
     }
 
     @Override
     public String getName() {
-        return null;
+        return name;
     }
 
 

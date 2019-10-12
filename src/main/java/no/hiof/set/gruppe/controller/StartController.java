@@ -109,6 +109,14 @@ public class StartController extends Controller {
         listview.refresh();
     }
 
+    private void setupActionHandlers() {
+        deleteBtn.setOnAction(this::onDelete);
+        editBtn.setOnAction(this::onEditClick);
+        newArrangementBtn.setOnAction(this::onClick);
+        listview.setOnMouseClicked(this::onClickListView);
+        arrSearch.setOnAction(this::search);
+    }
+
     private void setupFilteredList(){
         filteredList = arrangementListObservable.filtered(arrangement -> true);
         listview.setItems(filteredList);
@@ -208,11 +216,9 @@ public class StartController extends Controller {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        deleteBtn.setOnAction(this::onDelete);
-        editBtn.setOnAction(this::onEditClick);
-        newArrangementBtn.setOnAction(this::onClick);
-        listview.setOnMouseClicked(this::onClickListView);
-        arrSearch.setOnAction(this::search);
+        setupActionHandlers();
         populateListView();
     }
+
+
 }
