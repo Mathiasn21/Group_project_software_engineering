@@ -43,8 +43,8 @@
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="150.0">
                      <children>
-                        <TextField fx:id="username" />
-                        <PasswordField fx:id="password">
+                        <TextField fx:id="uName" />
+                        <PasswordField fx:id="pass">
                            <VBox.margin>
                               <Insets top="5.0" />
                            </VBox.margin>
@@ -56,7 +56,7 @@
                   <Insets left="150.0" />
                </VBox.margin>
             </HBox>
-            <Button fx:id="loggInn" mnemonicParsing="false" prefHeight="31.0" prefWidth="98.0" text="Logg inn">
+            <Button fx:id="logInn" mnemonicParsing="false" prefHeight="31.0" prefWidth="98.0" text="Logg inn">
                <VBox.margin>
                   <Insets left="250.0" top="10.0" />
                </VBox.margin></Button>

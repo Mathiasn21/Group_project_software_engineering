@@ -129,5 +129,6 @@
       <Text layoutX="6.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Søk" />
       <ChoiceBox fx:id="sortOptions" layoutX="112.0" layoutY="61.0" prefHeight="25.0" prefWidth="100.0" />
       <Text layoutX="112.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sorter" />
+      <Button fx:id="logOut" layoutX="728.0" layoutY="411.0" mnemonicParsing="false" text="Logg Ut" />
    </children>
 </AnchorPane>

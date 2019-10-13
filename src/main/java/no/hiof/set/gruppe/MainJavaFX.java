@@ -46,17 +46,17 @@ public class MainJavaFX extends Application implements SetupWindow {
     public void start(Stage stage) throws IOException {
         this.stage = stage;
 
-        FXMLLoader loader = new FXMLLoader(MainJavaFX.class.getResource("Organizer.fxml"));
+        FXMLLoader loader = new FXMLLoader(MainJavaFX.class.getResource("Login.fxml"));
         Parent editLayout = loader.load();
 
-        IController controller= (loader.getController());
+        IController controller = (loader.getController());
         controller.setMainController(this);
 
         stage.setOnHidden((Event)-> controller.onCloseStoreInformation());
         Scene scene = new Scene(editLayout, 800, 450);
         stage.setScene(scene);
         stage.setResizable(false);
-        stage.setTitle("Mine Arrangementer");
+        stage.setTitle("Logg inn");
         stage.show();
     }
 
@@ -75,12 +75,19 @@ public class MainJavaFX extends Application implements SetupWindow {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(MainJavaFX.class.getResource(controller.getName()));
         Parent editLayout = loader.load();
-        stage.setOnHidden((Event)-> controller.onCloseStoreInformation());
+
+        //handling onclose for given stage
+        IController finalController = controller;
+        stage.setOnHidden((Event)-> finalController.onCloseStoreInformation());
+
         Scene editScene = new Scene(editLayout, 800, 600);
         stage.setScene(editScene);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initOwner(this.stage);
         stage.setTitle(controller.getTitle());
+
+        //setting next controller
+        controller = loader.getController();
         controller.setMainController(this);
         System.out.println(this);
 

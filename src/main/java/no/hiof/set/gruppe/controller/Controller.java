@@ -32,6 +32,10 @@ public abstract class Controller implements IControllerDataTransfer, Initializab
         mainController.setupWindow(controller, object);
     }
 
+    public MainJavaFX getMainController() {
+        return mainController;
+    }
+
     /**
      * Default logic for closing of a view
      */

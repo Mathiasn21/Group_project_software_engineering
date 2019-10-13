@@ -1,23 +1,29 @@
 package no.hiof.set.gruppe.controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import no.hiof.set.gruppe.Exceptions.DataFormatException;
+import no.hiof.set.gruppe.model.User;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class LoginController extends Controller implements ILoginValidation {
+public class LoginController extends Controller {
     // --------------------------------------------------//
     //                2.Local Fields                     //
     // --------------------------------------------------//
-    private String name = "Login";
-    private String title = "Innlogging";
+    private String name = "";
+    private String title = "";
 
 
     // --------------------------------------------------//
     //                3.FXML Fields                      //
     // --------------------------------------------------//
+    @FXML
+    private Button logInn;
     @FXML
     private Button adminLogin;
     @FXML
@@ -25,11 +31,9 @@ public class LoginController extends Controller implements ILoginValidation {
     @FXML
     private Button userLogin;
     @FXML
-    private TextField username;
+    private TextField uName;
     @FXML
-    private TextField password;
-
-
+    private TextField pass;
 
     // --------------------------------------------------//
     //                2.Private Methods                  //
@@ -41,14 +45,52 @@ public class LoginController extends Controller implements ILoginValidation {
         return 0;
     }
 
+    private void getCorrectCredentials(ActionEvent event){
+        User user = User.USER;
+        Button source = (Button)event.getSource();
+
+        if (source.equals(adminLogin)) user = User.ADMIN;
+        else if (source.equals(arrangLogin)) {
+            user = User.ORGANIZER;
+        }
+        applyCredentials(user);
+    }
+
+    private void login(ActionEvent event) {
+        String userName = uName.getText();
+        String password = pass.getText();
+        if(User.isValidUser(userName, password)){
+            User user = User.getUser(userName);
+            assert user != null;
+            ((Stage)logInn.getScene().getWindow()).close();
+            openCorrespondingStage(user);
+        }
+    }
+
+    private void openCorrespondingStage(User user) {
+        title = user.getName();
+        name = user.getViewName();
+        System.out.println(getMainController());
+        createNewView(this);
+    }
+
+    private void applyCredentials(User user) {
+        uName.setText(user.getName());
+        pass.setText(user.getPass());
+    }
+
 
     // --------------------------------------------------//
     //                5.Overridden Methods               //
     // --------------------------------------------------//
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        Button[] credentialsBtns = {adminLogin, arrangLogin, userLogin};
+        for (Button credentialsBtn : credentialsBtns) credentialsBtn.setOnAction(this::getCorrectCredentials);
+        
+        logInn.setOnAction(this::login);
     }
+
 
     @Override
     public Object getDataObject() {
@@ -71,17 +113,7 @@ public class LoginController extends Controller implements ILoginValidation {
     }
 
 
-
     /*
-    * Needs valid logic
+    * Needs valid logic for input control
     * */
-    @Override
-    public boolean isValidUName(String str) {
-        return false;
-    }
-
-    @Override
-    public boolean isValidPass(String str) {
-        return false;
-    }
 }

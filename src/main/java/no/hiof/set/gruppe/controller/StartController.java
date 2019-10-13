@@ -23,6 +23,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import no.hiof.set.gruppe.Exceptions.DataFormatException;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.data.DataHandler;
@@ -54,6 +55,9 @@ public class StartController extends Controller {
     @FXML
     private Button deleteBtn;
     @FXML
+    private Button logOut;
+
+    @FXML
     private Text arrangementNameView, arrangementAdressView, arrangementDateView, arrangementParticipantsView, arrangementGorIView, arrangementSportView;
     @FXML
     private TextField arrSearch;
@@ -63,13 +67,6 @@ public class StartController extends Controller {
     // --------------------------------------------------//
     //                4.On Action Methods                //
     // --------------------------------------------------//
-    /*
-    * Needs to be extended with logic for the following items:
-    * Search AND sort after category
-    * Add numb of participants for text field
-    *
-    * */
-
 
     private void search(ActionEvent actionEvent){
         filteredList.setPredicate(this::lowerCaseTitleSearch);
@@ -115,6 +112,7 @@ public class StartController extends Controller {
         newArrangementBtn.setOnAction(this::onClick);
         listview.setOnMouseClicked(this::onClickListView);
         arrSearch.setOnAction(this::search);
+        logOut.setOnAction(this::returnToMainWindow);
     }
 
     private void setupFilteredList(){
@@ -122,7 +120,6 @@ public class StartController extends Controller {
         listview.setItems(filteredList);
         arrSearch.setText("");
     }
-
 
     /**
      * Returns a Boolean based on if the Arrangement name contains
@@ -164,9 +161,18 @@ public class StartController extends Controller {
     }
 
     private String groupsOrIndividuals(Arrangement arrangement){
-        if(arrangement.isGroup())
+        /*if(arrangement.isGroup())
             return "Lagkonkurranse";
-        return "Individuell konkurranse";
+        return "Individuell konkurranse";*/
+        return arrangement.isGroup() ? "Lagkonkurranse" : "Individuell konkurranse";
+    }
+
+    private void returnToMainWindow(ActionEvent event) {
+        title = "Logg inn";
+        name = "Login.fxml";
+        ((Stage)logOut.getScene().getWindow()).close();
+        System.out.println(getMainController());
+        createNewView(this);
     }
 
     // --------------------------------------------------//
@@ -208,9 +214,10 @@ public class StartController extends Controller {
     public void onCloseStoreInformation() {
         new DataHandler().storeArrangementsData(arrangementListObservable);
     }
+
     @Override
     public void updateView(){
-        if(currentArrangement == null){return;}
+        if(currentArrangement == null)return;
         changedView();
     }
 
@@ -218,6 +225,8 @@ public class StartController extends Controller {
     public void initialize(URL location, ResourceBundle resources) {
         setupActionHandlers();
         populateListView();
+        System.out.println(getMainController());
+
     }
 
 
