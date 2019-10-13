@@ -13,8 +13,11 @@ package no.hiof.set.gruppe.data;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import no.hiof.set.gruppe.model.Arrangement;
+import no.hiof.set.gruppe.model.User;
+import no.hiof.set.gruppe.model.UserConnectedArrangement;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -30,6 +33,7 @@ public class DataHandler implements IDataHandler {
     //                2.Local Fields                     //
     // --------------------------------------------------//
     private static String arrangementFName = "arrangements.json";
+    private static String userHasArrangements = "userHasArrangements.json";
 
     // --------------------------------------------------//
     //                3.Private Static Methods           //
@@ -112,8 +116,32 @@ public class DataHandler implements IDataHandler {
      * those into a usable collection of arrangements.
      * @return {@link Collection} ? extends {@link Arrangement}
      */
-    public static Collection<? extends Arrangement> getArrangementsData() {
+    public static Collection<Arrangement> getArrangementsData() {
         return listFromJson(Arrangement[].class, readFromFile(arrangementFName));
+    }
+
+    public static Collection<Arrangement> getUserArrangements(User user) {
+        String jsonFromFile = readFromFile(userHasArrangements);
+        Collection<UserConnectedArrangement> userArrangementColl = listFromJson(UserConnectedArrangement[].class, jsonFromFile);
+
+        Collection<Arrangement> result = new ArrayList<>();
+        Collection<Arrangement> allArrangements = getArrangementsData();
+        String userName = user.getName();
+
+        outer:for(Arrangement arrangement : allArrangements){
+            int arrID = arrangement.getID();
+            for(UserConnectedArrangement userArrangement : userArrangementColl){
+                if(userName.equals(userArrangement.getUSERNAME()) && arrID == userArrangement.getID()){
+                    result.add(arrangement);
+                    continue outer;
+                }
+            }
+        }
+        return result;
+    }
+
+    public static void storeUserArrangements(Collection<UserConnectedArrangement> colletionOfData){
+        writeToFile(toJson(UserConnectedArrangement[].class,  colletionOfData.toArray(UserConnectedArrangement[]::new)), userHasArrangements);
     }
 
     /**
@@ -125,4 +153,6 @@ public class DataHandler implements IDataHandler {
     public void storeArrangementsData(Collection<Arrangement> arrangement) {
         writeToFile(toJson(Arrangement[].class, arrangement.toArray(Arrangement[]::new)), arrangementFName);
     }
+
+
 }

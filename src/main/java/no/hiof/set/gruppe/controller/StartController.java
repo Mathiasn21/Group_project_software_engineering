@@ -27,7 +27,12 @@ import javafx.stage.Stage;
 import no.hiof.set.gruppe.Exceptions.DataFormatException;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.data.DataHandler;
+import no.hiof.set.gruppe.model.User;
+import no.hiof.set.gruppe.model.UserConnectedArrangement;
+
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.ResourceBundle;
 
 /**
@@ -134,7 +139,7 @@ public class StartController extends Controller {
     }
 
     private void populateListView() {
-        arrangementListObservable = FXCollections.observableArrayList(DataHandler.getArrangementsData());
+        arrangementListObservable = FXCollections.observableArrayList(DataHandler.getUserArrangements(User.ORGANIZER));
         setupFilteredList();
         listview.refresh();
     }
@@ -147,7 +152,6 @@ public class StartController extends Controller {
 
     private void onClickListView(MouseEvent mouseEvent) {
         changedView();
-        System.out.println(currentArrangement);
         listview.refresh();
     }
 
@@ -173,6 +177,15 @@ public class StartController extends Controller {
         ((Stage)logOut.getScene().getWindow()).close();
         System.out.println(getMainController());
         createNewView(this);
+    }
+
+
+    private Collection<UserConnectedArrangement> genUConnArrangement() {
+        Collection<UserConnectedArrangement> result = new ArrayList<>();
+        for(Arrangement arr : arrangementListObservable){
+            result.add(new UserConnectedArrangement(arr.getID(), "Organizer"));
+        }
+        return result;
     }
 
     // --------------------------------------------------//
@@ -213,6 +226,7 @@ public class StartController extends Controller {
     @Override
     public void onCloseStoreInformation() {
         new DataHandler().storeArrangementsData(arrangementListObservable);
+        DataHandler.storeUserArrangements(genUConnArrangement());
     }
 
     @Override
@@ -225,8 +239,6 @@ public class StartController extends Controller {
     public void initialize(URL location, ResourceBundle resources) {
         setupActionHandlers();
         populateListView();
-        System.out.println(getMainController());
-
     }
 
 

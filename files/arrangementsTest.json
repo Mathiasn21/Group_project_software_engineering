@@ -1,20 +1,22 @@
 [
   {
-    "name": "Test Arrengement",
+    "ID": 4864684,
+    "name": "ertyhtr",
     "sport": "Annet",
-    "participants": 420,
-    "adress": "Oppibakken 15",
-    "gruppe": false,
+    "adress": "Hakkebakken 420",
     "startDate": "2019-10-02",
-    "endDate": "2019-10-04"
+    "endDate": "2019-10-04",
+    "participants": 69,
+    "group": true
   },
   {
-    "name": "Apple fun 2",
-    "sport": "Basketball",
-    "participants": 69,
-    "adress": "Hakkebakken 420",
-    "gruppe": false,
+    "ID": 4138446,
+    "name": "yikes",
+    "sport": "Annet",
+    "adress": "Oppibakken 15",
     "startDate": "2019-10-02",
-    "endDate": "2019-10-04"
+    "endDate": "2019-10-04",
+    "participants": 420,
+    "group": true
   }
 ]

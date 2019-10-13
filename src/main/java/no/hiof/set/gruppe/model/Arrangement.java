@@ -24,6 +24,7 @@ public class Arrangement {
     // --------------------------------------------------//
     //                2.Local Fields                     //
     // --------------------------------------------------//
+    private final int ID;
     private String name;
     private String sport;
     private String adress;
@@ -60,6 +61,7 @@ public class Arrangement {
         this.group = gruppe;
         this.startDate = startDate;
         this.endDate = endDate;
+        ID = hashCode();
     }
 
     // --------------------------------------------------//
@@ -83,6 +85,7 @@ public class Arrangement {
     public String getAdress() {
         return adress;
     }
+    public int getID(){return ID;}
 
     // --------------------------------------------------//
     //                4.Setters                          //
