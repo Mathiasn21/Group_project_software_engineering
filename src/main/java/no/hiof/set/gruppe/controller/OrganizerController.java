@@ -28,7 +28,6 @@ import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.data.DataHandler;
 import no.hiof.set.gruppe.model.User;
 import no.hiof.set.gruppe.model.UserConnectedArrangement;
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -36,7 +35,7 @@ import java.util.ResourceBundle;
 
 /**
  * This controller controls all functionality and logic pertaining
- * to the ArrangementView
+ * to the Organizer View
  * @author Gruppe4
  */
 public class OrganizerController extends Controller {
@@ -97,6 +96,7 @@ public class OrganizerController extends Controller {
     // --------------------------------------------------//
     //                5.Private Methods                  //
     // --------------------------------------------------//
+
     private void changedView(){
         Arrangement arrangement = listview.getSelectionModel().getSelectedItem();
         if(currentArrangement == null || !currentArrangement.equals(arrangement)){
@@ -160,9 +160,6 @@ public class OrganizerController extends Controller {
     }
 
     private String groupsOrIndividuals(Arrangement arrangement){
-        /*if(arrangement.isGroup())
-            return "Lagkonkurranse";
-        return "Individuell konkurranse";*/
         return arrangement.isGroup() ? "Lagkonkurranse" : "Individuell konkurranse";
     }
 
@@ -173,7 +170,6 @@ public class OrganizerController extends Controller {
         System.out.println(getMainController());
         createNewView(this);
     }
-
 
     private Collection<UserConnectedArrangement> genUConnArrangement() {
         Collection<UserConnectedArrangement> result = new ArrayList<>();
@@ -186,6 +182,7 @@ public class OrganizerController extends Controller {
     // --------------------------------------------------//
     //                6.Overridden Methods               //
     // --------------------------------------------------//
+
     //handles the title and name of current view. Here name is the local path
     @Override
     public String getTitle() {

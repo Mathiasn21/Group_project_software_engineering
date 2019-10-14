@@ -25,6 +25,7 @@ public class AdminController extends Controller {
     // --------------------------------------------------//
     //                2.Local Fields                     //
     // --------------------------------------------------//
+
     String name = "Login";
     String title = "Login";
 
@@ -42,6 +43,7 @@ public class AdminController extends Controller {
     // --------------------------------------------------//
     //                5.Private Methods                  //
     // --------------------------------------------------//
+
     private void returnToMainWindow(ActionEvent event) {
         title = "Logg inn";
         name = "Login.fxml";
@@ -52,6 +54,7 @@ public class AdminController extends Controller {
     // --------------------------------------------------//
     //                6.Overridden Methods               //
     // --------------------------------------------------//
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         logOut.setOnAction(this::returnToMainWindow);

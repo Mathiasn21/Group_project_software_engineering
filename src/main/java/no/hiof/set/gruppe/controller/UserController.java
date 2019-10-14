@@ -36,9 +36,7 @@ public class UserController extends Controller{
     //                2.Local Fields                     //
     // --------------------------------------------------//
 
-    private String title = "";
-    private String name = "";
-
+    private String title, name = "";
     private ObservableList<Arrangement> arrangementListObservableJoined, arrangementListObservableAvailable, arrangementListObservableFinished;
     private FilteredList<Arrangement> filteredList;
     private Arrangement currentSelectedArrangement = null;
@@ -84,7 +82,7 @@ public class UserController extends Controller{
         joinedArrangementsListView.refresh();
         availableArrangementsListView.refresh();
     }
-    
+
     // --------------------------------------------------//
     //                6.Overridden Methods               //
     // --------------------------------------------------//
