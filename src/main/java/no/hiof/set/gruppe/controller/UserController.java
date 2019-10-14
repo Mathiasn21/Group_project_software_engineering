@@ -84,6 +84,7 @@ public class UserController extends Controller{
         joinedArrangementsListView.refresh();
         availableArrangementsListView.refresh();
     }
+    
     // --------------------------------------------------//
     //                6.Overridden Methods               //
     // --------------------------------------------------//

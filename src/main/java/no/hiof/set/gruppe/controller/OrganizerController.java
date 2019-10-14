@@ -39,7 +39,7 @@ import java.util.ResourceBundle;
  * to the ArrangementView
  * @author Gruppe4
  */
-public class StartController extends Controller {
+public class OrganizerController extends Controller {
 
     // --------------------------------------------------//
     //                2.Local Fields                     //

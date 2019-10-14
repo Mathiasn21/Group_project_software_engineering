@@ -12,6 +12,7 @@ package no.hiof.set.gruppe.controller;
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -19,7 +20,6 @@ import javafx.stage.Stage;
 import no.hiof.set.gruppe.Exceptions.DataFormatException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
 
 public class AdminController extends Controller {
     // --------------------------------------------------//
