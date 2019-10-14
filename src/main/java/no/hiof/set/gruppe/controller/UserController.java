@@ -1,5 +1,18 @@
 package no.hiof.set.gruppe.controller;
 
+/*Guide
+ * 1. Import Statements
+ * 2. Local Fields
+ * 3. FXML Fields
+ * 4. On Action Methods
+ * 5. Private Methods
+ * 6. Overridden Methods
+ * */
+
+// --------------------------------------------------//
+//                1.Import Statements                //
+// --------------------------------------------------//
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -15,7 +28,6 @@ import no.hiof.set.gruppe.Exceptions.DataFormatException;
 import no.hiof.set.gruppe.data.DataHandler;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.User;
-
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -23,72 +35,43 @@ public class UserController extends Controller{
     // --------------------------------------------------//
     //                2.Local Fields                     //
     // --------------------------------------------------//
+
     private String title = "";
     private String name = "";
 
-
-    private ObservableList<Arrangement> arrangementListObservableJoined;
-    private ObservableList<Arrangement> arrangementListObservableAvailable;
-    private ObservableList<Arrangement> arrangementListObservableFinished;
+    private ObservableList<Arrangement> arrangementListObservableJoined, arrangementListObservableAvailable, arrangementListObservableFinished;
     private FilteredList<Arrangement> filteredList;
     private Arrangement currentSelectedArrangement = null;
 
     // --------------------------------------------------//
     //                3.FXML Fields                      //
     // --------------------------------------------------//
-    @FXML
-    private ListView<Arrangement> finishedArrangementsListView;
-    @FXML
-    private ListView<Arrangement> availableArrangementsListView;
-    @FXML
-    private ListView<Arrangement> joinedArrangementsListView;
 
     @FXML
-    private Text arrangementTitle;
+    private ListView<Arrangement> finishedArrangementsListView, availableArrangementsListView, joinedArrangementsListView;
     @FXML
-    private Text arrangementSport;
+    private Text arrangementTitle, arrangementSport,arrangementAddress,arrangementDate,arrangementParticipants,arrangementGroup;
     @FXML
-    private Text arrangementAddress;
+    private Button joinBtn, leaveBtn, logOut;
     @FXML
-    private Text arrangementDate;
+    private TextField availableSearch, joinedSearch;
     @FXML
-    private Text arrangementParticipants;
-    @FXML
-    private Text arrangementGroup;
-
-    @FXML
-    private Button joinBtn;
-    @FXML
-    private Button leaveBtn;
-    @FXML
-    private Button logOut;
-
-    @FXML
-    private TextField availableSearch;
-    @FXML
-    private TextField joinedSearch;
-
-    @FXML
-    private ComboBox<String> availableSortingOptions;
-    @FXML
-    private ComboBox<String> joinedSortingOptions;
+    private ComboBox<String> availableSortingOptions, joinedSortingOptions;
 
     // --------------------------------------------------//
     //                4.On Action Methods                //
     // --------------------------------------------------//
 
-
-
     // --------------------------------------------------//
-    //                2.Private Methods                  //
+    //                5.Private Methods                  //
     // --------------------------------------------------//
+
     private void returnToMainWindow(ActionEvent event) {
         title = "Logg inn";
         name = "Login.fxml";
         ((Stage)logOut.getScene().getWindow()).close();
         createNewView(this);
     }
-
 
     //Needs Rework
     private void populateListView() {
@@ -102,7 +85,7 @@ public class UserController extends Controller{
         availableArrangementsListView.refresh();
     }
     // --------------------------------------------------//
-    //                4.Overridden Methods               //
+    //                6.Overridden Methods               //
     // --------------------------------------------------//
 
     @Override

@@ -1,5 +1,18 @@
 package no.hiof.set.gruppe.controller;
 
+/*Guide
+ * 1. Import Statements
+ * 2. Local Fields
+ * 3. FXML Fields
+ * 4. On Action Methods
+ * 5. Private Methods
+ * 6. Overridden Methods
+ * */
+
+// --------------------------------------------------//
+//                1.Import Statements                //
+// --------------------------------------------------//
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -7,7 +20,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import no.hiof.set.gruppe.Exceptions.DataFormatException;
 import no.hiof.set.gruppe.model.User;
-
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -15,29 +27,27 @@ public class LoginController extends Controller {
     // --------------------------------------------------//
     //                2.Local Fields                     //
     // --------------------------------------------------//
+
     private String name = "";
     private String title = "";
-
 
     // --------------------------------------------------//
     //                3.FXML Fields                      //
     // --------------------------------------------------//
+
     @FXML
-    private Button logInn;
+    private Button logInn, adminLogin, arrangLogin, userLogin;
     @FXML
-    private Button adminLogin;
-    @FXML
-    private Button arrangLogin;
-    @FXML
-    private Button userLogin;
-    @FXML
-    private TextField uName;
-    @FXML
-    private TextField pass;
+    private TextField uName, pass;
 
     // --------------------------------------------------//
-    //                2.Private Methods                  //
+    //                4.On action Methods                //
     // --------------------------------------------------//
+
+    // --------------------------------------------------//
+    //                5.Private Methods                  //
+    // --------------------------------------------------//
+
     private int checkCredentials(String user){
         //should take an input that is a user enum
         //Test for valid and what the valid credentials are, eg admin, organizer or user
@@ -79,10 +89,10 @@ public class LoginController extends Controller {
         pass.setText(user.getPass());
     }
 
+    // --------------------------------------------------//
+    //                6.Overridden Methods               //
+    // --------------------------------------------------//
 
-    // --------------------------------------------------//
-    //                5.Overridden Methods               //
-    // --------------------------------------------------//
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Button[] credentialsBtns = {adminLogin, arrangLogin, userLogin};
@@ -90,7 +100,6 @@ public class LoginController extends Controller {
         
         logInn.setOnAction(this::login);
     }
-
 
     @Override
     public Object getDataObject() {
@@ -111,7 +120,6 @@ public class LoginController extends Controller {
     public String getName() {
         return name;
     }
-
 
     /*
     * Needs valid logic for input control

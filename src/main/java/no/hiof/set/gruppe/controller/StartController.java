@@ -9,7 +9,6 @@ package no.hiof.set.gruppe.controller;
  * 6. Overridden Methods
  * */
 
-
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
@@ -41,9 +40,11 @@ import java.util.ResourceBundle;
  * @author Gruppe4
  */
 public class StartController extends Controller {
+
     // --------------------------------------------------//
     //                2.Local Fields                     //
     // --------------------------------------------------//
+
     private String title = "";
     private String name = "NewAlterArrangement.fxml";
     private ObservableList<Arrangement>arrangementListObservable;
@@ -53,15 +54,9 @@ public class StartController extends Controller {
     // --------------------------------------------------//
     //                3.FXML Fields                      //
     // --------------------------------------------------//
-    @FXML
-    private Button newArrangementBtn;
-    @FXML
-    private Button editBtn;
-    @FXML
-    private Button deleteBtn;
-    @FXML
-    private Button logOut;
 
+    @FXML
+    private Button newArrangementBtn, editBtn, deleteBtn, logOut;
     @FXML
     private Text arrangementNameView, arrangementAdressView, arrangementDateView, arrangementParticipantsView, arrangementGorIView, arrangementSportView;
     @FXML
@@ -200,12 +195,10 @@ public class StartController extends Controller {
     public String getName() {
         return name;
     }
-
     @Override
     public Object getDataObject() {
         return listview.getSelectionModel().getSelectedItem();
     }
-
 
     /**
      * Handles data setup and interaction from other controllers.
@@ -240,6 +233,4 @@ public class StartController extends Controller {
         setupActionHandlers();
         populateListView();
     }
-
-
 }

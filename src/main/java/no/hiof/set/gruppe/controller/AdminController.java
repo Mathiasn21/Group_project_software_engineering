@@ -1,13 +1,13 @@
 package no.hiof.set.gruppe.controller;
 
-/*Guide Controllers
+/*Guide
  * 1. Import Statements
  * 2. Local Fields
  * 3. FXML Fields
- * 4. FXML Methods
- * 5. Overridden Methods
+ * 4. On Action Methods
+ * 5. Private Methods
+ * 6. Overridden Methods
  * */
-
 
 // --------------------------------------------------//
 //                1.Import Statements                //
@@ -28,11 +28,19 @@ public class AdminController extends Controller {
     String name = "Login";
     String title = "Login";
 
+    // --------------------------------------------------//
+    //                3.FXML Fields                      //
+    // --------------------------------------------------//
+
      @FXML
      private Button logOut;
 
     // --------------------------------------------------//
-    //                2.Private Methods                  //
+    //                4.On action Methods                //
+    // --------------------------------------------------//
+
+    // --------------------------------------------------//
+    //                5.Private Methods                  //
     // --------------------------------------------------//
     private void returnToMainWindow(ActionEvent event) {
         title = "Logg inn";
@@ -42,7 +50,7 @@ public class AdminController extends Controller {
     }
 
     // --------------------------------------------------//
-    //                5.Overridden Methods               //
+    //                6.Overridden Methods               //
     // --------------------------------------------------//
     @Override
     public void initialize(URL location, ResourceBundle resources) {
