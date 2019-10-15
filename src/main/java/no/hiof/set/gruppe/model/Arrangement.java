@@ -56,8 +56,8 @@ public class Arrangement {
         this.group = gruppe;
         this.startDate = startDate;
         this.endDate = endDate;
-        ID = hashCode();
         this.description = description;
+        ID = hashCode();
     }
 
     // --------------------------------------------------//
@@ -137,7 +137,7 @@ public class Arrangement {
 
     @Override
     public String toString(){
-        return name + " " + sport + " " + participants + " " + adress + " " + startDate + " til " + endDate;
+        return name + " " + sport + " " + participants + " " + adress + " " + startDate + " til " + endDate + " " + description;
     }
 }
 

@@ -12,10 +12,7 @@ package no.hiof.set.gruppe.controller;
 // --------------------------------------------------//
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.GroupCategory;
@@ -45,6 +42,8 @@ public class NewAlterArrangementController extends Controller{
     @FXML
     private TextField nameInput, participantsInput, adressInput;
     @FXML
+    private TextArea descriptionInput;
+    @FXML
     private DatePicker startDateInput, endDateInput;
     @FXML
     private ComboBox<GroupCategory> groupInput;
@@ -67,7 +66,7 @@ public class NewAlterArrangementController extends Controller{
         arrangementToEdit.setName(nameInput.getText());
         arrangementToEdit.setParticipants(Integer.parseInt(participantsInput.getText()));
         arrangementToEdit.setAdress(adressInput.getText());
-
+        arrangementToEdit.setDescription(descriptionInput.getText());
         arrangementToEdit.setGruppe(groupInput.getSelectionModel().getSelectedItem().isGroup);
         arrangementToEdit.setSport(sportComboBoxInput.getSelectionModel().getSelectedItem().toString());
         arrangementToEdit.setStartDate(startDateInput.getValue().toString());
@@ -127,6 +126,7 @@ public class NewAlterArrangementController extends Controller{
             participantsInput.setText(Integer.toString(arrangement.getParticipants()));
             startDateInput.setValue(arrangement.getStartDate());
             endDateInput.setValue(arrangement.getEndDate());
+            descriptionInput.setText(arrangement.getDescription());
         }
     }
 }

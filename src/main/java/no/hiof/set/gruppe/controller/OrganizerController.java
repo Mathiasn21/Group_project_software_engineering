@@ -57,7 +57,7 @@ public class OrganizerController extends Controller {
     @FXML
     private Button newArrangementBtn, editBtn, deleteBtn, logOut;
     @FXML
-    private Text arrangementNameView, arrangementAdressView, arrangementDateView, arrangementParticipantsView, arrangementGorIView, arrangementSportView, descriptionView;
+    private Text arrangementNameView, arrangementAdressView, arrangementDateView, arrangementParticipantsView, arrangementGorIView, arrangementSportView, arrangementDescriptionView;
     @FXML
     private TextField arrSearch;
     @FXML
@@ -157,6 +157,7 @@ public class OrganizerController extends Controller {
         arrangementDateView.setText(arrangement.getStartDate().toString() + " til " + arrangement.getEndDate().toString());
         arrangementParticipantsView.setText(Integer.toString(arrangement.getParticipants()));
         arrangementGorIView.setText(groupsOrIndividuals(arrangement));
+        arrangementDescriptionView.setText(arrangement.getDescription());
     }
 
     private String groupsOrIndividuals(Arrangement arrangement){
