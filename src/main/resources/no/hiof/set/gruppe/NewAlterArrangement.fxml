@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -10,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="441.0" maxWidth="186.0" minHeight="441.0" minWidth="186.0" prefHeight="441.0" prefWidth="186.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="no.hiof.set.gruppe.controller.NewAlterArrangementController">
+<AnchorPane maxHeight="523.0" maxWidth="481.0" minHeight="523.0" minWidth="481.0" prefHeight="523.0" prefWidth="481.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="no.hiof.set.gruppe.controller.NewAlterArrangementController">
    <children>
       <VBox layoutX="14.0" layoutY="14.0" prefHeight="388.0" prefWidth="175.0" spacing="5.0" AnchorPane.bottomAnchor="220.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="50.0">
          <children>
@@ -40,5 +41,7 @@
          <font>
             <Font size="24.0" />
          </font></Text>
+      <TextArea fx:id="descriptionInput" layoutX="218.0" layoutY="74.0" prefHeight="219.0" prefWidth="220.0" wrapText="true" />
+      <Text layoutX="217.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Beskrivelse" />
    </children>
 </AnchorPane>

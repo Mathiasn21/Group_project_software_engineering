@@ -57,7 +57,7 @@ public class OrganizerController extends Controller {
     @FXML
     private Button newArrangementBtn, editBtn, deleteBtn, logOut;
     @FXML
-    private Text arrangementNameView, arrangementAdressView, arrangementDateView, arrangementParticipantsView, arrangementGorIView, arrangementSportView;
+    private Text arrangementNameView, arrangementAdressView, arrangementDateView, arrangementParticipantsView, arrangementGorIView, arrangementSportView, descriptionView;
     @FXML
     private TextField arrSearch;
     @FXML
