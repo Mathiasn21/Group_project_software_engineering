@@ -4,7 +4,7 @@ public enum User implements ILoginValidation{
 
 
     ADMIN("Admin", "Password1", "Admin.fxml"),
-    USER("User", "Password2", "User.fxml"),
+    USER("User", "Password2", "User2.fxml"),
     ORGANIZER("Organizer", "Password3", "Organizer.fxml");
 
     String user;

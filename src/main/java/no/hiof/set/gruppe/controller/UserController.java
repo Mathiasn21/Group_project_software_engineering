@@ -17,6 +17,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -28,6 +29,8 @@ import no.hiof.set.gruppe.Exceptions.DataFormatException;
 import no.hiof.set.gruppe.data.DataHandler;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.User;
+
+import java.awt.event.MouseEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -46,7 +49,7 @@ public class UserController extends Controller{
     // --------------------------------------------------//
 
     @FXML
-    private ListView<Arrangement> finishedArrangementsListView, availableArrangementsListView, joinedArrangementsListView;
+    private ListView<Arrangement> finishedArrangementsListView, availableArrangementsListView = new ListView<>(), joinedArrangementsListView;
     @FXML
     private Text arrangementTitle, arrangementSport,arrangementAddress,arrangementDate,arrangementParticipants,arrangementGroup, arrangementDescription;
     @FXML
@@ -60,6 +63,18 @@ public class UserController extends Controller{
     //                4.On Action Methods                //
     // --------------------------------------------------//
 
+    @FXML
+    private void onJoinClick(ActionEvent actionEvent){
+        //Trenger logikk
+        System.out.println("meld på");
+    }
+
+    @FXML
+    private void onLeaveClick(ActionEvent actionEvent){
+        //Trenger logikk
+        System.out.println("meld av");
+    }
+
     // --------------------------------------------------//
     //                5.Private Methods                  //
     // --------------------------------------------------//
@@ -71,6 +86,21 @@ public class UserController extends Controller{
         createNewView(this);
     }
 
+    //Henter bare det samme som i OrganizerController, burde gjøres om så en enkelt bruker får sine egne arrangementer
+    private void populateAvailableArrangementListView(){
+
+        arrangementListObservableAvailable = FXCollections.observableArrayList(DataHandler.getUserArrangements(User.ORGANIZER));
+        setUpFilteredList();
+        availableArrangementsListView.refresh();
+    }
+
+    private void setUpFilteredList(){
+        filteredList = arrangementListObservableAvailable.filtered(arrangement -> true);
+        availableArrangementsListView.setItems(filteredList);
+    }
+    
+
+    /*
     //Needs Rework
     private void populateListView() {
         arrangementListObservableJoined = FXCollections.observableArrayList(DataHandler.getUserArrangements(User.USER));
@@ -82,6 +112,7 @@ public class UserController extends Controller{
         joinedArrangementsListView.refresh();
         availableArrangementsListView.refresh();
     }
+    */
 
     // --------------------------------------------------//
     //                6.Overridden Methods               //
@@ -90,7 +121,7 @@ public class UserController extends Controller{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         logOut.setOnAction(this::returnToMainWindow);
-        populateListView();
+        populateAvailableArrangementListView();
     }
 
     @Override
