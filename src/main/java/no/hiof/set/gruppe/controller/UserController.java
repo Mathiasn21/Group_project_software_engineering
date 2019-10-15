@@ -48,7 +48,7 @@ public class UserController extends Controller{
     @FXML
     private ListView<Arrangement> finishedArrangementsListView, availableArrangementsListView, joinedArrangementsListView;
     @FXML
-    private Text arrangementTitle, arrangementSport,arrangementAddress,arrangementDate,arrangementParticipants,arrangementGroup;
+    private Text arrangementTitle, arrangementSport,arrangementAddress,arrangementDate,arrangementParticipants,arrangementGroup, arrangementDescription;
     @FXML
     private Button joinBtn, leaveBtn, logOut;
     @FXML

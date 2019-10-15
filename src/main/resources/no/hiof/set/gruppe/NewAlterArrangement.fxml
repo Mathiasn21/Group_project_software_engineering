@@ -41,7 +41,7 @@
          <font>
             <Font size="24.0" />
          </font></Text>
-      <TextArea fx:id="descriptionInput" layoutX="218.0" layoutY="74.0" prefHeight="219.0" prefWidth="220.0" />
+      <TextArea fx:id="descriptionInput" layoutX="218.0" layoutY="74.0" prefHeight="219.0" prefWidth="220.0" wrapText="true" />
       <Text layoutX="217.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Beskrivelse" />
    </children>
 </AnchorPane>
