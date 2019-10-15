@@ -19,12 +19,12 @@
             <Font size="25.0" />
          </font>
       </Text>
-      <ListView fx:id="listview" layoutX="6.0" layoutY="89.0" prefHeight="323.0" prefWidth="341.0">
+      <ListView fx:id="listview" layoutX="6.0" layoutY="89.0" prefHeight="505.0" prefWidth="341.0">
          <opaqueInsets>
             <Insets top="5.0" />
          </opaqueInsets>
       </ListView>
-      <HBox layoutY="411.0" prefHeight="39.0" prefWidth="279.0" spacing="5.0">
+      <HBox layoutY="594.0" prefHeight="39.0" prefWidth="279.0" spacing="5.0">
          <children>
             <Button fx:id="newArrangementBtn" mnemonicParsing="false" text="Nytt arrangement" />
             <Button fx:id="editBtn" mnemonicParsing="false" text="Rediger" />
@@ -119,12 +119,12 @@
                </children>
             </HBox>
          </children></VBox>
-      <Text fx:id="arrangementNameView" layoutX="348.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="444.0">
+      <Text fx:id="arrangementNameView" layoutX="383.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="373.9999935030937">
          <font>
             <Font size="25.0" />
          </font>
       </Text>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="33.0" layoutX="383.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="374.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="33.0" layoutX="383.0" layoutY="44.0" stroke="BLACK" strokeType="INSIDE" width="374.0" />
       <TextField fx:id="arrSearch" layoutX="6.0" layoutY="61.0" prefHeight="25.0" prefWidth="100.0" />
       <Text layoutX="6.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Søk" />
       <ChoiceBox fx:id="sortOptions" layoutX="112.0" layoutY="61.0" prefHeight="25.0" prefWidth="100.0" />
