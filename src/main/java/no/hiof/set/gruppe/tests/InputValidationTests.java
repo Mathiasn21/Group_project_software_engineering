@@ -14,6 +14,13 @@ import java.time.LocalDate;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class InputValidationTests {
 
+
+    //Test registrering av bruker
+
+
+    //Test bruker påmeldelse
+
+
     /*
     @Test
     @Order(1)
