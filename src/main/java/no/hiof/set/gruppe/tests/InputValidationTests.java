@@ -27,8 +27,7 @@ public class InputValidationTests {
     @Test
     @Order(1)
     public void LegalInput() {
-        boolean test = InputValidation.arrangementInputValidation("pes","Annet","420","Hakkebakkeskogen", true, LocalDate.of(2019,10,10), LocalDate.of(2019,10,11));
-        System.out.println(test);
+        assertTrue(InputValidation.arrangementInputValidation("pes","Annet","420","Hakkebakkeskogen", true, LocalDate.of(2019,10,10), LocalDate.of(2019,10,11)));
     }
 
     @ParameterizedTest
