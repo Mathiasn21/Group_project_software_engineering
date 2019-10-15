@@ -1,22 +1,24 @@
 [
   {
-    "ID": -1244313242,
-    "name": "Børres langrenn",
-    "sport": "Skirenn",
-    "adress": "Walkersgate 8",
-    "startDate": "2019-10-11",
-    "endDate": "2019-10-12",
-    "participants": 40,
-    "group": false
+    "ID": 4864684,
+    "name": "ertyhtr",
+    "sport": "Annet",
+    "adress": "Hakkebakken 420",
+    "startDate": "2019-10-02",
+    "endDate": "2019-10-04",
+    "description": "",
+    "participants": 69,
+    "group": true
   },
   {
-    "ID": 1371470065,
-    "name": "Oskars diverse",
+    "ID": 4138446,
+    "name": "yikes",
     "sport": "Annet",
-    "adress": "Hakkebakkeskogen 73",
-    "startDate": "2019-11-11",
-    "endDate": "2019-11-12",
-    "participants": 72,
-    "group": false
+    "adress": "Oppibakken 15",
+    "startDate": "2019-10-02",
+    "endDate": "2019-10-04",
+    "description": "",
+    "participants": 420,
+    "group": true
   }
 ]

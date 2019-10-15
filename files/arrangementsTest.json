@@ -6,6 +6,7 @@
     "adress": "Hakkebakken 420",
     "startDate": "2019-10-02",
     "endDate": "2019-10-04",
+    "description": "",
     "participants": 69,
     "group": true
   },
@@ -16,6 +17,7 @@
     "adress": "Oppibakken 15",
     "startDate": "2019-10-02",
     "endDate": "2019-10-04",
+    "description": "",
     "participants": 420,
     "group": true
   }

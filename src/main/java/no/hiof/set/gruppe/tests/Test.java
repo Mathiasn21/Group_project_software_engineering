@@ -7,5 +7,5 @@ public class Test {
     //Test arrangør kan endre og redigere arrangement
     //Test arranglr kan opprette nytt
     //Test arrangør kan slette
-    //
+    //Test
 }
