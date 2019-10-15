@@ -80,7 +80,7 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <Button fx:id="logOut" layoutX="931.0" layoutY="429.0" mnemonicParsing="false" text="Logg Ut" />
+      <Button fx:id="logOut" layoutX="931.0" layoutY="429.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="63.0" text="Logg Ut" />
       <Text layoutX="781.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mine Arrangementer" textAlignment="CENTER" wrappingWidth="138.00001001358032">
          <font>
             <Font size="13.0" />
