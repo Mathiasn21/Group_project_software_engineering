@@ -44,6 +44,7 @@ public class LoginController extends Controller {
     //                4.On action Methods                //
     // --------------------------------------------------//
 
+
     // --------------------------------------------------//
     //                5.Private Methods                  //
     // --------------------------------------------------//
@@ -120,6 +121,8 @@ public class LoginController extends Controller {
     public String getName() {
         return name;
     }
+
+
 
     /*
     * Needs valid logic for input control

@@ -16,6 +16,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
@@ -102,7 +103,7 @@ public class OrganizerController extends Controller {
         if(currentArrangement == null || !currentArrangement.equals(arrangement)){
             currentArrangement = arrangement;
         }
-        setInformationAboutArrangementInView(currentArrangement);
+        setInformationAboutArrangementInView();
         listview.refresh();
     }
 
@@ -150,14 +151,14 @@ public class OrganizerController extends Controller {
         listview.refresh();
     }
 
-    private void setInformationAboutArrangementInView(Arrangement arrangement){
-        arrangementNameView.setText(arrangement.getName());
-        arrangementSportView.setText(arrangement.getSport());
-        arrangementAdressView.setText(arrangement.getAdress());
-        arrangementDateView.setText(arrangement.getStartDate().toString() + " til " + arrangement.getEndDate().toString());
-        arrangementParticipantsView.setText(Integer.toString(arrangement.getParticipants()));
-        arrangementGorIView.setText(groupsOrIndividuals(arrangement));
-        arrangementDescriptionView.setText(arrangement.getDescription());
+    private void setInformationAboutArrangementInView(){
+        arrangementNameView.setText(currentArrangement.getName());
+        arrangementSportView.setText(currentArrangement.getSport());
+        arrangementAdressView.setText(currentArrangement.getAdress());
+        arrangementDateView.setText(currentArrangement.getStartDate().toString() + " til " + currentArrangement.getEndDate().toString());
+        arrangementParticipantsView.setText(Integer.toString(currentArrangement.getParticipants()));
+        arrangementGorIView.setText(groupsOrIndividuals(currentArrangement));
+        arrangementDescriptionView.setText(currentArrangement.getDescription());
     }
 
     private String groupsOrIndividuals(Arrangement arrangement){

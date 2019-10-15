@@ -63,13 +63,11 @@ public class UserController extends Controller{
     //                4.On Action Methods                //
     // --------------------------------------------------//
 
-    @FXML
     private void onJoinClick(ActionEvent actionEvent){
         //Trenger logikk
         System.out.println("meld på");
     }
 
-    @FXML
     private void onLeaveClick(ActionEvent actionEvent){
         //Trenger logikk
         System.out.println("meld av");
@@ -84,6 +82,11 @@ public class UserController extends Controller{
         name = "Login.fxml";
         ((Stage)logOut.getScene().getWindow()).close();
         createNewView(this);
+    }
+
+    private void setupActionHandlers(){
+        joinBtn.setOnAction(this::onJoinClick);
+        leaveBtn.setOnAction(this::onLeaveClick);
     }
 
     //Henter bare det samme som i OrganizerController, burde gjøres om så en enkelt bruker får sine egne arrangementer
@@ -122,6 +125,7 @@ public class UserController extends Controller{
     public void initialize(URL location, ResourceBundle resources) {
         logOut.setOnAction(this::returnToMainWindow);
         populateAvailableArrangementListView();
+        setupActionHandlers();
     }
 
     @Override
