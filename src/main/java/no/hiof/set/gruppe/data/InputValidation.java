@@ -24,7 +24,14 @@ public class InputValidation implements IInputValidation{
      * @param endDate
      * @return True if input is valid. False if input is not valid.
      */
-    public static boolean arrangementInputValidation(String name, String sport, String participants, String adress, boolean gruppe, LocalDate startDate, LocalDate endDate) {
+
+    private static final String textNotNullPattern = "[\\00]";
+    private static final String numberPattern = "[^0-9]";
+
+    public static boolean arrangementInputValidation(String name, String sport, String participants, String adress, LocalDate startDate, LocalDate endDate) {
+
+        String mainResult = "";
+
         /*
         * This whole class can be truncated, where the reg patterns are put onto the top the application.
         * A method could be used to test for the actual string, given pattern.
@@ -35,47 +42,89 @@ public class InputValidation implements IInputValidation{
         *
         * */
 
-
-        int validations = 0;
-
-
         //[\p{L}\p{Nd}\p{Zs}\p{Po}]+ Converted to double negation as to save some cpu cycles and therefore less strain
         //on the overall memory
-        if(!Pattern.matches("\\00", name) && name.length() < 50 && name.length() > 2)
-            validations++;
+
+        mainResult += nameValidation(name) + "\n";
+        mainResult += sportValidation(sport) + "\n";
+        mainResult += participantsValidation(participants) + "\n";
+        mainResult += adressValidation(adress) + "\n";
+        mainResult += dateValidation(startDate, endDate) + "\n";
+
+        if(mainResult == ""){
+            return true;
+        }
+
+        return false;
+    }
+
+    private static String nameValidation(String name) {
+
+        String result = "";
+
+        if (!Pattern.matches (textNotNullPattern, name) && name.length() < 50 && name.length() > 2)
+            result = "";
         else
-            System.out.println("Sett inn et gyldig navn");
+            result = "Sett inn et gyldig navn";
+
+        return result;
+    }
+
+    private static String sportValidation(String sport){
+
+        String result = "";
 
         if(sport != null)
-            validations++;
+            result = "";
         else
-            System.out.println("Velg en idrett!");
+            result = "Velg en idrett!";
 
-        if(Pattern.matches("[0-9 ]+", participants)){
+        return result;
+    }
+
+    private static String participantsValidation(String participants){
+
+        String result = "";
+
+        if(Pattern.matches(numberPattern, participants)){
+
             int participantsInt = Integer.parseInt(participants);
-            if(participantsInt < 1000000 && participantsInt >= 0)
-                validations++;
+
+            if(participantsInt < 1000000 && participantsInt >= 0){
+                result = "";
+            }
             else
-                System.out.println("Et arrangement må ha 0 eller flere deltakere!");
+                result = "Et arrangement må ha 0 eller flere deltakere";
         }
         else
-            System.out.println("Deltakere må være et nummmer!");
+            result = "Antall deltakere må være et tall";
 
-        if(Pattern.matches("[A-Za-z0-9. ]+", adress) && adress.length() < 100)
-            validations++;
+        return result;
+    }
+
+    private static String adressValidation(String adress){
+
+        String result = "";
+
+        if(Pattern.matches(textNotNullPattern, adress) && adress.length() < 100)
+            result = "";
         else
-            System.out.println("Sett inn gydlig adresse!");
+            result = "Sett inn en gydlig adresse";
+
+        return result;
+    }
+
+    private static String dateValidation(LocalDate startDate, LocalDate endDate){
+
+        String result = "";
 
         if(startDate.isBefore(endDate) || startDate.isEqual(endDate))
-            validations++;
-        else
-            System.out.println("Sett inn gydlig dato");
+            result = "";
 
-        if(validations == 5) {
-            return true;
-        } else {
-            return false;
-        }
+        else
+            result = "Sett inn gyldige datoer";
+
+        return result;
     }
 
     @Override
