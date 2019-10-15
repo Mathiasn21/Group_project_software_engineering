@@ -36,7 +36,7 @@ public class Arrangement {
         this("", "", 0, "", false);
     }
     public Arrangement(String name, String sport, int participants, String adress, boolean gruppe){
-        this(name, sport, participants, adress, gruppe, null, null);
+        this(name, sport, participants, adress, gruppe, null, null, "");
     }
 
     /**
@@ -48,7 +48,7 @@ public class Arrangement {
      * @param startDate String
      * @param endDate String
      */
-    public Arrangement(String name, String sport, int participants, String adress, boolean gruppe, String startDate, String endDate) {
+    public Arrangement(String name, String sport, int participants, String adress, boolean gruppe, String startDate, String endDate, String description) {
         this.name = name;
         this.sport = sport;
         this.participants = participants;
@@ -57,6 +57,7 @@ public class Arrangement {
         this.startDate = startDate;
         this.endDate = endDate;
         ID = hashCode();
+        this.description = description;
     }
 
     // --------------------------------------------------//
@@ -81,6 +82,7 @@ public class Arrangement {
         return adress;
     }
     public int getID(){return ID;}
+    public String getDescription() {return description;}
 
     // --------------------------------------------------//
     //                4.Setters                          //
@@ -100,6 +102,7 @@ public class Arrangement {
     }
     public void setStartDate(String startDate) {this.startDate = startDate;}
     public void setEndDate(String endDate) {this.endDate = endDate;}
+    public void setDescription(String description) {this.description = description;}
 
 
     // --------------------------------------------------//
