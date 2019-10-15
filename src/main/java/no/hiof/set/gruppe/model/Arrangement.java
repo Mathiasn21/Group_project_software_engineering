@@ -25,15 +25,9 @@ public class Arrangement {
     //                2.Local Fields                     //
     // --------------------------------------------------//
     private final int ID;
-    private String name;
-    private String sport;
-    private String adress;
-    private String startDate;
-    private String endDate;
-
+    private String name, sport, adress, startDate, endDate, description;
     private int participants;
     private boolean group;
-
 
     // --------------------------------------------------//
     //                2.Constructors                     //
@@ -44,6 +38,7 @@ public class Arrangement {
     public Arrangement(String name, String sport, int participants, String adress, boolean gruppe){
         this(name, sport, participants, adress, gruppe, null, null);
     }
+
     /**
      * @param name String
      * @param sport String

@@ -89,7 +89,6 @@ public class InputValidation implements IInputValidation{
         if(Pattern.matches(numberPattern, participants)){
 
             int participantsInt = Integer.parseInt(participants);
-            result = "";
 
             if(participantsInt < 1000000 && participantsInt >= 0){
                 result = "";
@@ -97,6 +96,8 @@ public class InputValidation implements IInputValidation{
             else
                 result = "Et arrangement må ha 0 eller flere deltakere";
         }
+        else
+            result = "Antall deltakere må være et tall";
 
         return result;
     }
