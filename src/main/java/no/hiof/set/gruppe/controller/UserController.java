@@ -98,7 +98,7 @@ public class UserController extends Controller{
         filteredList = arrangementListObservableAvailable.filtered(arrangement -> true);
         availableArrangementsListView.setItems(filteredList);
     }
-    
+
 
     /*
     //Needs Rework

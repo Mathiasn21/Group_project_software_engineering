@@ -14,6 +14,7 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import no.hiof.set.gruppe.data.InputValidation;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.GroupCategory;
 import no.hiof.set.gruppe.model.SportCategory;
@@ -63,17 +64,26 @@ public class NewAlterArrangementController extends Controller{
             arrangementToEdit = new Arrangement();
             createdNewObject = true;
         }
-        arrangementToEdit.setName(nameInput.getText());
-        arrangementToEdit.setParticipants(Integer.parseInt(participantsInput.getText()));
-        arrangementToEdit.setAdress(adressInput.getText());
-        arrangementToEdit.setDescription(descriptionInput.getText());
-        arrangementToEdit.setGruppe(groupInput.getSelectionModel().getSelectedItem().isGroup);
-        arrangementToEdit.setSport(sportComboBoxInput.getSelectionModel().getSelectedItem().toString());
-        arrangementToEdit.setStartDate(startDateInput.getValue().toString());
-        arrangementToEdit.setEndDate(endDateInput.getValue().toString());
 
-        System.out.println("saving arrangement: " + arrangementToEdit);
-        ((Stage)saveBtn.getScene().getWindow()).close();
+        if(InputValidation.arrangementInputValidation(  nameInput.getText(),
+                                                        sportComboBoxInput.getSelectionModel().getSelectedItem().toString(),
+                                                        participantsInput.getText(),
+                                                        adressInput.getText(),
+                                                        startDateInput.getValue(),
+                                                        endDateInput.getValue()))
+        {
+            arrangementToEdit.setName(nameInput.getText());
+            arrangementToEdit.setParticipants(Integer.parseInt(participantsInput.getText()));
+            arrangementToEdit.setAdress(adressInput.getText());
+            arrangementToEdit.setDescription(descriptionInput.getText());
+            arrangementToEdit.setGruppe(groupInput.getSelectionModel().getSelectedItem().isGroup);
+            arrangementToEdit.setSport(sportComboBoxInput.getSelectionModel().getSelectedItem().toString());
+            arrangementToEdit.setStartDate(startDateInput.getValue().toString());
+            arrangementToEdit.setEndDate(endDateInput.getValue().toString());
+
+            System.out.println("saving arrangement: " + arrangementToEdit);
+            ((Stage)saveBtn.getScene().getWindow()).close();
+        }
     }
 
     @FXML

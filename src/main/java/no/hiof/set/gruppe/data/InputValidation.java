@@ -26,11 +26,9 @@ public class InputValidation implements IInputValidation{
      */
 
     private static final String textNotNullPattern = "[\\00]";
-    private static final String numberPattern = "[^0-9]";
+    private static final String numberPattern = "[0-9]+";
 
     public static boolean arrangementInputValidation(String name, String sport, String participants, String adress, LocalDate startDate, LocalDate endDate) {
-
-        String mainResult = "";
 
         /*
         * This whole class can be truncated, where the reg patterns are put onto the top the application.
@@ -45,16 +43,20 @@ public class InputValidation implements IInputValidation{
         //[\p{L}\p{Nd}\p{Zs}\p{Po}]+ Converted to double negation as to save some cpu cycles and therefore less strain
         //on the overall memory
 
-        mainResult += nameValidation(name) + "\n";
-        mainResult += sportValidation(sport) + "\n";
-        mainResult += participantsValidation(participants) + "\n";
-        mainResult += adressValidation(adress) + "\n";
-        mainResult += dateValidation(startDate, endDate) + "\n";
+        StringBuilder str = new StringBuilder();
 
-        if(mainResult == ""){
+        str.append(nameValidation(name));
+        str.append(sportValidation(sport));
+        str.append(participantsValidation(participants));
+        str.append(adressValidation(adress));
+        str.append(dateValidation(startDate, endDate));
+        
+        if(str.length() == 0){
             return true;
         }
 
+        //Burde bli displayet i en alertboks til brukeren
+        System.out.println(str);
         return false;
     }
 
@@ -62,14 +64,13 @@ public class InputValidation implements IInputValidation{
 
         String result = "";
 
-        if (!Pattern.matches (textNotNullPattern, name) && name.length() < 50 && name.length() > 2)
+        if (!Pattern.matches (textNotNullPattern, name) && lengthCheck(name))
             result = "";
         else
-            result = "Sett inn et gyldig navn";
+            result = "Sett inn et gyldig navn" + "\n";
 
         return result;
     }
-
 
     private static String sportValidation(String sport){
         String result = "";
@@ -77,7 +78,7 @@ public class InputValidation implements IInputValidation{
         if(sport != null)
             result = "";
         else
-            result = "Velg en idrett!";
+            result = "Velg en idrett" + "\n";
 
         return result;
     }
@@ -90,14 +91,12 @@ public class InputValidation implements IInputValidation{
 
             int participantsInt = Integer.parseInt(participants);
 
-            if(participantsInt < 1000000 && participantsInt >= 0){
+            if(participantsInt < 100000 && participantsInt >= 0){
                 result = "";
             }
-            else
-                result = "Et arrangement må ha 0 eller flere deltakere";
         }
         else
-            result = "Antall deltakere må være et tall";
+            result = "Sett inn et gyldig antall deltakere" + "\n";
 
         return result;
     }
@@ -106,10 +105,10 @@ public class InputValidation implements IInputValidation{
 
         String result = "";
 
-        if(Pattern.matches(textNotNullPattern, adress) && adress.length() < 100)
+        if(!Pattern.matches(textNotNullPattern, adress) && lengthCheck(adress))
             result = "";
         else
-            result = "Sett inn en gydlig adresse";
+            result = "Sett inn en gydlig adresse" + "\n";
 
         return result;
     }
@@ -122,9 +121,15 @@ public class InputValidation implements IInputValidation{
             result = "";
 
         else
-            result = "Sett inn gyldige datoer";
+            result = "Sett inn gyldige datoer" + "\n";
 
         return result;
+    }
+
+    private static boolean lengthCheck(String str){
+        if(str.length() < 50 && str.length() >= 2)
+            return true;
+        return false;
     }
 
     @Override
