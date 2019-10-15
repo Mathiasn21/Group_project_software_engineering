@@ -15,10 +15,8 @@ import java.time.LocalDate;
 public class InputValidationTests {
 
 
-    //Test registrering av bruker
-
-
     //Test bruker påmeldelse
+    //Test
 
 
     //Test

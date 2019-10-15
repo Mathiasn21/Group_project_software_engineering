@@ -6,7 +6,19 @@
     "adress": "Hakkebakken 420",
     "startDate": "2019-10-02",
     "endDate": "2019-10-04",
+    "description": "",
     "participants": 69,
+    "group": true
+  },
+  {
+    "ID": 1742811572,
+    "name": "dwadaw",
+    "sport": "Annet",
+    "adress": "dwadwa",
+    "startDate": "2019-10-01",
+    "endDate": "2019-10-24",
+    "description": "",
+    "participants": 22,
     "group": true
   }
 ]

@@ -70,8 +70,8 @@ public class InputValidation implements IInputValidation{
         return result;
     }
 
-    private static String sportValidation(String sport){
 
+    private static String sportValidation(String sport){
         String result = "";
 
         if(sport != null)
