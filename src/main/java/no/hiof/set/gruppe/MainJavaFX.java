@@ -53,7 +53,7 @@ public class MainJavaFX extends Application implements SetupWindow {
         controller.setMainController(this);
 
         stage.setOnHidden((Event)-> controller.onCloseStoreInformation());
-        Scene scene = new Scene(editLayout, 800, 450);
+        Scene scene = new Scene(editLayout);
         stage.setScene(scene);
         stage.setResizable(false);
         stage.setTitle("Logg inn");
@@ -80,7 +80,7 @@ public class MainJavaFX extends Application implements SetupWindow {
         IController finalController = controller;
         stage.setOnHidden((Event)-> finalController.onCloseStoreInformation());
 
-        Scene editScene = new Scene(editLayout, 800, 600);
+        Scene editScene = new Scene(editLayout);
         stage.setScene(editScene);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initOwner(this.stage);
@@ -125,7 +125,7 @@ public class MainJavaFX extends Application implements SetupWindow {
                 finalController.onCloseStoreInformation();
             });
 
-            Scene editScene = new Scene(editLayout, 400, 500);
+            Scene editScene = new Scene(editLayout);
             stage.setScene(editScene);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initOwner(this.stage);
