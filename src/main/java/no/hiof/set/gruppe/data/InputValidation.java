@@ -25,7 +25,7 @@ public class InputValidation implements IInputValidation{
      * @return True if input is valid. False if input is not valid.
      */
 
-    private static final String textNotNullPattern = "[\\00]";
+    private static final String textNotNullPattern = "(?!^ +$)^.+$";
     private static final String numberPattern = "[0-9]+";
 
     public static boolean arrangementInputValidation(String name, String sport, String participants, String adress, LocalDate startDate, LocalDate endDate) {
@@ -64,7 +64,7 @@ public class InputValidation implements IInputValidation{
 
         String result = "";
 
-        if (!Pattern.matches (textNotNullPattern, name) && lengthCheck(name))
+        if (Pattern.matches (textNotNullPattern, name) && lengthCheck(name))
             result = "";
         else
             result = "Sett inn et gyldig navn" + "\n";
@@ -105,7 +105,7 @@ public class InputValidation implements IInputValidation{
 
         String result = "";
 
-        if(!Pattern.matches(textNotNullPattern, adress) && lengthCheck(adress))
+        if(Pattern.matches(textNotNullPattern, adress) && lengthCheck(adress))
             result = "";
         else
             result = "Sett inn en gydlig adresse" + "\n";
