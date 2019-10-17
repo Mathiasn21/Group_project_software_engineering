@@ -12,24 +12,13 @@
   },
   {
     "ID": 1742811572,
-    "name": "ï¿½ï¿½ï¿½",
+    "name": "æææ",
     "sport": "Annet",
     "adress": "fghj",
     "startDate": "2019-10-24",
     "endDate": "2019-10-31",
     "description": "ghjhkhgk fdgjkhdfg djkfghkjds gdfkjgh dfkghdfkjgh kjdhfg kjhdkjdfkjgh kdjfhg kjdfhgkjdf hgkdjfghdfkjghdffkjghdkjfghjkdh hdfkjghkdjfgh hkj",
     "participants": 0,
-    "group": false
-  },
-  {
-    "ID": 1742811572,
-    "name": "BÃ¸rres Langrenn",
-    "sport": "Skirenn",
-    "adress": "Hakkebakkeveien 53",
-    "startDate": "2019-10-17",
-    "endDate": "2019-10-25",
-    "description": "Vi skal vel kanskje stÃ¥ litt pÃ¥ ski da. Tiden fÃ¥r vise",
-    "participants": 3,
     "group": false
   }
 ]

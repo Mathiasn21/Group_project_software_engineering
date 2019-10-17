@@ -23,18 +23,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import no.hiof.set.gruppe.Exceptions.DataFormatException;
 import no.hiof.set.gruppe.data.DataHandler;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.User;
-import no.hiof.set.gruppe.model.UserConnectedArrangement;
 
+import java.awt.event.MouseEvent;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.ResourceBundle;
 
 public class UserController extends Controller{
@@ -82,16 +79,6 @@ public class UserController extends Controller{
         arrangementListObservableJoined.remove(myArrangementsListView.getSelectionModel().getSelectedItem());
     }
 
-    public void myArrangementListClicked(MouseEvent mouseEvent) {
-        if(myArrangementsListView.getSelectionModel().getSelectedItem() != null)
-            populateArrangementDisplay(myArrangementsListView.getSelectionModel().getSelectedItem());
-    }
-
-    public void availableArrangementListClicked(MouseEvent mouseEvent) {
-        if(availableArrangementsListView.getSelectionModel().getSelectedItem() != null)
-            populateArrangementDisplay(availableArrangementsListView.getSelectionModel().getSelectedItem());
-    }
-
     // --------------------------------------------------//
     //                5.Private Methods                  //
     // --------------------------------------------------//
@@ -122,7 +109,7 @@ public class UserController extends Controller{
     }
 
     private void populateJoinedArrangementListView() {
-        arrangementListObservableJoined = FXCollections.observableArrayList(DataHandler.getUserArrangements(User.USER));
+        arrangementListObservableJoined = FXCollections.observableArrayList();
         setUpFilteredListJoined();
         myArrangementsListView.refresh();
     }
@@ -130,24 +117,6 @@ public class UserController extends Controller{
     private void setUpFilteredListJoined() {
         joinedFilteredList = arrangementListObservableJoined.filtered(arrangement -> true);
         myArrangementsListView.setItems(joinedFilteredList);
-    }
-
-    private void populateArrangementDisplay(Arrangement displayArrangement) {
-        arrangementTitle.setText(displayArrangement.getName());
-        arrangementSport.setText(displayArrangement.getSport());
-        arrangementAddress.setText(displayArrangement.getAdress());
-        arrangementDate.setText(displayArrangement.getStartDate() + " - " + displayArrangement.getEndDate());
-        arrangementParticipants.setText(Integer.toString(displayArrangement.getParticipants()));
-        arrangementGroup.setText("");
-        arrangementDescription.setText(displayArrangement.getDescription());
-    }
-
-    private Collection<UserConnectedArrangement> genUConnArrangement() {
-        Collection<UserConnectedArrangement> result = new ArrayList<>();
-        for(Arrangement arr : arrangementListObservableJoined){
-            result.add(new UserConnectedArrangement(arr.getID(), User.USER.getName()));
-        }
-        return result;
     }
 
 
@@ -195,11 +164,5 @@ public class UserController extends Controller{
     @Override
     public String getName() {
         return name;
-    }
-
-    @Override
-    public void onCloseStoreInformation() {
-        // Går for øyeblikket bare ann å legge til. Burde endre dette til å oppdatere istedenfor
-        DataHandler.updateUserArrangements(genUConnArrangement(), User.USER);
     }
 }

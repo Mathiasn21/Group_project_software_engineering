@@ -12,7 +12,7 @@
 
 <AnchorPane maxHeight="590.0" maxWidth="1000.0" minHeight="450.0" minWidth="1000.0" prefHeight="590.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="no.hiof.set.gruppe.controller.UserController">
    <children>
-      <ListView fx:id="availableArrangementsListView" layoutX="47.0" layoutY="122.0" prefHeight="288.0" prefWidth="232.0" onMouseClicked="#availableArrangementListClicked"/>
+      <ListView fx:id="availableArrangementsListView" layoutX="47.0" layoutY="122.0" prefHeight="288.0" prefWidth="232.0" />
       <Text layoutX="75.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tilgjengelige arrangementer" textAlignment="CENTER" wrappingWidth="175.00001001358032">
          <font>
             <Font size="13.0" />
@@ -86,10 +86,10 @@
             <Font size="13.0" />
          </font>
       </Text>
-      <ListView fx:id="myArrangementsListView" layoutX="728.0" layoutY="122.0" prefHeight="288.0" prefWidth="232.0" onMouseClicked="#myArrangementListClicked"/>
+      <ListView fx:id="myArrangementsListView" layoutX="728.0" layoutY="122.0" prefHeight="288.0" prefWidth="232.0" />
       <TextField fx:id="searchMy" layoutX="728.0" layoutY="87.0" prefHeight="25.0" prefWidth="96.0" />
       <Text layoutX="728.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Søk" wrappingWidth="32.09179639816284" />
-      <ComboBox fx:id="availableSortingOptionsMy" layoutX="864.0" layoutY="86.0" prefHeight="25.0" prefWidth="96.0"/>
+      <ComboBox fx:id="availableSortingOptionsMy" layoutX="864.0" layoutY="86.0" prefHeight="25.0" prefWidth="96.0" />
       <Text layoutX="864.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sorter" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="25.0" layoutX="744.0" layoutY="25.0" stroke="BLACK" strokeType="INSIDE" width="202.0" />
       <Text layoutX="465.0" layoutY="447.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Beskrivelse" underline="true">

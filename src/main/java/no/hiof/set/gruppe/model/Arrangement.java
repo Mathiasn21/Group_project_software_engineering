@@ -132,7 +132,6 @@ public class Arrangement {
 
     @Override
     public int hashCode() {
-        // TODO Fikse denne. Den greier ikke å ta i mot verdiene, og vil derfor alltid gi samme hash
         return Objects.hash(name, sport, adress, startDate, endDate, participants, group);
     }
 

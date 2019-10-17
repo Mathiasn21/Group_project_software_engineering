@@ -10,9 +10,4 @@ public class UserConnectedArrangement {
 
     public int getID() { return ID; }
     public String getUSERNAME() { return USERNAME; }
-
-    //@Override
-    public boolean equals(UserConnectedArrangement obj) {
-        return (ID == obj.getID() && USERNAME.equals(obj.getUSERNAME()));
-    }
 }

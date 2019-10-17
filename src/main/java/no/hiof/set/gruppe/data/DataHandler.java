@@ -144,33 +144,6 @@ public class DataHandler implements IDataHandler {
         writeToFile(toJson(UserConnectedArrangement[].class,  colletionOfData.toArray(UserConnectedArrangement[]::new)), userHasArrangements);
     }
 
-    public static void updateUserArrangements(Collection<UserConnectedArrangement> collectionOfData, User user) {
-        String jsonFromFile = readFromFile(userHasArrangements);
-        ArrayList<UserConnectedArrangement> userArrangementColl = new ArrayList<>(listFromJson(UserConnectedArrangement[].class, jsonFromFile));
-        Collection<UserConnectedArrangement> result = new ArrayList<>(userArrangementColl);
-
-        int orgSize = userArrangementColl.size();
-
-        System.out.println(collectionOfData);
-
-        for(UserConnectedArrangement newArrangements : collectionOfData) {
-            for(int i = 0; i <= userArrangementColl.size(); i++) {
-                if(i == userArrangementColl.size()) {
-                    result.add(newArrangements);
-                    break;
-                }
-
-                if(newArrangements.equals(userArrangementColl.get(i))) {
-                    break;
-                }
-            }
-        }
-
-
-        if(result.size() != orgSize)
-            storeUserArrangements(result);
-    }
-
     /**
      * Converts a given collection into json given a template,
      * and the stores that string to a file.
