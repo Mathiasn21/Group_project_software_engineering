@@ -41,7 +41,7 @@ public class UserController extends Controller{
 
     private String title, name = "";
     private ObservableList<Arrangement> arrangementListObservableJoined, arrangementListObservableAvailable, arrangementListObservableFinished;
-    private FilteredList<Arrangement> filteredList;
+    private FilteredList<Arrangement> filteredList, joinedFilteredList;
     private Arrangement currentSelectedArrangement = null;
 
     // --------------------------------------------------//
@@ -49,7 +49,7 @@ public class UserController extends Controller{
     // --------------------------------------------------//
 
     @FXML
-    private ListView<Arrangement> finishedArrangementsListView, availableArrangementsListView = new ListView<>(), joinedArrangementsListView;
+    private ListView<Arrangement> finishedArrangementsListView, availableArrangementsListView = new ListView<>(), joinedArrangementsListView, myArrangementsListView = new ListView<>();
     @FXML
     private Text arrangementTitle, arrangementSport,arrangementAddress,arrangementDate,arrangementParticipants,arrangementGroup, arrangementDescription;
     @FXML
@@ -66,11 +66,17 @@ public class UserController extends Controller{
     private void onJoinClick(ActionEvent actionEvent){
         //Trenger logikk
         System.out.println("meld på");
+
+        arrangementListObservableJoined.add(availableArrangementsListView.getSelectionModel().getSelectedItem());
+        arrangementListObservableAvailable.remove(availableArrangementsListView.getSelectionModel().getSelectedItem());
     }
 
     private void onLeaveClick(ActionEvent actionEvent){
         //Trenger logikk
         System.out.println("meld av");
+
+        arrangementListObservableAvailable.add(myArrangementsListView.getSelectionModel().getSelectedItem());
+        arrangementListObservableJoined.remove(myArrangementsListView.getSelectionModel().getSelectedItem());
     }
 
     // --------------------------------------------------//
@@ -95,9 +101,20 @@ public class UserController extends Controller{
         availableArrangementsListView.refresh();
     }
 
-    private void setUpFilteredList(){
+    private void setUpFilteredListAvailable(){
         filteredList = arrangementListObservableAvailable.filtered(arrangement -> true);
         availableArrangementsListView.setItems(filteredList);
+    }
+
+    private void populateJoinedArrangementListView() {
+        arrangementListObservableJoined = FXCollections.observableArrayList();
+        setUpFilteredListJoined();
+        myArrangementsListView.refresh();
+    }
+
+    private void setUpFilteredListJoined() {
+        joinedFilteredList = arrangementListObservableJoined.filtered(arrangement -> true);
+        myArrangementsListView.setItems(joinedFilteredList);
     }
 
 
@@ -123,6 +140,7 @@ public class UserController extends Controller{
     public void initialize(URL location, ResourceBundle resources) {
         logOut.setOnAction(this::returnToMainWindow);
         populateAvailableArrangementListView();
+        populateJoinedArrangementListView();
         setupActionHandlers();
     }
 
