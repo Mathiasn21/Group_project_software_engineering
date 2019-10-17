@@ -19,6 +19,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -135,7 +136,7 @@ public class OrganizerController extends Controller {
     }
 
     private void populateListView() {
-        arrangementListObservable = FXCollections.observableArrayList(DataHandler.getUserArrangements(User.ORGANIZER));
+        arrangementListObservable = FXCollections.observableArrayList(DataHandler.getArrangementsData());
         setupFilteredList();
         listview.refresh();
     }
@@ -232,4 +233,23 @@ public class OrganizerController extends Controller {
         setupActionHandlers();
         populateListView();
     }
+
+
+
+    private class ArrangementCell extends ListCell<Arrangement>{
+        @Override
+        public void updateItem(Arrangement arrangement, boolean empty){
+            if(arrangement != null){
+                setText(arrangement.toString());
+            }
+        }
+
+
+
+    }
+
+
+
+
+
 }

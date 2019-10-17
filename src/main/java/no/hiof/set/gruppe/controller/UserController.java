@@ -95,11 +95,9 @@ public class UserController extends Controller{
         leaveBtn.setOnAction(this::onLeaveClick);
     }
 
-    //Henter bare det samme som i OrganizerController, burde gjøres om så en enkelt bruker får sine egne arrangementer
     private void populateAvailableArrangementListView(){
-
-        arrangementListObservableAvailable = FXCollections.observableArrayList(DataHandler.getUserArrangements(User.ORGANIZER));
-        setUpFilteredListAvailable();
+        arrangementListObservableAvailable = FXCollections.observableArrayList(DataHandler.getUserArrangements(User.USER));
+        setUpFilteredList();
         availableArrangementsListView.refresh();
     }
 
