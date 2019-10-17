@@ -86,7 +86,7 @@
             <Font size="13.0" />
          </font>
       </Text>
-      <ListView fx:id="myArrangementsListView" layoutX="728.0" layoutY="122.0" prefHeight="288.0" prefWidth="232.0" />
+      <TreeView fx:id="myArrangementsListView" layoutX="728.0" layoutY="122.0" prefHeight="288.0" prefWidth="232.0" />
       <TextField fx:id="searchMy" layoutX="728.0" layoutY="87.0" prefHeight="25.0" prefWidth="96.0" />
       <Text layoutX="728.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Søk" wrappingWidth="32.09179639816284" />
       <ComboBox fx:id="availableSortingOptionsMy" layoutX="864.0" layoutY="86.0" prefHeight="25.0" prefWidth="96.0" />
