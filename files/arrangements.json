@@ -1,24 +1,35 @@
 [
   {
-    "ID": 1742811572,
-    "name": "ghfhg",
-    "sport": "Annet",
-    "adress": "gfhgfh",
-    "startDate": "2019-10-09",
-    "endDate": "2019-10-18",
-    "description": "hgjhgjj",
-    "participants": 444,
-    "group": true
+    "ID": -1244313242,
+    "name": "√òskars Diverse",
+    "sport": "Skirenn",
+    "adress": "Walkersgate 8",
+    "startDate": "2019-10-11",
+    "endDate": "2019-10-12",
+    "description": "Sumthin",
+    "participants": 40,
+    "group": false
   },
   {
-    "ID": 1742811572,
-    "name": "ÊÊÊ",
+    "ID": -222733810,
+    "name": "Vegars lefse l√∏p",
     "sport": "Annet",
-    "adress": "fghj",
-    "startDate": "2019-10-24",
-    "endDate": "2019-10-31",
-    "description": "ghjhkhgk fdgjkhdfg djkfghkjds gdfkjgh dfkghdfkjgh kjdhfg kjhdkjdfkjgh kdjfhg kjdfhgkjdf hgkdjfghdfkjghdffkjghdkjfghjkdh hdfkjghkdjfgh hkj",
-    "participants": 0,
+    "adress": "Lefseveien 17c",
+    "startDate": "2019-10-11",
+    "endDate": "2019-10-12",
+    "description": "Masse spising og l√∏ing med lefser",
+    "participants": 37,
+    "group": false
+  },
+  {
+    "ID": 1694876920,
+    "name": "B√∏rres Brokkoli mani",
+    "sport": "Annet",
+    "adress": "Brokkolivegen 28",
+    "startDate": "2019-10-11",
+    "endDate": "2019-10-12",
+    "description": "Masse spising og l√∏ing med brokkoli",
+    "participants": 37,
     "group": false
   }
 ]

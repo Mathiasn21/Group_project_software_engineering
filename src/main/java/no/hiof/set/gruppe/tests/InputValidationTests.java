@@ -15,13 +15,11 @@ import java.time.LocalDate;
 public class InputValidationTests {
 
 
-    //Test bruker påmeldelse
-    //Test
 
 
-    //Test
 
-    /*
+    //Dette kan nødvendigvis ikke brukes i innleveringen, men kjekt for å sjekke om den faktisk fungerer
+
     @Test
     @Order(1)
     public void LegalInput() {
@@ -42,14 +40,14 @@ public class InputValidationTests {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"-1","1000000","Words are not allowed"})
+    @ValueSource(strings = {"-1","Words are not allowed"})
     @Order(4)
     public void IllegalParticipants(String participants) {
         assertFalse(InputValidation.arrangementInputValidation("Hello World","Annet",participants,"Hakkebakkeskogen", LocalDate.of(2019,10,10), LocalDate.of(2019,10,11)));
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"Illegal with ()[]{}", "This address is way to looooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong"})
+    @ValueSource(strings = {"This address is way to looooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong"})
     @Order(5)
     public void IllegalAddress(String address) {
         assertFalse(InputValidation.arrangementInputValidation("Hello World","Annet","420",address, LocalDate.of(2019,10,10), LocalDate.of(2019,10,11)));
@@ -60,5 +58,4 @@ public class InputValidationTests {
     public void IllegalDates() {
         assertFalse(InputValidation.arrangementInputValidation("Hello World","Annet","420","Hakkebakkeskogen", LocalDate.of(2019,10,10), LocalDate.of(2019,10,9)));
     }
-    */
 }
