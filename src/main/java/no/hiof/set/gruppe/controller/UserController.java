@@ -64,19 +64,13 @@ public class UserController extends Controller{
     // --------------------------------------------------//
 
     private void onJoinClick(ActionEvent actionEvent){
-        //Trenger logikk
-        System.out.println("meld på");
-
-        arrangementListObservableJoined.add(availableArrangementsListView.getSelectionModel().getSelectedItem());
-        arrangementListObservableAvailable.remove(availableArrangementsListView.getSelectionModel().getSelectedItem());
+        arrangementListObservableJoined.add(selectedArrangement(availableArrangementsListView));
+        arrangementListObservableAvailable.remove(selectedArrangement(availableArrangementsListView));
     }
 
     private void onLeaveClick(ActionEvent actionEvent){
-        //Trenger logikk
-        System.out.println("meld av");
-
-        arrangementListObservableAvailable.add(myArrangementsListView.getSelectionModel().getSelectedItem());
-        arrangementListObservableJoined.remove(myArrangementsListView.getSelectionModel().getSelectedItem());
+        arrangementListObservableAvailable.add(selectedArrangement(myArrangementsListView));
+        arrangementListObservableJoined.remove(selectedArrangement(myArrangementsListView));
     }
 
     // --------------------------------------------------//
@@ -90,14 +84,18 @@ public class UserController extends Controller{
         createNewView(this);
     }
 
+    private Arrangement selectedArrangement(ListView <Arrangement> arr){
+        return arr.getSelectionModel().getSelectedItem();
+    }
+
     private void setupActionHandlers(){
         joinBtn.setOnAction(this::onJoinClick);
         leaveBtn.setOnAction(this::onLeaveClick);
     }
 
     private void populateAvailableArrangementListView(){
-        arrangementListObservableAvailable = FXCollections.observableArrayList(DataHandler.getUserArrangements(User.USER));
-        setUpFilteredList();
+        arrangementListObservableAvailable = FXCollections.observableArrayList(DataHandler.getArrangementsData());
+        //setUpFilteredList();
         availableArrangementsListView.refresh();
     }
 
