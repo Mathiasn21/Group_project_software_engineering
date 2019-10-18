@@ -1,6 +1,6 @@
 package no.hiof.set.gruppe.model;
 
-public enum User implements ILoginValidation{
+public enum User{
 
 
     ADMIN("Admin", "Password1", "Admin.fxml"),

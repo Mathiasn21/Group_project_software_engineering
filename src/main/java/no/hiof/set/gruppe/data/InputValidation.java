@@ -28,7 +28,7 @@ public class InputValidation implements IInputValidation{
     private static final String textNotNullPattern = "(?!^ +$)^.+$";
     private static final String numberPattern = "[0-9]+";
 
-    public static boolean arrangementInputValidation(String name, String sport, String participants, String adress, LocalDate startDate, LocalDate endDate) {
+    public static boolean validateArrangement(String name, String sport, String participants, String adress, LocalDate startDate, LocalDate endDate) {
 
         /*
         * This whole class can be truncated, where the reg patterns are put onto the top the application.

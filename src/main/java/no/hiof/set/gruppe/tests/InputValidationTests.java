@@ -23,39 +23,39 @@ public class InputValidationTests {
     @Test
     @Order(1)
     public void LegalInput() {
-        assertTrue(InputValidation.arrangementInputValidation("pes","Annet","420","Hakkebakkeskogen", LocalDate.of(2019,10,10), LocalDate.of(2019,10,11)));
+        assertTrue(InputValidation.validateArrangement("pes","Annet","420","Hakkebakkeskogen", LocalDate.of(2019,10,10), LocalDate.of(2019,10,11)));
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"","P","This is way to loooooooooooooooooooooooooooooooooooong"})
     @Order(2)
     public void IllegalNames(String name) {
-        assertFalse(InputValidation.arrangementInputValidation(name,"Annet","420","Hakkebakkeskogen", LocalDate.of(2019,10,10), LocalDate.of(2019,10,11)));
+        assertFalse(InputValidation.validateArrangement(name,"Annet","420","Hakkebakkeskogen", LocalDate.of(2019,10,10), LocalDate.of(2019,10,11)));
     }
 
     @Test
     @Order(3)
     public void IllegalSport() {
-        assertFalse(InputValidation.arrangementInputValidation("Hello World",null,"420","Hakkebakkeskogen", LocalDate.of(2019,10,10), LocalDate.of(2019,10,11)));
+        assertFalse(InputValidation.validateArrangement("Hello World",null,"420","Hakkebakkeskogen", LocalDate.of(2019,10,10), LocalDate.of(2019,10,11)));
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"-1","Words are not allowed"})
     @Order(4)
     public void IllegalParticipants(String participants) {
-        assertFalse(InputValidation.arrangementInputValidation("Hello World","Annet",participants,"Hakkebakkeskogen", LocalDate.of(2019,10,10), LocalDate.of(2019,10,11)));
+        assertFalse(InputValidation.validateArrangement("Hello World","Annet",participants,"Hakkebakkeskogen", LocalDate.of(2019,10,10), LocalDate.of(2019,10,11)));
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"This address is way to looooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong"})
     @Order(5)
     public void IllegalAddress(String address) {
-        assertFalse(InputValidation.arrangementInputValidation("Hello World","Annet","420",address, LocalDate.of(2019,10,10), LocalDate.of(2019,10,11)));
+        assertFalse(InputValidation.validateArrangement("Hello World","Annet","420",address, LocalDate.of(2019,10,10), LocalDate.of(2019,10,11)));
     }
 
     @Test
     @Order(6)
     public void IllegalDates() {
-        assertFalse(InputValidation.arrangementInputValidation("Hello World","Annet","420","Hakkebakkeskogen", LocalDate.of(2019,10,10), LocalDate.of(2019,10,9)));
+        assertFalse(InputValidation.validateArrangement("Hello World","Annet","420","Hakkebakkeskogen", LocalDate.of(2019,10,10), LocalDate.of(2019,10,9)));
     }
 }

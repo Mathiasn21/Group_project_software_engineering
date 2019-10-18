@@ -20,6 +20,7 @@ import no.hiof.set.gruppe.model.GroupCategory;
 import no.hiof.set.gruppe.model.SportCategory;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 /**
@@ -65,25 +66,27 @@ public class NewAlterArrangementController extends Controller{
             createdNewObject = true;
         }
 
-        if(InputValidation.arrangementInputValidation(  nameInput.getText(),
-                                                        sportComboBoxInput.getSelectionModel().getSelectedItem().toString(),
-                                                        participantsInput.getText(),
-                                                        adressInput.getText(),
-                                                        startDateInput.getValue(),
-                                                        endDateInput.getValue()))
-        {
-            arrangementToEdit.setName(nameInput.getText());
-            arrangementToEdit.setParticipants(Integer.parseInt(participantsInput.getText()));
-            arrangementToEdit.setAdress(adressInput.getText());
-            arrangementToEdit.setDescription(descriptionInput.getText());
-            arrangementToEdit.setGruppe(groupInput.getSelectionModel().getSelectedItem().isGroup);
-            arrangementToEdit.setSport(sportComboBoxInput.getSelectionModel().getSelectedItem().toString());
-            arrangementToEdit.setStartDate(startDateInput.getValue().toString());
-            arrangementToEdit.setEndDate(endDateInput.getValue().toString());
+        String name = nameInput.getText();
+        String sport = sportComboBoxInput.getSelectionModel().getSelectedItem().toString();
+        String partic = participantsInput.getText();
+        String desc = descriptionInput.getText();
+        String address = adressInput.getText();
+        boolean group = groupInput.getSelectionModel().getSelectedItem().isGroup;
+        LocalDate startDate = startDateInput.getValue();
+        LocalDate endDate = endDateInput.getValue();
 
-            System.out.println("saving arrangement: " + arrangementToEdit);
-            ((Stage)saveBtn.getScene().getWindow()).close();
-        }
+        if(!InputValidation.validateArrangement(name, sport, partic, address, startDate, endDate))return;
+
+        arrangementToEdit.setName(name);
+        arrangementToEdit.setParticipants(Integer.parseInt(partic));
+        arrangementToEdit.setAdress(address);
+        arrangementToEdit.setDescription(desc);
+        arrangementToEdit.setGruppe(group);
+        arrangementToEdit.setSport(sport);
+        arrangementToEdit.setStartDate(startDate.toString());
+        arrangementToEdit.setEndDate(endDate.toString());
+
+        ((Stage)saveBtn.getScene().getWindow()).close();
     }
 
     @FXML
