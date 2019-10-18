@@ -16,7 +16,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
@@ -51,6 +50,7 @@ public class OrganizerController extends Controller {
     private ObservableList<Arrangement>arrangementListObservable;
     private FilteredList<Arrangement> filteredList;
     private Arrangement currentArrangement = null;
+    private Collection<Arrangement> collectionOfArrangements = new ArrayList<>();
 
     // --------------------------------------------------//
     //                3.FXML Fields                      //
@@ -136,7 +136,7 @@ public class OrganizerController extends Controller {
     }
 
     private void populateListView() {
-        arrangementListObservable = FXCollections.observableArrayList(DataHandler.getArrangementsData());
+        arrangementListObservable = FXCollections.observableArrayList(DataHandler.getUserArrangements(User.ORGANIZER));
         setupFilteredList();
         listview.refresh();
     }
@@ -218,8 +218,7 @@ public class OrganizerController extends Controller {
 
     @Override
     public void onCloseStoreInformation() {
-        new DataHandler().storeArrangementsData(arrangementListObservable);
-        DataHandler.storeUserArrangements(genUConnArrangement());
+        new DataHandler().storeArrangementsData(arrangementListObservable, User.ORGANIZER);
     }
 
     @Override
@@ -233,23 +232,4 @@ public class OrganizerController extends Controller {
         setupActionHandlers();
         populateListView();
     }
-
-
-
-    private class ArrangementCell extends ListCell<Arrangement>{
-        @Override
-        public void updateItem(Arrangement arrangement, boolean empty){
-            if(arrangement != null){
-                setText(arrangement.toString());
-            }
-        }
-
-
-
-    }
-
-
-
-
-
 }

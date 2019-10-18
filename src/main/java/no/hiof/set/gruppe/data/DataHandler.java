@@ -19,7 +19,6 @@ import no.hiof.set.gruppe.model.UserConnectedArrangement;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -114,18 +113,18 @@ public class DataHandler implements IDataHandler {
     /**
      * Grabs the arrangement data from a file and converts
      * those into a usable collection of arrangements.
-     * @return {@link Collection} ? extends {@link Arrangement}
+     * @return {@link List} ? extends {@link Arrangement}
      */
-    public static Collection<Arrangement> getArrangementsData() {
+    public static List<Arrangement> getArrangementsData() {
         return listFromJson(Arrangement[].class, readFromFile(arrangementFName));
     }
 
-    public static Collection<Arrangement> getUserArrangements(User user) {
+    public static List<Arrangement> getUserArrangements(User user) {
         String jsonFromFile = readFromFile(userHasArrangements);
-        Collection<UserConnectedArrangement> userArrangementColl = listFromJson(UserConnectedArrangement[].class, jsonFromFile);
+        List<UserConnectedArrangement> userArrangementColl = listFromJson(UserConnectedArrangement[].class, jsonFromFile);
 
-        Collection<Arrangement> result = new ArrayList<>();
-        Collection<Arrangement> allArrangements = getArrangementsData();
+        List<Arrangement> result = new ArrayList<>();
+        List<Arrangement> allArrangements = getArrangementsData();
         String userName = user.getName();
 
         outer:for(Arrangement arrangement : allArrangements){
@@ -140,19 +139,27 @@ public class DataHandler implements IDataHandler {
         return result;
     }
 
-    public static void storeUserArrangements(Collection<UserConnectedArrangement> colletionOfData){
+    private static void storeUserArrangements(List<UserConnectedArrangement> colletionOfData, User user){
         writeToFile(toJson(UserConnectedArrangement[].class,  colletionOfData.toArray(UserConnectedArrangement[]::new)), userHasArrangements);
     }
 
     /**
      * Converts a given collection into json given a template,
      * and the stores that string to a file.
-     * @param arrangement {@link Collection}<{@link Arrangement}>
+     * @param arrangements {@link List}<{@link Arrangement}>
      */
     @Override
-    public void storeArrangementsData(Collection<Arrangement> arrangement) {
-        writeToFile(toJson(Arrangement[].class, arrangement.toArray(Arrangement[]::new)), arrangementFName);
+    public void storeArrangementsData(List<Arrangement> arrangements, User user) {
+        List<Arrangement> oldArrData = new ArrayList<>(getArrangementsData());
+        for(Arrangement oldArr : oldArrData){
+            for(Arrangement newArr : arrangements){
+                if(oldArr.getID() == newArr.getID()){
+                    arrangements.remove(newArr);
+                    break;
+                }
+            }
+        }
+        oldArrData.addAll(arrangements);
+        writeToFile(toJson(Arrangement[].class, oldArrData.toArray(Arrangement[]::new)), arrangementFName);
     }
-
-
 }

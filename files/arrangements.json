@@ -31,5 +31,16 @@
     "description": "Masse spising og løing med brokkoli",
     "participants": 37,
     "group": false
+  },
+  {
+    "ID": 1742811572,
+    "name": "oahoda",
+    "sport": "Annet",
+    "adress": "dawodja",
+    "startDate": "2019-10-17",
+    "endDate": "2019-10-25",
+    "description": "",
+    "participants": 22,
+    "group": true
   }
 ]
