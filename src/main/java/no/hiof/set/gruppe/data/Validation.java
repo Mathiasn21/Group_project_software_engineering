@@ -49,7 +49,7 @@ public class Validation{
      * @param max int
      * @return boolean
      */
-    private static boolean isBetween(int min, int max, int numToTest){return min <= numToTest && numToTest >= max;}
+    private static boolean isBetween(int min, int max, int numToTest){return min <= numToTest && numToTest <= max;}
 
     /**
      * General regex tester

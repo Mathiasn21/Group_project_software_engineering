@@ -19,7 +19,7 @@ class ValidationTests {
     @Test
     @Order(1)
     public void LegalInput() {
-        Arrangement arrangement = new Arrangement("pes","Annet",420,"Hakkebakkeskogen", false, LocalDate.of(2019,10,10).toString(), LocalDate.of(2019,10,11).toString(), "test");
+        Arrangement arrangement = new Arrangement("pes","Annet",420,"Hakkebakkeskogen", false, LocalDate.of(2019,10,10).toString(), LocalDate.of(2019,10,11).toString(), "testdwa dawd aw");
         assertTrue(Validation.ofArrangement(arrangement));
     }
 
