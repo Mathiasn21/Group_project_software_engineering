@@ -105,11 +105,17 @@ public class DataHandler implements IDataHandler {
         return gson.toJson(array, type);
     }
 
+    private static List<UserConnectedArrangement>generateUserConnectedArrangements(List<Arrangement> arrList, User user){
+        List<UserConnectedArrangement> result = new ArrayList<>();
+        for(Arrangement arr : arrList){
+            result.add(new UserConnectedArrangement(arr.getID(), user.getName()));
+        }
+        return result;
+    }
 
     // --------------------------------------------------//
     //                4.Public Methods                   //
     // --------------------------------------------------//
-
     /**
      * Grabs the arrangement data from a file and converts
      * those into a usable collection of arrangements.
@@ -120,8 +126,7 @@ public class DataHandler implements IDataHandler {
     }
 
     public static List<Arrangement> getUserArrangements(User user) {
-        String jsonFromFile = readFromFile(userHasArrangements);
-        List<UserConnectedArrangement> userArrangementColl = listFromJson(UserConnectedArrangement[].class, jsonFromFile);
+        List<UserConnectedArrangement> userArrangementColl = getUserConnectedArrangements();
 
         List<Arrangement> result = new ArrayList<>();
         List<Arrangement> allArrangements = getArrangementsData();
@@ -139,12 +144,18 @@ public class DataHandler implements IDataHandler {
         return result;
     }
 
-    private static void storeUserArrangements(List<UserConnectedArrangement> colletionOfData, User user){
-        writeToFile(toJson(UserConnectedArrangement[].class,  colletionOfData.toArray(UserConnectedArrangement[]::new)), userHasArrangements);
+    private static List<UserConnectedArrangement> getUserConnectedArrangements() {
+        String jsonFromFile = readFromFile(userHasArrangements);
+        return listFromJson(UserConnectedArrangement[].class, jsonFromFile);
+    }
+
+    private static void storeUserArrangements(List<UserConnectedArrangement> listOfData){
+        listOfData.addAll(getUserConnectedArrangements());
+        writeToFile(toJson(UserConnectedArrangement[].class,  listOfData.toArray(UserConnectedArrangement[]::new)), userHasArrangements);
     }
 
     /**
-     * Converts a given collection into json given a template,
+     * Converts a given list into json given a template,
      * and the stores that string to a file.
      * @param arrangements {@link List}<{@link Arrangement}>
      */
@@ -161,5 +172,6 @@ public class DataHandler implements IDataHandler {
         }
         oldArrData.addAll(arrangements);
         writeToFile(toJson(Arrangement[].class, oldArrData.toArray(Arrangement[]::new)), arrangementFName);
+        storeUserArrangements(generateUserConnectedArrangements(arrangements, user));
     }
 }

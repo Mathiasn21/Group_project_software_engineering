@@ -17,10 +17,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -44,13 +41,12 @@ public class OrganizerController extends Controller {
     // --------------------------------------------------//
     //                2.Local Fields                     //
     // --------------------------------------------------//
-
     private String title = "";
     private String name = "NewAlterArrangement.fxml";
     private ObservableList<Arrangement>arrangementListObservable;
     private FilteredList<Arrangement> filteredList;
     private Arrangement currentArrangement = null;
-    private Collection<Arrangement> collectionOfArrangements = new ArrayList<>();
+
 
     // --------------------------------------------------//
     //                3.FXML Fields                      //
@@ -68,7 +64,6 @@ public class OrganizerController extends Controller {
     // --------------------------------------------------//
     //                4.On Action Methods                //
     // --------------------------------------------------//
-
     private void search(ActionEvent actionEvent){
         filteredList.setPredicate(this::lowerCaseTitleSearch);
         listview.setItems(filteredList);
@@ -103,9 +98,9 @@ public class OrganizerController extends Controller {
         Arrangement arrangement = listview.getSelectionModel().getSelectedItem();
         if(currentArrangement == null || !currentArrangement.equals(arrangement)){
             currentArrangement = arrangement;
+            setInformationAboutArrangementInView();
+            listview.refresh();
         }
-        setInformationAboutArrangementInView();
-        listview.refresh();
     }
 
     private void setupActionHandlers() {
@@ -174,14 +169,6 @@ public class OrganizerController extends Controller {
         createNewView(this);
     }
 
-    private Collection<UserConnectedArrangement> genUConnArrangement() {
-        Collection<UserConnectedArrangement> result = new ArrayList<>();
-        for(Arrangement arr : arrangementListObservable){
-            result.add(new UserConnectedArrangement(arr.getID(), "Organizer"));
-        }
-        return result;
-    }
-
     // --------------------------------------------------//
     //                6.Overridden Methods               //
     // --------------------------------------------------//
@@ -197,7 +184,8 @@ public class OrganizerController extends Controller {
     }
     @Override
     public Object getDataObject() {
-        return listview.getSelectionModel().getSelectedItem();
+        currentArrangement = listview.getSelectionModel().getSelectedItem();
+        return currentArrangement;
     }
 
     /**
@@ -207,11 +195,11 @@ public class OrganizerController extends Controller {
      */
     @Override
     public void setDataFields(Object object) throws DataFormatException {
-        if (!(object instanceof Arrangement)){
-            throw new DataFormatException();
-        }
-        System.out.println("Adding arrangement: " + object);
+        if (!(object instanceof Arrangement)) throw new DataFormatException();
+
+        MultipleSelectionModel selModel = listview.getSelectionModel();
         arrangementListObservable.add((Arrangement) object);
+        if(selModel.getSelectedItem() == null) selModel.selectLast();
         listview.refresh();
         changedView();
     }
