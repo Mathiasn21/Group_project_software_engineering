@@ -33,7 +33,7 @@ public class ArrrengementTests {
     @Order(2)
     public void FjerneArrangementTest() {
         List<Arrangement> testArrangementer = new ArrayList<>(DataHandler.getArrangementsData());
-        testArrangementer.remove(((ArrayList<Arrangement>) testArrangementer).get(0));
+        testArrangementer.remove((testArrangementer).get(0));
 
         new DataHandler().storeArrangementsData(testArrangementer, User.USER);
 
