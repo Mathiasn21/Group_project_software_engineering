@@ -78,7 +78,7 @@ public class NewAlterArrangementController extends Controller{
         //must throw exception in the future
         //"Ugyldig nummer format.\n";
         if(!Validation.ofNumber(partic)){return;}
-        if(!Validation.ofArrangement(arrangementToEdit))return;
+        if(!Validation.ofArrangement(arrangementToEdit).IS_VALID)return;
 
         arrangementToEdit.setName(name);
         arrangementToEdit.setParticipants(Integer.parseInt(partic));

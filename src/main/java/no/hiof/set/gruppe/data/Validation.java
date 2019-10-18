@@ -1,6 +1,8 @@
 package no.hiof.set.gruppe.data;
 
 import no.hiof.set.gruppe.model.Arrangement;
+import no.hiof.set.gruppe.model.ValidationResult;
+
 import java.time.LocalDate;
 import java.util.regex.Pattern;
 
@@ -14,13 +16,12 @@ public class Validation{
 
     private static final int maxNameL = 50;
     private static final int minNameL = 2;
-
     /**
      * Validates an arrangement
      * @param arrangement {@link Arrangement}
-     * @return boolean
+     * @return ValidationResult {@link ValidationResult}
      */
-    public static boolean ofArrangement(Arrangement arrangement) {
+    public static ValidationResult ofArrangement(Arrangement arrangement) {
         StringBuilder str = new StringBuilder();
         String invalidNum = "Sett inn et gyldig antall deltakere\n";
 
@@ -36,7 +37,7 @@ public class Validation{
         str.append(regCheck(textNotNullPattern, address) && isBetween(minNameL, maxNameL, address.length()) ? "" : "Sett inn en gydlig adresse.\n");
         str.append(startDate.isBefore(endDate) || startDate.isEqual(endDate) ? "" : "Sett inn gyldige datoer.\n");
         str.append(isBetween(participantsMin, participantsMax, arrangement.getParticipants()) ? "" : invalidNum);
-        return str.length() == 0;
+        return new ValidationResult(str.toString(), str.length() == 0);
     }
 
     public static boolean ofNumber(String num){
