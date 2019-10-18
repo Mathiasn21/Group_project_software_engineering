@@ -19,6 +19,7 @@ import no.hiof.set.gruppe.model.UserConnectedArrangement;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -133,9 +134,9 @@ public class DataHandler implements IDataHandler {
         String userName = user.getName();
 
         outer:for(Arrangement arrangement : allArrangements){
-            int arrID = arrangement.getID();
+            String arrID = arrangement.getID();
             for(UserConnectedArrangement userArrangement : userArrangementColl){
-                if(userName.equals(userArrangement.getUSERNAME()) && arrID == userArrangement.getID()){
+                if(userName.equals(userArrangement.getUSERNAME()) && arrID.equals(userArrangement.getID())){
                     result.add(arrangement);
                     continue outer;
                 }
@@ -150,7 +151,16 @@ public class DataHandler implements IDataHandler {
     }
 
     private static void storeUserArrangements(List<UserConnectedArrangement> listOfData){
-        listOfData.addAll(getUserConnectedArrangements());
+        List<UserConnectedArrangement> allUserConnData = new ArrayList<>(getUserConnectedArrangements());
+        for(UserConnectedArrangement userArr : listOfData){
+            for (UserConnectedArrangement userArrToComp : allUserConnData){
+                if(userArr.equals(userArrToComp)){
+                    listOfData.remove(userArr);
+                    break;
+                }
+            }
+        }
+        listOfData.addAll(allUserConnData);
         writeToFile(toJson(UserConnectedArrangement[].class,  listOfData.toArray(UserConnectedArrangement[]::new)), userHasArrangements);
     }
 
@@ -160,18 +170,30 @@ public class DataHandler implements IDataHandler {
      * @param arrangements {@link List}<{@link Arrangement}>
      */
     @Override
-    public void storeArrangementsData(List<Arrangement> arrangements, User user) {
+    public void storeArrangementsData(List<Arrangement> arrangements, List<Arrangement> deletedArrangements, User user) {
         List<Arrangement> oldArrData = new ArrayList<>(getArrangementsData());
         for(Arrangement oldArr : oldArrData){
             for(Arrangement newArr : arrangements){
-                if(oldArr.getID() == newArr.getID()){
+                if(oldArr.getID().equals(newArr.getID())){
                     arrangements.remove(newArr);
                     break;
                 }
             }
         }
+        removeFromListWithPredicateOnObject(deletedArrangements, oldArrData);
         oldArrData.addAll(arrangements);
         writeToFile(toJson(Arrangement[].class, oldArrData.toArray(Arrangement[]::new)), arrangementFName);
         storeUserArrangements(generateUserConnectedArrangements(arrangements, user));
+    }
+
+    private void removeFromListWithPredicateOnObject(List<Arrangement> deletedArrangements, List<Arrangement> oldArrData) {
+        for(Arrangement deletedArr : deletedArrangements){
+            for(Arrangement arr : oldArrData){
+                if(deletedArr.getID().equals(arr.getID())) {
+                    oldArrData.remove(arr);
+                    break;
+                }
+            }
+        }
     }
 }

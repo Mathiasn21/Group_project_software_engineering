@@ -7,5 +7,5 @@ import java.io.IOException;
  */
 public interface SetupWindow {
     void setupWindow(IController controller)throws IOException;
-    void setupWindow(IControllerDataTransfer<Object> controller, Object object);
+    void setupWindow(IControllerDataTransfer controller, Object object);
 }

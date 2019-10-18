@@ -6,5 +6,5 @@ import no.hiof.set.gruppe.model.User;
 import java.util.List;
 
 public interface IDataHandler {
-    void storeArrangementsData(List<Arrangement> arrangement, User user);
+    void storeArrangementsData(List<Arrangement> arrangement, List<Arrangement> deletedArrangements, User user);
 }

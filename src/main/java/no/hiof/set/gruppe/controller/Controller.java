@@ -28,7 +28,7 @@ public abstract class Controller implements IControllerDataTransfer, Initializab
         }
     }
 
-    void createNewView(IControllerDataTransfer<Object> controller, Object object) {
+    void createNewView(IControllerDataTransfer controller, Object object) {
         mainController.setupWindow(controller, object);
     }
 

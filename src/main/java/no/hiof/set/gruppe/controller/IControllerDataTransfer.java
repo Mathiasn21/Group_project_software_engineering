@@ -2,9 +2,9 @@ package no.hiof.set.gruppe.controller;
 
 import no.hiof.set.gruppe.Exceptions.DataFormatException;
 
-public interface IControllerDataTransfer<T> extends IController{
-    T getDataObject();
+public interface IControllerDataTransfer extends IController{
+    Object getDataObject();
     boolean hasNewObject();
-    void setDataFields(T object) throws DataFormatException;
+    void setDataFields(Object controller) throws DataFormatException;
     void updateView();
 }

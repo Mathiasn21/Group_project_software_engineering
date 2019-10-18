@@ -78,7 +78,6 @@ public class NewAlterArrangementController extends Controller{
         //must throw exception in the future
         //"Ugyldig nummer format.\n";
         if(!Validation.ofNumber(partic)){return;}
-        if(!Validation.ofArrangement(arrangementToEdit).IS_VALID)return;
 
         arrangementToEdit.setName(name);
         arrangementToEdit.setParticipants(Integer.parseInt(partic));
@@ -88,6 +87,9 @@ public class NewAlterArrangementController extends Controller{
         arrangementToEdit.setSport(sport);
         arrangementToEdit.setStartDate(startDate.toString());
         arrangementToEdit.setEndDate(endDate.toString());
+        if(!Validation.ofArrangement(arrangementToEdit).IS_VALID)return;
+
+
 
         ((Stage)saveBtn.getScene().getWindow()).close();
     }

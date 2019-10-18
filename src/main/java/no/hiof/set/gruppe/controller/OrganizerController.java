@@ -27,6 +27,7 @@ import no.hiof.set.gruppe.data.DataHandler;
 import no.hiof.set.gruppe.model.User;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
@@ -43,6 +44,7 @@ public class OrganizerController extends Controller {
     private String name = "NewAlterArrangement.fxml";
     private ObservableList<Arrangement>arrangementListObservable;
     private FilteredList<Arrangement> filteredList;
+    private ArrayList<Arrangement> deletedArrangements = new ArrayList<>();
     private Arrangement currentArrangement = null;
 
 
@@ -137,6 +139,7 @@ public class OrganizerController extends Controller {
     private void deleteArrangement(){
         Arrangement selectedItem = listview.getSelectionModel().getSelectedItem();
         arrangementListObservable.remove(selectedItem);
+        deletedArrangements.add(selectedItem);
         listview.getSelectionModel().selectFirst();
     }
 
@@ -204,7 +207,7 @@ public class OrganizerController extends Controller {
 
     @Override
     public void onCloseStoreInformation() {
-        new DataHandler().storeArrangementsData(arrangementListObservable, User.ORGANIZER);
+        new DataHandler().storeArrangementsData(arrangementListObservable, deletedArrangements, User.ORGANIZER);
     }
 
     @Override

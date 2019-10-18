@@ -12,7 +12,7 @@ package no.hiof.set.gruppe.model;
 //                1.Import Statements                //
 // --------------------------------------------------//
 import java.time.LocalDate;
-import java.util.Objects;
+import java.util.UUID;
 
 /**
  * Arrangement holds information about a possible arrangement.
@@ -24,7 +24,7 @@ public class Arrangement {
     // --------------------------------------------------//
     //                2.Local Fields                     //
     // --------------------------------------------------//
-    private final int ID;
+    private final String ID;
     private String name, sport, adress, startDate, endDate, description;
     private int participants;
     private boolean group;
@@ -57,7 +57,7 @@ public class Arrangement {
         this.startDate = startDate;
         this.endDate = endDate;
         this.description = description;
-        ID = hashCode();
+        ID = UUID.randomUUID().toString();
     }
 
     // --------------------------------------------------//
@@ -81,7 +81,7 @@ public class Arrangement {
     public String getAddress() {
         return adress;
     }
-    public int getID(){return ID;}
+    public String getID(){return ID;}
     public String getDescription() {return description;}
 
     // --------------------------------------------------//
@@ -103,7 +103,6 @@ public class Arrangement {
     public void setStartDate(String startDate) {this.startDate = startDate;}
     public void setEndDate(String endDate) {this.endDate = endDate;}
     public void setDescription(String description) {this.description = description;}
-
 
     // --------------------------------------------------//
     //                5.Public Methods                   //
@@ -127,12 +126,8 @@ public class Arrangement {
                 sport.equals(that.sport) &&
                 adress.equals(that.adress) &&
                 startDate.equals(that.startDate) &&
-                endDate.equals(that.endDate);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, sport, adress, startDate, endDate, participants, group);
+                endDate.equals(that.endDate) &&
+                description.equals(that.getDescription());
     }
 
     @Override

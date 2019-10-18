@@ -101,7 +101,7 @@ public class MainJavaFX extends Application implements SetupWindow {
      * @param controller {@link IControllerDataTransfer}
      * @param object {@link Object}
      */
-    public void setupWindow(IControllerDataTransfer<Object> controller, Object object){
+    public void setupWindow(IControllerDataTransfer controller, Object object){
         try{
             Stage stage = new Stage();
 
@@ -109,10 +109,10 @@ public class MainJavaFX extends Application implements SetupWindow {
             loader.setLocation(MainJavaFX.class.getResource(controller.getName()));
             Parent editLayout = loader.load();
 
-            IControllerDataTransfer<Object> oldController = controller;
+            IControllerDataTransfer oldController = controller;
             controller = loader.getController();
             controller.setDataFields(object);
-            IControllerDataTransfer<Object> finalController = controller;
+            IControllerDataTransfer finalController = controller;
             stage.setOnHidden((Event)->{
                 if(finalController.hasNewObject()){
                     try {

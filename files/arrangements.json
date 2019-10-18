@@ -1,6 +1,6 @@
 [
   {
-    "ID": -1244313242,
+    "ID": "1244313242",
     "name": "Øskars Diverse",
     "sport": "Skirenn",
     "adress": "Walkersgate 8",
@@ -11,7 +11,7 @@
     "group": false
   },
   {
-    "ID": -222733810,
+    "ID": "222733810",
     "name": "Vegars lefse løp",
     "sport": "Annet",
     "adress": "Lefseveien 17c",
@@ -22,7 +22,7 @@
     "group": false
   },
   {
-    "ID": 1694876920,
+    "ID": "1694876920",
     "name": "Børres Brokkoli mani",
     "sport": "Annet",
     "adress": "Brokkolivegen 28",
@@ -31,27 +31,5 @@
     "description": "Masse spising og løing med brokkoli",
     "participants": 37,
     "group": false
-  },
-  {
-    "ID": 1742811572,
-    "name": "dawdwa",
-    "sport": "Annet",
-    "adress": "dwadwa",
-    "startDate": "2019-10-16",
-    "endDate": "2019-10-27",
-    "description": "dwadwa",
-    "participants": 22,
-    "group": true
-  },
-  {
-    "ID": 1742811572,
-    "name": "adwa",
-    "sport": "Annet",
-    "adress": "dwadwa",
-    "startDate": "2019-10-17",
-    "endDate": "2019-10-26",
-    "description": "dwadwa",
-    "participants": 22,
-    "group": true
   }
 ]
