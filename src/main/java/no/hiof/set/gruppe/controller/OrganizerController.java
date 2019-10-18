@@ -25,10 +25,8 @@ import no.hiof.set.gruppe.Exceptions.DataFormatException;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.data.DataHandler;
 import no.hiof.set.gruppe.model.User;
-import no.hiof.set.gruppe.model.UserConnectedArrangement;
+
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.ResourceBundle;
 
 /**
@@ -150,7 +148,7 @@ public class OrganizerController extends Controller {
     private void setInformationAboutArrangementInView(){
         arrangementNameView.setText(currentArrangement.getName());
         arrangementSportView.setText(currentArrangement.getSport());
-        arrangementAdressView.setText(currentArrangement.getAdress());
+        arrangementAdressView.setText(currentArrangement.getAddress());
         arrangementDateView.setText(currentArrangement.getStartDate().toString() + " til " + currentArrangement.getEndDate().toString());
         arrangementParticipantsView.setText(Integer.toString(currentArrangement.getParticipants()));
         arrangementGorIView.setText(groupsOrIndividuals(currentArrangement));

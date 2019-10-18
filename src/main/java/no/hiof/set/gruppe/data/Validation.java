@@ -1,17 +1,14 @@
 package no.hiof.set.gruppe.data;
 
+import no.hiof.set.gruppe.model.Arrangement;
 import java.time.LocalDate;
 import java.util.regex.Pattern;
 
 /**
- * Validation is a class that handles inputs from a user.
- *
+ * This class handles backend validation of various data classes.
  * @author Gruppe4
  */
-
 public class Validation{
-
-
     private static final String textNotNullPattern = "(?!^ +$)^.+$";
     private static final String numPatt = "[0-9]+";
 
@@ -19,33 +16,32 @@ public class Validation{
     private static final int minNameL = 2;
 
     /**
-     * Validates arrangement input data from user.
-     * @param name
-     * @param sport
-     * @param participants
-     * @param adress
-     * @param gruppe
-     * @param startDate
-     * @param endDate
-     * @return True if input is valid. False if input is not valid.
+     * Validates an arrangement
+     * @param arrangement {@link Arrangement}
+     * @return boolean
      */
-    public static boolean ofArrangement(String name, String sport, String participants, String adress, LocalDate startDate, LocalDate endDate) {
+    public static boolean ofArrangement(Arrangement arrangement) {
         StringBuilder str = new StringBuilder();
+        String invalidNum = "Sett inn et gyldig antall deltakere\n";
 
-        str.append(nameValidation(name));
-        str.append(sportValidation(sport));
-        str.append(participantsValidation(participants));
-        str.append(adressValidation(adress));
-        str.append(dateValidation(startDate, endDate));
+        int participantsMax = 999999;
+        int participantsMin = 0;
+        String name = arrangement.getName();
+        String address = arrangement.getAddress();
+        LocalDate startDate = arrangement.getStartDate();
+        LocalDate endDate = arrangement.getEndDate();
+
+        str.append(regCheck(textNotNullPattern, name) && isBetween(minNameL, maxNameL, name.length()) ? "" : "Sett inn et gyldig navn.\n");
+        str.append(arrangement.getSport() != null ? "" : "Velg en idrett.\n");
+        str.append(regCheck(textNotNullPattern, address) && isBetween(minNameL, maxNameL, address.length()) ? "" : "Sett inn en gydlig adresse.\n");
+        str.append(startDate.isBefore(endDate) || startDate.isEqual(endDate) ? "" : "Sett inn gyldige datoer.\n");
+        str.append(isBetween(participantsMin, participantsMax, arrangement.getParticipants()) ? "" : invalidNum);
         return str.length() == 0;
     }
 
-    private static String nameValidation(String name) {
-        return regCheck(textNotNullPattern, name) && isBetween(minNameL, maxNameL, name.length()) ? "" : "Sett inn et gyldig navn.\n";
+    public static boolean ofNumber(String num){
+        return regCheck(numPatt, num);
     }
-
-    private static String sportValidation(String sport){return sport != null ? "" : "Velg en idrett.\n";}
-
 
     /**
      * Tests if number is between two numbers, inclusive both ends.
@@ -53,30 +49,7 @@ public class Validation{
      * @param max int
      * @return boolean
      */
-    private static boolean isBetween(int min, int max, int numToTest){
-        return min <= numToTest && numToTest >= max;
-    }
-
-    private static String adressValidation(String adress){
-        return regCheck(textNotNullPattern, adress) && isBetween(minNameL, maxNameL, adress.length()) ? "" : "Sett inn en gydlig adresse.\n";
-    }
-
-    private static String dateValidation(LocalDate startDate, LocalDate endDate){
-        return startDate.isBefore(endDate) || startDate.isEqual(endDate) ? "" : "Sett inn gyldige datoer.\n";
-    }
-
-    private static String participantsValidation(String num){
-        String invalidNum = "Sett inn et gyldig antall deltakere\n";
-        String invalidNumFormat = "Ugyldig nummer format.\n";
-
-        if(!regCheck(numPatt, num)) return invalidNumFormat;
-
-        int participants = Integer.parseInt(num);
-        int participantsMax = 999999;
-        int participantsMin = 0;
-
-        return isBetween(participantsMin, participantsMax, participants) ? "" : invalidNum;
-    }
+    private static boolean isBetween(int min, int max, int numToTest){return min <= numToTest && numToTest >= max;}
 
     /**
      * General regex tester
@@ -84,7 +57,5 @@ public class Validation{
      * @param str String
      * @return boolean
      */
-    private static boolean regCheck(String pattern, String str) {
-        return Pattern.matches(pattern, str);
-    }
+    private static boolean regCheck(String pattern, String str) {return Pattern.matches(pattern, str);}
 }

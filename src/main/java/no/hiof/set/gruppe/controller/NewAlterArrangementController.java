@@ -75,7 +75,10 @@ public class NewAlterArrangementController extends Controller{
         LocalDate startDate = startDateInput.getValue();
         LocalDate endDate = endDateInput.getValue();
 
-        if(!Validation.ofArrangement(name, sport, partic, address, startDate, endDate))return;
+        //must throw exception in the future
+        //"Ugyldig nummer format.\n";
+        if(!Validation.ofNumber(partic)){return;}
+        if(!Validation.ofArrangement(arrangementToEdit))return;
 
         arrangementToEdit.setName(name);
         arrangementToEdit.setParticipants(Integer.parseInt(partic));
@@ -135,7 +138,7 @@ public class NewAlterArrangementController extends Controller{
             Arrangement arrangement = (Arrangement)object;
             arrangementToEdit = arrangement;
             nameInput.setText(arrangement.getName());
-            adressInput.setText(arrangement.getAdress());
+            adressInput.setText(arrangement.getAddress());
             participantsInput.setText(Integer.toString(arrangement.getParticipants()));
             startDateInput.setValue(arrangement.getStartDate());
             endDateInput.setValue(arrangement.getEndDate());

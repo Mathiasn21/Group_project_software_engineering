@@ -78,7 +78,7 @@ public class Arrangement {
     public LocalDate getEndDate() {
         return LocalDate.parse(endDate);
     }
-    public String getAdress() {
+    public String getAddress() {
         return adress;
     }
     public int getID(){return ID;}

@@ -1,6 +1,7 @@
 package no.hiof.set.gruppe.tests;
 
 import no.hiof.set.gruppe.data.Validation;
+import no.hiof.set.gruppe.model.Arrangement;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -18,39 +19,48 @@ class ValidationTests {
     @Test
     @Order(1)
     public void LegalInput() {
-        assertTrue(Validation.ofArrangement("pes","Annet","420","Hakkebakkeskogen", LocalDate.of(2019,10,10), LocalDate.of(2019,10,11)));
+        Arrangement arrangement = new Arrangement("pes","Annet",420,"Hakkebakkeskogen", false, LocalDate.of(2019,10,10).toString(), LocalDate.of(2019,10,11).toString(), "test");
+        assertTrue(Validation.ofArrangement(arrangement));
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"","P","This is way to loooooooooooooooooooooooooooooooooooong"})
     @Order(2)
     public void IllegalNames(String name) {
-        assertFalse(Validation.ofArrangement(name,"Annet","420","Hakkebakkeskogen", LocalDate.of(2019,10,10), LocalDate.of(2019,10,11)));
+        Arrangement arrangement = new Arrangement(name,"Annet",420,"Hakkebakkeskogen", false, LocalDate.of(2019,10,10).toString(), LocalDate.of(2019,10,11).toString(), "test");
+        assertFalse(Validation.ofArrangement(arrangement));
     }
 
     @Test
     @Order(3)
     public void IllegalSport() {
-        assertFalse(Validation.ofArrangement("Hello World",null,"420","Hakkebakkeskogen", LocalDate.of(2019,10,10), LocalDate.of(2019,10,11)));
+        Arrangement arrangement = new Arrangement("pes",null,420,"Hakkebakkeskogen", false, LocalDate.of(2019,10,10).toString(), LocalDate.of(2019,10,11).toString(), "test");
+        assertFalse(Validation.ofArrangement(arrangement));
     }
 
+    /*
+    Disabled and should be removed as the controller secures that this will always be true
     @ParameterizedTest
     @ValueSource(strings = {"-1","Words are not allowed"})
     @Order(4)
     public void IllegalParticipants(String participants) {
-        assertFalse(Validation.ofArrangement("Hello World","Annet",participants,"Hakkebakkeskogen", LocalDate.of(2019,10,10), LocalDate.of(2019,10,11)));
+        Arrangement arrangement = new Arrangement("pes","Annet",participants,"Hakkebakkeskogen", false, LocalDate.of(2019,10,10).toString(), LocalDate.of(2019,10,11).toString(), "test");
+        assertFalse(Validation.ofArrangement(arrangement));
     }
+     */
 
     @ParameterizedTest
     @ValueSource(strings = {"This address is way to looooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong"})
     @Order(5)
     public void IllegalAddress(String address) {
-        assertFalse(Validation.ofArrangement("Hello World","Annet","420",address, LocalDate.of(2019,10,10), LocalDate.of(2019,10,11)));
+        Arrangement arrangement = new Arrangement("pes","Annet",420,address, false, LocalDate.of(2019,10,10).toString(), LocalDate.of(2019,10,11).toString(), "test");
+        assertFalse(Validation.ofArrangement(arrangement));
     }
 
     @Test
     @Order(6)
     public void IllegalDates() {
-        assertFalse(Validation.ofArrangement("Hello World","Annet","420","Hakkebakkeskogen", LocalDate.of(2019,10,10), LocalDate.of(2019,10,9)));
+        Arrangement arrangement = new Arrangement("pes","Annet",420,"Hakkebakkeskogen", false, LocalDate.of(2019,10,10).toString(), LocalDate.of(2019,10,9).toString(), "test");
+        assertFalse(Validation.ofArrangement(arrangement));
     }
 }
