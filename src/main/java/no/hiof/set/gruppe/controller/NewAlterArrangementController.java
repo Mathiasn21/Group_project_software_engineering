@@ -14,7 +14,7 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import no.hiof.set.gruppe.data.InputValidation;
+import no.hiof.set.gruppe.data.Validation;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.GroupCategory;
 import no.hiof.set.gruppe.model.SportCategory;
@@ -75,7 +75,7 @@ public class NewAlterArrangementController extends Controller{
         LocalDate startDate = startDateInput.getValue();
         LocalDate endDate = endDateInput.getValue();
 
-        if(!InputValidation.validateArrangement(name, sport, partic, address, startDate, endDate))return;
+        if(!Validation.ofArrangement(name, sport, partic, address, startDate, endDate))return;
 
         arrangementToEdit.setName(name);
         arrangementToEdit.setParticipants(Integer.parseInt(partic));
