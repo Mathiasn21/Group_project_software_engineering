@@ -1,7 +1,7 @@
 package no.hiof.set.gruppe.model;
 
 /**
- * A class representing the result from a validation attempt.
+ * A class representing the result from a validation{@link no.hiof.set.gruppe.data.Validation} attempt.
  */
 public class ValidationResult {
     public final String RESULT;
