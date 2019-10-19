@@ -15,12 +15,10 @@ import com.google.gson.GsonBuilder;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.User;
 import no.hiof.set.gruppe.model.UserConnectedArrangement;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * Main class and logic for handling data, both storage and retrieval.
@@ -29,11 +27,20 @@ import java.util.List;
  */
 public class DataHandler implements IDataHandler {
 
+
     // --------------------------------------------------//
     //                2.Local Fields                     //
     // --------------------------------------------------//
     private static String arrangementFName = "arrangements.json";
     private static String userHasArrangements = "userHasArrangements.json";
+    private static List<Arrangement> listOfAllArrangements;
+    private static List<UserConnectedArrangement> listOfAllUserConnectedArrangements;
+
+    //Preloads the data.
+    static{
+        listOfAllArrangements = readArrangementsData();
+        listOfAllUserConnectedArrangements = getUserConnectedArrangements();
+    }
 
     // --------------------------------------------------//
     //                3.Private Static Methods           //
@@ -45,6 +52,7 @@ public class DataHandler implements IDataHandler {
      * @param fName String
      * @return String
      */
+    @NotNull
     private static String readFromFile(String fName){
         String line;
         StringBuilder textFromFile = new StringBuilder();
@@ -84,6 +92,7 @@ public class DataHandler implements IDataHandler {
      * @param <T> T
      * @return {@link List}<T>
      */
+    @NotNull
     private static<T> List<T> listFromJson(Class<T[]> type, String jsonTextFromFile) {
         GsonBuilder gsonBuilder = new GsonBuilder().setPrettyPrinting();
         Gson gson = gsonBuilder.create();
@@ -106,7 +115,8 @@ public class DataHandler implements IDataHandler {
         return gson.toJson(array, type);
     }
 
-    private static List<UserConnectedArrangement>generateUserConnectedArrangements(List<Arrangement> arrList, User user){
+    @NotNull
+    private static List<UserConnectedArrangement>generateUserConnectedArrangements(@NotNull List<Arrangement> arrList, User user){
         List<UserConnectedArrangement> result = new ArrayList<>();
         for(Arrangement arr : arrList){
             result.add(new UserConnectedArrangement(arr.getID(), user.getName()));
@@ -117,25 +127,35 @@ public class DataHandler implements IDataHandler {
     // --------------------------------------------------//
     //                4.Public Methods                   //
     // --------------------------------------------------//
+    public static void deleteArrangement(Arrangement arrangement){
+        listOfAllArrangements.remove(arrangement);
+    }
+
+    public static List<Arrangement> getArrangementsData(){
+        return listOfAllArrangements;
+    }
+
+    public static void addArrangement(Arrangement arrangement, User user){
+        listOfAllArrangements.add(arrangement);
+        listOfAllUserConnectedArrangements.add(new UserConnectedArrangement(arrangement.getID(), user.getName()));
+    }
+
     /**
      * Grabs the arrangement data from a file and converts
      * those into a usable collection of arrangements.
      * @return {@link List} ? extends {@link Arrangement}
      */
-    public static List<Arrangement> getArrangementsData() {
+    private static List<Arrangement> readArrangementsData() {
         return listFromJson(Arrangement[].class, readFromFile(arrangementFName));
     }
 
     public static List<Arrangement> getUserArrangements(User user) {
-        List<UserConnectedArrangement> userArrangementColl = getUserConnectedArrangements();
-
         List<Arrangement> result = new ArrayList<>();
-        List<Arrangement> allArrangements = getArrangementsData();
         String userName = user.getName();
 
-        outer:for(Arrangement arrangement : allArrangements){
+        outer:for(Arrangement arrangement : listOfAllArrangements){
             String arrID = arrangement.getID();
-            for(UserConnectedArrangement userArrangement : userArrangementColl){
+            for(UserConnectedArrangement userArrangement : listOfAllUserConnectedArrangements){
                 if(userName.equals(userArrangement.getUSERNAME()) && arrID.equals(userArrangement.getID())){
                     result.add(arrangement);
                     continue outer;
@@ -155,7 +175,7 @@ public class DataHandler implements IDataHandler {
         for(UserConnectedArrangement userArr : listOfData){
             for (UserConnectedArrangement userArrToComp : allUserConnData){
                 if(userArr.equals(userArrToComp)){
-                    listOfData.remove(userArr);
+                    allUserConnData.remove(userArrToComp);
                     break;
                 }
             }
@@ -170,30 +190,23 @@ public class DataHandler implements IDataHandler {
      * @param arrangements {@link List}<{@link Arrangement}>
      */
     @Override
-    public void storeArrangementsData(List<Arrangement> arrangements, List<Arrangement> deletedArrangements, User user) {
+    public void storeArrangementsData(List<Arrangement> arrangements, User user) {
         List<Arrangement> oldArrData = new ArrayList<>(getArrangementsData());
-        for(Arrangement oldArr : oldArrData){
-            for(Arrangement newArr : arrangements){
-                if(oldArr.getID().equals(newArr.getID())){
-                    arrangements.remove(newArr);
+        for(int i = 0; i < arrangements.size(); i++){
+            Arrangement newArr = arrangements.get(i);
+            for(Arrangement oldArr : oldArrData){
+                if(oldArr.getID().equals(newArr.getID()) ){
+                    oldArrData.remove(oldArr);
                     break;
                 }
             }
+            if(newArr.getDeleted()){
+                arrangements.remove(newArr);
+                i--;
+            }
         }
-        removeFromListWithPredicateOnObject(deletedArrangements, oldArrData);
         oldArrData.addAll(arrangements);
         writeToFile(toJson(Arrangement[].class, oldArrData.toArray(Arrangement[]::new)), arrangementFName);
         storeUserArrangements(generateUserConnectedArrangements(arrangements, user));
-    }
-
-    private void removeFromListWithPredicateOnObject(List<Arrangement> deletedArrangements, List<Arrangement> oldArrData) {
-        for(Arrangement deletedArr : deletedArrangements){
-            for(Arrangement arr : oldArrData){
-                if(deletedArr.getID().equals(arr.getID())) {
-                    oldArrData.remove(arr);
-                    break;
-                }
-            }
-        }
     }
 }

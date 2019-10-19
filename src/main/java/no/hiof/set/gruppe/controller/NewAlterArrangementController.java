@@ -81,7 +81,7 @@ public class NewAlterArrangementController extends Controller{
 
         arrangementToEdit.setName(name);
         arrangementToEdit.setParticipants(Integer.parseInt(partic));
-        arrangementToEdit.setAdress(address);
+        arrangementToEdit.setAddress(address);
         arrangementToEdit.setDescription(desc);
         arrangementToEdit.setGruppe(group);
         arrangementToEdit.setSport(sport);

@@ -8,7 +8,6 @@ package no.hiof.set.gruppe.controller;
  * 5. Private Methods
  * 6. Overridden Methods
  * */
-
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
@@ -27,7 +26,6 @@ import no.hiof.set.gruppe.data.DataHandler;
 import no.hiof.set.gruppe.model.User;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
@@ -44,7 +42,6 @@ public class OrganizerController extends Controller {
     private String name = "NewAlterArrangement.fxml";
     private ObservableList<Arrangement>arrangementListObservable;
     private FilteredList<Arrangement> filteredList;
-    private ArrayList<Arrangement> deletedArrangements = new ArrayList<>();
     private Arrangement currentArrangement = null;
 
 
@@ -139,7 +136,7 @@ public class OrganizerController extends Controller {
     private void deleteArrangement(){
         Arrangement selectedItem = listview.getSelectionModel().getSelectedItem();
         arrangementListObservable.remove(selectedItem);
-        deletedArrangements.add(selectedItem);
+        DataHandler.deleteArrangement(selectedItem);
         listview.getSelectionModel().selectFirst();
     }
 
@@ -149,6 +146,7 @@ public class OrganizerController extends Controller {
     }
 
     private void setInformationAboutArrangementInView(){
+        if(currentArrangement == null)return;
         arrangementNameView.setText(currentArrangement.getName());
         arrangementSportView.setText(currentArrangement.getSport());
         arrangementAdressView.setText(currentArrangement.getAddress());
@@ -207,7 +205,7 @@ public class OrganizerController extends Controller {
 
     @Override
     public void onCloseStoreInformation() {
-        new DataHandler().storeArrangementsData(arrangementListObservable, deletedArrangements, User.ORGANIZER);
+        new DataHandler().storeArrangementsData(arrangementListObservable, User.ORGANIZER);
     }
 
     @Override

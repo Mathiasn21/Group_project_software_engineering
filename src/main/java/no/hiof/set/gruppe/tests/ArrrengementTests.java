@@ -22,7 +22,7 @@ public class ArrrengementTests {
         List<Arrangement> testArrangementer = new ArrayList<>(DataHandler.getArrangementsData());
         testArrangementer.add(new Arrangement("Vegars lefse løp","Annet",37,"Lefseveien 17c", false, "2019-10-11", "2019-10-12","Masse spising og løing med lefser"));
 
-        new DataHandler().storeArrangementsData(testArrangementer, new ArrayList<>(), User.USER);
+        new DataHandler().storeArrangementsData(testArrangementer, User.USER);
 
         List<Arrangement> afterChangeArrangementer = new ArrayList<>(DataHandler.getArrangementsData());
 
@@ -35,7 +35,7 @@ public class ArrrengementTests {
         List<Arrangement> testArrangementer = new ArrayList<>(DataHandler.getArrangementsData());
         testArrangementer.remove((testArrangementer).get(0));
 
-        new DataHandler().storeArrangementsData(testArrangementer, new ArrayList<>(), User.USER);
+        new DataHandler().storeArrangementsData(testArrangementer, User.USER);
 
         List<Arrangement> afterChangeArrangementer = new ArrayList<>(DataHandler.getArrangementsData());
 
@@ -46,12 +46,12 @@ public class ArrrengementTests {
     @Order(3)
     public void EndreArrangementTest() {
         List<Arrangement> testArrangementer = new ArrayList<>(DataHandler.getArrangementsData());
-        Arrangement endreArrangement = ((ArrayList<Arrangement>) testArrangementer).get(0);
+        Arrangement endreArrangement = testArrangementer.get(0);
         testArrangementer.remove(endreArrangement);
         endreArrangement.setName("Øskars Diverse");
         testArrangementer.add(endreArrangement);
 
-        new DataHandler().storeArrangementsData(testArrangementer, new ArrayList<>(), User.USER);
+        new DataHandler().storeArrangementsData(testArrangementer, User.USER);
 
         List<Arrangement> afterChangeArrangementer = new ArrayList<>(DataHandler.getArrangementsData());
 
@@ -63,7 +63,7 @@ public class ArrrengementTests {
         List<Arrangement> testArrangementer = new ArrayList<>(DataHandler.getArrangementsData());
         testArrangementer.add(new Arrangement("Børres Brokkoli mani","Annet",37,"Brokkolivegen 28", false, "2019-10-11", "2019-10-12","Masse spising og løing med brokkoli"));
 
-        new DataHandler().storeArrangementsData(testArrangementer, new ArrayList<>(), User.USER);
+        new DataHandler().storeArrangementsData(testArrangementer, User.USER);
     }
 
 }

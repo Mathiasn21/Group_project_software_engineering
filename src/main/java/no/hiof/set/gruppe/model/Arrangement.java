@@ -25,9 +25,9 @@ public class Arrangement {
     //                2.Local Fields                     //
     // --------------------------------------------------//
     private final String ID;
-    private String name, sport, adress, startDate, endDate, description;
+    private String name, sport, address, startDate, endDate, description;
     private int participants;
-    private boolean group;
+    private boolean group, deleted;
 
     // --------------------------------------------------//
     //                2.Constructors                     //
@@ -35,29 +35,30 @@ public class Arrangement {
     public Arrangement(){
         this("", "", 0, "", false);
     }
-    public Arrangement(String name, String sport, int participants, String adress, boolean gruppe){
-        this(name, sport, participants, adress, gruppe, null, null, "");
+    public Arrangement(String name, String sport, int participants, String address, boolean gruppe){
+        this(name, sport, participants, address, gruppe, null, null, "");
     }
 
     /**
      * @param name String
      * @param sport String
      * @param participants int
-     * @param adress String
+     * @param address String
      * @param gruppe boolean
      * @param startDate String
      * @param endDate String
      */
-    public Arrangement(String name, String sport, int participants, String adress, boolean gruppe, String startDate, String endDate, String description) {
+    public Arrangement(String name, String sport, int participants, String address, boolean gruppe, String startDate, String endDate, String description) {
         this.name = name;
         this.sport = sport;
         this.participants = participants;
-        this.adress = adress;
+        this.address = address;
         this.group = gruppe;
         this.startDate = startDate;
         this.endDate = endDate;
         this.description = description;
         ID = UUID.randomUUID().toString();
+        deleted = false;
     }
 
     // --------------------------------------------------//
@@ -79,10 +80,11 @@ public class Arrangement {
         return LocalDate.parse(endDate);
     }
     public String getAddress() {
-        return adress;
+        return address;
     }
     public String getID(){return ID;}
     public String getDescription() {return description;}
+    public boolean getDeleted(){return deleted;}
 
     // --------------------------------------------------//
     //                4.Setters                          //
@@ -97,12 +99,13 @@ public class Arrangement {
     public void setSport(String sport) {
         this.sport = sport;
     }
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAddress(String address) {
+        this.address = address;
     }
     public void setStartDate(String startDate) {this.startDate = startDate;}
     public void setEndDate(String endDate) {this.endDate = endDate;}
     public void setDescription(String description) {this.description = description;}
+    public void setIsDeleted(boolean deleted){this.deleted = deleted;}
 
     // --------------------------------------------------//
     //                5.Public Methods                   //
@@ -124,7 +127,7 @@ public class Arrangement {
                 group == that.group &&
                 name.equals(that.name) &&
                 sport.equals(that.sport) &&
-                adress.equals(that.adress) &&
+                address.equals(that.address) &&
                 startDate.equals(that.startDate) &&
                 endDate.equals(that.endDate) &&
                 description.equals(that.getDescription());
@@ -132,7 +135,7 @@ public class Arrangement {
 
     @Override
     public String toString(){
-        return name + " " + sport + " " + participants + " " + adress + " " + startDate + " til " + endDate + " " + description;
+        return name + " " + sport + " " + participants + " " + address + " " + startDate + " til " + endDate + " " + description;
     }
 }
 
