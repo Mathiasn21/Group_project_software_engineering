@@ -27,7 +27,6 @@ import java.util.*;
  */
 public class DataHandler implements IDataHandler {
 
-
     // --------------------------------------------------//
     //                2.Local Fields                     //
     // --------------------------------------------------//
@@ -45,7 +44,6 @@ public class DataHandler implements IDataHandler {
     // --------------------------------------------------//
     //                3.Private Static Methods           //
     // --------------------------------------------------//
-
     /**
      * Standard reading from a file. Utilizes a relative path given a filename.extension.
      * Files must exist in the top level directory.
@@ -115,24 +113,21 @@ public class DataHandler implements IDataHandler {
         return gson.toJson(array, type);
     }
 
-    @NotNull
-    private static List<UserConnectedArrangement>generateUserConnectedArrangements(@NotNull List<Arrangement> arrList, User user){
-        List<UserConnectedArrangement> result = new ArrayList<>();
-        for(Arrangement arr : arrList){
-            result.add(new UserConnectedArrangement(arr.getID(), user.getName()));
+    private static void deleteUserConnectedArrangements(String ID){
+        for (int i = 0; i < listOfAllUserConnectedArrangements.size(); i++){
+            UserConnectedArrangement userArr = listOfAllUserConnectedArrangements.get(i);
+            if(userArr.getID().equals(ID)){
+                listOfAllUserConnectedArrangements.remove(userArr);
+                i--;
+            }
         }
-        return result;
     }
-
     // --------------------------------------------------//
     //                4.Public Methods                   //
     // --------------------------------------------------//
     public static void deleteArrangement(Arrangement arrangement){
         listOfAllArrangements.remove(arrangement);
-    }
-
-    public static List<Arrangement> getArrangementsData(){
-        return listOfAllArrangements;
+        deleteUserConnectedArrangements(arrangement.getID());
     }
 
     public static void addArrangement(Arrangement arrangement, User user){
@@ -140,13 +135,8 @@ public class DataHandler implements IDataHandler {
         listOfAllUserConnectedArrangements.add(new UserConnectedArrangement(arrangement.getID(), user.getName()));
     }
 
-    /**
-     * Grabs the arrangement data from a file and converts
-     * those into a usable collection of arrangements.
-     * @return {@link List} ? extends {@link Arrangement}
-     */
-    private static List<Arrangement> readArrangementsData() {
-        return listFromJson(Arrangement[].class, readFromFile(arrangementFName));
+    public static List<Arrangement> getArrangementsData(){
+        return listOfAllArrangements;
     }
 
     public static List<Arrangement> getUserArrangements(User user) {
@@ -165,48 +155,30 @@ public class DataHandler implements IDataHandler {
         return result;
     }
 
-    private static List<UserConnectedArrangement> getUserConnectedArrangements() {
-        String jsonFromFile = readFromFile(userHasArrangements);
-        return listFromJson(UserConnectedArrangement[].class, jsonFromFile);
-    }
-
-    private static void storeUserArrangements(List<UserConnectedArrangement> listOfData){
-        List<UserConnectedArrangement> allUserConnData = new ArrayList<>(getUserConnectedArrangements());
-        for(UserConnectedArrangement userArr : listOfData){
-            for (UserConnectedArrangement userArrToComp : allUserConnData){
-                if(userArr.equals(userArrToComp)){
-                    allUserConnData.remove(userArrToComp);
-                    break;
-                }
-            }
-        }
-        listOfData.addAll(allUserConnData);
-        writeToFile(toJson(UserConnectedArrangement[].class,  listOfData.toArray(UserConnectedArrangement[]::new)), userHasArrangements);
+    /**
+     * Stores all arrangements and their user connection
+     */
+    @Override
+    public void storeArrangementsData() {
+        writeToFile(toJson(Arrangement[].class, listOfAllArrangements.toArray(Arrangement[]::new)), arrangementFName);
+        storeUserArrangements();
     }
 
     /**
-     * Converts a given list into json given a template,
-     * and the stores that string to a file.
-     * @param arrangements {@link List}<{@link Arrangement}>
+     * Grabs the arrangement data from a file and converts
+     * those into a usable collection of arrangements.
+     * @return {@link List} ? extends {@link Arrangement}
      */
-    @Override
-    public void storeArrangementsData(List<Arrangement> arrangements, User user) {
-        List<Arrangement> oldArrData = new ArrayList<>(getArrangementsData());
-        for(int i = 0; i < arrangements.size(); i++){
-            Arrangement newArr = arrangements.get(i);
-            for(Arrangement oldArr : oldArrData){
-                if(oldArr.getID().equals(newArr.getID()) ){
-                    oldArrData.remove(oldArr);
-                    break;
-                }
-            }
-            if(newArr.getDeleted()){
-                arrangements.remove(newArr);
-                i--;
-            }
-        }
-        oldArrData.addAll(arrangements);
-        writeToFile(toJson(Arrangement[].class, oldArrData.toArray(Arrangement[]::new)), arrangementFName);
-        storeUserArrangements(generateUserConnectedArrangements(arrangements, user));
+    private static List<Arrangement> readArrangementsData() {
+        return new ArrayList<>(listFromJson(Arrangement[].class, readFromFile(arrangementFName)));
+    }
+
+    private static List<UserConnectedArrangement> getUserConnectedArrangements() {
+        String jsonFromFile = readFromFile(userHasArrangements);
+        return new ArrayList<>(listOfAllUserConnectedArrangements = listFromJson(UserConnectedArrangement[].class, jsonFromFile));
+    }
+
+    private static void storeUserArrangements(){
+        writeToFile(toJson(UserConnectedArrangement[].class,  listOfAllUserConnectedArrangements.toArray(UserConnectedArrangement[]::new)), userHasArrangements);
     }
 }

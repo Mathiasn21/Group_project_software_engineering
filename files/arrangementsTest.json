@@ -1,24 +1,38 @@
 [
   {
-    "ID": 4864684,
-    "name": "ertyhtr",
-    "sport": "Annet",
-    "adress": "Hakkebakken 420",
-    "startDate": "2019-10-02",
-    "endDate": "2019-10-04",
-    "description": "",
-    "participants": 69,
-    "group": true
+    "ID": "1244313242",
+    "name": "Øskars Diverse",
+    "sport": "Skirenn",
+    "address": "",
+    "startDate": "2019-10-11",
+    "endDate": "2019-10-12",
+    "description": "Sumthin",
+    "participants": 40,
+    "group": false,
+    "deleted": false
   },
   {
-    "ID": 4138446,
-    "name": "yikes",
+    "ID": "1694876920",
+    "name": "Børres Brokkoli mani",
     "sport": "Annet",
-    "adress": "Oppibakken 15",
-    "startDate": "2019-10-02",
-    "endDate": "2019-10-04",
-    "description": "",
-    "participants": 420,
-    "group": true
+    "address": "",
+    "startDate": "2019-10-11",
+    "endDate": "2019-10-12",
+    "description": "Masse spising og løing med brokkoli",
+    "participants": 37,
+    "group": false,
+    "deleted": false
+  },
+  {
+    "ID": "c1c76db8-8e6f-45a5-b811-8aea20c17adb",
+    "name": "dwadaw",
+    "sport": "Annet",
+    "address": "wda",
+    "startDate": "2019-10-14",
+    "endDate": "2019-11-01",
+    "description": "dawdwa",
+    "participants": 22,
+    "group": true,
+    "deleted": false
   }
 ]

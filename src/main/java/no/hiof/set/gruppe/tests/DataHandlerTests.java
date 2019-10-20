@@ -20,10 +20,6 @@ public class DataHandlerTests {
 
     @AfterAll
     public static void CleanUp() {
-        ArrayList<Arrangement> cleanUpArrangementer = new ArrayList<>();
-        cleanUpArrangementer.add(new Arrangement("Børres langrenn","Skirenn",40,"Walkersgate 8",false, "2019-10-11","2019-10-12","Sumthin"));
-        cleanUpArrangementer.add(new Arrangement("Oskars diverse","Annet",72,"Hakkebakkeskogen 73",false, "2019-11-11","2019-11-12","Sumthin else"));
-        new DataHandler().storeArrangementsData(cleanUpArrangementer, User.USER);
     }
 
 
@@ -36,12 +32,5 @@ public class DataHandlerTests {
 
     @Test
     public void writeToJsonTest() {
-        ArrayList<Arrangement> beforeSaveArrangementer = new ArrayList<>(DataHandler.getArrangementsData());
-        beforeSaveArrangementer.add(new Arrangement("Børres langrenn","Skirenn",40,"Walkersgate 8",false, "2019-10-11","2019-10-12","Suuumthin"));
-
-        new DataHandler().storeArrangementsData(beforeSaveArrangementer, User.USER);
-        ArrayList<Arrangement> afterSaveArrangementer = new ArrayList<>(DataHandler.getArrangementsData());
-
-        assertTrue("These two arrays are different",beforeSaveArrangementer.equals(afterSaveArrangementer));
     }
 }

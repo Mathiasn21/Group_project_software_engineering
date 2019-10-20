@@ -82,8 +82,7 @@ public class OrganizerController extends Controller {
     }
 
     private void onDelete(ActionEvent event){
-        if(listview.getSelectionModel().getSelectedItem() == null)
-            return;
+        if(listview.getSelectionModel().getSelectedItem() == null) return;
         deleteArrangement();
     }
 
@@ -93,11 +92,11 @@ public class OrganizerController extends Controller {
 
     private void changedView(){
         Arrangement arrangement = listview.getSelectionModel().getSelectedItem();
-        if(currentArrangement == null || !currentArrangement.equals(arrangement)){
+        if(currentArrangement == null){
             currentArrangement = arrangement;
-            setInformationAboutArrangementInView();
-            listview.refresh();
         }
+        setInformationAboutArrangementInView();
+        listview.refresh();
     }
 
     private void setupActionHandlers() {
@@ -195,9 +194,11 @@ public class OrganizerController extends Controller {
     @Override
     public void setDataFields(Object object) throws DataFormatException {
         if (!(object instanceof Arrangement)) throw new DataFormatException();
+        Arrangement arrangement = (Arrangement) object;
 
         MultipleSelectionModel selModel = listview.getSelectionModel();
-        arrangementListObservable.add((Arrangement) object);
+        arrangementListObservable.add(arrangement);
+        DataHandler.addArrangement(arrangement, User.ORGANIZER);
         if(selModel.getSelectedItem() == null) selModel.selectLast();
         listview.refresh();
         changedView();
@@ -205,7 +206,7 @@ public class OrganizerController extends Controller {
 
     @Override
     public void onCloseStoreInformation() {
-        new DataHandler().storeArrangementsData(arrangementListObservable, User.ORGANIZER);
+        new DataHandler().storeArrangementsData();
     }
 
     @Override
