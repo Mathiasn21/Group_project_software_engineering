@@ -92,7 +92,6 @@ public class OrganizerController extends Controller {
     // --------------------------------------------------//
     //                5.Private Methods                  //
     // --------------------------------------------------//
-
     private void changedView(){
         Arrangement arrangement = listview.getSelectionModel().getSelectedItem();
         if(currentArrangement == null){
