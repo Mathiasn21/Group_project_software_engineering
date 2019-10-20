@@ -64,12 +64,13 @@ public class UserController extends Controller{
     //                4.On Action Methods                //
     // --------------------------------------------------//
     private void onJoinClick(ActionEvent actionEvent){
+        if(currentAvailableArrangement == null)return;
         myObservableArrangements.add(selectedArrangement());
         availableObservableArrangements.remove(selectedArrangement());
-        //add userConnectection
     }
 
     private void onLeaveClick(ActionEvent actionEvent){
+        if(currentSelectedMyArrangement == null)return;
         availableObservableArrangements.add(selectedArrangement());
         myObservableArrangements.remove(myArrangementsTreeView.getSelectionModel().getSelectedItem().getValue());
     }
