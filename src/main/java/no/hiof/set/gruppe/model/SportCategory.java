@@ -5,6 +5,7 @@ package no.hiof.set.gruppe.model;
  */
 public enum SportCategory {
 
+    ALL("Alle"),
     OTHER("Annet"),
     BICYCLING("Sykkelritt"),
     SKIING("Skirenn"),
@@ -12,7 +13,6 @@ public enum SportCategory {
     ;
 
     String category;
-    int id;
     SportCategory(String category){
         this.category = category;
     }

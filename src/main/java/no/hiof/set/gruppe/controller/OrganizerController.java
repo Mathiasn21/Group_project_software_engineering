@@ -23,6 +23,7 @@ import javafx.stage.Stage;
 import no.hiof.set.gruppe.Exceptions.DataFormatException;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.data.DataHandler;
+import no.hiof.set.gruppe.model.SportCategory;
 import no.hiof.set.gruppe.model.User;
 
 import java.net.URL;
@@ -56,7 +57,9 @@ public class OrganizerController extends Controller {
     @FXML
     private TextField arrSearch;
     @FXML
-    private ListView<Arrangement>listview = new ListView<>();
+    private ChoiceBox<SportCategory> sortOptions;
+    @FXML
+    private ListView<Arrangement>listview;
 
     // --------------------------------------------------//
     //                4.On Action Methods                //
@@ -105,6 +108,7 @@ public class OrganizerController extends Controller {
         newArrangementBtn.setOnAction(this::onClick);
         listview.setOnMouseClicked(this::onClickListView);
         arrSearch.setOnAction(this::search);
+        sortOptions.setOnAction(this::search);
         logOut.setOnAction(this::returnToMainWindow);
     }
 
@@ -116,6 +120,7 @@ public class OrganizerController extends Controller {
 
     /**
      * Returns a Boolean based on if the Arrangement name contains
+     * And is in same category
      * the given search string.
      * @param arrangement Arrangement
      * @return boolean
@@ -123,13 +128,23 @@ public class OrganizerController extends Controller {
     private boolean lowerCaseTitleSearch(Arrangement arrangement){
         String title = arrangement.getName().toLowerCase();
         String search = arrSearch.getText().toLowerCase();
-        return title.contains(search);
+        return title.contains(search) && categoryMatch(arrangement);
+    }
+
+    private boolean categoryMatch(Arrangement arrangement) {
+        SportCategory category = sortOptions.getSelectionModel().getSelectedItem();
+        return category.equals(SportCategory.ALL) || arrangement.getSport().equals(category.toString());
     }
 
     private void populateListView() {
         arrangementListObservable = FXCollections.observableArrayList(DataHandler.getUserArrangements(User.ORGANIZER));
         setupFilteredList();
         listview.refresh();
+    }
+
+    private void populateSportCategories() {
+        sortOptions.setItems(FXCollections.observableArrayList(SportCategory.values()));
+        sortOptions.getSelectionModel().select(SportCategory.ALL);
     }
 
     private void deleteArrangement(){
@@ -219,5 +234,6 @@ public class OrganizerController extends Controller {
     public void initialize(URL location, ResourceBundle resources) {
         setupActionHandlers();
         populateListView();
+        populateSportCategories();
     }
 }
