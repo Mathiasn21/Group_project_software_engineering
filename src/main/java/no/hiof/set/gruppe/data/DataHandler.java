@@ -130,14 +130,22 @@ public class DataHandler implements IDataHandler {
         deleteUserConnectedArrangements(arrangement.getID());
     }
 
+    public static void deleteUserFromArrangement(Arrangement arrangement,User user){
+        arrangement.setParticipants(arrangement.getParticipants()-1);
+    }
+
+    public static void addUserToArrangement(Arrangement arrangement, User user){
+        arrangement.setParticipants(arrangement.getParticipants()+1);
+        listOfAllUserConnectedArrangements.add(new UserConnectedArrangement(arrangement.getID(), user.getName()));
+    }
+
+
     public static void addArrangement(Arrangement arrangement, User user){
         listOfAllArrangements.add(arrangement);
         listOfAllUserConnectedArrangements.add(new UserConnectedArrangement(arrangement.getID(), user.getName()));
     }
 
-    public static List<Arrangement> getArrangementsData(){
-        return listOfAllArrangements;
-    }
+    public static List<Arrangement> getArrangementsData(){ return new ArrayList<>(listOfAllArrangements); }
 
     public static List<Arrangement> getUserArrangements(User user) {
         List<Arrangement> result = new ArrayList<>();

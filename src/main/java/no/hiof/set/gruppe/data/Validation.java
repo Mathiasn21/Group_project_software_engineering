@@ -2,6 +2,8 @@ package no.hiof.set.gruppe.data;
 
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.ValidationResult;
+import org.jetbrains.annotations.Contract;
+
 import java.time.LocalDate;
 import java.util.regex.Pattern;
 
@@ -49,6 +51,7 @@ public class Validation{
      * @param max int
      * @return boolean
      */
+    @Contract(pure = true)
     private static boolean isBetween(int min, int max, int numToTest){return min <= numToTest && numToTest <= max;}
 
     /**

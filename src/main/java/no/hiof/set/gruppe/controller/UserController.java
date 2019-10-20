@@ -17,12 +17,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import no.hiof.set.gruppe.Exceptions.DataFormatException;
@@ -30,8 +26,9 @@ import no.hiof.set.gruppe.data.DataHandler;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.User;
 
-import java.awt.event.MouseEvent;
 import java.net.URL;
+import java.time.LocalDate;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class UserController extends Controller{
@@ -40,16 +37,20 @@ public class UserController extends Controller{
     // --------------------------------------------------//
 
     private String title, name = "";
-    private ObservableList<Arrangement> arrangementListObservableJoined, arrangementListObservableAvailable, arrangementListObservableFinished;
-    private FilteredList<Arrangement> filteredList, joinedFilteredList;
-    private Arrangement currentSelectedArrangement = null;
+    private ObservableList<Arrangement> myObservableArrangements, availableObservableArrangements;
+    private ObservableList<TreeItem<Object>> observableExpiredLayer = FXCollections.observableArrayList(), observableOngoingLayer = FXCollections.observableArrayList();
+    private FilteredList<Arrangement> availableFiltered, myFiltered;
+    private Arrangement currentAvailableArrangement = null;
+    private Arrangement currentSelectedMyArrangement = null;
 
     // --------------------------------------------------//
     //                3.FXML Fields                      //
     // --------------------------------------------------//
 
     @FXML
-    private ListView<Arrangement> finishedArrangementsListView, availableArrangementsListView = new ListView<>(), joinedArrangementsListView, myArrangementsListView = new ListView<>();
+    private ListView<Arrangement>availableArrangementsListView;
+    @FXML
+    private TreeView<Object> myArrangementsTreeView;
     @FXML
     private Text arrangementTitle, arrangementSport,arrangementAddress,arrangementDate,arrangementParticipants,arrangementGroup, arrangementDescription;
     @FXML
@@ -62,21 +63,32 @@ public class UserController extends Controller{
     // --------------------------------------------------//
     //                4.On Action Methods                //
     // --------------------------------------------------//
-
     private void onJoinClick(ActionEvent actionEvent){
-        arrangementListObservableJoined.add(selectedArrangement(availableArrangementsListView));
-        arrangementListObservableAvailable.remove(selectedArrangement(availableArrangementsListView));
+        myObservableArrangements.add(selectedArrangement());
+        availableObservableArrangements.remove(selectedArrangement());
+        //add userConnectection
     }
 
     private void onLeaveClick(ActionEvent actionEvent){
-        arrangementListObservableAvailable.add(selectedArrangement(myArrangementsListView));
-        arrangementListObservableJoined.remove(selectedArrangement(myArrangementsListView));
+        availableObservableArrangements.add(selectedArrangement());
+        myObservableArrangements.remove(myArrangementsTreeView.getSelectionModel().getSelectedItem().getValue());
+    }
+
+    private void onClickListView(ActionEvent event){
+        Arrangement selectedItem = selectedArrangement();
+        if(selectedItem == null){return;}
+        currentAvailableArrangement = selectedItem;
+    }
+
+    private void onClickTreeView(ActionEvent event){
+        Object selectedItem = myArrangementsTreeView.getSelectionModel().getSelectedItem().getValue();
+        if(!(selectedItem instanceof Arrangement)){return;}
+        currentSelectedMyArrangement = (Arrangement)selectedItem;
     }
 
     // --------------------------------------------------//
     //                5.Private Methods                  //
     // --------------------------------------------------//
-
     private void returnToMainWindow(ActionEvent event) {
         title = "Logg inn";
         name = "Login.fxml";
@@ -84,63 +96,72 @@ public class UserController extends Controller{
         createNewView(this);
     }
 
-    private Arrangement selectedArrangement(ListView <Arrangement> arr){
-        return arr.getSelectionModel().getSelectedItem();
+    private Arrangement selectedArrangement(){
+        return availableArrangementsListView.getSelectionModel().getSelectedItem();
     }
 
     private void setupActionHandlers(){
         joinBtn.setOnAction(this::onJoinClick);
         leaveBtn.setOnAction(this::onLeaveClick);
+        logOut.setOnAction(this::returnToMainWindow);
     }
 
-    private void populateAvailableArrangementListView(){
-        arrangementListObservableAvailable = FXCollections.observableArrayList(DataHandler.getArrangementsData());
+    private void setArrangementListInformation() {
+        List<Arrangement> allArrang = DataHandler.getArrangementsData();
+        List<Arrangement> userConnectedArrangements = DataHandler.getUserArrangements(User.USER);
+
+        allArrang.removeAll(userConnectedArrangements);
         //setUpFilteredList();
+        availableObservableArrangements = FXCollections.observableArrayList(allArrang);
+        myObservableArrangements = FXCollections.observableArrayList(userConnectedArrangements);
+    }
+
+    private void setupListView(){
+        myFiltered = availableObservableArrangements.filtered(arrangement -> true);
+        availableArrangementsListView.setItems(myFiltered);
         availableArrangementsListView.refresh();
     }
 
-    private void setUpFilteredListAvailable(){
-        filteredList = arrangementListObservableAvailable.filtered(arrangement -> true);
-        availableArrangementsListView.setItems(filteredList);
+    private void populateMyArrangemenTreeView() {
+        TreeItem<Object> root = new TreeItem<>();
+        TreeItem<Object> myExpiredTopNode = new TreeItem<>(new ArrangementTopNode("Expirert"));
+        TreeItem<Object> myOngoingTopNode = new TreeItem<>(new ArrangementTopNode("Pågående"));
+
+        myArrangementsTreeView.setShowRoot(false);
+        myArrangementsTreeView.setRoot(root);
+        root.setExpanded(true);
+
+        //generate TreeItems containing Arrangements
+        for(Arrangement arrangement : myObservableArrangements){
+            TreeItem<Object> arrangementTreeItem = new TreeItem<>(arrangement);
+
+            if(arrangement.getEndDate().isBefore(LocalDate.now())) observableExpiredLayer.add(arrangementTreeItem);
+            else observableOngoingLayer.add(arrangementTreeItem);
+        }
+
+        FilteredList<TreeItem<Object>> filteredExpiredLayer = new FilteredList<>(observableExpiredLayer, item -> true);
+        FilteredList<TreeItem<Object>> filteredOngoingLayer = new FilteredList<>(observableOngoingLayer, item -> true);
+
+        myExpiredTopNode.getChildren().addAll(filteredExpiredLayer);
+        myOngoingTopNode.getChildren().addAll(filteredOngoingLayer);
+
+        root.getChildren().add(myExpiredTopNode);
+        root.getChildren().add(myOngoingTopNode);
+
+        myArrangementsTreeView.refresh();
     }
-
-    private void populateJoinedArrangementListView() {
-        arrangementListObservableJoined = FXCollections.observableArrayList();
-        setUpFilteredListJoined();
-        myArrangementsListView.refresh();
-    }
-
-    private void setUpFilteredListJoined() {
-        joinedFilteredList = arrangementListObservableJoined.filtered(arrangement -> true);
-        myArrangementsListView.setItems(joinedFilteredList);
-    }
-
-
-    /*
-    //Needs Rework
-    private void populateListView() {
-        arrangementListObservableJoined = FXCollections.observableArrayList(DataHandler.getUserArrangements(User.USER));
-        joinedArrangementsListView.setItems(arrangementListObservableJoined);
-
-        arrangementListObservableAvailable = FXCollections.observableArrayList(DataHandler.getUserArrangements(User.USER));
-        availableArrangementsListView.setItems(arrangementListObservableAvailable);
-
-        joinedArrangementsListView.refresh();
-        availableArrangementsListView.refresh();
-    }
-    */
 
     // --------------------------------------------------//
     //                6.Overridden Methods               //
     // --------------------------------------------------//
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        logOut.setOnAction(this::returnToMainWindow);
-        populateAvailableArrangementListView();
-        populateJoinedArrangementListView();
+        setArrangementListInformation();
+        populateMyArrangemenTreeView();
+        setupListView();
         setupActionHandlers();
     }
+
 
     @Override
     public Object getDataObject() {
@@ -152,13 +173,25 @@ public class UserController extends Controller{
 
     }
 
+    //change and create a new data object pertaining the view information
     @Override
-    public String getTitle() {
-        return title;
-    }
+    public String getTitle() {return title;}
 
     @Override
-    public String getName() {
-        return name;
+    public String getName() {return name;}
+
+    // --------------------------------------------------//
+    //                6.Inner Class                      //
+    // --------------------------------------------------//
+
+    private static class ArrangementTopNode{
+        private final String name;
+
+        ArrangementTopNode(String name){
+            this.name = name;
+        }
+
+        @Override
+        public String toString(){return name;}
     }
 }

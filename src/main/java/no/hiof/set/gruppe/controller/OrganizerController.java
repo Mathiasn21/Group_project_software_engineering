@@ -101,6 +101,11 @@ public class OrganizerController extends Controller {
         listview.refresh();
     }
 
+    private void onClickListView(MouseEvent mouseEvent) {
+        changedView();
+        listview.refresh();
+    }
+
     private void setupActionHandlers() {
         deleteBtn.setOnAction(this::onDelete);
         editBtn.setOnAction(this::onEditClick);
@@ -153,10 +158,6 @@ public class OrganizerController extends Controller {
         listview.getSelectionModel().selectFirst();
     }
 
-    private void onClickListView(MouseEvent mouseEvent) {
-        changedView();
-        listview.refresh();
-    }
 
     private void setInformationAboutArrangementInView(){
         if(currentArrangement == null)return;
