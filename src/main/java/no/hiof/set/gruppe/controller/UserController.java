@@ -19,6 +19,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import no.hiof.set.gruppe.Exceptions.DataFormatException;
@@ -41,7 +42,7 @@ public class UserController extends Controller{
     private ObservableList<TreeItem<Object>> observableExpiredLayer = FXCollections.observableArrayList(), observableOngoingLayer = FXCollections.observableArrayList();
     private FilteredList<Arrangement> availableFiltered, myFiltered;
     private Arrangement currentAvailableArrangement = null;
-    private Arrangement currentSelectedMyArrangement = null;
+    private TreeItem<Object> currentSelectedMyArrangement = null;
 
     // --------------------------------------------------//
     //                3.FXML Fields                      //
@@ -65,26 +66,39 @@ public class UserController extends Controller{
     // --------------------------------------------------//
     private void onJoinClick(ActionEvent actionEvent){
         if(currentAvailableArrangement == null)return;
-        myObservableArrangements.add(selectedArrangement());
-        availableObservableArrangements.remove(selectedArrangement());
+        myObservableArrangements.add(currentAvailableArrangement);
+        availableObservableArrangements.remove(currentAvailableArrangement);
+
+        currentSelectedMyArrangement = new TreeItem<>(currentAvailableArrangement);
+        currentAvailableArrangement = null;
+        myArrangementsTreeView.getSelectionModel().selectLast();
+        updateView();
     }
 
     private void onLeaveClick(ActionEvent actionEvent){
         if(currentSelectedMyArrangement == null)return;
-        availableObservableArrangements.add(selectedArrangement());
-        myObservableArrangements.remove(myArrangementsTreeView.getSelectionModel().getSelectedItem().getValue());
+        availableObservableArrangements.add((Arrangement) currentSelectedMyArrangement.getValue());
+        observableOngoingLayer.remove(currentSelectedMyArrangement);
+        updateView();
+
+        TreeItem item = myArrangementsTreeView.getSelectionModel().getSelectedItem();
+        item.getParent().getChildren().remove(item);
+
+        currentAvailableArrangement = (Arrangement) currentSelectedMyArrangement.getValue();
+        currentSelectedMyArrangement = null;
+        availableArrangementsListView.getSelectionModel().selectLast();
     }
 
-    private void onClickListView(ActionEvent event){
+    private void onClickListView(MouseEvent event){
         Arrangement selectedItem = selectedArrangement();
         if(selectedItem == null){return;}
         currentAvailableArrangement = selectedItem;
     }
 
-    private void onClickTreeView(ActionEvent event){
-        Object selectedItem = myArrangementsTreeView.getSelectionModel().getSelectedItem().getValue();
-        if(!(selectedItem instanceof Arrangement)){return;}
-        currentSelectedMyArrangement = (Arrangement)selectedItem;
+    private void onClickTreeView(MouseEvent event){
+        TreeItem<Object> selectedItem = myArrangementsTreeView.getSelectionModel().getSelectedItem();
+        if(!(selectedItem.getValue() instanceof Arrangement)){return;}
+        currentSelectedMyArrangement = selectedItem;
     }
 
     // --------------------------------------------------//
@@ -102,6 +116,8 @@ public class UserController extends Controller{
     }
 
     private void setupActionHandlers(){
+        availableArrangementsListView.setOnMouseClicked(this::onClickListView);
+        myArrangementsTreeView.setOnMouseClicked(this::onClickTreeView);
         joinBtn.setOnAction(this::onJoinClick);
         leaveBtn.setOnAction(this::onLeaveClick);
         logOut.setOnAction(this::returnToMainWindow);
@@ -163,6 +179,11 @@ public class UserController extends Controller{
         setupActionHandlers();
     }
 
+    @Override
+    public void updateView(){
+        availableArrangementsListView.refresh();
+        myArrangementsTreeView.refresh();
+    }
 
     @Override
     public Object getDataObject() {
