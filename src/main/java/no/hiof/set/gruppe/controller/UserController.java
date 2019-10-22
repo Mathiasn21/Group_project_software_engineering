@@ -38,6 +38,7 @@ public class UserController extends Controller{
     // --------------------------------------------------//
 
     private String title, name = "";
+    private FilteredList<TreeItem<Object>> filteredOngoingLayer;
     private ObservableList<Arrangement> myObservableArrangements, availableObservableArrangements;
     private ObservableList<TreeItem<Object>> observableExpiredLayer = FXCollections.observableArrayList(), observableOngoingLayer = FXCollections.observableArrayList();
     private FilteredList<Arrangement> availableFiltered, myFiltered;
@@ -66,11 +67,13 @@ public class UserController extends Controller{
     // --------------------------------------------------//
     private void onJoinClick(ActionEvent actionEvent){
         if(currentAvailableArrangement == null)return;
-        myObservableArrangements.add(currentAvailableArrangement);
         availableObservableArrangements.remove(currentAvailableArrangement);
 
         currentSelectedMyArrangement = new TreeItem<>(currentAvailableArrangement);
+        myArrangementsTreeView.getRoot().getChildren().get(1).getChildren().add(currentSelectedMyArrangement);
+
         currentAvailableArrangement = null;
+        observableOngoingLayer.add(currentSelectedMyArrangement);
         myArrangementsTreeView.getSelectionModel().selectLast();
         updateView();
     }
@@ -104,6 +107,26 @@ public class UserController extends Controller{
     // --------------------------------------------------//
     //                5.Private Methods                  //
     // --------------------------------------------------//
+    private void search(ActionEvent actionEvent){
+        myFiltered.setPredicate(this::lowerCaseTitleSearch);
+        myArrangementsTreeView.getRoot()(filteredList);
+        listview.refresh();
+    }
+
+    /**
+     * Returns a Boolean based on if the Arrangement name contains
+     * And is in same category
+     * the given search string.
+     * @param arrangement Arrangement
+     * @return boolean
+     */
+    private boolean lowerCaseTitleSearch(Arrangement arrangement){
+        String title = arrangement.getName().toLowerCase();
+        String search = joinedSearch.getText().toLowerCase();
+        return title.contains(search);
+    }
+
+
     private void returnToMainWindow(ActionEvent event) {
         title = "Logg inn";
         name = "Login.fxml";
@@ -118,6 +141,7 @@ public class UserController extends Controller{
     private void setupActionHandlers(){
         availableArrangementsListView.setOnMouseClicked(this::onClickListView);
         myArrangementsTreeView.setOnMouseClicked(this::onClickTreeView);
+        joinedSearch.setOnAction(this::search);
         joinBtn.setOnAction(this::onJoinClick);
         leaveBtn.setOnAction(this::onLeaveClick);
         logOut.setOnAction(this::returnToMainWindow);
