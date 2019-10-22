@@ -18,7 +18,7 @@ import java.util.UUID;
  * Arrangement holds information about a possible arrangement.
  * @author Gruppe4
  */
-public class Arrangement {
+public class Arrangement implements IArrangementSortering {
 
 
     // --------------------------------------------------//
@@ -136,6 +136,26 @@ public class Arrangement {
     @Override
     public String toString(){
         return name + " " + sport + " " + participants + " " + address + " " + startDate + " til " + endDate + " " + description;
+    }
+
+    @Override
+    public int compareName(Arrangement comparingArr, boolean Ascending) {
+        return 0;
+    }
+
+    @Override
+    public int compareDate(Arrangement comparingArr, boolean Ascending) {
+        return 0;
+    }
+
+    @Override
+    public int compareParticipants(Arrangement comparingArr, boolean Ascending) {
+        return 0;
+    }
+
+    @Override
+    public int compareSport(Arrangement comparingArr, boolean Ascending) {
+        return 0;
     }
 }
 
