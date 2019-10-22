@@ -140,12 +140,17 @@ public class Arrangement implements IArrangementSortering {
 
     @Override
     public int compareName(Arrangement comparingArr, boolean Ascending) {
-        return 0;
+        int result;
+        result = this.getName().compareTo(comparingArr.getName());
+
+        if(!Ascending)
+            result *= -1;
+
+        return result;
     }
 
     @Override
     public int compareDate(Arrangement comparingArr, boolean Ascending) {
-
         int result;
 
         if(this.getStartDate().isBefore(comparingArr.getStartDate()))
@@ -174,7 +179,13 @@ public class Arrangement implements IArrangementSortering {
 
     @Override
     public int compareSport(Arrangement comparingArr, boolean Ascending) {
-        return 0;
+        int result;
+        result = this.getSport().compareTo(comparingArr.getSport());
+
+        if(!Ascending)
+            result *= -1;
+
+        return result;
     }
 }
 
