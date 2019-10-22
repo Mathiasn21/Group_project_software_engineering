@@ -145,16 +145,31 @@ public class Arrangement implements IArrangementSortering {
 
     @Override
     public int compareDate(Arrangement comparingArr, boolean Ascending) {
+
+        int result;
+
         if(this.getStartDate().isBefore(comparingArr.getStartDate()))
-            return 1;
-        if(this.getStartDate().isAfter(comparingArr.getStartDate()))
-            return -1;
-        return 0;
+            result = 1;
+        else if(this.getStartDate().isAfter(comparingArr.getStartDate()))
+            result = -1;
+        else
+            result = 0;
+
+        if(!Ascending)
+            result *= -1;
+
+        return result;
     }
 
     @Override
     public int compareParticipants(Arrangement comparingArr, boolean Ascending) {
-        return this.getParticipants() - comparingArr.getParticipants();
+        int result;
+        result = this.getParticipants() - comparingArr.getParticipants();
+
+        if(!Ascending)
+            result *= -1;
+
+        return result;
     }
 
     @Override
