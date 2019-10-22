@@ -29,6 +29,7 @@ import no.hiof.set.gruppe.model.User;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -38,12 +39,10 @@ public class UserController extends Controller{
     // --------------------------------------------------//
 
     private String title, name = "";
-    private FilteredList<TreeItem<Object>> filteredOngoingLayer;
     private ObservableList<Arrangement> myObservableArrangements, availableObservableArrangements;
-    private ObservableList<TreeItem<Object>> observableExpiredLayer = FXCollections.observableArrayList(), observableOngoingLayer = FXCollections.observableArrayList();
     private FilteredList<Arrangement> availableFiltered, myFiltered;
     private Arrangement currentAvailableArrangement = null;
-    private TreeItem<Object> currentSelectedMyArrangement = null;
+    private Arrangement currentSelectedMyArrangement = null;
 
     // --------------------------------------------------//
     //                3.FXML Fields                      //
@@ -52,7 +51,7 @@ public class UserController extends Controller{
     @FXML
     private ListView<Arrangement>availableArrangementsListView;
     @FXML
-    private TreeView<Object> myArrangementsTreeView;
+    private ListView<Arrangement> myArrangementsTreeView;
     @FXML
     private Text arrangementTitle, arrangementSport,arrangementAddress,arrangementDate,arrangementParticipants,arrangementGroup, arrangementDescription;
     @FXML
@@ -147,11 +146,13 @@ public class UserController extends Controller{
         logOut.setOnAction(this::returnToMainWindow);
     }
 
+
     private void setArrangementListInformation() {
         List<Arrangement> allArrang = DataHandler.getArrangementsData();
         List<Arrangement> userConnectedArrangements = DataHandler.getUserArrangements(User.USER);
 
-        allArrang.removeAll(userConnectedArrangements);
+        allArrang.removeAll(userConnectedArrangements);allArrang.sort();
+        Comparator.comparing()
         //setUpFilteredList();
         availableObservableArrangements = FXCollections.observableArrayList(allArrang);
         myObservableArrangements = FXCollections.observableArrayList(userConnectedArrangements);
@@ -164,30 +165,6 @@ public class UserController extends Controller{
     }
 
     private void populateMyArrangemenTreeView() {
-        TreeItem<Object> root = new TreeItem<>();
-        TreeItem<Object> myExpiredTopNode = new TreeItem<>(new ArrangementTopNode("Expirert"));
-        TreeItem<Object> myOngoingTopNode = new TreeItem<>(new ArrangementTopNode("Pågående"));
-
-        myArrangementsTreeView.setShowRoot(false);
-        myArrangementsTreeView.setRoot(root);
-        root.setExpanded(true);
-
-        //generate TreeItems containing Arrangements
-        for(Arrangement arrangement : myObservableArrangements){
-            TreeItem<Object> arrangementTreeItem = new TreeItem<>(arrangement);
-
-            if(arrangement.getEndDate().isBefore(LocalDate.now())) observableExpiredLayer.add(arrangementTreeItem);
-            else observableOngoingLayer.add(arrangementTreeItem);
-        }
-
-        FilteredList<TreeItem<Object>> filteredExpiredLayer = new FilteredList<>(observableExpiredLayer, item -> true);
-        FilteredList<TreeItem<Object>> filteredOngoingLayer = new FilteredList<>(observableOngoingLayer, item -> true);
-
-        myExpiredTopNode.getChildren().addAll(filteredExpiredLayer);
-        myOngoingTopNode.getChildren().addAll(filteredOngoingLayer);
-
-        root.getChildren().add(myExpiredTopNode);
-        root.getChildren().add(myOngoingTopNode);
 
         myArrangementsTreeView.refresh();
     }
