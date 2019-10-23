@@ -254,7 +254,7 @@ public class UserController extends Controller{
 
             if(ne.equals(radioExp))leaveBtn.setDisable(true);
             else leaveBtn.setDisable(false);
-            
+
             search(new ActionEvent());
         });
 
