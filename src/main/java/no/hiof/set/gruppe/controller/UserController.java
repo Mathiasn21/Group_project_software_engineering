@@ -42,6 +42,8 @@ public class UserController extends Controller{
     private FilteredList<Arrangement> availableFiltered, myFiltered;
     private Arrangement currentAvailableArrangement = null;
     private Arrangement currentSelectedMyArrangement = null;
+    private Arrangement currentSelectedArrangement;
+    private Text[] allTextFields;
 
     private final ToggleGroup radioBtns = new ToggleGroup();
     // --------------------------------------------------//
@@ -88,12 +90,14 @@ public class UserController extends Controller{
         Arrangement selectedItem = availableArrangementsListView.getSelectionModel().getSelectedItem();
         if(selectedItem == null){return;}
         currentAvailableArrangement = selectedItem;
+        currentSelectedArrangement = currentAvailableArrangement;
     }
 
     private void onClickMyView(MouseEvent event){
         Arrangement selectedItem = myArrangementsView.getSelectionModel().getSelectedItem();
         if(selectedItem == null){return;}
         currentSelectedMyArrangement = selectedItem;
+        currentSelectedArrangement = currentSelectedMyArrangement;
     }
 
     // --------------------------------------------------//
@@ -128,9 +132,10 @@ public class UserController extends Controller{
     private boolean lowerCaseTitleSearch(Arrangement arrangement){
         String title = arrangement.getName().toLowerCase();
         String search = searchAv.getText().toLowerCase();
+        RadioPredicate predicate = ((RadioPredicate)radioBtns.getUserData());
         return title.contains(search) &&
-                categoryMatch(arrangement) && 
-                ((RadioPredicate)radioBtns.getUserData()).execute(arrangement.getStartDate(), arrangement.getEndDate());
+                categoryMatch(arrangement) &&
+                predicate.execute(arrangement.getStartDate(), arrangement.getEndDate());
     }
 
     /**
@@ -165,10 +170,6 @@ public class UserController extends Controller{
         createNewView(this);
     }
 
-    private Arrangement selectedArrangement(){
-        return availableArrangementsListView.getSelectionModel().getSelectedItem();
-    }
-
     private void setupActionHandlers(){
         availableArrangementsListView.setOnMouseClicked(this::onClickListView);
         myArrangementsView.setOnMouseClicked(this::onClickMyView);
@@ -179,6 +180,16 @@ public class UserController extends Controller{
         logOut.setOnAction(this::returnToMainWindow);
     }
 
+    private void setDataFields(){
+        if(currentSelectedArrangement == null){return;}
+        arrangementTitle.setText(currentSelectedArrangement.getName());
+        arrangementSport.setText(currentSelectedArrangement.getSport());
+        arrangementAddress.setText(currentSelectedArrangement.getAddress());
+        arrangementDate.setText(currentSelectedArrangement.getStartDate().toString());
+        arrangementParticipants.setText(String.valueOf(currentSelectedArrangement.getParticipants()));
+        arrangementGroup.setText(currentSelectedArrangement.getSport());
+        arrangementDescription.setText(currentSelectedArrangement.getDescription());
+    }
 
     private void setArrangementListInformation() {
         List<Arrangement> allArrang = DataHandler.getArrangementsData();
@@ -214,13 +225,13 @@ public class UserController extends Controller{
         populateMyArrangementView();
         setupListView();
         setupActionHandlers();
+        setDataFields();
+
+        //Should be extracted
         radioFut.setToggleGroup(radioBtns);
         radioFut.setUserData(RadioPredicate.TestBefore);
         radioExp.setToggleGroup(radioBtns);
-
         radioOng.setToggleGroup(radioBtns);
-
-
         radioBtns.selectedToggleProperty().addListener((value, old, ne) -> {
             if(old == null || ne == null) return;
             old.setSelected(false);
