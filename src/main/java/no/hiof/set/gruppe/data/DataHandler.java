@@ -35,7 +35,7 @@ public class DataHandler {
     private static List<Arrangement> listOfAllArrangements;
     private static List<UserConnectedArrangement> listOfAllUserConnectedArrangements;
 
-    //Preloads the data.
+    //Preloads data.
     static{
         listOfAllArrangements = readArrangementsData();
         listOfAllUserConnectedArrangements = getUserConnectedArrangements();
@@ -132,6 +132,13 @@ public class DataHandler {
 
     public static void deleteUserFromArrangement(Arrangement arrangement,User user){
         arrangement.setParticipants(arrangement.getParticipants()-1);
+        for(int i = 0; i < listOfAllUserConnectedArrangements.size(); i++){
+            UserConnectedArrangement userArrangement = listOfAllUserConnectedArrangements.get(i);
+            if(userArrangement.getID().equals(arrangement.getID()) && userArrangement.getUSERNAME().equals(user.getName())){
+                listOfAllUserConnectedArrangements.remove(userArrangement);
+                break;
+            }
+        }
     }
 
     public static void addUserToArrangement(Arrangement arrangement, User user){

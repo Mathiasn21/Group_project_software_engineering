@@ -63,16 +63,20 @@ public class UserController extends Controller{
         availableObservableArrangements.remove(currentAvailableArrangement);
         myObservableArrangements.add(currentAvailableArrangement);
 
-        currentAvailableArrangement = currentSelectedMyArrangement;
+        DataHandler.addUserToArrangement(currentAvailableArrangement, User.USER);
+        currentSelectedMyArrangement = currentAvailableArrangement;
         currentAvailableArrangement = null;
         updateView();
     }
 
     private void onLeaveClick(ActionEvent actionEvent){
         if(currentSelectedMyArrangement == null)return;
-        availableObservableArrangements.remove(currentAvailableArrangement);
-        myObservableArrangements = availableObservableArrangements;
-        myObservableArrangements = null;
+        myObservableArrangements.remove(currentSelectedMyArrangement);
+        availableObservableArrangements.add(currentSelectedMyArrangement);
+
+        DataHandler.deleteUserFromArrangement(currentSelectedMyArrangement, User.USER);
+        currentAvailableArrangement = currentSelectedMyArrangement;
+        currentSelectedMyArrangement = null;
     }
 
     private void onClickListView(MouseEvent event){
@@ -170,6 +174,13 @@ public class UserController extends Controller{
         setupListView();
         setupActionHandlers();
     }
+
+
+    @Override
+    public void onCloseStoreInformation(){
+        DataHandler.storeArrangementsData();
+    }
+
 
     @Override
     public void updateView(){
