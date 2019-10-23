@@ -13,6 +13,7 @@ package no.hiof.set.gruppe.controller;
 //                1.Import Statements                //
 // --------------------------------------------------//
 
+import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -42,6 +43,7 @@ public class UserController extends Controller{
     private Arrangement currentAvailableArrangement = null;
     private Arrangement currentSelectedMyArrangement = null;
 
+    private final ToggleGroup radioBtns = new ToggleGroup();
     // --------------------------------------------------//
     //                3.FXML Fields                      //
     // --------------------------------------------------//
@@ -49,6 +51,8 @@ public class UserController extends Controller{
     private ListView<Arrangement>availableArrangementsListView, myArrangementsView;
     @FXML
     private Text arrangementTitle, arrangementSport,arrangementAddress,arrangementDate,arrangementParticipants,arrangementGroup, arrangementDescription;
+    @FXML
+    private RadioButton radioExp, radioOng, radioFut;
     @FXML
     private Button joinBtn, leaveBtn, logOut;
     @FXML
@@ -124,7 +128,7 @@ public class UserController extends Controller{
     private boolean lowerCaseTitleSearch(Arrangement arrangement){
         String title = arrangement.getName().toLowerCase();
         String search = searchAv.getText().toLowerCase();
-        return title.contains(search) && categoryMatch(arrangement);
+        return title.contains(search) && categoryMatch(arrangement) && radioBtns.getSelectedToggle();
     }
 
     /**
@@ -208,6 +212,19 @@ public class UserController extends Controller{
         populateMyArrangementView();
         setupListView();
         setupActionHandlers();
+        radioFut.setToggleGroup(radioBtns);
+        radioFut.setUserData();
+        radioExp.setToggleGroup(radioBtns);
+
+        radioOng.setToggleGroup(radioBtns);
+
+
+        radioBtns.selectedToggleProperty().addListener((value, old, ne) -> {
+            if(old == null || ne == null) return;
+            old.setSelected(false);
+            ne.setSelected(true);
+            search(new ActionEvent());
+        });
     }
 
     @Override
@@ -238,4 +255,12 @@ public class UserController extends Controller{
 
     @Override
     public String getName() {return name;}
+
+
+    private enum radioPredicates{
+        String name;
+        radioPredicate(){
+
+        }
+    }
 }
