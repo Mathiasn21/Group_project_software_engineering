@@ -13,7 +13,6 @@ package no.hiof.set.gruppe.controller;
 //                1.Import Statements                //
 // --------------------------------------------------//
 
-import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -30,6 +29,7 @@ import no.hiof.set.gruppe.model.SportCategory;
 import no.hiof.set.gruppe.model.User;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.*;
 
 public class UserController extends Controller{
@@ -128,7 +128,7 @@ public class UserController extends Controller{
     private boolean lowerCaseTitleSearch(Arrangement arrangement){
         String title = arrangement.getName().toLowerCase();
         String search = searchAv.getText().toLowerCase();
-        return title.contains(search) && categoryMatch(arrangement) && radioBtns.getSelectedToggle();
+        return title.contains(search) && categoryMatch(arrangement) && ((RadioPredicate)radioBtns.getUserData()).execute();
     }
 
     /**
@@ -213,7 +213,7 @@ public class UserController extends Controller{
         setupListView();
         setupActionHandlers();
         radioFut.setToggleGroup(radioBtns);
-        radioFut.setUserData();
+        radioFut.setUserData(RadioPredicate.TestBefore);
         radioExp.setToggleGroup(radioBtns);
 
         radioOng.setToggleGroup(radioBtns);
@@ -257,10 +257,21 @@ public class UserController extends Controller{
     public String getName() {return name;}
 
 
-    private enum radioPredicates{
-        String name;
-        radioPredicate(){
+    private enum RadioPredicate{
 
+        TestBefore("test", (LocalDate date)->{return true;});
+
+        private final String name;
+        private final DatePredicate predicate;
+
+        RadioPredicate(String name, DatePredicate predicate) {
+            this.name = name;
+            this.predicate = predicate;
         }
+
+        @Override
+        public String toString(){return name;}
+
+        public boolean execute(){return predicate.testDate();}
     }
 }
