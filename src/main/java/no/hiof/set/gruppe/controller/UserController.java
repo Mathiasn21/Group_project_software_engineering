@@ -91,6 +91,7 @@ public class UserController extends Controller{
         if(selectedItem == null){return;}
         currentAvailableArrangement = selectedItem;
         currentSelectedArrangement = currentAvailableArrangement;
+        setDataFields();
     }
 
     private void onClickMyView(MouseEvent event){
@@ -98,6 +99,7 @@ public class UserController extends Controller{
         if(selectedItem == null){return;}
         currentSelectedMyArrangement = selectedItem;
         currentSelectedArrangement = currentSelectedMyArrangement;
+        setDataFields();
     }
 
     // --------------------------------------------------//
@@ -225,7 +227,6 @@ public class UserController extends Controller{
         populateMyArrangementView();
         setupListView();
         setupActionHandlers();
-        setDataFields();
 
         //Should be extracted
         radioFut.setToggleGroup(radioBtns);

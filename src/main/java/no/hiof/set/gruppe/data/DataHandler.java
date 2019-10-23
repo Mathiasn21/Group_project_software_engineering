@@ -121,6 +121,7 @@ public class DataHandler {
                 i--;
             }
         }
+
     }
     // --------------------------------------------------//
     //                4.Public Methods                   //
@@ -128,6 +129,7 @@ public class DataHandler {
     public static void deleteArrangement(Arrangement arrangement){
         listOfAllArrangements.remove(arrangement);
         deleteUserConnectedArrangements(arrangement.getID());
+        storeArrangementsData();
     }
 
     public static void deleteUserFromArrangement(Arrangement arrangement,User user){
@@ -139,17 +141,20 @@ public class DataHandler {
                 break;
             }
         }
+        storeArrangementsData();
     }
 
     public static void addUserToArrangement(Arrangement arrangement, User user){
         arrangement.setParticipants(arrangement.getParticipants()+1);
         listOfAllUserConnectedArrangements.add(new UserConnectedArrangement(arrangement.getID(), user.getName()));
+        storeArrangementsData();
     }
 
 
     public static void addArrangement(Arrangement arrangement, User user){
         listOfAllArrangements.add(arrangement);
         listOfAllUserConnectedArrangements.add(new UserConnectedArrangement(arrangement.getID(), user.getName()));
+        storeArrangementsData();
     }
 
     public static List<Arrangement> getArrangementsData(){ return new ArrayList<>(listOfAllArrangements); }
