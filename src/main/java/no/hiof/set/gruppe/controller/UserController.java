@@ -25,6 +25,7 @@ import javafx.stage.Stage;
 import no.hiof.set.gruppe.Exceptions.DataFormatException;
 import no.hiof.set.gruppe.data.DataHandler;
 import no.hiof.set.gruppe.model.Arrangement;
+import no.hiof.set.gruppe.model.SportCategory;
 import no.hiof.set.gruppe.model.User;
 
 import java.net.URL;
@@ -51,9 +52,9 @@ public class UserController extends Controller{
     @FXML
     private Button joinBtn, leaveBtn, logOut;
     @FXML
-    private TextField search, searchMy;
+    private TextField searchAv, searchMy;
     @FXML
-    private ComboBox<String> availableSortingOptionsMy, sortingOptions;
+    private ComboBox<SportCategory> availableSortingOptionsMy, sortingOptions;
 
     // --------------------------------------------------//
     //                4.On Action Methods                //
@@ -94,8 +95,16 @@ public class UserController extends Controller{
     // --------------------------------------------------//
     //                5.Private Methods                  //
     // --------------------------------------------------//
+    private void setSortingOptions() {
+        sortingOptions.setItems(FXCollections.observableArrayList(SportCategory.values()));
+        sortingOptions.getSelectionModel().select(SportCategory.ALL);
+        availableSortingOptionsMy.setItems(FXCollections.observableArrayList(SportCategory.values()));
+        availableSortingOptionsMy.getSelectionModel().select(SportCategory.ALL);
+    }
+
+
     private void search(ActionEvent actionEvent){
-        myFiltered.setPredicate(this::lowerCaseTitleSearch);
+        myFiltered.setPredicate(this::lowerCaseTitleSearchMy);
         myArrangementsView.setItems(myFiltered);
         myArrangementsView.refresh();
     }
@@ -114,8 +123,32 @@ public class UserController extends Controller{
      */
     private boolean lowerCaseTitleSearch(Arrangement arrangement){
         String title = arrangement.getName().toLowerCase();
+        String search = searchAv.getText().toLowerCase();
+        return title.contains(search) && categoryMatch(arrangement);
+    }
+
+    /**
+     * Returns a Boolean based on if the Arrangement name contains
+     * And is in same category
+     * the given search string.
+     * @param arrangement Arrangement
+     * @return boolean
+     */
+    private boolean lowerCaseTitleSearchMy(Arrangement arrangement){
+        String title = arrangement.getName().toLowerCase();
         String search = searchMy.getText().toLowerCase();
-        return title.contains(search);
+        return title.contains(search) && categoryMatchMy(arrangement);
+    }
+
+
+    private boolean categoryMatch(Arrangement arrangement) {
+        SportCategory category = availableSortingOptionsMy.getSelectionModel().getSelectedItem();
+        return category.equals(SportCategory.ALL) || arrangement.getSport().equals(category.toString());
+    }
+
+    private boolean categoryMatchMy(Arrangement arrangement) {
+        SportCategory category = sortingOptions.getSelectionModel().getSelectedItem();
+        return category.equals(SportCategory.ALL) || arrangement.getSport().equals(category.toString());
     }
 
 
@@ -134,6 +167,7 @@ public class UserController extends Controller{
         availableArrangementsListView.setOnMouseClicked(this::onClickListView);
         myArrangementsView.setOnMouseClicked(this::onClickMyView);
         searchMy.setOnAction(this::search);
+        searchAv.setOnAction(this::searchOrg);
         joinBtn.setOnAction(this::onJoinClick);
         leaveBtn.setOnAction(this::onLeaveClick);
         logOut.setOnAction(this::returnToMainWindow);
@@ -170,11 +204,11 @@ public class UserController extends Controller{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setArrangementListInformation();
+        setSortingOptions();
         populateMyArrangementView();
         setupListView();
         setupActionHandlers();
     }
-
 
     @Override
     public void onCloseStoreInformation(){

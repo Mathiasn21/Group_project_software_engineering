@@ -20,7 +20,7 @@
       <Button fx:id="joinBtn" layoutX="133.0" layoutY="419.0" mnemonicParsing="false" text="Meld på" />
       <Button fx:id="leaveBtn" layoutX="900.0" layoutY="419.0" mnemonicParsing="false" text="Meld av" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="32.0" layoutX="318.0" layoutY="25.0" stroke="BLACK" strokeType="INSIDE" width="365.0" />
-      <TextField fx:id="search" layoutX="47.0" layoutY="87.0" prefHeight="25.0" prefWidth="96.0" />
+      <TextField fx:id="searchAv" layoutX="47.0" layoutY="87.0" prefHeight="25.0" prefWidth="96.0" />
       <Text layoutX="47.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Søk" wrappingWidth="32.09179639816284" />
       <ComboBox fx:id="sortingOptions" layoutX="183.0" layoutY="86.0" prefHeight="25.0" prefWidth="96.0" />
       <Text layoutX="183.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sorter" />
@@ -97,9 +97,9 @@
          </font>
       </Text>
       <Text fx:id="arrangementDescription" layoutX="291.0" layoutY="477.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="418.5999091863632" />
-      <RadioButton layoutX="724.0" layoutY="414.0" mnemonicParsing="false" text="Skjul utgåtte" />
-      <RadioButton layoutX="724.0" layoutY="434.0" mnemonicParsing="false" text="Skjul fremtidige" />
-      <RadioButton layoutX="724.0" layoutY="453.0" mnemonicParsing="false" text="Skjul pågående" />
+      <RadioButton fx:id="radioExp" layoutX="724.0" layoutY="414.0" mnemonicParsing="false" text="Skjul utgåtte" />
+      <RadioButton fx:id="radioFut" layoutX="724.0" layoutY="434.0" mnemonicParsing="false" text="Skjul fremtidige" />
+      <RadioButton fx:id="radioOng" layoutX="724.0" layoutY="453.0" mnemonicParsing="false" text="Skjul pågående" />
       <ListView fx:id="myArrangementsView" layoutX="729.0" layoutY="122.0" prefHeight="288.0" prefWidth="232.0" />
    </children>
 </AnchorPane>

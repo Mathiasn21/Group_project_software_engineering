@@ -221,7 +221,7 @@ public class OrganizerController extends Controller {
 
     @Override
     public void onCloseStoreInformation() {
-        new DataHandler().storeArrangementsData();
+        DataHandler.storeArrangementsData();
     }
 
     @Override
