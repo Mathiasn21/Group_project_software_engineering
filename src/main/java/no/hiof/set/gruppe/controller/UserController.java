@@ -28,10 +28,7 @@ import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.User;
 
 import java.net.URL;
-import java.time.LocalDate;
-import java.util.Comparator;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class UserController extends Controller{
     // --------------------------------------------------//
@@ -47,19 +44,16 @@ public class UserController extends Controller{
     // --------------------------------------------------//
     //                3.FXML Fields                      //
     // --------------------------------------------------//
-
     @FXML
-    private ListView<Arrangement>availableArrangementsListView;
-    @FXML
-    private ListView<Arrangement> myArrangementsTreeView;
+    private ListView<Arrangement>availableArrangementsListView, myArrangementsView;
     @FXML
     private Text arrangementTitle, arrangementSport,arrangementAddress,arrangementDate,arrangementParticipants,arrangementGroup, arrangementDescription;
     @FXML
     private Button joinBtn, leaveBtn, logOut;
     @FXML
-    private TextField availableSearch, joinedSearch;
+    private TextField search, searchMy;
     @FXML
-    private ComboBox<String> availableSortingOptions, joinedSortingOptions;
+    private ComboBox<String> availableSortingOptionsMy, sortingOptions;
 
     // --------------------------------------------------//
     //                4.On Action Methods                //
@@ -67,39 +61,29 @@ public class UserController extends Controller{
     private void onJoinClick(ActionEvent actionEvent){
         if(currentAvailableArrangement == null)return;
         availableObservableArrangements.remove(currentAvailableArrangement);
+        myObservableArrangements.add(currentAvailableArrangement);
 
-        currentSelectedMyArrangement = new TreeItem<>(currentAvailableArrangement);
-        myArrangementsTreeView.getRoot().getChildren().get(1).getChildren().add(currentSelectedMyArrangement);
-
+        currentAvailableArrangement = currentSelectedMyArrangement;
         currentAvailableArrangement = null;
-        observableOngoingLayer.add(currentSelectedMyArrangement);
-        myArrangementsTreeView.getSelectionModel().selectLast();
         updateView();
     }
 
     private void onLeaveClick(ActionEvent actionEvent){
         if(currentSelectedMyArrangement == null)return;
-        availableObservableArrangements.add((Arrangement) currentSelectedMyArrangement.getValue());
-        observableOngoingLayer.remove(currentSelectedMyArrangement);
-        updateView();
-
-        TreeItem item = myArrangementsTreeView.getSelectionModel().getSelectedItem();
-        item.getParent().getChildren().remove(item);
-
-        currentAvailableArrangement = (Arrangement) currentSelectedMyArrangement.getValue();
-        currentSelectedMyArrangement = null;
-        availableArrangementsListView.getSelectionModel().selectLast();
+        availableObservableArrangements.remove(currentAvailableArrangement);
+        myObservableArrangements = availableObservableArrangements;
+        myObservableArrangements = null;
     }
 
     private void onClickListView(MouseEvent event){
-        Arrangement selectedItem = selectedArrangement();
+        Arrangement selectedItem = availableArrangementsListView.getSelectionModel().getSelectedItem();
         if(selectedItem == null){return;}
         currentAvailableArrangement = selectedItem;
     }
 
-    private void onClickTreeView(MouseEvent event){
-        TreeItem<Object> selectedItem = myArrangementsTreeView.getSelectionModel().getSelectedItem();
-        if(!(selectedItem.getValue() instanceof Arrangement)){return;}
+    private void onClickMyView(MouseEvent event){
+        Arrangement selectedItem = myArrangementsView.getSelectionModel().getSelectedItem();
+        if(selectedItem == null){return;}
         currentSelectedMyArrangement = selectedItem;
     }
 
@@ -108,8 +92,13 @@ public class UserController extends Controller{
     // --------------------------------------------------//
     private void search(ActionEvent actionEvent){
         myFiltered.setPredicate(this::lowerCaseTitleSearch);
-        myArrangementsTreeView.getRoot()(filteredList);
-        listview.refresh();
+        myArrangementsView.setItems(myFiltered);
+        myArrangementsView.refresh();
+    }
+    private void searchOrg(ActionEvent actionEvent){
+        availableFiltered.setPredicate(this::lowerCaseTitleSearch);
+        availableArrangementsListView.setItems(availableFiltered);
+        availableArrangementsListView.refresh();
     }
 
     /**
@@ -121,7 +110,7 @@ public class UserController extends Controller{
      */
     private boolean lowerCaseTitleSearch(Arrangement arrangement){
         String title = arrangement.getName().toLowerCase();
-        String search = joinedSearch.getText().toLowerCase();
+        String search = searchMy.getText().toLowerCase();
         return title.contains(search);
     }
 
@@ -139,8 +128,8 @@ public class UserController extends Controller{
 
     private void setupActionHandlers(){
         availableArrangementsListView.setOnMouseClicked(this::onClickListView);
-        myArrangementsTreeView.setOnMouseClicked(this::onClickTreeView);
-        joinedSearch.setOnAction(this::search);
+        myArrangementsView.setOnMouseClicked(this::onClickMyView);
+        searchMy.setOnAction(this::search);
         joinBtn.setOnAction(this::onJoinClick);
         leaveBtn.setOnAction(this::onLeaveClick);
         logOut.setOnAction(this::returnToMainWindow);
@@ -151,22 +140,24 @@ public class UserController extends Controller{
         List<Arrangement> allArrang = DataHandler.getArrangementsData();
         List<Arrangement> userConnectedArrangements = DataHandler.getUserArrangements(User.USER);
 
-        allArrang.removeAll(userConnectedArrangements);allArrang.sort();
-        Comparator.comparing()
-        //setUpFilteredList();
+        allArrang.removeAll(userConnectedArrangements);
         availableObservableArrangements = FXCollections.observableArrayList(allArrang);
         myObservableArrangements = FXCollections.observableArrayList(userConnectedArrangements);
     }
 
     private void setupListView(){
-        myFiltered = availableObservableArrangements.filtered(arrangement -> true);
-        availableArrangementsListView.setItems(myFiltered);
+        myFiltered = myObservableArrangements.filtered(arrangement -> true);
+        availableFiltered = availableObservableArrangements.filtered(arrangement -> true);
+
+        availableArrangementsListView.setItems(availableFiltered);
         availableArrangementsListView.refresh();
+
+        myArrangementsView.setItems(myFiltered);
+        myArrangementsView.refresh();
     }
 
-    private void populateMyArrangemenTreeView() {
-
-        myArrangementsTreeView.refresh();
+    private void populateMyArrangementView() {
+        myArrangementsView.refresh();
     }
 
     // --------------------------------------------------//
@@ -175,7 +166,7 @@ public class UserController extends Controller{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setArrangementListInformation();
-        populateMyArrangemenTreeView();
+        populateMyArrangementView();
         setupListView();
         setupActionHandlers();
     }
@@ -183,7 +174,7 @@ public class UserController extends Controller{
     @Override
     public void updateView(){
         availableArrangementsListView.refresh();
-        myArrangementsTreeView.refresh();
+        myArrangementsView.refresh();
     }
 
     @Override
@@ -202,19 +193,4 @@ public class UserController extends Controller{
 
     @Override
     public String getName() {return name;}
-
-    // --------------------------------------------------//
-    //                6.Inner Class                      //
-    // --------------------------------------------------//
-
-    private static class ArrangementTopNode{
-        private final String name;
-
-        ArrangementTopNode(String name){
-            this.name = name;
-        }
-
-        @Override
-        public String toString(){return name;}
-    }
 }

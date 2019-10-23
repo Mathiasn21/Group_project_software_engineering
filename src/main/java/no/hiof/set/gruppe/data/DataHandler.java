@@ -25,7 +25,7 @@ import java.util.*;
  * Interacting with this object is done via the interface IDataHandler.
  * @author Gruppe4
  */
-public class DataHandler implements IDataHandler {
+public class DataHandler {
 
     // --------------------------------------------------//
     //                2.Local Fields                     //
@@ -166,8 +166,7 @@ public class DataHandler implements IDataHandler {
     /**
      * Stores all arrangements and their user connection
      */
-    @Override
-    public void storeArrangementsData() {
+    public static void storeArrangementsData() {
         writeToFile(toJson(Arrangement[].class, listOfAllArrangements.toArray(Arrangement[]::new)), arrangementFName);
         storeUserArrangements();
     }
