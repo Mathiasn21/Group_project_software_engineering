@@ -4,5 +4,5 @@ import java.time.LocalDate;
 
 @FunctionalInterface
 public interface DatePredicate {
-    boolean testDate(LocalDate date);
+    boolean testDate(LocalDate startDate, LocalDate endDate);
 }

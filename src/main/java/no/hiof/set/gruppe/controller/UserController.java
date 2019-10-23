@@ -128,7 +128,9 @@ public class UserController extends Controller{
     private boolean lowerCaseTitleSearch(Arrangement arrangement){
         String title = arrangement.getName().toLowerCase();
         String search = searchAv.getText().toLowerCase();
-        return title.contains(search) && categoryMatch(arrangement) && ((RadioPredicate)radioBtns.getUserData()).execute(arrangement.getEndDate());
+        return title.contains(search) &&
+                categoryMatch(arrangement) && 
+                ((RadioPredicate)radioBtns.getUserData()).execute(arrangement.getStartDate(), arrangement.getEndDate());
     }
 
     /**
@@ -259,8 +261,10 @@ public class UserController extends Controller{
 
     private enum RadioPredicate{
 
-        TestBefore("Expirert", (LocalDate date)->{ return date.isBefore(LocalDate.now());}),
-        TestAfter("Fremtidige", (LocalDate date)->{ return date.isAfter(LocalDate.now());});
+        TestBefore("Expirert", (startDate, endDate)->{ return endDate.isBefore(LocalDate.now());}),
+        TestOngoing("Fremtidige", (startDate, endDate)->{ return endDate.isAfter(LocalDate.now());}),
+        TestFuture("Fremtidige", (startDate, endDate)->{ return endDate.isAfter(LocalDate.now());}),
+        ALL("Fremtidige", (startDate, endDate)->{ return true;});
 
         private final String name;
         private final DatePredicate predicate;
@@ -273,6 +277,6 @@ public class UserController extends Controller{
         @Override
         public String toString(){return name;}
 
-        public boolean execute(LocalDate date){return predicate.testDate(date);}
+        public boolean execute(LocalDate startDate, LocalDate endDate){return predicate.testDate(startDate, endDate);}
     }
 }
