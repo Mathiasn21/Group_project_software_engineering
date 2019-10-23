@@ -1,17 +1,5 @@
 [
   {
-    "ID": "1244313242",
-    "name": "Øskars Diverse",
-    "sport": "Skirenn",
-    "address": "",
-    "startDate": "2019-10-11",
-    "endDate": "2019-10-12",
-    "description": "Sumthin",
-    "participants": 40,
-    "group": false,
-    "deleted": false
-  },
-  {
     "ID": "1694876920",
     "name": "Børres Brokkoli mani",
     "sport": "Annet",
@@ -67,8 +55,32 @@
     "startDate": "2019-10-23",
     "endDate": "2019-11-10",
     "description": "dwagrdsgdr",
-    "participants": 25,
+    "participants": 24,
     "group": true,
+    "deleted": false
+  },
+  {
+    "ID": "f751fc9c-ad4d-4416-956d-1d6d1f762b84",
+    "name": "Vegars lefse løp",
+    "sport": "Annet",
+    "address": "Lefseveien 17c",
+    "startDate": "2019-10-11",
+    "endDate": "2019-10-12",
+    "description": "Masse spising og løing med lefser",
+    "participants": 37,
+    "group": false,
+    "deleted": false
+  },
+  {
+    "ID": "d52665f4-38f1-4b56-b24d-9d760adc7102",
+    "name": "Børres Brokkoli mani",
+    "sport": "Annet",
+    "address": "Brokkolivegen 28",
+    "startDate": "2019-10-11",
+    "endDate": "2019-10-12",
+    "description": "Masse spising og løing med brokkoli",
+    "participants": 37,
+    "group": false,
     "deleted": false
   }
 ]

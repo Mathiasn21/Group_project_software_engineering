@@ -38,17 +38,6 @@ class ValidationTests {
         assertFalse(Validation.ofArrangement(arrangement).IS_VALID);
     }
 
-    /*
-    Disabled and should be removed as the controller secures that this will always be true
-    @ParameterizedTest
-    @ValueSource(strings = {"-1","Words are not allowed"})
-    @Order(4)
-    public void IllegalParticipants(String participants) {
-        Arrangement arrangement = new Arrangement("pes","Annet",participants,"Hakkebakkeskogen", false, LocalDate.of(2019,10,10).toString(), LocalDate.of(2019,10,11).toString(), "test");
-        assertFalse(Validation.ofArrangement(arrangement));
-    }
-     */
-
     @ParameterizedTest
     @ValueSource(strings = {"This address is way to looooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong"})
     @Order(5)

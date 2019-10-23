@@ -1,9 +1,5 @@
 [
   {
-    "ID": "1244313242",
-    "USERNAME": "Organizer"
-  },
-  {
     "ID": "1694876920",
     "USERNAME": "Organizer"
   },
@@ -32,7 +28,11 @@
     "USERNAME": "Organizer"
   },
   {
-    "ID": "a057b6e7-ad2e-4f40-b2c9-4e2e408b3bd2",
+    "ID": "f751fc9c-ad4d-4416-956d-1d6d1f762b84",
+    "USERNAME": "User"
+  },
+  {
+    "ID": "d52665f4-38f1-4b56-b24d-9d760adc7102",
     "USERNAME": "User"
   }
 ]
