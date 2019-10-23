@@ -27,6 +27,8 @@ import no.hiof.set.gruppe.data.DataHandler;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.SportCategory;
 import no.hiof.set.gruppe.model.User;
+import no.hiof.set.gruppe.model.DateTest;
+import org.jetbrains.annotations.NotNull;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -43,7 +45,6 @@ public class UserController extends Controller{
     private Arrangement currentAvailableArrangement = null;
     private Arrangement currentSelectedMyArrangement = null;
     private Arrangement currentSelectedArrangement;
-    private Text[] allTextFields;
 
     private final ToggleGroup radioBtns = new ToggleGroup();
     // --------------------------------------------------//
@@ -54,7 +55,7 @@ public class UserController extends Controller{
     @FXML
     private Text arrangementTitle, arrangementSport,arrangementAddress,arrangementDate,arrangementParticipants,arrangementGroup, arrangementDescription;
     @FXML
-    private RadioButton radioExp, radioOng, radioFut;
+    private RadioButton radioExp, radioOng, radioFut, radioAll;
     @FXML
     private Button joinBtn, leaveBtn, logOut;
     @FXML
@@ -108,6 +109,7 @@ public class UserController extends Controller{
     private void setSortingOptions() {
         sortingOptions.setItems(FXCollections.observableArrayList(SportCategory.values()));
         sortingOptions.getSelectionModel().select(SportCategory.ALL);
+
         availableSortingOptionsMy.setItems(FXCollections.observableArrayList(SportCategory.values()));
         availableSortingOptionsMy.getSelectionModel().select(SportCategory.ALL);
     }
@@ -131,13 +133,10 @@ public class UserController extends Controller{
      * @param arrangement Arrangement
      * @return boolean
      */
-    private boolean lowerCaseTitleSearch(Arrangement arrangement){
+    private boolean lowerCaseTitleSearch(@NotNull Arrangement arrangement){
         String title = arrangement.getName().toLowerCase();
         String search = searchAv.getText().toLowerCase();
-        RadioPredicate predicate = ((RadioPredicate)radioBtns.getUserData());
-        return title.contains(search) &&
-                categoryMatch(arrangement) &&
-                predicate.execute(arrangement.getStartDate(), arrangement.getEndDate());
+        return title.contains(search) && categoryMatch(arrangement);
     }
 
     /**
@@ -147,10 +146,14 @@ public class UserController extends Controller{
      * @param arrangement Arrangement
      * @return boolean
      */
-    private boolean lowerCaseTitleSearchMy(Arrangement arrangement){
+    private boolean lowerCaseTitleSearchMy(@NotNull Arrangement arrangement){
         String title = arrangement.getName().toLowerCase();
         String search = searchMy.getText().toLowerCase();
-        return title.contains(search) && categoryMatchMy(arrangement);
+        DateTest predicate = ((DateTest)radioBtns.getSelectedToggle().getUserData());
+
+        return title.contains(search) &&
+                categoryMatchMy(arrangement) &&
+                predicate.execute(arrangement.getStartDate(), arrangement.getEndDate());
     }
 
 
@@ -198,6 +201,8 @@ public class UserController extends Controller{
         List<Arrangement> userConnectedArrangements = DataHandler.getUserArrangements(User.USER);
 
         allArrang.removeAll(userConnectedArrangements);
+        allArrang.removeIf((arrangement) -> DateTest.TestExpired.execute(arrangement.getStartDate(), arrangement.getEndDate()));
+
         availableObservableArrangements = FXCollections.observableArrayList(allArrang);
         myObservableArrangements = FXCollections.observableArrayList(userConnectedArrangements);
     }
@@ -229,16 +234,30 @@ public class UserController extends Controller{
         setupActionHandlers();
 
         //Should be extracted
+        radioAll.setToggleGroup(radioBtns);
+        radioAll.setUserData(DateTest.ALL);
+
         radioFut.setToggleGroup(radioBtns);
-        radioFut.setUserData(RadioPredicate.TestBefore);
+        radioFut.setUserData(DateTest.TestFuture);
+
         radioExp.setToggleGroup(radioBtns);
+        radioExp.setUserData(DateTest.TestExpired);
+
         radioOng.setToggleGroup(radioBtns);
+        radioOng.setUserData(DateTest.TestOngoing);
+
+        radioBtns.selectToggle(radioAll);
         radioBtns.selectedToggleProperty().addListener((value, old, ne) -> {
             if(old == null || ne == null) return;
             old.setSelected(false);
             ne.setSelected(true);
+
+            if(ne.equals(radioExp))leaveBtn.setDisable(true);
+            else leaveBtn.setDisable(false);
+            
             search(new ActionEvent());
         });
+
     }
 
     @Override
@@ -269,26 +288,4 @@ public class UserController extends Controller{
 
     @Override
     public String getName() {return name;}
-
-
-    private enum RadioPredicate{
-
-        TestBefore("Expirert", (startDate, endDate)->{ return endDate.isBefore(LocalDate.now());}),
-        TestOngoing("Fremtidige", (startDate, endDate)->{ return endDate.isAfter(LocalDate.now());}),
-        TestFuture("Fremtidige", (startDate, endDate)->{ return endDate.isAfter(LocalDate.now());}),
-        ALL("Fremtidige", (startDate, endDate)->{ return true;});
-
-        private final String name;
-        private final DatePredicate predicate;
-
-        RadioPredicate(String name, DatePredicate predicate) {
-            this.name = name;
-            this.predicate = predicate;
-        }
-
-        @Override
-        public String toString(){return name;}
-
-        public boolean execute(LocalDate startDate, LocalDate endDate){return predicate.testDate(startDate, endDate);}
-    }
 }

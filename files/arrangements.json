@@ -34,5 +34,41 @@
     "participants": 22,
     "group": true,
     "deleted": false
+  },
+  {
+    "ID": "5dcf3140-b627-4b0b-9993-3a6838358dd3",
+    "name": "Derp",
+    "sport": "Alle",
+    "address": "dwafrtd34",
+    "startDate": "2019-11-01",
+    "endDate": "2019-11-23",
+    "description": "wdawdegsgdtreafrtdhrg",
+    "participants": 22,
+    "group": true,
+    "deleted": false
+  },
+  {
+    "ID": "7f7da859-3b6a-4a5e-ad80-2c025af8e345",
+    "name": "dwadfwagrds",
+    "sport": "Alle",
+    "address": "adfrhgbdgs",
+    "startDate": "2019-11-07",
+    "endDate": "2019-11-09",
+    "description": "grsdhgbdtrgww",
+    "participants": 22,
+    "group": true,
+    "deleted": false
+  },
+  {
+    "ID": "a057b6e7-ad2e-4f40-b2c9-4e2e408b3bd2",
+    "name": "Bernt",
+    "sport": "Alle",
+    "address": "grdxgfsaeedaw",
+    "startDate": "2019-10-23",
+    "endDate": "2019-11-10",
+    "description": "dwagrdsgdr",
+    "participants": 25,
+    "group": true,
+    "deleted": false
   }
 ]

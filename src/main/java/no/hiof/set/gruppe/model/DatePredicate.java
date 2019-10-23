@@ -1,4 +1,4 @@
-package no.hiof.set.gruppe.controller;
+package no.hiof.set.gruppe.model;
 
 import java.time.LocalDate;
 
