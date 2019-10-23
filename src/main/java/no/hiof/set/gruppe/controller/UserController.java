@@ -128,7 +128,7 @@ public class UserController extends Controller{
     private boolean lowerCaseTitleSearch(Arrangement arrangement){
         String title = arrangement.getName().toLowerCase();
         String search = searchAv.getText().toLowerCase();
-        return title.contains(search) && categoryMatch(arrangement) && ((RadioPredicate)radioBtns.getUserData()).execute();
+        return title.contains(search) && categoryMatch(arrangement) && ((RadioPredicate)radioBtns.getUserData()).execute(arrangement.getEndDate());
     }
 
     /**
@@ -259,7 +259,8 @@ public class UserController extends Controller{
 
     private enum RadioPredicate{
 
-        TestBefore("test", (LocalDate date)->{return true;});
+        TestBefore("Expirert", (LocalDate date)->{ return date.isBefore(LocalDate.now());}),
+        TestAfter("Fremtidige", (LocalDate date)->{ return date.isAfter(LocalDate.now());});
 
         private final String name;
         private final DatePredicate predicate;
@@ -272,6 +273,6 @@ public class UserController extends Controller{
         @Override
         public String toString(){return name;}
 
-        public boolean execute(){return predicate.testDate();}
+        public boolean execute(LocalDate date){return predicate.testDate(date);}
     }
 }
