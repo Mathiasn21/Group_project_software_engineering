@@ -26,6 +26,7 @@ import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.data.DataHandler;
 import no.hiof.set.gruppe.model.constantInformation.SportCategory;
 import no.hiof.set.gruppe.model.user.User;
+import no.hiof.set.gruppe.util.ArrangementSort;
 import org.jetbrains.annotations.NotNull;
 
 import java.net.URL;
@@ -103,6 +104,7 @@ public class OrganizerController extends Controller {
         System.out.println(getMainController());
         createNewView(this);
     }
+
 
     // --------------------------------------------------//
     //                5.Private Functional Methods       //
@@ -183,6 +185,7 @@ public class OrganizerController extends Controller {
 
     private void populateListView() {
         arrangementListObservable = FXCollections.observableArrayList(DataHandler.getUserArrangements(User.ORGANIZER));
+        arrangementListObservable.sort(ArrangementSort.COMP_DATE_ASC.getComparator());
         setupFilteredList();
         listview.refresh();
     }

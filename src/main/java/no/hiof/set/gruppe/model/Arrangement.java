@@ -18,7 +18,7 @@ import java.util.UUID;
  * Arrangement holds information about a possible arrangement.
  * @author Gruppe4
  */
-public class Arrangement implements IArrangementSortering {
+public class Arrangement implements IArrangementSortering{
 
 
     // --------------------------------------------------//
@@ -27,7 +27,7 @@ public class Arrangement implements IArrangementSortering {
     private final String ID;
     private String name, sport, address, startDate, endDate, description;
     private int participants;
-    private boolean group, deleted;
+    private boolean group;
 
     // --------------------------------------------------//
     //                2.Constructors                     //
@@ -58,7 +58,6 @@ public class Arrangement implements IArrangementSortering {
         this.endDate = endDate;
         this.description = description;
         ID = UUID.randomUUID().toString();
-        deleted = false;
     }
 
     // --------------------------------------------------//
@@ -84,7 +83,7 @@ public class Arrangement implements IArrangementSortering {
     }
     public String getID(){return ID;}
     public String getDescription() {return description;}
-    public boolean getDeleted(){return deleted;}
+
 
     // --------------------------------------------------//
     //                4.Setters                          //
@@ -105,7 +104,7 @@ public class Arrangement implements IArrangementSortering {
     public void setStartDate(String startDate) {this.startDate = startDate;}
     public void setEndDate(String endDate) {this.endDate = endDate;}
     public void setDescription(String description) {this.description = description;}
-    public void setIsDeleted(boolean deleted){this.deleted = deleted;}
+
 
     // --------------------------------------------------//
     //                5.Public Methods                   //
@@ -143,10 +142,7 @@ public class Arrangement implements IArrangementSortering {
         int result;
         result = this.getName().compareTo(comparingArr.getName());
 
-        if(!Ascending)
-            result *= -1;
-
-        return result;
+        return Ascending ? result : result * -1;
     }
 
     @Override
