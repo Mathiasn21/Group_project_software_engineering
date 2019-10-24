@@ -1,8 +1,8 @@
-package no.hiof.set.gruppe.model;
+package no.hiof.set.gruppe.model.constantInformation;
 
 /**
  * This enum represents the possible answer to the question:
- * Does this meant for groups?
+ * Is this meant for groups?
  */
 public enum GroupCategory {
 

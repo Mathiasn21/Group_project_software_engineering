@@ -1,7 +1,7 @@
-package no.hiof.set.gruppe.data;
+package no.hiof.set.gruppe.util;
 
 import no.hiof.set.gruppe.model.Arrangement;
-import no.hiof.set.gruppe.model.User;
+import no.hiof.set.gruppe.model.user.User;
 
 public interface IValidation {
     <V extends Arrangement>boolean isValidArrangement(V arrangement);

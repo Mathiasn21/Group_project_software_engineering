@@ -1,4 +1,4 @@
-package no.hiof.set.gruppe.model;
+package no.hiof.set.gruppe.model.constantInformation;
 
 /**
  * This enum represents the different sports categories

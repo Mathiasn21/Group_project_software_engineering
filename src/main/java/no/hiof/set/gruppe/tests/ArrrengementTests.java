@@ -2,7 +2,7 @@ package no.hiof.set.gruppe.tests;
 
 import no.hiof.set.gruppe.data.DataHandler;
 import no.hiof.set.gruppe.model.Arrangement;
-import no.hiof.set.gruppe.model.User;
+import no.hiof.set.gruppe.model.user.User;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;

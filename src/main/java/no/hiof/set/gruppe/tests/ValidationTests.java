@@ -1,6 +1,6 @@
 package no.hiof.set.gruppe.tests;
 
-import no.hiof.set.gruppe.data.Validation;
+import no.hiof.set.gruppe.util.Validation;
 import no.hiof.set.gruppe.model.Arrangement;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;

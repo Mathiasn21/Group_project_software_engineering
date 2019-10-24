@@ -1,4 +1,4 @@
-package no.hiof.set.gruppe.controller;
+package no.hiof.set.gruppe.controller.abstractions;
 
 import no.hiof.set.gruppe.Exceptions.DataFormatException;
 

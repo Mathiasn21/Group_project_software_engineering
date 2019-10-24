@@ -1,4 +1,4 @@
-package no.hiof.set.gruppe.controller;
+package no.hiof.set.gruppe.controller.concrete;
 
 /*Guide
  * 1. Import Statements
@@ -18,6 +18,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import no.hiof.set.gruppe.Exceptions.DataFormatException;
+import no.hiof.set.gruppe.controller.abstractions.Controller;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 

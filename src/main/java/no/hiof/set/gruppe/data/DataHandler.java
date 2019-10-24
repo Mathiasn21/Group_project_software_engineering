@@ -13,8 +13,8 @@ package no.hiof.set.gruppe.data;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import no.hiof.set.gruppe.model.Arrangement;
-import no.hiof.set.gruppe.model.User;
-import no.hiof.set.gruppe.model.UserConnectedArrangement;
+import no.hiof.set.gruppe.model.user.User;
+import no.hiof.set.gruppe.model.user.UserConnectedArrangement;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.*;

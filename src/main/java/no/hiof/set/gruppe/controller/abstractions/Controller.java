@@ -1,4 +1,4 @@
-package no.hiof.set.gruppe.controller;
+package no.hiof.set.gruppe.controller.abstractions;
 
 import javafx.fxml.Initializable;
 import no.hiof.set.gruppe.MainJavaFX;
@@ -28,11 +28,11 @@ public abstract class Controller implements IControllerDataTransfer, Initializab
         }
     }
 
-    void createNewView(IControllerDataTransfer controller, Object object) {
+    protected void createNewView(IControllerDataTransfer controller, Object object) {
         mainController.setupWindow(controller, object);
     }
 
-    public MainJavaFX getMainController() {
+    protected MainJavaFX getMainController() {
         return mainController;
     }
 

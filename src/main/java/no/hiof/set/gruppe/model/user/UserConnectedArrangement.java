@@ -1,4 +1,4 @@
-package no.hiof.set.gruppe.model;
+package no.hiof.set.gruppe.model.user;
 
 public class UserConnectedArrangement {
     private final String ID;

@@ -1,7 +1,7 @@
-package no.hiof.set.gruppe.data;
+package no.hiof.set.gruppe.util;
 
 import no.hiof.set.gruppe.model.Arrangement;
-import no.hiof.set.gruppe.model.ValidationResult;
+import no.hiof.set.gruppe.model.constantInformation.ValidationResult;
 import org.jetbrains.annotations.Contract;
 
 import java.time.LocalDate;

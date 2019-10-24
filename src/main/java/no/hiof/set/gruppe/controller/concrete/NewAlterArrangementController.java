@@ -1,4 +1,4 @@
-package no.hiof.set.gruppe.controller;
+package no.hiof.set.gruppe.controller.concrete;
 /*Guide
  * 1. Import Statements
  * 2. Local Fields
@@ -14,10 +14,11 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import no.hiof.set.gruppe.data.Validation;
+import no.hiof.set.gruppe.controller.abstractions.Controller;
+import no.hiof.set.gruppe.util.Validation;
 import no.hiof.set.gruppe.model.Arrangement;
-import no.hiof.set.gruppe.model.GroupCategory;
-import no.hiof.set.gruppe.model.SportCategory;
+import no.hiof.set.gruppe.model.constantInformation.GroupCategory;
+import no.hiof.set.gruppe.model.constantInformation.SportCategory;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -28,7 +29,7 @@ import java.util.ResourceBundle;
  * or a new creation of an arrangement.
  * @author Gruppe4
  */
-public class NewAlterArrangementController extends Controller{
+public class NewAlterArrangementController extends Controller {
 
     // --------------------------------------------------//
     //                2.Local Fields                     //
