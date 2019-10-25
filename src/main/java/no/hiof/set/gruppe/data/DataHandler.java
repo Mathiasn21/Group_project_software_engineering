@@ -132,7 +132,6 @@ public class DataHandler {
     }
 
     public static void deleteUserFromArrangement(Arrangement arrangement,User user){
-        arrangement.setParticipants(arrangement.getParticipants()-1);
         for(int i = 0; i < listOfAllUserConnectedArrangements.size(); i++){
             UserConnectedArrangement userArrangement = listOfAllUserConnectedArrangements.get(i);
             if(userArrangement.getID().equals(arrangement.getID()) && userArrangement.getUSERNAME().equals(user.getName())){
@@ -144,7 +143,6 @@ public class DataHandler {
     }
 
     public static void addUserToArrangement(Arrangement arrangement, User user){
-        arrangement.setParticipants(arrangement.getParticipants()+1);
         listOfAllUserConnectedArrangements.add(new UserConnectedArrangement(arrangement.getID(), user.getName()));
         storeArrangementsData();
     }

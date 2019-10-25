@@ -62,10 +62,6 @@ public class NewAlterArrangementController extends Controller {
     // --------------------------------------------------//
     @FXML
     public void saveClicked(){
-        if(arrangementToEdit == null) {
-            arrangementToEdit = new Arrangement();
-            createdNewObject = true;
-        }
 
         String name = nameInput.getText();
         String sport = sportComboBoxInput.getSelectionModel().getSelectedItem().toString();
@@ -76,10 +72,18 @@ public class NewAlterArrangementController extends Controller {
         LocalDate startDate = startDateInput.getValue();
         LocalDate endDate = endDateInput.getValue();
 
+        if(name.length() == 0 || sport.length() == 0 || partic.length() == 0 ||
+                desc.length() == 0 || address.length() == 0 || startDate == null || endDate == null){return;}
+
+
         //must throw exception in the future
         //"Ugyldig nummer format.\n";
         if(!Validation.ofNumber(partic)){return;}
 
+        if(arrangementToEdit == null) {
+            arrangementToEdit = new Arrangement();
+            createdNewObject = true;
+        }
         arrangementToEdit.setName(name);
         arrangementToEdit.setParticipants(Integer.parseInt(partic));
         arrangementToEdit.setAddress(address);

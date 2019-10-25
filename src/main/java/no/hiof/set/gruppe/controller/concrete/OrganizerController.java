@@ -111,9 +111,7 @@ public class OrganizerController extends Controller {
     // --------------------------------------------------//
     private void changedView(){
         Arrangement arrangement = listview.getSelectionModel().getSelectedItem();
-        if(currentArrangement == null){
-            currentArrangement = arrangement;
-        }
+        currentArrangement = arrangement;
         setInformationAboutArrangementInView();
         listview.refresh();
     }
