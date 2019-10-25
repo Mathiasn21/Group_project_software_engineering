@@ -1,7 +1,12 @@
 package no.hiof.set.gruppe.controller.abstractions;
 
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.stage.Modality;
+import no.hiof.set.gruppe.Exceptions.ErrorExceptionHandler;
 import no.hiof.set.gruppe.MainJavaFX;
+import org.jetbrains.annotations.NotNull;
+
 import java.io.IOException;
 
 /**
@@ -48,4 +53,18 @@ public abstract class Controller implements IControllerDataTransfer, Initializab
     @Override
     public void updateView(){}
 
+
+
+    /**
+     * Creates a alert box for the user, including the given error.
+     * @param errMsg ErrorExceptionHandler
+     */
+    public static void createAlert(@NotNull ErrorExceptionHandler errMsg){
+
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.initModality(Modality.APPLICATION_MODAL);
+        alert.setTitle("ERROR");
+        alert.setContentText(errMsg.CODE + " " + errMsg.ERROR_MSG);
+        alert.showAndWait();
+    }
 }
