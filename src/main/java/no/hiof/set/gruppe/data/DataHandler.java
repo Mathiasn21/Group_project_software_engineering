@@ -18,6 +18,7 @@ import no.hiof.set.gruppe.model.user.UserConnectedArrangement;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 /**
@@ -56,7 +57,7 @@ public class DataHandler {
         StringBuilder textFromFile = new StringBuilder();
 
         String filepath = "/files/" + fName;
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(new File("").getAbsolutePath() + filepath))) {
+        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(new File("").getAbsolutePath() + filepath), StandardCharsets.UTF_8))) {
             while ((line = bufferedReader.readLine()) != null) {
                 textFromFile.append(line);
             }
