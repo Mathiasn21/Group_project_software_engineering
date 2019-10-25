@@ -18,7 +18,13 @@ import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import no.hiof.set.gruppe.Exceptions.DataFormatException;
-import no.hiof.set.gruppe.controller.*;
+import no.hiof.set.gruppe.Exceptions.ErrorExceptionHandler;
+import no.hiof.set.gruppe.controller.abstractions.Controller;
+import no.hiof.set.gruppe.controller.abstractions.IController;
+import no.hiof.set.gruppe.controller.abstractions.IControllerDataTransfer;
+import no.hiof.set.gruppe.controller.abstractions.SetupWindow;
+import org.jetbrains.annotations.NotNull;
+
 import java.io.IOException;
 
 /**
@@ -31,7 +37,6 @@ public class MainJavaFX extends Application implements SetupWindow {
     // --------------------------------------------------//
     //                2.Local Fields                     //
     // --------------------------------------------------//
-    private static Scene scene;
     private Stage stage;
 
     public static void main(String[] args) {
@@ -43,20 +48,20 @@ public class MainJavaFX extends Application implements SetupWindow {
     //                3.Overridden Methods               //
     // --------------------------------------------------//
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(@NotNull Stage stage) throws IOException {
         this.stage = stage;
 
-        FXMLLoader loader = new FXMLLoader(MainJavaFX.class.getResource("Arrangement.fxml"));
+        FXMLLoader loader = new FXMLLoader(MainJavaFX.class.getResource("Login.fxml"));
         Parent editLayout = loader.load();
 
-        IController controller= (loader.getController());
+        IController controller = (loader.getController());
         controller.setMainController(this);
 
-        stage.setOnHidden((Event)-> controller.onCloseStoreInformation());
-        Scene scene = new Scene(editLayout, 800, 450);
+        stage.setOnHidden((Event) -> controller.onCloseStoreInformation());
+        Scene scene = new Scene(editLayout);
         stage.setScene(scene);
         stage.setResizable(false);
-        stage.setTitle("Mine Arrangementer");
+        stage.setTitle("Logg inn");
         stage.show();
     }
 
@@ -64,23 +69,32 @@ public class MainJavaFX extends Application implements SetupWindow {
     // --------------------------------------------------//
     //                4.Public Methods                   //
     // --------------------------------------------------//
+
     /**
      * This function is responsible for setting up a new window.
      * This is custom made for controllers that implement the interface: {@link IController}
+     *
      * @param controller {@link IController}
      */
-    public void setupWindow(IController controller)throws IOException{
+    public void setupWindow(@NotNull IController controller) throws IOException {
         Stage stage = new Stage();
 
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(MainJavaFX.class.getResource(controller.getName()));
         Parent editLayout = loader.load();
-        stage.setOnHidden((Event)-> controller.onCloseStoreInformation());
-        Scene editScene = new Scene(editLayout, 400, 450);
+
+        //handling onclose for given stage
+        IController finalController = controller;
+        stage.setOnHidden((Event) -> finalController.onCloseStoreInformation());
+
+        Scene editScene = new Scene(editLayout);
         stage.setScene(editScene);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initOwner(this.stage);
         stage.setTitle(controller.getTitle());
+
+        //setting next controller
+        controller = loader.getController();
         controller.setMainController(this);
         System.out.println(this);
 
@@ -91,33 +105,38 @@ public class MainJavaFX extends Application implements SetupWindow {
      * This function is responsible for setting up a new window.
      * This is custom made for controllers that implement the interface: {@link IControllerDataTransfer}
      * And as such mediates between controllers that requires this.
+     *
      * @param controller {@link IControllerDataTransfer}
-     * @param object {@link Object}
+     * @param object     {@link Object}
      */
-    public void setupWindow(IControllerDataTransfer<Object> controller, Object object){
-        try{
+    public void setupWindow(@NotNull IControllerDataTransfer controller, Object object) {
+        boolean errorOccured = true;
+        ErrorExceptionHandler err = null;
+        Throwable thrown = null;
+        try {
             Stage stage = new Stage();
 
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainJavaFX.class.getResource(controller.getName()));
             Parent editLayout = loader.load();
 
-            IControllerDataTransfer<Object> oldController = controller;
+            IControllerDataTransfer oldController = controller;
             controller = loader.getController();
             controller.setDataFields(object);
-            IControllerDataTransfer<Object> finalController = controller;
-            stage.setOnHidden((Event)->{
-                if(finalController.hasNewObject()){
+            IControllerDataTransfer finalController = controller;
+            stage.setOnHidden((Event) -> {
+                if (finalController.hasNewObject()) {
                     try {
                         oldController.setDataFields(finalController.getDataObject());
                     } catch (DataFormatException e) {
                         e.printStackTrace();
                     }
                 }
+                oldController.updateView();
                 finalController.onCloseStoreInformation();
             });
 
-            Scene editScene = new Scene(editLayout, 186, 441);
+            Scene editScene = new Scene(editLayout);
             stage.setScene(editScene);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initOwner(this.stage);
@@ -127,27 +146,22 @@ public class MainJavaFX extends Application implements SetupWindow {
             System.out.println(this);
 
             stage.show();
-        }catch (DataFormatException | IOException dataEx){
-            dataEx.printStackTrace();
+            errorOccured = false;
+
+        } catch (DataFormatException datFormEx) {
+            err = ErrorExceptionHandler.ERROR_WRONG_DATA_OBJECT;
+            thrown = datFormEx;
+
+        } catch (IOException IOEx) {
+            err = ErrorExceptionHandler.ERROR_LOAD_RESOURCE;
+            thrown = IOEx;
+
+        } finally {
+            try {
+                if (errorOccured && (err != null)) ErrorExceptionHandler.createLogWithDetails(err, thrown);
+            } catch (Exception e) {
+                Controller.createAlert(ErrorExceptionHandler.ERROR_LOGGING_ERROR);
+            }
         }
-    }
-
-
-    // --------------------------------------------------//
-    //                5.Static Methods                   //
-    // --------------------------------------------------//
-    /**
-     * Let be. This will be used for later in order to dynamically switching between windows.
-     * */
-    private static Parent loadFXML(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(MainJavaFX.class.getResource(fxml + ".fxml"));
-        return fxmlLoader.load();
-    }
-
-    /**
-     * Let be. This will be used for later in order to dynamically switching between windows.
-     * */
-    static void setRoot(String fxml) throws IOException {
-        scene.setRoot(loadFXML(fxml));
     }
 }

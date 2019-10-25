@@ -1,20 +1,46 @@
 [
   {
-    "name": "Test Arrengement",
-    "sport": "Annet",
-    "participants": 420,
-    "adress": "Oppibakken 15",
-    "gruppe": false,
-    "startDate": "2019-10-02",
-    "endDate": "2019-10-04"
+    "ID": "5dcf3140-b627-4b0b-9993-3a6838358dd3",
+    "name": "Øskars Diverse",
+    "sport": "Alle",
+    "address": "dwafrtd34",
+    "startDate": "2019-11-01",
+    "endDate": "2019-11-23",
+    "description": "wdawdegsgdtreafrtdhrg",
+    "participants": 23,
+    "group": true
   },
   {
-    "name": "Apple fun 2",
-    "sport": "Basketball",
-    "participants": 69,
-    "adress": "Hakkebakken 420",
-    "gruppe": false,
-    "startDate": "2019-10-02",
-    "endDate": "2019-10-04"
+    "ID": "a057b6e7-ad2e-4f40-b2c9-4e2e408b3bd2",
+    "name": "Bernt",
+    "sport": "Alle",
+    "address": "grdxgfsaeedaw",
+    "startDate": "2019-10-23",
+    "endDate": "2019-11-10",
+    "description": "dwagrdsgdr",
+    "participants": 24,
+    "group": true
+  },
+  {
+    "ID": "f751fc9c-ad4d-4416-956d-1d6d1f762b84",
+    "name": "Vegars lefse løp",
+    "sport": "Annet",
+    "address": "Lefseveien 17c",
+    "startDate": "2019-10-11",
+    "endDate": "2019-10-12",
+    "description": "Masse spising og løing med lefser",
+    "participants": 36,
+    "group": false
+  },
+  {
+    "ID": "d52665f4-38f1-4b56-b24d-9d760adc7102",
+    "name": "Børres Brokkoli mani",
+    "sport": "Annet",
+    "address": "Brokkolivegen 28",
+    "startDate": "2019-10-11",
+    "endDate": "2019-10-12",
+    "description": "Masse spising og løing med brokkoli",
+    "participants": 36,
+    "group": false
   }
 ]
