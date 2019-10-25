@@ -15,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import no.hiof.set.gruppe.controller.abstractions.Controller;
+import no.hiof.set.gruppe.model.constantInformation.ValidationResult;
 import no.hiof.set.gruppe.util.Validation;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.constantInformation.GroupCategory;
@@ -26,7 +27,8 @@ import java.util.ResourceBundle;
 
 /**
  * This controller deals with the logic pertaining to either editing
- * or a new creation of an arrangement.
+ * or a new creation of an arrangement. Validation of arrangement happens through
+ * {@link Validation} class.
  * @author Gruppe4
  */
 public class NewAlterArrangementController extends Controller {
@@ -45,7 +47,7 @@ public class NewAlterArrangementController extends Controller {
     @FXML
     private TextField nameInput, participantsInput, adressInput;
     @FXML
-    private TextArea descriptionInput;
+    private TextArea descriptionInput, ErrorField;
     @FXML
     private DatePicker startDateInput, endDateInput;
     @FXML
@@ -62,7 +64,6 @@ public class NewAlterArrangementController extends Controller {
     // --------------------------------------------------//
     @FXML
     public void saveClicked(){
-
         String name = nameInput.getText();
         String sport = sportComboBoxInput.getSelectionModel().getSelectedItem().toString();
         String partic = participantsInput.getText();
@@ -73,12 +74,14 @@ public class NewAlterArrangementController extends Controller {
         LocalDate endDate = endDateInput.getValue();
 
         if(name.length() == 0 || sport.length() == 0 || partic.length() == 0 ||
-                desc.length() == 0 || address.length() == 0 || startDate == null || endDate == null){return;}
-
+                desc.length() == 0 || address.length() == 0 || startDate == null || endDate == null)return;
 
         //must throw exception in the future
         //"Ugyldig nummer format.\n";
-        if(!Validation.ofNumber(partic)){return;}
+        if(!Validation.ofNumber(partic)){
+            setErrorField("Antall deltakere har ikke gyldig nummer format.");
+            return;
+        }
 
         if(arrangementToEdit == null) {
             arrangementToEdit = new Arrangement();
@@ -92,16 +95,24 @@ public class NewAlterArrangementController extends Controller {
         arrangementToEdit.setSport(sport);
         arrangementToEdit.setStartDate(startDate.toString());
         arrangementToEdit.setEndDate(endDate.toString());
-        if(!Validation.ofArrangement(arrangementToEdit).IS_VALID)return;
 
-
-
+        ValidationResult result = Validation.ofArrangement(arrangementToEdit);
+        if(!result.IS_VALID){
+            setErrorField(result.RESULT);
+            return;
+        }
         ((Stage)saveBtn.getScene().getWindow()).close();
     }
 
     @FXML
     public void cancelClicked(){
         ((Stage)cancelBtn.getScene().getWindow()).close();
+    }
+
+    private void setErrorField(String result) {
+        ErrorField.setText(result);
+        ErrorField.setVisible(true);
+        ErrorField.setDisable(false);
     }
 
     // --------------------------------------------------//

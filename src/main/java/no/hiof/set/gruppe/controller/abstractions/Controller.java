@@ -6,7 +6,6 @@ import javafx.stage.Modality;
 import no.hiof.set.gruppe.Exceptions.ErrorExceptionHandler;
 import no.hiof.set.gruppe.MainJavaFX;
 import org.jetbrains.annotations.NotNull;
-
 import java.io.IOException;
 
 /**
@@ -26,10 +25,24 @@ public abstract class Controller implements IControllerDataTransfer, Initializab
     }
     @Override
     public void createNewView(Controller controller) {
+        boolean errorOccured = true;
+        ErrorExceptionHandler err = null;
+        Throwable thrown = null;
+
+        //Handling and logging error + exceptions
         try {
             mainController.setupWindow(controller);
+            errorOccured = false;
         } catch (IOException e) {
-            e.printStackTrace();
+            err = ErrorExceptionHandler.ERROR_WRONG_DATA_OBJECT;
+            thrown = e;
+
+        }finally {
+            try {
+                if (errorOccured && (err != null)) ErrorExceptionHandler.createLogWithDetails(err, thrown);
+            } catch (Exception e) {
+                Controller.createAlert(ErrorExceptionHandler.ERROR_LOGGING_ERROR);
+            }
         }
     }
 
@@ -52,8 +65,6 @@ public abstract class Controller implements IControllerDataTransfer, Initializab
 
     @Override
     public void updateView(){}
-
-
 
     /**
      * Creates a alert box for the user, including the given error.

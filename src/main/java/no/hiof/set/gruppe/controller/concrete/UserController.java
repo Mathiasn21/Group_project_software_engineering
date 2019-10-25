@@ -154,9 +154,8 @@ public class UserController extends Controller {
     }
 
     /**
-     * Returns a Boolean based on if the Arrangement name contains
-     * And is in same category
-     * the given search string.
+     * Returns a Boolean based on match with given search string, as well
+     * as a given category and a given date predicate.
      * @param arrangement Arrangement
      * @return boolean
      */

@@ -97,10 +97,10 @@
          </font>
       </Text>
       <Text fx:id="arrangementDescription" layoutX="291.0" layoutY="477.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="418.5999091863632" />
-      <RadioButton fx:id="radioExp" layoutX="724.0" layoutY="414.0" mnemonicParsing="false" text="Vis utgåtte" />
-      <RadioButton fx:id="radioFut" layoutX="724.0" layoutY="434.0" mnemonicParsing="false" text="Vis fremtidige" />
-      <RadioButton fx:id="radioOng" layoutX="724.0" layoutY="453.0" mnemonicParsing="false" text="Vis pågående" />
+      <RadioButton fx:id="radioExp" layoutX="734.0" layoutY="415.0" mnemonicParsing="false" text="Vis utgåtte" />
+      <RadioButton fx:id="radioFut" layoutX="734.0" layoutY="435.0" mnemonicParsing="false" text="Vis fremtidige" />
+      <RadioButton fx:id="radioOng" layoutX="734.0" layoutY="454.0" mnemonicParsing="false" text="Vis pågående" />
       <ListView fx:id="myArrangementsView" layoutX="729.0" layoutY="122.0" prefHeight="288.0" prefWidth="232.0" />
-      <RadioButton fx:id="radioAll" layoutX="724.0" layoutY="472.0" mnemonicParsing="false" text="Vis Alle" />
+      <RadioButton fx:id="radioAll" layoutX="734.0" layoutY="473.0" mnemonicParsing="false" text="Vis Alle" />
    </children>
 </AnchorPane>

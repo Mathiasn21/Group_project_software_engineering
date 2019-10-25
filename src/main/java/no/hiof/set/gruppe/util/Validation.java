@@ -3,6 +3,7 @@ package no.hiof.set.gruppe.util;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.constantInformation.ValidationResult;
 import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDate;
 import java.util.regex.Pattern;
@@ -17,12 +18,15 @@ public class Validation{
 
     private static final int maxNameL = 50;
     private static final int minNameL = 2;
+
     /**
      * Validates an arrangement
      * @param arrangement {@link Arrangement}
      * @return ValidationResult {@link ValidationResult}
      */
-    public static ValidationResult ofArrangement(Arrangement arrangement) {
+    @NotNull
+    @Contract("_ -> new")
+    public static ValidationResult ofArrangement(@NotNull Arrangement arrangement) {
         StringBuilder str = new StringBuilder();
         String invalidNum = "Sett inn et gyldig antall deltakere\n";
 
@@ -49,6 +53,7 @@ public class Validation{
      * Tests if number is between two numbers, inclusive both ends.
      * @param min int
      * @param max int
+     * @param numToTest int
      * @return boolean
      */
     @Contract(pure = true)

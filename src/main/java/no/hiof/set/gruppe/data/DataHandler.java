@@ -88,7 +88,7 @@ public class DataHandler {
      * @param type T[]
      * @param jsonTextFromFile String
      * @param <T> T
-     * @return {@link List}<T>
+     * @return {@link List}
      */
     @NotNull
     private static<T> List<T> listFromJson(Class<T[]> type, String jsonTextFromFile) {

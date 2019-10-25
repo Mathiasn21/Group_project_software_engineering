@@ -18,6 +18,8 @@ import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import no.hiof.set.gruppe.Exceptions.DataFormatException;
+import no.hiof.set.gruppe.Exceptions.ErrorExceptionHandler;
+import no.hiof.set.gruppe.controller.abstractions.Controller;
 import no.hiof.set.gruppe.controller.abstractions.IController;
 import no.hiof.set.gruppe.controller.abstractions.IControllerDataTransfer;
 import no.hiof.set.gruppe.controller.abstractions.SetupWindow;
@@ -36,6 +38,7 @@ public class MainJavaFX extends Application implements SetupWindow {
     //                2.Local Fields                     //
     // --------------------------------------------------//
     private Stage stage;
+
     public static void main(String[] args) {
         launch(args);
     }
@@ -54,7 +57,7 @@ public class MainJavaFX extends Application implements SetupWindow {
         IController controller = (loader.getController());
         controller.setMainController(this);
 
-        stage.setOnHidden((Event)-> controller.onCloseStoreInformation());
+        stage.setOnHidden((Event) -> controller.onCloseStoreInformation());
         Scene scene = new Scene(editLayout);
         stage.setScene(scene);
         stage.setResizable(false);
@@ -66,12 +69,14 @@ public class MainJavaFX extends Application implements SetupWindow {
     // --------------------------------------------------//
     //                4.Public Methods                   //
     // --------------------------------------------------//
+
     /**
      * This function is responsible for setting up a new window.
      * This is custom made for controllers that implement the interface: {@link IController}
+     *
      * @param controller {@link IController}
      */
-    public void setupWindow(@NotNull IController controller)throws IOException{
+    public void setupWindow(@NotNull IController controller) throws IOException {
         Stage stage = new Stage();
 
         FXMLLoader loader = new FXMLLoader();
@@ -80,7 +85,7 @@ public class MainJavaFX extends Application implements SetupWindow {
 
         //handling onclose for given stage
         IController finalController = controller;
-        stage.setOnHidden((Event)-> finalController.onCloseStoreInformation());
+        stage.setOnHidden((Event) -> finalController.onCloseStoreInformation());
 
         Scene editScene = new Scene(editLayout);
         stage.setScene(editScene);
@@ -100,11 +105,15 @@ public class MainJavaFX extends Application implements SetupWindow {
      * This function is responsible for setting up a new window.
      * This is custom made for controllers that implement the interface: {@link IControllerDataTransfer}
      * And as such mediates between controllers that requires this.
+     *
      * @param controller {@link IControllerDataTransfer}
-     * @param object {@link Object}
+     * @param object     {@link Object}
      */
-    public void setupWindow(@NotNull IControllerDataTransfer controller, Object object){
-        try{
+    public void setupWindow(@NotNull IControllerDataTransfer controller, Object object) {
+        boolean errorOccured = true;
+        ErrorExceptionHandler err = null;
+        Throwable thrown = null;
+        try {
             Stage stage = new Stage();
 
             FXMLLoader loader = new FXMLLoader();
@@ -115,8 +124,8 @@ public class MainJavaFX extends Application implements SetupWindow {
             controller = loader.getController();
             controller.setDataFields(object);
             IControllerDataTransfer finalController = controller;
-            stage.setOnHidden((Event)->{
-                if(finalController.hasNewObject()){
+            stage.setOnHidden((Event) -> {
+                if (finalController.hasNewObject()) {
                     try {
                         oldController.setDataFields(finalController.getDataObject());
                     } catch (DataFormatException e) {
@@ -137,8 +146,22 @@ public class MainJavaFX extends Application implements SetupWindow {
             System.out.println(this);
 
             stage.show();
-        }catch (DataFormatException | IOException dataEx){
-            dataEx.printStackTrace();
+            errorOccured = false;
+
+        } catch (DataFormatException datFormEx) {
+            err = ErrorExceptionHandler.ERROR_WRONG_DATA_OBJECT;
+            thrown = datFormEx;
+
+        } catch (IOException IOEx) {
+            err = ErrorExceptionHandler.ERROR_LOAD_RESOURCE;
+            thrown = IOEx;
+
+        } finally {
+            try {
+                if (errorOccured && (err != null)) ErrorExceptionHandler.createLogWithDetails(err, thrown);
+            } catch (Exception e) {
+                Controller.createAlert(ErrorExceptionHandler.ERROR_LOGGING_ERROR);
+            }
         }
     }
 }

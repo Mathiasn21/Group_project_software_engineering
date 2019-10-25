@@ -105,7 +105,6 @@ public class OrganizerController extends Controller {
         createNewView(this);
     }
 
-
     // --------------------------------------------------//
     //                5.Private Functional Methods       //
     // --------------------------------------------------//

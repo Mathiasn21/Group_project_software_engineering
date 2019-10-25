@@ -24,6 +24,9 @@ import no.hiof.set.gruppe.model.user.User;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Contains logic corresponding to the login view, vurrently the main view.
+ */
 public class LoginController extends Controller {
     // --------------------------------------------------//
     //                2.Local Fields                     //
@@ -49,13 +52,6 @@ public class LoginController extends Controller {
     // --------------------------------------------------//
     //                5.Private Methods                  //
     // --------------------------------------------------//
-
-    private int checkCredentials(String user){
-        //should take an input that is a user enum
-        //Test for valid and what the valid credentials are, eg admin, organizer or user
-        //Might be a enum that returns a given view name
-        return 0;
-    }
 
     private void getCorrectCredentials(ActionEvent event){
         User user = User.USER;
@@ -122,10 +118,4 @@ public class LoginController extends Controller {
     public String getName() {
         return name;
     }
-
-
-
-    /*
-    * Needs valid logic for input control
-    * */
 }

@@ -2,13 +2,13 @@
   {
     "ID": "5dcf3140-b627-4b0b-9993-3a6838358dd3",
     "name": "Øskars Diverse",
-    "sport": "Alle",
-    "address": "dwafrtd34",
-    "startDate": "2019-11-01",
+    "sport": "Skirenn",
+    "address": "testvegen - 2",
+    "startDate": "2019-10-01",
     "endDate": "2019-11-23",
     "description": "wdawdegsgdtreafrtdhrg",
     "participants": 23,
-    "group": true
+    "group": false
   },
   {
     "ID": "a057b6e7-ad2e-4f40-b2c9-4e2e408b3bd2",

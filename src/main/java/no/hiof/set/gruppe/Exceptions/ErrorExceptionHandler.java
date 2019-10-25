@@ -17,8 +17,9 @@ public enum ErrorExceptionHandler {
     ERROR_OPENING_WINDOW (4, "Could not open window."),
     ERROR_LOGGING_ERROR (6, "ERROR, could not log the error."),
     ERROR_LOAD_RESOURCE(7, "ERROR, could not load resources for fxml window."),
+    ERROR_WRONG_DATA_OBJECT(10, "ERROR, Wrong dataformat on object."),
     ERROR_FATAL(8, "Something really bad has happened. Program terminated."),
-    EXCEPTION_STORAGE_ERROR (9, "Exception, something went wrong withstoring the data.");
+    EXCEPTION_STORAGE_ERROR (9, "Exception, something went wrong with storing the data.");
 
 
     // --------------------------------------------------//
