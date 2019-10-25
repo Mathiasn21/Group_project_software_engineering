@@ -47,6 +47,7 @@ public class Arrangement implements IArrangementSortering{
      * @param gruppe boolean
      * @param startDate String
      * @param endDate String
+     * @param description String
      */
     public Arrangement(String name, String sport, int participants, String address, boolean gruppe, String startDate, String endDate, String description) {
         this.name = name;
