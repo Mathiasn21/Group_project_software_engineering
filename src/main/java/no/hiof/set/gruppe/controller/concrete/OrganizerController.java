@@ -137,7 +137,6 @@ public class OrganizerController extends Controller {
         listview.getSelectionModel().selectFirst();
     }
 
-
     // --------------------------------------------------//
     //                6.Private Search Methods           //
     // --------------------------------------------------//
