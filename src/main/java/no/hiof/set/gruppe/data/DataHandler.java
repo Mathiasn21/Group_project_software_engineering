@@ -61,11 +61,10 @@ public class DataHandler {
             while ((line = bufferedReader.readLine()) != null) {
                 textFromFile.append(line);
             }
-            return textFromFile.toString();
         }catch (IOException ioexc) {
             ioexc.printStackTrace();
         }
-        return "";
+        return textFromFile.toString();
     }
 
     /**
