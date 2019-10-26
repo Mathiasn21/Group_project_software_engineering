@@ -115,11 +115,6 @@ public class OrganizerController extends Controller {
         listview.refresh();
     }
 
-    @NotNull
-    private String groupsOrIndividuals(@NotNull Arrangement arrangement){
-        return arrangement.isGroup() ? "Lagkonkurranse" : "Individuell konkurranse";
-    }
-
     private void setInformationAboutArrangementInView(){
         if(currentArrangement == null)return;
         ArrayList<Text> viewFields = viewFields(arrangementNameView, arrangementSportView, arrangementAdressView, arrangementDateView, arrangementParticipantsView, arrangementGorIView, arrangementDescriptionView);

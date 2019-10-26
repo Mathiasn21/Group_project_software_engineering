@@ -107,8 +107,7 @@ public class UserController extends Controller {
         ((Stage)logOut.getScene().getWindow()).close();
         createNewView(this);
     }
-
-
+    
     // --------------------------------------------------//
     //                5.Private Functional Methods       //
     // --------------------------------------------------//
