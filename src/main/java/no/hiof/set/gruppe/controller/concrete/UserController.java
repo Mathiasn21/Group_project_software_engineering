@@ -89,7 +89,7 @@ public class UserController extends Controller {
         if(selectedItem == null){return;}
         currentAvailableArrangement = selectedItem;
         currentSelectedArrangement = currentAvailableArrangement;
-        setDataFields();
+        setInformationAboutArrangementInView();
     }
     private void onClickMyView(MouseEvent event){
         Arrangement selectedItem = myArrangementsView.getSelectionModel().getSelectedItem();
@@ -99,7 +99,7 @@ public class UserController extends Controller {
 
         if(DateTest.TestExpired.execute(currentSelectedMyArrangement.getStartDate() ,currentSelectedMyArrangement.getEndDate()))leaveBtn.setDisable(true);
         else leaveBtn.setDisable(false);
-        setDataFields();
+        setInformationAboutArrangementInView();
     }
     private void returnToMainWindow(ActionEvent event) {
         title = "Logg inn";
@@ -112,17 +112,15 @@ public class UserController extends Controller {
     // --------------------------------------------------//
     //                5.Private Functional Methods       //
     // --------------------------------------------------//
-    private void setDataFields(){
-        if(currentSelectedArrangement == null){return;}
-        arrangementTitle.setText(currentSelectedArrangement.getName());
-        arrangementSport.setText(currentSelectedArrangement.getSport());
-        arrangementAddress.setText(currentSelectedArrangement.getAddress());
-        arrangementDate.setText(currentSelectedArrangement.getStartDate().toString());
-        arrangementParticipants.setText(String.valueOf(currentSelectedArrangement.getParticipants()));
-        arrangementGroup.setText(currentSelectedArrangement.getSport());
-        arrangementDescription.setText(currentSelectedArrangement.getDescription());
-    }
 
+    private void setInformationAboutArrangementInView(){
+        if(currentSelectedArrangement == null)return;
+        ArrayList<Text> viewFields = viewFields(arrangementTitle, arrangementSport,arrangementAddress,arrangementDate,arrangementParticipants,arrangementGroup, arrangementDescription);
+        ArrayList<String> data = arrangementData(currentSelectedArrangement);
+        for(int i = 0; i < data.size(); i++){
+            viewFields.get(i).setText(data.get(i));
+        }
+    }
 
     // --------------------------------------------------//
     //                6.Private Search Methods           //

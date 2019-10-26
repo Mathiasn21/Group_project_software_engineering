@@ -30,7 +30,9 @@ import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.user.User;
 import org.jetbrains.annotations.NotNull;
 
+import java.lang.reflect.Method;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
@@ -57,7 +59,7 @@ public class AdminController extends Controller {
      @FXML
      private TextField search;
      @FXML
-     private Text arrangementSportView, arrangementNameView, arrangementAdressView, arrangementDateView, arrangementGorIView, arrangementParticipantsView, arrangementDescriptionView;
+     private Text arrangementSport, arrangementName, arrangementAdress, arrangementDate, arrangementGorI, arrangementParticipants, arrangementDescription;
 
     // --------------------------------------------------//
     //                4.On action Methods                //
@@ -100,22 +102,16 @@ public class AdminController extends Controller {
         currentArrangement = incomingArrangement;
     }
 
+
     private void setInformationAboutArrangementInView(){
         if(currentArrangement == null)return;
-        arrangementNameView.setText(currentArrangement.getName());
-        arrangementSportView.setText(currentArrangement.getSport());
-        arrangementAdressView.setText(currentArrangement.getAddress());
-        arrangementDateView.setText(currentArrangement.getStartDate().toString() + " til " + currentArrangement.getEndDate().toString());
-        arrangementParticipantsView.setText(Integer.toString(currentArrangement.getParticipants()));
-        arrangementGorIView.setText(groupsOrIndividuals(currentArrangement));
-        arrangementDescriptionView.setText(currentArrangement.getDescription());
+        ArrayList<Text> viewFields = viewFields(arrangementName, arrangementSport, arrangementAdress, arrangementDate, arrangementParticipants, arrangementGorI, arrangementDescription);
+        ArrayList<String> data = arrangementData(currentArrangement);
+        for(int i = 0; i < data.size(); i++){
+            viewFields.get(i).setText(data.get(i));
+        }
     }
 
-    @NotNull
-    private String groupsOrIndividuals(@NotNull Arrangement arrangement){
-        return arrangement.isGroup() ? "Lagkonkurranse" : "Individuell konkurranse";
-    }
-    
     // --------------------------------------------------//
     //                6.Overridden Methods               //
     // --------------------------------------------------//

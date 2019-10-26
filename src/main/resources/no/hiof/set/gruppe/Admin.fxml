@@ -25,7 +25,7 @@
                   <Font size="15.0" />
                </font>
             </Text>
-            <Text fx:id="arrangementSportView" layoutX="10.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="444.0">
+            <Text fx:id="arrangementSport" layoutX="10.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="444.0">
                <font>
                   <Font size="15.0" />
                </font>
@@ -38,7 +38,7 @@
                   <Font size="15.0" />
                </font>
             </Text>
-            <Text fx:id="arrangementAdressView" layoutX="10.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="444.0">
+            <Text fx:id="arrangementAdress" layoutX="10.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="444.0">
                <font>
                   <Font size="15.0" />
                </font>
@@ -51,7 +51,7 @@
                   <Font size="15.0" />
                </font>
             </Text>
-            <Text fx:id="arrangementDateView" layoutX="10.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="444.0">
+            <Text fx:id="arrangementDate" layoutX="10.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="444.0">
                <font>
                   <Font size="15.0" />
                </font>
@@ -84,7 +84,7 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="428.0">
                <children>
-                  <Text fx:id="arrangementGorIView" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="222.0">
+                  <Text fx:id="arrangementGorI" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="222.0">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -92,7 +92,7 @@
                         <Insets top="10.0" />
                      </HBox.margin>
                   </Text>
-                  <Text fx:id="arrangementParticipantsView" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="224.0">
+                  <Text fx:id="arrangementParticipants" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="224.0">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -105,7 +105,7 @@
          </children>
       </VBox>
       <Button fx:id="delete" layoutX="94.0" layoutY="457.0" mnemonicParsing="false" text="Slett" />
-      <Text fx:id="arrangementNameView" layoutX="279.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="373.9999935030937">
+      <Text fx:id="arrangementName" layoutX="279.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="373.9999935030937">
          <font>
             <Font size="25.0" />
          </font>
@@ -116,7 +116,7 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <Text fx:id="arrangementDescriptionView" layoutX="295.0" layoutY="394.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="341.60000681877136" />
+      <Text fx:id="arrangementDescription" layoutX="295.0" layoutY="394.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="341.60000681877136" />
       <TextField fx:id="search" layoutX="46.0" layoutY="36.0" prefHeight="26.0" prefWidth="171.0" />
       <Text layoutX="14.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Søk" />
    </children>

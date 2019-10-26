@@ -2,11 +2,16 @@ package no.hiof.set.gruppe.controller.abstractions;
 
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import no.hiof.set.gruppe.Exceptions.ErrorExceptionHandler;
 import no.hiof.set.gruppe.MainJavaFX;
+import no.hiof.set.gruppe.model.Arrangement;
 import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * This class is the main setup for all other controllers and their logic.
@@ -77,5 +82,28 @@ public abstract class Controller implements IControllerDataTransfer, Initializab
         alert.setTitle("ERROR");
         alert.setContentText(errMsg.CODE + " " + errMsg.ERROR_MSG);
         alert.showAndWait();
+    }
+
+    public ArrayList<Text> viewFields(Text name, Text sport, Text adress, Text date, Text participants, Text groups, Text description){
+
+        Text[] t = {name, sport, adress, date, participants, groups, description};
+
+        return new ArrayList<>(Arrays.asList(t));
+    }
+
+    public ArrayList<String>arrangementData(Arrangement a){
+
+        String[] s = {a.getName(), a.getSport(), a.getAddress(), dateString(a), Integer.toString(a.getParticipants()), groupsOrIndividuals(a), a.getDescription()};
+
+        return new ArrayList<>(Arrays.asList(s));
+    }
+
+    @NotNull
+    private String groupsOrIndividuals(@NotNull Arrangement arrangement){
+        return arrangement.isGroup() ? "Lagkonkurranse" : "Individuell konkurranse";
+    }
+
+    private String dateString(Arrangement a){
+        return a.getStartDate().toString() + " til " + a.getEndDate().toString();
     }
 }

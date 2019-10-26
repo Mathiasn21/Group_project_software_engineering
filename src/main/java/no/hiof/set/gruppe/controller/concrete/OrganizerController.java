@@ -30,6 +30,7 @@ import no.hiof.set.gruppe.util.ArrangementSort;
 import org.jetbrains.annotations.NotNull;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
@@ -121,13 +122,11 @@ public class OrganizerController extends Controller {
 
     private void setInformationAboutArrangementInView(){
         if(currentArrangement == null)return;
-        arrangementNameView.setText(currentArrangement.getName());
-        arrangementSportView.setText(currentArrangement.getSport());
-        arrangementAdressView.setText(currentArrangement.getAddress());
-        arrangementDateView.setText(currentArrangement.getStartDate().toString() + " til " + currentArrangement.getEndDate().toString());
-        arrangementParticipantsView.setText(Integer.toString(currentArrangement.getParticipants()));
-        arrangementGorIView.setText(groupsOrIndividuals(currentArrangement));
-        arrangementDescriptionView.setText(currentArrangement.getDescription());
+        ArrayList<Text> viewFields = viewFields(arrangementNameView, arrangementSportView, arrangementAdressView, arrangementDateView, arrangementParticipantsView, arrangementGorIView, arrangementDescriptionView);
+        ArrayList<String> data = arrangementData(currentArrangement);
+        for(int i = 0; i < data.size(); i++){
+            viewFields.get(i).setText(data.get(i));
+        }
     }
 
     private void deleteArrangement(){
