@@ -15,6 +15,7 @@ import com.google.gson.GsonBuilder;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.user.User;
 import no.hiof.set.gruppe.model.user.UserConnectedArrangement;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
@@ -61,11 +62,10 @@ public class DataHandler {
             while ((line = bufferedReader.readLine()) != null) {
                 textFromFile.append(line);
             }
-            return textFromFile.toString();
         }catch (IOException ioexc) {
             ioexc.printStackTrace();
         }
-        return "";
+        return textFromFile.toString();
     }
 
     /**
@@ -143,21 +143,24 @@ public class DataHandler {
         storeArrangementsData();
     }
 
-    public static void addUserToArrangement(Arrangement arrangement, User user){
+    public static void addUserToArrangement(@NotNull Arrangement arrangement, @NotNull User user){
         listOfAllUserConnectedArrangements.add(new UserConnectedArrangement(arrangement.getID(), user.getName()));
         storeArrangementsData();
     }
 
 
-    public static void addArrangement(Arrangement arrangement, User user){
+    public static void addArrangement(Arrangement arrangement, @NotNull User user){
         listOfAllArrangements.add(arrangement);
         listOfAllUserConnectedArrangements.add(new UserConnectedArrangement(arrangement.getID(), user.getName()));
         storeArrangementsData();
     }
 
+    @NotNull
+    @Contract(" -> new")
     public static List<Arrangement> getArrangementsData(){ return new ArrayList<>(listOfAllArrangements); }
 
-    public static List<Arrangement> getUserArrangements(User user) {
+    @NotNull
+    public static List<Arrangement> getUserArrangements(@NotNull User user) {
         List<Arrangement> result = new ArrayList<>();
         String userName = user.getName();
 
@@ -186,10 +189,13 @@ public class DataHandler {
      * those into a usable collection of arrangements.
      * @return {@link List} ? extends {@link Arrangement}
      */
+    @NotNull
+    @Contract(" -> new")
     private static List<Arrangement> readArrangementsData() {
         return new ArrayList<>(listFromJson(Arrangement[].class, readFromFile(arrangementFName)));
     }
 
+    @NotNull
     private static List<UserConnectedArrangement> getUserConnectedArrangements() {
         String jsonFromFile = readFromFile(userHasArrangements);
         return new ArrayList<>(listOfAllUserConnectedArrangements = listFromJson(UserConnectedArrangement[].class, jsonFromFile));

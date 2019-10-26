@@ -37,6 +37,7 @@ public enum ErrorExceptionHandler {
      * @param code int
      * @param msg String
      */
+    @Contract(pure = true)
     ErrorExceptionHandler(int code, String msg) {
         this.CODE = code;
         this.ERROR_MSG = msg;
