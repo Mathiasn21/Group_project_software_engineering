@@ -59,6 +59,9 @@ public class AdminController extends Controller {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         logOut.setOnAction(this::returnToMainWindow);
+
+        
+
     }
 
     @Override

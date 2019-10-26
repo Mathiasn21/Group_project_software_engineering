@@ -48,7 +48,6 @@ public class OrganizerController extends Controller {
     private FilteredList<Arrangement> filteredList;
     private Arrangement currentArrangement = null;
 
-
     // --------------------------------------------------//
     //                3.FXML Fields                      //
     // --------------------------------------------------//
