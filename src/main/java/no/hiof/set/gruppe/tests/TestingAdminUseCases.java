@@ -32,8 +32,8 @@ class TestingAdminUseCases {
     @Test
     @Order(1)
     void addArrangement() throws IllegalDataAccess {
-        DataHandler.addArrangement(arrangement, user);
-        assertTrue(DataHandler.getUserArrangements(user).contains(arrangement));
+        DataHandler.addArrangement(arrangement, User.ORGANIZER);
+        assertTrue(DataHandler.getUserArrangements(User.ORGANIZER).contains(arrangement));
     }
 
     /**
@@ -42,7 +42,7 @@ class TestingAdminUseCases {
     @Test
     @Order(2)
     void deleteArrangement() throws IllegalDataAccess {
-        DataHandler.deleteArrangement(arrangement, User.ORGANIZER);
+        DataHandler.deleteArrangement(arrangement, user);
         assertFalse(DataHandler.getArrangementsData().contains(arrangement));
     }
 
