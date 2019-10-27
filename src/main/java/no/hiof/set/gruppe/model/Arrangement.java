@@ -106,14 +106,12 @@ public class Arrangement implements IArrangementSortering{
     public void setEndDate(String endDate) {this.endDate = endDate;}
     public void setDescription(String description) {this.description = description;}
 
-
     // --------------------------------------------------//
     //                5.Public Methods                   //
     // --------------------------------------------------//
     public boolean isGroup() {
         return group;
     }
-
 
     // --------------------------------------------------//
     //                6.Overridden Methods               //
@@ -135,7 +133,7 @@ public class Arrangement implements IArrangementSortering{
 
     @Override
     public String toString(){
-        return name + " " + sport + " " + participants + " " + address + " " + startDate + " til " + endDate + " " + description;
+        return name + ", " + sport + ", " + startDate + " til " + endDate;
     }
 
     @Override
