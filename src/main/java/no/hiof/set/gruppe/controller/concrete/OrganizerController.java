@@ -149,8 +149,7 @@ public class OrganizerController extends Controller {
         SportCategory category = sortOptions.getSelectionModel().getSelectedItem();
         return category.equals(SportCategory.ALL) || arrangement.getSport().equals(category.toString());
     }
-
-
+    
     // --------------------------------------------------//
     //                7.Private Setup Methods            //
     // --------------------------------------------------//
