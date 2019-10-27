@@ -12,6 +12,7 @@ package no.hiof.set.gruppe.controller.concrete;
 //                1.Import Statements                //
 // --------------------------------------------------//
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.AccessibleAction;
@@ -27,6 +28,7 @@ import no.hiof.set.gruppe.model.constantInformation.SportCategory;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
@@ -44,7 +46,6 @@ public class NewAlterArrangementController extends Controller {
     private String title = "Arrangement";
     private Arrangement arrangementToEdit = null;
     private boolean createdNewObject = false;
-
     private String arrName;
     private String sport;
     private String partic;
@@ -68,9 +69,7 @@ public class NewAlterArrangementController extends Controller {
     @FXML
     private ComboBox<SportCategory> sportComboBoxInput;
     @FXML
-    public Button saveBtn;
-    @FXML
-    public Button cancelBtn;
+    public Button saveBtn, cancelBtn;
 
     /**
      * Only saves the information if given information in the view is valid.
@@ -105,9 +104,16 @@ public class NewAlterArrangementController extends Controller {
     private void setupComboBoxes(){
         sportComboBoxInput.setItems(FXCollections.observableArrayList(SportCategory.values()));
         groupInput.setItems(FXCollections.observableArrayList(GroupCategory.values()));
-
         sportComboBoxInput.getSelectionModel().select(0);
         groupInput.getSelectionModel().select(0);
+    }
+
+    private int getSportIndex(){
+        ObservableList list = FXCollections.observableArrayList(SportCategory.values());
+       for(int i = 0; i < list.size(); i++){
+           if(list.get(i).toString() == arrangementToEdit.getSport())return i;
+       }
+       return 0;
     }
 
     private void getArrangementData(){
@@ -230,6 +236,7 @@ public class NewAlterArrangementController extends Controller {
             arrangementToEdit = arrangement;
             nameInput.setText(arrangement.getName());
             adressInput.setText(arrangement.getAddress());
+            sportComboBoxInput.getSelectionModel().select(getSportIndex());
             participantsInput.setText(Integer.toString(arrangement.getParticipants()));
             startDateInput.setValue(arrangement.getStartDate());
             endDateInput.setValue(arrangement.getEndDate());
