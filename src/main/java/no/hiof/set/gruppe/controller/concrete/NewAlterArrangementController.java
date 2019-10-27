@@ -1,4 +1,5 @@
 package no.hiof.set.gruppe.controller.concrete;
+
 /*Guide
  * 1. Import Statements
  * 2. Local Fields
@@ -15,7 +16,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.AccessibleAction;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import no.hiof.set.gruppe.controller.abstractions.Controller;
@@ -25,10 +25,8 @@ import no.hiof.set.gruppe.util.Validation;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.constantInformation.GroupCategory;
 import no.hiof.set.gruppe.model.constantInformation.SportCategory;
-
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
@@ -108,14 +106,6 @@ public class NewAlterArrangementController extends Controller {
         groupInput.getSelectionModel().select(0);
     }
 
-    private int getSportIndex(){
-        ObservableList list = FXCollections.observableArrayList(SportCategory.values());
-       for(int i = 0; i < list.size(); i++){
-           if(list.get(i).toString() == arrangementToEdit.getSport())return i;
-       }
-       return 0;
-    }
-
     private void getArrangementData(){
         arrName = nameInput.getText();
         sport = sportComboBoxInput.getSelectionModel().getSelectedItem().toString();
@@ -165,6 +155,14 @@ public class NewAlterArrangementController extends Controller {
             return true;
         }
         return false;
+    }
+
+    private int getSportIndex(){
+        ObservableList list = FXCollections.observableArrayList(SportCategory.values());
+        for(int i = 0; i < list.size(); i++){
+            if(list.get(i).toString() == arrangementToEdit.getSport())return i;
+        }
+        return 0;
     }
 
     private void closeWindow(){
