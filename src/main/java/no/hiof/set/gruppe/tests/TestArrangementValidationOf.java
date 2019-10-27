@@ -16,7 +16,7 @@ import java.time.LocalDate;
 import java.util.stream.Stream;
 
 
-class TestValidationOf {
+class TestArrangementValidationOf {
 
     /**
      * Generates illegal dates and names
