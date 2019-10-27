@@ -24,12 +24,15 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import no.hiof.set.gruppe.Exceptions.DataFormatException;
+import no.hiof.set.gruppe.Exceptions.ErrorExceptionHandler;
+import no.hiof.set.gruppe.Exceptions.IllegalDataAccess;
 import no.hiof.set.gruppe.controller.abstractions.Controller;
 import no.hiof.set.gruppe.data.DataHandler;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.user.User;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.ArrayList;
@@ -111,8 +114,7 @@ public class AdminController extends Controller {
     }
 
     private boolean checkIfLegalArrangement(){
-        if(clickedItemFromListView() == null || clickedItemFromListView().getStartDate() == null)return false;
-        return true;
+        return clickedItemFromListView() != null && clickedItemFromListView().getStartDate() != null;
     }
 
     private void setCurrentArrangement(){
@@ -120,9 +122,15 @@ public class AdminController extends Controller {
     }
 
     private void deleteArrangement(){
-        arrangementListObservable.remove(currentArrangement);
-        DataHandler.deleteArrangement(currentArrangement);
-        arrangementListView.refresh();
+        try {
+            DataHandler.deleteArrangement(currentArrangement, User.ADMIN);
+            arrangementListObservable.remove(currentArrangement);
+            arrangementListView.refresh();
+        }
+        catch (IllegalDataAccess illegalDataAccess) {
+            try { ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_ACCESSING_DATA, illegalDataAccess); }
+            catch (IOException e) {e.printStackTrace();}
+        }
     }
 
     private void editArrangement(){

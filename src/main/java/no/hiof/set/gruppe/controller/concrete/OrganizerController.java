@@ -21,6 +21,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import no.hiof.set.gruppe.Exceptions.DataFormatException;
+import no.hiof.set.gruppe.Exceptions.ErrorExceptionHandler;
+import no.hiof.set.gruppe.Exceptions.IllegalDataAccess;
 import no.hiof.set.gruppe.controller.abstractions.Controller;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.data.DataHandler;
@@ -29,6 +31,7 @@ import no.hiof.set.gruppe.model.user.User;
 import no.hiof.set.gruppe.util.ArrangementSort;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -48,6 +51,7 @@ public class OrganizerController extends Controller {
     private ObservableList<Arrangement>arrangementListObservable;
     private FilteredList<Arrangement> filteredList;
     private Arrangement currentArrangement = null;
+    private static final User user = User.ORGANIZER;
 
     // --------------------------------------------------//
     //                3.FXML Fields                      //
@@ -124,9 +128,15 @@ public class OrganizerController extends Controller {
 
     private void deleteArrangement(){
         Arrangement selectedItem = listview.getSelectionModel().getSelectedItem();
-        arrangementListObservable.remove(selectedItem);
-        DataHandler.deleteArrangement(selectedItem);
-        listview.getSelectionModel().selectFirst();
+        try {
+            DataHandler.deleteArrangement(selectedItem, user);
+            arrangementListObservable.remove(selectedItem);
+            listview.getSelectionModel().selectFirst();
+        }
+        catch (IllegalDataAccess illegalDataAccess) {
+            try {ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_ACCESSING_DATA, illegalDataAccess); }
+            catch (IOException e) {e.printStackTrace();}
+        }
     }
 
     // --------------------------------------------------//
@@ -213,8 +223,14 @@ public class OrganizerController extends Controller {
         Arrangement arrangement = (Arrangement) object;
 
         MultipleSelectionModel selModel = listview.getSelectionModel();
-        arrangementListObservable.add(arrangement);
-        DataHandler.addArrangement(arrangement, User.ORGANIZER);
+        try {
+            DataHandler.addArrangement(arrangement, User.ORGANIZER);
+            arrangementListObservable.add(arrangement);
+
+        } catch (IllegalDataAccess illegalDataAccess) {
+            try {ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_ACCESSING_DATA, illegalDataAccess);}
+            catch (IOException e) {e.printStackTrace();}
+        }
         if(selModel.getSelectedItem() == null) selModel.selectLast();
         listview.refresh();
         changedView();

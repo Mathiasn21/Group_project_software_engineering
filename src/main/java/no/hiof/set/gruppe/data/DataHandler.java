@@ -13,9 +13,11 @@ package no.hiof.set.gruppe.data;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import no.hiof.set.gruppe.Exceptions.ErrorExceptionHandler;
+import no.hiof.set.gruppe.Exceptions.IllegalDataAccess;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.user.User;
 import no.hiof.set.gruppe.model.user.UserConnectedArrangement;
+import no.hiof.set.gruppe.util.AccessValidate;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -126,10 +128,34 @@ public class DataHandler {
             }
         }
     }
+
+    /**
+     * Grabs the arrangement data from a file and converts
+     * those into a usable collection of arrangements.
+     * @return {@link List} ? extends {@link Arrangement}
+     */
+    @NotNull
+    @Contract(" -> new")
+    private static List<Arrangement> readArrangementsData() throws IOException {
+        return new ArrayList<>(listFromJson(Arrangement[].class, readFromFile(arrangementFName)));
+    }
+
+    @NotNull
+    private static List<UserConnectedArrangement> getUserConnectedArrangements() throws IOException {
+        String jsonFromFile = readFromFile(userHasArrangements);
+        return new ArrayList<>(listOfAllUserConnectedArrangements = listFromJson(UserConnectedArrangement[].class, jsonFromFile));
+    }
+
+    private static void storeUserArrangements(){
+        writeToFile(toJson(UserConnectedArrangement[].class,  listOfAllUserConnectedArrangements.toArray(UserConnectedArrangement[]::new)), userHasArrangements);
+    }
+
     // --------------------------------------------------//
     //                4.Public Methods                   //
     // --------------------------------------------------//
-    public static void deleteArrangement(Arrangement arrangement){
+    public static void deleteArrangement(Arrangement arrangement, User user) throws IllegalDataAccess {
+        if(!AccessValidate.userCanModifyArrangement(arrangement, user))throw new IllegalDataAccess();
+
         listOfAllArrangements.remove(arrangement);
         deleteUserConnectedArrangements(arrangement.getID());
         storeArrangementsData();
@@ -151,8 +177,9 @@ public class DataHandler {
         storeArrangementsData();
     }
 
+    public static void addArrangement(Arrangement arrangement, @NotNull User user) throws IllegalDataAccess {
+        if(!AccessValidate.userCanCreateArrangement(user))throw new IllegalDataAccess();
 
-    public static void addArrangement(Arrangement arrangement, @NotNull User user){
         listOfAllArrangements.add(arrangement);
         listOfAllUserConnectedArrangements.add(new UserConnectedArrangement(arrangement.getID(), user.getName()));
         storeArrangementsData();
@@ -185,26 +212,5 @@ public class DataHandler {
     public static void storeArrangementsData() {
         writeToFile(toJson(Arrangement[].class, listOfAllArrangements.toArray(Arrangement[]::new)), arrangementFName);
         storeUserArrangements();
-    }
-
-    /**
-     * Grabs the arrangement data from a file and converts
-     * those into a usable collection of arrangements.
-     * @return {@link List} ? extends {@link Arrangement}
-     */
-    @NotNull
-    @Contract(" -> new")
-    private static List<Arrangement> readArrangementsData() throws IOException {
-        return new ArrayList<>(listFromJson(Arrangement[].class, readFromFile(arrangementFName)));
-    }
-
-    @NotNull
-    private static List<UserConnectedArrangement> getUserConnectedArrangements() throws IOException {
-        String jsonFromFile = readFromFile(userHasArrangements);
-        return new ArrayList<>(listOfAllUserConnectedArrangements = listFromJson(UserConnectedArrangement[].class, jsonFromFile));
-    }
-
-    private static void storeUserArrangements(){
-        writeToFile(toJson(UserConnectedArrangement[].class,  listOfAllUserConnectedArrangements.toArray(UserConnectedArrangement[]::new)), userHasArrangements);
     }
 }

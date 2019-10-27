@@ -20,7 +20,8 @@ public enum ErrorExceptionHandler {
     ERROR_WRONG_DATA_OBJECT(8, "ERROR, Wrong dataformat on object."),
     ERROR_FATAL(9, "Something really bad has happened. Program terminated."),
     EXCEPTION_STORAGE_ERROR (10, "Exception, something went wrong with storing the data."),
-    ERROR_READING_DATA(11, "ERROR, undable to read data from database");
+    ERROR_READING_DATA(11, "ERROR, unable to read data from database"),
+    ERROR_ACCESSING_DATA(12, "ERROR user cannot access this data.");
 
     // --------------------------------------------------//
     //                3.Instance variables               //
