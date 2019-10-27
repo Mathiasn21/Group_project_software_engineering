@@ -21,6 +21,8 @@ import javafx.stage.Stage;
 import no.hiof.set.gruppe.Exceptions.DataFormatException;
 import no.hiof.set.gruppe.controller.abstractions.Controller;
 import no.hiof.set.gruppe.model.user.User;
+import org.jetbrains.annotations.NotNull;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -53,7 +55,7 @@ public class LoginController extends Controller {
     //                5.Private Methods                  //
     // --------------------------------------------------//
 
-    private void getCorrectCredentials(ActionEvent event){
+    private void getCorrectCredentials(@NotNull ActionEvent event){
         User user = User.USER;
         Button source = (Button)event.getSource();
 
@@ -75,7 +77,7 @@ public class LoginController extends Controller {
         }
     }
 
-    private void openCorrespondingStage(User user) {
+    private void openCorrespondingStage(@NotNull User user) {
         title = user.getName();
         name = user.getViewName();
         System.out.println(getMainController());
