@@ -4,7 +4,8 @@ package no.hiof.set.gruppe.controller.concrete;
  * 2. Local Fields
  * 3. FXML Fields
  * 4. FXML Methods
- * 5. Overridden Methods
+ * 5. Private Methods
+ * 6. Overridden Methods
  * */
 
 // --------------------------------------------------//
@@ -42,6 +43,15 @@ public class NewAlterArrangementController extends Controller {
     private Arrangement arrangementToEdit = null;
     private boolean createdNewObject = false;
 
+    private String arrName;
+    private String sport;
+    private String partic;
+    private String desc;
+    private String address;
+    private boolean group;
+    private LocalDate startDate;
+    private LocalDate endDate;
+
     // --------------------------------------------------//
     //                3.FXML Fields                      //
     // --------------------------------------------------//
@@ -69,43 +79,12 @@ public class NewAlterArrangementController extends Controller {
     // --------------------------------------------------//
     @FXML
     public void saveClicked(){
-        String name = nameInput.getText();
-        String sport = sportComboBoxInput.getSelectionModel().getSelectedItem().toString();
-        String partic = participantsInput.getText();
-        String desc = descriptionInput.getText();
-        String address = adressInput.getText();
-        boolean group = groupInput.getSelectionModel().getSelectedItem().isGroup;
-        LocalDate startDate = startDateInput.getValue();
-        LocalDate endDate = endDateInput.getValue();
+        getArrangementData();
+        if(checkLengthOfAllFields())return;
+        if(illegalNumberFormat())return;
+        setArrangementData();
+        if(validateArrangementData())return;
 
-        if(name.length() == 0 || sport.length() == 0 || partic.length() == 0 ||
-                desc.length() == 0 || address.length() == 0 || startDate == null || endDate == null)return;
-
-        //must throw exception in the future
-        //"Ugyldig nummer format.\n";
-        if(!Validation.ofNumber(partic)){
-            setErrorField("Antall deltakere har ikke gyldig nummer format.");
-            return;
-        }
-
-        if(arrangementToEdit == null) {
-            arrangementToEdit = new Arrangement();
-            createdNewObject = true;
-        }
-        arrangementToEdit.setName(name);
-        arrangementToEdit.setParticipants(Integer.parseInt(partic));
-        arrangementToEdit.setAddress(address);
-        arrangementToEdit.setDescription(desc);
-        arrangementToEdit.setGruppe(group);
-        arrangementToEdit.setSport(sport);
-        arrangementToEdit.setStartDate(startDate.toString());
-        arrangementToEdit.setEndDate(endDate.toString());
-
-        ValidationResult result = Validation.ofArrangement(arrangementToEdit);
-        if(!result.IS_VALID){
-            setErrorField(result.RESULT);
-            return;
-        }
         ((Stage)saveBtn.getScene().getWindow()).close();
     }
 
@@ -113,6 +92,63 @@ public class NewAlterArrangementController extends Controller {
     public void cancelClicked(){
         ((Stage)cancelBtn.getScene().getWindow()).close();
     }
+
+    // --------------------------------------------------//
+    //                6.Private Methods                  //
+    // --------------------------------------------------//
+
+    private void getArrangementData(){
+        arrName = nameInput.getText();
+        sport = sportComboBoxInput.getSelectionModel().getSelectedItem().toString();
+        partic = participantsInput.getText();
+        desc = descriptionInput.getText();
+        address = adressInput.getText();
+        group = groupInput.getSelectionModel().getSelectedItem().isGroup;
+        startDate = startDateInput.getValue();
+        endDate = endDateInput.getValue();
+    }
+
+    private void setArrangementData(){
+        if(arrangementToEdit == null) {
+            arrangementToEdit = new Arrangement();
+            createdNewObject = true;
+        }
+        arrangementToEdit.setName(arrName);
+        arrangementToEdit.setParticipants(Integer.parseInt(partic));
+        arrangementToEdit.setAddress(address);
+        arrangementToEdit.setDescription(desc);
+        arrangementToEdit.setGruppe(group);
+        arrangementToEdit.setSport(sport);
+        arrangementToEdit.setStartDate(startDate.toString());
+        arrangementToEdit.setEndDate(endDate.toString());
+    }
+
+    private boolean checkLengthOfAllFields(){
+        if(arrName.length() == 0 || sport.length() == 0 || partic.length() == 0 || desc.length() == 0 || address.length() == 0 || startDate == null || endDate == null)
+            return true;
+        return false;
+    }
+
+    private boolean illegalNumberFormat(){
+        //must throw exception in the future
+        //"Ugyldig nummer format.\n";
+        if(!Validation.ofNumber(partic)){
+            setErrorField("Antall deltakere har ikke gyldig nummer format.");
+            return true;
+        }
+        return false;
+    }
+
+    private boolean validateArrangementData(){
+        ValidationResult result = Validation.ofArrangement(arrangementToEdit);
+        if(!result.IS_VALID){
+            setErrorField(result.RESULT);
+            return true;
+        }
+        return false;
+    }
+
+
 
     /**
      * @param result String
@@ -124,7 +160,7 @@ public class NewAlterArrangementController extends Controller {
     }
 
     // --------------------------------------------------//
-    //                5.Overridden Methods               //
+    //                6.Overridden Methods               //
     // --------------------------------------------------//
     /**
      * @param url {@link URL}

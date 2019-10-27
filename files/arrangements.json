@@ -12,13 +12,13 @@
   },
   {
     "ID": "a057b6e7-ad2e-4f40-b2c9-4e2e408b3bd2",
-    "name": "Bernt",
+    "name": "cvvbmnbvnm",
     "sport": "Alle",
     "address": "grdxgfsaeedaw",
     "startDate": "2019-10-23",
     "endDate": "2019-11-10",
     "description": "dwagrdsgdr",
-    "participants": 24,
+    "participants": 99,
     "group": true
   },
   {
@@ -30,6 +30,17 @@
     "endDate": "2019-10-12",
     "description": "Masse spising og løing med brokkoli",
     "participants": 36,
+    "group": false
+  },
+  {
+    "ID": "2b0b50f2-54a5-46da-994b-b46ccefbcef5",
+    "name": "hgjkgk",
+    "sport": "Skirenn",
+    "address": "jkhhjkl",
+    "startDate": "2019-10-03",
+    "endDate": "2019-10-18",
+    "description": "ghjkhjkhjl",
+    "participants": 666,
     "group": false
   }
 ]
