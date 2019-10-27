@@ -11,7 +11,6 @@ import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * This class is the main setup for all other controllers and their logic.
@@ -85,16 +84,12 @@ public abstract class Controller implements IControllerDataTransfer, Initializab
     }
 
     public ArrayList<Text> viewFields(Text name, Text sport, Text adress, Text date, Text participants, Text groups, Text description){
-
         Text[] t = {name, sport, adress, date, participants, groups, description};
-
         return new ArrayList<>(Arrays.asList(t));
     }
 
     public ArrayList<String>arrangementData(Arrangement a){
-
         String[] s = {a.getName(), a.getSport(), a.getAddress(), dateString(a), Integer.toString(a.getParticipants()), groupsOrIndividuals(a), a.getDescription()};
-
         return new ArrayList<>(Arrays.asList(s));
     }
 
