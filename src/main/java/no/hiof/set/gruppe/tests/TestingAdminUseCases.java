@@ -4,8 +4,10 @@ import no.hiof.set.gruppe.Exceptions.IllegalDataAccess;
 import no.hiof.set.gruppe.data.DataHandler;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.user.User;
+import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -14,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Testing the functional requirements by testing
  * the use cases of a organizer.
  */
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class TestingAdminUseCases {
     private static final Arrangement arrangement = new Arrangement(
             "Bernts Fantastiske Test",
