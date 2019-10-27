@@ -44,5 +44,4 @@ class TestingOrganizerUseCases {
 
     //Send out push notifications
     //test returning arrangements only belonging to this user
-
 }
