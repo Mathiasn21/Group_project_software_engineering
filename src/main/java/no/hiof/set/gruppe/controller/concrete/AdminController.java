@@ -66,7 +66,9 @@ public class AdminController extends Controller {
     // --------------------------------------------------//
 
     private void onDeleteClick(ActionEvent event){
-        System.out.println("delete");
+        if(checkIfLegalArrangement()){
+            deleteArrangement();
+        }
     }
 
     private void onEditClick(ActionEvent event){
@@ -114,6 +116,12 @@ public class AdminController extends Controller {
 
     private void setCurrentArrangement(){
         currentArrangement = clickedItemFromListView();
+    }
+
+    private void deleteArrangement(){
+        arrangementListObservable.remove(currentArrangement);
+        DataHandler.deleteArrangement(currentArrangement);
+        arrangementListView.refresh();
     }
 
     private void setInformationAboutArrangementInView(){

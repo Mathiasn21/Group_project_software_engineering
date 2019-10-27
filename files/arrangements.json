@@ -22,17 +22,6 @@
     "group": true
   },
   {
-    "ID": "f751fc9c-ad4d-4416-956d-1d6d1f762b84",
-    "name": "Vegars lefse løp",
-    "sport": "Annet",
-    "address": "Lefseveien 17c",
-    "startDate": "2019-10-11",
-    "endDate": "2019-10-12",
-    "description": "Masse spising og løing med lefser",
-    "participants": 36,
-    "group": false
-  },
-  {
     "ID": "d52665f4-38f1-4b56-b24d-9d760adc7102",
     "name": "Børres Brokkoli mani",
     "sport": "Annet",
