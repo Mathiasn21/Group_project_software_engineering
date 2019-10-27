@@ -18,7 +18,7 @@ import java.util.UUID;
  * Arrangement holds information about a possible arrangement.
  * @author Gruppe4
  */
-public class Arrangement{
+public class Arrangement implements IGetAllData{
 
 
     // --------------------------------------------------//
@@ -136,6 +136,11 @@ public class Arrangement{
     @Override
     public String toString(){
         return name + " " + sport + " " + participants + " " + address + " " + startDate + " til " + endDate + " " + description;
+    }
+
+    @Override
+    public String[] getAllDataAsStringArr() {
+        return new String[0];
     }
 }
 
