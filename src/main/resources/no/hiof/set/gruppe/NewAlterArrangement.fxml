@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="523.0" maxWidth="481.0" minHeight="449.0" minWidth="481.0" prefHeight="449.0" prefWidth="481.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="no.hiof.set.gruppe.controller.concrete.NewAlterArrangementController">
+<AnchorPane maxHeight="523.0" maxWidth="481.0" minHeight="449.0" minWidth="481.0" prefHeight="449.0" prefWidth="481.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="no.hiof.set.gruppe.controller.concrete.NewAlterArrangementController">
    <children>
       <VBox layoutX="14.0" layoutY="14.0" prefHeight="388.0" prefWidth="175.0" spacing="5.0" AnchorPane.bottomAnchor="220.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="50.0">
          <children>
@@ -31,8 +31,8 @@
             <ComboBox fx:id="groupInput" prefWidth="150.0" />
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0">
                <children>
-                  <Button fx:id="saveBtn" mnemonicParsing="false" onAction="#saveClicked" text="Lagre" />
-                  <Button fx:id="cancelBtn" mnemonicParsing="false" onAction="#cancelClicked" text="Avbryt" />
+                  <Button fx:id="saveBtn" mnemonicParsing="false" text="Lagre" />
+                  <Button fx:id="cancelBtn" mnemonicParsing="false" text="Avbryt" />
                </children>
             </HBox>
          </children>

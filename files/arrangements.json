@@ -35,12 +35,12 @@
   {
     "ID": "d2efbf1f-200d-4f1d-add0-e2a44e0b3920",
     "name": "Bernts Fantastiske Test",
-    "sport": "Annet",
+    "sport": "Alle",
     "address": "BergOgDalBaneVegen 46",
     "startDate": "2019-10-15",
     "endDate": "2019-10-16",
     "description": "Dette varer i hele 1 dager. Og, server null formål.",
     "participants": 420,
-    "group": false
+    "group": true
   }
 ]

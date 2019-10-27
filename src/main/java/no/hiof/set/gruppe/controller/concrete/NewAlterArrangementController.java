@@ -3,7 +3,7 @@ package no.hiof.set.gruppe.controller.concrete;
  * 1. Import Statements
  * 2. Local Fields
  * 3. FXML Fields
- * 4. FXML Methods
+ * 4. On Action Methods
  * 5. Private Methods
  * 6. Overridden Methods
  * */
@@ -12,7 +12,9 @@ package no.hiof.set.gruppe.controller.concrete;
 //                1.Import Statements                //
 // --------------------------------------------------//
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.AccessibleAction;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import no.hiof.set.gruppe.controller.abstractions.Controller;
@@ -75,27 +77,38 @@ public class NewAlterArrangementController extends Controller {
      * Uses {@link Validation} in order to validate the information.
      */
     // --------------------------------------------------//
-    //                4.FXML Methods                     //
+    //                4.On Action Methods                //
     // --------------------------------------------------//
-    @FXML
-    public void saveClicked(){
+
+    private void saveClicked(ActionEvent event){
         getArrangementData();
         if(checkLengthOfAllFields())return;
         if(illegalNumberFormat())return;
         setArrangementData();
         if(validateArrangementData())return;
-
-        ((Stage)saveBtn.getScene().getWindow()).close();
+        closeWindow();
     }
 
-    @FXML
-    public void cancelClicked(){
-        ((Stage)cancelBtn.getScene().getWindow()).close();
+    public void cancelClicked(ActionEvent event){
+        closeWindow();
     }
 
     // --------------------------------------------------//
-    //                6.Private Methods                  //
+    //                5.Private Methods                  //
     // --------------------------------------------------//
+
+    private void setupActionHandlers(){
+        saveBtn.setOnAction(this::saveClicked);
+        cancelBtn.setOnAction(this::cancelClicked);
+    }
+
+    private void setupComboBoxes(){
+        sportComboBoxInput.setItems(FXCollections.observableArrayList(SportCategory.values()));
+        groupInput.setItems(FXCollections.observableArrayList(GroupCategory.values()));
+
+        sportComboBoxInput.getSelectionModel().select(0);
+        groupInput.getSelectionModel().select(0);
+    }
 
     private void getArrangementData(){
         arrName = nameInput.getText();
@@ -148,7 +161,9 @@ public class NewAlterArrangementController extends Controller {
         return false;
     }
 
-
+    private void closeWindow(){
+        ((Stage)cancelBtn.getScene().getWindow()).close();
+    }
 
     /**
      * @param result String
@@ -168,13 +183,8 @@ public class NewAlterArrangementController extends Controller {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
-
-        //setting up combo boxes
-        sportComboBoxInput.setItems(FXCollections.observableArrayList(SportCategory.values()));
-        groupInput.setItems(FXCollections.observableArrayList(GroupCategory.values()));
-
-        sportComboBoxInput.getSelectionModel().select(0);
-        groupInput.getSelectionModel().select(0);
+        setupActionHandlers();
+        setupComboBoxes();
     }
 
     /**
