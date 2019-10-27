@@ -11,6 +11,8 @@ package no.hiof.set.gruppe.model;
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
+import org.jetbrains.annotations.Contract;
+
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -116,6 +118,7 @@ public class Arrangement implements IGetAllData{
     // --------------------------------------------------//
     //                6.Overridden Methods               //
     // --------------------------------------------------//
+    @Contract(value = "null -> false", pure = true)
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
