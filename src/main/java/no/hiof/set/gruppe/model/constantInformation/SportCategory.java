@@ -1,6 +1,7 @@
 package no.hiof.set.gruppe.model.constantInformation;
 
 import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * This enum represents the different sports categories
@@ -16,7 +17,7 @@ public enum SportCategory {
 
     String category;
     @Contract(pure = true)
-    SportCategory(String category){
+    SportCategory(@NotNull String category){
         this.category = category;
     }
 

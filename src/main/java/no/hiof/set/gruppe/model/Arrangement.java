@@ -75,12 +75,8 @@ public class Arrangement implements IGetAllData{
     public int getParticipants() {
         return participants;
     }
-    public LocalDate getStartDate() {
-        return LocalDate.parse(startDate);
-    }
-    public LocalDate getEndDate() {
-        return LocalDate.parse(endDate);
-    }
+    public LocalDate getStartDate() {return LocalDate.parse(startDate);}
+    public LocalDate getEndDate() {return LocalDate.parse(endDate);}
     public String getAddress() {
         return address;
     }
