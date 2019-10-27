@@ -42,8 +42,8 @@ public class AdminController extends Controller {
     // --------------------------------------------------//
     //                2.Local Fields                     //
     // --------------------------------------------------//
-    private String name = "Login";
     private String title = "Login";
+    private String name = "NewAlterArrangement.fxml";
     private FilteredList<Arrangement> filteredList;
     private Arrangement currentArrangement = null;
     private ObservableList<Arrangement> arrangementListObservable;
@@ -66,13 +66,14 @@ public class AdminController extends Controller {
     // --------------------------------------------------//
 
     private void onDeleteClick(ActionEvent event){
-        if(checkIfLegalArrangement()){
+        if(checkIfLegalArrangement())
             deleteArrangement();
-        }
     }
 
     private void onEditClick(ActionEvent event){
-        System.out.println("edit");
+        if(checkIfLegalArrangement()){
+            editArrangement();
+        }
     }
 
     private void onListViewClick(MouseEvent mouseEvent){
@@ -122,6 +123,11 @@ public class AdminController extends Controller {
         arrangementListObservable.remove(currentArrangement);
         DataHandler.deleteArrangement(currentArrangement);
         arrangementListView.refresh();
+    }
+
+    private void editArrangement(){
+        title = "Rediger";
+        createNewView(this, currentArrangement);
     }
 
     private void setInformationAboutArrangementInView(){

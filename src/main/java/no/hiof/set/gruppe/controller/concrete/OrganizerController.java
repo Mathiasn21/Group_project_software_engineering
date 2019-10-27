@@ -118,9 +118,8 @@ public class OrganizerController extends Controller {
         if(currentArrangement == null)return;
         ArrayList<Text> viewFields = viewFields(arrangementNameView, arrangementSportView, arrangementAdressView, arrangementDateView, arrangementParticipantsView, arrangementGorIView, arrangementDescriptionView);
         ArrayList<String> data = arrangementData(currentArrangement);
-        for(int i = 0; i < data.size(); i++){
+        for(int i = 0; i < data.size(); i++)
             viewFields.get(i).setText(data.get(i));
-        }
     }
 
     private void deleteArrangement(){
