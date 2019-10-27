@@ -4,13 +4,8 @@ import no.hiof.set.gruppe.data.DataHandler;
 import no.hiof.set.gruppe.model.Arrangement;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
-
 import java.util.Collection;
 import static org.junit.Assert.*;
-
-
-
-
 
 public class DataHandlerTests {
 

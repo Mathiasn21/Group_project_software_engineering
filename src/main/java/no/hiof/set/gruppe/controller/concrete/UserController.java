@@ -107,18 +107,16 @@ public class UserController extends Controller {
         ((Stage)logOut.getScene().getWindow()).close();
         createNewView(this);
     }
-    
+
     // --------------------------------------------------//
     //                5.Private Functional Methods       //
     // --------------------------------------------------//
 
     private void setInformationAboutArrangementInView(){
-        if(currentSelectedArrangement == null)return;
         ArrayList<Text> viewFields = viewFields(arrangementTitle, arrangementSport,arrangementAddress,arrangementDate,arrangementParticipants,arrangementGroup, arrangementDescription);
         ArrayList<String> data = arrangementData(currentSelectedArrangement);
-        for(int i = 0; i < data.size(); i++){
+        for(int i = 0; i < data.size(); i++)
             viewFields.get(i).setText(data.get(i));
-        }
     }
 
     // --------------------------------------------------//
