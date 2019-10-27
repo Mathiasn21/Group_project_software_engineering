@@ -127,8 +127,8 @@ public class NewAlterArrangementController extends Controller {
     //                5.Overridden Methods               //
     // --------------------------------------------------//
     /**
-     * @param location {@link URL}
-     * @param resources {@link ResourceBundle}
+     * @param url {@link URL}
+     * @param resourceBundle {@link ResourceBundle}
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){

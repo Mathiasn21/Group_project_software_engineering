@@ -58,6 +58,7 @@ public class DataHandler {
      * Standard reading from a file. Utilizes a relative path given a filename.extension.
      * Files must exist in the top level directory.
      * @param fName String
+     * @throws IOException IOException {@link IOException}
      * @return String
      */
     @NotNull
@@ -132,6 +133,7 @@ public class DataHandler {
     /**
      * Grabs the arrangement data from a file and converts
      * those into a usable collection of arrangements.
+     * @throws IOException IOException {@link IOException}
      * @return {@link List} ? extends {@link Arrangement}
      */
     @NotNull

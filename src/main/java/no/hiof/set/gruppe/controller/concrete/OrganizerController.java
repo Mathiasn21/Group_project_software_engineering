@@ -73,7 +73,7 @@ public class OrganizerController extends Controller {
     //                4.Event Related Methods            //
     // --------------------------------------------------//
     /**
-     * @param event {@link MouseEvent}
+     * @param actionEvent {@link ActionEvent}
      */
     private void search(ActionEvent actionEvent){
         filteredList.setPredicate(this::lowerCaseTitleSearch);
@@ -82,7 +82,7 @@ public class OrganizerController extends Controller {
     }
 
     /**
-     * @param event {@link MouseEvent}
+     * @param mouseEvent {@link MouseEvent}
      */
     private void onClickListView(MouseEvent mouseEvent) {
         changedView();
