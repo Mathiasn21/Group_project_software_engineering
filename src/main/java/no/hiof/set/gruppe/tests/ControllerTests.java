@@ -15,7 +15,6 @@ public class ControllerTests {
     //Vet ikke helt om disse testene er nyttige..Men tenkte at de ikke var som dumme
 
     public class ControllerTest extends Controller {
-
         @Override
         public void initialize(URL location, ResourceBundle resources) { }
         @Override

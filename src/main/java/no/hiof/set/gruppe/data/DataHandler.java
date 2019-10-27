@@ -12,6 +12,7 @@ package no.hiof.set.gruppe.data;
 // --------------------------------------------------//
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import no.hiof.set.gruppe.Exceptions.ErrorExceptionHandler;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.user.User;
 import no.hiof.set.gruppe.model.user.UserConnectedArrangement;
@@ -39,8 +40,13 @@ public class DataHandler {
 
     //Preloads data.
     static{
-        listOfAllArrangements = readArrangementsData();
-        listOfAllUserConnectedArrangements = getUserConnectedArrangements();
+        try{
+            listOfAllArrangements = readArrangementsData();
+            listOfAllUserConnectedArrangements = getUserConnectedArrangements();
+        }catch (IOException e){
+            try {ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_READING_DATA, e);}
+            catch (IOException ex) {ex.printStackTrace();}
+        }
     }
 
     // --------------------------------------------------//
@@ -53,18 +59,15 @@ public class DataHandler {
      * @return String
      */
     @NotNull
-    private static String readFromFile(String fName){
+    private static String readFromFile(String fName) throws IOException {
         String line;
         StringBuilder textFromFile = new StringBuilder();
 
         String filepath = "/files/" + fName;
-        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(new File("").getAbsolutePath() + filepath), StandardCharsets.UTF_8))) {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(new File("").getAbsolutePath() + filepath), StandardCharsets.UTF_8));
             while ((line = bufferedReader.readLine()) != null) {
                 textFromFile.append(line);
             }
-        }catch (IOException ioexc) {
-            ioexc.printStackTrace();
-        }
         return textFromFile.toString();
     }
 
@@ -191,12 +194,12 @@ public class DataHandler {
      */
     @NotNull
     @Contract(" -> new")
-    private static List<Arrangement> readArrangementsData() {
+    private static List<Arrangement> readArrangementsData() throws IOException {
         return new ArrayList<>(listFromJson(Arrangement[].class, readFromFile(arrangementFName)));
     }
 
     @NotNull
-    private static List<UserConnectedArrangement> getUserConnectedArrangements() {
+    private static List<UserConnectedArrangement> getUserConnectedArrangements() throws IOException {
         String jsonFromFile = readFromFile(userHasArrangements);
         return new ArrayList<>(listOfAllUserConnectedArrangements = listFromJson(UserConnectedArrangement[].class, jsonFromFile));
     }

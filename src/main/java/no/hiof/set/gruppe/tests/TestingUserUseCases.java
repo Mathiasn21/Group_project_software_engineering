@@ -42,6 +42,4 @@ class TestingUserUseCases {
         DataHandler.deleteUserFromArrangement(arrangementToTest, user);
         assertFalse(DataHandler.getUserArrangements(user).contains(arrangementToTest));
     }
-
-    //sortData by definition
-}
+ }
