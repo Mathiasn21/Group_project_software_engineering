@@ -94,7 +94,7 @@ public abstract class Controller implements IControllerDataTransfer, Initializab
     }
 
     @NotNull
-    private String groupsOrIndividuals(@NotNull Arrangement arrangement){
+    public String groupsOrIndividuals(@NotNull Arrangement arrangement){
         return arrangement.isGroup() ? "Lagkonkurranse" : "Individuell konkurranse";
     }
 
