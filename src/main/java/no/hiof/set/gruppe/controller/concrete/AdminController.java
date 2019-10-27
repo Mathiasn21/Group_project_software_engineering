@@ -53,7 +53,7 @@ public class AdminController extends Controller {
     // --------------------------------------------------//
 
      @FXML
-     private Button logOut, delete;
+     private Button logOut, edit, delete;
      @FXML
      private ListView<Arrangement> arrangementListView;
      @FXML
@@ -66,17 +66,33 @@ public class AdminController extends Controller {
     // --------------------------------------------------//
 
     private void onDeleteClick(ActionEvent event){
+        if(checkIfLegalArrangement()){
+            deleteArrangement();
+        }
+    }
 
+    private void onEditClick(ActionEvent event){
+        System.out.println("edit");
     }
 
     private void onListViewClick(MouseEvent mouseEvent){
-        setCurrentArrangement();
-        setInformationAboutArrangementInView();
+        if(checkIfLegalArrangement()){
+            setCurrentArrangement();
+            setInformationAboutArrangementInView();
+        }
     }
 
     // --------------------------------------------------//
     //                5.Private Methods                  //
     // --------------------------------------------------//
+
+    private void setupActionHandlers(){
+        logOut.setOnAction(this::returnToMainWindow);
+        edit.setOnAction(this::onEditClick);
+        delete.setOnAction(this::onDeleteClick);
+        arrangementListView.setOnMouseClicked(this::onListViewClick);
+    }
+
     private void returnToMainWindow(ActionEvent event) {
         title = "Logg inn";
         name = "Login.fxml";
@@ -84,32 +100,36 @@ public class AdminController extends Controller {
         createNewView(this);
     }
 
-    private void setupActionHandlers(){
-        logOut.setOnAction(this::returnToMainWindow);
-        delete.setOnAction(this::onDeleteClick);
-        arrangementListView.setOnMouseClicked(this::onListViewClick);
-    }
-
-
     private void populateListView(){
         arrangementListObservable = FXCollections.observableArrayList(DataHandler.getArrangementsData());
         arrangementListView.setItems(arrangementListObservable);
     }
 
-    private void setCurrentArrangement(){
-        Arrangement incomingArrangement = arrangementListView.getSelectionModel().getSelectedItem();
-        if(incomingArrangement == null || incomingArrangement.getStartDate() == null)return;
-        currentArrangement = incomingArrangement;
+    private Arrangement clickedItemFromListView(){
+        return arrangementListView.getSelectionModel().getSelectedItem();
     }
 
+    private boolean checkIfLegalArrangement(){
+        if(clickedItemFromListView() == null || clickedItemFromListView().getStartDate() == null)return false;
+        return true;
+    }
+
+    private void setCurrentArrangement(){
+        currentArrangement = clickedItemFromListView();
+    }
+
+    private void deleteArrangement(){
+        arrangementListObservable.remove(currentArrangement);
+        DataHandler.deleteArrangement(currentArrangement);
+        arrangementListView.refresh();
+    }
 
     private void setInformationAboutArrangementInView(){
         if(currentArrangement == null)return;
         ArrayList<Text> viewFields = viewFields(arrangementName, arrangementSport, arrangementAdress, arrangementDate, arrangementParticipants, arrangementGorI, arrangementDescription);
         ArrayList<String> data = arrangementData(currentArrangement);
-        for(int i = 0; i < data.size(); i++){
+        for(int i = 0; i < data.size(); i++)
             viewFields.get(i).setText(data.get(i));
-        }
     }
 
     // --------------------------------------------------//
