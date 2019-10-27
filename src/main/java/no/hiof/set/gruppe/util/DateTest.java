@@ -22,10 +22,18 @@ public enum DateTest {
 
     private final DatePredicate predicate;
 
+    /**
+     * @param predicate {@link DatePredicate}
+     */
     @Contract(pure = true)
     DateTest(DatePredicate predicate) {
         this.predicate = predicate;
     }
 
+    /**
+     * @param startDate {@link LocalDate}
+     * @param endDate {@link LocalDate}
+     * @return boolean
+     */
     public boolean execute(LocalDate startDate, LocalDate endDate){return predicate.testDate(startDate, endDate);}
 }

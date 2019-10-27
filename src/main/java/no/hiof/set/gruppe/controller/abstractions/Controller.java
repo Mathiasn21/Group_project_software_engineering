@@ -83,22 +83,23 @@ public abstract class Controller implements IControllerDataTransfer, Initializab
         alert.showAndWait();
     }
 
-    public ArrayList<Text> viewFields(Text name, Text sport, Text adress, Text date, Text participants, Text groups, Text description){
+    protected ArrayList<Text> viewFields(Text name, Text sport, Text adress, Text date, Text participants, Text groups, Text description){
         Text[] t = {name, sport, adress, date, participants, groups, description};
         return new ArrayList<>(Arrays.asList(t));
     }
 
-    public ArrayList<String>arrangementData(Arrangement a){
+    protected ArrayList<String>arrangementData(@NotNull Arrangement a){
         String[] s = {a.getName(), a.getSport(), a.getAddress(), dateString(a), Integer.toString(a.getParticipants()), groupsOrIndividuals(a), a.getDescription()};
         return new ArrayList<>(Arrays.asList(s));
     }
 
     @NotNull
-    public String groupsOrIndividuals(@NotNull Arrangement arrangement){
+    private String groupsOrIndividuals(@NotNull Arrangement arrangement){
         return arrangement.isGroup() ? "Lagkonkurranse" : "Individuell konkurranse";
     }
 
-    private String dateString(Arrangement a){
+    @NotNull
+    private String dateString(@NotNull Arrangement a){
         return a.getStartDate().toString() + " til " + a.getEndDate().toString();
     }
 }

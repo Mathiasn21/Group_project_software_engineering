@@ -25,10 +25,13 @@ import no.hiof.set.gruppe.Exceptions.DataFormatException;
 import no.hiof.set.gruppe.controller.abstractions.Controller;
 import no.hiof.set.gruppe.data.DataHandler;
 import no.hiof.set.gruppe.model.Arrangement;
+import no.hiof.set.gruppe.model.ViewInformation;
 import no.hiof.set.gruppe.model.constantInformation.SportCategory;
 import no.hiof.set.gruppe.model.user.User;
 import no.hiof.set.gruppe.util.DateTest;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import java.net.URL;
 import java.util.*;
 
@@ -63,6 +66,10 @@ public class UserController extends Controller {
     // --------------------------------------------------//
     //                4.Event Related Methods            //
     // --------------------------------------------------//
+
+    /**
+     * @param actionEvent {@link ActionEvent}
+     */
     private void onJoinClick(ActionEvent actionEvent){
         if(currentAvailableArrangement == null)return;
         availableObservableArrangements.remove(currentAvailableArrangement);
@@ -73,6 +80,10 @@ public class UserController extends Controller {
         currentAvailableArrangement = null;
         updateView();
     }
+
+    /**
+     * @param actionEvent {@link ActionEvent}
+     */
     private void onLeaveClick(ActionEvent actionEvent){
         if(currentSelectedMyArrangement == null)return;
         myObservableArrangements.remove(currentSelectedMyArrangement);
@@ -84,6 +95,9 @@ public class UserController extends Controller {
     }
 
     //onclick could be truncated
+    /**
+     * @param event {@link MouseEvent}
+     */
     private void onClickListView(MouseEvent event){
         Arrangement selectedItem = availableArrangementsListView.getSelectionModel().getSelectedItem();
         if(selectedItem == null){return;}
@@ -91,6 +105,10 @@ public class UserController extends Controller {
         currentSelectedArrangement = currentAvailableArrangement;
         setInformationAboutArrangementInView();
     }
+
+    /**
+     * @param event {@link MouseEvent}
+     */
     private void onClickMyView(MouseEvent event){
         Arrangement selectedItem = myArrangementsView.getSelectionModel().getSelectedItem();
         if(selectedItem == null)return;
@@ -101,6 +119,10 @@ public class UserController extends Controller {
         else leaveBtn.setDisable(false);
         setInformationAboutArrangementInView();
     }
+
+    /**
+     * @param event {@link ActionEvent}
+     */
     private void returnToMainWindow(ActionEvent event) {
         title = "Logg inn";
         name = "Login.fxml";
@@ -111,7 +133,6 @@ public class UserController extends Controller {
     // --------------------------------------------------//
     //                5.Private Functional Methods       //
     // --------------------------------------------------//
-
     private void setInformationAboutArrangementInView(){
         ArrayList<Text> viewFields = viewFields(arrangementTitle, arrangementSport,arrangementAddress,arrangementDate,arrangementParticipants,arrangementGroup, arrangementDescription);
         ArrayList<String> data = arrangementData(currentSelectedArrangement);
@@ -123,11 +144,18 @@ public class UserController extends Controller {
     //                6.Private Search Methods           //
     // --------------------------------------------------//
     //Could be truncated to one method
+    /**
+     * @param actionEvent {@link ActionEvent}
+     */
     private void search(ActionEvent actionEvent){
         myFiltered.setPredicate(this::lowerCaseTitleSearchMy);
         myArrangementsView.setItems(myFiltered);
         myArrangementsView.refresh();
     }
+
+    /**
+     * @param actionEvent {@link ActionEvent}
+     */
     private void searchOrg(ActionEvent actionEvent){
         availableFiltered.setPredicate(this::lowerCaseTitleSearch);
         availableArrangementsListView.setItems(availableFiltered);
@@ -139,7 +167,7 @@ public class UserController extends Controller {
      * Returns a Boolean based on if the Arrangement name contains
      * And is in same category
      * the given search string.
-     * @param arrangement Arrangement
+     * @param arrangement {@link Arrangement}
      * @return boolean
      */
     private boolean lowerCaseTitleSearch(@NotNull Arrangement arrangement){
@@ -151,7 +179,7 @@ public class UserController extends Controller {
     /**
      * Returns a Boolean based on match with given search string, as well
      * as a given category and a given date predicate.
-     * @param arrangement Arrangement
+     * @param arrangement {@link Arrangement}
      * @return boolean
      */
     private boolean lowerCaseTitleSearchMy(@NotNull Arrangement arrangement){
@@ -165,10 +193,18 @@ public class UserController extends Controller {
     }
 
     //should be truncated
+    /**
+     * @param arrangement {@link Arrangement}
+     * @return boolean
+     */
     private boolean categoryMatch(Arrangement arrangement) {
         SportCategory category = availableSortingOptionsMy.getSelectionModel().getSelectedItem();
         return category.equals(SportCategory.ALL) || arrangement.getSport().equals(category.toString());
     }
+    /**
+     * @param arrangement {@link Arrangement}
+     * @return boolean
+     */
     private boolean categoryMatchMy(Arrangement arrangement) {
         SportCategory category = sortingOptions.getSelectionModel().getSelectedItem();
         return category.equals(SportCategory.ALL) || arrangement.getSport().equals(category.toString());
@@ -252,6 +288,10 @@ public class UserController extends Controller {
     // --------------------------------------------------//
     //                6.Overridden Methods               //
     // --------------------------------------------------//
+    /**
+     * @param location {@link URL}
+     * @param resources {@link ResourceBundle}
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setArrangementListInformation();
@@ -260,34 +300,62 @@ public class UserController extends Controller {
         setupListView();
         setupActionHandlers();
         setupToggleBtns();
-
     }
 
+    /**
+     * Stores information after all stages have closed.
+     */
     @Override
     public void onCloseStoreInformation(){
         DataHandler.storeArrangementsData();
     }
 
+    /**
+     * Just refreshes the view
+     */
     @Override
     public void updateView(){
         availableArrangementsListView.refresh();
         myArrangementsView.refresh();
     }
 
+    /**
+     * @return Object
+     */
     @Override
+    @Nullable
     public Object getDataObject() {
         return null;
     }
 
+    /**
+     * @param object Object
+     * @throws DataFormatException wrongDataFormat {@link DataFormatException}
+     */
     @Override
     public void setDataFields(Object object) throws DataFormatException {
 
     }
 
+    /**
+     * @return String
+     */
     //change and create a new data object containing the necessary information
     @Override
     public String getTitle() {return title;}
 
+    /**
+     * @return String
+     */
     @Override
     public String getName() {return name;}
+
+    /**
+     * @return {@link ViewInformation}
+     */
+    //new method for returning information about the view
+    @Override
+    public ViewInformation getViewInformation() {
+        return new ViewInformation(name, title);
+    }
 }

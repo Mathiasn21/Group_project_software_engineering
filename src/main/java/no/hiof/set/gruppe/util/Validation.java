@@ -1,7 +1,7 @@
 package no.hiof.set.gruppe.util;
 
 import no.hiof.set.gruppe.model.Arrangement;
-import no.hiof.set.gruppe.model.constantInformation.ValidationResult;
+import no.hiof.set.gruppe.model.ValidationResult;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -45,6 +45,10 @@ public class Validation{
         return new ValidationResult(str.toString(), str.length() == 0);
     }
 
+    /**
+     * @param num String
+     * @return boolean
+     */
     public static boolean ofNumber(String num){
         return regCheck(numPatt, num);
     }

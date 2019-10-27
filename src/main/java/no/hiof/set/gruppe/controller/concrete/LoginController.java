@@ -20,14 +20,16 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import no.hiof.set.gruppe.Exceptions.DataFormatException;
 import no.hiof.set.gruppe.controller.abstractions.Controller;
+import no.hiof.set.gruppe.model.ViewInformation;
 import no.hiof.set.gruppe.model.user.User;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * Contains logic corresponding to the login view, vurrently the main view.
+ * Contains logic corresponding to the login view, currently the main view.
  */
 public class LoginController extends Controller {
     // --------------------------------------------------//
@@ -40,21 +42,18 @@ public class LoginController extends Controller {
     // --------------------------------------------------//
     //                3.FXML Fields                      //
     // --------------------------------------------------//
-
     @FXML
     private Button logInn, adminLogin, arrangLogin, userLogin;
     @FXML
     private TextField uName, pass;
 
+
     // --------------------------------------------------//
     //                4.On action Methods                //
     // --------------------------------------------------//
-
-
-    // --------------------------------------------------//
-    //                5.Private Methods                  //
-    // --------------------------------------------------//
-
+    /**
+     * @param event {@link ActionEvent}
+     */
     private void getCorrectCredentials(@NotNull ActionEvent event){
         User user = User.USER;
         Button source = (Button)event.getSource();
@@ -66,6 +65,9 @@ public class LoginController extends Controller {
         applyCredentials(user);
     }
 
+    /**
+     * @param event {@link ActionEvent}
+     */
     private void login(ActionEvent event) {
         String userName = uName.getText();
         String password = pass.getText();
@@ -77,6 +79,13 @@ public class LoginController extends Controller {
         }
     }
 
+
+    // --------------------------------------------------//
+    //                5.Private Methods                  //
+    // --------------------------------------------------//
+    /**
+     * @param user {@link User}
+     */
     private void openCorrespondingStage(@NotNull User user) {
         title = user.getName();
         name = user.getViewName();
@@ -84,7 +93,10 @@ public class LoginController extends Controller {
         createNewView(this);
     }
 
-    private void applyCredentials(User user) {
+    /**
+     * @param user {@link User}
+     */
+    private void applyCredentials(@NotNull User user) {
         uName.setText(user.getName());
         pass.setText(user.getPass());
     }
@@ -93,6 +105,10 @@ public class LoginController extends Controller {
     //                6.Overridden Methods               //
     // --------------------------------------------------//
 
+    /**
+     * @param location {@link URL}
+     * @param resources {@link ResourceBundle}
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Button[] credentialsBtns = {adminLogin, arrangLogin, userLogin};
@@ -101,23 +117,47 @@ public class LoginController extends Controller {
         logInn.setOnAction(this::login);
     }
 
+    /**
+     * @return Object
+     */
+    @Nullable
     @Override
     public Object getDataObject() {
         return null;
     }
 
+    /**
+     * Does not have a purpose here.
+     * @param object Object
+     * @throws DataFormatException dataFormatException{@link DataFormatException}
+     */
     @Override
     public void setDataFields(Object object) throws DataFormatException {
 
     }
 
+    /**
+     * @return String
+     */
     @Override
     public String getTitle() {
         return title;
     }
 
+    /**
+     * @return String
+     */
     @Override
     public String getName() {
         return name;
+    }
+
+    //new method for returning information about the view
+    /**
+     * @return {@link ViewInformation}
+     */
+    @Override
+    public ViewInformation getViewInformation() {
+        return new ViewInformation(name, title);
     }
 }

@@ -20,15 +20,25 @@ public enum ArrangementSort {
     private String definition;
     private Comparator<? super Arrangement> comparator;
 
+    /**
+     * @param definition String
+     * @param comparator {@link Comparator}
+     */
     @Contract(pure = true)
     ArrangementSort(String definition, Comparator<? super Arrangement> comparator){
         this.definition = definition;
         this.comparator = comparator;
     }
 
+    /**
+     * @return String
+     */
     @Contract(pure = true)
     public String getDefinition() {return definition;}
 
+    /**
+     * @return String
+     */
     @Contract(pure = true)
     public Comparator<? super Arrangement> getComparator() {return comparator;}
 }

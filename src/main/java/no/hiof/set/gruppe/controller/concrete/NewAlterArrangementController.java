@@ -15,7 +15,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import no.hiof.set.gruppe.controller.abstractions.Controller;
-import no.hiof.set.gruppe.model.constantInformation.ValidationResult;
+import no.hiof.set.gruppe.model.ValidationResult;
+import no.hiof.set.gruppe.model.ViewInformation;
 import no.hiof.set.gruppe.util.Validation;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.constantInformation.GroupCategory;
@@ -59,6 +60,10 @@ public class NewAlterArrangementController extends Controller {
     @FXML
     public Button cancelBtn;
 
+    /**
+     * Only saves the information if given information in the view is valid.
+     * Uses {@link Validation} in order to validate the information.
+     */
     // --------------------------------------------------//
     //                4.FXML Methods                     //
     // --------------------------------------------------//
@@ -109,6 +114,9 @@ public class NewAlterArrangementController extends Controller {
         ((Stage)cancelBtn.getScene().getWindow()).close();
     }
 
+    /**
+     * @param result String
+     */
     private void setErrorField(String result) {
         ErrorField.setText(result);
         ErrorField.setVisible(true);
@@ -118,6 +126,10 @@ public class NewAlterArrangementController extends Controller {
     // --------------------------------------------------//
     //                5.Overridden Methods               //
     // --------------------------------------------------//
+    /**
+     * @param location {@link URL}
+     * @param resources {@link ResourceBundle}
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
 
@@ -129,18 +141,33 @@ public class NewAlterArrangementController extends Controller {
         groupInput.getSelectionModel().select(0);
     }
 
+    /**
+     * @return String
+     */
     @Override
     public String getTitle() {
         return title;
     }
+
+    /**
+     * @return String
+     */
     @Override
     public String getName() {
         return name;
     }
+
+    /**
+     * @return Object
+     */
     @Override
     public Object getDataObject() {
         return arrangementToEdit;
     }
+
+    /**
+     * @return boolean
+     */
     @Override
     public boolean hasNewObject(){
         return createdNewObject;
@@ -162,5 +189,14 @@ public class NewAlterArrangementController extends Controller {
             endDateInput.setValue(arrangement.getEndDate());
             descriptionInput.setText(arrangement.getDescription());
         }
+    }
+
+    /**
+     * @return {@link ViewInformation}
+     */
+    //new method for returning information about the view
+    @Override
+    public ViewInformation getViewInformation() {
+        return new ViewInformation(name, title);
     }
 }

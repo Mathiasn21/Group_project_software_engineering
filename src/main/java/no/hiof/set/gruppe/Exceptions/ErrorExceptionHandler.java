@@ -8,8 +8,6 @@ import java.io.IOException;
 import java.io.PrintStream;
 
 public enum ErrorExceptionHandler {
-
-
     // --------------------------------------------------//
     //                2.Constants                        //
     // --------------------------------------------------//

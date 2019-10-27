@@ -29,11 +29,10 @@ import no.hiof.set.gruppe.Exceptions.IllegalDataAccess;
 import no.hiof.set.gruppe.controller.abstractions.Controller;
 import no.hiof.set.gruppe.data.DataHandler;
 import no.hiof.set.gruppe.model.Arrangement;
+import no.hiof.set.gruppe.model.ViewInformation;
 import no.hiof.set.gruppe.model.user.User;
-import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
-import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -64,10 +63,10 @@ public class AdminController extends Controller {
      @FXML
      private Text arrangementSport, arrangementName, arrangementAdress, arrangementDate, arrangementGorI, arrangementParticipants, arrangementDescription;
 
+
     // --------------------------------------------------//
     //                4.On action Methods                //
     // --------------------------------------------------//
-
     private void onDeleteClick(ActionEvent event){
         if(checkIfLegalArrangement())
             deleteArrangement();
@@ -173,5 +172,11 @@ public class AdminController extends Controller {
     @Override
     public String getName() {
         return name;
+    }
+
+    //new method for returning information about the view
+    @Override
+    public ViewInformation getViewInformation() {
+        return new ViewInformation(name, title);
     }
 }

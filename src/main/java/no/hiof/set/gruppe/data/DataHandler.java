@@ -140,12 +140,20 @@ public class DataHandler {
         return new ArrayList<>(listFromJson(Arrangement[].class, readFromFile(arrangementFName)));
     }
 
+    /**
+     * @return {@link List}
+     * @throws IOException IOException{@link IOException}
+     */
     @NotNull
     private static List<UserConnectedArrangement> getUserConnectedArrangements() throws IOException {
         String jsonFromFile = readFromFile(userHasArrangements);
         return new ArrayList<>(listOfAllUserConnectedArrangements = listFromJson(UserConnectedArrangement[].class, jsonFromFile));
     }
 
+    /**
+     * Stores all arrangements in buffer to file.json. Called
+     * after every modification of said buffer.
+     */
     private static void storeUserArrangements(){
         writeToFile(toJson(UserConnectedArrangement[].class,  listOfAllUserConnectedArrangements.toArray(UserConnectedArrangement[]::new)), userHasArrangements);
     }
@@ -153,6 +161,12 @@ public class DataHandler {
     // --------------------------------------------------//
     //                4.Public Methods                   //
     // --------------------------------------------------//
+
+    /**
+     * @param arrangement {@link Arrangement}
+     * @param user {@link User}
+     * @throws IllegalDataAccess illegalAccess{@link IllegalDataAccess}
+     */
     public static void deleteArrangement(Arrangement arrangement, User user) throws IllegalDataAccess {
         if(!AccessValidate.userCanModifyArrangement(arrangement, user))throw new IllegalDataAccess();
 
@@ -161,6 +175,10 @@ public class DataHandler {
         storeArrangementsData();
     }
 
+    /**
+     * @param arrangement {@link Arrangement}
+     * @param user {@link User}
+     */
     public static void deleteUserFromArrangement(@NotNull Arrangement arrangement,@NotNull User user){
         for(int i = 0; i < listOfAllUserConnectedArrangements.size(); i++){
             UserConnectedArrangement userArrangement = listOfAllUserConnectedArrangements.get(i);
@@ -172,11 +190,20 @@ public class DataHandler {
         storeArrangementsData();
     }
 
+    /**
+     * @param arrangement {@link Arrangement}
+     * @param user {@link User}
+     */
     public static void addUserToArrangement(@NotNull Arrangement arrangement, @NotNull User user){
         listOfAllUserConnectedArrangements.add(new UserConnectedArrangement(arrangement.getID(), user.getName()));
         storeArrangementsData();
     }
 
+    /**
+     * @param arrangement {@link Arrangement}
+     * @param user {@link User}
+     * @throws IllegalDataAccess IllegalAccess{@link IllegalDataAccess}
+     */
     public static void addArrangement(Arrangement arrangement, @NotNull User user) throws IllegalDataAccess {
         if(!AccessValidate.userCanCreateArrangement(user))throw new IllegalDataAccess();
 
@@ -185,10 +212,17 @@ public class DataHandler {
         storeArrangementsData();
     }
 
+    /**
+     * @return {@link List}
+     */
     @NotNull
     @Contract(" -> new")
     public static List<Arrangement> getArrangementsData(){ return new ArrayList<>(listOfAllArrangements); }
 
+    /**
+     * @param user {@link User}
+     * @return {@link List}
+     */
     @NotNull
     public static List<Arrangement> getUserArrangements(@NotNull User user) {
         List<Arrangement> result = new ArrayList<>();

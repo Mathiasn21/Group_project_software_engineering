@@ -26,6 +26,7 @@ import no.hiof.set.gruppe.Exceptions.IllegalDataAccess;
 import no.hiof.set.gruppe.controller.abstractions.Controller;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.data.DataHandler;
+import no.hiof.set.gruppe.model.ViewInformation;
 import no.hiof.set.gruppe.model.constantInformation.SportCategory;
 import no.hiof.set.gruppe.model.user.User;
 import no.hiof.set.gruppe.util.ArrangementSort;
@@ -71,22 +72,34 @@ public class OrganizerController extends Controller {
     // --------------------------------------------------//
     //                4.Event Related Methods            //
     // --------------------------------------------------//
+    /**
+     * @param event {@link MouseEvent}
+     */
     private void search(ActionEvent actionEvent){
         filteredList.setPredicate(this::lowerCaseTitleSearch);
         listview.setItems(filteredList);
         listview.refresh();
     }
 
+    /**
+     * @param event {@link MouseEvent}
+     */
     private void onClickListView(MouseEvent mouseEvent) {
         changedView();
         listview.refresh();
     }
 
+    /**
+     * @param event {@link ActionEvent}
+     */
     private void onClick(ActionEvent event) {
         title = "Ny";
         createNewView(this, null);
     }
 
+    /**
+     * @param event {@link ActionEvent}
+     */
     private void onEditClick(ActionEvent event){
         if(listview.getSelectionModel().getSelectedItem() != null){
             title = "Rediger";
@@ -96,11 +109,17 @@ public class OrganizerController extends Controller {
             System.out.println("Du har ikke valgt et arrangement");
     }
 
+    /**
+     * @param event {@link ActionEvent}
+     */
     private void onDelete(ActionEvent event){
         if(listview.getSelectionModel().getSelectedItem() == null) return;
         deleteArrangement();
     }
 
+    /**
+     * @param event {@link ActionEvent}
+     */
     private void returnToMainWindow(ActionEvent event) {
         title = "Logg inn";
         name = "Login.fxml";
@@ -155,6 +174,10 @@ public class OrganizerController extends Controller {
         return title.contains(search) && categoryMatch(arrangement);
     }
 
+    /**
+     * @param arrangement {@link Arrangement}
+     * @return boolean
+     */
     private boolean categoryMatch(Arrangement arrangement) {
         SportCategory category = sortOptions.getSelectionModel().getSelectedItem();
         return category.equals(SportCategory.ALL) || arrangement.getSport().equals(category.toString());
@@ -194,6 +217,10 @@ public class OrganizerController extends Controller {
     // --------------------------------------------------//
     //                8.Overridden Methods               //
     // --------------------------------------------------//
+    /**
+     * @param location {@link URL}
+     * @param resources {@link ResourceBundle}
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setupActionHandlers();
@@ -201,12 +228,18 @@ public class OrganizerController extends Controller {
         populateSportCategories();
     }
 
+    /**
+     * Just refreshes the view
+     */
     @Override
     public void updateView(){
         if(currentArrangement == null)return;
         changedView();
     }
 
+    /**
+     * Stores information after all stages have closed.
+     */
     @Override
     public void onCloseStoreInformation() {
         DataHandler.storeArrangementsData();
@@ -237,19 +270,37 @@ public class OrganizerController extends Controller {
     }
 
     //handles the title and name of current view. Here name is the local path
+    /**
+     * @return String
+     */
     @Override
     public String getTitle() {
         return title;
     }
 
+    /**
+     * @return String
+     */
     @Override
     public String getName() {
         return name;
     }
 
+    /**
+     * @return Object
+     */
     @Override
     public Object getDataObject() {
         currentArrangement = listview.getSelectionModel().getSelectedItem();
         return currentArrangement;
+    }
+
+    //new method for returning information about the view
+    /**
+     * @return {@link ViewInformation}
+     */
+    @Override
+    public ViewInformation getViewInformation() {
+        return new ViewInformation(name, title);
     }
 }

@@ -14,13 +14,19 @@ public enum SportCategory {
     SKIING("Skirenn"),
     MARATHON("Maraton"),
     ;
+    final String category;
 
-    String category;
+    /**
+     * @param category String
+     */
     @Contract(pure = true)
     SportCategory(@NotNull String category){
         this.category = category;
     }
 
+    /**
+     * @return String
+     */
     @Contract(pure = true)
     @Override
     public String toString(){
