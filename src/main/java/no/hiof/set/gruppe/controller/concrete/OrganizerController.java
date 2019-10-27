@@ -60,7 +60,7 @@ public class OrganizerController extends Controller {
     @FXML
     private Button newArrangementBtn, editBtn, deleteBtn, logOut;
     @FXML
-    private Text arrangementNameView, arrangementAdressView, arrangementDateView, arrangementParticipantsView, arrangementGorIView, arrangementSportView, arrangementDescriptionView;
+    private Text arrangementName, arrangementAdress, arrangementDate, arrangementParticipants, arrangementGorI, arrangementSport, arrangementDescription;
     @FXML
     private TextField arrSearch;
     @FXML
@@ -139,7 +139,7 @@ public class OrganizerController extends Controller {
 
     private void setInformationAboutArrangementInView(){
         if(currentArrangement == null)return;
-        ArrayList<Text> viewFields = viewFields(arrangementNameView, arrangementSportView, arrangementAdressView, arrangementDateView, arrangementParticipantsView, arrangementGorIView, arrangementDescriptionView);
+        ArrayList<Text> viewFields = viewFields(arrangementName, arrangementSport, arrangementAdress, arrangementDate, arrangementParticipants, arrangementGorI, arrangementDescription);
         ArrayList<String> data = arrangementData(currentArrangement);
         for(int i = 0; i < data.size(); i++)
             viewFields.get(i).setText(data.get(i));
