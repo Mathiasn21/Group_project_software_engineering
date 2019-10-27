@@ -12,6 +12,10 @@ import org.junit.jupiter.api.TestMethodOrder;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * Testing the functional requirements by testing
+ * the use cases of a organizer.
+ */
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class TestingOrganizerUseCases {
     private static final Arrangement arrangement = new Arrangement(
@@ -23,10 +27,12 @@ class TestingOrganizerUseCases {
             "2019-10-15",
             "2019-10-16",
             "Dette varer i hele 1 dager. Og, server null formål.");
-
     private static final User user = User.ORGANIZER;
 
-    //Add arrangement
+
+    /**
+     * @throws IllegalDataAccess IllegalDataAccess{@link IllegalDataAccess}
+     */
     @Test
     @Order(1)
     void addArrangement() throws IllegalDataAccess {
@@ -34,7 +40,9 @@ class TestingOrganizerUseCases {
         assertTrue(DataHandler.getUserArrangements(user).contains(arrangement));
     }
 
-    //remove arrangement
+    /**
+     * @throws IllegalDataAccess IllegalDataAccess {@link IllegalDataAccess}
+     */
     @Test
     @Order(2)
     void deleteArrangement() throws IllegalDataAccess {

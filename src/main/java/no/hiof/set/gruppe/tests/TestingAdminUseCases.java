@@ -10,6 +10,10 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * Testing the functional requirements by testing
+ * the use cases of a organizer.
+ */
 class TestingAdminUseCases {
     private static final Arrangement arrangement = new Arrangement(
             "Bernts Fantastiske Test",
@@ -20,10 +24,11 @@ class TestingAdminUseCases {
             "2019-10-15",
             "2019-10-16",
             "Dette varer i hele 1 dager. Og, server null formål.");
-
     private static final User user = User.ADMIN;
 
-    //Add arrangement
+    /**
+     * @throws IllegalDataAccess IllegalDateAccess {@link IllegalDataAccess}
+     */
     @Test
     @Order(1)
     void addArrangement() throws IllegalDataAccess {
@@ -31,7 +36,9 @@ class TestingAdminUseCases {
         assertTrue(DataHandler.getUserArrangements(user).contains(arrangement));
     }
 
-    //remove arrangement
+    /**
+     * @throws IllegalDataAccess IllegalDateAccess {@link IllegalDataAccess}
+     */
     @Test
     @Order(2)
     void deleteArrangement() throws IllegalDataAccess {

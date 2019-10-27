@@ -12,6 +12,10 @@ import java.util.List;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+/**
+ * Testing the functional requirements by testing
+ * the use cases of a user.
+ */
  @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class TestingUserUseCases {
     private static final User user = User.USER;
@@ -26,7 +30,9 @@ class TestingUserUseCases {
         notUserArrangements.removeAll(userArrangements);
     }
 
-    //Adding user to data
+     /**
+      * Testing if adding a new arrangement is possible.
+      */
     @Test
     @Order(1)
     void adduserToArrangement(){
@@ -35,7 +41,9 @@ class TestingUserUseCases {
         assertTrue(DataHandler.getUserArrangements(user).contains(arrangementToTest));
     }
 
-    //Remove user from data
+     /**
+      * Testing if removal of user is possible.
+      */
     @Test
     @Order(2)
     void removeUserFromArrangement(){
