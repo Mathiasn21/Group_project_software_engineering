@@ -109,8 +109,7 @@ public class OrganizerController extends Controller {
     //                5.Private Functional Methods       //
     // --------------------------------------------------//
     private void changedView(){
-        Arrangement arrangement = listview.getSelectionModel().getSelectedItem();
-        currentArrangement = arrangement;
+        currentArrangement = listview.getSelectionModel().getSelectedItem();
         setInformationAboutArrangementInView();
         listview.refresh();
     }
