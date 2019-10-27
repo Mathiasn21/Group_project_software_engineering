@@ -1,20 +1,12 @@
 package no.hiof.set.gruppe.tests;
 
-
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.text.Text;
 import no.hiof.set.gruppe.Exceptions.DataFormatException;
 import no.hiof.set.gruppe.controller.abstractions.Controller;
-import no.hiof.set.gruppe.data.DataHandler;
 import no.hiof.set.gruppe.model.Arrangement;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.ResourceBundle;
 import static org.junit.Assert.*;
 
@@ -49,7 +41,6 @@ public class ControllerTests {
 
         assertEquals("Individuell konkurranse", controllerTest.groupsOrIndividuals(arrangement));
     }
-
 
     private Text name, sport, adress, date, participants, groups, description;
     @Test
