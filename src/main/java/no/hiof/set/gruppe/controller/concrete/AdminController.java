@@ -68,8 +68,10 @@ public class AdminController extends Controller {
     //                4.On action Methods                //
     // --------------------------------------------------//
     private void onDeleteClick(ActionEvent event){
-        if(checkIfLegalArrangement())
+        if(checkIfLegalArrangement()){
             deleteArrangement();
+            updateView();
+        }
     }
 
     private void onEditClick(ActionEvent event){
@@ -145,6 +147,12 @@ public class AdminController extends Controller {
             viewFields.get(i).setText(data.get(i));
     }
 
+    private void changedView(){
+        currentArrangement = arrangementListView.getSelectionModel().getSelectedItem();
+        setInformationAboutArrangementInView();
+        arrangementListView.refresh();
+    }
+
     // --------------------------------------------------//
     //                6.Overridden Methods               //
     // --------------------------------------------------//
@@ -152,6 +160,12 @@ public class AdminController extends Controller {
     public void initialize(URL location, ResourceBundle resources) {
         setupActionHandlers();
         populateListView();
+    }
+
+    @Override
+    public void updateView(){
+        if(currentArrangement == null)return;
+        changedView();
     }
 
     @Override
