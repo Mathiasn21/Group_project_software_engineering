@@ -69,14 +69,15 @@ public class NewAlterArrangementController extends Controller {
     @FXML
     public Button saveBtn, cancelBtn;
 
-    /**
-     * Only saves the information if given information in the view is valid.
-     * Uses {@link Validation} in order to validate the information.
-     */
+
     // --------------------------------------------------//
     //                4.On Action Methods                //
     // --------------------------------------------------//
-
+    /**
+     * Only saves the information if given information in the view is valid.
+     * Uses {@link Validation} in order to validate the information.
+     * @param event {@link ActionEvent}
+     */
     private void saveClicked(ActionEvent event){
         getArrangementData();
         if(checkLengthOfAllFields())return;
@@ -86,7 +87,10 @@ public class NewAlterArrangementController extends Controller {
         closeWindow();
     }
 
-    public void cancelClicked(ActionEvent event){
+    /**
+     * @param event {@link ActionEvent}
+     */
+    private void cancelClicked(ActionEvent event){
         closeWindow();
     }
 
