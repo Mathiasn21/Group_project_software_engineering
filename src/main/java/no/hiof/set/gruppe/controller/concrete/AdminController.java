@@ -140,17 +140,10 @@ public class AdminController extends Controller {
     }
 
     private void setInformationAboutArrangementInView(){
-        if(currentArrangement == null)return;
         ArrayList<Text> viewFields = viewFields(arrangementName, arrangementSport, arrangementAdress, arrangementDate, arrangementParticipants, arrangementGorI, arrangementDescription);
         ArrayList<String> data = arrangementData(currentArrangement);
         for(int i = 0; i < data.size(); i++)
             viewFields.get(i).setText(data.get(i));
-    }
-
-    private void changedView(){
-        currentArrangement = arrangementListView.getSelectionModel().getSelectedItem();
-        setInformationAboutArrangementInView();
-        arrangementListView.refresh();
     }
 
     // --------------------------------------------------//
@@ -164,8 +157,9 @@ public class AdminController extends Controller {
 
     @Override
     public void updateView(){
-        if(currentArrangement == null)return;
-        changedView();
+        currentArrangement = arrangementListView.getSelectionModel().getSelectedItem();
+        setInformationAboutArrangementInView();
+        arrangementListView.refresh();
     }
 
     @Override
