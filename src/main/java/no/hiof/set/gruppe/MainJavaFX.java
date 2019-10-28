@@ -58,7 +58,6 @@ public class MainJavaFX extends Application implements SetupWindow {
         IController controller = (loader.getController());
         controller.setMainController(this);
 
-        stage.setOnHidden((Event) -> controller.onCloseStoreInformation());
         Scene scene = new Scene(editLayout);
         stage.setScene(scene);
         stage.setResizable(false);
@@ -83,10 +82,6 @@ public class MainJavaFX extends Application implements SetupWindow {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(MainJavaFX.class.getResource(controller.getViewInformation().viewName));
         Parent editLayout = loader.load();
-
-        //handling onclose for given stage
-        IController finalController = controller;
-        stage.setOnHidden((Event) -> finalController.onCloseStoreInformation());
 
         Scene editScene = new Scene(editLayout);
         stage.setScene(editScene);
@@ -134,7 +129,6 @@ public class MainJavaFX extends Application implements SetupWindow {
                     }
                 }
                 oldController.updateView();
-                finalController.onCloseStoreInformation();
             });
 
             Scene editScene = new Scene(editLayout);

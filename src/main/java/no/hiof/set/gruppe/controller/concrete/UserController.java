@@ -23,7 +23,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import no.hiof.set.gruppe.Exceptions.DataFormatException;
 import no.hiof.set.gruppe.controller.abstractions.Controller;
-import no.hiof.set.gruppe.data.DataHandler;
+import no.hiof.set.gruppe.data.Repository;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.ViewInformation;
 import no.hiof.set.gruppe.model.constantInformation.SportCategory;
@@ -75,7 +75,7 @@ public class UserController extends Controller {
         availableObservableArrangements.remove(currentAvailableArrangement);
         myObservableArrangements.add(currentAvailableArrangement);
 
-        DataHandler.addUserToArrangement(currentAvailableArrangement, User.USER);
+        Repository.addUserToArrangement(currentAvailableArrangement, User.USER);
         currentSelectedMyArrangement = currentAvailableArrangement;
         currentAvailableArrangement = null;
         updateView();
@@ -89,7 +89,7 @@ public class UserController extends Controller {
         myObservableArrangements.remove(currentSelectedMyArrangement);
         availableObservableArrangements.add(currentSelectedMyArrangement);
 
-        DataHandler.deleteUserFromArrangement(currentSelectedMyArrangement, User.USER);
+        Repository.deleteUserFromArrangement(currentSelectedMyArrangement, User.USER);
         currentAvailableArrangement = currentSelectedMyArrangement;
         currentSelectedMyArrangement = null;
     }
@@ -214,8 +214,8 @@ public class UserController extends Controller {
     //                7.Private Setup Methods            //
     // --------------------------------------------------//
     private void setArrangementListInformation() {
-        List<Arrangement> allArrang = DataHandler.getArrangementsData();
-        List<Arrangement> userConnectedArrangements = DataHandler.getUserArrangements(User.USER);
+        List<Arrangement> allArrang = Repository.getArrangementsData();
+        List<Arrangement> userConnectedArrangements = Repository.getUserArrangements(User.USER);
 
         allArrang.removeAll(userConnectedArrangements);
         allArrang.removeIf((arrangement) -> DateTest.TestExpired.execute(arrangement.getStartDate(), arrangement.getEndDate()));
@@ -300,14 +300,6 @@ public class UserController extends Controller {
         setupListView();
         setupActionHandlers();
         setupToggleBtns();
-    }
-
-    /**
-     * Stores information after all stages have closed.
-     */
-    @Override
-    public void onCloseStoreInformation(){
-        DataHandler.storeArrangementsData();
     }
 
     /**

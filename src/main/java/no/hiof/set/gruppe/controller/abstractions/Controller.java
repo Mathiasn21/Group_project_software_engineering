@@ -58,11 +58,6 @@ public abstract class Controller implements IControllerDataTransfer, Initializab
         return mainController;
     }
 
-    /**
-     * Default logic for closing of a view
-     */
-    @Override
-    public void onCloseStoreInformation(){}
     public boolean hasNewObject(){
         return false;
     }

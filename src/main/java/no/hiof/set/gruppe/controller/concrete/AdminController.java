@@ -27,7 +27,7 @@ import no.hiof.set.gruppe.Exceptions.DataFormatException;
 import no.hiof.set.gruppe.Exceptions.ErrorExceptionHandler;
 import no.hiof.set.gruppe.Exceptions.IllegalDataAccess;
 import no.hiof.set.gruppe.controller.abstractions.Controller;
-import no.hiof.set.gruppe.data.DataHandler;
+import no.hiof.set.gruppe.data.Repository;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.ViewInformation;
 import no.hiof.set.gruppe.model.user.User;
@@ -106,7 +106,7 @@ public class AdminController extends Controller {
     }
 
     private void populateListView(){
-        arrangementListObservable = FXCollections.observableArrayList(DataHandler.getArrangementsData());
+        arrangementListObservable = FXCollections.observableArrayList(Repository.getArrangementsData());
         arrangementListView.setItems(arrangementListObservable);
     }
 
@@ -124,7 +124,7 @@ public class AdminController extends Controller {
 
     private void deleteArrangement(){
         try {
-            DataHandler.deleteArrangement(currentArrangement, User.ADMIN);
+            Repository.deleteArrangement(currentArrangement, User.ADMIN);
             arrangementListObservable.remove(currentArrangement);
             arrangementListView.refresh();
         }
@@ -172,7 +172,6 @@ public class AdminController extends Controller {
 
     }
 
-    //new method for returning information about the view
     @Override
     public ViewInformation getViewInformation() {
         return new ViewInformation(name, title);

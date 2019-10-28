@@ -5,7 +5,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * An enum representing legal users.
+ * An enum representing legal users. Just a dummy class
  */
 public enum User{
     ADMIN("Admin", "Password1", "Admin.fxml"),

@@ -20,7 +20,6 @@ public interface IController {
      * @throws IOException exception {@link IOException}
      */
     void createNewView(Controller controller) throws IOException;
-    void onCloseStoreInformation();
 
     /**
      * @return {@link ViewInformation}

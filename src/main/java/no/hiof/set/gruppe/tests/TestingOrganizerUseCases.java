@@ -1,7 +1,7 @@
 package no.hiof.set.gruppe.tests;
 
 import no.hiof.set.gruppe.Exceptions.IllegalDataAccess;
-import no.hiof.set.gruppe.data.DataHandler;
+import no.hiof.set.gruppe.data.Repository;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.user.User;
 import org.junit.jupiter.api.MethodOrderer;
@@ -36,8 +36,8 @@ class TestingOrganizerUseCases {
     @Test
     @Order(1)
     void addArrangement() throws IllegalDataAccess {
-        DataHandler.addArrangement(arrangement, user);
-        assertTrue(DataHandler.getUserArrangements(user).contains(arrangement));
+        Repository.addArrangement(arrangement, user);
+        assertTrue(Repository.getUserArrangements(user).contains(arrangement));
     }
 
     /**
@@ -46,8 +46,8 @@ class TestingOrganizerUseCases {
     @Test
     @Order(2)
     void deleteArrangement() throws IllegalDataAccess {
-        DataHandler.deleteArrangement(arrangement, User.ORGANIZER);
-        assertFalse(DataHandler.getArrangementsData().contains(arrangement));
+        Repository.deleteArrangement(arrangement, User.ORGANIZER);
+        assertFalse(Repository.getArrangementsData().contains(arrangement));
     }
 
     //Send out push notifications

@@ -1,7 +1,7 @@
 package no.hiof.set.gruppe.tests;
 
 import no.hiof.set.gruppe.Exceptions.IllegalDataAccess;
-import no.hiof.set.gruppe.data.DataHandler;
+import no.hiof.set.gruppe.data.Repository;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.user.User;
 import org.junit.jupiter.api.MethodOrderer;
@@ -35,8 +35,8 @@ class TestingAdminUseCases {
     @Test
     @Order(1)
     void addArrangement() throws IllegalDataAccess {
-        DataHandler.addArrangement(arrangement, User.ORGANIZER);
-        assertTrue(DataHandler.getUserArrangements(User.ORGANIZER).contains(arrangement));
+        Repository.addArrangement(arrangement, User.ORGANIZER);
+        assertTrue(Repository.getUserArrangements(User.ORGANIZER).contains(arrangement));
     }
 
     /**
@@ -45,8 +45,8 @@ class TestingAdminUseCases {
     @Test
     @Order(2)
     void deleteArrangement() throws IllegalDataAccess {
-        DataHandler.deleteArrangement(arrangement, user);
-        assertFalse(DataHandler.getArrangementsData().contains(arrangement));
+        Repository.deleteArrangement(arrangement, user);
+        assertFalse(Repository.getArrangementsData().contains(arrangement));
     }
 
 

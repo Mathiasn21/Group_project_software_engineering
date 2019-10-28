@@ -14,7 +14,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import no.hiof.set.gruppe.Exceptions.ErrorExceptionHandler;
 import no.hiof.set.gruppe.Exceptions.IllegalDataAccess;
+import no.hiof.set.gruppe.Exceptions.InvalidLoginInformation;
 import no.hiof.set.gruppe.model.Arrangement;
+import no.hiof.set.gruppe.model.user.ILoginInformation;
 import no.hiof.set.gruppe.model.user.User;
 import no.hiof.set.gruppe.model.user.UserConnectedArrangement;
 import no.hiof.set.gruppe.util.AccessValidate;
@@ -30,7 +32,7 @@ import java.util.*;
  * Interacting with this object is done via the interface IDataHandler.
  * @author Gruppe4
  */
-public class DataHandler {
+public class Repository {
 
     // --------------------------------------------------//
     //                2.Local Fields                     //
@@ -152,6 +154,10 @@ public class DataHandler {
         return new ArrayList<>(listOfAllUserConnectedArrangements = listFromJson(UserConnectedArrangement[].class, jsonFromFile));
     }
 
+
+    // --------------------------------------------------//
+    //                4.Public Mutators                  //
+    // --------------------------------------------------//
     /**
      * Stores all arrangements in buffer to file.json. Called
      * after every modification of said buffer.
@@ -160,10 +166,32 @@ public class DataHandler {
         writeToFile(toJson(UserConnectedArrangement[].class,  listOfAllUserConnectedArrangements.toArray(UserConnectedArrangement[]::new)), userHasArrangements);
     }
 
-    // --------------------------------------------------//
-    //                4.Public Methods                   //
-    // --------------------------------------------------//
+    /**
+     * @param arrangement {@link Arrangement}
+     * @param user {@link User}
+     */
+    public static void addUserToArrangement(@NotNull Arrangement arrangement, @NotNull User user){
+        listOfAllUserConnectedArrangements.add(new UserConnectedArrangement(arrangement.getID(), user.getName()));
+        storeArrangementsData();
+    }
 
+    /**
+     * @param arrangement {@link Arrangement}
+     * @param user {@link User}
+     * @throws IllegalDataAccess IllegalAccess{@link IllegalDataAccess}
+     */
+    public static void addArrangement(Arrangement arrangement, @NotNull User user) throws IllegalDataAccess {
+        if(!AccessValidate.userCanCreateArrangement(user))throw new IllegalDataAccess();
+
+        listOfAllArrangements.add(arrangement);
+        listOfAllUserConnectedArrangements.add(new UserConnectedArrangement(arrangement.getID(), user.getName()));
+        storeArrangementsData();
+    }
+
+
+    // --------------------------------------------------//
+    //                4.Public Data Removal              //
+    // --------------------------------------------------//
     /**
      * @param arrangement {@link Arrangement}
      * @param user {@link User}
@@ -192,28 +220,10 @@ public class DataHandler {
         storeArrangementsData();
     }
 
-    /**
-     * @param arrangement {@link Arrangement}
-     * @param user {@link User}
-     */
-    public static void addUserToArrangement(@NotNull Arrangement arrangement, @NotNull User user){
-        listOfAllUserConnectedArrangements.add(new UserConnectedArrangement(arrangement.getID(), user.getName()));
-        storeArrangementsData();
-    }
 
-    /**
-     * @param arrangement {@link Arrangement}
-     * @param user {@link User}
-     * @throws IllegalDataAccess IllegalAccess{@link IllegalDataAccess}
-     */
-    public static void addArrangement(Arrangement arrangement, @NotNull User user) throws IllegalDataAccess {
-        if(!AccessValidate.userCanCreateArrangement(user))throw new IllegalDataAccess();
-
-        listOfAllArrangements.add(arrangement);
-        listOfAllUserConnectedArrangements.add(new UserConnectedArrangement(arrangement.getID(), user.getName()));
-        storeArrangementsData();
-    }
-
+    // --------------------------------------------------//
+    //                4.Public Getters                   //
+    // --------------------------------------------------//
     /**
      * @return {@link List}
      */
@@ -245,8 +255,18 @@ public class DataHandler {
     /**
      * Stores all arrangements and their user connection
      */
-    public static void storeArrangementsData() {
+    private static void storeArrangementsData() {
         writeToFile(toJson(Arrangement[].class, listOfAllArrangements.toArray(Arrangement[]::new)), arrangementFName);
         storeUserArrangements();
+    }
+
+    @NotNull
+    private static User getUserDetails(@NotNull ILoginInformation loginInformation) throws InvalidLoginInformation {
+        String userID = loginInformation.getUserID();
+        String passHash = loginInformation.getPassHash();
+
+        User user = User.getUser(userID);
+        if(user == null || !user.getName().equals(userID) || !user.getPass().equals(passHash)) throw new InvalidLoginInformation();
+        return user;
     }
 }

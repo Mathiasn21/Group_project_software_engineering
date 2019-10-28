@@ -1,6 +1,6 @@
 package no.hiof.set.gruppe.tests;
 
-import no.hiof.set.gruppe.data.DataHandler;
+import no.hiof.set.gruppe.data.Repository;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.user.User;
 import org.junit.jupiter.api.MethodOrderer;
@@ -25,8 +25,8 @@ class TestingUserUseCases {
 
     //setup
     static {
-        userArrangements = DataHandler.getUserArrangements(user);
-        notUserArrangements = DataHandler.getArrangementsData();
+        userArrangements = Repository.getUserArrangements(user);
+        notUserArrangements = Repository.getArrangementsData();
         notUserArrangements.removeAll(userArrangements);
     }
 
@@ -37,8 +37,8 @@ class TestingUserUseCases {
     @Order(1)
     void adduserToArrangement(){
         arrangementToTest = notUserArrangements.get(0);
-        DataHandler.addUserToArrangement(arrangementToTest, user);
-        assertTrue(DataHandler.getUserArrangements(user).contains(arrangementToTest));
+        Repository.addUserToArrangement(arrangementToTest, user);
+        assertTrue(Repository.getUserArrangements(user).contains(arrangementToTest));
     }
 
      /**
@@ -47,7 +47,7 @@ class TestingUserUseCases {
     @Test
     @Order(2)
     void removeUserFromArrangement(){
-        DataHandler.deleteUserFromArrangement(arrangementToTest, user);
-        assertFalse(DataHandler.getUserArrangements(user).contains(arrangementToTest));
+        Repository.deleteUserFromArrangement(arrangementToTest, user);
+        assertFalse(Repository.getUserArrangements(user).contains(arrangementToTest));
     }
  }

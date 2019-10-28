@@ -24,8 +24,8 @@ import no.hiof.set.gruppe.Exceptions.DataFormatException;
 import no.hiof.set.gruppe.Exceptions.ErrorExceptionHandler;
 import no.hiof.set.gruppe.Exceptions.IllegalDataAccess;
 import no.hiof.set.gruppe.controller.abstractions.Controller;
+import no.hiof.set.gruppe.data.Repository;
 import no.hiof.set.gruppe.model.Arrangement;
-import no.hiof.set.gruppe.data.DataHandler;
 import no.hiof.set.gruppe.model.ViewInformation;
 import no.hiof.set.gruppe.model.constantInformation.SportCategory;
 import no.hiof.set.gruppe.model.user.User;
@@ -148,7 +148,7 @@ public class OrganizerController extends Controller {
     private void deleteArrangement(){
         Arrangement selectedItem = listview.getSelectionModel().getSelectedItem();
         try {
-            DataHandler.deleteArrangement(selectedItem, user);
+            Repository.deleteArrangement(selectedItem, user);
             arrangementListObservable.remove(selectedItem);
             listview.getSelectionModel().selectFirst();
         }
@@ -203,7 +203,7 @@ public class OrganizerController extends Controller {
     }
 
     private void populateListView() {
-        arrangementListObservable = FXCollections.observableArrayList(DataHandler.getUserArrangements(User.ORGANIZER));
+        arrangementListObservable = FXCollections.observableArrayList(Repository.getUserArrangements(User.ORGANIZER));
         arrangementListObservable.sort(ArrangementSort.COMP_DATE_ASC.getComparator());
         setupFilteredList();
         listview.refresh();
@@ -238,14 +238,6 @@ public class OrganizerController extends Controller {
     }
 
     /**
-     * Stores information after all stages have closed.
-     */
-    @Override
-    public void onCloseStoreInformation() {
-        DataHandler.storeArrangementsData();
-    }
-
-    /**
      * Handles data setup and interaction from other controllers.
      * @param object Object
      * @throws DataFormatException Exception
@@ -257,7 +249,7 @@ public class OrganizerController extends Controller {
 
         MultipleSelectionModel selModel = listview.getSelectionModel();
         try {
-            DataHandler.addArrangement(arrangement, User.ORGANIZER);
+            Repository.addArrangement(arrangement, User.ORGANIZER);
             arrangementListObservable.add(arrangement);
 
         } catch (IllegalDataAccess illegalDataAccess) {
@@ -278,7 +270,6 @@ public class OrganizerController extends Controller {
         return currentArrangement;
     }
 
-    //new method for returning information about the view
     /**
      * @return {@link ViewInformation}
      */
