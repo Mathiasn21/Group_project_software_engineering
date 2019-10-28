@@ -172,16 +172,6 @@ public class AdminController extends Controller {
 
     }
 
-    @Override
-    public String getTitle() {
-        return title;
-    }
-
-    @Override
-    public String getName() {
-        return name;
-    }
-
     //new method for returning information about the view
     @Override
     public ViewInformation getViewInformation() {

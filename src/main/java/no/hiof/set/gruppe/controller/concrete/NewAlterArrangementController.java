@@ -137,9 +137,7 @@ public class NewAlterArrangementController extends Controller {
     }
 
     private boolean checkLengthOfAllFields(){
-        if(arrName.length() == 0 || sport.length() == 0 || partic.length() == 0 || desc.length() == 0 || address.length() == 0 || startDate == null || endDate == null)
-            return true;
-        return false;
+        return arrName.length() == 0 || sport.length() == 0 || partic.length() == 0 || desc.length() == 0 || address.length() == 0 || startDate == null || endDate == null;
     }
 
     private boolean illegalNumberFormat(){
@@ -164,7 +162,7 @@ public class NewAlterArrangementController extends Controller {
     private int getSportIndex(){
         ObservableList list = FXCollections.observableArrayList(SportCategory.values());
         for(int i = 0; i < list.size(); i++){
-            if(list.get(i).toString() == arrangementToEdit.getSport())return i;
+            if(list.get(i).toString().equals(arrangementToEdit.getSport()))return i;
         }
         return 0;
     }
@@ -193,22 +191,6 @@ public class NewAlterArrangementController extends Controller {
     public void initialize(URL url, ResourceBundle resourceBundle){
         setupActionHandlers();
         setupComboBoxes();
-    }
-
-    /**
-     * @return String
-     */
-    @Override
-    public String getTitle() {
-        return title;
-    }
-
-    /**
-     * @return String
-     */
-    @Override
-    public String getName() {
-        return name;
     }
 
     /**

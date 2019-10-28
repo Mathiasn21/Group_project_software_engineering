@@ -23,6 +23,7 @@ import no.hiof.set.gruppe.controller.abstractions.Controller;
 import no.hiof.set.gruppe.controller.abstractions.IController;
 import no.hiof.set.gruppe.controller.abstractions.IControllerDataTransfer;
 import no.hiof.set.gruppe.controller.abstractions.SetupWindow;
+import no.hiof.set.gruppe.model.ViewInformation;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -80,7 +81,7 @@ public class MainJavaFX extends Application implements SetupWindow {
         Stage stage = new Stage();
 
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(MainJavaFX.class.getResource(controller.getName()));
+        loader.setLocation(MainJavaFX.class.getResource(controller.getViewInformation().viewName));
         Parent editLayout = loader.load();
 
         //handling onclose for given stage
@@ -91,7 +92,7 @@ public class MainJavaFX extends Application implements SetupWindow {
         stage.setScene(editScene);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initOwner(this.stage);
-        stage.setTitle(controller.getTitle());
+        stage.setTitle(controller.getViewInformation().viewTitle);
 
         //setting next controller
         controller = loader.getController();
@@ -117,7 +118,7 @@ public class MainJavaFX extends Application implements SetupWindow {
             Stage stage = new Stage();
 
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainJavaFX.class.getResource(controller.getName()));
+            loader.setLocation(MainJavaFX.class.getResource(controller.getViewInformation().viewName));
             Parent editLayout = loader.load();
 
             IControllerDataTransfer oldController = controller;
@@ -140,7 +141,7 @@ public class MainJavaFX extends Application implements SetupWindow {
             stage.setScene(editScene);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initOwner(this.stage);
-            stage.setTitle(controller.getTitle());
+            stage.setTitle(controller.getViewInformation().viewTitle);
             stage.setResizable(false);
             controller.setMainController(this);
             System.out.println(this);

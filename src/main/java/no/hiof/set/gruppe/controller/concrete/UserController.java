@@ -338,19 +338,6 @@ public class UserController extends Controller {
     }
 
     /**
-     * @return String
-     */
-    //change and create a new data object containing the necessary information
-    @Override
-    public String getTitle() {return title;}
-
-    /**
-     * @return String
-     */
-    @Override
-    public String getName() {return name;}
-
-    /**
      * @return {@link ViewInformation}
      */
     //new method for returning information about the view

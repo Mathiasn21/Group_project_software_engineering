@@ -137,23 +137,6 @@ public class LoginController extends Controller {
     }
 
     /**
-     * @return String
-     */
-    @Override
-    public String getTitle() {
-        return title;
-    }
-
-    /**
-     * @return String
-     */
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    //new method for returning information about the view
-    /**
      * @return {@link ViewInformation}
      */
     @Override

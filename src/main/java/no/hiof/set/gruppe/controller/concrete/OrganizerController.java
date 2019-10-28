@@ -269,23 +269,6 @@ public class OrganizerController extends Controller {
         changedView();
     }
 
-    //handles the title and name of current view. Here name is the local path
-    /**
-     * @return String
-     */
-    @Override
-    public String getTitle() {
-        return title;
-    }
-
-    /**
-     * @return String
-     */
-    @Override
-    public String getName() {
-        return name;
-    }
-
     /**
      * @return Object
      */

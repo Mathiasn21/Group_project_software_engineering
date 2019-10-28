@@ -11,16 +11,6 @@ import java.io.IOException;
  */
 public interface IController {
     /**
-     * @return String
-     */
-    String getTitle();
-
-    /**
-     * @return String
-     */
-    String getName();
-
-    /**
      * @param mainController {@link MainJavaFX}
      */
     void setMainController(MainJavaFX mainController);
