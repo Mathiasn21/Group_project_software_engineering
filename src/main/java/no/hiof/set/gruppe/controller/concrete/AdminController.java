@@ -68,8 +68,10 @@ public class AdminController extends Controller {
     //                4.On action Methods                //
     // --------------------------------------------------//
     private void onDeleteClick(ActionEvent event){
-        if(checkIfLegalArrangement())
+        if(checkIfLegalArrangement()){
             deleteArrangement();
+            updateView();
+        }
     }
 
     private void onEditClick(ActionEvent event){
@@ -138,7 +140,6 @@ public class AdminController extends Controller {
     }
 
     private void setInformationAboutArrangementInView(){
-        if(currentArrangement == null)return;
         ArrayList<Text> viewFields = viewFields(arrangementName, arrangementSport, arrangementAdress, arrangementDate, arrangementParticipants, arrangementGorI, arrangementDescription);
         ArrayList<String> data = arrangementData(currentArrangement);
         for(int i = 0; i < data.size(); i++)
@@ -152,6 +153,13 @@ public class AdminController extends Controller {
     public void initialize(URL location, ResourceBundle resources) {
         setupActionHandlers();
         populateListView();
+    }
+
+    @Override
+    public void updateView(){
+        currentArrangement = arrangementListView.getSelectionModel().getSelectedItem();
+        setInformationAboutArrangementInView();
+        arrangementListView.refresh();
     }
 
     @Override
