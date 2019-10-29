@@ -27,7 +27,7 @@ import no.hiof.set.gruppe.data.Repository;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.ViewInformation;
 import no.hiof.set.gruppe.model.constantInformation.SportCategory;
-import no.hiof.set.gruppe.model.user.User;
+import no.hiof.set.gruppe.model.user.ProtoUser;
 import no.hiof.set.gruppe.util.DateTest;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -75,7 +75,7 @@ public class UserController extends Controller {
         availableObservableArrangements.remove(currentAvailableArrangement);
         myObservableArrangements.add(currentAvailableArrangement);
 
-        Repository.addUserToArrangement(currentAvailableArrangement, User.USER);
+        Repository.addUserToArrangement(currentAvailableArrangement, ProtoUser.USER);
         currentSelectedMyArrangement = currentAvailableArrangement;
         currentAvailableArrangement = null;
         updateView();
@@ -89,7 +89,7 @@ public class UserController extends Controller {
         myObservableArrangements.remove(currentSelectedMyArrangement);
         availableObservableArrangements.add(currentSelectedMyArrangement);
 
-        Repository.deleteUserFromArrangement(currentSelectedMyArrangement, User.USER);
+        Repository.deleteUserFromArrangement(currentSelectedMyArrangement, ProtoUser.USER);
         currentAvailableArrangement = currentSelectedMyArrangement;
         currentSelectedMyArrangement = null;
     }
@@ -215,7 +215,7 @@ public class UserController extends Controller {
     // --------------------------------------------------//
     private void setArrangementListInformation() {
         List<Arrangement> allArrang = Repository.getArrangementsData();
-        List<Arrangement> userConnectedArrangements = Repository.getUserArrangements(User.USER);
+        List<Arrangement> userConnectedArrangements = Repository.getUserArrangements(ProtoUser.USER);
 
         allArrang.removeAll(userConnectedArrangements);
         allArrang.removeIf((arrangement) -> DateTest.TestExpired.execute(arrangement.getStartDate(), arrangement.getEndDate()));

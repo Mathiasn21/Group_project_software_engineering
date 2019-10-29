@@ -30,7 +30,7 @@ import no.hiof.set.gruppe.controller.abstractions.Controller;
 import no.hiof.set.gruppe.data.Repository;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.ViewInformation;
-import no.hiof.set.gruppe.model.user.User;
+import no.hiof.set.gruppe.model.user.ProtoUser;
 
 import java.io.IOException;
 import java.net.URL;
@@ -124,7 +124,7 @@ public class AdminController extends Controller {
 
     private void deleteArrangement(){
         try {
-            Repository.deleteArrangement(currentArrangement, User.ADMIN);
+            Repository.deleteArrangement(currentArrangement, ProtoUser.ADMIN);
             arrangementListObservable.remove(currentArrangement);
             arrangementListView.refresh();
         }

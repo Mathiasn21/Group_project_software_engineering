@@ -3,7 +3,7 @@ package no.hiof.set.gruppe.tests;
 import no.hiof.set.gruppe.Exceptions.IllegalDataAccess;
 import no.hiof.set.gruppe.data.Repository;
 import no.hiof.set.gruppe.model.Arrangement;
-import no.hiof.set.gruppe.model.user.User;
+import no.hiof.set.gruppe.model.user.ProtoUser;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -29,8 +29,8 @@ class TestingOrganizerUseCases {
             "2019-10-15",
             "2019-10-16",
             "Dette varer i hele 1 dager. Og, server null formål.");
-    private static final User user = User.ORGANIZER;
-    private static final List<Arrangement> arrangementList = Repository.getUserArrangements(user);
+    private static final ProtoUser PROTO_USER = ProtoUser.ORGANIZER;
+    private static final List<Arrangement> arrangementList = Repository.getUserArrangements(PROTO_USER);
 
 
     /**
@@ -39,8 +39,8 @@ class TestingOrganizerUseCases {
     @Test
     @Order(1)
     void addArrangement() throws IllegalDataAccess {
-        Repository.addArrangement(arrangement, user);
-        List<Arrangement> newListOfArrangements = Repository.getUserArrangements(user);
+        Repository.addArrangement(arrangement, PROTO_USER);
+        List<Arrangement> newListOfArrangements = Repository.getUserArrangements(PROTO_USER);
         assertTrue(newListOfArrangements.contains(arrangement));
         assertTrue(newListOfArrangements.containsAll(arrangementList) && newListOfArrangements.size() == arrangementList.size() + 1);
     }
@@ -51,10 +51,10 @@ class TestingOrganizerUseCases {
     @Test
     @Order(2)
     void deleteArrangement() throws IllegalDataAccess {
-        Repository.deleteArrangement(arrangement, User.ORGANIZER);
+        Repository.deleteArrangement(arrangement, ProtoUser.ORGANIZER);
         assertFalse(Repository.getArrangementsData().contains(arrangement));
     }
 
     //Send out push notifications
-    //test returning arrangements only belonging to this user
+    //test returning arrangements only belonging to this PROTO_USER
 }

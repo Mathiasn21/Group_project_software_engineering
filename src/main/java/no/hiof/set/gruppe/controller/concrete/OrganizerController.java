@@ -28,7 +28,7 @@ import no.hiof.set.gruppe.data.Repository;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.ViewInformation;
 import no.hiof.set.gruppe.model.constantInformation.SportCategory;
-import no.hiof.set.gruppe.model.user.User;
+import no.hiof.set.gruppe.model.user.ProtoUser;
 import no.hiof.set.gruppe.util.ArrangementSort;
 import org.jetbrains.annotations.NotNull;
 
@@ -53,7 +53,7 @@ public class OrganizerController extends Controller {
     private ObservableList<Arrangement>arrangementListObservable;
     private FilteredList<Arrangement> filteredList;
     private Arrangement currentArrangement = null;
-    private static final User user = User.ORGANIZER;
+    private static final ProtoUser PROTO_USER = ProtoUser.ORGANIZER;
 
     // --------------------------------------------------//
     //                3.FXML Fields                      //
@@ -150,7 +150,7 @@ public class OrganizerController extends Controller {
     private void deleteArrangement(){
         Arrangement selectedItem = listview.getSelectionModel().getSelectedItem();
         try {
-            Repository.deleteArrangement(selectedItem, user);
+            Repository.deleteArrangement(selectedItem, PROTO_USER);
             arrangementListObservable.remove(selectedItem);
             listview.getSelectionModel().selectFirst();
         }
@@ -205,7 +205,7 @@ public class OrganizerController extends Controller {
     }
 
     private void populateListView() {
-        arrangementListObservable = FXCollections.observableArrayList(Repository.getUserArrangements(User.ORGANIZER));
+        arrangementListObservable = FXCollections.observableArrayList(Repository.getUserArrangements(ProtoUser.ORGANIZER));
         arrangementListObservable.sort(ArrangementSort.COMP_DATE_ASC.getComparator());
         setupFilteredList();
         listview.refresh();
@@ -260,7 +260,7 @@ public class OrganizerController extends Controller {
 
         MultipleSelectionModel selModel = listview.getSelectionModel();
         try {
-            Repository.addArrangement(arrangement, User.ORGANIZER);
+            Repository.addArrangement(arrangement, ProtoUser.ORGANIZER);
             arrangementListObservable.add(arrangement);
 
         } catch (IllegalDataAccess illegalDataAccess) {

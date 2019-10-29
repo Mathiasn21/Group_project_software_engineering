@@ -15,12 +15,15 @@ import com.google.gson.GsonBuilder;
 import no.hiof.set.gruppe.Exceptions.ErrorExceptionHandler;
 import no.hiof.set.gruppe.Exceptions.IllegalDataAccess;
 import no.hiof.set.gruppe.Exceptions.InvalidLoginInformation;
+import no.hiof.set.gruppe.Exceptions.UnableToRegisterUser;
 import no.hiof.set.gruppe.model.Arrangement;
-import no.hiof.set.gruppe.model.RegisterUser;
+import no.hiof.set.gruppe.model.ValidationResult;
 import no.hiof.set.gruppe.model.user.ILoginInformation;
-import no.hiof.set.gruppe.model.user.User;
+import no.hiof.set.gruppe.model.user.ProtoUser;
+import no.hiof.set.gruppe.model.user.RawUser;
 import no.hiof.set.gruppe.model.user.UserConnectedArrangement;
 import no.hiof.set.gruppe.util.AccessValidate;
+import no.hiof.set.gruppe.util.Validation;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -177,29 +180,30 @@ public class Repository {
 
     /**
      * @param arrangement {@link Arrangement}
-     * @param user {@link User}
+     * @param protoUser {@link ProtoUser}
      */
-    public static void addUserToArrangement(@NotNull Arrangement arrangement, @NotNull User user){
-        listOfAllUserConnectedArrangements.add(new UserConnectedArrangement(arrangement.getID(), user.getName()));
+    public static void addUserToArrangement(@NotNull Arrangement arrangement, @NotNull ProtoUser protoUser){
+        listOfAllUserConnectedArrangements.add(new UserConnectedArrangement(arrangement.getID(), protoUser.getName()));
         storeArrangementsData();
     }
 
     /**
      * @param arrangement {@link Arrangement}
-     * @param user {@link User}
+     * @param protoUser {@link ProtoUser}
      * @throws IllegalDataAccess IllegalAccess{@link IllegalDataAccess}
      */
-    public static void addArrangement(Arrangement arrangement, @NotNull User user) throws IllegalDataAccess {
-        if(!AccessValidate.userCanCreateArrangement(user))throw new IllegalDataAccess();
+    public static void addArrangement(Arrangement arrangement, @NotNull ProtoUser protoUser) throws IllegalDataAccess {
+        if(!AccessValidate.userCanCreateArrangement(protoUser))throw new IllegalDataAccess();
 
         listOfAllArrangements.add(arrangement);
-        listOfAllUserConnectedArrangements.add(new UserConnectedArrangement(arrangement.getID(), user.getName()));
+        listOfAllUserConnectedArrangements.add(new UserConnectedArrangement(arrangement.getID(), protoUser.getName()));
         storeArrangementsData();
     }
 
     @Contract(pure = true)
-    public static boolean addNewUser(RegisterUser userRaw){
-        return false;
+    public static void addNewUser(RawUser rawUser)throws UnableToRegisterUser{
+        ValidationResult result = Validation.ofNewUser(rawUser);
+        if(!result.IS_VALID)throw new UnableToRegisterUser(result);
     }
 
     // --------------------------------------------------//
@@ -207,11 +211,11 @@ public class Repository {
     // --------------------------------------------------//
     /**
      * @param arrangement {@link Arrangement}
-     * @param user {@link User}
+     * @param protoUser {@link ProtoUser}
      * @throws IllegalDataAccess illegalAccess{@link IllegalDataAccess}
      */
-    public static void deleteArrangement(Arrangement arrangement, User user) throws IllegalDataAccess {
-        if(!AccessValidate.userCanModifyArrangement(arrangement, user))throw new IllegalDataAccess();
+    public static void deleteArrangement(Arrangement arrangement, ProtoUser protoUser) throws IllegalDataAccess {
+        if(!AccessValidate.userCanModifyArrangement(arrangement, protoUser))throw new IllegalDataAccess();
 
         listOfAllArrangements.remove(arrangement);
         deleteUserConnectedArrangements(arrangement.getID());
@@ -220,12 +224,12 @@ public class Repository {
 
     /**
      * @param arrangement {@link Arrangement}
-     * @param user {@link User}
+     * @param protoUser {@link ProtoUser}
      */
-    public static void deleteUserFromArrangement(@NotNull Arrangement arrangement,@NotNull User user){
+    public static void deleteUserFromArrangement(@NotNull Arrangement arrangement,@NotNull ProtoUser protoUser){
         for(int i = 0; i < listOfAllUserConnectedArrangements.size(); i++){
             UserConnectedArrangement userArrangement = listOfAllUserConnectedArrangements.get(i);
-            if(userArrangement.getID().equals(arrangement.getID()) && userArrangement.getUSERNAME().equals(user.getName())){
+            if(userArrangement.getID().equals(arrangement.getID()) && userArrangement.getUSERNAME().equals(protoUser.getName())){
                 listOfAllUserConnectedArrangements.remove(userArrangement);
                 break;
             }
@@ -245,13 +249,13 @@ public class Repository {
     public static List<Arrangement> getArrangementsData(){ return new ArrayList<>(listOfAllArrangements); }
 
     /**
-     * @param user {@link User}
+     * @param protoUser {@link ProtoUser}
      * @return {@link List}
      */
     @NotNull
-    public static List<Arrangement> getUserArrangements(@NotNull User user) {
+    public static List<Arrangement> getUserArrangements(@NotNull ProtoUser protoUser) {
         List<Arrangement> result = new ArrayList<>();
-        String userName = user.getName();
+        String userName = protoUser.getName();
 
         outer:for(Arrangement arrangement : listOfAllArrangements){
             String arrID = arrangement.getID();
@@ -266,12 +270,24 @@ public class Repository {
     }
 
     @NotNull
-    public static User getUserDetails(@NotNull ILoginInformation loginInformation) throws InvalidLoginInformation {
+    public static ProtoUser getUserDetails(@NotNull ILoginInformation loginInformation) throws InvalidLoginInformation {
         String userID = loginInformation.getUserID();
         String passHash = loginInformation.getPassHash();
 
-        User user = User.getUser(userID);
-        if(user == null || !user.getName().equals(userID) || !user.getPass().equals(passHash)) throw new InvalidLoginInformation();
-        return user;
+        ProtoUser protoUser = ProtoUser.getUser(userID);
+        if(protoUser == null || !protoUser.getName().equals(userID) || !protoUser.getPass().equals(passHash)) throw new InvalidLoginInformation();
+        return protoUser;
     }
+
+    /**
+     * This method interacts with an database to check if the address exists.
+     * Temp solution is for it to return true when length is below 50.
+     * @param streetAddress String
+     * @return boolean
+     */
+    @Contract(pure = true)
+    public static boolean addressExists(@NotNull String streetAddress) {return !(streetAddress.length() < 50);}
+
+    @Contract(pure = true)
+    public static boolean emailExists(String email) {return false;}
 }

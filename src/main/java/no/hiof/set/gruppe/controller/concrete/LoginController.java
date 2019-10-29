@@ -23,7 +23,7 @@ import no.hiof.set.gruppe.Exceptions.ErrorExceptionHandler;
 import no.hiof.set.gruppe.Exceptions.InvalidLoginInformation;
 import no.hiof.set.gruppe.controller.abstractions.Controller;
 import no.hiof.set.gruppe.model.ViewInformation;
-import no.hiof.set.gruppe.model.user.User;
+import no.hiof.set.gruppe.model.user.ProtoUser;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -58,12 +58,12 @@ public class LoginController extends Controller {
      * @param event {@link ActionEvent}
      */
     private void getCorrectCredentials(@NotNull ActionEvent event){
-        User user = User.USER;
+        ProtoUser protoUser = ProtoUser.USER;
         Button source = (Button)event.getSource();
 
-        if (source.equals(adminLogin)) user = User.ADMIN;
-        else if (source.equals(arrangLogin))user = User.ORGANIZER;
-        applyCredentials(user);
+        if (source.equals(adminLogin)) protoUser = ProtoUser.ADMIN;
+        else if (source.equals(arrangLogin)) protoUser = ProtoUser.ORGANIZER;
+        applyCredentials(protoUser);
     }
 
     /**
@@ -74,12 +74,12 @@ public class LoginController extends Controller {
         String password = pass.getText();
 
         try{
-            if (!User.isValidUser(userName, password)) throw new InvalidLoginInformation();
+            if (!ProtoUser.isValidUser(userName, password)) throw new InvalidLoginInformation();
 
-            User user = User.getUser(userName);
-            assert user != null;
+            ProtoUser protoUser = ProtoUser.getUser(userName);
+            assert protoUser != null;
             ((Stage)logInn.getScene().getWindow()).close();
-            openCorrespondingStage(user);
+            openCorrespondingStage(protoUser);
 
         }catch (InvalidLoginInformation invalidLogin){
             try { ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_LOGIN, invalidLogin); }
@@ -93,21 +93,21 @@ public class LoginController extends Controller {
     //                5.Private Methods                  //
     // --------------------------------------------------//
     /**
-     * @param user {@link User}
+     * @param protoUser {@link ProtoUser}
      */
-    private void openCorrespondingStage(@NotNull User user) {
-        title = user.getName();
-        name = user.getViewName();
+    private void openCorrespondingStage(@NotNull ProtoUser protoUser) {
+        title = protoUser.getName();
+        name = protoUser.getViewName();
         System.out.println(getMainController());
         createNewView(this);
     }
 
     /**
-     * @param user {@link User}
+     * @param protoUser {@link ProtoUser}
      */
-    private void applyCredentials(@NotNull User user) {
-        uName.setText(user.getName());
-        pass.setText(user.getPass());
+    private void applyCredentials(@NotNull ProtoUser protoUser) {
+        uName.setText(protoUser.getName());
+        pass.setText(protoUser.getPass());
     }
 
     // --------------------------------------------------//

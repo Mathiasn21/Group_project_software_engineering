@@ -3,7 +3,7 @@ package no.hiof.set.gruppe.tests;
 import no.hiof.set.gruppe.Exceptions.IllegalDataAccess;
 import no.hiof.set.gruppe.data.Repository;
 import no.hiof.set.gruppe.model.Arrangement;
-import no.hiof.set.gruppe.model.user.User;
+import no.hiof.set.gruppe.model.user.ProtoUser;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -27,7 +27,7 @@ class TestingAdminUseCases {
             "2019-10-15",
             "2019-10-16",
             "Dette varer i hele 1 dager. Og, server null formål.");
-    private static final User user = User.ADMIN;
+    private static final ProtoUser PROTO_USER = ProtoUser.ADMIN;
 
     /**
      * @throws IllegalDataAccess IllegalDateAccess {@link IllegalDataAccess}
@@ -35,8 +35,8 @@ class TestingAdminUseCases {
     @Test
     @Order(1)
     void addArrangement() throws IllegalDataAccess {
-        Repository.addArrangement(arrangement, User.ORGANIZER);
-        assertTrue(Repository.getUserArrangements(User.ORGANIZER).contains(arrangement));
+        Repository.addArrangement(arrangement, ProtoUser.ORGANIZER);
+        assertTrue(Repository.getUserArrangements(ProtoUser.ORGANIZER).contains(arrangement));
     }
 
     /**
@@ -45,7 +45,7 @@ class TestingAdminUseCases {
     @Test
     @Order(2)
     void deleteArrangement() throws IllegalDataAccess {
-        Repository.deleteArrangement(arrangement, user);
+        Repository.deleteArrangement(arrangement, PROTO_USER);
         assertFalse(Repository.getArrangementsData().contains(arrangement));
     }
 
@@ -58,7 +58,7 @@ class TestingAdminUseCases {
 
     //Add users
 
-    //Set user as organizer
+    //Set PROTO_USER as organizer
 
-    //Remove user as organizer
+    //Remove PROTO_USER as organizer
 }

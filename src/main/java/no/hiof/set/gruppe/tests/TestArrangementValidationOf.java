@@ -37,7 +37,7 @@ class TestArrangementValidationOf {
      */
     @Test
     void LegalInput() {
-        Arrangement arrangement = new Arrangement("pez","Annet",420,"Hakkebakkeskogen", false, LocalDate.of(2019,10,10).toString(), LocalDate.of(2019,10,11).toString(), "testdwa dawd aw");
+        Arrangement arrangement = new Arrangement("pez","Annet",420,"Hakkebakkeskogen", false, LocalDate.of(2019,12,10).toString(), LocalDate.of(2019,12,11).toString(), "testdwa dawd aw");
         assertTrue(Validation.ofArrangement(arrangement).IS_VALID);
     }
 
@@ -53,6 +53,4 @@ class TestArrangementValidationOf {
         Arrangement arrangement = new Arrangement(str,"Annet",420, str, false, startDate.toString(), endDate.toString(), "test");
         assertFalse(Validation.ofArrangement(arrangement).IS_VALID);
     }
-
-
 }

@@ -2,7 +2,7 @@ package no.hiof.set.gruppe.util;
 
 import no.hiof.set.gruppe.data.Repository;
 import no.hiof.set.gruppe.model.Arrangement;
-import no.hiof.set.gruppe.model.user.User;
+import no.hiof.set.gruppe.model.user.ProtoUser;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -14,20 +14,20 @@ public final class AccessValidate {
 
     /**
      * @param arrangement {@link Arrangement}
-     * @param user {@link User}
+     * @param protoUser {@link ProtoUser}
      * @return boolean
      */
     @Contract(pure = true)
-    public static boolean userCanModifyArrangement(@NotNull Arrangement arrangement, @NotNull User user){
-        return (user == User.ORGANIZER && Repository.getUserArrangements(user).contains(arrangement)) || user == User.ADMIN;
+    public static boolean userCanModifyArrangement(@NotNull Arrangement arrangement, @NotNull ProtoUser protoUser){
+        return (protoUser == ProtoUser.ORGANIZER && Repository.getUserArrangements(protoUser).contains(arrangement)) || protoUser == ProtoUser.ADMIN;
     }
 
     /**
-     * @param user {@link User}
+     * @param protoUser {@link ProtoUser}
      * @return boolean
      */
     @Contract(pure = true)
-    public static boolean userCanCreateArrangement(@NotNull User user){
-        return user == User.ORGANIZER || user == User.ADMIN;
+    public static boolean userCanCreateArrangement(@NotNull ProtoUser protoUser){
+        return protoUser == ProtoUser.ORGANIZER || protoUser == ProtoUser.ADMIN;
     }
 }

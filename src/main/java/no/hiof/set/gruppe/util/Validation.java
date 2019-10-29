@@ -1,11 +1,15 @@
 package no.hiof.set.gruppe.util;
 
+import no.hiof.set.gruppe.Exceptions.DataFormatException;
+import no.hiof.set.gruppe.data.Repository;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.ValidationResult;
+import no.hiof.set.gruppe.model.user.RawUser;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.regex.Pattern;
 
 /**
@@ -44,6 +48,29 @@ public class Validation{
         str.append(isBetween(participantsMin, participantsMax, arrangement.getParticipants()) ? "" : invalidNum);
         return new ValidationResult(str.toString(), str.length() == 0);
     }
+
+    @NotNull
+    @Contract("_ -> new")
+    public static ValidationResult ofNewUser(@NotNull RawUser rawUser){
+        StringBuilder res = new StringBuilder();
+        int maxLengthName = 255;
+
+        String email = rawUser.geteMail();
+        String passHash = rawUser.getPassHash();
+        LocalDate bDate;
+
+        try{bDate = LocalDate.parse(rawUser.getbDate());
+        }catch (DateTimeParseException wrongDateFormat){res.append("ERROR, feil dato format.\n");}
+
+        res.append(rawUser.getfName().length() <= maxLengthName && rawUser.getlName().length() <= maxLengthName ? "" : "Ulovlig langt navn\n");
+        res.append(!Repository.addressExists(rawUser.getStreetAddress()) ? "" : "Addressen er ikke gyldig.\n");
+        res.append(rawUser.getCityCode().length() == 4 ? "" : "Ugyldig by kode.\n");
+        res.append(regCheck(textNotNullPattern, email) && !Repository.emailExists(email) ? "" : "Ugyldig email.\n");
+        res.append(passHash.length() >= 10 && passHash.length() <= 60 ? "" : "Ugyldig passord\n");
+
+        return new ValidationResult(res.toString(), res.length() == 0);
+    }
+
 
     /**
      * @param num String
