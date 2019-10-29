@@ -17,7 +17,7 @@
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Navn" />
             <TextField fx:id="nameInput" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Deltakere" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Maks antall deltakere" />
             <TextField fx:id="participantsInput" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Adresse" />
             <TextField fx:id="adressInput" />
