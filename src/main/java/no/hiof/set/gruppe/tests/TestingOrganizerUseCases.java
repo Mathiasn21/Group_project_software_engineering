@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -28,6 +30,7 @@ class TestingOrganizerUseCases {
             "2019-10-16",
             "Dette varer i hele 1 dager. Og, server null formål.");
     private static final User user = User.ORGANIZER;
+    private static final List<Arrangement> arrangementList = Repository.getUserArrangements(user);
 
 
     /**
@@ -37,7 +40,9 @@ class TestingOrganizerUseCases {
     @Order(1)
     void addArrangement() throws IllegalDataAccess {
         Repository.addArrangement(arrangement, user);
-        assertTrue(Repository.getUserArrangements(user).contains(arrangement));
+        List<Arrangement> newListOfArrangements = Repository.getUserArrangements(user);
+        assertTrue(newListOfArrangements.contains(arrangement));
+        assertTrue(newListOfArrangements.containsAll(arrangementList) && newListOfArrangements.size() == arrangementList.size() + 1);
     }
 
     /**
