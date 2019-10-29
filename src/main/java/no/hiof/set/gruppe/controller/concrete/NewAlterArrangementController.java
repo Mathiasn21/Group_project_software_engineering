@@ -167,6 +167,11 @@ public class NewAlterArrangementController extends Controller {
         return 0;
     }
 
+    private int getGroupCategoryIndex(){
+        if(arrangementToEdit.isGroup())return 0;
+        return 1;
+    }
+    
     private void closeWindow(){
         ((Stage)cancelBtn.getScene().getWindow()).close();
     }
@@ -221,6 +226,7 @@ public class NewAlterArrangementController extends Controller {
             nameInput.setText(arrangement.getName());
             adressInput.setText(arrangement.getAddress());
             sportComboBoxInput.getSelectionModel().select(getSportIndex());
+            groupInput.getSelectionModel().select(getGroupCategoryIndex());
             participantsInput.setText(Integer.toString(arrangement.getParticipants()));
             startDateInput.setValue(arrangement.getStartDate());
             endDateInput.setValue(arrangement.getEndDate());
