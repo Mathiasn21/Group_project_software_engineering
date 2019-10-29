@@ -11,6 +11,8 @@ package no.hiof.set.gruppe.controller.concrete;
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -73,13 +75,12 @@ public class OrganizerController extends Controller {
     // --------------------------------------------------//
     //                4.Event Related Methods            //
     // --------------------------------------------------//
+
     /**
-     * @param actionEvent {@link ActionEvent}
+     * @param event {@link ActionEvent}
      */
-    private void search(ActionEvent actionEvent){
-        filteredList.setPredicate(this::lowerCaseTitleSearch);
-        listview.setItems(filteredList);
-        listview.refresh();
+    private void sort(ActionEvent event){
+        sortAndSearch();
     }
 
     /**
@@ -127,6 +128,10 @@ public class OrganizerController extends Controller {
         ((Stage)logOut.getScene().getWindow()).close();
         System.out.println(getMainController());
         createNewView(this);
+    }
+
+    private void search(){
+        sortAndSearch();
     }
 
     // --------------------------------------------------//
@@ -184,6 +189,16 @@ public class OrganizerController extends Controller {
         SportCategory category = sortOptions.getSelectionModel().getSelectedItem();
         return category.equals(SportCategory.ALL) || arrangement.getSport().equals(category.toString());
     }
+
+    private void sortAndSearch(){
+        filteredList.setPredicate(this::lowerCaseTitleSearch);
+        listview.setItems(filteredList);
+        listview.refresh();
+    }
+
+    private void liveSearchUpdate(){
+        arrSearch.textProperty().addListener(((s) -> search()));
+    }
     
     // --------------------------------------------------//
     //                7.Private Setup Methods            //
@@ -193,8 +208,7 @@ public class OrganizerController extends Controller {
         editBtn.setOnAction(this::onEditClick);
         newArrangementBtn.setOnAction(this::onClick);
         listview.setOnMouseClicked(this::onClickListView);
-        arrSearch.setOnAction(this::search);
-        sortOptions.setOnAction(this::search);
+        sortOptions.setOnAction(this::sort);
         logOut.setOnAction(this::returnToMainWindow);
     }
 
@@ -235,8 +249,9 @@ public class OrganizerController extends Controller {
         setupActionHandlers();
         populateListView();
         populateSportCategories();
+        liveSearchUpdate();
 
-        
+
     }
 
     /**
