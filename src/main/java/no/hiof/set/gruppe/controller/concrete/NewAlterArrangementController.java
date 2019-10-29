@@ -171,7 +171,7 @@ public class NewAlterArrangementController extends Controller {
         if(arrangementToEdit.isGroup())return 0;
         return 1;
     }
-    
+
     private void closeWindow(){
         ((Stage)cancelBtn.getScene().getWindow()).close();
     }

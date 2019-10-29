@@ -235,6 +235,8 @@ public class OrganizerController extends Controller {
         setupActionHandlers();
         populateListView();
         populateSportCategories();
+
+        
     }
 
     /**
