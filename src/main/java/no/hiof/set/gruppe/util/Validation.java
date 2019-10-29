@@ -40,7 +40,7 @@ public class Validation{
         str.append(regCheck(textNotNullPattern, name) && isBetween(minNameL, maxNameL, name.length()) ? "" : "Sett inn et gyldig navn.\n");
         str.append(arrangement.getSport() != null ? "" : "Velg en idrett.\n");
         str.append(regCheck(textNotNullPattern, address) && isBetween(minNameL, maxNameL, address.length()) ? "" : "Sett inn en gydlig adresse.\n");
-        str.append(startDate.isBefore(endDate) || startDate.isEqual(endDate) ? "" : "Sett inn gyldige datoer.\n");
+        str.append(LocalDate.now().isBefore(startDate) && (startDate.isBefore(endDate) || startDate.isEqual(endDate)) ? "" : "Sett inn gyldige datoer.\n");
         str.append(isBetween(participantsMin, participantsMax, arrangement.getParticipants()) ? "" : invalidNum);
         return new ValidationResult(str.toString(), str.length() == 0);
     }
