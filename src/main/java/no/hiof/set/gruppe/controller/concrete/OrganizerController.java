@@ -189,6 +189,16 @@ public class OrganizerController extends Controller {
         SportCategory category = sortOptions.getSelectionModel().getSelectedItem();
         return category.equals(SportCategory.ALL) || arrangement.getSport().equals(category.toString());
     }
+
+    private void sortAndSearch(){
+        filteredList.setPredicate(this::lowerCaseTitleSearch);
+        listview.setItems(filteredList);
+        listview.refresh();
+    }
+
+    private void liveSearchUpdate(){
+        arrSearch.textProperty().addListener(((s) -> search()));
+    }
     
     // --------------------------------------------------//
     //                7.Private Setup Methods            //
@@ -206,16 +216,6 @@ public class OrganizerController extends Controller {
         filteredList = arrangementListObservable.filtered(arrangement -> true);
         listview.setItems(filteredList);
         arrSearch.setText("");
-    }
-
-    private void sortAndSearch(){
-        filteredList.setPredicate(this::lowerCaseTitleSearch);
-        listview.setItems(filteredList);
-        listview.refresh();
-    }
-
-    private void liveSearchUpdate(){
-        arrSearch.textProperty().addListener(((s) -> search()));
     }
 
     private void populateListView() {
