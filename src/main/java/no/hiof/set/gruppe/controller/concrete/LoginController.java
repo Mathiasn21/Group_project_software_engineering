@@ -19,12 +19,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import no.hiof.set.gruppe.Exceptions.DataFormatException;
+import no.hiof.set.gruppe.Exceptions.ErrorExceptionHandler;
+import no.hiof.set.gruppe.Exceptions.InvalidLoginInformation;
 import no.hiof.set.gruppe.controller.abstractions.Controller;
 import no.hiof.set.gruppe.model.ViewInformation;
 import no.hiof.set.gruppe.model.user.User;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -59,9 +62,7 @@ public class LoginController extends Controller {
         Button source = (Button)event.getSource();
 
         if (source.equals(adminLogin)) user = User.ADMIN;
-        else if (source.equals(arrangLogin)) {
-            user = User.ORGANIZER;
-        }
+        else if (source.equals(arrangLogin))user = User.ORGANIZER;
         applyCredentials(user);
     }
 
@@ -71,11 +72,19 @@ public class LoginController extends Controller {
     private void login(ActionEvent event) {
         String userName = uName.getText();
         String password = pass.getText();
-        if(User.isValidUser(userName, password)){
+
+        try{
+            if (!User.isValidUser(userName, password)) throw new InvalidLoginInformation();
+
             User user = User.getUser(userName);
             assert user != null;
             ((Stage)logInn.getScene().getWindow()).close();
             openCorrespondingStage(user);
+
+        }catch (InvalidLoginInformation invalidLogin){
+            try { ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_LOGIN, invalidLogin); }
+            catch (IOException e) {e.printStackTrace();}
+            createAlert(ErrorExceptionHandler.ERROR_LOGIN);
         }
     }
 

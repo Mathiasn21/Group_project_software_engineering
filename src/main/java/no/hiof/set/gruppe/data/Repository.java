@@ -16,6 +16,7 @@ import no.hiof.set.gruppe.Exceptions.ErrorExceptionHandler;
 import no.hiof.set.gruppe.Exceptions.IllegalDataAccess;
 import no.hiof.set.gruppe.Exceptions.InvalidLoginInformation;
 import no.hiof.set.gruppe.model.Arrangement;
+import no.hiof.set.gruppe.model.RegisterUser;
 import no.hiof.set.gruppe.model.user.ILoginInformation;
 import no.hiof.set.gruppe.model.user.User;
 import no.hiof.set.gruppe.model.user.UserConnectedArrangement;
@@ -154,6 +155,14 @@ public class Repository {
         return new ArrayList<>(listOfAllUserConnectedArrangements = listFromJson(UserConnectedArrangement[].class, jsonFromFile));
     }
 
+    /**
+     * Stores all arrangements and their user connection
+     */
+    private static void storeArrangementsData() {
+        writeToFile(toJson(Arrangement[].class, listOfAllArrangements.toArray(Arrangement[]::new)), arrangementFName);
+        storeUserArrangements();
+    }
+
 
     // --------------------------------------------------//
     //                4.Public Mutators                  //
@@ -188,6 +197,10 @@ public class Repository {
         storeArrangementsData();
     }
 
+    @Contract(pure = true)
+    public static boolean addNewUser(RegisterUser userRaw){
+        return false;
+    }
 
     // --------------------------------------------------//
     //                4.Public Data Removal              //
@@ -252,16 +265,8 @@ public class Repository {
         return result;
     }
 
-    /**
-     * Stores all arrangements and their user connection
-     */
-    private static void storeArrangementsData() {
-        writeToFile(toJson(Arrangement[].class, listOfAllArrangements.toArray(Arrangement[]::new)), arrangementFName);
-        storeUserArrangements();
-    }
-
     @NotNull
-    private static User getUserDetails(@NotNull ILoginInformation loginInformation) throws InvalidLoginInformation {
+    public static User getUserDetails(@NotNull ILoginInformation loginInformation) throws InvalidLoginInformation {
         String userID = loginInformation.getUserID();
         String passHash = loginInformation.getPassHash();
 

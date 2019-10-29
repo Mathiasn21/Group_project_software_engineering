@@ -19,7 +19,8 @@ public enum ErrorExceptionHandler {
     ERROR_FATAL(9, "Something really bad has happened. Program terminated."),
     EXCEPTION_STORAGE_ERROR (10, "Exception, something went wrong with storing the data."),
     ERROR_READING_DATA(11, "ERROR, unable to read data from database"),
-    ERROR_ACCESSING_DATA(12, "ERROR user cannot access this data.");
+    ERROR_ACCESSING_DATA(12, "ERROR user cannot access this data."),
+    ERROR_LOGIN(13, "ERROR, invalid user information.");
 
     // --------------------------------------------------//
     //                3.Instance variables               //
