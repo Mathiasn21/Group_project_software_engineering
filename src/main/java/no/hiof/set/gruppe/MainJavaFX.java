@@ -23,18 +23,18 @@ import no.hiof.set.gruppe.controller.abstractions.Controller;
 import no.hiof.set.gruppe.controller.abstractions.IController;
 import no.hiof.set.gruppe.controller.abstractions.IControllerDataTransfer;
 import no.hiof.set.gruppe.controller.abstractions.SetupWindow;
-import no.hiof.set.gruppe.model.ViewInformation;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
 /**
  * MainJavaFX is a class that controls all of the windows in the application.
- * Its primary goal is to controll and mediate between all other controllers.
- *
+ * Its primary goal is to control and mediate between all other controllers.
  * @author Gruppe4
  */
 public class MainJavaFX extends Application implements SetupWindow {
+
+
     // --------------------------------------------------//
     //                2.Local Fields                     //
     // --------------------------------------------------//

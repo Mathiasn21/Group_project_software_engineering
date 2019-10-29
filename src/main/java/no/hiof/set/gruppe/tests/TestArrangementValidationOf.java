@@ -51,4 +51,6 @@ class TestArrangementValidationOf {
         Arrangement arrangement = new Arrangement(str,"Annet",420, str, false, startDate.toString(), endDate.toString(), "test");
         assertFalse(Validation.ofArrangement(arrangement).IS_VALID);
     }
+
+
 }
