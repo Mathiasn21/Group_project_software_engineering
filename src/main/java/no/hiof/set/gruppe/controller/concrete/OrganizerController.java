@@ -34,6 +34,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -134,6 +135,7 @@ public class OrganizerController extends Controller {
     private void changedView(){
         currentArrangement = listview.getSelectionModel().getSelectedItem();
         setInformationAboutArrangementInView();
+        checkArrangementDate();
         listview.refresh();
     }
 
@@ -212,6 +214,13 @@ public class OrganizerController extends Controller {
     private void populateSportCategories() {
         sortOptions.setItems(FXCollections.observableArrayList(SportCategory.values()));
         sortOptions.getSelectionModel().select(SportCategory.ALL);
+    }
+
+    private void checkArrangementDate(){
+        if(currentArrangement.getEndDate().isBefore(LocalDate.now())){
+            editBtn.setDisable(true);
+            deleteBtn.setDisable(true);
+        }
     }
 
     // --------------------------------------------------//
