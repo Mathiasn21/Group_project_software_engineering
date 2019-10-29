@@ -4,6 +4,4 @@ public class TestThirdpartyIntegrations {
     //Test google integrasjon
 
     //Linking to ticketmaster
-
-    
 }
