@@ -215,15 +215,9 @@ public class OrganizerController extends Controller {
     }
 
     private void liveSearchUpdate(){
-        arrSearch.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
-                search();
-            }
-        });
+        arrSearch.textProperty().addListener(((observableValue, s, t1) -> search()));
     }
-
-
+    
     private void populateListView() {
         arrangementListObservable = FXCollections.observableArrayList(Repository.getUserArrangements(User.ORGANIZER));
         arrangementListObservable.sort(ArrangementSort.COMP_DATE_ASC.getComparator());
@@ -256,6 +250,8 @@ public class OrganizerController extends Controller {
         populateListView();
         populateSportCategories();
         liveSearchUpdate();
+
+
     }
 
     /**
