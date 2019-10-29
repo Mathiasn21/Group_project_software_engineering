@@ -26,7 +26,9 @@ class TestArrangementValidationOf {
     @Contract(pure = true)
     private static Stream<Arguments> GenIllegalNameAndDates() {
         return Stream.of(
-                arguments("", LocalDate.of(2019,10,9), LocalDate.of(2019,10,8))
+                arguments("", LocalDate.of(2019,10,9), LocalDate.of(2019,10,8)),
+                arguments("\00", LocalDate.of(2019,10,9), LocalDate.of(2019,10,8)),
+                arguments("ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss", LocalDate.of(2019,10,9), LocalDate.of(2019,10,9))
         );
     }
 
