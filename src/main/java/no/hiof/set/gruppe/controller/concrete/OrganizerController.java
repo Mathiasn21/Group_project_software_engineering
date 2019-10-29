@@ -215,9 +215,9 @@ public class OrganizerController extends Controller {
     }
 
     private void liveSearchUpdate(){
-        arrSearch.textProperty().addListener(((observableValue, s, t1) -> search()));
+        arrSearch.textProperty().addListener(((s) -> search()));
     }
-    
+
     private void populateListView() {
         arrangementListObservable = FXCollections.observableArrayList(Repository.getUserArrangements(User.ORGANIZER));
         arrangementListObservable.sort(ArrangementSort.COMP_DATE_ASC.getComparator());
