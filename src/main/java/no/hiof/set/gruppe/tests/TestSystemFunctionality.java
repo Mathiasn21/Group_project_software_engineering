@@ -79,6 +79,8 @@ class TestSystemFunctionality {
         assertFalse(DateTest.TestOngoing.execute(date2, date4));
     }
 
+
+    //NOT DONE YET, NEEDS MORE WORK
     @Test
     void arrangementListSorting(){
         Arrangement arrangement1 = new Arrangement("a","Annet",101,"BergOgDalBaneVegen 46",false,"2019-10-15","2019-10-16","Formål1");
