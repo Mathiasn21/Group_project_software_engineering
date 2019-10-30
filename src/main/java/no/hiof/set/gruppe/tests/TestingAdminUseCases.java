@@ -27,8 +27,8 @@ class TestingAdminUseCases {
             false,
             "2019-10-15",
             "2019-10-16",
-            "Dette varer i hele 1 dager. Og, server null formål.");
-
+            "Dette varer i hele 1 dager. Og, server null formål."
+    );
 
     /**
      * @throws IllegalDataAccess IllegalDateAccess {@link IllegalDataAccess}

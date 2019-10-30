@@ -1,15 +1,16 @@
 package no.hiof.set.gruppe.tests;
 
 import no.hiof.set.gruppe.model.Arrangement;
+import no.hiof.set.gruppe.util.ArrangementSort;
 import no.hiof.set.gruppe.util.DateTest;
 import no.hiof.set.gruppe.util.Validation;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
-
+import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class TestSystemFunctionality {
@@ -22,12 +23,10 @@ class TestSystemFunctionality {
             "2019-10-15",
             "2019-10-16",
             "Dette varer i hele 1 dager. Og, server null formål.");
-
     //test returning the proper list in order from arrangement.
 
     @Test
     void minimumDataExistsInArrangement(){
-
         String[] arrangementNeededData = {
                 arrangement.getName(),
                 arrangement.getSport(),
@@ -51,6 +50,7 @@ class TestSystemFunctionality {
     void legalNumberFormatFromString(String str){
         assertTrue(Validation.ofNumber(str));
     }
+
 
     //Needs refactoring, maybe
     @Test
@@ -77,5 +77,16 @@ class TestSystemFunctionality {
         assertFalse(DateTest.TestExpired.execute(date1, date1));
         assertFalse(DateTest.TestFuture.execute(date3, date2));
         assertFalse(DateTest.TestOngoing.execute(date2, date4));
+    }
+
+    @Test
+    void arrangementListSorting(){
+        Arrangement arrangement1 = new Arrangement("a","Annet",101,"BergOgDalBaneVegen 46",false,"2019-10-15","2019-10-16","Formål1");
+        Arrangement arrangement2 = new Arrangement("A","Sykkelritt",101,"BergOgDalBaneVegen 46",false,"2019-10-15","2019-10-16","Formål2");
+        Arrangement arrangement3 = new Arrangement("B","Annet",99,"BergOgDalBaneVegen 48",true,"2019-10-16","2019-10-17","Formål3");
+        Arrangement arrangement4 = new Arrangement("c","Skirenn",100,"BergOgDalBaneVegen 49",true,"2019-10-11","2019-10-18","Formål4");
+
+        List<Arrangement> arrangementList = new ArrayList<>(Arrays.asList(arrangement1, arrangement2, arrangement3, arrangement4));
+        arrangementList.sort(ArrangementSort.COMP_NAME_ASC.getComparator());
     }
 }

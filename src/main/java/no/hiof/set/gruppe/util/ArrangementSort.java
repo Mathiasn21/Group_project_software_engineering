@@ -12,29 +12,20 @@ import java.util.Comparator;
  * For more information.
  */
 public enum ArrangementSort {
-    COMP_NAME_ASC("Sorter navn synkende", (ob1, ob2) -> ob1.getName().compareTo(ob2.getName())),
-    COMP_DATE_ASC("Sorter dato synkende", (ob1, ob2) -> ob1.getStartDate().compareTo(ob2.getStartDate())),
-    COMP_PARTICIPANTS_ASC("Sorter navn synkende", (ob1, ob2) -> Integer.compare(ob1.getParticipants(), ob2.getParticipants())),
-    COMP_SPORT_ASC("Sorter navn synkende", (ob1, ob2) -> ob1.getName().compareTo(ob2.getName()));
+    COMP_NAME_ASC((ob1, ob2) -> ob1.getName().compareTo(ob2.getName())),
+    COMP_DATE_ASC((ob1, ob2) -> ob1.getStartDate().compareTo(ob2.getStartDate())),
+    COMP_PARTICIPANTS_ASC((ob1, ob2) -> Integer.compare(ob1.getParticipants(), ob2.getParticipants())),
+    COMP_SPORT_ASC((ob1, ob2) -> ob1.getName().compareTo(ob2.getName()));
 
-    private String definition;
     private Comparator<? super Arrangement> comparator;
 
     /**
-     * @param definition String
      * @param comparator {@link Comparator}
      */
     @Contract(pure = true)
-    ArrangementSort(String definition, Comparator<? super Arrangement> comparator){
-        this.definition = definition;
+    ArrangementSort(Comparator<? super Arrangement> comparator){
         this.comparator = comparator;
     }
-
-    /**
-     * @return String
-     */
-    @Contract(pure = true)
-    public String getDefinition() {return definition;}
 
     /**
      * @return String
