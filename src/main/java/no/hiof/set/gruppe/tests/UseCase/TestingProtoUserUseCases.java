@@ -1,4 +1,4 @@
-package no.hiof.set.gruppe.tests;
+package UseCase;
 
 import no.hiof.set.gruppe.data.Repository;
 import no.hiof.set.gruppe.model.Arrangement;

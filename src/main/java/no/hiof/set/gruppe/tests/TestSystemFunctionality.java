@@ -21,8 +21,10 @@ class TestSystemFunctionality {
             "2019-10-15",
             "2019-10-16",
             "Dette varer i hele 1 dager. Og, server null formål.");
-    //test returning the proper list in order from arrangement.
 
+    /**
+     * Used for testing that data that are used by the application does still exists
+     */
     @Test
     void minimumDataExistsInArrangement(){
         String[] arrangementNeededData = {

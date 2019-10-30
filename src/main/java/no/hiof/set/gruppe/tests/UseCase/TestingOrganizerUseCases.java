@@ -1,4 +1,4 @@
-package no.hiof.set.gruppe.tests;
+package UseCase;
 
 import no.hiof.set.gruppe.Exceptions.IllegalDataAccess;
 import no.hiof.set.gruppe.data.Repository;
@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -17,8 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * the use cases of a organizer.
  */
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class TestingAdminUseCases {
-    private static final ProtoUser PROTO_USER = ProtoUser.ADMIN;
+class TestingOrganizerUseCases {
     private static final Arrangement arrangement = new Arrangement(
             "Bernts Fantastiske Test",
             "Annet",
@@ -27,40 +28,33 @@ class TestingAdminUseCases {
             false,
             "2019-10-15",
             "2019-10-16",
-            "Dette varer i hele 1 dager. Og, server null formål."
-    );
+            "Dette varer i hele 1 dager. Og, server null formål.");
+    private static final ProtoUser PROTO_USER = ProtoUser.ORGANIZER;
+    private static final List<Arrangement> arrangementList = Repository.getUserArrangements(PROTO_USER);
+
 
     /**
-     * @throws IllegalDataAccess IllegalDateAccess {@link IllegalDataAccess}
+     * @throws IllegalDataAccess IllegalDataAccess{@link IllegalDataAccess}
      */
     @Test
     @Order(1)
     void addArrangement() throws IllegalDataAccess {
-        Repository.addArrangement(arrangement, ProtoUser.ORGANIZER);
-        assertTrue(Repository.getUserArrangements(ProtoUser.ORGANIZER).contains(arrangement));
-        //needs a tests to ensure that no excessive information is given and no less as well
+        Repository.addArrangement(arrangement, PROTO_USER);
+        List<Arrangement> newListOfArrangements = Repository.getUserArrangements(PROTO_USER);
+        assertTrue(newListOfArrangements.contains(arrangement));
+        assertTrue(newListOfArrangements.containsAll(arrangementList) && newListOfArrangements.size() == arrangementList.size() + 1);
     }
 
     /**
-     * @throws IllegalDataAccess IllegalDateAccess {@link IllegalDataAccess}
+     * @throws IllegalDataAccess IllegalDataAccess {@link IllegalDataAccess}
      */
     @Test
     @Order(2)
     void deleteArrangement() throws IllegalDataAccess {
-        Repository.deleteArrangement(arrangement, PROTO_USER);
+        Repository.deleteArrangement(arrangement, ProtoUser.ORGANIZER);
         assertFalse(Repository.getArrangementsData().contains(arrangement));
-        //need a test to ensure only this data is deleted
     }
 
-    //Add new sports
-
-    //Remove sports
-
-    //Remove Users
-
-    //Add users
-
-    //Set PROTO_USER as organizer
-
-    //Remove PROTO_USER as organizer
+    //Send out push notifications
+    //test returning arrangements only belonging to this PROTO_USER
 }
