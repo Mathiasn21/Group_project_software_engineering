@@ -90,7 +90,6 @@ public class AdminController extends Controller {
     // --------------------------------------------------//
     //                5.Private Methods                  //
     // --------------------------------------------------//
-
     private void setupActionHandlers(){
         logOut.setOnAction(this::returnToMainWindow);
         edit.setOnAction(this::onEditClick);
