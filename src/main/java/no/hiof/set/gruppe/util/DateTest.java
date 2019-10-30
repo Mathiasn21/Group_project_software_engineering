@@ -13,7 +13,7 @@ import java.time.LocalDate;
 public enum DateTest {
 
     TestExpired((start, end) -> end.isBefore(LocalDate.now())),
-    TestFuture((start, end) -> end.isAfter(LocalDate.now()) && start.isAfter(LocalDate.now())),
+    TestFuture((start, end) -> start.compareTo(LocalDate.now()) >= 0 && end.compareTo(start) >= 0),
     ALL((startDate, endDate) -> true),
 
     TestOngoing((startDate, endDate) -> {
@@ -23,6 +23,7 @@ public enum DateTest {
     private final DatePredicate predicate;
 
     /**
+     * Ensures execution of test.
      * @param predicate {@link DatePredicate}
      */
     @Contract(pure = true)

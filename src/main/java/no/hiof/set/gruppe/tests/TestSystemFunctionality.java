@@ -1,17 +1,18 @@
 package no.hiof.set.gruppe.tests;
 
 import no.hiof.set.gruppe.model.Arrangement;
+import no.hiof.set.gruppe.util.DateTest;
 import no.hiof.set.gruppe.util.Validation;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
-public class TestSystemFunctionality {
+class TestSystemFunctionality {
     private static final Arrangement arrangement = new Arrangement(
             "Bernts Fantastiske Test",
             "Annet",
@@ -23,8 +24,6 @@ public class TestSystemFunctionality {
             "Dette varer i hele 1 dager. Og, server null formål.");
 
     //test returning the proper list in order from arrangement.
-
-    //Test that correct data still exists in the arrangement object.?????
 
     @Test
     void minimumDataExistsInArrangement(){
@@ -38,7 +37,7 @@ public class TestSystemFunctionality {
                 arrangement.getDescription()
         };
         String[] arrangementDataFields = arrangement.getAllDataAsStringArr();
-        assertTrue(Arrays.compare(arrangementNeededData, arrangementDataFields) == 0);
+        assertEquals(0, Arrays.compare(arrangementNeededData, arrangementDataFields));
     }
 
     @ParameterizedTest
@@ -51,5 +50,32 @@ public class TestSystemFunctionality {
     @ValueSource(strings = {"01", "000", "11", "22222222222"})
     void legalNumberFormatFromString(String str){
         assertTrue(Validation.ofNumber(str));
+    }
+
+    //Needs refactoring, maybe
+    @Test
+    void classDateLegal(){
+        LocalDate date1 = LocalDate.of(2019, 10, 15);
+        LocalDate date2 = LocalDate.of(2019, 10, 15);
+        LocalDate date3 = LocalDate.of(2019, 10, 16);
+        LocalDate date4 = LocalDate.now().plusDays(1);
+        LocalDate date5 = LocalDate.now().plusDays(2);
+
+        assertTrue(DateTest.TestExpired.execute(date1, date2));
+        assertTrue(DateTest.TestExpired.execute(date1, date3));
+        assertTrue(DateTest.TestFuture.execute(date4, date5));
+        assertTrue(DateTest.TestOngoing.execute(date1, date4));
+    }
+
+    @Test
+    void classDateIllegal(){
+        LocalDate date1 = LocalDate.now().plusDays(1);
+        LocalDate date2 = LocalDate.of(2019, 10, 15);
+        LocalDate date3 = LocalDate.of(2019, 10, 16);
+        LocalDate date4 = LocalDate.now().minusDays(1);
+
+        assertFalse(DateTest.TestExpired.execute(date1, date1));
+        assertFalse(DateTest.TestFuture.execute(date3, date2));
+        assertFalse(DateTest.TestOngoing.execute(date2, date4));
     }
 }

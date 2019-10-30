@@ -22,7 +22,9 @@ import no.hiof.set.gruppe.Exceptions.DataFormatException;
 import no.hiof.set.gruppe.Exceptions.ErrorExceptionHandler;
 import no.hiof.set.gruppe.Exceptions.InvalidLoginInformation;
 import no.hiof.set.gruppe.controller.abstractions.Controller;
+import no.hiof.set.gruppe.data.Repository;
 import no.hiof.set.gruppe.model.ViewInformation;
+import no.hiof.set.gruppe.model.user.LoginInformation;
 import no.hiof.set.gruppe.model.user.ProtoUser;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -73,11 +75,9 @@ public class LoginController extends Controller {
         String userName = uName.getText();
         String password = pass.getText();
 
-        try{
-            if (!ProtoUser.isValidUser(userName, password)) throw new InvalidLoginInformation();
 
-            ProtoUser protoUser = ProtoUser.getUser(userName);
-            assert protoUser != null;
+        try{
+            ProtoUser protoUser = Repository.getUserDetails(new LoginInformation(userName, password));
             ((Stage)logInn.getScene().getWindow()).close();
             openCorrespondingStage(protoUser);
 

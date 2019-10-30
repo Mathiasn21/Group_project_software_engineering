@@ -39,13 +39,11 @@ class TestAccessValidation {
         assertThrows(InvalidLoginInformation.class, () -> Repository.getUserDetails(loginInformation));
     }
 
-
     @Test
     void userRegister()throws UnableToRegisterUser {
         RawUser rawUser = new RawUser("Bernt", "Åge", "2007-12-03", "1771", "NerdStreet 22", "It_Burns@When_I.PI", "TheInternet22");
         Repository.addNewUser(rawUser);
     }
-
 
     /**
      * Generates illegal {@link LoginInformation}

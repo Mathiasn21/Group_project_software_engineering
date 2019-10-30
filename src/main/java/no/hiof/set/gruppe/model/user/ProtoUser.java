@@ -1,7 +1,6 @@
 package no.hiof.set.gruppe.model.user;
 
 import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -45,17 +44,6 @@ public enum ProtoUser {
      */
     @Contract(pure = true)
     public String getViewName() {return viewName;}
-
-    /**
-     * @param userName String
-     * @param pass String
-     * @return boolean
-     */
-    public static boolean isValidUser(@NotNull String userName,@NotNull String pass) {
-        ProtoUser[] protoUsers = values();
-        for (ProtoUser protoUser : protoUsers) if(protoUser.password.equals(pass) && protoUser.user.equals(userName))return true;
-        return false;
-    }
 
     /**
      * @param userName String
