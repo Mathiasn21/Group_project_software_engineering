@@ -86,6 +86,9 @@ class TestSystemFunctionality {
         Arrangement arrangement3 = new Arrangement("B","Annet",99,"BergOgDalBaneVegen 48",true,"2019-10-16","2019-10-17","Formål3");
         Arrangement arrangement4 = new Arrangement("c","Skirenn",100,"BergOgDalBaneVegen 49",true,"2019-10-11","2019-10-18","Formål4");
 
+        List<Arrangement> alphabeticalASC = new ArrayList<>(Arrays.asList(arrangement2, arrangement1, arrangement3, arrangement4));
+
+
         List<Arrangement> arrangementList = new ArrayList<>(Arrays.asList(arrangement1, arrangement2, arrangement3, arrangement4));
         arrangementList.sort(ArrangementSort.COMP_NAME_ASC.getComparator());
     }
