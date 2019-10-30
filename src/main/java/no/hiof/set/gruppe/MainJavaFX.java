@@ -46,7 +46,7 @@ public class MainJavaFX extends Application implements SetupWindow {
 
 
     // --------------------------------------------------//
-    //                3.Overridden Methods               //
+    //                3.Start Method                     //
     // --------------------------------------------------//
     @Override
     public void start(@NotNull Stage stage) throws IOException {
@@ -67,9 +67,8 @@ public class MainJavaFX extends Application implements SetupWindow {
 
 
     // --------------------------------------------------//
-    //                4.Public Methods                   //
+    //          4.SetupWindow Interface Methods          //
     // --------------------------------------------------//
-
     /**
      * This function is responsible for setting up a new window.
      * This is custom made for controllers that implement the interface: {@link IController}

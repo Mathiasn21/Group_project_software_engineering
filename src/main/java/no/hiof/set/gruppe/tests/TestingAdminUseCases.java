@@ -18,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class TestingAdminUseCases {
+    private static final ProtoUser PROTO_USER = ProtoUser.ADMIN;
     private static final Arrangement arrangement = new Arrangement(
             "Bernts Fantastiske Test",
             "Annet",
@@ -27,7 +28,7 @@ class TestingAdminUseCases {
             "2019-10-15",
             "2019-10-16",
             "Dette varer i hele 1 dager. Og, server null formål.");
-    private static final ProtoUser PROTO_USER = ProtoUser.ADMIN;
+
 
     /**
      * @throws IllegalDataAccess IllegalDateAccess {@link IllegalDataAccess}
@@ -48,7 +49,6 @@ class TestingAdminUseCases {
         Repository.deleteArrangement(arrangement, PROTO_USER);
         assertFalse(Repository.getArrangementsData().contains(arrangement));
     }
-
 
     //Add new sports
 
