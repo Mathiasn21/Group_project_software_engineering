@@ -12,10 +12,10 @@ import java.util.Comparator;
  * For more information.
  */
 public enum ArrangementSort {
-    COMP_NAME_ASC((ob1, ob2) -> ob1.getName().compareTo(ob2.getName())),
+    COMP_NAME_ASC((ob1, ob2) -> ob1.getName().toLowerCase().compareTo(ob2.getName().toLowerCase())),
     COMP_DATE_ASC((ob1, ob2) -> ob1.getStartDate().compareTo(ob2.getStartDate())),
     COMP_PARTICIPANTS_ASC((ob1, ob2) -> Integer.compare(ob1.getParticipants(), ob2.getParticipants())),
-    COMP_SPORT_ASC((ob1, ob2) -> ob1.getName().compareTo(ob2.getName()));
+    COMP_SPORT_ASC((ob1, ob2) -> ob1.getSport().toLowerCase().compareTo(ob2.getSport().toLowerCase()));
 
     private Comparator<? super Arrangement> comparator;
 

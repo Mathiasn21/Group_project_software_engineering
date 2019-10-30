@@ -10,6 +10,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -79,8 +80,6 @@ class TestSystemFunctionality {
         assertFalse(DateTest.TestOngoing.execute(date2, date4));
     }
 
-
-    //NOT DONE YET, NEEDS MORE WORK
     @Test
     void arrangementListSorting(){
         Arrangement arrangement1 = new Arrangement("a","Annet",101,"BergOgDalBaneVegen 46",false,"2019-10-15","2019-10-16","Formål1");
@@ -88,10 +87,23 @@ class TestSystemFunctionality {
         Arrangement arrangement3 = new Arrangement("B","Annet",99,"BergOgDalBaneVegen 48",true,"2019-10-16","2019-10-17","Formål3");
         Arrangement arrangement4 = new Arrangement("c","Skirenn",100,"BergOgDalBaneVegen 49",true,"2019-10-11","2019-10-18","Formål4");
 
-        List<Arrangement> alphabeticalASC = new ArrayList<>(Arrays.asList(arrangement2, arrangement1, arrangement3, arrangement4));
+        Arrangement[] alphabeticalASC = {arrangement1, arrangement2, arrangement3, arrangement4};
+        Arrangement[] sortDatesASC = {arrangement4, arrangement1, arrangement2, arrangement3};
+        Arrangement[] maxParticipantsASC = {arrangement3, arrangement4, arrangement1, arrangement2};
+        Arrangement[] sportASC = {arrangement3, arrangement1, arrangement4, arrangement2};
 
+        Arrangement[] arrangementArr = {arrangement1, arrangement2, arrangement3, arrangement4};
 
-        List<Arrangement> arrangementList = new ArrayList<>(Arrays.asList(arrangement1, arrangement2, arrangement3, arrangement4));
-        arrangementList.sort(ArrangementSort.COMP_NAME_ASC.getComparator());
+        Arrays.sort(arrangementArr, ArrangementSort.COMP_NAME_ASC.getComparator());
+        assertArrayEquals(alphabeticalASC, arrangementArr);
+
+        Arrays.sort(arrangementArr, ArrangementSort.COMP_DATE_ASC.getComparator());
+        assertArrayEquals(sortDatesASC, arrangementArr);
+
+        Arrays.sort(arrangementArr, ArrangementSort.COMP_PARTICIPANTS_ASC.getComparator());
+        assertArrayEquals(maxParticipantsASC, arrangementArr);
+
+        Arrays.sort(arrangementArr, ArrangementSort.COMP_SPORT_ASC.getComparator());
+        assertArrayEquals(sportASC, arrangementArr);
     }
 }
