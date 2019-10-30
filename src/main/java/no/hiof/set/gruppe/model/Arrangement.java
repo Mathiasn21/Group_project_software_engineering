@@ -183,7 +183,7 @@ public class Arrangement implements IGetAllData{
      */
     @Override
     public String[] getAllDataAsStringArr() {
-        return new String[]{name, sport, address, startDate + " til " + endDate, String.valueOf(participants), "something", description};
+        return new String[]{name, sport, address, startDate + " til " + endDate, String.valueOf(participants), description};
     }
 }
 

@@ -38,6 +38,7 @@ class TestingAdminUseCases {
     void addArrangement() throws IllegalDataAccess {
         Repository.addArrangement(arrangement, ProtoUser.ORGANIZER);
         assertTrue(Repository.getUserArrangements(ProtoUser.ORGANIZER).contains(arrangement));
+        //needs a tests to ensure that no excessive information is given and no less as well
     }
 
     /**
@@ -48,6 +49,7 @@ class TestingAdminUseCases {
     void deleteArrangement() throws IllegalDataAccess {
         Repository.deleteArrangement(arrangement, PROTO_USER);
         assertFalse(Repository.getArrangementsData().contains(arrangement));
+        //need a test to ensure only this data is deleted
     }
 
     //Add new sports
