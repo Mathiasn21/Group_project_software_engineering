@@ -11,6 +11,7 @@ package no.hiof.set.gruppe.model;
 //                1.Import Statements                //
 // --------------------------------------------------//
 import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.Nullable;
 
 import java.time.LocalDate;
 import java.util.UUID;
@@ -156,18 +157,18 @@ public class Arrangement implements IGetAllData{
      */
     @Contract(value = "null -> false", pure = true)
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(@Nullable Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Arrangement that = (Arrangement) o;
         return participants == that.participants &&
-                group == that.group &&
-                name.equals(that.name) &&
-                sport.equals(that.sport) &&
-                address.equals(that.address) &&
-                startDate.equals(that.startDate) &&
-                endDate.equals(that.endDate) &&
-                description.equals(that.getDescription());
+                this.group == that.group &&
+                this.name.equals(that.name) &&
+                this.sport.equals(that.sport) &&
+                this.address.equals(that.address) &&
+                this.startDate.equals(that.startDate) &&
+                this.endDate.equals(that.endDate) &&
+                this.description.equals(that.getDescription());
     }
 
     /**
