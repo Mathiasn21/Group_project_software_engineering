@@ -8,10 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class TestSystemFunctionality {
@@ -79,6 +76,7 @@ class TestSystemFunctionality {
         assertFalse(DateTest.TestFuture.execute(date3, date2));
         assertFalse(DateTest.TestOngoing.execute(date2, date4));
     }
+
 
     @Test
     void arrangementListSorting(){
