@@ -97,9 +97,4 @@ public abstract class Controller implements IControllerDataTransfer, Initializab
     private String dateString(@NotNull Arrangement a){
         return a.getStartDate().toString() + " til " + a.getEndDate().toString();
     }
-
-    private boolean test(){
-
-    }
-
 }
