@@ -12,7 +12,6 @@ package no.hiof.set.gruppe.controller.concrete;
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -90,7 +89,7 @@ public class LoginController extends Controller {
 
 
     // --------------------------------------------------//
-    //                5.Private Methods                  //
+    //                5.Functional Methods               //
     // --------------------------------------------------//
     /**
      * @param protoUser {@link ProtoUser}
@@ -113,7 +112,6 @@ public class LoginController extends Controller {
     // --------------------------------------------------//
     //                6.Overridden Methods               //
     // --------------------------------------------------//
-
     /**
      * @param location {@link URL}
      * @param resources {@link ResourceBundle}
