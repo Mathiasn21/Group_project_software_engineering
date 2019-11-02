@@ -61,7 +61,7 @@ public class OrganizerController extends Controller {
     //                3.FXML Fields                      //
     // --------------------------------------------------//
     @FXML
-    private Button newArrangementBtn, editBtn, deleteBtn, logOut;
+    private Button newArrangementBtn, editBtn, deleteBtn;
     @FXML
     private Text arrangementName, arrangementAdress, arrangementDate, arrangementParticipants, arrangementGorI, arrangementSport, arrangementDescription;
     @FXML
@@ -70,6 +70,8 @@ public class OrganizerController extends Controller {
     private ChoiceBox<SportCategory> sortOptions;
     @FXML
     private ListView<Arrangement>listview;
+    @FXML
+    private MenuItem logOut;
 
 
     // --------------------------------------------------//
@@ -125,7 +127,7 @@ public class OrganizerController extends Controller {
     private void returnToMainWindow(ActionEvent event) {
         title = "Logg inn";
         name = "Login.fxml";
-        ((Stage)logOut.getScene().getWindow()).close();
+        ((Stage)deleteBtn.getScene().getWindow()).close();
         System.out.println(getMainController());
         createNewView(this);
     }

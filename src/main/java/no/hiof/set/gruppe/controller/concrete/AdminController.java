@@ -19,6 +19,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
@@ -55,14 +56,15 @@ public class AdminController extends Controller {
     // --------------------------------------------------//
 
      @FXML
-     private Button logOut, edit, delete;
+     private Button edit, delete;
      @FXML
      private ListView<Arrangement> arrangementListView;
      @FXML
      private TextField search;
      @FXML
      private Text arrangementSport, arrangementName, arrangementAdress, arrangementDate, arrangementGorI, arrangementParticipants, arrangementDescription;
-
+     @FXML
+     private MenuItem logOut;
 
     // --------------------------------------------------//
     //                4.On action Methods                //
@@ -100,7 +102,7 @@ public class AdminController extends Controller {
     private void returnToMainWindow(ActionEvent event) {
         title = "Logg inn";
         name = "Login.fxml";
-        ((Stage)logOut.getScene().getWindow()).close();
+        ((Stage)delete.getScene().getWindow()).close();
         createNewView(this);
     }
 

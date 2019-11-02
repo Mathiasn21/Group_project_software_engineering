@@ -57,12 +57,13 @@ public class UserController extends Controller {
     @FXML
     private RadioButton radioExp, radioOng, radioFut, radioAll;
     @FXML
-    private Button joinBtn, leaveBtn, logOut;
+    private Button joinBtn, leaveBtn;
     @FXML
     private TextField searchAv, searchMy;
     @FXML
     private ComboBox<SportCategory> availableSortingOptionsMy, sortingOptions;
-
+    @FXML
+    private MenuItem logOut;
     // --------------------------------------------------//
     //                4.Event Related Methods            //
     // --------------------------------------------------//
@@ -126,7 +127,7 @@ public class UserController extends Controller {
     private void returnToMainWindow(ActionEvent event) {
         title = "Logg inn";
         name = "Login.fxml";
-        ((Stage)logOut.getScene().getWindow()).close();
+        ((Stage)joinBtn.getScene().getWindow()).close();
         createNewView(this);
     }
 
