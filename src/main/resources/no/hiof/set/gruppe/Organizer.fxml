@@ -19,7 +19,7 @@
             <Font size="25.0" />
          </font>
       </Text>
-      <ListView fx:id="listview" layoutX="6.0" layoutY="89.0" prefHeight="505.0" prefWidth="341.0">
+      <ListView fx:id="listview" layoutX="6.0" layoutY="96.0" prefHeight="505.0" prefWidth="341.0">
          <opaqueInsets>
             <Insets top="5.0" />
          </opaqueInsets>

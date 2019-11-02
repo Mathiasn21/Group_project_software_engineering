@@ -250,8 +250,6 @@ public class OrganizerController extends Controller {
         populateListView();
         populateSportCategories();
         liveSearchUpdate();
-
-
     }
 
     /**

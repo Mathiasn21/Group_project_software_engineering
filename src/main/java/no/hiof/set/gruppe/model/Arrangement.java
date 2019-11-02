@@ -96,7 +96,8 @@ public class Arrangement implements IGetAllData{
     public boolean isGroup() {
         return group;
     }
-
+    public String getGroup(){return group ? "Lagkonkurranse" : "Individuell konkurranse";}
+    public String getDateIntervall() {return startDate + " til " + endDate;}
     // --------------------------------------------------//
     //                4.Setters                          //
     // --------------------------------------------------//
@@ -186,6 +187,7 @@ public class Arrangement implements IGetAllData{
     public String[] getAllDataAsStringArr() {
         return new String[]{name, sport, address, startDate + " til " + endDate, String.valueOf(participants), description};
     }
+
 }
 
 
