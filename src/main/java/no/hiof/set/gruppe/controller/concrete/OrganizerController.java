@@ -107,8 +107,6 @@ public class OrganizerController extends Controller {
             title = "Rediger";
             createNewView(this, currentArrangement);
         }
-        else
-            System.out.println("Du har ikke valgt et arrangement");
     }
 
     /**
@@ -126,7 +124,6 @@ public class OrganizerController extends Controller {
         title = "Logg inn";
         name = "Login.fxml";
         ((Stage)logOut.getScene().getWindow()).close();
-        System.out.println(getMainController());
         createNewView(this);
     }
 
@@ -162,6 +159,7 @@ public class OrganizerController extends Controller {
         catch (IllegalDataAccess illegalDataAccess) {
             try {ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_ACCESSING_DATA, illegalDataAccess); }
             catch (IOException e) {e.printStackTrace();}
+            Controller.createAlert(ErrorExceptionHandler.ERROR_ACCESSING_DATA);
         }
     }
 
@@ -279,6 +277,7 @@ public class OrganizerController extends Controller {
         } catch (IllegalDataAccess illegalDataAccess) {
             try {ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_ACCESSING_DATA, illegalDataAccess);}
             catch (IOException e) {e.printStackTrace();}
+            Controller.createAlert(ErrorExceptionHandler.ERROR_ACCESSING_DATA);
         }
         if(selModel.getSelectedItem() == null) selModel.selectLast();
         listview.refresh();

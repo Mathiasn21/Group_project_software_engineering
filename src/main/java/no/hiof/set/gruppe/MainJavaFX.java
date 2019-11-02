@@ -91,7 +91,6 @@ public class MainJavaFX extends Application implements SetupWindow {
         //setting next controller
         controller = loader.getController();
         controller.setMainController(this);
-        System.out.println(this);
 
         stage.show();
     }
@@ -137,7 +136,6 @@ public class MainJavaFX extends Application implements SetupWindow {
             stage.setTitle(controller.getViewInformation().viewTitle);
             stage.setResizable(false);
             controller.setMainController(this);
-            System.out.println(this);
 
             stage.show();
             errorOccured = false;
