@@ -40,12 +40,12 @@ public class Group implements IGetAllData {
         this.id = id;
     }
 
-    public ArrayList<DummyUsers> getMedlemmer() {
+    public ArrayList<DummyUsers> getMembersr() {
         return members;
     }
 
-    public void setMedlemmer(ArrayList<DummyUsers> medlemmer) {
-        this.members = medlemmer;
+    public void setMembers(ArrayList<DummyUsers> member) {
+        this.members = member;
     }
 
     @Override
