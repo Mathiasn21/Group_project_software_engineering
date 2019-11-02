@@ -35,5 +35,5 @@ public class MainJavaFXTest {
         stage.show();
     }
 
-    public void setStartView(String name){startView = name;}
+    void setStartView(String name){startView = name;}
 }
