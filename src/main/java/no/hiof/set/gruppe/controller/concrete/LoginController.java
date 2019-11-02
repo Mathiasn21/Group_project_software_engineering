@@ -89,7 +89,7 @@ public class LoginController extends Controller {
 
 
     // --------------------------------------------------//
-    //                5.Functional Methods               //
+    //                5.Private Methods                  //
     // --------------------------------------------------//
     /**
      * @param protoUser {@link ProtoUser}

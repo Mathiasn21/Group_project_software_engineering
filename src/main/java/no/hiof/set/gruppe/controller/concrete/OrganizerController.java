@@ -6,13 +6,14 @@ package no.hiof.set.gruppe.controller.concrete;
  * 3. FXML Fields
  * 4. On Action Methods
  * 5. Private Methods
- * 6. Overridden Methods
+ * 6. Private Search Methods
+ * 7. Private Setup Methods
+ * 8. Overridden Methods
  * */
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -74,7 +75,7 @@ public class OrganizerController extends Controller {
     private MenuItem logOut;
 
     // --------------------------------------------------//
-    //                4.Event Related Methods            //
+    //                4.On Action Methods                //
     // --------------------------------------------------//
 
     /**
@@ -136,7 +137,7 @@ public class OrganizerController extends Controller {
     }
 
     // --------------------------------------------------//
-    //                5.Private Functional Methods       //
+    //                5.Private Methods                  //
     // --------------------------------------------------//
     private void changedView(){
         currentArrangement = listview.getSelectionModel().getSelectedItem();

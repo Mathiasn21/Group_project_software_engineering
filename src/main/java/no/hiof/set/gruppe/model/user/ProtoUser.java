@@ -1,5 +1,15 @@
 package no.hiof.set.gruppe.model.user;
 
+/*Guide
+ * 1. Import Statements
+ * 2. Constants
+ * 3. Contracts
+ * 4. Public getter methods
+ * */
+
+// --------------------------------------------------//
+//                1.Import Statements                //
+// --------------------------------------------------//
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
 
@@ -7,6 +17,9 @@ import org.jetbrains.annotations.Nullable;
  * An enum representing legal users. Just a dummy class
  */
 public enum ProtoUser {
+    // --------------------------------------------------//
+    //                2.Constants                        //
+    // --------------------------------------------------//
     ADMIN("Admin", "Password1", "Admin.fxml"),
     USER("ProtoUser", "Password2", "User2.fxml"),
     ORGANIZER("Organizer", "Password3", "Organizer.fxml");
@@ -15,6 +28,10 @@ public enum ProtoUser {
     String password;
     String viewName;
 
+
+    // --------------------------------------------------//
+    //                3.Contracts                        //
+    // --------------------------------------------------//
     /**
      * @param user String
      * @param password String
@@ -49,6 +66,10 @@ public enum ProtoUser {
      * @param userName String
      * @return {@link ProtoUser}
      */
+
+    // --------------------------------------------------//
+    //                4.Public getter methods            //
+    // --------------------------------------------------//
     @Nullable
     public static ProtoUser getUser(String userName){
         for(ProtoUser u: values()) if(u.user.equals(userName))return u;

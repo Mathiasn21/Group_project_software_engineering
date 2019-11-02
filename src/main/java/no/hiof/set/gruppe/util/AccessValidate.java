@@ -1,5 +1,13 @@
 package no.hiof.set.gruppe.util;
 
+/*Guide
+ * 1. Import Statements
+ * 2. Contracts
+ * */
+
+// --------------------------------------------------//
+//                1.Import Statements                //
+// --------------------------------------------------//
 import no.hiof.set.gruppe.data.Repository;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.user.ProtoUser;
@@ -12,6 +20,9 @@ import org.jetbrains.annotations.NotNull;
  */
 public final class AccessValidate {
 
+    // --------------------------------------------------//
+    //                2.Contracts                        //
+    // --------------------------------------------------//
     /**
      * @param arrangement {@link Arrangement}
      * @param protoUser {@link ProtoUser}

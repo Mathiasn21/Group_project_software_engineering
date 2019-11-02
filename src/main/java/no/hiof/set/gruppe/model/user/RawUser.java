@@ -1,8 +1,22 @@
 package no.hiof.set.gruppe.model.user;
 
+/*Guide
+ * 1. Import Statements
+ * 2. Local Fields
+ * 3. Contracts
+ * 4. Public Getter Methods
+ * */
+
+// --------------------------------------------------//
+//                1.Import Statements                //
+// --------------------------------------------------//
 import org.jetbrains.annotations.Contract;
 
 public class RawUser {
+
+    // --------------------------------------------------//
+    //                2.Local Fields                     //
+    // --------------------------------------------------//
     private final String fName;
     private final String lName;
     private final String bDate;
@@ -11,6 +25,9 @@ public class RawUser {
     private final String eMail;
     private final String passHash;
 
+    // --------------------------------------------------//
+    //                3.Contracts                        //
+    // --------------------------------------------------//
     @Contract(pure = true)
     public RawUser(String fName, String lName, String bDate, String cityCode, String streetAddress, String eMail, String pass) {
         this.fName = fName;
@@ -22,6 +39,9 @@ public class RawUser {
         this.passHash = pass;
     }
 
+    // --------------------------------------------------//
+    //                4.Public Getter Methods            //
+    // --------------------------------------------------//
     public String getfName() {return fName;}
     public String getlName() {return lName;}
     public String getbDate() {return bDate;}

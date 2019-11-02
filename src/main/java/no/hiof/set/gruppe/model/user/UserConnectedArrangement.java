@@ -1,5 +1,15 @@
 package no.hiof.set.gruppe.model.user;
 
+/*Guide
+ * 1. Import Statements
+ * 2. Local Fields
+ * 3. Contracts
+ * 4. Public Getter Methods
+ * */
+
+// --------------------------------------------------//
+//                1.Import Statements                //
+// --------------------------------------------------//
 import org.jetbrains.annotations.Contract;
 
 /**
@@ -7,6 +17,9 @@ import org.jetbrains.annotations.Contract;
  * a user and a arrangement.
  */
 public class UserConnectedArrangement {
+    // --------------------------------------------------//
+    //                2.Local Fields                     //
+    // --------------------------------------------------//
     private final String ID;
     private final String USERNAME;
 
@@ -14,21 +27,15 @@ public class UserConnectedArrangement {
      * @param id String
      * @param userName String
      */
+
+    // --------------------------------------------------//
+    //                3.Contracts                        //
+    // --------------------------------------------------//
     @Contract(pure = true)
     public UserConnectedArrangement(String id, String userName) {
         ID = id;
         this.USERNAME = userName;
     }
-
-    /**
-     * @return String
-     */
-    public String getID() { return ID; }
-
-    /**
-     * @return String
-     */
-    public String getUSERNAME() { return USERNAME; }
 
     /**
      * @param o Object
@@ -42,4 +49,17 @@ public class UserConnectedArrangement {
         UserConnectedArrangement that = (UserConnectedArrangement) o;
         return USERNAME.equals(that.USERNAME) && ID.equals(that.ID);
     }
+
+    // --------------------------------------------------//
+    //                4.Public Getter Methods            //
+    // --------------------------------------------------//
+    /**
+     * @return String
+     */
+    public String getID() { return ID; }
+
+    /**
+     * @return String
+     */
+    public String getUSERNAME() { return USERNAME; }
 }

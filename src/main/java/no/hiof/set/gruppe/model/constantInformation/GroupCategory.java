@@ -1,5 +1,14 @@
 package no.hiof.set.gruppe.model.constantInformation;
 
+/*Guide
+ * 1. Import Statements
+ * 2. Constants
+ * 3. Contracts
+ * */
+
+// --------------------------------------------------//
+//                1.Import Statements                //
+// --------------------------------------------------//
 import org.jetbrains.annotations.Contract;
 
 /**
@@ -7,13 +16,19 @@ import org.jetbrains.annotations.Contract;
  * Is this meant for groups?
  */
 public enum GroupCategory {
-
+    // --------------------------------------------------//
+    //                2.Constants                        //
+    // --------------------------------------------------//
     TRUE(true, "Lagkonkurranse"),
     FALSE(false, "Individuell konkurranse");
 
     public final boolean isGroup;
     public final String str;
 
+
+    // --------------------------------------------------//
+    //                3.Contracts                        //
+    // --------------------------------------------------//
     /**
      * @param bool boolean
      * @param str String

@@ -1,5 +1,14 @@
 package no.hiof.set.gruppe.tests;
 
+/*Guide
+ * 1. Import Statements
+ * 2. Single Tests
+ * 3. Multiple Tests
+ * */
+
+// --------------------------------------------------//
+//                1.Import Statements                //
+// --------------------------------------------------//
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.util.ArrangementSort;
 import no.hiof.set.gruppe.util.DateTest;
@@ -12,6 +21,9 @@ import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.*;
 
 class TestSystemFunctionality {
+    // --------------------------------------------------//
+    //                1.Import Statements                //
+    // --------------------------------------------------//
     private static final Arrangement arrangement = new Arrangement(
             "Bernts Fantastiske Test",
             "Annet",
@@ -25,6 +37,10 @@ class TestSystemFunctionality {
     /**
      * Used for testing that data that are used by the application does still exists
      */
+
+    // --------------------------------------------------//
+    //                2.Single Tests                     //
+    // --------------------------------------------------//
     @Test
     void minimumDataExistsInArrangement(){
         String[] arrangementNeededData = {
@@ -38,19 +54,6 @@ class TestSystemFunctionality {
         String[] arrangementDataFields = arrangement.getAllDataAsStringArr();
         assertEquals(0, Arrays.compare(arrangementNeededData, arrangementDataFields));
     }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"1\00", "\00 1", "1s", "s1", "ss'¨¨¨^", "^^^''''"})
-    void illegalNumberFormatFromString(String str){
-        assertFalse(Validation.ofNumber(str));
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"01", "000", "11", "22222222222"})
-    void legalNumberFormatFromString(String str){
-        assertTrue(Validation.ofNumber(str));
-    }
-
 
     //Needs refactoring, maybe
     @Test
@@ -79,7 +82,6 @@ class TestSystemFunctionality {
         assertFalse(DateTest.TestOngoing.execute(date2, date4));
     }
 
-
     @Test
     void arrangementListSorting(){
         Arrangement arrangement1 = new Arrangement("a","Annet",101,"BergOgDalBaneVegen 46",false,"2019-10-15","2019-10-16","Formål1");
@@ -106,4 +108,21 @@ class TestSystemFunctionality {
         Arrays.sort(arrangementArr, ArrangementSort.COMP_SPORT_ASC.getComparator());
         assertArrayEquals(sportASC, arrangementArr);
     }
+
+    // --------------------------------------------------//
+    //                2.Multiple Tests                   //
+    // --------------------------------------------------//
+
+    @ParameterizedTest
+    @ValueSource(strings = {"1\00", "\00 1", "1s", "s1", "ss'¨¨¨^", "^^^''''"})
+    void illegalNumberFormatFromString(String str){
+        assertFalse(Validation.ofNumber(str));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"01", "000", "11", "22222222222"})
+    void legalNumberFormatFromString(String str){
+        assertTrue(Validation.ofNumber(str));
+    }
+
 }

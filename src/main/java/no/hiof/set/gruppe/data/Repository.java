@@ -3,7 +3,9 @@ package no.hiof.set.gruppe.data;
  * 1. Import Statements
  * 2. Local Fields
  * 3. Private Static Methods
- * 4. Public Methods
+ * 4. Public Mutators
+ * 5. Public Data Removal
+ * 6. Public Getters
  * */
 
 
@@ -208,7 +210,7 @@ public class Repository {
     }
 
     // --------------------------------------------------//
-    //                4.Public Data Removal              //
+    //                5.Public Data Removal              //
     // --------------------------------------------------//
     /**
      * @param arrangement {@link Arrangement}
@@ -240,7 +242,7 @@ public class Repository {
 
 
     // --------------------------------------------------//
-    //                4.Public Getters                   //
+    //                6.Public Getters                   //
     // --------------------------------------------------//
     /**
      * @return {@link List}

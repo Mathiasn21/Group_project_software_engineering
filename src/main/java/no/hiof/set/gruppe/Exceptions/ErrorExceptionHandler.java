@@ -1,5 +1,17 @@
 package no.hiof.set.gruppe.Exceptions;
 
+/*Guide
+ * 1. Import Statements
+ * 2. Constants
+ * 3. Instance variables
+ * 4. Constructs
+ * 5. Public Methods
+ * */
+
+
+// --------------------------------------------------//
+//                1.Import Statements                //
+// --------------------------------------------------//
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -45,7 +57,7 @@ public enum ErrorExceptionHandler {
 
 
     // --------------------------------------------------//
-    //                6.Public methods                   //
+    //                5.Public methods                   //
     // --------------------------------------------------//
     /**
      * Tries to create a log given error. Failing to do so

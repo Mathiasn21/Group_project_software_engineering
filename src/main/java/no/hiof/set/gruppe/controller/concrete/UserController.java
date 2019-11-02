@@ -5,8 +5,10 @@ package no.hiof.set.gruppe.controller.concrete;
  * 2. Local Fields
  * 3. FXML Fields
  * 4. On Action Methods
- * 5. Private Methods
- * 6. Overridden Methods
+ * 5. Private Functional Methods
+ * 6. Private Search Methods
+ * 7. Private Setup Methods
+ * 8. Overridden Methods
  * */
 
 // --------------------------------------------------//
@@ -66,7 +68,7 @@ public class UserController extends Controller {
     @FXML
     private MenuItem logOut, newGroup;
     // --------------------------------------------------//
-    //                4.Event Related Methods            //
+    //                4.On Action Methods                //
     // --------------------------------------------------//
 
     /**
@@ -295,7 +297,7 @@ public class UserController extends Controller {
     }
 
     // --------------------------------------------------//
-    //                6.Overridden Methods               //
+    //                8.Overridden Methods               //
     // --------------------------------------------------//
     /**
      * @param location {@link URL}

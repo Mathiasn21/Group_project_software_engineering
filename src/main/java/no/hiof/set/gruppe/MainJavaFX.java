@@ -3,9 +3,8 @@ package no.hiof.set.gruppe;
 /*Guide Controllers
  * 1. Import Statements
  * 2. Local Fields
- * 3. Overridden Methods
- * 4. Public Methods
- * 5. Static Methods
+ * 3. Start Method
+ * 4. SetupWindow Interface Methods
  * */
 
 // --------------------------------------------------//

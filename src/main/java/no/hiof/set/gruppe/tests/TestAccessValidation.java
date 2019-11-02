@@ -1,5 +1,15 @@
 package no.hiof.set.gruppe.tests;
 
+/*Guide
+ * 1. Import Statements
+ * 2. Single Tests
+ * 3. Multiple Tests
+ * 4. Contracts
+ * */
+
+// --------------------------------------------------//
+//                1.Import Statements                //
+// --------------------------------------------------//
 import no.hiof.set.gruppe.Exceptions.InvalidLoginInformation;
 import no.hiof.set.gruppe.Exceptions.UnableToRegisterUser;
 import no.hiof.set.gruppe.data.Repository;
@@ -26,17 +36,14 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
  */
 class TestAccessValidation {
 
+    // --------------------------------------------------//
+    //                2.Single Tests                     //
+    // --------------------------------------------------//
     @Test
     void userloginSuccess() throws InvalidLoginInformation {
         ILoginInformation loginInformation = new LoginInformation("ProtoUser", "Password2");
         ProtoUser protoUserDetails = Repository.getUserDetails(loginInformation);
         assertTrue(userEqualsLoginInformation(protoUserDetails, loginInformation));
-    }
-
-    @ParameterizedTest
-    @MethodSource("GenIllegalLoginInformation")
-    void userloginFailed(ILoginInformation loginInformation){
-        assertThrows(InvalidLoginInformation.class, () -> Repository.getUserDetails(loginInformation));
     }
 
     @Test
@@ -45,6 +52,18 @@ class TestAccessValidation {
         Repository.addNewUser(rawUser);
     }
 
+    // --------------------------------------------------//
+    //                3.Multiple Tests                   //
+    // --------------------------------------------------//
+    @ParameterizedTest
+    @MethodSource("GenIllegalLoginInformation")
+    void userloginFailed(ILoginInformation loginInformation){
+        assertThrows(InvalidLoginInformation.class, () -> Repository.getUserDetails(loginInformation));
+    }
+
+    // --------------------------------------------------//
+    //                4.Contracts                        //
+    // --------------------------------------------------//
     /**
      * Generates illegal {@link LoginInformation}
      * @return {@link Stream}

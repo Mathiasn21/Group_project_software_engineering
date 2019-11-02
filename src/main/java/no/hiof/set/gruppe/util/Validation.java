@@ -1,5 +1,15 @@
 package no.hiof.set.gruppe.util;
 
+/*Guide
+ * 1. Import Statements
+ * 2. Constants
+ * 3. Contracts
+ * 4. Public Static Methods
+ * */
+
+// --------------------------------------------------//
+//                1.Import Statements                //
+// --------------------------------------------------//
 import no.hiof.set.gruppe.Exceptions.DataFormatException;
 import no.hiof.set.gruppe.data.Repository;
 import no.hiof.set.gruppe.model.Arrangement;
@@ -17,12 +27,19 @@ import java.util.regex.Pattern;
  * @author Gruppe4
  */
 public class Validation{
+
+    // --------------------------------------------------//
+    //                2.Local Fields                     //
+    // --------------------------------------------------//
     private static final String textNotNullPattern = "(?!^ +$)^.+$";
     private static final String numPatt = "[0-9]+";
 
     private static final int maxNameL = 50;
     private static final int minNameL = 2;
 
+    // --------------------------------------------------//
+    //                3.Contracts                        //
+    // --------------------------------------------------//
     /**
      * Validates an arrangement
      * @param arrangement {@link Arrangement}
@@ -71,7 +88,9 @@ public class Validation{
         return new ValidationResult(res.toString(), res.length() == 0);
     }
 
-
+    // --------------------------------------------------//
+    //                4.Public Static Methods            //
+    // --------------------------------------------------//
     /**
      * @param num String
      * @return boolean

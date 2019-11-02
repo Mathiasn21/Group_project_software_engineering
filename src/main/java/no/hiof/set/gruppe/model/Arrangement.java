@@ -1,10 +1,12 @@
 package no.hiof.set.gruppe.model;
 /*Guide
  * 1. Import Statements
- * 2. Constructors
- * 3. Getters
- * 4. Setters
- * 5. Overridden Methods
+ * 2. Local Fields
+ * 3. Constructors
+ * 4. Public Getter Methods
+ * 5. Public Setter Methods
+ * 6. Overridden Methods
+ * 7. Overridden Contracts
  * */
 
 // --------------------------------------------------//
@@ -32,7 +34,7 @@ public class Arrangement implements IGetAllData{
     private boolean group;
 
     // --------------------------------------------------//
-    //                2.Constructors                     //
+    //                3.Constructors                     //
     // --------------------------------------------------//
     public Arrangement(){
         this("", "", 0, "", false);
@@ -72,7 +74,7 @@ public class Arrangement implements IGetAllData{
     }
 
     // --------------------------------------------------//
-    //                3.Getters                          //
+    //                4.Public Getter Methods            //
     // --------------------------------------------------//
     public String getName() {
         return name;
@@ -98,7 +100,7 @@ public class Arrangement implements IGetAllData{
     }
 
     // --------------------------------------------------//
-    //                4.Setters                          //
+    //                5.Public Setter Methods            //
     // --------------------------------------------------//
     /**
      * @param name String
@@ -149,7 +151,26 @@ public class Arrangement implements IGetAllData{
     public void setDescription(String description) {this.description = description;}
 
     // --------------------------------------------------//
-    //                5.Overridden Methods               //
+    //                6.Overridden Methods               //
+    // --------------------------------------------------//
+    /**
+     * @return String
+     */
+    @Override
+    public String toString(){
+        return name + ", " + sport + ", " + startDate + " til " + endDate;
+    }
+
+    /**
+     * @return String[]
+     */
+    @Override
+    public String[] getAllDataAsStringArr() {
+        return new String[]{name, sport, address, startDate + " til " + endDate, String.valueOf(participants), description};
+    }
+
+    // --------------------------------------------------//
+    //                7.Overridden Contracts            //
     // --------------------------------------------------//
     /**
      * @param o {@link Object}
@@ -169,22 +190,6 @@ public class Arrangement implements IGetAllData{
                 this.startDate.equals(that.startDate) &&
                 this.endDate.equals(that.endDate) &&
                 this.description.equals(that.getDescription());
-    }
-
-    /**
-     * @return String
-     */
-    @Override
-    public String toString(){
-        return name + ", " + sport + ", " + startDate + " til " + endDate;
-    }
-
-    /**
-     * @return String[]
-     */
-    @Override
-    public String[] getAllDataAsStringArr() {
-        return new String[]{name, sport, address, startDate + " til " + endDate, String.valueOf(participants), description};
     }
 }
 
