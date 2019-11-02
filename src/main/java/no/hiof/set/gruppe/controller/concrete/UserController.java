@@ -40,7 +40,7 @@ public class UserController extends Controller {
     //                2.Local Fields                     //
     // --------------------------------------------------//
     private String title = "";
-    private String name = "GroupLeader.fxml";
+    private String name = "NewAlterGroup.fxml";
     private ObservableList<Arrangement> myObservableArrangements, availableObservableArrangements;
     private FilteredList<Arrangement> availableFiltered, myFiltered;
     private Arrangement currentAvailableArrangement = null;
@@ -134,6 +134,7 @@ public class UserController extends Controller {
 
     private void onClickNewGroup(ActionEvent event){
         title = "Ny gruppe";
+        name = "NewAlterGroup.fxml";
         createNewView(this);
     }
 
