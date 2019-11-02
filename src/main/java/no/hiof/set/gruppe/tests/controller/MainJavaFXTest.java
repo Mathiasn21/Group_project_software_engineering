@@ -36,4 +36,6 @@ public class MainJavaFXTest {
     }
 
     void setStartView(String name){startView = name;}
+
+    //Helper method - Get all fields
 }

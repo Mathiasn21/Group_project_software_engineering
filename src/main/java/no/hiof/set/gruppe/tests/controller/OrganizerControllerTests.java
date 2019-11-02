@@ -48,17 +48,11 @@ public class OrganizerControllerTests extends MainJavaFXTest{
 
         assertEquals(listView.getSelectionModel().getSelectedItem(), arrangement);
         robot.clickOn("#deleteBtn");
-
-        /*
-        double height = listView.getHeight();
-        double width = listView.getWidth();
-        double presumedCellSize = listView.getFixedCellSize();
-        Node node = listView.getChildrenUnmodifiable().get(0);
-        Bounds bounds = node.localToScreen(node.getBoundsInLocal());
-
-        robot.clickOn(bounds.getCenterX(), bounds.getCenterY() + height/(listView.getFixedCellSize()/2)/4 + 10);
-        */
     }
+
+    //Test that alterAdd functionality works
+
+    //test sorting works
 
 
     private void assertFieldsCorrespondToNewArrangement(@NotNull FxRobot robot, @NotNull Arrangement arrangement) {
@@ -70,6 +64,7 @@ public class OrganizerControllerTests extends MainJavaFXTest{
         Assertions.assertThat(robot.lookup("#arrangementParticipants").queryAs(Text.class)).hasText(String.valueOf(arrangement.getParticipants()));
         Assertions.assertThat(robot.lookup("#arrangementDescription").queryAs(Text.class)).hasText(arrangement.getDescription());
     }
+
     private void fillOutForm(@NotNull FxRobot robot, @NotNull Arrangement arrangement) {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
