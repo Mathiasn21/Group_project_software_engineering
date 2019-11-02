@@ -12,15 +12,20 @@ package no.hiof.set.gruppe.controller.concrete;
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import no.hiof.set.gruppe.Exceptions.DataFormatException;
 import no.hiof.set.gruppe.controller.abstractions.Controller;
+import no.hiof.set.gruppe.data.Repository;
 import no.hiof.set.gruppe.model.ViewInformation;
+import no.hiof.set.gruppe.model.constantInformation.DummyUsers;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -30,6 +35,9 @@ public class NewAlterGroupController extends Controller {
     //                2.Local Fields                     //
     // --------------------------------------------------//
 
+    private ObservableList<DummyUsers>avaliableUsersObservableList, chosenUsersObservableList;
+    private DummyUsers currentUser = null;
+
     // --------------------------------------------------//
     //                3.FXML Fields                      //
     // --------------------------------------------------//
@@ -37,7 +45,7 @@ public class NewAlterGroupController extends Controller {
     @FXML
     private TextField name;
     @FXML
-    private ListView availableMembers, chosenMembers;
+    private ListView<DummyUsers> availableMembers, chosenMembers;
     @FXML
     private Button addMember, removeMember, save, cancel;
 
@@ -47,11 +55,11 @@ public class NewAlterGroupController extends Controller {
     // --------------------------------------------------//
 
     private void onClickAddMember(ActionEvent event){
-        System.out.println("add");
+        addChosenMember();
     }
 
     private void onClickRemoveMember(ActionEvent event){
-        System.out.println("remove");
+        removeChosenMember();
     }
 
     private void onClickSave(ActionEvent event){
@@ -59,15 +67,15 @@ public class NewAlterGroupController extends Controller {
     }
 
     private void onClickCancel(ActionEvent event){
-        System.out.println("cancel");
+        close();
     }
 
     private void onClickAvailableMembers(Event event){
-        System.out.println("avaliable");
+        setCurrentUser(availableMembers);
     }
 
     private void onClickChosenMembers (Event event){
-        System.out.println("chosen");
+        setCurrentUser(chosenMembers);
     }
 
     // --------------------------------------------------//
@@ -81,6 +89,42 @@ public class NewAlterGroupController extends Controller {
         cancel.setOnAction(this::onClickCancel);
         availableMembers.setOnMouseClicked(this::onClickAvailableMembers);
         chosenMembers.setOnMouseClicked(this::onClickChosenMembers);
+    }
+
+
+    private void populateAvaliabeMembers(){
+        avaliableUsersObservableList = FXCollections.observableArrayList(Repository.getAllUsers());
+        availableMembers.setItems(avaliableUsersObservableList);
+    }
+
+    private void addChosenMember(){
+        if(currentUser == null || check(avaliableUsersObservableList))return;
+        chosenUsersObservableList.add(currentUser);
+        avaliableUsersObservableList.remove(currentUser);
+        chosenMembers.setItems(chosenUsersObservableList);
+        currentUser = null;
+    }
+
+    private void removeChosenMember(){
+        if(currentUser == null || check(chosenUsersObservableList))return;
+        chosenUsersObservableList.remove(currentUser);
+        avaliableUsersObservableList.add(currentUser);
+        currentUser = null;
+    }
+
+    private void setCurrentUser(ListView<DummyUsers> list){
+        currentUser = list.getSelectionModel().getSelectedItem();
+    }
+
+    private boolean check(ObservableList<DummyUsers> o) {
+        for (int i = 0; i < o.size(); i++) {
+            if (currentUser == o.get(i))return false;
+        }
+        return true;
+    }
+
+    private void close(){
+        ((Stage)cancel.getScene().getWindow()).close();
     }
 
     // --------------------------------------------------//
@@ -99,7 +143,9 @@ public class NewAlterGroupController extends Controller {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        populateAvaliabeMembers();
         setupActionHandlers();
+        chosenUsersObservableList = FXCollections.observableArrayList();
     }
 
     @Override

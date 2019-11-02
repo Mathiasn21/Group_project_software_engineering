@@ -18,6 +18,7 @@ import no.hiof.set.gruppe.Exceptions.InvalidLoginInformation;
 import no.hiof.set.gruppe.Exceptions.UnableToRegisterUser;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.ValidationResult;
+import no.hiof.set.gruppe.model.constantInformation.DummyUsers;
 import no.hiof.set.gruppe.model.user.ILoginInformation;
 import no.hiof.set.gruppe.model.user.ProtoUser;
 import no.hiof.set.gruppe.model.user.RawUser;
@@ -277,6 +278,15 @@ public class Repository {
         ProtoUser protoUser = ProtoUser.getUser(userID);
         if(protoUser == null || !protoUser.getName().equals(userID) || !protoUser.getPass().equals(passHash)) throw new InvalidLoginInformation();
         return protoUser;
+    }
+
+    @NotNull
+    public static ArrayList<DummyUsers> getAllUsers(){
+        ArrayList<DummyUsers>dummyUsers = new ArrayList<>();
+        for(int i = 0; i < DummyUsers.values().length; i++){
+            dummyUsers.add(DummyUsers.values()[i]);
+        }
+        return dummyUsers;
     }
 
     /**
