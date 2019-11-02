@@ -3,12 +3,12 @@ package no.hiof.set.gruppe.controller.concrete;
 import no.hiof.set.gruppe.Exceptions.DataFormatException;
 import no.hiof.set.gruppe.controller.abstractions.Controller;
 import no.hiof.set.gruppe.model.ViewInformation;
+import no.hiof.set.gruppe.model.user.ProtoUser;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class GroupLeaderController extends Controller {
-
 
 
 

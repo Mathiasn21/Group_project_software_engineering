@@ -73,7 +73,6 @@ public class OrganizerController extends Controller {
     @FXML
     private MenuItem logOut;
 
-
     // --------------------------------------------------//
     //                4.Event Related Methods            //
     // --------------------------------------------------//
@@ -252,12 +251,10 @@ public class OrganizerController extends Controller {
         populateListView();
         populateSportCategories();
         liveSearchUpdate();
-
-
     }
 
     /**
-     * Just refreshes the view
+     * Refreshes the view
      */
     @Override
     public void updateView(){

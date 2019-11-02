@@ -39,7 +39,8 @@ public class UserController extends Controller {
     // --------------------------------------------------//
     //                2.Local Fields                     //
     // --------------------------------------------------//
-    private String title, name = "";
+    private String title = "";
+    private String name = "GroupLeader.fxml";
     private ObservableList<Arrangement> myObservableArrangements, availableObservableArrangements;
     private FilteredList<Arrangement> availableFiltered, myFiltered;
     private Arrangement currentAvailableArrangement = null;
@@ -63,7 +64,7 @@ public class UserController extends Controller {
     @FXML
     private ComboBox<SportCategory> availableSortingOptionsMy, sortingOptions;
     @FXML
-    private MenuItem logOut;
+    private MenuItem logOut, newGroup;
     // --------------------------------------------------//
     //                4.Event Related Methods            //
     // --------------------------------------------------//
@@ -128,6 +129,11 @@ public class UserController extends Controller {
         title = "Logg inn";
         name = "Login.fxml";
         ((Stage)joinBtn.getScene().getWindow()).close();
+        createNewView(this);
+    }
+
+    private void onClickNewGroup(ActionEvent event){
+        title = "Ny gruppe";
         createNewView(this);
     }
 
@@ -249,6 +255,7 @@ public class UserController extends Controller {
         joinBtn.setOnAction(this::onJoinClick);
         leaveBtn.setOnAction(this::onLeaveClick);
         logOut.setOnAction(this::returnToMainWindow);
+        newGroup.setOnAction(this::onClickNewGroup);
     }
 
     private void setupToggleBtns() {
