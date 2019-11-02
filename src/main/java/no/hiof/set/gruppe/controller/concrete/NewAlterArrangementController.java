@@ -141,8 +141,6 @@ public class NewAlterArrangementController extends Controller {
     }
 
     private boolean illegalNumberFormat(){
-        //must throw exception in the future
-        //"Ugyldig nummer format.\n";
         if(!Validation.ofNumber(partic)){
             setErrorField("Antall deltakere har ikke gyldig nummer format.");
             return true;
