@@ -14,7 +14,7 @@
 
 <AnchorPane maxHeight="635.0" maxWidth="800.0" minHeight="450.0" minWidth="800.0" prefHeight="633.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="no.hiof.set.gruppe.controller.concrete.OrganizerController">
    <children>
-      <Text fx:id="mainTitle" layoutX="64.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mine arrangementer">
+      <Text fx:id="mainTitle" layoutX="64.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Arrangør">
          <font>
             <Font size="25.0" />
          </font>

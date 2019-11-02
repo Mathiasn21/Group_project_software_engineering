@@ -21,40 +21,28 @@ class MainControllerTest extends MainJavaFXTest{
 
     @Test
     void enter_correct_login_information_from_btns(@NotNull FxRobot robot){
-        TextField uName = robot.lookup("#uName").queryAs(TextField.class);
-        TextField pass = robot.lookup("#pass").queryAs(TextField.class);
-
         robot.clickOn("#adminLogin");
-        Assertions.assertThat(uName).hasText("Admin");
-        Assertions.assertThat(pass).hasText("Password1");
+        Assertions.assertThat(robot.lookup("#uName").queryAs(TextField.class)).hasText("Admin");
+        Assertions.assertThat(robot.lookup("#pass").queryAs(TextField.class)).hasText("Password1");
 
-        robot.clickOn("#userLogin");
-        Assertions.assertThat(uName).hasText("ProtoUser");
-        Assertions.assertThat(pass).hasText("Password2");
-
-        robot.clickOn("#arrangLogin");
-        Assertions.assertThat(uName).hasText("Organizer");
-        Assertions.assertThat(pass).hasText("Password3");
-    }
-
-    @Test
-    void get_correct_view_admin(@NotNull FxRobot robot){
-        robot.clickOn("#adminLogin");
         robot.clickOn("#logInn");
         Assertions.assertThat(robot.lookup("#mainTitle").queryAs(Text.class)).hasText("ADMIN");
-    }
+        robot.clickOn("#logOut");
 
-    @Test
-    void get_correct_view_User(@NotNull FxRobot robot){
+
+        robot.clickOn("#arrangLogin");
+        Assertions.assertThat(robot.lookup("#uName").queryAs(TextField.class)).hasText("Organizer");
+        Assertions.assertThat(robot.lookup("#pass").queryAs(TextField.class)).hasText("Password3");
+        robot.clickOn("#logInn");
+        Assertions.assertThat(robot.lookup("#mainTitle").queryAs(Text.class)).hasText("Arrangør");
+        robot.clickOn("#logOut");
+
+
         robot.clickOn("#userLogin");
+        Assertions.assertThat(robot.lookup("#uName").queryAs(TextField.class)).hasText("ProtoUser");
+        Assertions.assertThat(robot.lookup("#pass").queryAs(TextField.class)).hasText("Password2");
         robot.clickOn("#logInn");
         Assertions.assertThat(robot.lookup("#mainTitle").queryAs(Text.class)).hasText("Bruker");
-    }
-
-    @Test
-    void get_correct_view_Organizer(@NotNull FxRobot robot){
-        robot.clickOn("#arrangLogin");
-        robot.clickOn("#logInn");
-        Assertions.assertThat(robot.lookup("#mainTitle").queryAs(Text.class)).hasText("Mine arrangementer");
+        robot.clickOn("#logOut");
     }
 }
