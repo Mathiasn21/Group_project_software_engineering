@@ -20,7 +20,7 @@ import java.util.UUID;
  * Arrangement holds information about a possible arrangement.
  * @author Gruppe4
  */
-public class Arrangement implements IGetAllData{
+public class Arrangement implements IGetAllData, IGetAllDataRaw{
 
 
     // --------------------------------------------------//
@@ -181,13 +181,22 @@ public class Arrangement implements IGetAllData{
     }
 
     /**
+     * Returns data in this sequence:
+     * name, sport, address, startDate + " til " + endDate, participants, description
      * @return String[]
      */
     @Override
     public String[] getAllDataAsStringArr() {
-        return new String[]{name, sport, address, startDate + " til " + endDate, String.valueOf(participants), description};
+        return new String[]{name, sport, address, startDate + " til " + endDate, String.valueOf(participants), group ? "Lagkonkurranse" : "Individuell konkurranse", description};
     }
 
+    /**
+     * Returns all raw data in this sequence:
+     * name, address, participants, description
+     * @return String[]
+     */
+    @Override
+    public String[] getAllStringDataArrRaw() {
+        return new String[]{name, address, String.valueOf(participants), description};
+    }
 }
-
-
