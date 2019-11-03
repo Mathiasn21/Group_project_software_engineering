@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 @ExtendWith(ApplicationExtension.class)
@@ -31,7 +32,6 @@ public class OrganizerControllerTests extends MainJavaFXTest{
                         "2020-11-09",
                         "2020-12-09",
                         "Very Nerdy.");
-
     @Start
     public void start(@NotNull Stage stage) throws IOException {
         MainJavaFXTest mainJavaFXTest = new MainJavaFXTest();
@@ -48,24 +48,23 @@ public class OrganizerControllerTests extends MainJavaFXTest{
         assertFieldsCorrespondToNewArrangement(robot);
 
         assertEquals(listView.getSelectionModel().getSelectedItem(), arrangement);
+        testAlterArrangement(robot);
+        assertEquals(listView.getSelectionModel().getSelectedItem(), arrangement);
         robot.clickOn("#deleteBtn");
     }
 
     //Test that alterAdd functionality works
-    @Test
     void testAlterArrangement(@NotNull FxRobot usingRobot){
-        /*ListView listView = usingRobot.lookup("#listview").queryAs(ListView.class);
+        ListView listView = usingRobot.lookup("#listview").queryAs(ListView.class);
         listView.getSelectionModel().selectLast();
         usingRobot.clickOn("#editBtn");
         fillOutForm(usingRobot);
         usingRobot.clickOn("#saveBtn");
+        arrangement = (Arrangement) listView.getSelectionModel().getSelectedItem();
         assertFieldsCorrespondToNewArrangement(usingRobot);
-        */
     }
 
     //test sorting works
-
-
     private void assertFieldsCorrespondToNewArrangement(@NotNull FxRobot robot) {
         Assertions.assertThat(robot.lookup("#arrangementName").queryAs(Text.class)).hasText(arrangement.getName());
         Assertions.assertThat(robot.lookup("#arrangementSport").queryAs(Text.class)).hasText(arrangement.getSport());
