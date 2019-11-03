@@ -32,15 +32,15 @@ class MainControllerTest extends MainJavaFXTest{
         }
     }
 
-    private void thenAssertLoginHasCorrectWindow(@NotNull FxRobot usingRobot, String stageTitle){
-        usingRobot.clickOn("#logInn");
-        Assertions.assertThat(usingRobot.lookup("#mainTitle").queryAs(Text.class)).hasText(stageTitle);
-        usingRobot.clickOn("#logOut");
-    }
-
     private void firstAssertUserInformation(@NotNull String userBtn, @NotNull ProtoUser user, @NotNull FxRobot usingRobot){
         usingRobot.clickOn("#" + userBtn);
         Assertions.assertThat(usingRobot.lookup("#uName").queryAs(TextField.class)).hasText(user.getName());
         Assertions.assertThat(usingRobot.lookup("#pass").queryAs(TextField.class)).hasText(user.getPass());
+    }
+
+    private void thenAssertLoginHasCorrectWindow(@NotNull FxRobot usingRobot, String stageTitle) {
+        usingRobot.clickOn("#logInn");
+        Assertions.assertThat(usingRobot.lookup("#mainTitle").queryAs(Text.class)).hasText(stageTitle);
+        usingRobot.clickOn("#logOut");
     }
 }

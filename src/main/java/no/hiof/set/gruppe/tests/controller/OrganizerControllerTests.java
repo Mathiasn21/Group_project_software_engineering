@@ -21,6 +21,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(ApplicationExtension.class)
 public class OrganizerControllerTests extends MainJavaFXTest{
+
+    private Arrangement arrangement = new Arrangement(
+                "ThisIsNerdy",
+                        "Alle",
+                        400,
+                        "NerdStreet - 22",
+                        true,
+                        "2020-11-09",
+                        "2020-12-09",
+                        "Very Nerdy.");
+
     @Start
     public void start(@NotNull Stage stage) throws IOException {
         MainJavaFXTest mainJavaFXTest = new MainJavaFXTest();
@@ -31,31 +42,31 @@ public class OrganizerControllerTests extends MainJavaFXTest{
     @Test
     void testCreatingNewArrangement(@NotNull FxRobot robot) {
         ListView listView = robot.lookup("#listview").queryAs(ListView.class);
-        Arrangement arrangement = new Arrangement(
-                "ThisIsNerdy",
-                "Alle",
-                42,
-                "NerdStreet - 22",
-                true,
-                "2020-11-09",
-                "2020-12-09",
-                "Very Nerdy.");
-
         robot.clickOn("#newArrangementBtn");
-        fillOutForm(robot, arrangement);
+        fillOutForm(robot);
         robot.clickOn("#saveBtn");
-        assertFieldsCorrespondToNewArrangement(robot, arrangement);
+        assertFieldsCorrespondToNewArrangement(robot);
 
         assertEquals(listView.getSelectionModel().getSelectedItem(), arrangement);
         robot.clickOn("#deleteBtn");
     }
 
     //Test that alterAdd functionality works
+    @Test
+    void testAlterArrangement(@NotNull FxRobot usingRobot){
+        /*ListView listView = usingRobot.lookup("#listview").queryAs(ListView.class);
+        listView.getSelectionModel().selectLast();
+        usingRobot.clickOn("#editBtn");
+        fillOutForm(usingRobot);
+        usingRobot.clickOn("#saveBtn");
+        assertFieldsCorrespondToNewArrangement(usingRobot);
+        */
+    }
 
     //test sorting works
 
 
-    private void assertFieldsCorrespondToNewArrangement(@NotNull FxRobot robot, @NotNull Arrangement arrangement) {
+    private void assertFieldsCorrespondToNewArrangement(@NotNull FxRobot robot) {
         Assertions.assertThat(robot.lookup("#arrangementName").queryAs(Text.class)).hasText(arrangement.getName());
         Assertions.assertThat(robot.lookup("#arrangementSport").queryAs(Text.class)).hasText(arrangement.getSport());
         Assertions.assertThat(robot.lookup("#arrangementAdress").queryAs(Text.class)).hasText(arrangement.getAddress());
@@ -65,20 +76,20 @@ public class OrganizerControllerTests extends MainJavaFXTest{
         Assertions.assertThat(robot.lookup("#arrangementDescription").queryAs(Text.class)).hasText(arrangement.getDescription());
     }
 
-    private void fillOutForm(@NotNull FxRobot robot, @NotNull Arrangement arrangement) {
+    private void fillOutForm(@NotNull FxRobot usingRobot) {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
-        robot.clickOn("#nameInput").write(arrangement.getName());
-        robot.clickOn("#participantsInput").write(String.valueOf(arrangement.getParticipants()));
-        robot.clickOn("#adressInput").write(arrangement.getAddress());
+        usingRobot.clickOn("#nameInput").write(arrangement.getName());
+        usingRobot.clickOn("#participantsInput").write(String.valueOf(arrangement.getParticipants()));
+        usingRobot.clickOn("#adressInput").write(arrangement.getAddress());
 
-        robot.clickOn("#startDateInput").write(arrangement.getStartDate().format(format));
-        robot.press(KeyCode.ENTER);
-        robot.release(KeyCode.ENTER);
-        robot.clickOn("#endDateInput").write(arrangement.getEndDate().format(format));
-        robot.press(KeyCode.ENTER);
-        robot.release(KeyCode.ENTER);
+        usingRobot.clickOn("#startDateInput").write(arrangement.getStartDate().format(format));
+        usingRobot.press(KeyCode.ENTER);
+        usingRobot.release(KeyCode.ENTER);
+        usingRobot.clickOn("#endDateInput").write(arrangement.getEndDate().format(format));
+        usingRobot.press(KeyCode.ENTER);
+        usingRobot.release(KeyCode.ENTER);
 
-        robot.clickOn("#descriptionInput").write(arrangement.getDescription());
+        usingRobot.clickOn("#descriptionInput").write(arrangement.getDescription());
     }
 }
