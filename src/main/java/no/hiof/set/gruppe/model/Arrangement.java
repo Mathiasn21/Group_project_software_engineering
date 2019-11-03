@@ -182,7 +182,7 @@ public class Arrangement implements IGetAllData, IGetAllDataRaw{
 
     /**
      * Returns data in this sequence:
-     * name, sport, address, startDate + " til " + endDate, participants, description
+     * name, sport, address, startDate + " til " + endDate, participants, group, description
      * @return String[]
      */
     @Override

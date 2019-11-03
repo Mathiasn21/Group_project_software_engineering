@@ -32,6 +32,12 @@ public class OrganizerControllerTests extends MainJavaFXTest{
                         "2020-11-09",
                         "2020-12-09",
                         "Very Nerdy.");
+    private String[] arrangementsData;
+    private final String[] lookupFields = new String[]{
+            "#arrangementName", "#arrangementSport",
+            "#arrangementAdress", "#arrangementDate",
+            "#arrangementParticipants", "#arrangementGorI", "#arrangementDescription"};
+
     @Start
     public void start(@NotNull Stage stage) throws IOException {
         MainJavaFXTest mainJavaFXTest = new MainJavaFXTest();
@@ -45,6 +51,8 @@ public class OrganizerControllerTests extends MainJavaFXTest{
         robot.clickOn("#newArrangementBtn");
         fillOutForm(robot);
         robot.clickOn("#saveBtn");
+
+        arrangementsData = ((Arrangement)listView.getSelectionModel().getSelectedItem()).getAllDataAsStringArr();
         assertFieldsCorrespondToNewArrangement(robot);
 
         assertEquals(listView.getSelectionModel().getSelectedItem(), arrangement);
@@ -53,26 +61,23 @@ public class OrganizerControllerTests extends MainJavaFXTest{
         robot.clickOn("#deleteBtn");
     }
 
-    //Test that alterAdd functionality works
     void testAlterArrangement(@NotNull FxRobot usingRobot){
         ListView listView = usingRobot.lookup("#listview").queryAs(ListView.class);
         listView.getSelectionModel().selectLast();
         usingRobot.clickOn("#editBtn");
         fillOutForm(usingRobot);
         usingRobot.clickOn("#saveBtn");
+
         arrangement = (Arrangement) listView.getSelectionModel().getSelectedItem();
+        arrangementsData = arrangement.getAllDataAsStringArr();
         assertFieldsCorrespondToNewArrangement(usingRobot);
     }
 
-    //test sorting works
+
     private void assertFieldsCorrespondToNewArrangement(@NotNull FxRobot robot) {
-        Assertions.assertThat(robot.lookup("#arrangementName").queryAs(Text.class)).hasText(arrangement.getName());
-        Assertions.assertThat(robot.lookup("#arrangementSport").queryAs(Text.class)).hasText(arrangement.getSport());
-        Assertions.assertThat(robot.lookup("#arrangementAdress").queryAs(Text.class)).hasText(arrangement.getAddress());
-        Assertions.assertThat(robot.lookup("#arrangementDate").queryAs(Text.class)).hasText(arrangement.getDateIntervall());
-        Assertions.assertThat(robot.lookup("#arrangementGorI").queryAs(Text.class)).hasText(arrangement.getGroup());
-        Assertions.assertThat(robot.lookup("#arrangementParticipants").queryAs(Text.class)).hasText(String.valueOf(arrangement.getParticipants()));
-        Assertions.assertThat(robot.lookup("#arrangementDescription").queryAs(Text.class)).hasText(arrangement.getDescription());
+        for(int i = 0; i < arrangementsData.length; i++){
+            Assertions.assertThat(robot.lookup(lookupFields[i]).queryAs(Text.class)).hasText(arrangementsData[i]);
+        }
     }
 
     private void fillOutForm(@NotNull FxRobot usingRobot) {
@@ -91,4 +96,7 @@ public class OrganizerControllerTests extends MainJavaFXTest{
 
         usingRobot.clickOn("#descriptionInput").write(arrangement.getDescription());
     }
+
+
+    //test sorting works
 }
