@@ -21,7 +21,6 @@ public class MainJavaFXTest {
 
     @Start
     public void start(@NotNull Stage stage) throws IOException {
-
         FXMLLoader loader = new FXMLLoader(MainJavaFX.class.getResource(startView));
         Parent editLayout = loader.load();
 
