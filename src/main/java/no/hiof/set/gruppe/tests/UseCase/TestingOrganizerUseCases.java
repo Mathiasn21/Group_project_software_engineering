@@ -1,5 +1,14 @@
 package UseCase;
 
+/*Guide
+ * 1. Import Statements
+ * 2. Local Fields
+ * 3. Single Tests
+ * */
+
+// --------------------------------------------------//
+//                1.Import Statements                //
+// --------------------------------------------------//
 import no.hiof.set.gruppe.Exceptions.IllegalDataAccess;
 import no.hiof.set.gruppe.data.Repository;
 import no.hiof.set.gruppe.model.Arrangement;
@@ -20,6 +29,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class TestingOrganizerUseCases {
+    // --------------------------------------------------//
+    //                2.Local Fields                      //
+    // --------------------------------------------------//
     private static final Arrangement arrangement = new Arrangement(
             "Bernts Fantastiske Test",
             "Annet",
@@ -33,6 +45,9 @@ class TestingOrganizerUseCases {
     private static final List<Arrangement> arrangementList = Repository.getUserArrangements(PROTO_USER);
 
 
+    // --------------------------------------------------//
+    //                3.Single Tests                     //
+    // --------------------------------------------------//
     /**
      * @throws IllegalDataAccess IllegalDataAccess{@link IllegalDataAccess}
      */

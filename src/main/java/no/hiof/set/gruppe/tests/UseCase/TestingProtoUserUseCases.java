@@ -1,5 +1,14 @@
 package UseCase;
 
+/*Guide
+ * 1. Import Statements
+ * 2. Local Fields
+ * 3. Single Tests
+ * */
+
+// --------------------------------------------------//
+//                1.Import Statements                //
+// --------------------------------------------------//
 import no.hiof.set.gruppe.data.Repository;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.user.ProtoUser;
@@ -18,6 +27,9 @@ import static org.junit.Assert.assertTrue;
  */
  @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class TestingProtoUserUseCases {
+    // --------------------------------------------------//
+    //                2.Local Fields                     //
+    // --------------------------------------------------//
     private static final ProtoUser PROTO_USER = ProtoUser.USER;
     private static List<Arrangement> userArrangements;
     private static List<Arrangement> notUserArrangements;
@@ -30,6 +42,9 @@ class TestingProtoUserUseCases {
         notUserArrangements.removeAll(userArrangements);
     }
 
+    // --------------------------------------------------//
+    //                3.Single Tests                     //
+    // --------------------------------------------------//
      /**
       * Testing if adding a new arrangement is possible.
       */
