@@ -98,7 +98,7 @@ public class NewAlterGroupController extends Controller {
     }
 
     private void addChosenMember(){
-        if(currentUser == null || check(avaliableUsersObservableList))return;
+        if(currentUser == null || checkIfRightRightList(avaliableUsersObservableList))return;
         chosenUsersObservableList.add(currentUser);
         avaliableUsersObservableList.remove(currentUser);
         chosenMembers.setItems(chosenUsersObservableList);
@@ -106,7 +106,7 @@ public class NewAlterGroupController extends Controller {
     }
 
     private void removeChosenMember(){
-        if(currentUser == null || check(chosenUsersObservableList))return;
+        if(currentUser == null || checkIfRightRightList(chosenUsersObservableList))return;
         chosenUsersObservableList.remove(currentUser);
         avaliableUsersObservableList.add(currentUser);
         currentUser = null;
@@ -116,9 +116,9 @@ public class NewAlterGroupController extends Controller {
         currentUser = list.getSelectionModel().getSelectedItem();
     }
 
-    private boolean check(ObservableList<DummyUsers> o) {
-        for (int i = 0; i < o.size(); i++) {
-            if (currentUser == o.get(i))return false;
+    private boolean checkIfRightRightList(ObservableList<DummyUsers> o) {
+        for (DummyUsers user : o) {
+            if (currentUser == user)return false;
         }
         return true;
     }
