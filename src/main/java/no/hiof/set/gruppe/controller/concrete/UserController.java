@@ -46,8 +46,8 @@ public class UserController extends Controller {
     // --------------------------------------------------//
     //                2.Local Fields                     //
     // --------------------------------------------------//
-    private String title = "";
-    private String name = "";
+    private String title = "Bruker";
+    private String name = ProtoUser.USER.getViewName();
     private ObservableList<Arrangement> myObservableArrangements, availableObservableArrangements;
     private FilteredList<Arrangement> availableFiltered, myFiltered;
     private Arrangement currentAvailableArrangement = null;
