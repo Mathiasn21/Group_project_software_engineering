@@ -191,6 +191,4 @@ public class Arrangement implements IGetAllData{
                 this.endDate.equals(that.endDate) &&
                 this.description.equals(that.getDescription());
     }
-}
-
 
