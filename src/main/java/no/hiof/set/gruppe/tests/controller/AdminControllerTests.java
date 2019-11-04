@@ -80,6 +80,4 @@ public class AdminControllerTests extends MainJavaFXTest{
         return robot.lookup(node).queryAs(ListView.class);
     }
     //test sorting functionality
-
-
 }

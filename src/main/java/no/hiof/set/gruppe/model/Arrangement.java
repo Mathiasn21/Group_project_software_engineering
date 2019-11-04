@@ -162,14 +162,6 @@ public class Arrangement implements IGetAllData, IGetAllDataRaw{
         return name + ", " + sport + ", " + startDate + " til " + endDate;
     }
 
-    /**
-     * @return String[]
-     */
-    @Override
-    public String[] getAllDataAsStringArr() {
-        return new String[]{name, sport, address, startDate + " til " + endDate, String.valueOf(participants), description};
-    }
-
     // --------------------------------------------------//
     //                7.Overridden Contracts            //
     // --------------------------------------------------//
@@ -191,6 +183,17 @@ public class Arrangement implements IGetAllData, IGetAllDataRaw{
                 this.startDate.equals(that.startDate) &&
                 this.endDate.equals(that.endDate) &&
                 this.description.equals(that.getDescription());
+    }
+
+
+    /**
+     * Returns data in this sequence:
+     * name, sport, address, startDate + " til " + endDate, participants, group, description
+     * @return String[]
+     */
+    @Override
+    public String[] getAllDataAsStringArr() {
+        return new String[]{name, sport, address, startDate + " til " + endDate, String.valueOf(participants), group ? "Lagkonkurranse" : "Individuell konkurranse", description};
     }
 
     /**
