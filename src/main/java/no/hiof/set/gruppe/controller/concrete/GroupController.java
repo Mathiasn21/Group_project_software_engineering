@@ -44,7 +44,7 @@ public class GroupController extends Controller {
     private String title = "";
     private String name = "";
     private ObservableList<Group> groupsList;
-    private Group currentSeletedGroup = null;
+    private Group selectedGroup = null;
     // --------------------------------------------------//
     //                3.FXML Fields                      //
     // --------------------------------------------------//
@@ -92,13 +92,17 @@ public class GroupController extends Controller {
     }
 
     private void onClickGroupsListView(MouseEvent event) {
-        System.out.println("liste");
+        setSelectedGroup();
+        System.out.println(selectedGroup);
     }
 
     // --------------------------------------------------//
     //                5.Private Functional Methods       //
     // --------------------------------------------------//
 
+    private void setSelectedGroup(){
+        selectedGroup = groupsListview.getSelectionModel().getSelectedItem();
+    }
 
     // --------------------------------------------------//
     //                6.Private Search Methods           //

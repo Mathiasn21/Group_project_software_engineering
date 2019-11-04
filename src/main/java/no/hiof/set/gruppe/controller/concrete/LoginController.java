@@ -74,7 +74,6 @@ public class LoginController extends Controller {
         String userName = uName.getText();
         String password = pass.getText();
 
-
         try{
             ProtoUser protoUser = Repository.getUserDetails(new LoginInformation(userName, password));
             closeWindow(logInn);
@@ -86,7 +85,6 @@ public class LoginController extends Controller {
             createAlert(ErrorExceptionHandler.ERROR_LOGIN);
         }
     }
-
 
     // --------------------------------------------------//
     //                5.Private Methods                  //
