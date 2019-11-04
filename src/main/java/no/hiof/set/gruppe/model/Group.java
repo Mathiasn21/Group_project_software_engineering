@@ -58,7 +58,7 @@ public class Group implements IGetAllData {
     public String getName() {
         return name;
     }
-    public ArrayList<DummyUsers> getMembersr() { return members; }
+    public ArrayList<DummyUsers> getMembers() { return members; }
     public int getId() { return id; }
 
     // --------------------------------------------------//
