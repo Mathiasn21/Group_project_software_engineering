@@ -160,7 +160,9 @@ public class Repository {
     private static List<Arrangement> readArrangementsData() throws IOException {
         return new ArrayList<>(listFromJson(Arrangement[].class, readFromFile(arrangementFName)));
     }
-
+    //Should be refactored
+    @NotNull
+    @Contract(" -> new")
     private static List<Group>readGroupsData()throws IOException{
         return new ArrayList<>(listFromJson(Group[].class, readFromFile(groupsFName)));
     }
@@ -178,6 +180,8 @@ public class Repository {
     /**
      * Stores all arrangements and their user connection
      */
+
+    //Should be refactored
     private static void storeArrangementsData() {
         writeToFile(toJson(Arrangement[].class, listOfAllArrangements.toArray(Arrangement[]::new)), arrangementFName);
         storeUserArrangements();

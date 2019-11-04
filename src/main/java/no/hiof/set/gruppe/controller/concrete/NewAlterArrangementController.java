@@ -172,7 +172,7 @@ public class NewAlterArrangementController extends Controller {
         return 1;
     }
 
-    private void closeWindow(){
+    public void closeWindow(){
         ((Stage)cancelBtn.getScene().getWindow()).close();
     }
 

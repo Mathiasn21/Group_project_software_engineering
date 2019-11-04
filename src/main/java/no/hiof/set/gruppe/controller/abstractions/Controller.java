@@ -2,8 +2,10 @@ package no.hiof.set.gruppe.controller.abstractions;
 
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
+import javafx.stage.Stage;
 import no.hiof.set.gruppe.Exceptions.ErrorExceptionHandler;
 import no.hiof.set.gruppe.MainJavaFX;
 import no.hiof.set.gruppe.model.Arrangement;
@@ -96,5 +98,9 @@ public abstract class Controller implements IControllerDataTransfer, Initializab
     @NotNull
     private String dateString(@NotNull Arrangement a){
         return a.getStartDate().toString() + " til " + a.getEndDate().toString();
+    }
+
+    public void closeWindow(Button b) {
+        ((Stage)b.getScene().getWindow()).close();
     }
 }

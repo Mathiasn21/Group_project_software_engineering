@@ -22,6 +22,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import no.hiof.set.gruppe.Exceptions.DataFormatException;
 import no.hiof.set.gruppe.controller.abstractions.Controller;
 import no.hiof.set.gruppe.model.Group;
@@ -76,7 +77,7 @@ public class GroupController extends Controller {
     }
 
     private void onClickLogoutBtn(ActionEvent event){
-        System.out.println("logg ut");
+        closeWindow(deleteBtn);
     }
 
     private void onClickGroupsListView(MouseEvent event){
@@ -86,6 +87,8 @@ public class GroupController extends Controller {
     // --------------------------------------------------//
     //                5.Private Functional Methods       //
     // --------------------------------------------------//
+
+
 
     // --------------------------------------------------//
     //                6.Private Search Methods           //

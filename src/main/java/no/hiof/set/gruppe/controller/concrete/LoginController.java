@@ -47,7 +47,7 @@ public class LoginController extends Controller {
     //                3.FXML Fields                      //
     // --------------------------------------------------//
     @FXML
-    private Button logInn, adminLogin, arrangLogin, userLogin;
+    private Button logInn, adminLogin, arrangLogin, userLogin, cancel;
     @FXML
     private TextField uName, pass;
 
@@ -109,6 +109,15 @@ public class LoginController extends Controller {
         pass.setText(protoUser.getPass());
     }
 
+    private void onClickCancel(ActionEvent event){
+        closeWindow(cancel);
+    }
+
+    private void setUpActionHandlers(){
+        logInn.setOnAction(this::login);
+        cancel.setOnAction(this::onClickCancel);
+    }
+
     // --------------------------------------------------//
     //                6.Overridden Methods               //
     // --------------------------------------------------//
@@ -120,8 +129,8 @@ public class LoginController extends Controller {
     public void initialize(URL location, ResourceBundle resources) {
         Button[] credentialsBtns = {adminLogin, arrangLogin, userLogin};
         for (Button credentialsBtn : credentialsBtns) credentialsBtn.setOnAction(this::getCorrectCredentials);
-        
-        logInn.setOnAction(this::login);
+
+        setUpActionHandlers();
     }
 
     /**

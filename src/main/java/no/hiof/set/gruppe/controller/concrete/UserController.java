@@ -131,7 +131,7 @@ public class UserController extends Controller {
     private void returnToMainWindow(ActionEvent event) {
         title = "Logg inn";
         name = "Login.fxml";
-        ((Stage)joinBtn.getScene().getWindow()).close();
+        closeWindow(joinBtn);
         createNewView(this);
     }
 

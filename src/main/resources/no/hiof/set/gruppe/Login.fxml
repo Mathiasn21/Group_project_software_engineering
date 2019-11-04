@@ -10,11 +10,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="300.0" maxWidth="600.0" minHeight="300.0" minWidth="600.0" prefHeight="300.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="no.hiof.set.gruppe.controller.concrete.LoginController">
+<AnchorPane maxHeight="300.0" maxWidth="600.0" minHeight="300.0" minWidth="600.0" prefHeight="300.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="no.hiof.set.gruppe.controller.concrete.LoginController">
    <children>
       <VBox prefHeight="298.0" prefWidth="600.0">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Innlogging">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Velkommen">
                <font>
                   <Font size="25.0" />
                </font>
@@ -62,7 +62,7 @@
                </VBox.margin></Button>
             <HBox prefHeight="31.0" prefWidth="594.0">
                <children>
-                  <Button fx:id="adminLogin" mnemonicParsing="false" text="Brukernavn/Passord admin">
+                  <Button fx:id="adminLogin" mnemonicParsing="false" text="ADMIN">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -70,7 +70,7 @@
                         <Insets left="8.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="arrangLogin" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Brukernavn/Passord arrangør">
+                  <Button fx:id="arrangLogin" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="ARRANGØR">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -78,12 +78,17 @@
                         <Insets left="5.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="userLogin" layoutX="208.0" layoutY="10.0" mnemonicParsing="false" text="Brukernavn/Passord bruker">
+                  <Button fx:id="userLogin" layoutX="208.0" layoutY="10.0" mnemonicParsing="false" text="BRUKER">
                      <font>
                         <Font size="14.0" />
                      </font>
                      <HBox.margin>
                         <Insets left="5.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="cancel" mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="AVSLUTT">
+                     <HBox.margin>
+                        <Insets left="280.0" top="5.0" />
                      </HBox.margin>
                   </Button>
                </children>

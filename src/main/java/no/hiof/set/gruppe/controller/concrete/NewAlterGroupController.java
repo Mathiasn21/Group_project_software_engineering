@@ -65,11 +65,11 @@ public class NewAlterGroupController extends Controller {
 
     private void onClickSave(ActionEvent event){
         createGroup();
-        close();
+        closeWindow(cancel);
     }
 
     private void onClickCancel(ActionEvent event){
-        close();
+        closeWindow(cancel);
     }
 
     private void onClickAvailableMembers(Event event){
@@ -115,10 +115,6 @@ public class NewAlterGroupController extends Controller {
             if (currentUser == user)return false;
         }
         return true;
-    }
-
-    private void close(){
-        ((Stage)cancel.getScene().getWindow()).close();
     }
 
     // --------------------------------------------------//

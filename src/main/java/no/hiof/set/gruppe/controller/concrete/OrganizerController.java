@@ -98,6 +98,7 @@ public class OrganizerController extends Controller {
      */
     private void onClick(ActionEvent event) {
         title = "Ny";
+        name = "NewAlterArrangement.fxml";
         createNewView(this, null);
     }
 
@@ -128,7 +129,7 @@ public class OrganizerController extends Controller {
     private void returnToMainWindow(ActionEvent event) {
         title = "Logg inn";
         name = "Login.fxml";
-        ((Stage)deleteBtn.getScene().getWindow()).close();
+        closeWindow(deleteBtn);
         System.out.println(getMainController());
         createNewView(this);
     }

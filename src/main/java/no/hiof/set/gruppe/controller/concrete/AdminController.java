@@ -102,7 +102,7 @@ public class AdminController extends Controller {
     private void returnToMainWindow(ActionEvent event) {
         title = "Logg inn";
         name = "Login.fxml";
-        ((Stage)delete.getScene().getWindow()).close();
+        closeWindow(delete);
         createNewView(this);
     }
 
