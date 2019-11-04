@@ -8,15 +8,7 @@
     "USERNAME": "Organizer"
   },
   {
-<<<<<<< HEAD
     "ID": "e07aef67-8eec-4a05-ad1c-a8b96bc92df0",
-=======
-    "ID": "5dcf3140-b627-4b0b-9993-3a6838358dd3",
-    "USERNAME": "User"
-  },
-  {
-    "ID": "edbbbe0a-468b-4943-86bb-682936015acf",
->>>>>>> parent of 9bf76d2... Merge branch 'TestingJFXFramework' into Premature_Alpha
     "USERNAME": "Organizer"
   }
 ]

@@ -1,5 +1,4 @@
 package no.hiof.set.gruppe;
-
 /**
  * Is needed to be able to launch a fat jar on double click.
  */
