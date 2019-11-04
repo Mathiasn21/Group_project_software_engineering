@@ -10,10 +10,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="603.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="no.hiof.set.gruppe.controller.concrete.GroupController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="603.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="no.hiof.set.gruppe.controller.concrete.GroupController">
    <children>
-      <ListView fx:id="groups" layoutX="12.0" layoutY="94.0" prefHeight="237.0" prefWidth="191.0" />
+      <ListView fx:id="groupsListview" layoutX="12.0" layoutY="94.0" prefHeight="273.0" prefWidth="191.0" />
       <Text layoutX="47.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mine grupper">
          <font>
             <Font size="20.0" />
@@ -21,9 +20,9 @@
       </Text>
       <MenuButton layoutX="12.0" layoutY="14.0" mnemonicParsing="false" text="Meny">
         <items>
-          <MenuItem mnemonicParsing="false" text="Individuelle arrangemnter" />
-          <MenuItem mnemonicParsing="false" text="Mine grupper" />
-            <MenuItem mnemonicParsing="false" text="Logg ut" />
+          <MenuItem fx:id="myIndividualArrangementsBtn" mnemonicParsing="false" text="Mine indivuelle arrangementer" />
+            <MenuItem fx:id="myGroupsBtn" mnemonicParsing="false" text="Mine grupper" />
+            <MenuItem fx:id="logoutBtn" mnemonicParsing="false" text="Logg ut" />
         </items>
       </MenuButton>
       <VBox layoutX="212.0" layoutY="95.0" prefHeight="200.0" prefWidth="100.0">
