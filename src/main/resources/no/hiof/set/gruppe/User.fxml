@@ -20,7 +20,7 @@
             <Font size="13.0" />
          </font></Text>
       <Button fx:id="joinBtn" layoutX="129.0" layoutY="447.0" mnemonicParsing="false" text="Meld på" />
-      <Button fx:id="leaveBtn" layoutX="895.0" layoutY="437.0" mnemonicParsing="false" text="Meld av" />
+      <Button fx:id="leaveBtn" layoutX="901.0" layoutY="447.0" mnemonicParsing="false" text="Meld av" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="32.0" layoutX="319.0" layoutY="52.0" stroke="BLACK" strokeType="INSIDE" width="365.0" />
       <TextField fx:id="searchAv" layoutX="43.0" layoutY="115.0" prefHeight="25.0" prefWidth="96.0" />
       <Text layoutX="43.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Søk" wrappingWidth="32.09179639816284" />
