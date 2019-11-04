@@ -42,7 +42,7 @@ public class UserController extends Controller {
     //                2.Local Fields                     //
     // --------------------------------------------------//
     private String title = "";
-    private String name = "NewAlterGroup.fxml";
+    private String name = "Groups.fxml";
     private ObservableList<Arrangement> myObservableArrangements, availableObservableArrangements;
     private FilteredList<Arrangement> availableFiltered, myFiltered;
     private Arrangement currentAvailableArrangement = null;
@@ -135,8 +135,12 @@ public class UserController extends Controller {
     }
 
     private void onClickNewGroup(ActionEvent event){
-        title = "Ny gruppe";
-        name = "NewAlterGroup.fxml";
+
+    }
+
+    private void onClickMyGroups(ActionEvent event){
+        title = "Mine grupper";
+        name = "Groups.fxml";
         createNewView(this);
     }
 
@@ -258,7 +262,7 @@ public class UserController extends Controller {
         joinBtn.setOnAction(this::onJoinClick);
         leaveBtn.setOnAction(this::onLeaveClick);
         logOut.setOnAction(this::returnToMainWindow);
-        newGroup.setOnAction(this::onClickNewGroup);
+        newGroup.setOnAction(this::onClickMyGroups);
     }
 
     private void setupToggleBtns() {
