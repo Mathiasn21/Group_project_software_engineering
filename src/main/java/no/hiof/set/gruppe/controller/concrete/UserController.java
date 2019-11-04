@@ -71,7 +71,7 @@ public class UserController extends Controller {
     @FXML
     private ComboBox<SportCategory> availableSortingOptionsMy, sortingOptions;
     @FXML
-    private MenuItem logOut;
+    private MenuItem logOut, myGroups;
     @FXML
     private MenuButton menu;
 
@@ -267,6 +267,7 @@ public class UserController extends Controller {
         joinBtn.setOnAction(this::onJoinClick);
         leaveBtn.setOnAction(this::onLeaveClick);
         logOut.setOnAction(this::returnToMainWindow);
+        myGroups.setOnAction(this::onClickMyGroups);
     }
 
     private void setupToggleBtns() {

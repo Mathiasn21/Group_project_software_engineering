@@ -110,6 +110,7 @@
       </Text>
       <MenuButton fx:id="menu" layoutY="2.0" mnemonicParsing="false" text="Meny">
          <items>
+            <MenuItem fx:id="myGroups" mnemonicParsing="false" text="Mine grupper" />
             <MenuItem fx:id="logOut" mnemonicParsing="false" text="Logg ut" />
          </items>
       </MenuButton>

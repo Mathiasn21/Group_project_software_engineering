@@ -10,9 +10,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="603.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="no.hiof.set.gruppe.controller.concrete.GroupController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="603.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="no.hiof.set.gruppe.controller.concrete.GroupController">
    <children>
-      <ListView fx:id="groupsListview" layoutX="12.0" layoutY="94.0" prefHeight="273.0" prefWidth="191.0" />
+      <ListView fx:id="groupsListview" layoutX="12.0" layoutY="94.0" prefHeight="275.0" prefWidth="191.0" />
       <Text layoutX="47.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mine grupper">
          <font>
             <Font size="20.0" />
@@ -24,7 +24,7 @@
             <MenuItem fx:id="logoutBtn" mnemonicParsing="false" text="Logg ut" />
         </items>
       </MenuButton>
-      <VBox layoutX="212.0" layoutY="95.0" prefHeight="200.0" prefWidth="100.0">
+      <VBox layoutX="212.0" layoutY="95.0" prefHeight="273.0" prefWidth="100.0">
          <children>
             <Button fx:id="editBtn" mnemonicParsing="false" prefHeight="26.0" prefWidth="95.0" text="Rediger">
                <VBox.margin>
@@ -38,13 +38,12 @@
             </Button>
             <Button fx:id="newGroupBtn" mnemonicParsing="false" prefHeight="26.0" prefWidth="95.0" text="Ny gruppe">
                <VBox.margin>
-                  <Insets top="30.0" />
+                  <Insets top="190.0" />
                </VBox.margin>
             </Button>
          </children>
       </VBox>
       <Text fx:id="groupName" layoutX="455.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Navn" />
       <Text fx:id="members" layoutX="419.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="..." textAlignment="CENTER" wrappingWidth="99.99999804608524" />
-      <Button fx:id="closeBtn" layoutX="494.0" layoutY="396.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="95.0" text="Lukk" />
    </children>
 </AnchorPane>
