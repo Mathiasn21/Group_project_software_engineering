@@ -76,6 +76,6 @@ public class Group implements IGetAllData {
 
     @Override
     public String toString(){
-        return name + " " + members;
+        return name;
     }
 }

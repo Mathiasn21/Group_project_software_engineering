@@ -14,6 +14,7 @@ package no.hiof.set.gruppe.controller.concrete;
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,11 +25,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import no.hiof.set.gruppe.Exceptions.DataFormatException;
 import no.hiof.set.gruppe.controller.abstractions.Controller;
+import no.hiof.set.gruppe.data.Repository;
 import no.hiof.set.gruppe.model.Group;
 import no.hiof.set.gruppe.model.ViewInformation;
 import java.net.URL;
 import java.util.ResourceBundle;
-
 
 /**
  * This controller controls all functionality and logic pertaining
@@ -118,6 +119,11 @@ public class GroupController extends Controller {
         logoutBtn.setOnAction(this::onClickLogoutBtn);
     }
 
+    private void populateListView(){
+        groupsList = FXCollections.observableArrayList(Repository.getAllGroups());
+        groupsListview.setItems(groupsList);
+    }
+
     // --------------------------------------------------//
     //                8.Overridden Methods               //
     // --------------------------------------------------//
@@ -125,6 +131,7 @@ public class GroupController extends Controller {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setupActionHandlers();
+        populateListView();
     }
 
     @Override

@@ -317,6 +317,12 @@ public class Repository {
         return dummyUsers;
     }
 
+    @NotNull
+    @Contract(" -> new")
+    public static ArrayList<Group>getAllGroups(){
+       return new ArrayList<>(listofAllGroups);
+    }
+
     /**
      * This method interacts with an database to check if the address exists.
      * Temp solution is for it to return true when length is below 50.
