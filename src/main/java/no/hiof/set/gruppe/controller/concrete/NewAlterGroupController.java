@@ -5,13 +5,14 @@ package no.hiof.set.gruppe.controller.concrete;
  * 2. Local Fields
  * 3. FXML Fields
  * 4. On Action Methods
- * 5. Private Methods
- * 6. Overridden Methods
+ * 5. Private Functional Methods
+ * 6. Private Setup Methods
+ * 7. Overridden Methods
  * */
 
-// --------------------------------------------------//
-//                1.Import Statements                //
-// --------------------------------------------------//
+    // --------------------------------------------------//
+    //                1.Import Statements                //
+    // --------------------------------------------------//
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -50,7 +51,6 @@ public class NewAlterGroupController extends Controller {
     @FXML
     private Button addMember, removeMember, save, cancel;
 
-
     // --------------------------------------------------//
     //                4.On Action Methods                //
     // --------------------------------------------------//
@@ -83,21 +83,6 @@ public class NewAlterGroupController extends Controller {
     // --------------------------------------------------//
     //                5.Private Methods                  //
     // --------------------------------------------------//
-
-    private void setupActionHandlers(){
-        addMember.setOnAction(this::onClickAddMember);
-        removeMember.setOnAction(this::onClickRemoveMember);
-        save.setOnAction(this::onClickSave);
-        cancel.setOnAction(this::onClickCancel);
-        availableMembers.setOnMouseClicked(this::onClickAvailableMembers);
-        chosenMembers.setOnMouseClicked(this::onClickChosenMembers);
-    }
-
-
-    private void populateAvaliabeMembers(){
-        avaliableUsersObservableList = FXCollections.observableArrayList(Repository.getAllUsers());
-        availableMembers.setItems(avaliableUsersObservableList);
-    }
 
     private void addChosenMember(){
         if(currentUser == null || checkIfRightList(avaliableUsersObservableList))return;
@@ -134,6 +119,24 @@ public class NewAlterGroupController extends Controller {
 
     private void close(){
         ((Stage)cancel.getScene().getWindow()).close();
+    }
+
+    // --------------------------------------------------//
+    //                5.Private Setup Methods            //
+    // --------------------------------------------------//
+
+    private void setupActionHandlers(){
+        addMember.setOnAction(this::onClickAddMember);
+        removeMember.setOnAction(this::onClickRemoveMember);
+        save.setOnAction(this::onClickSave);
+        cancel.setOnAction(this::onClickCancel);
+        availableMembers.setOnMouseClicked(this::onClickAvailableMembers);
+        chosenMembers.setOnMouseClicked(this::onClickChosenMembers);
+    }
+
+    private void populateAvaliabeMembers(){
+        avaliableUsersObservableList = FXCollections.observableArrayList(Repository.getAllUsers());
+        availableMembers.setItems(avaliableUsersObservableList);
     }
 
     // --------------------------------------------------//
