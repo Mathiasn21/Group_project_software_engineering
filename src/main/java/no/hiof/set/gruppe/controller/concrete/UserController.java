@@ -61,7 +61,7 @@ public class UserController extends Controller {
     @FXML
     private ListView<Arrangement>availableArrangementsListView, myArrangementsView;
     @FXML
-    private Text arrangementTitle, arrangementSport,arrangementAddress,arrangementDate,arrangementParticipants,arrangementGroup, arrangementDescription;
+    private Text arrangementTitle, arrangementSport,arrangementAddress,arrangementDate,arrangementParticipants,arrangementGroup, arrangementDescription, mainTitle;
     @FXML
     private RadioButton radioExp, radioOng, radioFut, radioAll;
     @FXML
@@ -71,7 +71,9 @@ public class UserController extends Controller {
     @FXML
     private ComboBox<SportCategory> availableSortingOptionsMy, sortingOptions;
     @FXML
-    private MenuItem logOut, myGroups;
+    private MenuItem logOut;
+    @FXML
+    private MenuButton menu;
 
     // --------------------------------------------------//
     //                4.On Action Methods                //
@@ -265,7 +267,6 @@ public class UserController extends Controller {
         joinBtn.setOnAction(this::onJoinClick);
         leaveBtn.setOnAction(this::onLeaveClick);
         logOut.setOnAction(this::returnToMainWindow);
-        myGroups.setOnAction(this::onClickMyGroups);
     }
 
     private void setupToggleBtns() {

@@ -97,7 +97,6 @@ public class LoginController extends Controller {
     private void openCorrespondingStage(@NotNull ProtoUser protoUser) {
         title = protoUser.getName();
         name = protoUser.getViewName();
-        System.out.println(getMainController());
         createNewView(this);
     }
 

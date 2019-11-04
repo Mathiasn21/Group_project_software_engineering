@@ -40,7 +40,7 @@ public abstract class Controller implements IControllerDataTransfer, Initializab
             mainController.setupWindow(controller);
             errorOccured = false;
         } catch (IOException e) {
-            err = ErrorExceptionHandler.ERROR_WRONG_DATA_OBJECT;
+            err = ErrorExceptionHandler.ERROR_LOAD_RESOURCE;
             thrown = e;
 
         }finally {
