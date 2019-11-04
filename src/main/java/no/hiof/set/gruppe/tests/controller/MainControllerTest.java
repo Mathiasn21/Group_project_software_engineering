@@ -23,7 +23,7 @@ public class MainControllerTest extends MainJavaFXTest{
     @Test
     void enter_correct_login_information_from_btns(@NotNull FxRobot robot){
         String[] userBtns = {"adminLogin", "arrangLogin", "userLogin"};
-        String[] stageTitles = {"ADMIN", "Arrangør", "Bruker"};
+        String[] stageTitles = {"ADMIN", "Logget inn som arrangør", "Bruker"};
         ProtoUser[] users = {ProtoUser.ADMIN, ProtoUser.ORGANIZER, ProtoUser.USER};
 
         for(int i = 0; i < userBtns.length; i++){

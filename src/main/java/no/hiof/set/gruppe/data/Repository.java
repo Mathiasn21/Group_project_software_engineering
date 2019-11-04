@@ -56,16 +56,10 @@ public class Repository {
         try{
             listOfAllArrangements = readArrangementsData();
             listOfAllUserConnectedArrangements = getUserConnectedArrangements();
+            listofAllGroups = readGroupsData();
+
         }catch (IOException e){
             try {ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_READING_DATA, e);}
-            catch (IOException ex) {ex.printStackTrace();}
-        }
-
-        try{
-            listofAllGroups = readGroupsData();
-            System.out.println(listofAllGroups);
-        }catch (IOException e){
-            try{ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_READING_DATA, e);}
             catch (IOException ex) {ex.printStackTrace();}
         }
     }
