@@ -22,7 +22,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import no.hiof.set.gruppe.Exceptions.DataFormatException;
 import no.hiof.set.gruppe.controller.abstractions.Controller;
 import no.hiof.set.gruppe.model.Group;
@@ -30,6 +29,12 @@ import no.hiof.set.gruppe.model.ViewInformation;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+
+/**
+ * This controller controls all functionality and logic pertaining
+ * to the Group View
+ * @author Gruppe4
+ */
 public class GroupController extends Controller {
 
     // --------------------------------------------------//

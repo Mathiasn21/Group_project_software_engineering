@@ -31,6 +31,11 @@ import no.hiof.set.gruppe.model.constantInformation.DummyUsers;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * This controller controls all functionality and logic pertaining
+ * to the NewAlterGroup View
+ * @author Gruppe4
+ */
 public class NewAlterGroupController extends Controller {
 
     // --------------------------------------------------//

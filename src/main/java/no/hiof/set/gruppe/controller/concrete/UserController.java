@@ -37,6 +37,11 @@ import org.jetbrains.annotations.Nullable;
 import java.net.URL;
 import java.util.*;
 
+/**
+ * This controller controls all functionality and logic pertaining
+ * to the User View
+ * @author Gruppe4
+ */
 public class UserController extends Controller {
     // --------------------------------------------------//
     //                2.Local Fields                     //
