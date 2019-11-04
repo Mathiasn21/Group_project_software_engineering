@@ -21,7 +21,6 @@
       <MenuButton layoutX="12.0" layoutY="14.0" mnemonicParsing="false" text="Meny">
         <items>
           <MenuItem fx:id="myIndividualArrangementsBtn" mnemonicParsing="false" text="Mine indivuelle arrangementer" />
-            <MenuItem fx:id="myGroupsBtn" mnemonicParsing="false" text="Mine grupper" />
             <MenuItem fx:id="logoutBtn" mnemonicParsing="false" text="Logg ut" />
         </items>
       </MenuButton>
@@ -46,5 +45,6 @@
       </VBox>
       <Text fx:id="groupName" layoutX="455.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Navn" />
       <Text fx:id="members" layoutX="419.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="..." textAlignment="CENTER" wrappingWidth="99.99999804608524" />
+      <Button fx:id="closeBtn" layoutX="494.0" layoutY="396.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="95.0" text="Lukk" />
    </children>
 </AnchorPane>

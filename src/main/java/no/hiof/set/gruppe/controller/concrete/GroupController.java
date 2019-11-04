@@ -42,7 +42,7 @@ public class GroupController extends Controller {
     // --------------------------------------------------//
     private String title = "";
     private String name = "";
-    private ObservableList<Group>groupsList;
+    private ObservableList<Group> groupsList;
     private Group currentSeletedGroup = null;
     // --------------------------------------------------//
     //                3.FXML Fields                      //
@@ -51,7 +51,7 @@ public class GroupController extends Controller {
     @FXML
     private Button newGroupBtn, deleteBtn, editBtn;
     @FXML
-    private MenuItem myIndividualArrangementsBtn, myGroupsBtn, logoutBtn;
+    private MenuItem myIndividualArrangementsBtn, logoutBtn;
     @FXML
     private ListView<Group> groupsListview;
     @FXML
@@ -61,38 +61,42 @@ public class GroupController extends Controller {
     //                4.On Action Methods                //
     // --------------------------------------------------//
 
-    private void onClicknewGroupBtn(ActionEvent event){
-        System.out.println("ny");
+    //Håndtering av views må endres
+    private void onClicknewGroupBtn(ActionEvent event) {
+        title = "Ny gruppe";
+        name = "NewAlterGroup.fxml";
+        createNewView(this);
     }
 
-    private void onClickDeletBtn(ActionEvent event){
+    private void onClickDeletBtn(ActionEvent event) {
         System.out.println("slett");
     }
 
-    private void onClickEditBtn(ActionEvent event){
+    private void onClickEditBtn(ActionEvent event) {
         System.out.println("rediger");
     }
 
-    private void onClickMyIndividualArrangementsBtn(ActionEvent event){
-        System.out.println("mine individuelle arrangementer");
+    private void onClickMyIndividualArrangementsBtn(ActionEvent event) {
+        title = "Mine arrangementer";
+        name = "User.fxml";
+        closeWindow(editBtn);
+        createNewView(this);
     }
 
-    private void onClickMyGroupsBtn(ActionEvent event){
-        System.out.println("mine grupper");
+    private void onClickLogoutBtn(ActionEvent event) {
+        title = "Logg inn";
+        name = "Login.fxml";
+        closeWindow(editBtn);
+        createNewView(this);
     }
 
-    private void onClickLogoutBtn(ActionEvent event){
-        closeWindow(deleteBtn);
-    }
-
-    private void onClickGroupsListView(MouseEvent event){
+    private void onClickGroupsListView(MouseEvent event) {
         System.out.println("liste");
     }
 
     // --------------------------------------------------//
     //                5.Private Functional Methods       //
     // --------------------------------------------------//
-
 
 
     // --------------------------------------------------//
@@ -103,7 +107,7 @@ public class GroupController extends Controller {
     //                7.Private Setup Methods            //
     // --------------------------------------------------//
 
-    private void setupActionHandlers(){
+    private void setupActionHandlers() {
         newGroupBtn.setOnAction(this::onClicknewGroupBtn);
         deleteBtn.setOnAction(this::onClickDeletBtn);
         editBtn.setOnAction(this::onClickEditBtn);
@@ -111,7 +115,6 @@ public class GroupController extends Controller {
 
         //Menu items
         myIndividualArrangementsBtn.setOnAction(this::onClickMyIndividualArrangementsBtn);
-        myGroupsBtn.setOnAction(this::onClickMyGroupsBtn);
         logoutBtn.setOnAction(this::onClickLogoutBtn);
     }
 
@@ -136,6 +139,6 @@ public class GroupController extends Controller {
 
     @Override
     public ViewInformation getViewInformation() {
-        return null;
+        return new ViewInformation(name, title);
     }
 }

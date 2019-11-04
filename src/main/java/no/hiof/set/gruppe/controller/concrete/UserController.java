@@ -140,13 +140,10 @@ public class UserController extends Controller {
         createNewView(this);
     }
 
-    private void onClickNewGroup(ActionEvent event){
-
-    }
-
     private void onClickMyGroups(ActionEvent event){
         title = "Mine grupper";
         name = "Groups.fxml";
+        closeWindow(joinBtn);
         createNewView(this);
     }
 

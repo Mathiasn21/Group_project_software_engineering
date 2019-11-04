@@ -21,7 +21,7 @@ public enum ProtoUser {
     //                2.Constants                        //
     // --------------------------------------------------//
     ADMIN("Admin", "Password1", "Admin.fxml"),
-    USER("ProtoUser", "Password2", "User2.fxml"),
+    USER("ProtoUser", "Password2", "User.fxml"),
     ORGANIZER("Organizer", "Password3", "Organizer.fxml");
 
     String user;
