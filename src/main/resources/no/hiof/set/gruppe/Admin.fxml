@@ -106,7 +106,7 @@
          </children>
       </VBox>
       <Button fx:id="delete" layoutX="173.0" layoutY="470.0" mnemonicParsing="false" text="Slett" />
-      <Text fx:id="arrangementName" layoutX="279.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="373.9999935030937">
+      <Text fx:id="arrangementName" layoutX="277.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="373.9999935030937">
          <font>
             <Font size="25.0" />
          </font>
@@ -123,7 +123,6 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <Text fx:id="arrangementDescription" layoutX="295.0" layoutY="394.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="341.60000681877136" />
       <TextField fx:id="search" layoutX="42.0" layoutY="49.0" prefHeight="26.0" prefWidth="171.0" />
       <Text layoutX="10.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Søk" />
       <Button fx:id="edit" layoutY="470.0" mnemonicParsing="false" text="Rediger" />

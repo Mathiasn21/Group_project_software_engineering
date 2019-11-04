@@ -31,16 +31,5 @@
     "description": "Only for nerds, simple minded not allowed.",
     "participants": 400,
     "group": false
-  },
-  {
-    "ID": "e07aef67-8eec-4a05-ad1c-a8b96bc92df0",
-    "name": "ThisIsNerdy",
-    "sport": "Alle",
-    "address": "NerdStreet - 22",
-    "startDate": "2020-11-09",
-    "endDate": "2020-12-09",
-    "description": "Very Nerdy.",
-    "participants": 400,
-    "group": true
   }
 ]

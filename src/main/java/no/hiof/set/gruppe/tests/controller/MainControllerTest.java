@@ -14,7 +14,7 @@ import org.testfx.framework.junit5.Start;
 
 import java.io.IOException;
 @ExtendWith(ApplicationExtension.class)
-class MainControllerTest extends MainJavaFXTest{
+public class MainControllerTest extends MainJavaFXTest{
     @Start
     public void start(@NotNull Stage stage) throws IOException {
         new MainJavaFXTest().start(stage);
@@ -41,6 +41,7 @@ class MainControllerTest extends MainJavaFXTest{
     private void thenAssertLoginHasCorrectWindow(@NotNull FxRobot usingRobot, String stageTitle) {
         usingRobot.clickOn("#logInn");
         Assertions.assertThat(usingRobot.lookup("#mainTitle").queryAs(Text.class)).hasText(stageTitle);
+        usingRobot.clickOn("#menu");
         usingRobot.clickOn("#logOut");
     }
 }

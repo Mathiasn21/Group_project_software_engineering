@@ -100,7 +100,7 @@ public abstract class Controller implements IControllerDataTransfer, Initializab
         return a.getStartDate().toString() + " til " + a.getEndDate().toString();
     }
 
-    protected void closeWindow(Button b) {
+    protected void closeWindow(@NotNull Button b) {
         ((Stage)b.getScene().getWindow()).close();
     }
 }
