@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="603.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="no.hiof.set.gruppe.controller.concrete.GroupController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="603.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="no.hiof.set.gruppe.controller.concrete.GroupController">
    <children>
       <ListView fx:id="groupsListview" layoutX="12.0" layoutY="94.0" prefHeight="275.0" prefWidth="191.0" />
       <Text layoutX="47.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mine grupper">
@@ -43,7 +43,23 @@
             </Button>
          </children>
       </VBox>
-      <Text fx:id="groupName" layoutX="455.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Navn" />
-      <Text fx:id="members" layoutX="419.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="..." textAlignment="CENTER" wrappingWidth="99.99999804608524" />
+      <Text fx:id="groupName" layoutX="419.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="100.00000366196036">
+         <font>
+            <Font size="18.0" />
+         </font></Text>
+      <Text fx:id="members" layoutX="419.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="99.99999804608524">
+         <font>
+            <Font size="15.0" />
+         </font></Text>
+      <Text layoutX="421.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gruppenavn" underline="true">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="421.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Medlemmer" underline="true">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

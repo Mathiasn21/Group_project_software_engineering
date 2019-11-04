@@ -28,6 +28,8 @@ import no.hiof.set.gruppe.controller.abstractions.Controller;
 import no.hiof.set.gruppe.data.Repository;
 import no.hiof.set.gruppe.model.Group;
 import no.hiof.set.gruppe.model.ViewInformation;
+import no.hiof.set.gruppe.model.constantInformation.DummyUsers;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -93,7 +95,7 @@ public class GroupController extends Controller {
 
     private void onClickGroupsListView(MouseEvent event) {
         setSelectedGroup();
-        System.out.println(selectedGroup);
+        setGroupInformation();
     }
 
     // --------------------------------------------------//
@@ -126,6 +128,16 @@ public class GroupController extends Controller {
     private void populateListView(){
         groupsList = FXCollections.observableArrayList(Repository.getAllGroups());
         groupsListview.setItems(groupsList);
+    }
+
+    private void setGroupInformation(){
+        if(selectedGroup == null)return;;
+        groupName.setText(selectedGroup.getName());
+        String returingMembers = "";
+        for(DummyUsers dummyUsers : selectedGroup.getMembers()){
+            returingMembers += dummyUsers + "\n";
+        }
+        members.setText(returingMembers);
     }
 
     // --------------------------------------------------//
