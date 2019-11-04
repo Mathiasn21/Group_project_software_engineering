@@ -192,8 +192,6 @@ public class Arrangement implements IGetAllData, IGetAllDataRaw{
                 this.endDate.equals(that.endDate) &&
                 this.description.equals(that.getDescription());
     }
-}
-
 
     /**
      * Returns all raw data in this sequence:

@@ -127,7 +127,7 @@ public class OrganizerController extends Controller {
     private void returnToMainWindow(ActionEvent event) {
         title = "Logg inn";
         name = "Login.fxml";
-        ((Stage)logOut.getScene().getWindow()).close();
+        ((Stage)deleteBtn.getScene().getWindow()).close();
         createNewView(this);
     }
 
