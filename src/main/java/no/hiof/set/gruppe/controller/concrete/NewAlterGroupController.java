@@ -65,6 +65,7 @@ public class NewAlterGroupController extends Controller {
 
     private void onClickSave(ActionEvent event){
         createGroup();
+        close();
     }
 
     private void onClickCancel(ActionEvent event){
@@ -114,10 +115,11 @@ public class NewAlterGroupController extends Controller {
     }
 
     private void createGroup(){
-        Group group = new Group("name", 1);
+        Group group = new Group(name.getText(), 1); //ID skal generes automatisk senere
         group.addMulipleMembers(chosenUsersObservableList);
         Repository.addGroup(group);
     }
+
 
     private void setCurrentUser(ListView<DummyUsers> list){
         currentUser = list.getSelectionModel().getSelectedItem();
