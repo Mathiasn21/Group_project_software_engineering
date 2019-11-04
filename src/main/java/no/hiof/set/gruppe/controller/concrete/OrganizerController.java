@@ -130,7 +130,12 @@ public class OrganizerController extends Controller {
         title = "Logg inn";
         name = "Login.fxml";
 <<<<<<< HEAD
+<<<<<<< HEAD
         ((Stage)deleteBtn.getScene().getWindow()).close();
+=======
+        closeWindow(deleteBtn);
+        System.out.println(getMainController());
+>>>>>>> parent of 9bf76d2... Merge branch 'TestingJFXFramework' into Premature_Alpha
 =======
         closeWindow(deleteBtn);
         System.out.println(getMainController());
