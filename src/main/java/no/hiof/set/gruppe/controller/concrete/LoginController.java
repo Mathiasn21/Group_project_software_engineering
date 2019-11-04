@@ -77,7 +77,7 @@ public class LoginController extends Controller {
 
         try{
             ProtoUser protoUser = Repository.getUserDetails(new LoginInformation(userName, password));
-            ((Stage)logInn.getScene().getWindow()).close();
+            closeWindow(logInn);
             openCorrespondingStage(protoUser);
 
         }catch (InvalidLoginInformation invalidLogin){

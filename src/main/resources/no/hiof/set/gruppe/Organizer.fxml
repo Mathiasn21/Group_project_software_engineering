@@ -21,7 +21,7 @@
             <Font size="25.0" />
          </font>
       </Text>
-      <ListView fx:id="listview" layoutX="6.0" layoutY="96.0" prefHeight="505.0" prefWidth="341.0">
+      <ListView fx:id="listview" layoutX="6.0" layoutY="129.0" prefHeight="494.0" prefWidth="341.0">
          <opaqueInsets>
             <Insets top="5.0" />
          </opaqueInsets>
@@ -142,9 +142,9 @@
             <MenuItem fx:id="logOut" mnemonicParsing="false" text="Logg ut" />
          </items>
       </MenuButton>
-      <Text fx:id="mainTitle" layoutX="289.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Arrangør" textAlignment="CENTER" wrappingWidth="150.13671875">
+      <Text fx:id="mainTitle" fill="#4a4a4a" layoutX="582.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Logget inn som arrangør" textAlignment="CENTER" wrappingWidth="251.13671875">
          <font>
-            <Font size="18.0" />
+            <Font size="15.0" />
          </font>
       </Text>
    </children>
