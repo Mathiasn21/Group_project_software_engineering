@@ -22,6 +22,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import no.hiof.set.gruppe.Exceptions.DataFormatException;
 import no.hiof.set.gruppe.controller.abstractions.Controller;
@@ -29,7 +30,6 @@ import no.hiof.set.gruppe.data.Repository;
 import no.hiof.set.gruppe.model.Group;
 import no.hiof.set.gruppe.model.ViewInformation;
 import no.hiof.set.gruppe.model.constantInformation.DummyUsers;
-
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -58,7 +58,7 @@ public class GroupController extends Controller {
     @FXML
     private ListView<Group> groupsListview;
     @FXML
-    private Text members, groupName;
+    private Text members, groupName, groupNameStatic, membersStatic;
 
     // --------------------------------------------------//
     //                4.On Action Methods                //
@@ -80,17 +80,11 @@ public class GroupController extends Controller {
     }
 
     private void onClickMyIndividualArrangementsBtn(ActionEvent event) {
-        title = "Mine arrangementer";
-        name = "User.fxml";
-        closeWindow(editBtn);
-        createNewView(this);
+        switchView("Mine arrangementer","User.fxml");
     }
 
     private void onClickLogoutBtn(ActionEvent event) {
-        title = "Logg inn";
-        name = "Login.fxml";
-        closeWindow(editBtn);
-        createNewView(this);
+        switchView("Logg inn", "Login.fxml");
     }
 
     private void onClickGroupsListView(MouseEvent event) {
@@ -104,6 +98,13 @@ public class GroupController extends Controller {
 
     private void setSelectedGroup(){
         selectedGroup = groupsListview.getSelectionModel().getSelectedItem();
+    }
+
+    private void switchView(String newTitle, String newName){
+        title = newTitle;
+        name = newName;
+        closeWindow(editBtn);
+        createNewView(this);
     }
 
     // --------------------------------------------------//
@@ -131,13 +132,25 @@ public class GroupController extends Controller {
     }
 
     private void setGroupInformation(){
-        if(selectedGroup == null)return;;
+        if(selectedGroup == null)return;
+        setColors();
         groupName.setText(selectedGroup.getName());
-        String returingMembers = "";
+        String returningMembers = "";
         for(DummyUsers dummyUsers : selectedGroup.getMembers()){
-            returingMembers += dummyUsers + "\n";
+            returningMembers += dummyUsers + "\n";
         }
-        members.setText(returingMembers);
+        members.setText(returningMembers);
+    }
+
+    private void setColors(){
+        if(selectedGroup == null){
+            groupNameStatic.setFill(Color.GREY);
+            membersStatic.setFill(Color.GREY);
+        }
+        else{
+            groupNameStatic.setFill(Color.BLACK);
+            membersStatic.setFill(Color.BLACK);
+        }
     }
 
     // --------------------------------------------------//
@@ -148,6 +161,7 @@ public class GroupController extends Controller {
     public void initialize(URL location, ResourceBundle resources) {
         setupActionHandlers();
         populateListView();
+        setColors();
     }
 
     @Override
