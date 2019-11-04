@@ -52,7 +52,7 @@ public class OrganizerController extends Controller {
     //                2.Local Fields                     //
     // --------------------------------------------------//
     private String title = "";
-    private String name = "NewAlterArrangement.fxml";
+    private String name = "";
     private ObservableList<Arrangement>arrangementListObservable;
     private FilteredList<Arrangement> filteredList;
     private Arrangement currentArrangement = null;
@@ -107,6 +107,7 @@ public class OrganizerController extends Controller {
     private void onEditClick(ActionEvent event){
         if(listview.getSelectionModel().getSelectedItem() != null){
             title = "Rediger";
+            name = "NewAlterArrangement.fxml";
             createNewView(this, currentArrangement);
         }
         else
