@@ -4,6 +4,7 @@ import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import no.hiof.set.gruppe.tests.controller.*;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -22,6 +23,7 @@ import java.util.Set;
 
 @ExtendWith(ApplicationExtension.class)
 public class AdminControllerTests extends MainJavaFXTest{
+
     private Arrangement currentTestArrangement;
     @Start
     public void start(@NotNull Stage stage) throws IOException {
