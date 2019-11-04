@@ -135,11 +135,11 @@ public class GroupController extends Controller {
         if(selectedGroup == null)return;
         setColors();
         groupName.setText(selectedGroup.getName());
-        String returningMembers = "";
+        StringBuilder stringMembers = new StringBuilder();
         for(DummyUsers dummyUsers : selectedGroup.getMembers()){
-            returningMembers += dummyUsers + "\n";
+            stringMembers.append(dummyUsers + "\n");
         }
-        members.setText(returningMembers);
+        members.setText(stringMembers.toString());
     }
 
     private void setColors(){
