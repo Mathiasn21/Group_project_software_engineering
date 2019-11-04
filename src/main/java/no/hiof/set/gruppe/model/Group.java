@@ -13,6 +13,7 @@ package no.hiof.set.gruppe.model;
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
+import javafx.collections.ObservableList;
 import no.hiof.set.gruppe.model.constantInformation.DummyUsers;
 
 import java.util.ArrayList;
@@ -42,8 +43,13 @@ public class Group implements IGetAllData {
     // --------------------------------------------------//
     //                4.Public Methods                   //
     // --------------------------------------------------//
-    public void addmember (DummyUsers dummyUser){
+    public void addOnemember (DummyUsers dummyUser){
         members.add(dummyUser);
+    }
+
+    public void addMulipleMembers(ObservableList<DummyUsers> userlist){
+        for(DummyUsers user : userlist)
+            members.add(user);
     }
 
     // --------------------------------------------------//
@@ -67,4 +73,9 @@ public class Group implements IGetAllData {
     // --------------------------------------------------//
     @Override
     public String[] getAllDataAsStringArr() { return new String[0]; }
+
+    @Override
+    public String toString(){
+        return name + " " + members;
+    }
 }

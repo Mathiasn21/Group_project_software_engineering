@@ -1,0 +1,26 @@
+[
+  {
+    "name": "name",
+    "id": 1,
+    "members": [
+      "USER6",
+      "USER8"
+    ]
+  },
+  {
+    "name": "name",
+    "id": 1,
+    "members": [
+      "USER10",
+      "USER9"
+    ]
+  },
+  {
+    "name": "name",
+    "id": 1,
+    "members": [
+      "USER9",
+      "USER7"
+    ]
+  }
+]

@@ -24,6 +24,7 @@ import javafx.stage.Stage;
 import no.hiof.set.gruppe.Exceptions.DataFormatException;
 import no.hiof.set.gruppe.controller.abstractions.Controller;
 import no.hiof.set.gruppe.data.Repository;
+import no.hiof.set.gruppe.model.Group;
 import no.hiof.set.gruppe.model.ViewInformation;
 import no.hiof.set.gruppe.model.constantInformation.DummyUsers;
 import java.net.URL;
@@ -63,7 +64,7 @@ public class NewAlterGroupController extends Controller {
     }
 
     private void onClickSave(ActionEvent event){
-        System.out.println("save");
+        createGroup();
     }
 
     private void onClickCancel(ActionEvent event){
@@ -98,7 +99,7 @@ public class NewAlterGroupController extends Controller {
     }
 
     private void addChosenMember(){
-        if(currentUser == null || checkIfRightRightList(avaliableUsersObservableList))return;
+        if(currentUser == null || checkIfRightList(avaliableUsersObservableList))return;
         chosenUsersObservableList.add(currentUser);
         avaliableUsersObservableList.remove(currentUser);
         chosenMembers.setItems(chosenUsersObservableList);
@@ -106,17 +107,23 @@ public class NewAlterGroupController extends Controller {
     }
 
     private void removeChosenMember(){
-        if(currentUser == null || checkIfRightRightList(chosenUsersObservableList))return;
+        if(currentUser == null || checkIfRightList(chosenUsersObservableList))return;
         chosenUsersObservableList.remove(currentUser);
         avaliableUsersObservableList.add(currentUser);
         currentUser = null;
+    }
+
+    private void createGroup(){
+        Group group = new Group("name", 1);
+        group.addMulipleMembers(chosenUsersObservableList);
+        Repository.addGroup(group);
     }
 
     private void setCurrentUser(ListView<DummyUsers> list){
         currentUser = list.getSelectionModel().getSelectedItem();
     }
 
-    private boolean checkIfRightRightList(ObservableList<DummyUsers> o) {
+    private boolean checkIfRightList(ObservableList<DummyUsers> o) {
         for (DummyUsers user : o) {
             if (currentUser == user)return false;
         }

@@ -19,6 +19,7 @@ import no.hiof.set.gruppe.Exceptions.IllegalDataAccess;
 import no.hiof.set.gruppe.Exceptions.InvalidLoginInformation;
 import no.hiof.set.gruppe.Exceptions.UnableToRegisterUser;
 import no.hiof.set.gruppe.model.Arrangement;
+import no.hiof.set.gruppe.model.Group;
 import no.hiof.set.gruppe.model.ValidationResult;
 import no.hiof.set.gruppe.model.constantInformation.DummyUsers;
 import no.hiof.set.gruppe.model.user.ILoginInformation;
@@ -29,7 +30,6 @@ import no.hiof.set.gruppe.util.AccessValidate;
 import no.hiof.set.gruppe.util.Validation;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
-
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
@@ -46,7 +46,9 @@ public class Repository {
     // --------------------------------------------------//
     private static String arrangementFName = "arrangements.json";
     private static String userHasArrangements = "userHasArrangements.json";
+    private static String groupsFName = "groups.json";
     private static List<Arrangement> listOfAllArrangements;
+    private static List<Group> listofAllGroups;
     private static List<UserConnectedArrangement> listOfAllUserConnectedArrangements;
 
     //Preloads data.
@@ -56,6 +58,14 @@ public class Repository {
             listOfAllUserConnectedArrangements = getUserConnectedArrangements();
         }catch (IOException e){
             try {ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_READING_DATA, e);}
+            catch (IOException ex) {ex.printStackTrace();}
+        }
+
+        try{
+            listofAllGroups = readGroupsData();
+            System.out.println(listofAllGroups);
+        }catch (IOException e){
+            try{ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_READING_DATA, e);}
             catch (IOException ex) {ex.printStackTrace();}
         }
     }
@@ -151,6 +161,10 @@ public class Repository {
         return new ArrayList<>(listFromJson(Arrangement[].class, readFromFile(arrangementFName)));
     }
 
+    private static List<Group>readGroupsData()throws IOException{
+        return new ArrayList<>(listFromJson(Group[].class, readFromFile(groupsFName)));
+    }
+
     /**
      * @return {@link List}
      * @throws IOException IOException{@link IOException}
@@ -167,6 +181,10 @@ public class Repository {
     private static void storeArrangementsData() {
         writeToFile(toJson(Arrangement[].class, listOfAllArrangements.toArray(Arrangement[]::new)), arrangementFName);
         storeUserArrangements();
+    }
+
+    private static void storeGroupData(){
+        writeToFile(toJson(Group[].class, listofAllGroups.toArray(Group[]::new)),groupsFName);
     }
 
 
@@ -209,6 +227,11 @@ public class Repository {
         if(!result.IS_VALID)throw new UnableToRegisterUser(result);
     }
 
+    public static void addGroup(@NotNull Group group){
+        listofAllGroups.add(group);
+        storeGroupData();
+    }
+
     // --------------------------------------------------//
     //                5.Public Data Removal              //
     // --------------------------------------------------//
@@ -239,7 +262,6 @@ public class Repository {
         }
         storeArrangementsData();
     }
-
 
     // --------------------------------------------------//
     //                6.Public Getters                   //
