@@ -49,7 +49,6 @@ class TestSystemFunctionality {
                 arrangement.getAddress(),
                 arrangement.getStartDate() + " til " + arrangement.getEndDate(),
                 String.valueOf(arrangement.getParticipants()),
-                arrangement.isGroup() ? "Lagkonkurranse" : "Individuell konkurranse",
                 arrangement.getDescription()
         };
         String[] arrangementDataFields = arrangement.getAllDataAsStringArr();

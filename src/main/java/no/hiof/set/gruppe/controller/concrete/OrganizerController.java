@@ -111,6 +111,8 @@ public class OrganizerController extends Controller {
             name = "NewAlterArrangement.fxml";
             createNewView(this, currentArrangement);
         }
+        else
+            System.out.println("Du har ikke valgt et arrangement");
     }
 
     /**
@@ -127,7 +129,12 @@ public class OrganizerController extends Controller {
     private void returnToMainWindow(ActionEvent event) {
         title = "Logg inn";
         name = "Login.fxml";
+<<<<<<< HEAD
         ((Stage)deleteBtn.getScene().getWindow()).close();
+=======
+        closeWindow(deleteBtn);
+        System.out.println(getMainController());
+>>>>>>> parent of 9bf76d2... Merge branch 'TestingJFXFramework' into Premature_Alpha
         createNewView(this);
     }
 
@@ -163,7 +170,6 @@ public class OrganizerController extends Controller {
         catch (IllegalDataAccess illegalDataAccess) {
             try {ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_ACCESSING_DATA, illegalDataAccess); }
             catch (IOException e) {e.printStackTrace();}
-            Controller.createAlert(ErrorExceptionHandler.ERROR_ACCESSING_DATA);
         }
     }
 
@@ -201,7 +207,7 @@ public class OrganizerController extends Controller {
     private void liveSearchUpdate(){
         arrSearch.textProperty().addListener(((s) -> search()));
     }
-
+    
     // --------------------------------------------------//
     //                7.Private Setup Methods            //
     // --------------------------------------------------//
@@ -281,7 +287,6 @@ public class OrganizerController extends Controller {
         } catch (IllegalDataAccess illegalDataAccess) {
             try {ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_ACCESSING_DATA, illegalDataAccess);}
             catch (IOException e) {e.printStackTrace();}
-            Controller.createAlert(ErrorExceptionHandler.ERROR_ACCESSING_DATA);
         }
         if(selModel.getSelectedItem() == null) selModel.selectLast();
         listview.refresh();

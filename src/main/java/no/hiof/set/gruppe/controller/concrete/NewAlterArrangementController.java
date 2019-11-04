@@ -137,10 +137,12 @@ public class NewAlterArrangementController extends Controller {
     }
 
     private boolean checkLengthOfAllFields(){
-        return arrName.length() == 0 || sport.length() == 0 || partic.length() == 0 || desc.length() == 0 || address.length() == 0 || startDateInput.getValue() == null || endDateInput.getValue() == null;
+        return arrName.length() == 0 || sport.length() == 0 || partic.length() == 0 || desc.length() == 0 || address.length() == 0 || startDate == null || endDate == null;
     }
 
     private boolean illegalNumberFormat(){
+        //must throw exception in the future
+        //"Ugyldig nummer format.\n";
         if(!Validation.ofNumber(partic)){
             setErrorField("Antall deltakere har ikke gyldig nummer format.");
             return true;
@@ -181,7 +183,6 @@ public class NewAlterArrangementController extends Controller {
         ErrorField.setText(result);
         ErrorField.setVisible(true);
         ErrorField.setDisable(false);
-        ErrorField.setEditable(false);
     }
 
     // --------------------------------------------------//
