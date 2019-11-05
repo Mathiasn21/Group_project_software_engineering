@@ -154,6 +154,7 @@ public class Repository {
     private static List<Arrangement> readArrangementsData() throws IOException {
         return new ArrayList<>(listFromJson(Arrangement[].class, readFromFile(arrangementFName)));
     }
+
     //Should be refactored
     @NotNull
     @Contract(" -> new")
@@ -174,7 +175,6 @@ public class Repository {
     /**
      * Stores all arrangements and their user connection
      */
-
     //Should be refactored
     private static void storeArrangementsData() {
         writeToFile(toJson(Arrangement[].class, listOfAllArrangements.toArray(Arrangement[]::new)), arrangementFName);
@@ -229,6 +229,7 @@ public class Repository {
         listofAllGroups.add(group);
         storeGroupData();
     }
+
 
     // --------------------------------------------------//
     //                5.Public Data Removal              //

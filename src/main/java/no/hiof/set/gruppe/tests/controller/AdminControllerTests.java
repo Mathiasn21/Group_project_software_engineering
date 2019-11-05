@@ -1,11 +1,10 @@
 package no.hiof.set.gruppe.tests.controller;
 
 import javafx.scene.Node;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import no.hiof.set.gruppe.MainJavaFX;
 import no.hiof.set.gruppe.tests.controller.*;
-import javafx.scene.control.TextInputControl;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import no.hiof.set.gruppe.model.Arrangement;
@@ -19,23 +18,35 @@ import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
 
 import java.io.IOException;
+import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @ExtendWith(ApplicationExtension.class)
 public class AdminControllerTests extends MainJavaFXTest{
 
+    private Scene scene;
     private Arrangement currentTestArrangement;
     @Start
     public void start(@NotNull Stage stage) throws IOException {
         MainJavaFXTest mainJavaFXTest = new MainJavaFXTest();
         mainJavaFXTest.setStartView(ProtoUser.ADMIN.getViewName());
         mainJavaFXTest.start(stage);
+        this.scene = stage.getScene();
     }
 
     @Test
     void selectArrangementAndEdit(@NotNull FxRobot robot){
         selectArrangementTest(robot);
         robot.clickOn("#edit");
+
+        /*
+        DatePicker date = robot.lookup("#startDateInput").queryAs(DatePicker.class);
+        Set<Node> nodeList1 = date.lookupAll(".date-picker:hover > .arrow-button");
+        Node[] arr = nodeList1.toArray(Node[]::new);
+        robot.clickOn(arr[0]);
+        */
+
         editArrangementTest(robot);
     }
 

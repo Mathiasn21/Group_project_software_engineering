@@ -54,7 +54,6 @@ public class AdminController extends Controller {
     // --------------------------------------------------//
     //                3.FXML Fields                      //
     // --------------------------------------------------//
-
      @FXML
      private Button edit, delete;
      @FXML

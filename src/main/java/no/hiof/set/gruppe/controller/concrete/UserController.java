@@ -195,6 +195,7 @@ public class UserController extends Controller {
         return title.contains(search) && categoryMatch(arrangement);
     }
 
+
     /**
      * Returns a Boolean based on match with given search string, as well
      * as a given category and a given date predicate.
