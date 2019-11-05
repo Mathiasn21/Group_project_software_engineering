@@ -2,11 +2,17 @@ package no.hiof.set.gruppe.controller.abstractions;
 
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
+import javafx.stage.Stage;
 import no.hiof.set.gruppe.Exceptions.ErrorExceptionHandler;
 import no.hiof.set.gruppe.MainJavaFX;
+import no.hiof.set.gruppe.model.Arrangement;
 import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * This class is the main setup for all other controllers and their logic.
@@ -34,7 +40,7 @@ public abstract class Controller implements IControllerDataTransfer, Initializab
             mainController.setupWindow(controller);
             errorOccured = false;
         } catch (IOException e) {
-            err = ErrorExceptionHandler.ERROR_WRONG_DATA_OBJECT;
+            err = ErrorExceptionHandler.ERROR_LOAD_RESOURCE;
             thrown = e;
 
         }finally {
@@ -54,11 +60,6 @@ public abstract class Controller implements IControllerDataTransfer, Initializab
         return mainController;
     }
 
-    /**
-     * Default logic for closing of a view
-     */
-    @Override
-    public void onCloseStoreInformation(){}
     public boolean hasNewObject(){
         return false;
     }
@@ -77,5 +78,29 @@ public abstract class Controller implements IControllerDataTransfer, Initializab
         alert.setTitle("ERROR");
         alert.setContentText(errMsg.CODE + " " + errMsg.ERROR_MSG);
         alert.showAndWait();
+    }
+
+    protected ArrayList<Text> viewFields(Text name, Text sport, Text adress, Text date, Text participants, Text groups, Text description){
+        Text[] t = {name, sport, adress, date, participants, groups, description};
+        return new ArrayList<>(Arrays.asList(t));
+    }
+
+    protected ArrayList<String>arrangementData(@NotNull Arrangement a){
+        String[] s = {a.getName(), a.getSport(), a.getAddress(), dateString(a), Integer.toString(a.getParticipants()), groupsOrIndividuals(a), a.getDescription()};
+        return new ArrayList<>(Arrays.asList(s));
+    }
+
+    @NotNull
+    private String groupsOrIndividuals(@NotNull Arrangement arrangement){
+        return arrangement.isGroup() ? "Lagkonkurranse" : "Individuell konkurranse";
+    }
+
+    @NotNull
+    private String dateString(@NotNull Arrangement a){
+        return a.getStartDate().toString() + " til " + a.getEndDate().toString();
+    }
+
+    protected void closeWindow(@NotNull Button b) {
+        ((Stage)b.getScene().getWindow()).close();
     }
 }

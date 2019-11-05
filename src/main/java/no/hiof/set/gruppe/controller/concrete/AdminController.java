@@ -12,14 +12,30 @@ package no.hiof.set.gruppe.controller.concrete;
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import no.hiof.set.gruppe.Exceptions.DataFormatException;
+import no.hiof.set.gruppe.Exceptions.ErrorExceptionHandler;
+import no.hiof.set.gruppe.Exceptions.IllegalDataAccess;
 import no.hiof.set.gruppe.controller.abstractions.Controller;
+import no.hiof.set.gruppe.data.Repository;
+import no.hiof.set.gruppe.model.Arrangement;
+import no.hiof.set.gruppe.model.ViewInformation;
+import no.hiof.set.gruppe.model.user.ProtoUser;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
@@ -29,28 +45,105 @@ public class AdminController extends Controller {
     // --------------------------------------------------//
     //                2.Local Fields                     //
     // --------------------------------------------------//
-    private String name = "Login";
     private String title = "Login";
+    private String name = "NewAlterArrangement.fxml";
+    private FilteredList<Arrangement> filteredList;
+    private Arrangement currentArrangement = null;
+    private ObservableList<Arrangement> arrangementListObservable;
 
     // --------------------------------------------------//
     //                3.FXML Fields                      //
     // --------------------------------------------------//
-
      @FXML
-     private Button logOut;
+     private Button edit, delete;
+     @FXML
+     private ListView<Arrangement> arrangementListView;
+     @FXML
+     private TextField search;
+     @FXML
+     private Text arrangementSport, arrangementName, arrangementAdress, arrangementDate, arrangementGorI, arrangementParticipants, arrangementDescription;
+     @FXML
+     private MenuItem logOut;
 
     // --------------------------------------------------//
     //                4.On action Methods                //
     // --------------------------------------------------//
+    private void onDeleteClick(ActionEvent event){
+        if(checkIfLegalArrangement()){
+            deleteArrangement();
+            updateView();
+        }
+    }
+
+    private void onEditClick(ActionEvent event){
+        if(checkIfLegalArrangement()){
+            editArrangement();
+        }
+    }
+
+    private void onListViewClick(MouseEvent mouseEvent){
+        if(checkIfLegalArrangement()){
+            setCurrentArrangement();
+            setInformationAboutArrangementInView();
+        }
+    }
 
     // --------------------------------------------------//
     //                5.Private Methods                  //
     // --------------------------------------------------//
+    private void setupActionHandlers(){
+        logOut.setOnAction(this::returnToMainWindow);
+        edit.setOnAction(this::onEditClick);
+        delete.setOnAction(this::onDeleteClick);
+        arrangementListView.setOnMouseClicked(this::onListViewClick);
+    }
+
     private void returnToMainWindow(ActionEvent event) {
         title = "Logg inn";
         name = "Login.fxml";
-        ((Stage)logOut.getScene().getWindow()).close();
+        closeWindow(delete);
         createNewView(this);
+    }
+
+    private void populateListView(){
+        arrangementListObservable = FXCollections.observableArrayList(Repository.getArrangementsData());
+        arrangementListView.setItems(arrangementListObservable);
+    }
+
+    private Arrangement clickedItemFromListView(){
+        return arrangementListView.getSelectionModel().getSelectedItem();
+    }
+
+    private boolean checkIfLegalArrangement(){
+        return clickedItemFromListView() != null && clickedItemFromListView().getStartDate() != null;
+    }
+
+    private void setCurrentArrangement(){
+        currentArrangement = clickedItemFromListView();
+    }
+
+    private void deleteArrangement(){
+        try {
+            Repository.deleteArrangement(currentArrangement, ProtoUser.ADMIN);
+            arrangementListObservable.remove(currentArrangement);
+            arrangementListView.refresh();
+        }
+        catch (IllegalDataAccess illegalDataAccess) {
+            try { ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_ACCESSING_DATA, illegalDataAccess); }
+            catch (IOException e) {e.printStackTrace();}
+        }
+    }
+
+    private void editArrangement(){
+        title = "Rediger";
+        createNewView(this, currentArrangement);
+    }
+
+    private void setInformationAboutArrangementInView(){
+        ArrayList<Text> viewFields = viewFields(arrangementName, arrangementSport, arrangementAdress, arrangementDate, arrangementParticipants, arrangementGorI, arrangementDescription);
+        ArrayList<String> data = arrangementData(currentArrangement);
+        for(int i = 0; i < data.size(); i++)
+            viewFields.get(i).setText(data.get(i));
     }
 
     // --------------------------------------------------//
@@ -58,7 +151,15 @@ public class AdminController extends Controller {
     // --------------------------------------------------//
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        logOut.setOnAction(this::returnToMainWindow);
+        setupActionHandlers();
+        populateListView();
+    }
+
+    @Override
+    public void updateView(){
+        currentArrangement = arrangementListView.getSelectionModel().getSelectedItem();
+        setInformationAboutArrangementInView();
+        arrangementListView.refresh();
     }
 
     @Override
@@ -72,12 +173,7 @@ public class AdminController extends Controller {
     }
 
     @Override
-    public String getTitle() {
-        return title;
-    }
-
-    @Override
-    public String getName() {
-        return name;
+    public ViewInformation getViewInformation() {
+        return new ViewInformation(name, title);
     }
 }

@@ -6,11 +6,14 @@ package no.hiof.set.gruppe.controller.concrete;
  * 3. FXML Fields
  * 4. On Action Methods
  * 5. Private Methods
- * 6. Overridden Methods
+ * 6. Private Search Methods
+ * 7. Private Setup Methods
+ * 8. Overridden Methods
  * */
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -21,15 +24,21 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import no.hiof.set.gruppe.Exceptions.DataFormatException;
+import no.hiof.set.gruppe.Exceptions.ErrorExceptionHandler;
+import no.hiof.set.gruppe.Exceptions.IllegalDataAccess;
 import no.hiof.set.gruppe.controller.abstractions.Controller;
+import no.hiof.set.gruppe.data.Repository;
 import no.hiof.set.gruppe.model.Arrangement;
-import no.hiof.set.gruppe.data.DataHandler;
+import no.hiof.set.gruppe.model.ViewInformation;
 import no.hiof.set.gruppe.model.constantInformation.SportCategory;
-import no.hiof.set.gruppe.model.user.User;
+import no.hiof.set.gruppe.model.user.ProtoUser;
 import no.hiof.set.gruppe.util.ArrangementSort;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
@@ -43,101 +52,120 @@ public class OrganizerController extends Controller {
     //                2.Local Fields                     //
     // --------------------------------------------------//
     private String title = "";
-    private String name = "NewAlterArrangement.fxml";
+    private String name = "";
     private ObservableList<Arrangement>arrangementListObservable;
     private FilteredList<Arrangement> filteredList;
     private Arrangement currentArrangement = null;
-
+    private static final ProtoUser PROTO_USER = ProtoUser.ORGANIZER;
 
     // --------------------------------------------------//
     //                3.FXML Fields                      //
     // --------------------------------------------------//
     @FXML
-    private Button newArrangementBtn, editBtn, deleteBtn, logOut;
+    private Button newArrangementBtn, editBtn, deleteBtn;
     @FXML
-    private Text arrangementNameView, arrangementAdressView, arrangementDateView, arrangementParticipantsView, arrangementGorIView, arrangementSportView, arrangementDescriptionView;
+    private Text arrangementName, arrangementAdress, arrangementDate, arrangementParticipants, arrangementGorI, arrangementSport, arrangementDescription;
     @FXML
     private TextField arrSearch;
     @FXML
     private ChoiceBox<SportCategory> sortOptions;
     @FXML
     private ListView<Arrangement>listview;
-
+    @FXML
+    private MenuItem logOut;
 
     // --------------------------------------------------//
-    //                4.Event Related Methods            //
+    //                4.On Action Methods                //
     // --------------------------------------------------//
-    private void search(ActionEvent actionEvent){
-        filteredList.setPredicate(this::lowerCaseTitleSearch);
-        listview.setItems(filteredList);
-        listview.refresh();
+
+    /**
+     * @param event {@link ActionEvent}
+     */
+    private void sort(ActionEvent event){
+        sortAndSearch();
     }
 
+    /**
+     * @param mouseEvent {@link MouseEvent}
+     */
     private void onClickListView(MouseEvent mouseEvent) {
         changedView();
         listview.refresh();
     }
 
+    /**
+     * @param event {@link ActionEvent}
+     */
     private void onClick(ActionEvent event) {
         title = "Ny";
+        name = "NewAlterArrangement.fxml";
         createNewView(this, null);
     }
 
+    /**
+     * @param event {@link ActionEvent}
+     */
     private void onEditClick(ActionEvent event){
         if(listview.getSelectionModel().getSelectedItem() != null){
             title = "Rediger";
+            name = "NewAlterArrangement.fxml";
             createNewView(this, currentArrangement);
         }
-        else
-            System.out.println("Du har ikke valgt et arrangement");
     }
 
+    /**
+     * @param event {@link ActionEvent}
+     */
     private void onDelete(ActionEvent event){
         if(listview.getSelectionModel().getSelectedItem() == null) return;
         deleteArrangement();
     }
 
+    /**
+     * @param event {@link ActionEvent}
+     */
     private void returnToMainWindow(ActionEvent event) {
         title = "Logg inn";
         name = "Login.fxml";
-        ((Stage)logOut.getScene().getWindow()).close();
-        System.out.println(getMainController());
+        ((Stage)deleteBtn.getScene().getWindow()).close();
         createNewView(this);
     }
 
-    // --------------------------------------------------//
-    //                5.Private Functional Methods       //
-    // --------------------------------------------------//
-    private void changedView(){
-        Arrangement arrangement = listview.getSelectionModel().getSelectedItem();
-        currentArrangement = arrangement;
-        setInformationAboutArrangementInView();
-        listview.refresh();
+    private void search(){
+        sortAndSearch();
     }
 
-    @NotNull
-    private String groupsOrIndividuals(@NotNull Arrangement arrangement){
-        return arrangement.isGroup() ? "Lagkonkurranse" : "Individuell konkurranse";
+    // --------------------------------------------------//
+    //                5.Private Methods                  //
+    // --------------------------------------------------//
+    private void changedView(){
+        currentArrangement = listview.getSelectionModel().getSelectedItem();
+        setInformationAboutArrangementInView();
+        checkArrangementDate();
+        listview.refresh();
     }
 
     private void setInformationAboutArrangementInView(){
         if(currentArrangement == null)return;
-        arrangementNameView.setText(currentArrangement.getName());
-        arrangementSportView.setText(currentArrangement.getSport());
-        arrangementAdressView.setText(currentArrangement.getAddress());
-        arrangementDateView.setText(currentArrangement.getStartDate().toString() + " til " + currentArrangement.getEndDate().toString());
-        arrangementParticipantsView.setText(Integer.toString(currentArrangement.getParticipants()));
-        arrangementGorIView.setText(groupsOrIndividuals(currentArrangement));
-        arrangementDescriptionView.setText(currentArrangement.getDescription());
+        ArrayList<Text> viewFields = viewFields(arrangementName, arrangementSport, arrangementAdress, arrangementDate, arrangementParticipants, arrangementGorI, arrangementDescription);
+        ArrayList<String> data = arrangementData(currentArrangement);
+        for(int i = 0; i < data.size(); i++)
+            viewFields.get(i).setText(data.get(i));
     }
 
     private void deleteArrangement(){
         Arrangement selectedItem = listview.getSelectionModel().getSelectedItem();
-        arrangementListObservable.remove(selectedItem);
-        DataHandler.deleteArrangement(selectedItem);
-        listview.getSelectionModel().selectFirst();
+        try {
+            Repository.deleteArrangement(selectedItem, PROTO_USER);
+            arrangementListObservable.remove(selectedItem);
+            listview.getSelectionModel().selectFirst();
+        }
+        catch (IllegalDataAccess illegalDataAccess) {
+            try {ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_ACCESSING_DATA, illegalDataAccess); }
+            catch (IOException e) {e.printStackTrace();}
+            Controller.createAlert(ErrorExceptionHandler.ERROR_ACCESSING_DATA);
+        }
     }
-
 
     // --------------------------------------------------//
     //                6.Private Search Methods           //
@@ -155,11 +183,24 @@ public class OrganizerController extends Controller {
         return title.contains(search) && categoryMatch(arrangement);
     }
 
+    /**
+     * @param arrangement {@link Arrangement}
+     * @return boolean
+     */
     private boolean categoryMatch(Arrangement arrangement) {
         SportCategory category = sortOptions.getSelectionModel().getSelectedItem();
         return category.equals(SportCategory.ALL) || arrangement.getSport().equals(category.toString());
     }
 
+    private void sortAndSearch(){
+        filteredList.setPredicate(this::lowerCaseTitleSearch);
+        listview.setItems(filteredList);
+        listview.refresh();
+    }
+
+    private void liveSearchUpdate(){
+        arrSearch.textProperty().addListener(((s) -> search()));
+    }
 
     // --------------------------------------------------//
     //                7.Private Setup Methods            //
@@ -169,8 +210,7 @@ public class OrganizerController extends Controller {
         editBtn.setOnAction(this::onEditClick);
         newArrangementBtn.setOnAction(this::onClick);
         listview.setOnMouseClicked(this::onClickListView);
-        arrSearch.setOnAction(this::search);
-        sortOptions.setOnAction(this::search);
+        sortOptions.setOnAction(this::sort);
         logOut.setOnAction(this::returnToMainWindow);
     }
 
@@ -181,7 +221,7 @@ public class OrganizerController extends Controller {
     }
 
     private void populateListView() {
-        arrangementListObservable = FXCollections.observableArrayList(DataHandler.getUserArrangements(User.ORGANIZER));
+        arrangementListObservable = FXCollections.observableArrayList(Repository.getUserArrangements(ProtoUser.ORGANIZER));
         arrangementListObservable.sort(ArrangementSort.COMP_DATE_ASC.getComparator());
         setupFilteredList();
         listview.refresh();
@@ -192,25 +232,35 @@ public class OrganizerController extends Controller {
         sortOptions.getSelectionModel().select(SportCategory.ALL);
     }
 
+    private void checkArrangementDate(){
+        if(currentArrangement.getEndDate().isBefore(LocalDate.now())){
+            editBtn.setDisable(true);
+            deleteBtn.setDisable(true);
+        }
+    }
+
     // --------------------------------------------------//
     //                8.Overridden Methods               //
     // --------------------------------------------------//
+    /**
+     * @param location {@link URL}
+     * @param resources {@link ResourceBundle}
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setupActionHandlers();
         populateListView();
         populateSportCategories();
+        liveSearchUpdate();
     }
 
+    /**
+     * Refreshes the view
+     */
     @Override
     public void updateView(){
         if(currentArrangement == null)return;
         changedView();
-    }
-
-    @Override
-    public void onCloseStoreInformation() {
-        DataHandler.storeArrangementsData();
     }
 
     /**
@@ -224,27 +274,34 @@ public class OrganizerController extends Controller {
         Arrangement arrangement = (Arrangement) object;
 
         MultipleSelectionModel selModel = listview.getSelectionModel();
-        arrangementListObservable.add(arrangement);
-        DataHandler.addArrangement(arrangement, User.ORGANIZER);
+        try {
+            Repository.addArrangement(arrangement, ProtoUser.ORGANIZER);
+            arrangementListObservable.add(arrangement);
+
+        } catch (IllegalDataAccess illegalDataAccess) {
+            try {ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_ACCESSING_DATA, illegalDataAccess);}
+            catch (IOException e) {e.printStackTrace();}
+            Controller.createAlert(ErrorExceptionHandler.ERROR_ACCESSING_DATA);
+        }
         if(selModel.getSelectedItem() == null) selModel.selectLast();
         listview.refresh();
         changedView();
     }
 
-    //handles the title and name of current view. Here name is the local path
-    @Override
-    public String getTitle() {
-        return title;
-    }
-
-    @Override
-    public String getName() {
-        return name;
-    }
-
+    /**
+     * @return Object
+     */
     @Override
     public Object getDataObject() {
         currentArrangement = listview.getSelectionModel().getSelectedItem();
         return currentArrangement;
+    }
+
+    /**
+     * @return {@link ViewInformation}
+     */
+    @Override
+    public ViewInformation getViewInformation() {
+        return new ViewInformation(name, title);
     }
 }

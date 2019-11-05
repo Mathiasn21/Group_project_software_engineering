@@ -3,9 +3,8 @@ package no.hiof.set.gruppe;
 /*Guide Controllers
  * 1. Import Statements
  * 2. Local Fields
- * 3. Overridden Methods
- * 4. Public Methods
- * 5. Static Methods
+ * 3. Start Method
+ * 4. SetupWindow Interface Methods
  * */
 
 // --------------------------------------------------//
@@ -29,11 +28,12 @@ import java.io.IOException;
 
 /**
  * MainJavaFX is a class that controls all of the windows in the application.
- * Its primary goal is to controll and mediate between all other controllers.
- *
+ * Its primary goal is to control and mediate between all other controllers.
  * @author Gruppe4
  */
 public class MainJavaFX extends Application implements SetupWindow {
+
+
     // --------------------------------------------------//
     //                2.Local Fields                     //
     // --------------------------------------------------//
@@ -45,7 +45,7 @@ public class MainJavaFX extends Application implements SetupWindow {
 
 
     // --------------------------------------------------//
-    //                3.Overridden Methods               //
+    //                3.Start Method                     //
     // --------------------------------------------------//
     @Override
     public void start(@NotNull Stage stage) throws IOException {
@@ -57,7 +57,6 @@ public class MainJavaFX extends Application implements SetupWindow {
         IController controller = (loader.getController());
         controller.setMainController(this);
 
-        stage.setOnHidden((Event) -> controller.onCloseStoreInformation());
         Scene scene = new Scene(editLayout);
         stage.setScene(scene);
         stage.setResizable(false);
@@ -67,9 +66,8 @@ public class MainJavaFX extends Application implements SetupWindow {
 
 
     // --------------------------------------------------//
-    //                4.Public Methods                   //
+    //          4.SetupWindow Interface Methods          //
     // --------------------------------------------------//
-
     /**
      * This function is responsible for setting up a new window.
      * This is custom made for controllers that implement the interface: {@link IController}
@@ -80,23 +78,18 @@ public class MainJavaFX extends Application implements SetupWindow {
         Stage stage = new Stage();
 
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(MainJavaFX.class.getResource(controller.getName()));
+        loader.setLocation(MainJavaFX.class.getResource(controller.getViewInformation().viewName));
         Parent editLayout = loader.load();
-
-        //handling onclose for given stage
-        IController finalController = controller;
-        stage.setOnHidden((Event) -> finalController.onCloseStoreInformation());
 
         Scene editScene = new Scene(editLayout);
         stage.setScene(editScene);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initOwner(this.stage);
-        stage.setTitle(controller.getTitle());
+        stage.setTitle(controller.getViewInformation().viewTitle);
 
         //setting next controller
         controller = loader.getController();
         controller.setMainController(this);
-        System.out.println(this);
 
         stage.show();
     }
@@ -117,7 +110,7 @@ public class MainJavaFX extends Application implements SetupWindow {
             Stage stage = new Stage();
 
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainJavaFX.class.getResource(controller.getName()));
+            loader.setLocation(MainJavaFX.class.getResource(controller.getViewInformation().viewName));
             Parent editLayout = loader.load();
 
             IControllerDataTransfer oldController = controller;
@@ -133,17 +126,15 @@ public class MainJavaFX extends Application implements SetupWindow {
                     }
                 }
                 oldController.updateView();
-                finalController.onCloseStoreInformation();
             });
 
             Scene editScene = new Scene(editLayout);
             stage.setScene(editScene);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initOwner(this.stage);
-            stage.setTitle(controller.getTitle());
+            stage.setTitle(controller.getViewInformation().viewTitle);
             stage.setResizable(false);
             controller.setMainController(this);
-            System.out.println(this);
 
             stage.show();
             errorOccured = false;

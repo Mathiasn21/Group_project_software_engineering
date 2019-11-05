@@ -12,20 +12,28 @@ package no.hiof.set.gruppe.controller.concrete;
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import no.hiof.set.gruppe.Exceptions.DataFormatException;
+import no.hiof.set.gruppe.Exceptions.ErrorExceptionHandler;
+import no.hiof.set.gruppe.Exceptions.InvalidLoginInformation;
 import no.hiof.set.gruppe.controller.abstractions.Controller;
-import no.hiof.set.gruppe.model.user.User;
+import no.hiof.set.gruppe.data.Repository;
+import no.hiof.set.gruppe.model.ViewInformation;
+import no.hiof.set.gruppe.model.user.LoginInformation;
+import no.hiof.set.gruppe.model.user.ProtoUser;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * Contains logic corresponding to the login view, vurrently the main view.
+ * Contains logic corresponding to the login view, currently the main view.
  */
 public class LoginController extends Controller {
     // --------------------------------------------------//
@@ -38,84 +46,114 @@ public class LoginController extends Controller {
     // --------------------------------------------------//
     //                3.FXML Fields                      //
     // --------------------------------------------------//
-
     @FXML
-    private Button logInn, adminLogin, arrangLogin, userLogin;
+    private Button logInn, adminLogin, arrangLogin, userLogin, cancel;
     @FXML
     private TextField uName, pass;
+
 
     // --------------------------------------------------//
     //                4.On action Methods                //
     // --------------------------------------------------//
+    /**
+     * @param event {@link ActionEvent}
+     */
+    private void getCorrectCredentials(@NotNull ActionEvent event){
+        ProtoUser protoUser = ProtoUser.USER;
+        Button source = (Button)event.getSource();
 
+        if (source.equals(adminLogin)) protoUser = ProtoUser.ADMIN;
+        else if (source.equals(arrangLogin)) protoUser = ProtoUser.ORGANIZER;
+        applyCredentials(protoUser);
+    }
+
+    /**
+     * @param event {@link ActionEvent}
+     */
+    private void login(ActionEvent event) {
+        String userName = uName.getText();
+        String password = pass.getText();
+
+        try{
+            ProtoUser protoUser = Repository.getUserDetails(new LoginInformation(userName, password));
+            closeWindow(logInn);
+            openCorrespondingStage(protoUser);
+
+        }catch (InvalidLoginInformation invalidLogin){
+            try { ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_LOGIN, invalidLogin); }
+            catch (IOException e) {e.printStackTrace();}
+            createAlert(ErrorExceptionHandler.ERROR_LOGIN);
+        }
+    }
 
     // --------------------------------------------------//
     //                5.Private Methods                  //
     // --------------------------------------------------//
-
-    private void getCorrectCredentials(ActionEvent event){
-        User user = User.USER;
-        Button source = (Button)event.getSource();
-
-        if (source.equals(adminLogin)) user = User.ADMIN;
-        else if (source.equals(arrangLogin)) {
-            user = User.ORGANIZER;
-        }
-        applyCredentials(user);
-    }
-
-    private void login(ActionEvent event) {
-        String userName = uName.getText();
-        String password = pass.getText();
-        if(User.isValidUser(userName, password)){
-            User user = User.getUser(userName);
-            assert user != null;
-            ((Stage)logInn.getScene().getWindow()).close();
-            openCorrespondingStage(user);
-        }
-    }
-
-    private void openCorrespondingStage(User user) {
-        title = user.getName();
-        name = user.getViewName();
-        System.out.println(getMainController());
+    /**
+     * @param protoUser {@link ProtoUser}
+     */
+    private void openCorrespondingStage(@NotNull ProtoUser protoUser) {
+        title = protoUser.getName();
+        name = protoUser.getViewName();
         createNewView(this);
     }
 
-    private void applyCredentials(User user) {
-        uName.setText(user.getName());
-        pass.setText(user.getPass());
+    /**
+     * @param protoUser {@link ProtoUser}
+     */
+    private void applyCredentials(@NotNull ProtoUser protoUser) {
+        uName.setText(protoUser.getName());
+        pass.setText(protoUser.getPass());
+    }
+
+    private void onClickCancel(ActionEvent event){
+        closeWindow(cancel);
+    }
+
+    private void setUpActionHandlers(){
+        logInn.setOnAction(this::login);
+        cancel.setOnAction(this::onClickCancel);
     }
 
     // --------------------------------------------------//
     //                6.Overridden Methods               //
     // --------------------------------------------------//
-
+    /**
+     * @param location {@link URL}
+     * @param resources {@link ResourceBundle}
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Button[] credentialsBtns = {adminLogin, arrangLogin, userLogin};
         for (Button credentialsBtn : credentialsBtns) credentialsBtn.setOnAction(this::getCorrectCredentials);
-        
-        logInn.setOnAction(this::login);
+
+        setUpActionHandlers();
     }
 
+    /**
+     * @return Object
+     */
+    @Nullable
     @Override
     public Object getDataObject() {
         return null;
     }
 
+    /**
+     * Does not have a purpose here.
+     * @param object Object
+     * @throws DataFormatException dataFormatException{@link DataFormatException}
+     */
     @Override
     public void setDataFields(Object object) throws DataFormatException {
 
     }
 
+    /**
+     * @return {@link ViewInformation}
+     */
     @Override
-    public String getTitle() {
-        return title;
-    }
-
-    @Override
-    public String getName() {
-        return name;
+    public ViewInformation getViewInformation() {
+        return new ViewInformation(name, title);
     }
 }

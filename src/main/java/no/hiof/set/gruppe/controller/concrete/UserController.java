@@ -5,8 +5,10 @@ package no.hiof.set.gruppe.controller.concrete;
  * 2. Local Fields
  * 3. FXML Fields
  * 4. On Action Methods
- * 5. Private Methods
- * 6. Overridden Methods
+ * 5. Private Functional Methods
+ * 6. Private Search Methods
+ * 7. Private Setup Methods
+ * 8. Overridden Methods
  * */
 
 // --------------------------------------------------//
@@ -23,20 +25,29 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import no.hiof.set.gruppe.Exceptions.DataFormatException;
 import no.hiof.set.gruppe.controller.abstractions.Controller;
-import no.hiof.set.gruppe.data.DataHandler;
+import no.hiof.set.gruppe.data.Repository;
 import no.hiof.set.gruppe.model.Arrangement;
+import no.hiof.set.gruppe.model.ViewInformation;
 import no.hiof.set.gruppe.model.constantInformation.SportCategory;
-import no.hiof.set.gruppe.model.user.User;
+import no.hiof.set.gruppe.model.user.ProtoUser;
 import no.hiof.set.gruppe.util.DateTest;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import java.net.URL;
 import java.util.*;
 
+/**
+ * This controller controls all functionality and logic pertaining
+ * to the User View
+ * @author Gruppe4
+ */
 public class UserController extends Controller {
     // --------------------------------------------------//
     //                2.Local Fields                     //
     // --------------------------------------------------//
-    private String title, name = "";
+    private String title = "Bruker";
+    private String name = ProtoUser.USER.getViewName();
     private ObservableList<Arrangement> myObservableArrangements, availableObservableArrangements;
     private FilteredList<Arrangement> availableFiltered, myFiltered;
     private Arrangement currentAvailableArrangement = null;
@@ -50,47 +61,66 @@ public class UserController extends Controller {
     @FXML
     private ListView<Arrangement>availableArrangementsListView, myArrangementsView;
     @FXML
-    private Text arrangementTitle, arrangementSport,arrangementAddress,arrangementDate,arrangementParticipants,arrangementGroup, arrangementDescription;
+    private Text arrangementTitle, arrangementSport,arrangementAddress,arrangementDate,arrangementParticipants,arrangementGroup, arrangementDescription, mainTitle;
     @FXML
     private RadioButton radioExp, radioOng, radioFut, radioAll;
     @FXML
-    private Button joinBtn, leaveBtn, logOut;
+    private Button joinBtn, leaveBtn;
     @FXML
     private TextField searchAv, searchMy;
     @FXML
     private ComboBox<SportCategory> availableSortingOptionsMy, sortingOptions;
+    @FXML
+    private MenuItem logOut, myGroups;
+    @FXML
+    private MenuButton menu;
 
     // --------------------------------------------------//
-    //                4.Event Related Methods            //
+    //                4.On Action Methods                //
     // --------------------------------------------------//
+
+    /**
+     * @param actionEvent {@link ActionEvent}
+     */
     private void onJoinClick(ActionEvent actionEvent){
         if(currentAvailableArrangement == null)return;
         availableObservableArrangements.remove(currentAvailableArrangement);
         myObservableArrangements.add(currentAvailableArrangement);
 
-        DataHandler.addUserToArrangement(currentAvailableArrangement, User.USER);
+        Repository.addUserToArrangement(currentAvailableArrangement, ProtoUser.USER);
         currentSelectedMyArrangement = currentAvailableArrangement;
         currentAvailableArrangement = null;
         updateView();
     }
+
+    /**
+     * @param actionEvent {@link ActionEvent}
+     */
     private void onLeaveClick(ActionEvent actionEvent){
         if(currentSelectedMyArrangement == null)return;
         myObservableArrangements.remove(currentSelectedMyArrangement);
         availableObservableArrangements.add(currentSelectedMyArrangement);
 
-        DataHandler.deleteUserFromArrangement(currentSelectedMyArrangement, User.USER);
+        Repository.deleteUserFromArrangement(currentSelectedMyArrangement, ProtoUser.USER);
         currentAvailableArrangement = currentSelectedMyArrangement;
         currentSelectedMyArrangement = null;
     }
 
     //onclick could be truncated
+    /**
+     * @param event {@link MouseEvent}
+     */
     private void onClickListView(MouseEvent event){
         Arrangement selectedItem = availableArrangementsListView.getSelectionModel().getSelectedItem();
         if(selectedItem == null){return;}
         currentAvailableArrangement = selectedItem;
         currentSelectedArrangement = currentAvailableArrangement;
-        setDataFields();
+        setInformationAboutArrangementInView();
     }
+
+    /**
+     * @param event {@link MouseEvent}
+     */
     private void onClickMyView(MouseEvent event){
         Arrangement selectedItem = myArrangementsView.getSelectionModel().getSelectedItem();
         if(selectedItem == null)return;
@@ -99,40 +129,52 @@ public class UserController extends Controller {
 
         if(DateTest.TestExpired.execute(currentSelectedMyArrangement.getStartDate() ,currentSelectedMyArrangement.getEndDate()))leaveBtn.setDisable(true);
         else leaveBtn.setDisable(false);
-        setDataFields();
+        setInformationAboutArrangementInView();
     }
+
+    /**
+     * @param event {@link ActionEvent}
+     */
     private void returnToMainWindow(ActionEvent event) {
         title = "Logg inn";
         name = "Login.fxml";
-        ((Stage)logOut.getScene().getWindow()).close();
+        closeWindow(joinBtn);
         createNewView(this);
     }
 
+    private void onClickMyGroups(ActionEvent event){
+        title = "Mine grupper";
+        name = "Groups.fxml";
+        closeWindow(joinBtn);
+        createNewView(this);
+    }
 
     // --------------------------------------------------//
     //                5.Private Functional Methods       //
     // --------------------------------------------------//
-    private void setDataFields(){
-        if(currentSelectedArrangement == null){return;}
-        arrangementTitle.setText(currentSelectedArrangement.getName());
-        arrangementSport.setText(currentSelectedArrangement.getSport());
-        arrangementAddress.setText(currentSelectedArrangement.getAddress());
-        arrangementDate.setText(currentSelectedArrangement.getStartDate().toString());
-        arrangementParticipants.setText(String.valueOf(currentSelectedArrangement.getParticipants()));
-        arrangementGroup.setText(currentSelectedArrangement.getSport());
-        arrangementDescription.setText(currentSelectedArrangement.getDescription());
+    private void setInformationAboutArrangementInView(){
+        ArrayList<Text> viewFields = viewFields(arrangementTitle, arrangementSport,arrangementAddress,arrangementDate,arrangementParticipants,arrangementGroup, arrangementDescription);
+        ArrayList<String> data = arrangementData(currentSelectedArrangement);
+        for(int i = 0; i < data.size(); i++)
+            viewFields.get(i).setText(data.get(i));
     }
-
 
     // --------------------------------------------------//
     //                6.Private Search Methods           //
     // --------------------------------------------------//
     //Could be truncated to one method
+    /**
+     * @param actionEvent {@link ActionEvent}
+     */
     private void search(ActionEvent actionEvent){
         myFiltered.setPredicate(this::lowerCaseTitleSearchMy);
         myArrangementsView.setItems(myFiltered);
         myArrangementsView.refresh();
     }
+
+    /**
+     * @param actionEvent {@link ActionEvent}
+     */
     private void searchOrg(ActionEvent actionEvent){
         availableFiltered.setPredicate(this::lowerCaseTitleSearch);
         availableArrangementsListView.setItems(availableFiltered);
@@ -144,7 +186,7 @@ public class UserController extends Controller {
      * Returns a Boolean based on if the Arrangement name contains
      * And is in same category
      * the given search string.
-     * @param arrangement Arrangement
+     * @param arrangement {@link Arrangement}
      * @return boolean
      */
     private boolean lowerCaseTitleSearch(@NotNull Arrangement arrangement){
@@ -153,10 +195,11 @@ public class UserController extends Controller {
         return title.contains(search) && categoryMatch(arrangement);
     }
 
+
     /**
      * Returns a Boolean based on match with given search string, as well
      * as a given category and a given date predicate.
-     * @param arrangement Arrangement
+     * @param arrangement {@link Arrangement}
      * @return boolean
      */
     private boolean lowerCaseTitleSearchMy(@NotNull Arrangement arrangement){
@@ -170,10 +213,18 @@ public class UserController extends Controller {
     }
 
     //should be truncated
+    /**
+     * @param arrangement {@link Arrangement}
+     * @return boolean
+     */
     private boolean categoryMatch(Arrangement arrangement) {
         SportCategory category = availableSortingOptionsMy.getSelectionModel().getSelectedItem();
         return category.equals(SportCategory.ALL) || arrangement.getSport().equals(category.toString());
     }
+    /**
+     * @param arrangement {@link Arrangement}
+     * @return boolean
+     */
     private boolean categoryMatchMy(Arrangement arrangement) {
         SportCategory category = sortingOptions.getSelectionModel().getSelectedItem();
         return category.equals(SportCategory.ALL) || arrangement.getSport().equals(category.toString());
@@ -183,8 +234,8 @@ public class UserController extends Controller {
     //                7.Private Setup Methods            //
     // --------------------------------------------------//
     private void setArrangementListInformation() {
-        List<Arrangement> allArrang = DataHandler.getArrangementsData();
-        List<Arrangement> userConnectedArrangements = DataHandler.getUserArrangements(User.USER);
+        List<Arrangement> allArrang = Repository.getArrangementsData();
+        List<Arrangement> userConnectedArrangements = Repository.getUserArrangements(ProtoUser.USER);
 
         allArrang.removeAll(userConnectedArrangements);
         allArrang.removeIf((arrangement) -> DateTest.TestExpired.execute(arrangement.getStartDate(), arrangement.getEndDate()));
@@ -217,6 +268,7 @@ public class UserController extends Controller {
         joinBtn.setOnAction(this::onJoinClick);
         leaveBtn.setOnAction(this::onLeaveClick);
         logOut.setOnAction(this::returnToMainWindow);
+        myGroups.setOnAction(this::onClickMyGroups);
     }
 
     private void setupToggleBtns() {
@@ -255,8 +307,12 @@ public class UserController extends Controller {
     }
 
     // --------------------------------------------------//
-    //                6.Overridden Methods               //
+    //                8.Overridden Methods               //
     // --------------------------------------------------//
+    /**
+     * @param location {@link URL}
+     * @param resources {@link ResourceBundle}
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setArrangementListInformation();
@@ -265,34 +321,41 @@ public class UserController extends Controller {
         setupListView();
         setupActionHandlers();
         setupToggleBtns();
-
     }
 
-    @Override
-    public void onCloseStoreInformation(){
-        DataHandler.storeArrangementsData();
-    }
-
+    /**
+     * Just refreshes the view
+     */
     @Override
     public void updateView(){
         availableArrangementsListView.refresh();
         myArrangementsView.refresh();
     }
 
+    /**
+     * @return Object
+     */
     @Override
+    @Nullable
     public Object getDataObject() {
         return null;
     }
 
+    /**
+     * @param object Object
+     * @throws DataFormatException wrongDataFormat {@link DataFormatException}
+     */
     @Override
     public void setDataFields(Object object) throws DataFormatException {
 
     }
 
-    //change and create a new data object containing the necessary information
+    /**
+     * @return {@link ViewInformation}
+     */
+    //new method for returning information about the view
     @Override
-    public String getTitle() {return title;}
-
-    @Override
-    public String getName() {return name;}
+    public ViewInformation getViewInformation() {
+        return new ViewInformation(name, title);
+    }
 }

@@ -1,16 +1,20 @@
 package no.hiof.set.gruppe.model;
 /*Guide
  * 1. Import Statements
- * 2. Constructors
- * 3. Getters
- * 4. Setters
- * 5.Public Methods
+ * 2. Local Fields
+ * 3. Constructors
+ * 4. Public Getter Methods
+ * 5. Public Setter Methods
  * 6. Overridden Methods
+ * 7. Overridden Contracts
  * */
 
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.Nullable;
+
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -18,7 +22,7 @@ import java.util.UUID;
  * Arrangement holds information about a possible arrangement.
  * @author Gruppe4
  */
-public class Arrangement implements IArrangementSortering{
+public class Arrangement implements IGetAllData, IGetAllDataRaw{
 
 
     // --------------------------------------------------//
@@ -30,11 +34,19 @@ public class Arrangement implements IArrangementSortering{
     private boolean group;
 
     // --------------------------------------------------//
-    //                2.Constructors                     //
+    //                3.Constructors                     //
     // --------------------------------------------------//
     public Arrangement(){
         this("", "", 0, "", false);
     }
+
+    /**
+     * @param name String
+     * @param sport String
+     * @param participants int
+     * @param address String
+     * @param gruppe boolean
+     */
     public Arrangement(String name, String sport, int participants, String address, boolean gruppe){
         this(name, sport, participants, address, gruppe, null, null, "");
     }
@@ -62,7 +74,7 @@ public class Arrangement implements IArrangementSortering{
     }
 
     // --------------------------------------------------//
-    //                3.Getters                          //
+    //                4.Public Getter Methods            //
     // --------------------------------------------------//
     public String getName() {
         return name;
@@ -73,117 +85,124 @@ public class Arrangement implements IArrangementSortering{
     public int getParticipants() {
         return participants;
     }
-    public LocalDate getStartDate() {
-        return LocalDate.parse(startDate);
-    }
-    public LocalDate getEndDate() {
-        return LocalDate.parse(endDate);
-    }
+    public LocalDate getStartDate() {return LocalDate.parse(startDate);}
+    public LocalDate getEndDate() {return LocalDate.parse(endDate);}
     public String getAddress() {
         return address;
     }
     public String getID(){return ID;}
     public String getDescription() {return description;}
-
-
-    // --------------------------------------------------//
-    //                4.Setters                          //
-    // --------------------------------------------------//
-    public void setName(String name) {this.name = name;}
-    public void setGruppe(boolean gruppe) {
-        this.group = gruppe;
-    }
-    public void setParticipants(int participants) {
-        this.participants = participants;
-    }
-    public void setSport(String sport) {
-        this.sport = sport;
-    }
-    public void setAddress(String address) {
-        this.address = address;
-    }
-    public void setStartDate(String startDate) {this.startDate = startDate;}
-    public void setEndDate(String endDate) {this.endDate = endDate;}
-    public void setDescription(String description) {this.description = description;}
-
-
-    // --------------------------------------------------//
-    //                5.Public Methods                   //
-    // --------------------------------------------------//
+    /**
+     * @return boolean
+     */
     public boolean isGroup() {
         return group;
     }
+    public String getGroup(){return group ? "Lagkonkurranse" : "Individuell konkurranse";}
+    public String getDateIntervall() {return startDate + " til " + endDate;}
+    // --------------------------------------------------//
+    //                5.Public Setter Methods            //
+    // --------------------------------------------------//
+    /**
+     * @param name String
+     */
+    public void setName(String name) {this.name = name;}
 
+    /**
+     * @param gruppe String
+     */
+    public void setGruppe(boolean gruppe) {
+        this.group = gruppe;
+    }
+
+    /**
+     * @param participants String
+     */
+    public void setParticipants(int participants) {
+        this.participants = participants;
+    }
+
+    /**
+     * @param sport String
+     */
+    public void setSport(String sport) {
+        this.sport = sport;
+    }
+
+    /**
+     * @param address String
+     */
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    /**
+     * @param startDate String
+     */
+    public void setStartDate(String startDate) {this.startDate = startDate;}
+
+    /**
+     * @param endDate String
+     */
+    public void setEndDate(String endDate) {this.endDate = endDate;}
+
+    /**
+     * @param description String
+     */
+    public void setDescription(String description) {this.description = description;}
 
     // --------------------------------------------------//
     //                6.Overridden Methods               //
     // --------------------------------------------------//
+    /**
+     * @return String
+     */
     @Override
-    public boolean equals(Object o) {
+    public String toString(){
+        return name + ", " + sport + ", " + startDate + " til " + endDate;
+    }
+
+    // --------------------------------------------------//
+    //                7.Overridden Contracts            //
+    // --------------------------------------------------//
+    /**
+     * @param o {@link Object}
+     * @return boolean
+     */
+    @Contract(value = "null -> false", pure = true)
+    @Override
+    public boolean equals(@Nullable Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Arrangement that = (Arrangement) o;
         return participants == that.participants &&
-                group == that.group &&
-                name.equals(that.name) &&
-                sport.equals(that.sport) &&
-                address.equals(that.address) &&
-                startDate.equals(that.startDate) &&
-                endDate.equals(that.endDate) &&
-                description.equals(that.getDescription());
+                this.group == that.group &&
+                this.name.equals(that.name) &&
+                this.sport.equals(that.sport) &&
+                this.address.equals(that.address) &&
+                this.startDate.equals(that.startDate) &&
+                this.endDate.equals(that.endDate) &&
+                this.description.equals(that.getDescription());
     }
 
+
+    /**
+     * Returns data in this sequence:
+     * name, sport, address, startDate + " til " + endDate, participants, group, description
+     * @return String[]
+     */
     @Override
-    public String toString(){
-        return name + " " + sport + " " + participants + " " + address + " " + startDate + " til " + endDate + " " + description;
+    public String[] getAllDataAsStringArr() {
+        return new String[]{name, sport, address, startDate + " til " + endDate, String.valueOf(participants), group ? "Lagkonkurranse" : "Individuell konkurranse", description};
     }
 
+    /**
+     * Returns all raw data in this sequence:
+     * name, address, participants, description
+     * @return String[]
+     */
     @Override
-    public int compareName(Arrangement comparingArr, boolean Ascending) {
-        int result;
-        result = this.getName().compareTo(comparingArr.getName());
-
-        return Ascending ? result : result * -1;
-    }
-
-    @Override
-    public int compareDate(Arrangement comparingArr, boolean Ascending) {
-        int result;
-
-        if(this.getStartDate().isBefore(comparingArr.getStartDate()))
-            result = 1;
-        else if(this.getStartDate().isAfter(comparingArr.getStartDate()))
-            result = -1;
-        else
-            result = 0;
-
-        if(!Ascending)
-            result *= -1;
-
-        return result;
-    }
-
-    @Override
-    public int compareParticipants(Arrangement comparingArr, boolean Ascending) {
-        int result;
-        result = this.getParticipants() - comparingArr.getParticipants();
-
-        if(!Ascending)
-            result *= -1;
-
-        return result;
-    }
-
-    @Override
-    public int compareSport(Arrangement comparingArr, boolean Ascending) {
-        int result;
-        result = this.getSport().compareTo(comparingArr.getSport());
-
-        if(!Ascending)
-            result *= -1;
-
-        return result;
+    public String[] getAllStringDataArrRaw() {
+        return new String[]{name, address, String.valueOf(participants), description};
     }
 }
-
-

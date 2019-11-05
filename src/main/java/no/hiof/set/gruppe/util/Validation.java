@@ -1,11 +1,25 @@
 package no.hiof.set.gruppe.util;
 
+/*Guide
+ * 1. Import Statements
+ * 2. Constants
+ * 3. Contracts
+ * 4. Public Static Methods
+ * */
+
+// --------------------------------------------------//
+//                1.Import Statements                //
+// --------------------------------------------------//
+import no.hiof.set.gruppe.Exceptions.DataFormatException;
+import no.hiof.set.gruppe.data.Repository;
 import no.hiof.set.gruppe.model.Arrangement;
-import no.hiof.set.gruppe.model.constantInformation.ValidationResult;
+import no.hiof.set.gruppe.model.ValidationResult;
+import no.hiof.set.gruppe.model.user.RawUser;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.regex.Pattern;
 
 /**
@@ -13,12 +27,19 @@ import java.util.regex.Pattern;
  * @author Gruppe4
  */
 public class Validation{
+
+    // --------------------------------------------------//
+    //                2.Local Fields                     //
+    // --------------------------------------------------//
     private static final String textNotNullPattern = "(?!^ +$)^.+$";
     private static final String numPatt = "[0-9]+";
 
     private static final int maxNameL = 50;
     private static final int minNameL = 2;
 
+    // --------------------------------------------------//
+    //                3.Contracts                        //
+    // --------------------------------------------------//
     /**
      * Validates an arrangement
      * @param arrangement {@link Arrangement}
@@ -40,11 +61,40 @@ public class Validation{
         str.append(regCheck(textNotNullPattern, name) && isBetween(minNameL, maxNameL, name.length()) ? "" : "Sett inn et gyldig navn.\n");
         str.append(arrangement.getSport() != null ? "" : "Velg en idrett.\n");
         str.append(regCheck(textNotNullPattern, address) && isBetween(minNameL, maxNameL, address.length()) ? "" : "Sett inn en gydlig adresse.\n");
-        str.append(startDate.isBefore(endDate) || startDate.isEqual(endDate) ? "" : "Sett inn gyldige datoer.\n");
+        str.append(LocalDate.now().isBefore(startDate) && (startDate.isBefore(endDate) || startDate.isEqual(endDate)) ? "" : "Sett inn gyldige datoer.\n");
         str.append(isBetween(participantsMin, participantsMax, arrangement.getParticipants()) ? "" : invalidNum);
         return new ValidationResult(str.toString(), str.length() == 0);
     }
 
+    @NotNull
+    @Contract("_ -> new")
+    public static ValidationResult ofNewUser(@NotNull RawUser rawUser){
+        StringBuilder res = new StringBuilder();
+        int maxLengthName = 255;
+
+        String email = rawUser.geteMail();
+        String passHash = rawUser.getPassHash();
+        LocalDate bDate;
+
+        try{bDate = LocalDate.parse(rawUser.getbDate());
+        }catch (DateTimeParseException wrongDateFormat){res.append("ERROR, feil dato format.\n");}
+
+        res.append(rawUser.getfName().length() <= maxLengthName && rawUser.getlName().length() <= maxLengthName ? "" : "Ulovlig langt navn\n");
+        res.append(!Repository.addressExists(rawUser.getStreetAddress()) ? "" : "Addressen er ikke gyldig.\n");
+        res.append(rawUser.getCityCode().length() == 4 ? "" : "Ugyldig by kode.\n");
+        res.append(regCheck(textNotNullPattern, email) && !Repository.emailExists(email) ? "" : "Ugyldig email.\n");
+        res.append(passHash.length() >= 10 && passHash.length() <= 60 ? "" : "Ugyldig passord\n");
+
+        return new ValidationResult(res.toString(), res.length() == 0);
+    }
+
+    // --------------------------------------------------//
+    //                4.Public Static Methods            //
+    // --------------------------------------------------//
+    /**
+     * @param num String
+     * @return boolean
+     */
     public static boolean ofNumber(String num){
         return regCheck(numPatt, num);
     }

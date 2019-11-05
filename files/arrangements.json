@@ -4,43 +4,32 @@
     "name": "Øskars Diverse",
     "sport": "Skirenn",
     "address": "testvegen - 2",
-    "startDate": "2019-10-01",
-    "endDate": "2019-11-23",
+    "startDate": "2020-11-01",
+    "endDate": "2020-11-23",
     "description": "wdawdegsgdtreafrtdhrg",
     "participants": 23,
     "group": false
   },
   {
-    "ID": "a057b6e7-ad2e-4f40-b2c9-4e2e408b3bd2",
-    "name": "Bernt",
-    "sport": "Alle",
-    "address": "grdxgfsaeedaw",
-    "startDate": "2019-10-23",
-    "endDate": "2019-11-10",
-    "description": "dwagrdsgdr",
-    "participants": 24,
-    "group": true
-  },
-  {
-    "ID": "f751fc9c-ad4d-4416-956d-1d6d1f762b84",
-    "name": "Vegars lefse løp",
-    "sport": "Annet",
-    "address": "Lefseveien 17c",
-    "startDate": "2019-10-11",
-    "endDate": "2019-10-12",
-    "description": "Masse spising og løing med lefser",
-    "participants": 36,
-    "group": false
-  },
-  {
     "ID": "d52665f4-38f1-4b56-b24d-9d760adc7102",
     "name": "Børres Brokkoli mani",
-    "sport": "Annet",
+    "sport": "Sykkelritt",
     "address": "Brokkolivegen 28",
     "startDate": "2019-10-11",
     "endDate": "2019-10-12",
     "description": "Masse spising og løing med brokkoli",
     "participants": 36,
+    "group": false
+  },
+  {
+    "ID": "edbbbe0a-468b-4943-86bb-682936015acf",
+    "name": "The nerds show",
+    "sport": "Annet",
+    "address": "Smarter than you road 5",
+    "startDate": "2019-11-30",
+    "endDate": "2019-12-01",
+    "description": "Only for nerds, simple minded not allowed.",
+    "participants": 400,
     "group": false
   }
 ]

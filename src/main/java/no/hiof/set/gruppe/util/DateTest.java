@@ -1,5 +1,14 @@
 package no.hiof.set.gruppe.util;
 
+/*Guide
+ * 1. Import Statements
+ * 2. Constants
+ * 3. Contracts
+ * */
+
+// --------------------------------------------------//
+//                1.Import Statements                //
+// --------------------------------------------------//
 import org.jetbrains.annotations.Contract;
 
 import java.time.LocalDate;
@@ -12,8 +21,11 @@ import java.time.LocalDate;
  */
 public enum DateTest {
 
+    // --------------------------------------------------//
+    //                2.Constants                        //
+    // --------------------------------------------------//
     TestExpired((start, end) -> end.isBefore(LocalDate.now())),
-    TestFuture((start, end) -> end.isAfter(LocalDate.now()) && start.isAfter(LocalDate.now())),
+    TestFuture((start, end) -> start.compareTo(LocalDate.now()) >= 0 && end.compareTo(start) >= 0),
     ALL((startDate, endDate) -> true),
 
     TestOngoing((startDate, endDate) -> {
@@ -22,10 +34,23 @@ public enum DateTest {
 
     private final DatePredicate predicate;
 
+
+    // --------------------------------------------------//
+    //                3.Contracts                        //
+    // --------------------------------------------------//
+    /**
+     * Ensures execution of test.
+     * @param predicate {@link DatePredicate}
+     */
     @Contract(pure = true)
     DateTest(DatePredicate predicate) {
         this.predicate = predicate;
     }
 
+    /**
+     * @param startDate {@link LocalDate}
+     * @param endDate {@link LocalDate}
+     * @return boolean
+     */
     public boolean execute(LocalDate startDate, LocalDate endDate){return predicate.testDate(startDate, endDate);}
 }

@@ -1,26 +1,30 @@
 package no.hiof.set.gruppe.controller.concrete;
+
 /*Guide
  * 1. Import Statements
  * 2. Local Fields
  * 3. FXML Fields
- * 4. FXML Methods
- * 5. Overridden Methods
+ * 4. On Action Methods
+ * 5. Private Methods
+ * 6. Overridden Methods
  * */
 
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import no.hiof.set.gruppe.controller.abstractions.Controller;
-import no.hiof.set.gruppe.model.constantInformation.ValidationResult;
+import no.hiof.set.gruppe.model.ValidationResult;
+import no.hiof.set.gruppe.model.ViewInformation;
 import no.hiof.set.gruppe.util.Validation;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.constantInformation.GroupCategory;
 import no.hiof.set.gruppe.model.constantInformation.SportCategory;
-
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
@@ -40,6 +44,14 @@ public class NewAlterArrangementController extends Controller {
     private String title = "Arrangement";
     private Arrangement arrangementToEdit = null;
     private boolean createdNewObject = false;
+    private String arrName;
+    private String sport;
+    private String partic;
+    private String desc;
+    private String address;
+    private boolean group;
+    private LocalDate startDate;
+    private LocalDate endDate;
 
     // --------------------------------------------------//
     //                3.FXML Fields                      //
@@ -55,39 +67,66 @@ public class NewAlterArrangementController extends Controller {
     @FXML
     private ComboBox<SportCategory> sportComboBoxInput;
     @FXML
-    public Button saveBtn;
-    @FXML
-    public Button cancelBtn;
+    public Button saveBtn, cancelBtn;
+
 
     // --------------------------------------------------//
-    //                4.FXML Methods                     //
+    //                4.On Action Methods                //
     // --------------------------------------------------//
-    @FXML
-    public void saveClicked(){
-        String name = nameInput.getText();
-        String sport = sportComboBoxInput.getSelectionModel().getSelectedItem().toString();
-        String partic = participantsInput.getText();
-        String desc = descriptionInput.getText();
-        String address = adressInput.getText();
-        boolean group = groupInput.getSelectionModel().getSelectedItem().isGroup;
-        LocalDate startDate = startDateInput.getValue();
-        LocalDate endDate = endDateInput.getValue();
+    /**
+     * Only saves the information if given information in the view is valid.
+     * Uses {@link Validation} in order to validate the information.
+     * @param event {@link ActionEvent}
+     */
+    private void saveClicked(ActionEvent event){
+        getArrangementData();
+        if(checkLengthOfAllFields())return;
+        if(illegalNumberFormat())return;
+        setArrangementData();
+        if(validateArrangementData())return;
+        closeWindow();
+    }
 
-        if(name.length() == 0 || sport.length() == 0 || partic.length() == 0 ||
-                desc.length() == 0 || address.length() == 0 || startDate == null || endDate == null)return;
+    /**
+     * @param event {@link ActionEvent}
+     */
+    private void cancelClicked(ActionEvent event){
+        closeWindow();
+    }
 
-        //must throw exception in the future
-        //"Ugyldig nummer format.\n";
-        if(!Validation.ofNumber(partic)){
-            setErrorField("Antall deltakere har ikke gyldig nummer format.");
-            return;
-        }
+    // --------------------------------------------------//
+    //                5.Private Methods                  //
+    // --------------------------------------------------//
 
+    private void setupActionHandlers(){
+        saveBtn.setOnAction(this::saveClicked);
+        cancelBtn.setOnAction(this::cancelClicked);
+    }
+
+    private void setupComboBoxes(){
+        sportComboBoxInput.setItems(FXCollections.observableArrayList(SportCategory.values()));
+        groupInput.setItems(FXCollections.observableArrayList(GroupCategory.values()));
+        sportComboBoxInput.getSelectionModel().select(0);
+        groupInput.getSelectionModel().select(0);
+    }
+
+    private void getArrangementData(){
+        arrName = nameInput.getText();
+        sport = sportComboBoxInput.getSelectionModel().getSelectedItem().toString();
+        partic = participantsInput.getText();
+        desc = descriptionInput.getText();
+        address = adressInput.getText();
+        group = groupInput.getSelectionModel().getSelectedItem().isGroup;
+        startDate = startDateInput.getValue();
+        endDate = endDateInput.getValue();
+    }
+
+    private void setArrangementData(){
         if(arrangementToEdit == null) {
             arrangementToEdit = new Arrangement();
             createdNewObject = true;
         }
-        arrangementToEdit.setName(name);
+        arrangementToEdit.setName(arrName);
         arrangementToEdit.setParticipants(Integer.parseInt(partic));
         arrangementToEdit.setAddress(address);
         arrangementToEdit.setDescription(desc);
@@ -95,52 +134,80 @@ public class NewAlterArrangementController extends Controller {
         arrangementToEdit.setSport(sport);
         arrangementToEdit.setStartDate(startDate.toString());
         arrangementToEdit.setEndDate(endDate.toString());
+    }
 
+    private boolean checkLengthOfAllFields(){
+        return arrName.length() == 0 || sport.length() == 0 || partic.length() == 0 || desc.length() == 0 || address.length() == 0 || startDateInput.getValue() == null || endDateInput.getValue() == null;
+    }
+
+    private boolean illegalNumberFormat(){
+        if(!Validation.ofNumber(partic)){
+            setErrorField("Antall deltakere har ikke gyldig nummer format.");
+            return true;
+        }
+        return false;
+    }
+
+    private boolean validateArrangementData(){
         ValidationResult result = Validation.ofArrangement(arrangementToEdit);
         if(!result.IS_VALID){
             setErrorField(result.RESULT);
-            return;
+            return true;
         }
-        ((Stage)saveBtn.getScene().getWindow()).close();
+        return false;
     }
 
-    @FXML
-    public void cancelClicked(){
+    private int getSportIndex(){
+        ObservableList list = FXCollections.observableArrayList(SportCategory.values());
+        for(int i = 0; i < list.size(); i++){
+            if(list.get(i).toString().equals(arrangementToEdit.getSport()))return i;
+        }
+        return 0;
+    }
+
+    private int getGroupCategoryIndex(){
+        if(arrangementToEdit.isGroup())return 0;
+        return 1;
+    }
+
+    public void closeWindow(){
         ((Stage)cancelBtn.getScene().getWindow()).close();
     }
 
+    /**
+     * @param result String
+     */
     private void setErrorField(String result) {
         ErrorField.setText(result);
         ErrorField.setVisible(true);
         ErrorField.setDisable(false);
+        ErrorField.setEditable(false);
     }
 
     // --------------------------------------------------//
-    //                5.Overridden Methods               //
+    //                6.Overridden Methods               //
     // --------------------------------------------------//
+    /**
+     * @param url {@link URL}
+     * @param resourceBundle {@link ResourceBundle}
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
-
-        //setting up combo boxes
-        sportComboBoxInput.setItems(FXCollections.observableArrayList(SportCategory.values()));
-        groupInput.setItems(FXCollections.observableArrayList(GroupCategory.values()));
-
-        sportComboBoxInput.getSelectionModel().select(0);
-        groupInput.getSelectionModel().select(0);
+        setupActionHandlers();
+        setupComboBoxes();
     }
 
-    @Override
-    public String getTitle() {
-        return title;
-    }
-    @Override
-    public String getName() {
-        return name;
-    }
+    /**
+     * @return Object
+     */
     @Override
     public Object getDataObject() {
         return arrangementToEdit;
     }
+
+    /**
+     * @return boolean
+     */
     @Override
     public boolean hasNewObject(){
         return createdNewObject;
@@ -157,10 +224,21 @@ public class NewAlterArrangementController extends Controller {
             arrangementToEdit = arrangement;
             nameInput.setText(arrangement.getName());
             adressInput.setText(arrangement.getAddress());
+            sportComboBoxInput.getSelectionModel().select(getSportIndex());
+            groupInput.getSelectionModel().select(getGroupCategoryIndex());
             participantsInput.setText(Integer.toString(arrangement.getParticipants()));
             startDateInput.setValue(arrangement.getStartDate());
             endDateInput.setValue(arrangement.getEndDate());
             descriptionInput.setText(arrangement.getDescription());
         }
+    }
+
+    /**
+     * @return {@link ViewInformation}
+     */
+    //new method for returning information about the view
+    @Override
+    public ViewInformation getViewInformation() {
+        return new ViewInformation(name, title);
     }
 }
