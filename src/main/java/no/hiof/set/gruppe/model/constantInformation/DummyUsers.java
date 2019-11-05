@@ -16,17 +16,17 @@ public enum DummyUsers {
     // --------------------------------------------------//
     //                2.Constants                        //
     // --------------------------------------------------//
-    USER1("Arne"),
-    USER2("Kåre"),
-    USER3("Oda"),
-    USER4("Nisse"),
-    USER5("Nils"),
-    USER6("Per"),
-    USER7("Rune"),
-    USER8("Bernt"),
-    USER9("Bjørn"),
-    USER10("Line"),
-    USER11("Geir"),
+    USER1("Nub"),
+    USER2("Prætorius"),
+    USER3("Odd-Leif"),
+    USER4("Gauda"),
+    USER5("Leif-Olav"),
+    USER6("Oddbjørg"),
+    USER7("Bønne"),
+    USER8("Rosine"),
+    USER9("Fritz"),
+    USER10("Grissilde"),
+    USER11("Gjær"),
     ;
     final String user;
 
