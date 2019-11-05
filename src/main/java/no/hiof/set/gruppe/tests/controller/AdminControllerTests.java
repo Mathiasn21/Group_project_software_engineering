@@ -3,8 +3,6 @@ package no.hiof.set.gruppe.tests.controller;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import no.hiof.set.gruppe.MainJavaFX;
-import no.hiof.set.gruppe.tests.controller.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import no.hiof.set.gruppe.model.Arrangement;
@@ -16,10 +14,11 @@ import org.testfx.api.FxRobot;
 import org.testfx.assertions.api.Assertions;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
+import org.testfx.service.query.NodeQuery;
+import org.testfx.util.WaitForAsyncUtils;
 
 import java.io.IOException;
-import java.util.Date;
-import java.util.List;
+import java.time.LocalDate;
 import java.util.Set;
 
 @ExtendWith(ApplicationExtension.class)
@@ -39,16 +38,40 @@ public class AdminControllerTests extends MainJavaFXTest{
     void selectArrangementAndEdit(@NotNull FxRobot robot){
         selectArrangementTest(robot);
         robot.clickOn("#edit");
-
-        /*
-        DatePicker date = robot.lookup("#startDateInput").queryAs(DatePicker.class);
-        Set<Node> nodeList1 = date.lookupAll(".date-picker:hover > .arrow-button");
-        Node[] arr = nodeList1.toArray(Node[]::new);
-        robot.clickOn(arr[0]);
-        */
-
         editArrangementTest(robot);
     }
+
+    //DO NOT REMOVE THIS!!!!!!!!!!!!!!!!!!
+    /*
+        String[] datePickerNodes = {"#startDateInput", "#endDateInput"};
+        LocalDate afterDate = LocalDate.now();
+        for (String datePickerNode : datePickerNodes) {
+            afterDate = clickOnDatePicker(datePickerNode, robot, afterDate);
+        }
+
+    private LocalDate clickOnDatePicker(@NotNull String datePickerNode, @NotNull FxRobot robot, @NotNull LocalDate afterDate) {
+        DatePicker datepicker = robot.lookup(datePickerNode).queryAs(DatePicker.class);
+
+        //clicks on the datepicker arrow button
+        Set<Node> arowArr = datepicker.lookupAll(".date-picker:hover > .arrow-button");
+        Node[] nodeArr = arowArr.toArray(Node[]::new);
+        robot.clickOn(nodeArr[0]);
+
+        WaitForAsyncUtils.waitForFxEvents( );
+        NodeQuery nodeQuery = robot.lookup(".day-cell");
+        Set<Node> dateCellSet = nodeQuery.queryAll();
+        Node[] nodes = dateCellSet.toArray(Node[]::new);
+
+        for (Node n : nodes) {
+            LocalDate date = ((DateCell) n).getItem();
+            if (date.isAfter(afterDate)) {
+                afterDate = date;
+                robot.clickOn(n);
+                break;
+            }
+        }
+        return afterDate;
+    }*/
 
     private void selectArrangementTest(@NotNull FxRobot robot) {
         String[] lookupFields = {
