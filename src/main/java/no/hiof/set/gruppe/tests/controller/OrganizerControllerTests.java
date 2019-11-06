@@ -177,6 +177,4 @@ public class OrganizerControllerTests extends MainJavaFXTest{
         }
         return null;
     }
-
-    //test sorting works
 }
