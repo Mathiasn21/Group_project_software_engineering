@@ -38,6 +38,7 @@ public class MainJavaFX extends Application implements SetupWindow {
     //                2.Local Fields                     //
     // --------------------------------------------------//
     private Stage stage;
+    private String css = getClass().getResource("/no/hiof/set/gruppe/darktheme.css").toExternalForm();
 
     public static void main(String[] args) {
         launch(args);
@@ -50,7 +51,6 @@ public class MainJavaFX extends Application implements SetupWindow {
     @Override
     public void start(@NotNull Stage stage) throws IOException {
         this.stage = stage;
-
         FXMLLoader loader = new FXMLLoader(MainJavaFX.class.getResource("Login.fxml"));
         Parent editLayout = loader.load();
 
@@ -58,6 +58,7 @@ public class MainJavaFX extends Application implements SetupWindow {
         controller.setMainController(this);
 
         Scene scene = new Scene(editLayout);
+        //scene.getStylesheets().add(css);
         stage.setScene(scene);
         stage.setResizable(false);
         stage.setTitle("Logg inn");
@@ -82,6 +83,7 @@ public class MainJavaFX extends Application implements SetupWindow {
         Parent editLayout = loader.load();
 
         Scene editScene = new Scene(editLayout);
+        //editScene.getStylesheets().add(css);
         stage.setScene(editScene);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initOwner(this.stage);
@@ -129,7 +131,7 @@ public class MainJavaFX extends Application implements SetupWindow {
             });
 
             Scene editScene = new Scene(editLayout);
-            stage.setScene(editScene);
+            //editScene.getStylesheets().add(css);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initOwner(this.stage);
             stage.setTitle(controller.getViewInformation().viewTitle);
