@@ -115,5 +115,4 @@ public class AdminControllerTests extends MainJavaFXTest{
     private ListView getListView(@NotNull FxRobot robot, String node) {
         return robot.lookup(node).queryAs(ListView.class);
     }
-    //test sorting functionality
 }
