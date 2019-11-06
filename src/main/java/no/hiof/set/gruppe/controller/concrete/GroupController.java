@@ -22,7 +22,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import no.hiof.set.gruppe.Exceptions.DataFormatException;
 import no.hiof.set.gruppe.controller.abstractions.Controller;
@@ -147,6 +146,8 @@ public class GroupController extends Controller {
         }
         members.setText(stringMembers.toString());
     }
+
+
 
     // --------------------------------------------------//
     //                8.Overridden Methods               //

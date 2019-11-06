@@ -17,7 +17,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
 import no.hiof.set.gruppe.controller.abstractions.Controller;
 import no.hiof.set.gruppe.model.ValidationResult;
 import no.hiof.set.gruppe.model.ViewInformation;
@@ -69,7 +68,6 @@ public class NewAlterArrangementController extends Controller {
     @FXML
     public Button saveBtn, cancelBtn;
 
-
     // --------------------------------------------------//
     //                4.On Action Methods                //
     // --------------------------------------------------//
@@ -84,14 +82,14 @@ public class NewAlterArrangementController extends Controller {
         if(illegalNumberFormat())return;
         setArrangementData();
         if(validateArrangementData())return;
-        closeWindow();
+        closeWindow(cancelBtn);
     }
 
     /**
      * @param event {@link ActionEvent}
      */
     private void cancelClicked(ActionEvent event){
-        closeWindow();
+        closeWindow(cancelBtn);
     }
 
     // --------------------------------------------------//
@@ -168,10 +166,6 @@ public class NewAlterArrangementController extends Controller {
     private int getGroupCategoryIndex(){
         if(arrangementToEdit.isGroup())return 0;
         return 1;
-    }
-
-    public void closeWindow(){
-        ((Stage)cancelBtn.getScene().getWindow()).close();
     }
 
     /**

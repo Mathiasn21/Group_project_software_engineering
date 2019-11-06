@@ -13,6 +13,7 @@ package no.hiof.set.gruppe.util;
 import no.hiof.set.gruppe.Exceptions.DataFormatException;
 import no.hiof.set.gruppe.data.Repository;
 import no.hiof.set.gruppe.model.Arrangement;
+import no.hiof.set.gruppe.model.Group;
 import no.hiof.set.gruppe.model.ValidationResult;
 import no.hiof.set.gruppe.model.user.RawUser;
 import org.jetbrains.annotations.Contract;
@@ -86,6 +87,20 @@ public class Validation{
         res.append(passHash.length() >= 10 && passHash.length() <= 60 ? "" : "Ugyldig passord\n");
 
         return new ValidationResult(res.toString(), res.length() == 0);
+    }
+
+    @NotNull
+    @Contract("_ -> new")
+    public static ValidationResult ofGroup(@NotNull Group group){
+        StringBuilder res = new StringBuilder();
+        int maxNameLength = 30;
+        int minNameLength = 1;
+
+        res.append(group.getName().length() <= maxNameLength ? "" : "Navnet på gruppen er for langt");
+        res.append(group.getName().length() >= minNameLength ? "" : "Navnet på gruppen er for kort");
+        res.append(regCheck(textNotNullPattern, group.getName()) ? "" : "Navnet inneholder ugydlige tegn");
+
+        return  new ValidationResult(res.toString(), res.length() == 0);
     }
 
     // --------------------------------------------------//

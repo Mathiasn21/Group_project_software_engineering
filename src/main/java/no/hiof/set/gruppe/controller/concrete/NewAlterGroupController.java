@@ -26,8 +26,11 @@ import no.hiof.set.gruppe.Exceptions.DataFormatException;
 import no.hiof.set.gruppe.controller.abstractions.Controller;
 import no.hiof.set.gruppe.data.Repository;
 import no.hiof.set.gruppe.model.Group;
+import no.hiof.set.gruppe.model.ValidationResult;
 import no.hiof.set.gruppe.model.ViewInformation;
 import no.hiof.set.gruppe.model.constantInformation.DummyUsers;
+import no.hiof.set.gruppe.util.Validation;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -44,6 +47,7 @@ public class NewAlterGroupController extends Controller {
 
     private ObservableList<DummyUsers>avaliableUsersObservableList, chosenUsersObservableList;
     private DummyUsers currentUser = null;
+    private Group groupToEdit;
 
     // --------------------------------------------------//
     //                3.FXML Fields                      //
@@ -70,6 +74,7 @@ public class NewAlterGroupController extends Controller {
 
     private void onClickSave(ActionEvent event){
         createGroup();
+        if(validateGroupData())return;
         closeWindow(cancel);
     }
 
@@ -105,9 +110,17 @@ public class NewAlterGroupController extends Controller {
     }
 
     private void createGroup(){
-        Group group = new Group(name.getText(), 1); //ID skal generes automatisk senere
-        group.addMulipleMembers(chosenUsersObservableList);
-        Repository.addGroup(group);
+        groupToEdit = new Group(name.getText(), 1); //ID skal generes automatisk senere
+        groupToEdit.addMulipleMembers(chosenUsersObservableList);
+        Repository.addGroup(groupToEdit);
+    }
+
+    private boolean validateGroupData(){
+        ValidationResult validation = Validation.ofGroup(groupToEdit);
+        if(!validation.IS_VALID){
+            return true;
+        }
+        return false;
     }
 
 
