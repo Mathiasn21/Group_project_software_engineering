@@ -61,5 +61,10 @@
             <Font size="18.0" />
          </font>
       </Text>
+      <Text fx:id="mainTitle" fill="#4a4a4a" layoutX="450.0" layoutY="12.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Logget inn som Bruker Nåverende status: Gruddeleder" textAlignment="CENTER" wrappingWidth="152.13671875">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

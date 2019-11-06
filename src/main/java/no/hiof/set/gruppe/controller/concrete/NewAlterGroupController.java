@@ -165,4 +165,9 @@ public class NewAlterGroupController extends Controller {
     public ViewInformation getViewInformation() {
         return null;
     }
+
+    @Override
+    public void setTextColors(boolean tf) {
+
+    }
 }

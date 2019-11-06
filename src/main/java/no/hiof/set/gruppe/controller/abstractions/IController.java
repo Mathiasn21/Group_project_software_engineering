@@ -25,4 +25,6 @@ public interface IController {
      * @return {@link ViewInformation}
      */
     ViewInformation getViewInformation();
+
+    void setTextColors(boolean tf);
 }

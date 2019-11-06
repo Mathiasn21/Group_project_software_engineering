@@ -133,24 +133,13 @@ public class GroupController extends Controller {
 
     private void setGroupInformation(){
         if(selectedGroup == null)return;
-        setColors();
+        setTextColors(true);
         groupName.setText(selectedGroup.getName());
         StringBuilder stringMembers = new StringBuilder();
         for(DummyUsers dummyUsers : selectedGroup.getMembers()){
             stringMembers.append(dummyUsers + "\n");
         }
         members.setText(stringMembers.toString());
-    }
-
-    private void setColors(){
-        if(selectedGroup == null){
-            groupNameStatic.setFill(Color.GREY);
-            membersStatic.setFill(Color.GREY);
-        }
-        else{
-            groupNameStatic.setFill(Color.BLACK);
-            membersStatic.setFill(Color.BLACK);
-        }
     }
 
     // --------------------------------------------------//
@@ -161,7 +150,7 @@ public class GroupController extends Controller {
     public void initialize(URL location, ResourceBundle resources) {
         setupActionHandlers();
         populateListView();
-        setColors();
+        setTextColors(false);
     }
 
     @Override
@@ -177,5 +166,10 @@ public class GroupController extends Controller {
     @Override
     public ViewInformation getViewInformation() {
         return new ViewInformation(name, title);
+    }
+
+    @Override
+    public void setTextColors(boolean tf){
+        colorizeText(tf, groupNameStatic, membersStatic);
     }
 }

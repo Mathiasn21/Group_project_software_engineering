@@ -32,12 +32,12 @@
             <Font size="15.0" />
          </font>
       </Text>
-      <Text layoutX="482.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Idrett" underline="true">
+      <Text fx:id="sportHeader" layoutX="482.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Idrett" underline="true">
          <font>
             <Font size="15.0" />
          </font>
       </Text>
-      <Text layoutX="474.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adresse" underline="true">
+      <Text fx:id="addressHeader" layoutX="474.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adresse" underline="true">
          <font>
             <Font size="15.0" />
          </font>
@@ -52,7 +52,7 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <Text layoutX="484.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dato" underline="true">
+      <Text fx:id="dateHeader" layoutX="484.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dato" underline="true">
          <font>
             <Font size="15.0" />
          </font>
@@ -62,7 +62,7 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <Text layoutX="430.0" layoutY="350.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Maks antall deltakere" underline="true">
+      <Text fx:id="participantsHeader" layoutX="430.0" layoutY="350.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Maks antall deltakere" underline="true">
          <font>
             <Font size="15.0" />
          </font>
@@ -72,7 +72,7 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <Text layoutX="443.0" layoutY="423.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Konkurranseform" underline="true">
+      <Text fx:id="gOrIHeader" layoutX="443.0" layoutY="423.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Konkurranseform" underline="true">
          <font>
             <Font size="15.0" />
          </font>
@@ -92,7 +92,7 @@
       <ComboBox fx:id="availableSortingOptionsMy" layoutX="863.0" layoutY="115.0" prefHeight="25.0" prefWidth="96.0" />
       <Text layoutX="863.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sorter" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="25.0" layoutX="743.0" layoutY="53.0" stroke="BLACK" strokeType="INSIDE" width="202.0" />
-      <Text layoutX="465.0" layoutY="488.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Beskrivelse" underline="true">
+      <Text fx:id="descriptionHeader" layoutX="465.0" layoutY="488.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Beskrivelse" underline="true">
          <font>
             <Font size="15.0" />
          </font>
@@ -114,5 +114,10 @@
             <MenuItem fx:id="logOut" mnemonicParsing="false" text="Logg ut" />
          </items>
       </MenuButton>
+      <Text fx:id="mainTitle" fill="#4a4a4a" layoutX="785.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Logget inn som Bruker" textAlignment="CENTER" wrappingWidth="251.13671875">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

@@ -73,6 +73,8 @@ public class OrganizerController extends Controller {
     private ListView<Arrangement>listview;
     @FXML
     private MenuItem logOut;
+    @FXML
+    private Text sportHeader, addressHeader, dateHeader, gOrIHeader, participantsHeader, descriptionHeader;
 
     // --------------------------------------------------//
     //                4.On Action Methods                //
@@ -147,6 +149,7 @@ public class OrganizerController extends Controller {
 
     private void setInformationAboutArrangementInView(){
         if(currentArrangement == null)return;
+        setTextColors(true);
         ArrayList<Text> viewFields = viewFields(arrangementName, arrangementSport, arrangementAdress, arrangementDate, arrangementParticipants, arrangementGorI, arrangementDescription);
         ArrayList<String> data = arrangementData(currentArrangement);
         for(int i = 0; i < data.size(); i++)
@@ -252,6 +255,7 @@ public class OrganizerController extends Controller {
         populateListView();
         populateSportCategories();
         liveSearchUpdate();
+        setTextColors(false);
     }
 
     /**
@@ -303,5 +307,10 @@ public class OrganizerController extends Controller {
     @Override
     public ViewInformation getViewInformation() {
         return new ViewInformation(name, title);
+    }
+
+    @Override
+    public void setTextColors(boolean tf) {
+        colorizeText(tf, sportHeader, addressHeader, dateHeader, gOrIHeader, participantsHeader, descriptionHeader);
     }
 }

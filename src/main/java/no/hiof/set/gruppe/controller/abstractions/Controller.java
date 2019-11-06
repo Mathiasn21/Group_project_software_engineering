@@ -3,6 +3,7 @@ package no.hiof.set.gruppe.controller.abstractions;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -102,5 +103,16 @@ public abstract class Controller implements IControllerDataTransfer, Initializab
 
     protected void closeWindow(@NotNull Button b) {
         ((Stage)b.getScene().getWindow()).close();
+    }
+
+    protected void colorizeText(boolean tf, Text...t){
+        if(tf){
+            for (Text text : t)
+                text.setFill(Color.BLACK);
+        }
+        else{
+            for (Text text : t)
+                text.setFill(Color.GREY);
+        }
     }
 }

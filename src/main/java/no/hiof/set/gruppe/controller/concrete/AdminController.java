@@ -46,7 +46,7 @@ public class AdminController extends Controller {
     //                2.Local Fields                     //
     // --------------------------------------------------//
     private String title = "Login";
-    private String name = "NewAlterArrangement.fxml";
+    private String name = "";
     private FilteredList<Arrangement> filteredList;
     private Arrangement currentArrangement = null;
     private ObservableList<Arrangement> arrangementListObservable;
@@ -64,7 +64,8 @@ public class AdminController extends Controller {
      private Text arrangementSport, arrangementName, arrangementAdress, arrangementDate, arrangementGorI, arrangementParticipants, arrangementDescription;
      @FXML
      private MenuItem logOut;
-
+     @FXML
+     private Text sportHeader, adresHeader, dateHeader, gOrIHeader, participantsHeader, descriptionHeader;
     // --------------------------------------------------//
     //                4.On action Methods                //
     // --------------------------------------------------//
@@ -120,6 +121,7 @@ public class AdminController extends Controller {
 
     private void setCurrentArrangement(){
         currentArrangement = clickedItemFromListView();
+        setTextColors(true);
     }
 
     private void deleteArrangement(){
@@ -136,6 +138,7 @@ public class AdminController extends Controller {
 
     private void editArrangement(){
         title = "Rediger";
+        name = "NewAlterArrangement.fxml";
         createNewView(this, currentArrangement);
     }
 
@@ -153,6 +156,7 @@ public class AdminController extends Controller {
     public void initialize(URL location, ResourceBundle resources) {
         setupActionHandlers();
         populateListView();
+        setTextColors(false);
     }
 
     @Override
@@ -175,5 +179,10 @@ public class AdminController extends Controller {
     @Override
     public ViewInformation getViewInformation() {
         return new ViewInformation(name, title);
+    }
+
+    @Override
+    public void setTextColors(boolean tf) {
+        colorizeText(tf, sportHeader, adresHeader, dateHeader, gOrIHeader, participantsHeader, descriptionHeader);
     }
 }

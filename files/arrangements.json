@@ -1,11 +1,22 @@
 [
   {
+    "ID": "5dcf3140-b627-4b0b-9993-3a6838358dd3",
+    "name": "Øskars Diverse",
+    "sport": "Skirenn",
+    "address": "testvegen - 2",
+    "startDate": "2020-10-26",
+    "endDate": "2020-10-27",
+    "description": "wdawdegsgdtreafrtdhrg",
+    "participants": 23,
+    "group": false
+  },
+  {
     "ID": "d52665f4-38f1-4b56-b24d-9d760adc7102",
     "name": "Børres Brokkoli mani",
     "sport": "Sykkelritt",
     "address": "Brokkolivegen 28",
-    "startDate": "2019-10-11",
-    "endDate": "2019-10-12",
+    "startDate": "2019-11-07",
+    "endDate": "2019-11-08",
     "description": "Masse spising og løing med brokkoli",
     "participants": 36,
     "group": false
@@ -15,21 +26,10 @@
     "name": "The nerds show",
     "sport": "Annet",
     "address": "Smarter than you road 5",
-    "startDate": "2019-11-30",
-    "endDate": "2019-12-01",
+    "startDate": "2019-11-07",
+    "endDate": "2019-11-25",
     "description": "Only for nerds, simple minded not allowed.",
     "participants": 400,
-    "group": false
-  },
-  {
-    "ID": "5dcf3140-b627-4b0b-9993-3a6838358dd3",
-    "name": "Øskars Diverse",
-    "sport": "Skirenn",
-    "address": "testvegen - 2",
-    "startDate": "2020-10-26",
-    "endDate": "2020-10-27",
-    "description": "wdawdegsgdtreafrtdhrg",
-    "participants": 23,
     "group": false
   }
 ]

@@ -74,6 +74,8 @@ public class UserController extends Controller {
     private MenuItem logOut, myGroups;
     @FXML
     private MenuButton menu;
+    @FXML
+    private Text sportHeader, addressHeader, dateHeader, participantsHeader, gOrIHeader, descriptionHeader;
 
     // --------------------------------------------------//
     //                4.On Action Methods                //
@@ -153,6 +155,8 @@ public class UserController extends Controller {
     //                5.Private Functional Methods       //
     // --------------------------------------------------//
     private void setInformationAboutArrangementInView(){
+        if(currentSelectedArrangement == null)return;
+        setTextColors(true);
         ArrayList<Text> viewFields = viewFields(arrangementTitle, arrangementSport,arrangementAddress,arrangementDate,arrangementParticipants,arrangementGroup, arrangementDescription);
         ArrayList<String> data = arrangementData(currentSelectedArrangement);
         for(int i = 0; i < data.size(); i++)
@@ -321,6 +325,7 @@ public class UserController extends Controller {
         setupListView();
         setupActionHandlers();
         setupToggleBtns();
+        setTextColors(false);
     }
 
     /**
@@ -357,5 +362,10 @@ public class UserController extends Controller {
     @Override
     public ViewInformation getViewInformation() {
         return new ViewInformation(name, title);
+    }
+
+    @Override
+    public void setTextColors(boolean tf) {
+        colorizeText(tf, sportHeader, addressHeader, dateHeader, participantsHeader, gOrIHeader, descriptionHeader);
     }
 }
