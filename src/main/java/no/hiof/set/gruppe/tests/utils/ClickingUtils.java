@@ -37,7 +37,7 @@ public class ClickingUtils {
         Node[] rightNodeArr = getNodesAsArr(robot, ".date-picker-popup > * > .spinner > .button:pressed > .right-arrow");
         Node[] leftNodeArr = getNodesAsArr(robot, ".date-picker-popup > * > .spinner > .button:pressed > .left-arrow");
 
-        //Get month and year label nodes
+        //Get month and year Label nodes
         Node[] labelArr = getNodesAsArr(robot, ".date-picker-popup > * > .spinner > .label");
 
         Year year = Year.parse(((Label)labelArr[1]).getText());
@@ -54,9 +54,10 @@ public class ClickingUtils {
     }
 
     private static void ClickToGetSpinnerToShowCorrectText(@NotNull FxRobot robot, Node rightArrowNode, Node leftArrowNode, int x, int y) {
-        int i = Math.abs(x - y);
+        int difference = x - y;
+        int i = Math.abs(difference);
         while (i > 0) {
-            robot.clickOn(x - y <= 0 ? leftArrowNode : rightArrowNode);
+            robot.clickOn(difference <= 0 ? leftArrowNode : rightArrowNode);
             i--;
         }
     }
