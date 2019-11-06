@@ -75,7 +75,8 @@ public class GroupController extends Controller {
     }
 
     private void onClickEditBtn(ActionEvent event) {
-        System.out.println("rediger");
+        if(selectedGroup == null)return;
+        editGroup();
     }
 
     private void onClickMyIndividualArrangementsBtn(ActionEvent event) {
@@ -103,6 +104,12 @@ public class GroupController extends Controller {
         Repository.deleteGroup(selectedGroup);
         groupsList.remove(selectedGroup);
         groupsListview.refresh();
+    }
+
+    private void editGroup(){
+        title = "Rediger gruppe";
+        name = "NewAlterGroup.fxml";
+        createNewView(this, selectedGroup);
     }
 
     private void switchView(String newTitle, String newName){

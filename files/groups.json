@@ -34,5 +34,13 @@
     "name": "yy",
     "id": 1,
     "members": []
+  },
+  {
+    "name": "fghfghj",
+    "id": 1,
+    "members": [
+      "USER6",
+      "USER5"
+    ]
   }
 ]

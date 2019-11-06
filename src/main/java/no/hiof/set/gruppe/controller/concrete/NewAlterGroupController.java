@@ -21,7 +21,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import no.hiof.set.gruppe.Exceptions.DataFormatException;
 import no.hiof.set.gruppe.controller.abstractions.Controller;
 import no.hiof.set.gruppe.data.Repository;
@@ -32,6 +31,7 @@ import no.hiof.set.gruppe.model.constantInformation.DummyUsers;
 import no.hiof.set.gruppe.util.Validation;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
@@ -48,13 +48,18 @@ public class NewAlterGroupController extends Controller {
     private ObservableList<DummyUsers>avaliableUsersObservableList, chosenUsersObservableList;
     private DummyUsers currentUser = null;
     private Group groupToEdit;
+    private String grName;
+    private int id;
+    private ArrayList<DummyUsers>members;
+    private String name = "NewAlterGroup.fxml";
+    private String title = "Rediger";
 
     // --------------------------------------------------//
     //                3.FXML Fields                      //
     // --------------------------------------------------//
 
     @FXML
-    private TextField name;
+    private TextField inputName;
     @FXML
     private ListView<DummyUsers> availableMembers, chosenMembers;
     @FXML
@@ -110,9 +115,11 @@ public class NewAlterGroupController extends Controller {
     }
 
     private void createGroup(){
-        groupToEdit = new Group(name.getText(), 1); //ID skal generes automatisk senere
-        groupToEdit.addMulipleMembers(chosenUsersObservableList);
-        Repository.addGroup(groupToEdit);
+        if(groupToEdit == null){
+            groupToEdit = new Group(inputName.getText(), 1); //ID skal generes automatisk senere
+            groupToEdit.addMulipleMembers(chosenUsersObservableList);
+            Repository.addGroup(groupToEdit);
+        }
     }
 
     private boolean validateGroupData(){
@@ -121,11 +128,6 @@ public class NewAlterGroupController extends Controller {
             return true;
         }
         return false;
-    }
-
-
-    private void setCurrentUser(ListView<DummyUsers> list){
-        currentUser = list.getSelectionModel().getSelectedItem();
     }
 
     private boolean checkIfRightList(ObservableList<DummyUsers> o) {
@@ -148,9 +150,37 @@ public class NewAlterGroupController extends Controller {
         chosenMembers.setOnMouseClicked(this::onClickChosenMembers);
     }
 
+    private void getArrangementData(){
+        grName = groupToEdit.getName();
+        id = groupToEdit.getId();
+        members = groupToEdit.getMembers();
+    }
+
+    private void setGroupData(){
+
+    }
+
     private void populateAvaliabeMembers(){
-        avaliableUsersObservableList = FXCollections.observableArrayList(Repository.getAllUsers());
-        availableMembers.setItems(avaliableUsersObservableList);
+
+            avaliableUsersObservableList = FXCollections.observableArrayList(Repository.getAllUsers());
+            availableMembers.setItems(avaliableUsersObservableList);
+    }
+
+    private void setCurrentUser(ListView<DummyUsers> list){
+        currentUser = list.getSelectionModel().getSelectedItem();
+    }
+
+    private void setGroupToEdit(Object object){
+        if(object instanceof Group) {
+            groupToEdit = (Group)object;
+        }
+    }
+
+    private ArrayList<DummyUsers> getMembersFromGroup(){
+        ArrayList<DummyUsers>list = new ArrayList<>();
+        for(DummyUsers user : groupToEdit.getMembers())
+            list.add(user);
+        return list;
     }
 
     // --------------------------------------------------//
@@ -163,8 +193,11 @@ public class NewAlterGroupController extends Controller {
     }
 
     @Override
-    public void setDataFields(Object controller) throws DataFormatException {
-
+    public void setDataFields(Object object) throws DataFormatException {
+        setGroupToEdit(object);
+        inputName.setText(groupToEdit.getName());
+        chosenUsersObservableList = FXCollections.observableList(getMembersFromGroup());
+        chosenMembers.setItems(chosenUsersObservableList);
     }
 
     @Override
@@ -176,7 +209,7 @@ public class NewAlterGroupController extends Controller {
 
     @Override
     public ViewInformation getViewInformation() {
-        return null;
+        return new ViewInformation(name, title);
     }
 
     @Override
