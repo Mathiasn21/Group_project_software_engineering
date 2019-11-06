@@ -247,6 +247,11 @@ public class Repository {
         storeArrangementsData();
     }
 
+    public static void deleteGroup(Group group){
+        listofAllGroups.remove(group);
+        storeGroupData();
+    }
+
     /**
      * @param arrangement {@link Arrangement}
      * @param protoUser {@link ProtoUser}

@@ -72,7 +72,7 @@ public class GroupController extends Controller {
     }
 
     private void onClickDeletBtn(ActionEvent event) {
-        System.out.println("slett");
+        deleteGroup();
     }
 
     private void onClickEditBtn(ActionEvent event) {
@@ -98,6 +98,12 @@ public class GroupController extends Controller {
 
     private void setSelectedGroup(){
         selectedGroup = groupsListview.getSelectionModel().getSelectedItem();
+    }
+
+    private void deleteGroup(){
+        Repository.deleteGroup(selectedGroup);
+        groupsList.remove(selectedGroup);
+        groupsListview.refresh();
     }
 
     private void switchView(String newTitle, String newName){

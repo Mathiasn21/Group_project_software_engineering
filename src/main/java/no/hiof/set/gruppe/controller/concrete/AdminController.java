@@ -121,7 +121,7 @@ public class AdminController extends Controller {
 
     private void setCurrentArrangement(){
         currentArrangement = clickedItemFromListView();
-        setTextColors(true);
+
     }
 
     private void deleteArrangement(){
@@ -143,6 +143,7 @@ public class AdminController extends Controller {
     }
 
     private void setInformationAboutArrangementInView(){
+        setTextColors(true);
         ArrayList<Text> viewFields = viewFields(arrangementName, arrangementSport, arrangementAdress, arrangementDate, arrangementParticipants, arrangementGorI, arrangementDescription);
         ArrayList<String> data = arrangementData(currentArrangement);
         for(int i = 0; i < data.size(); i++)
