@@ -26,6 +26,7 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.time.Year;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -34,7 +35,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(ApplicationExtension.class)
 public class OrganizerControllerTests extends MainJavaFXTest{
-
     private Arrangement arrangement = new Arrangement(
                 "ThisIsNerdy",
                         "Alle",
