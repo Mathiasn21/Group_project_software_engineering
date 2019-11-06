@@ -21,6 +21,7 @@ import org.testfx.util.WaitForAsyncUtils;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 @ExtendWith(ApplicationExtension.class)
@@ -44,6 +45,7 @@ public class AdminControllerTests extends MainJavaFXTest{
             afterDate = clickOnDatePicker(datePickerNode, robot, afterDate);
         }
         editArrangementTest(robot);
+        
         deleteAddedArrangement(robot);
     }
 
@@ -62,6 +64,10 @@ public class AdminControllerTests extends MainJavaFXTest{
         for(int i = 0; i < arrangementData.length; i++){
             Assertions.assertThat(robot.lookup(lookupFields[i]).queryAs(Text.class)).hasText(arrangementData[i]);
         }
+    }
+
+    private void assertListViewHasData(@NotNull FxRobot robot, @NotNull List<Arrangement> arrangementsToExist, @NotNull ListView<Arrangement> listView){
+
     }
 
     private void assertFieldsIsClickedArrangement2(@NotNull FxRobot robot, String[] lookupFields, @NotNull String[] arrangementData) {
