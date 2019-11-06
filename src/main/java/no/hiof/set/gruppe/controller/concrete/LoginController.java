@@ -157,4 +157,9 @@ public class LoginController extends Controller {
     public ViewInformation getViewInformation() {
         return new ViewInformation(name, title);
     }
+
+    @Override
+    public void setTextColors(boolean tf) {
+
+    }
 }
