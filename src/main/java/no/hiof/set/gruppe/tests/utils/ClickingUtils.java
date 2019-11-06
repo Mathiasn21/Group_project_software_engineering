@@ -36,15 +36,17 @@ public class ClickingUtils {
         //Query for the spinner arrows. The arrows that change the year and the month
         Node[] rightNodeArr = getNodesAsArr(robot, ".date-picker-popup > * > .spinner > .button:pressed > .right-arrow");
         Node[] leftNodeArr = getNodesAsArr(robot, ".date-picker-popup > * > .spinner > .button:pressed > .left-arrow");
+        int yearNodeIndex = 1;
+        int monthNodeIndex = 0;
 
-        //Get month and year label nodes
+        //Get month and year Label nodes
         Node[] labelArr = getNodesAsArr(robot, ".date-picker-popup > * > .spinner > .label");
 
-        Year year = Year.parse(((Label)labelArr[1]).getText());
-        Month month = Month.valueOf(((Label)labelArr[0]).getText().toUpperCase());
+        Year year = Year.parse(((Label)labelArr[yearNodeIndex]).getText());
+        Month month = Month.valueOf(((Label)labelArr[monthNodeIndex]).getText().toUpperCase());
 
-        ClickToGetSpinnerToShowCorrectText(robot, rightNodeArr[0], leftNodeArr[0], dateToClick.getMonthValue(), month.getValue());
-        ClickToGetSpinnerToShowCorrectText(robot, rightNodeArr[1], leftNodeArr[1], dateToClick.getYear(), year.getValue());
+        ClickToGetSpinnerToShowCorrectText(robot, rightNodeArr[monthNodeIndex], leftNodeArr[monthNodeIndex], dateToClick.getMonthValue(), month.getValue());
+        ClickToGetSpinnerToShowCorrectText(robot, rightNodeArr[yearNodeIndex], leftNodeArr[yearNodeIndex], dateToClick.getYear(), year.getValue());
     }
 
     private static Node[] getNodesAsArr(@NotNull FxRobot robot, String s) {
@@ -54,9 +56,10 @@ public class ClickingUtils {
     }
 
     private static void ClickToGetSpinnerToShowCorrectText(@NotNull FxRobot robot, Node rightArrowNode, Node leftArrowNode, int x, int y) {
-        int i = Math.abs(x - y);
+        int difference = x - y;
+        int i = Math.abs(difference);
         while (i > 0) {
-            robot.clickOn(x - y <= 0 ? leftArrowNode : rightArrowNode);
+            robot.clickOn(difference <= 0 ? leftArrowNode : rightArrowNode);
             i--;
         }
     }
