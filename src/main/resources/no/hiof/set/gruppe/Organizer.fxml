@@ -142,9 +142,9 @@
             <MenuItem fx:id="logOut" mnemonicParsing="false" text="Logg ut" />
          </items>
       </MenuButton>
-      <Text fx:id="mainTitle" fill="#4a4a4a" layoutX="582.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Logget inn som arrangør" textAlignment="CENTER" wrappingWidth="251.13671875">
+      <Text fx:id="mainTitle" fill="#4a4a4a" layoutX="582.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Logget inn som Arrangør" textAlignment="CENTER" wrappingWidth="251.13671875">
          <font>
-            <Font size="15.0" />
+            <Font size="11.0" />
          </font>
       </Text>
    </children>

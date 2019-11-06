@@ -46,7 +46,7 @@ public class AdminController extends Controller {
     //                2.Local Fields                     //
     // --------------------------------------------------//
     private String title = "Login";
-    private String name = "NewAlterArrangement.fxml";
+    private String name = "";
     private FilteredList<Arrangement> filteredList;
     private Arrangement currentArrangement = null;
     private ObservableList<Arrangement> arrangementListObservable;
@@ -138,6 +138,7 @@ public class AdminController extends Controller {
 
     private void editArrangement(){
         title = "Rediger";
+        name = "NewAlterArrangement.fxml";
         createNewView(this, currentArrangement);
     }
 

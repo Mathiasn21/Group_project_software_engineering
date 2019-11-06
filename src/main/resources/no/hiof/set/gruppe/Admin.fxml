@@ -16,8 +16,8 @@
 
 <AnchorPane maxHeight="500.0" maxWidth="689.0" minHeight="481.0" minWidth="689.0" prefHeight="500.0" prefWidth="689.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="no.hiof.set.gruppe.controller.concrete.AdminController">
    <children>
-      <Circle fill="#1fff27" layoutX="674.0" layoutY="16.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" />
-      <Text layoutX="591.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Status: Online" />
+      <Circle fill="#1fff27" layoutX="166.0" layoutY="24.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" />
+      <Text layoutX="83.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Status: Online" />
       <ListView fx:id="arrangementListView" layoutY="79.0" prefHeight="387.0" prefWidth="213.0" />
       <VBox layoutX="243.0" layoutY="94.0" prefHeight="258.0" prefWidth="385.0">
          <children>
@@ -118,11 +118,6 @@
          </font>
       </Text>
       <Text fx:id="arrangementDescription" layoutX="293.0" layoutY="418.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" wrappingWidth="341.60000681877136" />
-      <Text fx:id="mainTitle" layoutX="278.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="ADMIN" textAlignment="CENTER" wrappingWidth="150.13671875">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Text>
       <TextField fx:id="search" layoutX="42.0" layoutY="49.0" prefHeight="26.0" prefWidth="171.0" />
       <Text layoutX="10.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Søk" />
       <Button fx:id="edit" layoutY="470.0" mnemonicParsing="false" text="Rediger" />
@@ -131,5 +126,10 @@
             <MenuItem fx:id="logOut" mnemonicParsing="false" text="Logg ut" />
          </items>
       </MenuButton>
+      <Text fx:id="mainTitle" fill="#4a4a4a" layoutX="449.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Logget inn som serviceadministrator" textAlignment="CENTER" wrappingWidth="251.13671875">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>
