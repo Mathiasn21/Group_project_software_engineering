@@ -311,9 +311,7 @@ public class Repository {
     @NotNull
     public static ArrayList<DummyUsers> getAllUsers(){
         ArrayList<DummyUsers>dummyUsers = new ArrayList<>();
-        for(int i = 0; i < DummyUsers.values().length; i++){
-            dummyUsers.add(DummyUsers.values()[i]);
-        }
+        dummyUsers.addAll(Arrays.asList(DummyUsers.values()));
         return dummyUsers;
     }
 
