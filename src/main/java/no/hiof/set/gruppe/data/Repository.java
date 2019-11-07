@@ -308,6 +308,7 @@ public class Repository {
         return protoUser;
     }
 
+    @Contract(" -> new")
     @NotNull
     public static ArrayList<DummyUsers> getAllUsers(){
         return new ArrayList<>(Arrays.asList(DummyUsers.values()));
