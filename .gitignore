@@ -13,7 +13,7 @@ out/
 logs/*
 posters/
 poster/
-idea/
+idea/*
 target/
 cmake-build-debug/
 SET_Project
@@ -22,4 +22,4 @@ SET_SourceCode.zip
 
 #Rule Exceptions
 !logs/.gitkeep
-!*.idea/runConfigurations/*
+!.idea/runConfigurations/*
