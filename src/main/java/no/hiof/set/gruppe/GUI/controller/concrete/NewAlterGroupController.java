@@ -53,6 +53,7 @@ public class NewAlterGroupController extends Controller {
     private ArrayList<DummyUsers>members;
     private String name = "NewAlterGroup.fxml";
     private String title = "Rediger";
+    private boolean groupIsEditable = false;
 
     // --------------------------------------------------//
     //                3.FXML Fields                      //
@@ -137,6 +138,13 @@ public class NewAlterGroupController extends Controller {
         return true;
     }
 
+    private ArrayList<DummyUsers> getMembersFromGroup(){
+        ArrayList<DummyUsers>list = new ArrayList<>();
+        for(DummyUsers user : groupToEdit.getMembers())
+            list.add(user);
+        return list;
+    }
+
     // --------------------------------------------------//
     //                5.Private Setup Methods            //
     // --------------------------------------------------//
@@ -160,10 +168,27 @@ public class NewAlterGroupController extends Controller {
 
     }
 
-    private void populateAvaliabeMembers(){
 
+    //Touche my spaghet?? Trenger refaktorering,
+    private void populateListviews(){
+        if(!groupIsEditable){
             avaliableUsersObservableList = FXCollections.observableArrayList(Repository.getAllUsers());
-            availableMembers.setItems(avaliableUsersObservableList);
+        }
+        if(groupIsEditable){
+
+            chosenUsersObservableList = FXCollections.observableArrayList(getMembersFromGroup());
+
+            for(int i = 0; i < avaliableUsersObservableList.size(); i++){
+                for(int j = 0; j < chosenUsersObservableList.size(); j++){
+                    if(avaliableUsersObservableList.get(i) == chosenUsersObservableList.get(j)){
+                        avaliableUsersObservableList.remove(avaliableUsersObservableList.get(i));
+                    }
+                }
+            }
+
+            chosenMembers.setItems(chosenUsersObservableList);
+        }
+        availableMembers.setItems(avaliableUsersObservableList);
     }
 
     private void setCurrentUser(ListView<DummyUsers> list){
@@ -176,12 +201,6 @@ public class NewAlterGroupController extends Controller {
         }
     }
 
-    private ArrayList<DummyUsers> getMembersFromGroup(){
-        ArrayList<DummyUsers>list = new ArrayList<>();
-        for(DummyUsers user : groupToEdit.getMembers())
-            list.add(user);
-        return list;
-    }
 
     /*
     private void filterAlreadyJoinedMembers(){
@@ -195,6 +214,11 @@ public class NewAlterGroupController extends Controller {
     }
     */
 
+    private void filterAlreadyJoinedMembers(){
+
+
+    }
+
     // --------------------------------------------------//
     //                6.Overridden Methods               //
     // --------------------------------------------------//
@@ -206,17 +230,16 @@ public class NewAlterGroupController extends Controller {
 
     @Override
     public void setDataFields(Object object) throws DataFormatException {
+        groupIsEditable = true;
         setGroupToEdit(object);
         inputName.setText(groupToEdit.getName());
-        chosenUsersObservableList = FXCollections.observableList(getMembersFromGroup());
-        chosenMembers.setItems(chosenUsersObservableList);
+        populateListviews();
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        populateAvaliabeMembers();
+        populateListviews();
         setupActionHandlers();
-        chosenUsersObservableList = FXCollections.observableArrayList();
     }
 
     @Override
