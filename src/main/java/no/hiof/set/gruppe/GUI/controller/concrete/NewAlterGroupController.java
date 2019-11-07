@@ -164,12 +164,7 @@ public class NewAlterGroupController extends Controller {
         members = groupToEdit.getMembers();
     }
 
-    private void setGroupData(){
-
-    }
-
-
-    //Touche my spaghet?? Trenger refaktorering,
+    //Toucha my spaghet?? Trenger refaktorering,
     private void populateListviews(){
         if(!groupIsEditable){
             avaliableUsersObservableList = FXCollections.observableArrayList(Repository.getAllUsers());
@@ -201,23 +196,6 @@ public class NewAlterGroupController extends Controller {
         }
     }
 
-
-    /*
-    private void filterAlreadyJoinedMembers(){
-        for(DummyUsers userAvailable : avaliableUsersObservableList){
-            for(DummyUsers userJoined : chosenUsersObservableList){
-                if(userAvailable == userJoined){
-                    avaliableUsersObservableList.remove(userAvailable);
-                }
-            }
-        }
-    }
-    */
-
-    private void filterAlreadyJoinedMembers(){
-
-
-    }
 
     // --------------------------------------------------//
     //                6.Overridden Methods               //
