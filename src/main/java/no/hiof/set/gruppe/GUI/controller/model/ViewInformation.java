@@ -1,4 +1,4 @@
-package no.hiof.set.gruppe.model;
+package no.hiof.set.gruppe.GUI.controller.model;
 
 /*Guide
  * 1. Import Statements
@@ -9,29 +9,29 @@ package no.hiof.set.gruppe.model;
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
-import no.hiof.set.gruppe.core.validations.Validation;
 import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 /**
- * A class representing the result from a validation{@link Validation} attempt.
+ * Information about the view. Mainly location and title
  */
-public class ValidationResult {
+public final class ViewInformation {
     // --------------------------------------------------//
     //                2.Local Fields                     //
     // --------------------------------------------------//
-    public final String RESULT;
-    public final boolean IS_VALID;
+    public final String viewName;
+    public final String viewTitle;
 
     // --------------------------------------------------//
-    //                3.Contracts                        //
+    //                3.Constructors                     //
     // --------------------------------------------------//
     /**
-     * @param result String
-     * @param isValid String
+     * @param viewName String
+     * @param viewTitle String
      */
     @Contract(pure = true)
-    public ValidationResult(String result, boolean isValid){
-        RESULT = result;
-        IS_VALID = isValid;
+    public ViewInformation(@NotNull String viewName, @NotNull String viewTitle){
+        this.viewName = viewName;
+        this.viewTitle = viewTitle;
     }
 }

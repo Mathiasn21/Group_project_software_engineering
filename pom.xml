@@ -133,7 +133,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.3</version>
                 <configuration>
-                    <mainClass>no.hiof.set.gruppe.MainJavaFX</mainClass>
+                    <mainClass>no.hiof.set.gruppe.GUI.MainJavaFX</mainClass>
                 </configuration>
             </plugin>
         </plugins>

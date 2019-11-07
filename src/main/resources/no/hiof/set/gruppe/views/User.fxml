@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="590.0" maxWidth="1003.0" minHeight="450.0" minWidth="1000.0" prefHeight="546.0" prefWidth="1003.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="no.hiof.set.gruppe.GUI.controller.concrete.UserController">
+   <children>
+      <ListView fx:id="availableArrangementsListView" layoutX="43.0" layoutY="150.0" prefHeight="288.0" prefWidth="232.0" />
+      <Text layoutX="72.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tilgjengelige arrangementer" textAlignment="CENTER" wrappingWidth="175.00001001358032">
+         <font>
+            <Font size="13.0" />
+         </font></Text>
+      <Button fx:id="joinBtn" layoutX="129.0" layoutY="447.0" mnemonicParsing="false" text="Meld på" />
+      <Button fx:id="leaveBtn" layoutX="901.0" layoutY="447.0" mnemonicParsing="false" text="Meld av" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="32.0" layoutX="319.0" layoutY="52.0" stroke="BLACK" strokeType="INSIDE" width="365.0" />
+      <TextField fx:id="searchAv" layoutX="43.0" layoutY="115.0" prefHeight="25.0" prefWidth="96.0" />
+      <Text layoutX="43.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Søk" wrappingWidth="32.09179639816284" />
+      <ComboBox fx:id="sortingOptions" layoutX="179.0" layoutY="114.0" prefHeight="25.0" prefWidth="96.0" />
+      <Text layoutX="179.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sorter" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="25.0" layoutX="56.0" layoutY="55.0" stroke="BLACK" strokeType="INSIDE" width="202.0" />
+      <Text fx:id="arrangementTitle" layoutX="353.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="297.0000100135803">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <Text fx:id="sportHeader" layoutX="482.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Idrett" underline="true">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <Text fx:id="addressHeader" layoutX="474.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adresse" underline="true">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <Text fx:id="arrangementSport" layoutX="347.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="306.9999873638153">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text fx:id="arrangementAddress" layoutX="347.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="306.9999873638153">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text fx:id="dateHeader" layoutX="484.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dato" underline="true">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <Text fx:id="arrangementDate" layoutX="347.0" layoutY="306.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="306.9999873638153">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text fx:id="participantsHeader" layoutX="430.0" layoutY="350.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Maks antall deltakere" underline="true">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <Text fx:id="arrangementParticipants" layoutX="347.0" layoutY="378.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="306.9999873638153">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text fx:id="gOrIHeader" layoutX="443.0" layoutY="423.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Konkurranseform" underline="true">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <Text fx:id="arrangementGroup" layoutX="347.0" layoutY="448.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="306.9999873638153">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="781.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mine Arrangementer" textAlignment="CENTER" wrappingWidth="138.00001001358032">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Text>
+      <TextField fx:id="searchMy" layoutX="727.0" layoutY="116.0" prefHeight="25.0" prefWidth="96.0" />
+      <Text layoutX="727.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Søk" wrappingWidth="32.09179639816284" />
+      <ComboBox fx:id="availableSortingOptionsMy" layoutX="863.0" layoutY="115.0" prefHeight="25.0" prefWidth="96.0" />
+      <Text layoutX="863.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sorter" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="25.0" layoutX="743.0" layoutY="53.0" stroke="BLACK" strokeType="INSIDE" width="202.0" />
+      <Text fx:id="descriptionHeader" layoutX="465.0" layoutY="488.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Beskrivelse" underline="true">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <Text fx:id="arrangementDescription" layoutX="291.0" layoutY="516.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="418.5999091863632" />
+      <RadioButton fx:id="radioExp" layoutX="733.0" layoutY="444.0" mnemonicParsing="false" text="Vis utgåtte" />
+      <RadioButton fx:id="radioFut" layoutX="733.0" layoutY="464.0" mnemonicParsing="false" text="Vis fremtidige" />
+      <RadioButton fx:id="radioOng" layoutX="733.0" layoutY="483.0" mnemonicParsing="false" text="Vis pågående" />
+      <ListView fx:id="myArrangementsView" layoutX="728.0" layoutY="151.0" prefHeight="288.0" prefWidth="232.0" />
+      <RadioButton fx:id="radioAll" layoutX="733.0" layoutY="502.0" mnemonicParsing="false" text="Vis Alle" />
+      <MenuButton fx:id="menu" layoutX="12.0" layoutY="7.0" mnemonicParsing="false" text="Meny">
+         <items>
+            <MenuItem fx:id="myGroups" mnemonicParsing="false" text="Mine grupper" />
+            <MenuItem fx:id="logOut" mnemonicParsing="false" text="Logg ut" />
+         </items>
+      </MenuButton>
+      <Text fx:id="mainTitle" fill="#4a4a4a" layoutX="785.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Logget inn som Bruker" textAlignment="CENTER" wrappingWidth="251.13671875">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>
