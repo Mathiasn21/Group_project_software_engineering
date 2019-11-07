@@ -308,17 +308,14 @@ public class Repository {
         return protoUser;
     }
 
+    @Contract(" -> new")
     @NotNull
     public static ArrayList<DummyUsers> getAllUsers(){
-        ArrayList<DummyUsers>dummyUsers = new ArrayList<>();
-        for(int i = 0; i < DummyUsers.values().length; i++){
-            dummyUsers.add(DummyUsers.values()[i]);
-        }
-        return dummyUsers;
+        return new ArrayList<>(Arrays.asList(DummyUsers.values()));
     }
 
     @NotNull
-    @Contract(" -> new")
+    @Contract(value = " -> new")
     public static ArrayList<Group>getAllGroups(){
        return new ArrayList<>(listofAllGroups);
     }
