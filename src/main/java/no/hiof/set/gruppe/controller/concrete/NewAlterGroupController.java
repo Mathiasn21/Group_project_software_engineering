@@ -183,6 +183,18 @@ public class NewAlterGroupController extends Controller {
         return list;
     }
 
+    /*
+    private void filterAlreadyJoinedMembers(){
+        for(DummyUsers userAvailable : avaliableUsersObservableList){
+            for(DummyUsers userJoined : chosenUsersObservableList){
+                if(userAvailable == userJoined){
+                    avaliableUsersObservableList.remove(userAvailable);
+                }
+            }
+        }
+    }
+    */
+
     // --------------------------------------------------//
     //                6.Overridden Methods               //
     // --------------------------------------------------//
