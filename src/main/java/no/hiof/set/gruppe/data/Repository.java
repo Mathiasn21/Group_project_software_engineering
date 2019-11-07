@@ -315,7 +315,7 @@ public class Repository {
     }
 
     @NotNull
-    @Contract(" -> new")
+    @Contract(value = " -> new")
     public static ArrayList<Group>getAllGroups(){
        return new ArrayList<>(listofAllGroups);
     }
