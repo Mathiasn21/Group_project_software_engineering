@@ -310,8 +310,7 @@ public class Repository {
 
     @NotNull
     public static ArrayList<DummyUsers> getAllUsers(){
-        ArrayList<DummyUsers> dummyUsers = new ArrayList<>(Arrays.asList(DummyUsers.values()));
-        return dummyUsers;
+        return new ArrayList<>(Arrays.asList(DummyUsers.values()));
     }
 
     @NotNull
