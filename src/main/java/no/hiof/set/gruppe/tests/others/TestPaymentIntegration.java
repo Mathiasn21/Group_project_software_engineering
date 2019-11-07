@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 class TestPaymentIntegration {
 
     // --------------------------------------------------//
-    //                2.Single Tests                     //
+    //                2.Unit Tests                       //
     // --------------------------------------------------//
     @Test
     void paymentSuccess(){
