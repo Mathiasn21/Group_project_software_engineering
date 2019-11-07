@@ -1,7 +1,6 @@
 package no.hiof.set.gruppe.tests.controller;
 
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -21,7 +20,6 @@ import org.testfx.util.WaitForAsyncUtils;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Set;
 
 @ExtendWith(ApplicationExtension.class)
@@ -75,7 +73,6 @@ public class AdminControllerTests extends MainJavaFXTest{
     // --------------------------------------------------//
     //                2.Helper methods                   //
     // --------------------------------------------------//
-    //DO NOT REMOVE THIS!!!!!!!!!!!!!!!!!!
     private LocalDate clickOnDatePicker(@NotNull String datePickerNode, @NotNull FxRobot robot, @NotNull LocalDate afterDate) {
         DatePicker datepicker = robot.lookup(datePickerNode).queryAs(DatePicker.class);
 
