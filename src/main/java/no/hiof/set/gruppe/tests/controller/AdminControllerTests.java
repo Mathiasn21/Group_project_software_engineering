@@ -45,7 +45,6 @@ public class AdminControllerTests extends MainJavaFXTest{
             afterDate = clickOnDatePicker(datePickerNode, robot, afterDate);
         }
         editArrangementTest(robot);
-        
         deleteAddedArrangement(robot);
     }
 
@@ -64,10 +63,6 @@ public class AdminControllerTests extends MainJavaFXTest{
         for(int i = 0; i < arrangementData.length; i++){
             Assertions.assertThat(robot.lookup(lookupFields[i]).queryAs(Text.class)).hasText(arrangementData[i]);
         }
-    }
-
-    private void assertListViewHasData(@NotNull FxRobot robot, @NotNull List<Arrangement> arrangementsToExist, @NotNull ListView<Arrangement> listView){
-
     }
 
     private void assertFieldsIsClickedArrangement2(@NotNull FxRobot robot, String[] lookupFields, @NotNull String[] arrangementData) {
