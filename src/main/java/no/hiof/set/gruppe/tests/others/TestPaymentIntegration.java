@@ -9,6 +9,7 @@ package no.hiof.set.gruppe.tests.others;
 //                1.Import Statements                //
 // --------------------------------------------------//
 import org.junit.jupiter.api.Test;
+import static org.junit.Assert.*;
 
 class TestPaymentIntegration {
 
@@ -16,12 +17,12 @@ class TestPaymentIntegration {
     //                2.Unit Tests                       //
     // --------------------------------------------------//
     @Test
-    void paymentSuccess(){
-
+    void transactionSuccess(){
+   
     }
 
     @Test
-    void paymentFailed(){
+    void transactionFailed(){
 
     }
 }
