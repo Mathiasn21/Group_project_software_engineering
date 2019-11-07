@@ -20,7 +20,7 @@ import java.util.Locale;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(ApplicationExtension.class)
-public class OrganizerControllerTests extends MainJavaFXTest{
+class OrganizerControllerTests extends MainJavaFXTest{
     static{
         Locale.setDefault(Locale.US);
     }
@@ -40,7 +40,7 @@ public class OrganizerControllerTests extends MainJavaFXTest{
             "#arrangementParticipants", "#arrangementGorI", "#arrangementDescription"};
 
     @Start
-    public void start(@NotNull Stage stage) throws IOException {
+    void start(@NotNull Stage stage) throws IOException {
         MainJavaFXTest mainJavaFXTest = new MainJavaFXTest();
         mainJavaFXTest.setStartView(ProtoUser.ORGANIZER.getViewName());
         mainJavaFXTest.start(stage);

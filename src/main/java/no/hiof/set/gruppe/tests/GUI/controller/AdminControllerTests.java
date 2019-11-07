@@ -23,11 +23,11 @@ import java.time.LocalDate;
 import java.util.Set;
 
 @ExtendWith(ApplicationExtension.class)
-public class AdminControllerTests extends MainJavaFXTest{
+class AdminControllerTests extends MainJavaFXTest{
 
     private Arrangement currentTestArrangement;
     @Start
-    public void start(@NotNull Stage stage) throws IOException {
+    void start(@NotNull Stage stage) throws IOException {
         MainJavaFXTest mainJavaFXTest = new MainJavaFXTest();
         mainJavaFXTest.setStartView(ProtoUser.ADMIN.getViewName());
         mainJavaFXTest.start(stage);

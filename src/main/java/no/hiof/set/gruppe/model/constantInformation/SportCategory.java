@@ -25,7 +25,7 @@ public enum SportCategory {
     SKIING("Skirenn"),
     MARATHON("Maraton"),
     ;
-    final String category;
+    private final String category;
 
 
     // --------------------------------------------------//

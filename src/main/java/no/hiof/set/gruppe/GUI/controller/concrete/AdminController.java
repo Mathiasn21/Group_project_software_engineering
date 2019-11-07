@@ -46,7 +46,6 @@ public class AdminController extends Controller {
     // --------------------------------------------------//
     private String title = "Login";
     private String name = "";
-    private FilteredList<Arrangement> filteredList;
     private Arrangement currentArrangement = null;
     private ObservableList<Arrangement> arrangementListObservable;
 
@@ -172,7 +171,7 @@ public class AdminController extends Controller {
     }
 
     @Override
-    public void setDataFields(Object object) throws DataFormatException {
+    public void setDataFields(Object object) {
 
     }
 

@@ -14,11 +14,11 @@ import org.testfx.framework.junit5.Start;
 import java.io.IOException;
 
 @ExtendWith(ApplicationExtension.class)
-public class MainJavaFXTest {
+class MainJavaFXTest {
     private String startView = "Login.fxml";
 
     @Start
-    public void start(@NotNull Stage stage) throws IOException {
+    void start(@NotNull Stage stage) throws IOException {
         FXMLLoader loader = new FXMLLoader(MainJavaFX.class.getResource(startView));
         System.out.println(MainJavaFX.class.getResource(startView));
         Parent editLayout = loader.load();

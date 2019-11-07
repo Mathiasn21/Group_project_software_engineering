@@ -34,13 +34,14 @@ import java.util.ResourceBundle;
  * {@link Validation} class.
  * @author Gruppe4
  */
+@SuppressWarnings("FieldCanBeLocal")
 public class NewAlterArrangementController extends Controller {
 
     // --------------------------------------------------//
     //                2.Local Fields                     //
     // --------------------------------------------------//
-    private String name = "NewAlterArrangement.fxml";
-    private String title = "Arrangement";
+    private final String name = "NewAlterArrangement.fxml";
+    private final String title = "Arrangement";
     private Arrangement arrangementToEdit = null;
     private boolean createdNewObject = false;
     private String arrName;

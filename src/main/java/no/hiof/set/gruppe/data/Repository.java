@@ -18,6 +18,7 @@ import no.hiof.set.gruppe.Exceptions.ErrorExceptionHandler;
 import no.hiof.set.gruppe.Exceptions.IllegalDataAccess;
 import no.hiof.set.gruppe.Exceptions.InvalidLoginInformation;
 import no.hiof.set.gruppe.Exceptions.UnableToRegisterUser;
+import no.hiof.set.gruppe.GUI.controller.concrete.AdminController;
 import no.hiof.set.gruppe.core.validations.AccessValidate;
 import no.hiof.set.gruppe.core.validations.Validation;
 import no.hiof.set.gruppe.model.Arrangement;
@@ -44,9 +45,9 @@ public class Repository {
     // --------------------------------------------------//
     //                2.Local Fields                     //
     // --------------------------------------------------//
-    private static String arrangementFName = "arrangements.json";
-    private static String userHasArrangements = "userHasArrangements.json";
-    private static String groupsFName = "groups.json";
+    private static final String arrangementFName = "arrangements.json";
+    private static final String userHasArrangements = "userHasArrangements.json";
+    private static final String groupsFName = "groups.json";
     private static List<Arrangement> listOfAllArrangements;
     private static List<Group> listofAllGroups;
     private static List<UserConnectedArrangement> listOfAllUserConnectedArrangements;

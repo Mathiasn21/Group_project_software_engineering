@@ -30,7 +30,7 @@ public enum ArrangementSort {
     COMP_PARTICIPANTS_ASC((ob1, ob2) -> Integer.compare(ob1.getParticipants(), ob2.getParticipants())),
     COMP_SPORT_ASC((ob1, ob2) -> ob1.getSport().toLowerCase().compareTo(ob2.getSport().toLowerCase()));
 
-    private Comparator<? super Arrangement> comparator;
+    private final Comparator<? super Arrangement> comparator;
 
     // --------------------------------------------------//
     //                3.Contracts                        //

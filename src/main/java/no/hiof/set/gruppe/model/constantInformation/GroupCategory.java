@@ -23,7 +23,7 @@ public enum GroupCategory {
     FALSE(false, "Individuell konkurranse");
 
     public final boolean isGroup;
-    public final String str;
+    private final String str;
 
 
     // --------------------------------------------------//

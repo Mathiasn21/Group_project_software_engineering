@@ -48,8 +48,7 @@ public class Group implements IGetAllData {
     }
 
     public void addMulipleMembers(ObservableList<DummyUsers> userlist){
-        for(DummyUsers user : userlist)
-            members.add(user);
+        members.addAll(userlist);
     }
 
     // --------------------------------------------------//

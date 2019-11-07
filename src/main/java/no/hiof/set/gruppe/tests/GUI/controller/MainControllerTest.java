@@ -14,9 +14,9 @@ import org.testfx.framework.junit5.Start;
 
 import java.io.IOException;
 @ExtendWith(ApplicationExtension.class)
-public class MainControllerTest extends MainJavaFXTest{
+class MainControllerTest extends MainJavaFXTest{
     @Start
-    public void start(@NotNull Stage stage) throws IOException {
+    void start(@NotNull Stage stage) throws IOException {
         new MainJavaFXTest().start(stage);
     }
 

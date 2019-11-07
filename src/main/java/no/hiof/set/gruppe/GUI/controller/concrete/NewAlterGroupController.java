@@ -51,8 +51,8 @@ public class NewAlterGroupController extends Controller {
     private String grName;
     private int id;
     private ArrayList<DummyUsers>members;
-    private String name = "NewAlterGroup.fxml";
-    private String title = "Rediger";
+    private final String name = "NewAlterGroup.fxml";
+    private final String title = "Rediger";
     private boolean groupIsEditable = false;
 
     // --------------------------------------------------//
@@ -125,10 +125,7 @@ public class NewAlterGroupController extends Controller {
 
     private boolean validateGroupData(){
         ValidationResult validation = Validation.ofGroup(groupToEdit);
-        if(!validation.IS_VALID){
-            return true;
-        }
-        return false;
+        return !validation.IS_VALID;
     }
 
     private boolean checkIfRightList(ObservableList<DummyUsers> o) {
@@ -174,8 +171,8 @@ public class NewAlterGroupController extends Controller {
             chosenUsersObservableList = FXCollections.observableArrayList(getMembersFromGroup());
 
             for(int i = 0; i < avaliableUsersObservableList.size(); i++){
-                for(int j = 0; j < chosenUsersObservableList.size(); j++){
-                    if(avaliableUsersObservableList.get(i) == chosenUsersObservableList.get(j)){
+                for (DummyUsers dummyUsers : chosenUsersObservableList) {
+                    if (avaliableUsersObservableList.get(i) == dummyUsers) {
                         avaliableUsersObservableList.remove(avaliableUsersObservableList.get(i));
                     }
                 }
@@ -207,7 +204,7 @@ public class NewAlterGroupController extends Controller {
     }
 
     @Override
-    public void setDataFields(Object object) throws DataFormatException {
+    public void setDataFields(Object object) {
         groupIsEditable = true;
         setGroupToEdit(object);
         inputName.setText(groupToEdit.getName());

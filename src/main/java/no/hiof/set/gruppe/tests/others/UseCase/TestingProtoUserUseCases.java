@@ -31,8 +31,8 @@ class TestingProtoUserUseCases {
     //                2.Local Fields                     //
     // --------------------------------------------------//
     private static final ProtoUser PROTO_USER = ProtoUser.USER;
-    private static List<Arrangement> userArrangements;
-    private static List<Arrangement> notUserArrangements;
+    private static final List<Arrangement> userArrangements;
+    private static final List<Arrangement> notUserArrangements;
     private static Arrangement arrangementToTest;
 
     //setup

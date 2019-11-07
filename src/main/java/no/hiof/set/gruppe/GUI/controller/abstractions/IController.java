@@ -17,9 +17,8 @@ public interface IController {
 
     /**
      * @param controller {@link Controller}
-     * @throws IOException exception {@link IOException}
      */
-    void createNewView(Controller controller) throws IOException;
+    void createNewView(Controller controller);
 
     /**
      * @return {@link ViewInformation}

@@ -5,7 +5,7 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 public final class UnableToRegisterUser extends Error {
-    ValidationResult result;
+    private final ValidationResult result;
 
     public UnableToRegisterUser(@NotNull ValidationResult result) {
         super("Unable to register new user.\n" + result.RESULT);

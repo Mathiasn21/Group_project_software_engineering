@@ -57,10 +57,6 @@ public abstract class Controller implements IControllerDataTransfer, Initializab
         mainController.setupWindow(controller, object);
     }
 
-    protected MainJavaFX getMainController() {
-        return mainController;
-    }
-
     public boolean hasNewObject(){
         return false;
     }

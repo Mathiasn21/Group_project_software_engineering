@@ -28,7 +28,7 @@ public enum DummyUsers {
     USER10("Grissilde"),
     USER11("Gjær"),
     ;
-    final String user;
+    private final String user;
 
 
     // --------------------------------------------------//

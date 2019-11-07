@@ -24,9 +24,9 @@ public enum ProtoUser {
     USER("ProtoUser", "Password2", "User.fxml"),
     ORGANIZER("Organizer", "Password3", "Organizer.fxml");
 
-    String user;
-    String password;
-    String viewName;
+    private final String user;
+    private final String password;
+    private final String viewName;
 
 
     // --------------------------------------------------//

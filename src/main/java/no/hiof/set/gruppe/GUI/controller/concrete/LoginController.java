@@ -141,10 +141,9 @@ public class LoginController extends Controller {
     /**
      * Does not have a purpose here.
      * @param object Object
-     * @throws DataFormatException dataFormatException{@link DataFormatException}
      */
     @Override
-    public void setDataFields(Object object) throws DataFormatException {
+    public void setDataFields(Object object) {
 
     }
 
