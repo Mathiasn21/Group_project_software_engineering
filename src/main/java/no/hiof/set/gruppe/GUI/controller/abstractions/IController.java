@@ -1,6 +1,6 @@
 package no.hiof.set.gruppe.GUI.controller.abstractions;
 
-import no.hiof.set.gruppe.GUI.MainJavaFX;
+import no.hiof.set.gruppe.MainJavaFX;
 import no.hiof.set.gruppe.GUI.controller.model.ViewInformation;
 
 import java.io.IOException;

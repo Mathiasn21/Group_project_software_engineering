@@ -4,7 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import no.hiof.set.gruppe.GUI.MainJavaFX;
+import no.hiof.set.gruppe.MainJavaFX;
 import no.hiof.set.gruppe.GUI.controller.abstractions.IController;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,6 +20,7 @@ public class MainJavaFXTest {
     @Start
     public void start(@NotNull Stage stage) throws IOException {
         FXMLLoader loader = new FXMLLoader(MainJavaFX.class.getResource(startView));
+        System.out.println(MainJavaFX.class.getResource(startView));
         Parent editLayout = loader.load();
 
         IController controller = loader.getController();

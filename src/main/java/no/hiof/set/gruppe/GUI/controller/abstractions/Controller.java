@@ -8,7 +8,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import no.hiof.set.gruppe.Exceptions.ErrorExceptionHandler;
-import no.hiof.set.gruppe.GUI.MainJavaFX;
+import no.hiof.set.gruppe.MainJavaFX;
 import no.hiof.set.gruppe.model.Arrangement;
 import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
