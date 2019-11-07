@@ -1,0 +1,39 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="tests in gruppe" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
+    <module name="gruppe" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="no.hiof.set.gruppe.core.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+      <pattern>
+        <option name="PATTERN" value="no.hiof.set.gruppe.data.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+      <pattern>
+        <option name="PATTERN" value="no.hiof.set.gruppe.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+      <pattern>
+        <option name="PATTERN" value="no.hiof.set.gruppe.Exceptions.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+      <pattern>
+        <option name="PATTERN" value="no.hiof.set.gruppe.model.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+      <pattern>
+        <option name="PATTERN" value="no.hiof.set.gruppe.ThirdPartyIntegrations.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <option name="MAIN_CLASS_NAME" value="" />
+    <option name="METHOD_NAME" value="" />
+    <option name="TEST_OBJECT" value="directory" />
+    <option name="PARAMETERS" value="" />
+    <dir value="$PROJECT_DIR$/src/main/java/no/hiof/set/gruppe/tests" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
