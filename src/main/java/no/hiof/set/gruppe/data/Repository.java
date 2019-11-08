@@ -47,6 +47,13 @@ public class Repository {
     private static List<Arrangement> listOfAllArrangements;
     private static List<Group> listofAllGroups;
     private static List<UserConnectedArrangement> listOfAllUserConnectedArrangements;
+    private static List<Arrangement> test;
+
+    private static final ObjectMapToFiles[] objectMapToFilesArr = {
+            new ObjectMapToFiles<>(Arrangement[].class, arrangementFName),
+            new ObjectMapToFiles<>(Group[].class, groupsFName),
+            new ObjectMapToFiles<>(UserConnectedArrangement[].class, userHasArrangements)
+    };
 
     //Preloads data.
     static{
@@ -54,8 +61,9 @@ public class Repository {
             listOfAllArrangements = readArrangementsData();
             listOfAllUserConnectedArrangements = getUserConnectedArrangements();
             listofAllGroups = readGroupsData();
+            test = readDataGivenObject(Arrangement[].class);
 
-        }catch (IOException e){
+        }catch (IOException | DataFormatException e){
             try {ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_READING_DATA, e);}
             catch (IOException ex) {ex.printStackTrace();}
         }
@@ -167,6 +175,11 @@ public class Repository {
     private static List<UserConnectedArrangement> getUserConnectedArrangements() throws IOException {
         String jsonFromFile = readFromFile(userHasArrangements);
         return new ArrayList<>(listOfAllUserConnectedArrangements = listFromJson(UserConnectedArrangement[].class, jsonFromFile));
+    }
+
+    private static <T> List<T> readDataGivenObject(Class<T[]> tClassArr) throws IOException, DataFormatException {
+        String jsonFromFile = readFromFile(ObjectMapToFiles.getCorrespondingMapperGivenType(tClassArr).fileName);
+        return new ArrayList<>(listFromJson(tClassArr, jsonFromFile));
     }
 
     /**
@@ -344,4 +357,26 @@ public class Repository {
 
     @Contract(pure = true)
     public static boolean emailExists(String email) {return false;}
+
+    private static class ObjectMapToFiles<T> {
+        private final Class<T[]> tClass;
+        private final String fileName;
+
+        ObjectMapToFiles(Class<T[]> tClass, String fileName){
+            this.fileName = fileName;
+            this.tClass = tClass;
+        }
+
+        Class<T[]> getTypeClass() {return tClass;}
+        public String getFileName() {return fileName;}
+
+        static <T> ObjectMapToFiles getCorrespondingMapperGivenType(Class<T[]> t) throws DataFormatException {
+            for(ObjectMapToFiles objectMapper : Repository.objectMapToFilesArr){
+                if(objectMapper.getTypeClass() == t){
+                    return objectMapper;
+                }
+            }
+            throw new DataFormatException();
+        }
+    }
 }
