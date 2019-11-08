@@ -41,18 +41,19 @@ import java.util.ResourceBundle;
  */
 public class NewAlterGroupController extends Controller {
 
+    //Hele klassen skal bli refaktorert
+
     // --------------------------------------------------//
     //                2.Local Fields                     //
     // --------------------------------------------------//
-
+    private final String name = "NewAlterGroup.fxml";
+    private final String title = "Rediger";
     private ObservableList<DummyUsers>avaliableUsersObservableList, chosenUsersObservableList;
     private DummyUsers currentUser = null;
     private Group groupToEdit;
     private String grName;
     private int id;
     private ArrayList<DummyUsers>members;
-    private final String name = "NewAlterGroup.fxml";
-    private final String title = "Rediger";
     private boolean groupIsEditable = false;
 
     // --------------------------------------------------//
@@ -79,9 +80,16 @@ public class NewAlterGroupController extends Controller {
     }
 
     private void onClickSave(ActionEvent event){
-        createGroup();
-        if(validateGroupData())return;
-        closeWindow(cancel);
+        if(groupIsEditable){
+            alterGroup();
+            if(validateGroupData())return;
+            closeWindow(cancel);
+        }
+        else{
+            createNewGroup();
+            if(validateGroupData())return;
+            closeWindow(cancel);
+        }
     }
 
     private void onClickCancel(ActionEvent event){
@@ -90,6 +98,7 @@ public class NewAlterGroupController extends Controller {
 
     private void onClickAvailableMembers(Event event){
         setCurrentUser(availableMembers);
+        System.out.println(availableMembers);
     }
 
     private void onClickChosenMembers (Event event){
@@ -115,12 +124,20 @@ public class NewAlterGroupController extends Controller {
         currentUser = null;
     }
 
-    private void createGroup(){
+    private void createNewGroup(){
         if(groupToEdit == null){
             groupToEdit = new Group(inputName.getText(), 1); //ID skal generes automatisk senere
             groupToEdit.addMulipleMembers(chosenUsersObservableList);
             Repository.addGroup(groupToEdit);
         }
+    }
+
+    private void alterGroup(){
+
+        groupToEdit.setMembers(new ArrayList<>());
+        groupToEdit.setName(inputName.getText());
+        groupToEdit.addMulipleMembers(chosenUsersObservableList);
+        Repository.addGroup(groupToEdit);
     }
 
     private boolean validateGroupData(){
@@ -165,6 +182,7 @@ public class NewAlterGroupController extends Controller {
     private void populateListviews(){
         if(!groupIsEditable){
             avaliableUsersObservableList = FXCollections.observableArrayList(Repository.getAllUsers());
+            chosenUsersObservableList = FXCollections.observableArrayList();
         }
         if(groupIsEditable){
 
@@ -178,9 +196,10 @@ public class NewAlterGroupController extends Controller {
                 }
             }
 
-            chosenMembers.setItems(chosenUsersObservableList);
+
         }
         availableMembers.setItems(avaliableUsersObservableList);
+        chosenMembers.setItems(chosenUsersObservableList);
     }
 
     private void setCurrentUser(ListView<DummyUsers> list){
@@ -192,7 +211,6 @@ public class NewAlterGroupController extends Controller {
             groupToEdit = (Group)object;
         }
     }
-
 
     // --------------------------------------------------//
     //                6.Overridden Methods               //

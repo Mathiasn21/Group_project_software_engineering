@@ -90,6 +90,8 @@ public class NewAlterArrangementController extends Controller {
      * @param event {@link ActionEvent}
      */
     private void cancelClicked(ActionEvent event){
+        arrangementToEdit = null;
+        createdNewObject  = false;
         closeWindow(cancelBtn);
     }
 

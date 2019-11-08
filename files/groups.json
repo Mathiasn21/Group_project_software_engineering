@@ -1,20 +1,11 @@
 [
   {
-    "name": "name",
+    "name": "hoi",
     "id": 1,
     "members": [
       "USER6",
-      "USER8"
-    ]
-  },
-  {
-    "name": "heiehi",
-    "id": 1,
-    "members": [
-      "USER10",
-      "USER4",
       "USER8",
-      "USER7"
+      "USER4"
     ]
   },
   {
@@ -32,6 +23,25 @@
       "USER5",
       "USER7",
       "USER9"
+    ]
+  },
+  {
+    "name": "heiehi",
+    "id": 1,
+    "members": [
+      "USER10",
+      "USER4",
+      "USER8",
+      "USER7"
+    ]
+  },
+  {
+    "name": "hoi",
+    "id": 1,
+    "members": [
+      "USER6",
+      "USER8",
+      "USER4"
     ]
   }
 ]

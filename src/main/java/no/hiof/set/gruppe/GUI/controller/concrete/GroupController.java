@@ -177,6 +177,11 @@ public class GroupController extends Controller {
     }
 
     @Override
+    public void updateView(){
+        groupsListview.refresh();
+    }
+
+    @Override
     public ViewInformation getViewInformation() {
         return new ViewInformation(name, title);
     }
