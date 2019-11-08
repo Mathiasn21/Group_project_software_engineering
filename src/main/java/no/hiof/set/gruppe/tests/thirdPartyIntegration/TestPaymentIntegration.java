@@ -1,4 +1,4 @@
-package no.hiof.set.gruppe.tests.others;
+package no.hiof.set.gruppe.tests.thirdPartyIntegration;
 
 /*Guide
  * 1. Import Statements
@@ -8,6 +8,8 @@ package no.hiof.set.gruppe.tests.others;
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
+import no.hiof.set.gruppe.thirdPartyIntegrations.paymenIntegration.IPaymentIntegration;
+import no.hiof.set.gruppe.thirdPartyIntegrations.paymenIntegration.KlarnaIntegration;
 import org.junit.jupiter.api.Test;
 import static org.junit.Assert.*;
 
@@ -18,6 +20,8 @@ class TestPaymentIntegration {
     // --------------------------------------------------//
     @Test
     void transactionSuccess(){
+        IPaymentIntegration paymentIntegration = new KlarnaIntegration();
+
 
     }
 
