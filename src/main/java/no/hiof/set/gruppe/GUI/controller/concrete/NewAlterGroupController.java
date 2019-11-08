@@ -153,10 +153,7 @@ public class NewAlterGroupController extends Controller {
     }
 
     private ArrayList<DummyUsers> getMembersFromGroup(){
-        ArrayList<DummyUsers>list = new ArrayList<>();
-        for(DummyUsers user : groupToEdit.getMembers())
-            list.add(user);
-        return list;
+        return new ArrayList<>(groupToEdit.getMembers());
     }
 
     // --------------------------------------------------//
@@ -188,6 +185,8 @@ public class NewAlterGroupController extends Controller {
 
             chosenUsersObservableList = FXCollections.observableArrayList(getMembersFromGroup());
 
+            avaliableUsersObservableList.removeAll(chosenUsersObservableList);
+            /*
             for(int i = 0; i < avaliableUsersObservableList.size(); i++){
                 for (DummyUsers dummyUsers : chosenUsersObservableList) {
                     if (avaliableUsersObservableList.get(i) == dummyUsers) {
