@@ -20,8 +20,7 @@ import org.junit.jupiter.api.TestMethodOrder;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Testing the functional requirements by testing
@@ -42,22 +41,21 @@ class TestingOrganizerUseCases {
             "2019-10-16",
             "Dette varer i hele 1 dager. Og, server null formål.");
     private static final ProtoUser PROTO_USER = ProtoUser.ORGANIZER;
-    private static final List<Arrangement> arrangementList = Repository.getUserArrangements(PROTO_USER);
-
 
     // --------------------------------------------------//
-    //                3.Single Tests                     //
+    //                3.Unit Tests                       //
     // --------------------------------------------------//
     /**
      * @throws IllegalDataAccess IllegalDataAccess{@link IllegalDataAccess}
      */
     @Test
     @Order(1)
-    void addArrangement() throws IllegalDataAccess {
+    void firstAddArrangement() throws IllegalDataAccess {
+        List<Arrangement> expectedList = Repository.getUserArrangements(PROTO_USER);
+        expectedList.add(arrangement);
         Repository.addArrangement(arrangement, PROTO_USER);
-        List<Arrangement> newListOfArrangements = Repository.getUserArrangements(PROTO_USER);
-        assertTrue(newListOfArrangements.contains(arrangement));
-        assertTrue(newListOfArrangements.containsAll(arrangementList) && newListOfArrangements.size() == arrangementList.size() + 1);
+
+        assertDataIntegrity(expectedList, Repository.getUserArrangements(PROTO_USER));
     }
 
     /**
@@ -65,11 +63,19 @@ class TestingOrganizerUseCases {
      */
     @Test
     @Order(2)
-    void deleteArrangement() throws IllegalDataAccess {
-        Repository.deleteArrangement(arrangement, ProtoUser.ORGANIZER);
-        assertFalse(Repository.getArrangementsData().contains(arrangement));
+    void thenDeleteArrangement() throws IllegalDataAccess {
+        List<Arrangement> expectedList = Repository.getUserArrangements(PROTO_USER);
+        expectedList.remove(arrangement);
+        Repository.deleteArrangement(arrangement, PROTO_USER);
+
+        assertDataIntegrity(expectedList, Repository.getUserArrangements(PROTO_USER));
+    }
+
+
+    private void assertDataIntegrity(List<Arrangement> expectedArrangementList, List<Arrangement> userArrangements) {
+        assertTrue(userArrangements.containsAll(expectedArrangementList));
+        assertEquals(expectedArrangementList.size(), userArrangements.size());
     }
 
     //Send out push notifications
-    //test returning arrangements only belonging to this PROTO_USER
 }

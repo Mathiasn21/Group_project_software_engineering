@@ -12,14 +12,13 @@ package no.hiof.set.gruppe.tests.others.UseCase;
 import no.hiof.set.gruppe.data.Repository;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.user.ProtoUser;
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.*;
+
 import java.util.List;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Testing the functional requirements by testing
@@ -50,10 +49,12 @@ class TestingProtoUserUseCases {
       */
     @Test
     @Order(1)
-    void adduserToArrangement(){
+    void firstAddUserToArrangement(){
         arrangementToTest = notUserArrangements.get(0);
+        userArrangements.add(arrangementToTest);
+
         Repository.addUserToArrangement(arrangementToTest, PROTO_USER);
-        assertTrue(Repository.getUserArrangements(PROTO_USER).contains(arrangementToTest));
+        assertDataIntegrity(Repository.getUserArrangements(PROTO_USER));
     }
 
      /**
@@ -61,8 +62,15 @@ class TestingProtoUserUseCases {
       */
     @Test
     @Order(2)
-    void removeUserFromArrangement(){
+    void thenRemoveUserFromArrangement(){
         Repository.deleteUserFromArrangement(arrangementToTest, PROTO_USER);
-        assertFalse(Repository.getUserArrangements(PROTO_USER).contains(arrangementToTest));
+        userArrangements.remove(arrangementToTest);
+        Repository.deleteUserFromArrangement(arrangementToTest, PROTO_USER);
+        assertDataIntegrity(Repository.getUserArrangements(PROTO_USER));
+    }
+
+    private void assertDataIntegrity(List<Arrangement> expectedArrangementList) {
+        Assertions.assertTrue(TestingProtoUserUseCases.userArrangements.containsAll(expectedArrangementList));
+        assertEquals(expectedArrangementList.size(), TestingProtoUserUseCases.userArrangements.size());
     }
  }

@@ -18,8 +18,9 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Testing the functional requirements by testing
@@ -30,7 +31,8 @@ class TestingAdminUseCases {
     // --------------------------------------------------//
     //                2.Local Fields                     //
     // --------------------------------------------------//
-    private static final ProtoUser PROTO_USER = ProtoUser.ADMIN;
+    private static final ProtoUser PROTO_USER_ADMIN = ProtoUser.ADMIN;
+    private static final ProtoUser PROTO_USER_ORGANIZER = ProtoUser.ORGANIZER;
     private static final Arrangement arrangement = new Arrangement(
             "Bernts Fantastiske Test",
             "Annet",
@@ -51,9 +53,16 @@ class TestingAdminUseCases {
     @Test
     @Order(1)
     void addArrangement() throws IllegalDataAccess {
-        Repository.addArrangement(arrangement, ProtoUser.ORGANIZER);
-        assertTrue(Repository.getUserArrangements(ProtoUser.ORGANIZER).contains(arrangement));
-        //needs a tests to ensure that no excessive information is given and no less as well
+        List<Arrangement> expectedArrangementList = Repository.getUserArrangements(PROTO_USER_ORGANIZER);
+        expectedArrangementList.add(arrangement);
+        Repository.addArrangement(arrangement, PROTO_USER_ORGANIZER);
+
+        assertDataIntegrity(expectedArrangementList, Repository.getUserArrangements(PROTO_USER_ORGANIZER));
+    }
+
+    private void assertDataIntegrity(List<Arrangement> expectedArrangementList, List<Arrangement> userArrangements) {
+        assertTrue(userArrangements.containsAll(expectedArrangementList));
+        assertEquals(expectedArrangementList.size(), userArrangements.size());
     }
 
     /**
@@ -62,9 +71,11 @@ class TestingAdminUseCases {
     @Test
     @Order(2)
     void deleteArrangement() throws IllegalDataAccess {
-        Repository.deleteArrangement(arrangement, PROTO_USER);
-        assertFalse(Repository.getArrangementsData().contains(arrangement));
-        //need a test to ensure only this data is deleted
+        List<Arrangement> expectedArrangementList = Repository.getUserArrangements(PROTO_USER_ORGANIZER);
+        expectedArrangementList.remove(arrangement);
+
+        Repository.deleteArrangement(arrangement, PROTO_USER_ADMIN);
+        assertDataIntegrity(expectedArrangementList, Repository.getArrangementsData());
     }
 
     //Add new sports

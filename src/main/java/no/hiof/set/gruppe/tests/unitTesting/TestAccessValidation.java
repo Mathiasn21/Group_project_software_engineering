@@ -1,10 +1,9 @@
 package no.hiof.set.gruppe.tests.unitTesting;
-
 /*Guide
  * 1. Import Statements
- * 2. Single Tests
- * 3. Multiple Tests
- * 4. Contracts
+ * 2. Unit Tests
+ * 3. Parameterized Tests
+ * 4. Helper Methods
  * */
 
 // --------------------------------------------------//
@@ -37,10 +36,10 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 class TestAccessValidation {
 
     // --------------------------------------------------//
-    //                2.Single Tests                     //
+    //                2.Unit Tests                       //
     // --------------------------------------------------//
     @Test
-    void userloginSuccess() throws InvalidLoginInformation {
+    void userLoginSuccess() throws InvalidLoginInformation {
         ILoginInformation loginInformation = new LoginInformation("ProtoUser", "Password2");
         ProtoUser protoUserDetails = Repository.getUserDetails(loginInformation);
         assertTrue(userEqualsLoginInformation(protoUserDetails, loginInformation));
@@ -53,16 +52,16 @@ class TestAccessValidation {
     }
 
     // --------------------------------------------------//
-    //                3.Multiple Tests                   //
+    //                3.Parameterized Tests              //
     // --------------------------------------------------//
     @ParameterizedTest
     @MethodSource("GenIllegalLoginInformation")
-    void userloginFailed(ILoginInformation loginInformation){
+    void userLoginFailed(ILoginInformation loginInformation){
         assertThrows(InvalidLoginInformation.class, () -> Repository.getUserDetails(loginInformation));
     }
 
     // --------------------------------------------------//
-    //                4.Contracts                        //
+    //                4.Helper Methods                   //
     // --------------------------------------------------//
     /**
      * Generates illegal {@link LoginInformation}

@@ -1,10 +1,9 @@
 package no.hiof.set.gruppe.tests.unitTesting;
-
 /*Guide
  * 1. Import Statements
- * 2. Single Tests
- * 3. Multiple Tests
- * 4. Contracts
+ * 2. Unit Tests
+ * 3. Parameterized Tests
+ * 4. Helper Methods
  * */
 
 // --------------------------------------------------//
@@ -29,7 +28,7 @@ class TestArrangementValidationOf {
 
 
     // --------------------------------------------------//
-    //                2.Single Tests                     //
+    //                2.Unit Tests                       //
     // --------------------------------------------------//
     /**
      * Tests legal inputs
@@ -41,7 +40,7 @@ class TestArrangementValidationOf {
     }
 
     // --------------------------------------------------//
-    //                3.Multiple Tests                   //
+    //                3.Parameterized Tests              //
     // --------------------------------------------------//
     /**
      * Tests for illegal names and illegal dates.
@@ -57,7 +56,7 @@ class TestArrangementValidationOf {
     }
 
     // --------------------------------------------------//
-    //                4.Contracts                        //
+    //                4.Helper Methods                   //
     // --------------------------------------------------//
     /**
      * Generates illegal dates and names

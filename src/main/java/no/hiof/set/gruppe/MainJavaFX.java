@@ -87,7 +87,7 @@ public class MainJavaFX extends Application implements SetupWindow {
         stage.initOwner(this.stage);
         stage.setTitle(controller.getViewInformation().viewTitle);
 
-        //setting next controller
+        //setting mainController on next controller switch
         controller = loader.getController();
         controller.setMainController(this);
 

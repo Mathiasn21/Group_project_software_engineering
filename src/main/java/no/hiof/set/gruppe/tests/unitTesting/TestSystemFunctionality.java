@@ -2,8 +2,8 @@ package no.hiof.set.gruppe.tests.unitTesting;
 
 /*Guide
  * 1. Import Statements
- * 2. Single Tests
- * 3. Multiple Tests
+ * 2. Unit Tests
+ * 3. Parameterized Tests
  * */
 
 // --------------------------------------------------//
@@ -39,7 +39,7 @@ class TestSystemFunctionality {
      */
 
     // --------------------------------------------------//
-    //                2.Single Tests                     //
+    //                2.Unit Tests                       //
     // --------------------------------------------------//
     @Test
     void minimumDataExistsInArrangement(){
@@ -111,9 +111,8 @@ class TestSystemFunctionality {
     }
 
     // --------------------------------------------------//
-    //                2.Multiple Tests                   //
+    //                2.Parameterized Tests              //
     // --------------------------------------------------//
-
     @ParameterizedTest
     @ValueSource(strings = {"1\00", "\00 1", "1s", "s1", "ss'¨¨¨^", "^^^''''"})
     void illegalNumberFormatFromString(String str){

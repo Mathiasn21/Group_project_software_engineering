@@ -14,10 +14,7 @@ package no.hiof.set.gruppe.data;
 // --------------------------------------------------//
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import no.hiof.set.gruppe.exceptions.ErrorExceptionHandler;
-import no.hiof.set.gruppe.exceptions.IllegalDataAccess;
-import no.hiof.set.gruppe.exceptions.InvalidLoginInformation;
-import no.hiof.set.gruppe.exceptions.UnableToRegisterUser;
+import no.hiof.set.gruppe.exceptions.*;
 import no.hiof.set.gruppe.core.validations.AccessValidate;
 import no.hiof.set.gruppe.core.validations.Validation;
 import no.hiof.set.gruppe.model.Arrangement;
@@ -185,18 +182,22 @@ public class Repository {
         writeToFile(toJson(Group[].class, listofAllGroups.toArray(Group[]::new)),groupsFName);
     }
 
-
-    // --------------------------------------------------//
-    //                4.Public Mutators                  //
-    // --------------------------------------------------//
     /**
      * Stores all arrangements in buffer to file.json. Called
      * after every modification of said buffer.
      */
     private static void storeUserArrangements(){
         writeToFile(toJson(UserConnectedArrangement[].class,  listOfAllUserConnectedArrangements.toArray(UserConnectedArrangement[]::new)), userHasArrangements);
+        //storeDataUsing(UserConnectedArrangement[].class, listOfAllUserConnectedArrangements.toArray(UserConnectedArrangement[]::new), userHasArrangements);
     }
 
+    private static <T> void storeDataUsing(Class<T[]> tClass, T[] tArray, String fileStr){
+        writeToFile(toJson(tClass,  tArray), fileStr);
+    }
+
+    // --------------------------------------------------//
+    //                4.Public Mutators                  //
+    // --------------------------------------------------//
     /**
      * @param arrangement {@link Arrangement}
      * @param protoUser {@link ProtoUser}
@@ -230,6 +231,18 @@ public class Repository {
         storeGroupData();
     }
 
+    public static void mutateObject(Object object)throws DataFormatException {
+        if(object instanceof Arrangement){
+            Arrangement thatArrangement = (Arrangement) object;
+            listOfAllArrangements.removeIf((thisArrangement) -> thisArrangement.getID().equals(thatArrangement.getID()));
+            listOfAllArrangements.add(thatArrangement);
+
+        }else if (object instanceof Group){
+            Group thatGroup = (Group) object;
+            listofAllGroups.removeIf((thisGroup) -> thisGroup.getId() == thatGroup.getId());
+            listofAllGroups.add(thatGroup);
+        }else{throw new DataFormatException();}
+    }
 
     // --------------------------------------------------//
     //                5.Public Data Removal              //
