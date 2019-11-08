@@ -11,7 +11,7 @@
         <option name="ENABLED" value="true" />
       </pattern>
       <pattern>
-        <option name="PATTERN" value="no.hiof.set.gruppe.Exceptions.*" />
+        <option name="PATTERN" value="no.hiof.set.gruppe.exceptions.*" />
         <option name="ENABLED" value="true" />
       </pattern>
       <pattern>

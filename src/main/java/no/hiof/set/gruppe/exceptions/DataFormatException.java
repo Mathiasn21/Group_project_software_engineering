@@ -1,4 +1,4 @@
-package no.hiof.set.gruppe.Exceptions;
+package no.hiof.set.gruppe.exceptions;
 
 /**
  * A custom exception that represents a malformed class format.

@@ -14,11 +14,10 @@ package no.hiof.set.gruppe.data;
 // --------------------------------------------------//
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import no.hiof.set.gruppe.Exceptions.ErrorExceptionHandler;
-import no.hiof.set.gruppe.Exceptions.IllegalDataAccess;
-import no.hiof.set.gruppe.Exceptions.InvalidLoginInformation;
-import no.hiof.set.gruppe.Exceptions.UnableToRegisterUser;
-import no.hiof.set.gruppe.GUI.controller.concrete.AdminController;
+import no.hiof.set.gruppe.exceptions.ErrorExceptionHandler;
+import no.hiof.set.gruppe.exceptions.IllegalDataAccess;
+import no.hiof.set.gruppe.exceptions.InvalidLoginInformation;
+import no.hiof.set.gruppe.exceptions.UnableToRegisterUser;
 import no.hiof.set.gruppe.core.validations.AccessValidate;
 import no.hiof.set.gruppe.core.validations.Validation;
 import no.hiof.set.gruppe.model.Arrangement;

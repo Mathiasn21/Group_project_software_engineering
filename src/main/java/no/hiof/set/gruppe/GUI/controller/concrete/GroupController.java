@@ -23,7 +23,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
-import no.hiof.set.gruppe.Exceptions.DataFormatException;
 import no.hiof.set.gruppe.GUI.controller.abstractions.Controller;
 import no.hiof.set.gruppe.data.Repository;
 import no.hiof.set.gruppe.model.Group;

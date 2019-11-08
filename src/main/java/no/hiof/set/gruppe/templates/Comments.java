@@ -1,4 +1,4 @@
-package no.hiof.set.gruppe.Templates;
+package no.hiof.set.gruppe.templates;
 
 public class Comments {
     /*Guide Controllers

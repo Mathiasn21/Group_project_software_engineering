@@ -1,4 +1,4 @@
-package no.hiof.set.gruppe.Exceptions;
+package no.hiof.set.gruppe.exceptions;
 
 /*Guide
  * 1. Import Statements

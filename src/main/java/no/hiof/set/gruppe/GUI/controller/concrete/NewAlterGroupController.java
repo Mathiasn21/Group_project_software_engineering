@@ -21,7 +21,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import no.hiof.set.gruppe.Exceptions.DataFormatException;
 import no.hiof.set.gruppe.GUI.controller.abstractions.Controller;
 import no.hiof.set.gruppe.data.Repository;
 import no.hiof.set.gruppe.model.Group;
@@ -186,7 +185,7 @@ public class NewAlterGroupController extends Controller {
             chosenUsersObservableList = FXCollections.observableArrayList(getMembersFromGroup());
 
             avaliableUsersObservableList.removeAll(chosenUsersObservableList);
-            /*
+
             for(int i = 0; i < avaliableUsersObservableList.size(); i++){
                 for (DummyUsers dummyUsers : chosenUsersObservableList) {
                     if (avaliableUsersObservableList.get(i) == dummyUsers) {
