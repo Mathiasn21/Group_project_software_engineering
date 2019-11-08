@@ -136,10 +136,7 @@ public class NewAlterGroupController extends Controller {
     }
 
     private ArrayList<DummyUsers> getMembersFromGroup(){
-        ArrayList<DummyUsers>list = new ArrayList<>();
-        for(DummyUsers user : groupToEdit.getMembers())
-            list.add(user);
-        return list;
+        return new ArrayList<>(groupToEdit.getMembers());
     }
 
     // --------------------------------------------------//
