@@ -167,14 +167,15 @@ public class NewAlterGroupController extends Controller {
 
             chosenUsersObservableList = FXCollections.observableArrayList(getMembersFromGroup());
 
+            avaliableUsersObservableList.removeAll(chosenUsersObservableList);
+            /*
             for(int i = 0; i < avaliableUsersObservableList.size(); i++){
                 for (DummyUsers dummyUsers : chosenUsersObservableList) {
                     if (avaliableUsersObservableList.get(i) == dummyUsers) {
                         avaliableUsersObservableList.remove(avaliableUsersObservableList.get(i));
                     }
                 }
-            }
-
+            }*/
             chosenMembers.setItems(chosenUsersObservableList);
         }
         availableMembers.setItems(avaliableUsersObservableList);
