@@ -23,12 +23,15 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import no.hiof.set.gruppe.GUI.controller.abstractions.Controller;
 import no.hiof.set.gruppe.data.Repository;
+import no.hiof.set.gruppe.exceptions.DataFormatException;
+import no.hiof.set.gruppe.exceptions.ErrorExceptionHandler;
 import no.hiof.set.gruppe.model.Group;
 import no.hiof.set.gruppe.model.ValidationResult;
 import no.hiof.set.gruppe.GUI.controller.model.ViewInformation;
 import no.hiof.set.gruppe.model.constantInformation.DummyUsers;
 import no.hiof.set.gruppe.core.validations.Validation;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -127,7 +130,7 @@ public class NewAlterGroupController extends Controller {
         if(groupToEdit == null){
             groupToEdit = new Group(inputName.getText(), 1); //ID skal generes automatisk senere
             groupToEdit.addMulipleMembers(chosenUsersObservableList);
-            Repository.addGroup(groupToEdit);
+            queryGroup();
         }
     }
 
@@ -136,7 +139,17 @@ public class NewAlterGroupController extends Controller {
         groupToEdit.setMembers(new ArrayList<>());
         groupToEdit.setName(inputName.getText());
         groupToEdit.addMulipleMembers(chosenUsersObservableList);
-        Repository.addGroup(groupToEdit);
+        queryGroup();
+    }
+
+    private void queryGroup() {
+        try {
+            Repository.addGroup(groupToEdit);
+        } catch (DataFormatException illegalDataAccess) {
+            try { ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_ACCESSING_DATA, illegalDataAccess);
+            } catch (IOException e) { e.printStackTrace(); }
+            createAlert(ErrorExceptionHandler.ERROR_ACCESSING_DATA);
+        }
     }
 
     private boolean validateGroupData(){

@@ -4,6 +4,7 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import no.hiof.set.gruppe.exceptions.DataFormatException;
 import no.hiof.set.gruppe.exceptions.IllegalDataAccess;
 import no.hiof.set.gruppe.data.Repository;
 import no.hiof.set.gruppe.model.Arrangement;
@@ -34,7 +35,7 @@ class AdminControllerTests extends MainJavaFXTest{
     }
 
     @Test
-    void selectArrangementAndEdit(@NotNull FxRobot robot) throws IllegalDataAccess {
+    void selectArrangementAndEdit(@NotNull FxRobot robot) throws IllegalDataAccess, DataFormatException {
         selectArrangementTest(robot);
         robot.clickOn("#edit");
         String[] datePickerNodes = {"#startDateInput", "#endDateInput"};
@@ -47,7 +48,7 @@ class AdminControllerTests extends MainJavaFXTest{
     }
 
     //Tests deletion of a arrangement
-    private void deleteAddedArrangement(@NotNull FxRobot robot) throws IllegalDataAccess {
+    private void deleteAddedArrangement(@NotNull FxRobot robot) throws IllegalDataAccess, DataFormatException {
         ListView listView = getListView(robot, "#arrangementListView");
         Arrangement arrangement = (Arrangement) listView.getSelectionModel().getSelectedItem();
         robot.clickOn("#delete");

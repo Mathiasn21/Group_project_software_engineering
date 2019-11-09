@@ -23,6 +23,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import no.hiof.set.gruppe.core.predicates.DateTest;
 import no.hiof.set.gruppe.exceptions.DataFormatException;
 import no.hiof.set.gruppe.exceptions.ErrorExceptionHandler;
 import no.hiof.set.gruppe.exceptions.IllegalDataAccess;
@@ -163,7 +164,7 @@ public class OrganizerController extends Controller {
             arrangementListObservable.remove(selectedItem);
             listview.getSelectionModel().selectFirst();
         }
-        catch (IllegalDataAccess illegalDataAccess) {
+        catch (IllegalDataAccess | DataFormatException illegalDataAccess) {
             try {ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_ACCESSING_DATA, illegalDataAccess); }
             catch (IOException e) {e.printStackTrace();}
             Controller.createAlert(ErrorExceptionHandler.ERROR_ACCESSING_DATA);
@@ -236,10 +237,9 @@ public class OrganizerController extends Controller {
     }
 
     private void checkArrangementDate(){
-        if(currentArrangement.getEndDate().isBefore(LocalDate.now())){
-            editBtn.setDisable(true);
-            deleteBtn.setDisable(true);
-        }
+        boolean test = DateTest.TestExpired.execute(currentArrangement.getStartDate(), currentArrangement.getEndDate());
+        editBtn.setDisable(test);
+        deleteBtn.setDisable(test);
     }
 
     // --------------------------------------------------//

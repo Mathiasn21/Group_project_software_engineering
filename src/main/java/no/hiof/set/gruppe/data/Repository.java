@@ -2,7 +2,7 @@ package no.hiof.set.gruppe.data;
 /*Guide
  * 1. Import Statements
  * 2. Local Fields
- * 3. Private Static Methods
+ * 3. Handle Json and File saving
  * 4. Public Mutators
  * 5. Public Data Removal
  * 6. Public Getters
@@ -47,7 +47,6 @@ public class Repository {
     private static List<Arrangement> listOfAllArrangements;
     private static List<Group> listofAllGroups;
     private static List<UserConnectedArrangement> listOfAllUserConnectedArrangements;
-
     private static final ObjectMapToFiles[] objectMapToFilesArr = {
             new ObjectMapToFiles<>(Arrangement.class, arrangementFName),
             new ObjectMapToFiles<>(Group.class, groupsFName),
@@ -57,18 +56,18 @@ public class Repository {
     //Preloads data.
     static{
         try{
-            listOfAllArrangements = readArrangementsData();
-            listOfAllUserConnectedArrangements = getUserConnectedArrangements();
-            listofAllGroups = readGroupsData();
+            listOfAllArrangements = readDataGivenTypeArr(Arrangement[].class);;
+            listOfAllUserConnectedArrangements = readDataGivenTypeArr(UserConnectedArrangement[].class);
+            listofAllGroups = readDataGivenTypeArr(Group[].class);
 
-        }catch (IOException e){
+        }catch (IOException | DataFormatException e){
             try {ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_READING_DATA, e);}
             catch (IOException ex) {ex.printStackTrace();}
         }
     }
 
     // --------------------------------------------------//
-    //                3.Private Static Methods           //
+    //                3.Handle Json and File saving      //
     // --------------------------------------------------//
     /**
      * Standard reading from a file. Utilizes a relative path given a filename.extension.
@@ -146,65 +145,42 @@ public class Repository {
         }
     }
 
-    /**
-     * Grabs the arrangement data from a file and converts
-     * those into a usable collection of arrangements.
-     * @throws IOException IOException {@link IOException}
-     * @return {@link List} ? extends {@link Arrangement}
-     */
-    @NotNull
-    @Contract(" -> new")
-    private static List<Arrangement> readArrangementsData() throws IOException {
-        return new ArrayList<>(listFromJson(Arrangement[].class, readFromFile(arrangementFName)));
-    }
-
-    //Should be refactored
-    @NotNull
-    @Contract(" -> new")
-    private static List<Group>readGroupsData()throws IOException{
-        return new ArrayList<>(listFromJson(Group[].class, readFromFile(groupsFName)));
-    }
-
-    /**
-     * @return {@link List}
-     * @throws IOException IOException{@link IOException}
-     */
-    @NotNull
-    private static List<UserConnectedArrangement> getUserConnectedArrangements() throws IOException {
-        String jsonFromFile = readFromFile(userHasArrangements);
-        return new ArrayList<>(listOfAllUserConnectedArrangements = listFromJson(UserConnectedArrangement[].class, jsonFromFile));
-    }
-
+    // --------------------------------------------------//
+    //                4.Private Handle Reading Data      //
+    // --------------------------------------------------//
     private static <T> List<T> readDataGivenTypeArr(Class<T[]> tClassArr) throws IOException, DataFormatException {
         String jsonFromFile = readFromFile(ObjectMapToFiles.getCorrespondingMapperGivenType(tClassArr).fileName);
         return new ArrayList<>(listFromJson(tClassArr, jsonFromFile));
     }
 
+
+    // --------------------------------------------------//
+    //                4.Private Handle Saving Data       //
+    // --------------------------------------------------//
     /**
      * Stores all arrangements and their user connection
      */
-    //Should be refactored
-    private static void storeArrangementsData() {
-        writeToFile(toJson(Arrangement[].class, listOfAllArrangements.toArray(Arrangement[]::new)), arrangementFName);
+    private static void storeArrangementsData() throws DataFormatException {
+        storeDataUsing(Arrangement[].class, listOfAllArrangements.toArray(Arrangement[]::new));
         storeUserArrangements();
     }
 
-    private static void storeGroupData(){
-        writeToFile(toJson(Group[].class, listofAllGroups.toArray(Group[]::new)),groupsFName);
+    private static void storeGroupData() throws DataFormatException {
+        storeDataUsing(Group[].class, listofAllGroups.toArray(Group[]::new));
     }
 
     /**
      * Stores all arrangements in buffer to file.json. Called
      * after every modification of said buffer.
      */
-    private static void storeUserArrangements(){
-        writeToFile(toJson(UserConnectedArrangement[].class,  listOfAllUserConnectedArrangements.toArray(UserConnectedArrangement[]::new)), userHasArrangements);
-        //storeDataUsing(UserConnectedArrangement[].class, listOfAllUserConnectedArrangements.toArray(UserConnectedArrangement[]::new), userHasArrangements);
+    private static void storeUserArrangements() throws DataFormatException {
+        storeDataUsing(UserConnectedArrangement[].class,  listOfAllUserConnectedArrangements.toArray(UserConnectedArrangement[]::new));
     }
 
-    private static <T> void storeDataUsing(Class<T[]> tClass, T[] tArray, String fileStr){
-        writeToFile(toJson(tClass,  tArray), fileStr);
+    private static <T> void storeDataUsing(Class<T[]> tClass, T[] tArray) throws DataFormatException {
+        writeToFile(toJson(tClass,  tArray), ObjectMapToFiles.getCorrespondingMapperGivenType(tClass).fileName);
     }
+
 
     // --------------------------------------------------//
     //                4.Public Mutators                  //
@@ -213,7 +189,7 @@ public class Repository {
      * @param arrangement {@link Arrangement}
      * @param protoUser {@link ProtoUser}
      */
-    public static void addUserToArrangement(@NotNull Arrangement arrangement, @NotNull ProtoUser protoUser){
+    public static void addUserToArrangement(@NotNull Arrangement arrangement, @NotNull ProtoUser protoUser) throws DataFormatException {
         listOfAllUserConnectedArrangements.add(new UserConnectedArrangement(arrangement.getID(), protoUser.getName()));
         storeArrangementsData();
     }
@@ -223,7 +199,7 @@ public class Repository {
      * @param protoUser {@link ProtoUser}
      * @throws IllegalDataAccess IllegalAccess{@link IllegalDataAccess}
      */
-    public static void addArrangement(Arrangement arrangement, @NotNull ProtoUser protoUser) throws IllegalDataAccess {
+    public static void addArrangement(Arrangement arrangement, @NotNull ProtoUser protoUser) throws IllegalDataAccess, DataFormatException {
         if(!AccessValidate.userCanCreateArrangement(protoUser))throw new IllegalDataAccess();
 
         listOfAllArrangements.add(arrangement);
@@ -237,7 +213,7 @@ public class Repository {
         if(!result.IS_VALID)throw new UnableToRegisterUser(result);
     }
 
-    public static void addGroup(@NotNull Group group){
+    public static void addGroup(@NotNull Group group) throws DataFormatException {
         listofAllGroups.add(group);
         storeGroupData();
     }
@@ -253,6 +229,7 @@ public class Repository {
             listofAllGroups.removeIf((thisGroup) -> thisGroup.getId() == thatGroup.getId());
             listofAllGroups.add(thatGroup);
         }else{throw new DataFormatException();}
+        storeArrangementsData();
     }
 
     // --------------------------------------------------//
@@ -263,7 +240,7 @@ public class Repository {
      * @param protoUser {@link ProtoUser}
      * @throws IllegalDataAccess illegalAccess{@link IllegalDataAccess}
      */
-    public static void deleteArrangement(Arrangement arrangement, ProtoUser protoUser) throws IllegalDataAccess {
+    public static void deleteArrangement(Arrangement arrangement, ProtoUser protoUser) throws IllegalDataAccess, DataFormatException {
         if(!AccessValidate.userCanModifyArrangement(arrangement, protoUser))throw new IllegalDataAccess();
 
         listOfAllArrangements.remove(arrangement);
@@ -271,7 +248,7 @@ public class Repository {
         storeArrangementsData();
     }
 
-    public static void deleteGroup(Group group){
+    public static void deleteGroup(Group group) throws DataFormatException {
         listofAllGroups.remove(group);
         storeGroupData();
     }
@@ -280,7 +257,7 @@ public class Repository {
      * @param arrangement {@link Arrangement}
      * @param protoUser {@link ProtoUser}
      */
-    public static void deleteUserFromArrangement(@NotNull Arrangement arrangement,@NotNull ProtoUser protoUser){
+    public static void deleteUserFromArrangement(@NotNull Arrangement arrangement,@NotNull ProtoUser protoUser) throws DataFormatException {
         for(int i = 0; i < listOfAllUserConnectedArrangements.size(); i++){
             UserConnectedArrangement userArrangement = listOfAllUserConnectedArrangements.get(i);
             if(userArrangement.getID().equals(arrangement.getID()) && userArrangement.getUSERNAME().equals(protoUser.getName())){
@@ -356,6 +333,7 @@ public class Repository {
     @Contract(pure = true)
     public static boolean emailExists(String email) {return false;}
 
+
     private static class ObjectMapToFiles<T> {
         private final Class<T> tClass;
         private final String fileName;
@@ -366,7 +344,6 @@ public class Repository {
         }
 
         Class<T> getTypeClass() {return tClass;}
-        public String getFileName() {return fileName;}
 
         static <T> ObjectMapToFiles getCorrespondingMapperGivenType(Class<T[]> t) throws DataFormatException {
             for(ObjectMapToFiles objectMapper : Repository.objectMapToFilesArr){

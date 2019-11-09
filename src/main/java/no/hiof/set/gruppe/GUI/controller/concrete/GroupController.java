@@ -25,9 +25,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import no.hiof.set.gruppe.GUI.controller.abstractions.Controller;
 import no.hiof.set.gruppe.data.Repository;
+import no.hiof.set.gruppe.exceptions.DataFormatException;
+import no.hiof.set.gruppe.exceptions.ErrorExceptionHandler;
 import no.hiof.set.gruppe.model.Group;
 import no.hiof.set.gruppe.GUI.controller.model.ViewInformation;
 import no.hiof.set.gruppe.model.constantInformation.DummyUsers;
+
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -94,13 +98,18 @@ public class GroupController extends Controller {
     // --------------------------------------------------//
     //                5.Private Functional Methods       //
     // --------------------------------------------------//
-
     private void setSelectedGroup(){
         selectedGroup = groupsListview.getSelectionModel().getSelectedItem();
     }
 
     private void deleteGroup(){
-        Repository.deleteGroup(selectedGroup);
+        try {
+            Repository.deleteGroup(selectedGroup);
+        } catch (DataFormatException illegalDataAccess) {
+            try { ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_ACCESSING_DATA, illegalDataAccess); }
+            catch (IOException e) {e.printStackTrace();}
+            createAlert(ErrorExceptionHandler.ERROR_ACCESSING_DATA);
+        }
         groupsList.remove(selectedGroup);
         groupsListview.refresh();
     }

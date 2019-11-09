@@ -9,6 +9,7 @@ package no.hiof.set.gruppe.tests.others.UseCase;
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
+import no.hiof.set.gruppe.exceptions.DataFormatException;
 import no.hiof.set.gruppe.exceptions.IllegalDataAccess;
 import no.hiof.set.gruppe.data.Repository;
 import no.hiof.set.gruppe.model.Arrangement;
@@ -52,7 +53,7 @@ class TestingAdminUseCases {
      */
     @Test
     @Order(1)
-    void addArrangement() throws IllegalDataAccess {
+    void addArrangement() throws IllegalDataAccess, DataFormatException {
         List<Arrangement> expectedArrangementList = Repository.getUserArrangements(PROTO_USER_ORGANIZER);
         expectedArrangementList.add(arrangement);
         Repository.addArrangement(arrangement, PROTO_USER_ORGANIZER);
@@ -70,7 +71,7 @@ class TestingAdminUseCases {
      */
     @Test
     @Order(2)
-    void deleteArrangement() throws IllegalDataAccess {
+    void deleteArrangement() throws IllegalDataAccess, DataFormatException {
         List<Arrangement> expectedArrangementList = Repository.getUserArrangements(PROTO_USER_ORGANIZER);
         expectedArrangementList.remove(arrangement);
 

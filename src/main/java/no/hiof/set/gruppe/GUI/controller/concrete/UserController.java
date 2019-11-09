@@ -25,6 +25,7 @@ import javafx.scene.text.Text;
 import no.hiof.set.gruppe.exceptions.DataFormatException;
 import no.hiof.set.gruppe.GUI.controller.abstractions.Controller;
 import no.hiof.set.gruppe.data.Repository;
+import no.hiof.set.gruppe.exceptions.ErrorExceptionHandler;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.GUI.controller.model.ViewInformation;
 import no.hiof.set.gruppe.model.constantInformation.SportCategory;
@@ -33,6 +34,7 @@ import no.hiof.set.gruppe.core.predicates.DateTest;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
@@ -88,7 +90,13 @@ public class UserController extends Controller {
         availableObservableArrangements.remove(currentAvailableArrangement);
         myObservableArrangements.add(currentAvailableArrangement);
 
-        Repository.addUserToArrangement(currentAvailableArrangement, ProtoUser.USER);
+        try {
+            Repository.addUserToArrangement(currentAvailableArrangement, ProtoUser.USER);
+        } catch (DataFormatException illegalDataAccess) {
+            try { ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_ACCESSING_DATA, illegalDataAccess); }
+            catch (IOException e) {e.printStackTrace();}
+            createAlert(ErrorExceptionHandler.ERROR_ACCESSING_DATA);
+        }
         currentSelectedMyArrangement = currentAvailableArrangement;
         currentAvailableArrangement = null;
         updateView();
@@ -102,7 +110,13 @@ public class UserController extends Controller {
         myObservableArrangements.remove(currentSelectedMyArrangement);
         availableObservableArrangements.add(currentSelectedMyArrangement);
 
-        Repository.deleteUserFromArrangement(currentSelectedMyArrangement, ProtoUser.USER);
+        try {
+            Repository.deleteUserFromArrangement(currentSelectedMyArrangement, ProtoUser.USER);
+        } catch (DataFormatException illegalDataAccess) {
+            try { ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_ACCESSING_DATA, illegalDataAccess); }
+            catch (IOException e) {e.printStackTrace();}
+            createAlert(ErrorExceptionHandler.ERROR_ACCESSING_DATA);
+        }
         currentAvailableArrangement = currentSelectedMyArrangement;
         currentSelectedMyArrangement = null;
     }

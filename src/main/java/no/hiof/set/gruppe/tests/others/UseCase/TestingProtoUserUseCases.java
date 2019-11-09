@@ -10,6 +10,7 @@ package no.hiof.set.gruppe.tests.others.UseCase;
 //                1.Import Statements                //
 // --------------------------------------------------//
 import no.hiof.set.gruppe.data.Repository;
+import no.hiof.set.gruppe.exceptions.DataFormatException;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.user.ProtoUser;
 import org.junit.jupiter.api.*;
@@ -49,7 +50,7 @@ class TestingProtoUserUseCases {
       */
     @Test
     @Order(1)
-    void firstAddUserToArrangement(){
+    void firstAddUserToArrangement() throws DataFormatException {
         arrangementToTest = notUserArrangements.get(0);
         userArrangements.add(arrangementToTest);
 
@@ -62,7 +63,7 @@ class TestingProtoUserUseCases {
       */
     @Test
     @Order(2)
-    void thenRemoveUserFromArrangement(){
+    void thenRemoveUserFromArrangement() throws DataFormatException {
         Repository.deleteUserFromArrangement(arrangementToTest, PROTO_USER);
         userArrangements.remove(arrangementToTest);
         Repository.deleteUserFromArrangement(arrangementToTest, PROTO_USER);

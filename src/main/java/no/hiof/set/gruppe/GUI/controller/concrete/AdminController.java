@@ -22,6 +22,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+import no.hiof.set.gruppe.exceptions.DataFormatException;
 import no.hiof.set.gruppe.exceptions.ErrorExceptionHandler;
 import no.hiof.set.gruppe.exceptions.IllegalDataAccess;
 import no.hiof.set.gruppe.GUI.controller.abstractions.Controller;
@@ -126,9 +127,10 @@ public class AdminController extends Controller {
             arrangementListObservable.remove(currentArrangement);
             arrangementListView.refresh();
         }
-        catch (IllegalDataAccess illegalDataAccess) {
+        catch (IllegalDataAccess | DataFormatException illegalDataAccess) {
             try { ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_ACCESSING_DATA, illegalDataAccess); }
             catch (IOException e) {e.printStackTrace();}
+            createAlert(ErrorExceptionHandler.ERROR_ACCESSING_DATA);
         }
     }
 
