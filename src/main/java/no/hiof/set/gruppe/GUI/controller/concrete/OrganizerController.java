@@ -48,19 +48,8 @@ import java.util.ResourceBundle;
  * @author Gruppe4
  */
 public class OrganizerController extends Controller {
-
     // --------------------------------------------------//
-    //                2.Local Fields                     //
-    // --------------------------------------------------//
-    private String title = "";
-    private String name = "";
-    private ObservableList<Arrangement>arrangementListObservable;
-    private FilteredList<Arrangement> filteredList;
-    private Arrangement currentArrangement = null;
-    private static final ProtoUser PROTO_USER = ProtoUser.ORGANIZER;
-
-    // --------------------------------------------------//
-    //                3.FXML Fields                      //
+    //                2.FXML Fields                      //
     // --------------------------------------------------//
     @FXML
     private Button newArrangementBtn, editBtn, deleteBtn;
@@ -76,6 +65,17 @@ public class OrganizerController extends Controller {
     private MenuItem logOut;
     @FXML
     private Text sportHeader, addressHeader, dateHeader, gOrIHeader, participantsHeader, descriptionHeader;
+
+    // --------------------------------------------------//
+    //                3.Local Fields                     //
+    // --------------------------------------------------//
+    private String title = "";
+    private String name = "";
+    private ObservableList<Arrangement>arrangementListObservable;
+    private FilteredList<Arrangement> filteredList;
+    private Arrangement currentArrangement = null;
+    private static final ProtoUser PROTO_USER = ProtoUser.ORGANIZER;
+    private final Text[] allTextFields = {arrangementName, arrangementAdress, arrangementDate, arrangementParticipants, arrangementGorI, arrangementSport, arrangementDescription};
 
     // --------------------------------------------------//
     //                4.On Action Methods                //
@@ -143,13 +143,13 @@ public class OrganizerController extends Controller {
     // --------------------------------------------------//
     private void changedView(){
         currentArrangement = listview.getSelectionModel().getSelectedItem();
+        if(currentArrangement == null)return;
         setInformationAboutArrangementInView();
         checkArrangementDate();
         listview.refresh();
     }
 
     private void setInformationAboutArrangementInView(){
-        if(currentArrangement == null)return;
         setTextColors(true);
         ArrayList<Text> viewFields = viewFields(arrangementName, arrangementSport, arrangementAdress, arrangementDate, arrangementParticipants, arrangementGorI, arrangementDescription);
         ArrayList<String> data = arrangementData(currentArrangement);
@@ -163,6 +163,8 @@ public class OrganizerController extends Controller {
             Repository.deleteArrangement(selectedItem, PROTO_USER);
             arrangementListObservable.remove(selectedItem);
             listview.getSelectionModel().selectFirst();
+            clearFields();
+            changedView();
         }
         catch (IllegalDataAccess | DataFormatException illegalDataAccess) {
             try {ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_ACCESSING_DATA, illegalDataAccess); }

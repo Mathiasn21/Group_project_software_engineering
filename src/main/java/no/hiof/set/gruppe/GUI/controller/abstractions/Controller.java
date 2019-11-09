@@ -36,7 +36,6 @@ public abstract class Controller implements IControllerDataTransfer, Initializab
         ErrorExceptionHandler err = null;
         Throwable thrown = null;
 
-        //Handling and logging error + exceptions
         try {
             mainController.setupWindow(controller);
             errorOccured = false;
@@ -81,6 +80,8 @@ public abstract class Controller implements IControllerDataTransfer, Initializab
         Text[] t = {name, sport, adress, date, participants, groups, description};
         return new ArrayList<>(Arrays.asList(t));
     }
+
+    public void clearFields(Text ...textNodes){ for(Text text : textNodes)text.setText(""); }
 
     protected ArrayList<String>arrangementData(@NotNull Arrangement a){
         String[] s = {a.getName(), a.getSport(), a.getAddress(), dateString(a), Integer.toString(a.getParticipants()), groupsOrIndividuals(a), a.getDescription()};

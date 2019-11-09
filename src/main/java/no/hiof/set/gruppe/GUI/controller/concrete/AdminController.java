@@ -41,14 +41,6 @@ import java.util.ResourceBundle;
  */
 public class AdminController extends Controller {
     // --------------------------------------------------//
-    //                2.Local Fields                     //
-    // --------------------------------------------------//
-    private String title = "Login";
-    private String name = "";
-    private Arrangement currentArrangement = null;
-    private ObservableList<Arrangement> arrangementListObservable;
-
-    // --------------------------------------------------//
     //                3.FXML Fields                      //
     // --------------------------------------------------//
      @FXML
@@ -63,6 +55,18 @@ public class AdminController extends Controller {
      private MenuItem logOut;
      @FXML
      private Text sportHeader, adresHeader, dateHeader, gOrIHeader, participantsHeader, descriptionHeader;
+
+
+    // --------------------------------------------------//
+    //                2.Local Fields                     //
+    // --------------------------------------------------//
+    private String title = "Login";
+    private String name = "";
+    private Arrangement currentArrangement = null;
+    private ObservableList<Arrangement> arrangementListObservable;
+    private final Text[] textFields = {arrangementSport, arrangementName, arrangementAdress, arrangementDate, arrangementGorI, arrangementParticipants, arrangementDescription};
+
+
     // --------------------------------------------------//
     //                4.On action Methods                //
     // --------------------------------------------------//
@@ -126,6 +130,8 @@ public class AdminController extends Controller {
             Repository.deleteArrangement(currentArrangement, ProtoUser.ADMIN);
             arrangementListObservable.remove(currentArrangement);
             arrangementListView.refresh();
+            clearFields();
+            updateView();
         }
         catch (IllegalDataAccess | DataFormatException illegalDataAccess) {
             try { ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_ACCESSING_DATA, illegalDataAccess); }

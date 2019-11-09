@@ -37,7 +37,6 @@ public class LoginController extends Controller {
     // --------------------------------------------------//
     //                2.Local Fields                     //
     // --------------------------------------------------//
-
     private String name = "";
     private String title = "";
 

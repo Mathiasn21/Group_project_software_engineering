@@ -135,7 +135,6 @@ public class NewAlterGroupController extends Controller {
     }
 
     private void alterGroup(){
-
         groupToEdit.setMembers(new ArrayList<>());
         groupToEdit.setName(inputName.getText());
         groupToEdit.addMulipleMembers(chosenUsersObservableList);
@@ -158,9 +157,7 @@ public class NewAlterGroupController extends Controller {
     }
 
     private boolean checkIfRightList(ObservableList<DummyUsers> o) {
-        for (DummyUsers user : o) {
-            if (currentUser == user)return false;
-        }
+        for (DummyUsers user : o) if (currentUser == user) return false;
         return true;
     }
 

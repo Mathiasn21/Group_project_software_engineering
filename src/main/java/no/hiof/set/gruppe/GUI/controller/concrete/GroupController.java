@@ -141,7 +141,6 @@ public class GroupController extends Controller {
         editBtn.setOnAction(this::onClickEditBtn);
         groupsListview.setOnMouseClicked(this::onClickGroupsListView);
 
-        //Menu items
         myIndividualArrangementsBtn.setOnAction(this::onClickMyIndividualArrangementsBtn);
         logoutBtn.setOnAction(this::onClickLogoutBtn);
     }
@@ -156,9 +155,7 @@ public class GroupController extends Controller {
         setTextColors(true);
         groupName.setText(selectedGroup.getName());
         StringBuilder stringMembers = new StringBuilder();
-        for(DummyUsers dummyUsers : selectedGroup.getMembers()){
-            stringMembers.append(dummyUsers + "\n");
-        }
+        for(DummyUsers dummyUsers : selectedGroup.getMembers()) stringMembers.append(dummyUsers).append("\n");
         members.setText(stringMembers.toString());
     }
 
