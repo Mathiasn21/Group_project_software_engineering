@@ -12,7 +12,6 @@ package no.hiof.set.gruppe.data;
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import no.hiof.set.gruppe.core.validations.AccessValidate;
