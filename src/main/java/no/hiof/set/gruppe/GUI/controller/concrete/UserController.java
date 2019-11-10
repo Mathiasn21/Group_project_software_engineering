@@ -62,7 +62,7 @@ public class UserController extends Controller {
     @FXML
     private ListView<Arrangement>availableArrangementsListView, myArrangementsView;
     @FXML
-    private Text arrangementTitle, arrangementSport,arrangementAddress,arrangementDate,arrangementParticipants,arrangementGroup, arrangementDescription, mainTitle;
+    private Text arrangementTitle, arrangementSport,arrangementAddress,arrangementDate,arrangementParticipants,arrangementGroup, arrangementDescription;
     @FXML
     private RadioButton radioExp, radioOng, radioFut, radioAll;
     @FXML
@@ -73,8 +73,6 @@ public class UserController extends Controller {
     private ComboBox<SportCategory> availableSortingOptionsMy, sortingOptions;
     @FXML
     private MenuItem logOut, myGroups;
-    @FXML
-    private MenuButton menu;
     @FXML
     private Text sportHeader, addressHeader, dateHeader, participantsHeader, gOrIHeader, descriptionHeader;
 
@@ -357,15 +355,6 @@ public class UserController extends Controller {
     @Nullable
     public Object getDataObject() {
         return null;
-    }
-
-    /**
-     * @param object Object
-     * @throws DataFormatException wrongDataFormat {@link DataFormatException}
-     */
-    @Override
-    public void setDataFields(Object object) throws DataFormatException {
-
     }
 
     /**

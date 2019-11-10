@@ -7,6 +7,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import no.hiof.set.gruppe.exceptions.DataFormatException;
 import no.hiof.set.gruppe.exceptions.ErrorExceptionHandler;
 import no.hiof.set.gruppe.MainJavaFX;
 import no.hiof.set.gruppe.model.Arrangement;
@@ -81,7 +82,7 @@ public abstract class Controller implements IControllerDataTransfer, Initializab
         return new ArrayList<>(Arrays.asList(t));
     }
 
-    public void clearFields(Text ...textNodes){ for(Text text : textNodes)text.setText(""); }
+    protected void clearFields(Text... textNodes){ for(Text text : textNodes)text.setText(""); }
 
     protected ArrayList<String>arrangementData(@NotNull Arrangement a){
         String[] s = {a.getName(), a.getSport(), a.getAddress(), dateString(a), Integer.toString(a.getParticipants()), groupsOrIndividuals(a), a.getDescription()};
@@ -102,14 +103,13 @@ public abstract class Controller implements IControllerDataTransfer, Initializab
         ((Stage)b.getScene().getWindow()).close();
     }
 
+    @Override
+    public void setDataFields(Object object) throws DataFormatException {
+
+    }
+
     protected void colorizeText(boolean tf, Text...t){
-        if(tf){
-            for (Text text : t)
-                text.setFill(Color.BLACK);
-        }
-        else{
-            for (Text text : t)
-                text.setFill(Color.GREY);
-        }
+        Color color = tf ? Color.BLACK : Color.GREY;
+        for (Text text : t)text.setFill(color);
     }
 }
