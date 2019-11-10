@@ -12,11 +12,12 @@ package no.hiof.set.gruppe.data;
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import no.hiof.set.gruppe.exceptions.*;
 import no.hiof.set.gruppe.core.validations.AccessValidate;
 import no.hiof.set.gruppe.core.validations.Validation;
+import no.hiof.set.gruppe.exceptions.*;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.Group;
 import no.hiof.set.gruppe.model.ValidationResult;
@@ -27,9 +28,12 @@ import no.hiof.set.gruppe.model.user.RawUser;
 import no.hiof.set.gruppe.model.user.UserConnectedArrangement;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Main class and logic for handling data, both storage and retrieval.
@@ -45,7 +49,7 @@ public class Repository {
     private static final String userHasArrangements = "userHasArrangements.json";
     private static final String groupsFName = "groups.json";
     private static List<Arrangement> listOfAllArrangements;
-    private static List<Group> listofAllGroups;
+    private static List<Group> listOfAllGroups;
     private static List<UserConnectedArrangement> listOfAllUserConnectedArrangements;
     private static final ObjectMapToFiles[] objectMapToFilesArr = {
             new ObjectMapToFiles<>(Arrangement.class, arrangementFName),
@@ -58,7 +62,7 @@ public class Repository {
         try{
             listOfAllArrangements = readDataGivenTypeArr(Arrangement[].class);;
             listOfAllUserConnectedArrangements = readDataGivenTypeArr(UserConnectedArrangement[].class);
-            listofAllGroups = readDataGivenTypeArr(Group[].class);
+            listOfAllGroups = readDataGivenTypeArr(Group[].class);
 
         }catch (IOException | DataFormatException e){
             try {ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_READING_DATA, e);}
@@ -166,7 +170,7 @@ public class Repository {
     }
 
     private static void storeGroupData() throws DataFormatException {
-        storeDataUsing(Group[].class, listofAllGroups.toArray(Group[]::new));
+        storeDataUsing(Group[].class, listOfAllGroups.toArray(Group[]::new));
     }
 
     /**
@@ -214,7 +218,7 @@ public class Repository {
     }
 
     public static void addGroup(@NotNull Group group) throws DataFormatException {
-        listofAllGroups.add(group);
+        listOfAllGroups.add(group);
         storeGroupData();
     }
 
@@ -226,8 +230,8 @@ public class Repository {
 
         }else if (object instanceof Group){
             Group thatGroup = (Group) object;
-            listofAllGroups.removeIf((thisGroup) -> thisGroup.getId() == thatGroup.getId());
-            listofAllGroups.add(thatGroup);
+            listOfAllGroups.removeIf((thisGroup) -> thisGroup.getId() == thatGroup.getId());
+            listOfAllGroups.add(thatGroup);
         }else{throw new DataFormatException();}
         storeArrangementsData();
     }
@@ -249,7 +253,7 @@ public class Repository {
     }
 
     public static void deleteGroup(Group group) throws DataFormatException {
-        listofAllGroups.remove(group);
+        listOfAllGroups.remove(group);
         storeGroupData();
     }
 
@@ -318,7 +322,7 @@ public class Repository {
     @NotNull
     @Contract(value = " -> new")
     public static ArrayList<Group>getAllGroups(){
-       return new ArrayList<>(listofAllGroups);
+       return new ArrayList<>(listOfAllGroups);
     }
 
     /**
