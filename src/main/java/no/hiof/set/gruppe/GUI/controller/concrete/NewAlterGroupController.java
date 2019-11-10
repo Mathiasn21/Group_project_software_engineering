@@ -178,14 +178,8 @@ public class NewAlterGroupController extends Controller {
         chosenMembers.setOnMouseClicked(this::onClickChosenMembers);
     }
 
-    private void getArrangementData(){
-        grName = groupToEdit.getName();
-        id = groupToEdit.getId();
-        members = groupToEdit.getMembers();
-    }
-
     //Toucha my spaghet?? Trenger refaktorering,
-    private void populateListviews(){
+    private void populateListViews(){
         if(!groupIsEditable){
             avaliableUsersObservableList = FXCollections.observableArrayList(Repository.queryAllUsers());
             chosenUsersObservableList = FXCollections.observableArrayList();
@@ -197,14 +191,12 @@ public class NewAlterGroupController extends Controller {
             avaliableUsersObservableList.removeAll(chosenUsersObservableList);
 
             for(int i = 0; i < avaliableUsersObservableList.size(); i++){
-                for (DummyUsers dummyUsers : chosenUsersObservableList) {
-                    if (avaliableUsersObservableList.get(i) == dummyUsers) {
+                for (DummyUsers dummyUser : chosenUsersObservableList) {
+                    if (avaliableUsersObservableList.get(i) == dummyUser) {
                         avaliableUsersObservableList.remove(avaliableUsersObservableList.get(i));
                     }
                 }
             }
-
-
         }
         availableMembers.setItems(avaliableUsersObservableList);
         chosenMembers.setItems(chosenUsersObservableList);
@@ -234,12 +226,12 @@ public class NewAlterGroupController extends Controller {
         groupIsEditable = true;
         setGroupToEdit(object);
         inputName.setText(groupToEdit.getName());
-        populateListviews();
+        populateListViews();
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        populateListviews();
+        populateListViews();
         setupActionHandlers();
     }
 
