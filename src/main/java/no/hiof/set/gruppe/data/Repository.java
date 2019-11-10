@@ -142,13 +142,15 @@ public class Repository {
             Arrangement thatArrangement = (Arrangement) t;
             listOfAllArrangements.removeIf((thisArrangement) -> thisArrangement.getID().equals(thatArrangement.getID()));
             listOfAllArrangements.add(thatArrangement);
+            storeArrangementsData();
 
         }else if (t instanceof Group){
             Group thatGroup = (Group) t;
             listOfAllGroups.removeIf((thisGroup) -> thisGroup.getId() == thatGroup.getId());
             listOfAllGroups.add(thatGroup);
+            storeGroupData();
         }else{throw new DataFormatException();}
-        storeArrangementsData();
+
     }
 
     // --------------------------------------------------//
