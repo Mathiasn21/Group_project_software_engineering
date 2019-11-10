@@ -137,14 +137,14 @@ public class Repository {
         storeGroupData();
     }
 
-    public static void mutateObject(Object object)throws DataFormatException {
-        if(object instanceof Arrangement){
-            Arrangement thatArrangement = (Arrangement) object;
+    public static <T> void mutateObject(T t)throws DataFormatException {
+        if(t instanceof Arrangement){
+            Arrangement thatArrangement = (Arrangement) t;
             listOfAllArrangements.removeIf((thisArrangement) -> thisArrangement.getID().equals(thatArrangement.getID()));
             listOfAllArrangements.add(thatArrangement);
 
-        }else if (object instanceof Group){
-            Group thatGroup = (Group) object;
+        }else if (t instanceof Group){
+            Group thatGroup = (Group) t;
             listOfAllGroups.removeIf((thisGroup) -> thisGroup.getId() == thatGroup.getId());
             listOfAllGroups.add(thatGroup);
         }else{throw new DataFormatException();}
