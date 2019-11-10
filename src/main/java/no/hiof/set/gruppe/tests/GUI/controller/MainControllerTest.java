@@ -22,12 +22,13 @@ class MainControllerTest extends MainJavaFXTest{
 
     @Test
     void enter_correct_login_information_from_btns(@NotNull FxRobot robot){
-        String[] userBtns = {"adminLogin", "arrangLogin", "userLogin"};
+        String[] userMenuItems = {"adminLogin", "arrangLogin", "userLogin"};
         String[] stageTitles = {"Logget inn som serviceadministrator", "Logget inn som Arrangør", "Logget inn som Bruker"};
         ProtoUser[] users = {ProtoUser.ADMIN, ProtoUser.ORGANIZER, ProtoUser.USER};
 
-        for(int i = 0; i < userBtns.length; i++){
-            firstAssertUserInformation(userBtns[i], users[i], robot);
+        for(int i = 0; i < userMenuItems.length; i++){
+            robot.clickOn("#cheatLogin");
+            firstAssertUserInformation(userMenuItems[i], users[i], robot);
             thenAssertLoginHasCorrectWindow(robot, stageTitles[i]);
         }
     }

@@ -15,6 +15,8 @@ package no.hiof.set.gruppe.GUI.controller.concrete;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import no.hiof.set.gruppe.exceptions.ErrorExceptionHandler;
 import no.hiof.set.gruppe.exceptions.InvalidLoginInformation;
@@ -44,7 +46,11 @@ public class LoginController extends Controller {
     //                3.FXML Fields                      //
     // --------------------------------------------------//
     @FXML
-    private Button logInn, adminLogin, arrangLogin, userLogin, cancel;
+    private Menu cheatLogin;
+    @FXML
+    private MenuItem adminLogin, arrangLogin, userLogin;
+    @FXML
+    private Button logInn, cancel;
     @FXML
     private TextField uName, pass;
 
@@ -57,7 +63,7 @@ public class LoginController extends Controller {
      */
     private void getCorrectCredentials(@NotNull ActionEvent event){
         ProtoUser protoUser = ProtoUser.USER;
-        Button source = (Button)event.getSource();
+        MenuItem source = (MenuItem)event.getSource();
 
         if (source.equals(adminLogin)) protoUser = ProtoUser.ADMIN;
         else if (source.equals(arrangLogin)) protoUser = ProtoUser.ORGANIZER;
@@ -110,6 +116,9 @@ public class LoginController extends Controller {
     private void setUpActionHandlers(){
         logInn.setOnAction(this::login);
         cancel.setOnAction(this::onClickCancel);
+
+        MenuItem[] credentialsBtns = {adminLogin, arrangLogin, userLogin};
+        for (MenuItem credentialsBtn : credentialsBtns) credentialsBtn.setOnAction(this::getCorrectCredentials);
     }
 
     // --------------------------------------------------//
@@ -121,9 +130,6 @@ public class LoginController extends Controller {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        Button[] credentialsBtns = {adminLogin, arrangLogin, userLogin};
-        for (Button credentialsBtn : credentialsBtns) credentialsBtn.setOnAction(this::getCorrectCredentials);
-
         setUpActionHandlers();
     }
 
