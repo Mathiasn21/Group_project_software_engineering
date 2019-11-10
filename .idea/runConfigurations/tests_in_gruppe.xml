@@ -7,7 +7,7 @@
         <option name="ENABLED" value="true" />
       </pattern>
       <pattern>
-        <option name="PATTERN" value="no.hiof.set.gruppe.data.*" />
+        <option name="PATTERN" value="no.hiof.set.gruppe.core.*" />
         <option name="ENABLED" value="true" />
       </pattern>
       <pattern>

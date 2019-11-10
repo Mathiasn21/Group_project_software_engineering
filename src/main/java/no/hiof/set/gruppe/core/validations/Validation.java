@@ -10,7 +10,7 @@ package no.hiof.set.gruppe.core.validations;
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
-import no.hiof.set.gruppe.data.Repository;
+import no.hiof.set.gruppe.core.Repository;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.Group;
 import no.hiof.set.gruppe.model.ValidationResult;

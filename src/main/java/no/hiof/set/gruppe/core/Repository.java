@@ -1,4 +1,4 @@
-package no.hiof.set.gruppe.data;
+package no.hiof.set.gruppe.core;
 /*Guide
  * 1. Import Statements
  * 2. Local Fields
@@ -14,6 +14,8 @@ package no.hiof.set.gruppe.data;
 // --------------------------------------------------//
 import no.hiof.set.gruppe.core.validations.AccessValidate;
 import no.hiof.set.gruppe.core.validations.Validation;
+import no.hiof.set.gruppe.data.HandleDataStorage;
+import no.hiof.set.gruppe.data.IHandleData;
 import no.hiof.set.gruppe.exceptions.*;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.Group;
@@ -44,7 +46,7 @@ public class Repository {
     private static List<Arrangement> listOfAllArrangements;
     private static List<Group> listOfAllGroups;
     private static List<UserConnectedArrangement> listOfAllUserConnectedArrangements;
-
+    private static final IHandleData handleData = new HandleDataStorage();
 
     //Preloads data.
     static{
@@ -73,7 +75,7 @@ public class Repository {
     }
 
     private static <T> List<T> queryDataGivenType(Class<T[]> tClassArr) throws IOException, DataFormatException {
-        return HandleDataStorage.queryDataGivenType(tClassArr);
+        return handleData.queryAllDataGivenType(tClassArr);
     }
 
     // --------------------------------------------------//
@@ -84,12 +86,12 @@ public class Repository {
      * Stores all arrangements and their user connection
      */
     private static void storeArrangementsData() throws DataFormatException {
-        HandleDataStorage.storeDataGivenType(Arrangement[].class, listOfAllArrangements.toArray(Arrangement[]::new));
+        handleData.storeDataGivenType(Arrangement[].class, listOfAllArrangements.toArray(Arrangement[]::new));
         storeUserArrangements();
     }
 
     private static void storeGroupData() throws DataFormatException {
-        HandleDataStorage.storeDataGivenType(Group[].class, listOfAllGroups.toArray(Group[]::new));
+        handleData.storeDataGivenType(Group[].class, listOfAllGroups.toArray(Group[]::new));
     }
 
     /**
@@ -97,7 +99,7 @@ public class Repository {
      * after every modification of said buffer.
      */
     private static void storeUserArrangements() throws DataFormatException {
-        HandleDataStorage.storeDataGivenType(UserConnectedArrangement[].class, listOfAllUserConnectedArrangements.toArray(UserConnectedArrangement[]::new));
+        handleData.storeDataGivenType(UserConnectedArrangement[].class, listOfAllUserConnectedArrangements.toArray(UserConnectedArrangement[]::new));
     }
 
 

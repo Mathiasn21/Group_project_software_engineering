@@ -21,7 +21,7 @@ import javafx.scene.control.TextField;
 import no.hiof.set.gruppe.exceptions.ErrorExceptionHandler;
 import no.hiof.set.gruppe.exceptions.InvalidLoginInformation;
 import no.hiof.set.gruppe.GUI.controller.abstractions.Controller;
-import no.hiof.set.gruppe.data.Repository;
+import no.hiof.set.gruppe.core.Repository;
 import no.hiof.set.gruppe.GUI.controller.model.ViewInformation;
 import no.hiof.set.gruppe.model.user.LoginInformation;
 import no.hiof.set.gruppe.model.user.ProtoUser;

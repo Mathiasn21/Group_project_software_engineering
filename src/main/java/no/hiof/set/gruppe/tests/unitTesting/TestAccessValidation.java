@@ -11,7 +11,7 @@ package no.hiof.set.gruppe.tests.unitTesting;
 // --------------------------------------------------//
 import no.hiof.set.gruppe.exceptions.InvalidLoginInformation;
 import no.hiof.set.gruppe.exceptions.UnableToRegisterUser;
-import no.hiof.set.gruppe.data.Repository;
+import no.hiof.set.gruppe.core.Repository;
 import no.hiof.set.gruppe.model.user.ILoginInformation;
 import no.hiof.set.gruppe.model.user.LoginInformation;
 import no.hiof.set.gruppe.model.user.ProtoUser;

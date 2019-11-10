@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-class HandleDataStorage {
+public class HandleDataStorage implements IHandleData{
     private static final String arrangementFName = "arrangements.json";
     private static final String userHasArrangements = "userHasArrangements.json";
     private static final String groupsFName = "groups.json";
@@ -25,15 +25,18 @@ class HandleDataStorage {
         ObjectMapToFiles.mutateObjectMapperList(new ObjectMapToFiles<>(UserConnectedArrangement.class, userHasArrangements));
     }
 
-    static <T> void storeDataGivenType(Class<T[]> tClass, T[] tArray) throws DataFormatException {
+    @Override
+    public <T> void storeDataGivenType(Class<T[]> tClass, T[] tArray) throws DataFormatException {
         writeToFile(toJson(tClass, tArray), ObjectMapToFiles.getCorrespondingMapperGivenType(tClass).fileName);
     }
 
-    static <T> List<T> queryDataGivenType(Class<T[]> tClassArr) throws IOException, DataFormatException {
+    @Override
+    public <T> List<T> queryAllDataGivenType(Class<T[]> tClassArr) throws IOException, DataFormatException {
         String jsonFromFile = HandleDataStorage.readFromFile(ObjectMapToFiles.getCorrespondingMapperGivenType(tClassArr).fileName);
         return new ArrayList<>(HandleDataStorage.listFromJson(tClassArr, jsonFromFile));
     }
 
+    
     /**
      * Standard method for writing data to a given file.
      * This methods does not append but overwrites!
