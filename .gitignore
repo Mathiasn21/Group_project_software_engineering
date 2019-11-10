@@ -11,7 +11,7 @@ SET_SourceCode.zip
 #Ignore Folders
 output/
 out/
-logs/
+logs/*
 posters/
 poster/
 .idea/*
