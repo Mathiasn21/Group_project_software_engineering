@@ -2,23 +2,24 @@
 CMakeLists.txt
 
 #Ignore Filetypes
-*.idea
-*.idea/
+
 *.iml
 *.project
+SET_Project.zip
+SET_SourceCode.zip
 
 #Ignore Folders
 output/
 out/
-logs/*
+logs/
 posters/
 poster/
 .idea/*
 target/
 cmake-build-debug/
 SET_Project
-SET_Project.zip
-SET_SourceCode.zip
+*.idea
+*.idea/
 
 #Rule Exceptions
 !logs/.gitkeep

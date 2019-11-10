@@ -2,7 +2,7 @@ package no.hiof.set.gruppe.tests.thirdPartyIntegration;
 
 /*Guide
  * 1. Import Statements
- * 2. Single Tests
+ * 2. Unit Tests
  * */
 
 // --------------------------------------------------//

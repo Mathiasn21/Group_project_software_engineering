@@ -59,7 +59,7 @@ public class Repository {
     //Preloads data.
     static{
         try{
-            listOfAllArrangements = readDataGivenTypeArr(Arrangement[].class);;
+            listOfAllArrangements = readDataGivenTypeArr(Arrangement[].class);
             listOfAllUserConnectedArrangements = readDataGivenTypeArr(UserConnectedArrangement[].class);
             listOfAllGroups = readDataGivenTypeArr(Group[].class);
 
