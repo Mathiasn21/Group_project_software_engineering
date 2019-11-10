@@ -146,7 +146,7 @@ public class GroupController extends Controller {
     }
 
     private void populateListView(){
-        groupsList = FXCollections.observableArrayList(Repository.getAllGroups());
+        groupsList = FXCollections.observableArrayList(Repository.queryAllGroups());
         groupsListview.setItems(groupsList);
     }
 

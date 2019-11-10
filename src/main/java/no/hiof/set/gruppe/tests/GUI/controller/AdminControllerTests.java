@@ -52,7 +52,7 @@ class AdminControllerTests extends MainJavaFXTest{
         ListView listView = getListView(robot, "#arrangementListView");
         Arrangement arrangement = (Arrangement) listView.getSelectionModel().getSelectedItem();
         robot.clickOn("#delete");
-        Repository.addArrangement(arrangement, ProtoUser.ORGANIZER);
+        Repository.insertArrangement(arrangement, ProtoUser.ORGANIZER);
     }
 
     // --------------------------------------------------//

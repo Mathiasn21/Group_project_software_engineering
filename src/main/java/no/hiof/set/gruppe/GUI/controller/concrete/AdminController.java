@@ -108,7 +108,7 @@ public class AdminController extends Controller {
     }
 
     private void populateListView(){
-        arrangementListObservable = FXCollections.observableArrayList(Repository.getArrangementsData());
+        arrangementListObservable = FXCollections.observableArrayList(Repository.queryAllArrangements());
         arrangementListView.setItems(arrangementListObservable);
     }
 

@@ -37,8 +37,8 @@ class TestingProtoUserUseCases {
 
     //setup
     static {
-        userArrangements = Repository.getUserArrangements(PROTO_USER);
-        notUserArrangements = Repository.getArrangementsData();
+        userArrangements = Repository.queryAllUserRelatedArrangements(PROTO_USER);
+        notUserArrangements = Repository.queryAllArrangements();
         notUserArrangements.removeAll(userArrangements);
     }
 
@@ -54,8 +54,8 @@ class TestingProtoUserUseCases {
         arrangementToTest = notUserArrangements.get(0);
         userArrangements.add(arrangementToTest);
 
-        Repository.addUserToArrangement(arrangementToTest, PROTO_USER);
-        assertDataIntegrity(Repository.getUserArrangements(PROTO_USER));
+        Repository.insertUserToArrangement(arrangementToTest, PROTO_USER);
+        assertDataIntegrity(Repository.queryAllUserRelatedArrangements(PROTO_USER));
     }
 
      /**
@@ -67,7 +67,7 @@ class TestingProtoUserUseCases {
         Repository.deleteUserFromArrangement(arrangementToTest, PROTO_USER);
         userArrangements.remove(arrangementToTest);
         Repository.deleteUserFromArrangement(arrangementToTest, PROTO_USER);
-        assertDataIntegrity(Repository.getUserArrangements(PROTO_USER));
+        assertDataIntegrity(Repository.queryAllUserRelatedArrangements(PROTO_USER));
     }
 
     private void assertDataIntegrity(List<Arrangement> expectedArrangementList) {

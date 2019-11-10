@@ -80,9 +80,9 @@ public class Validation{
         }catch (DateTimeParseException wrongDateFormat){res.append("ERROR, feil dato format.\n");}
 
         res.append(rawUser.getfName().length() <= maxLengthName && rawUser.getlName().length() <= maxLengthName ? "" : "Ulovlig langt navn\n");
-        res.append(!Repository.addressExists(rawUser.getStreetAddress()) ? "" : "Addressen er ikke gyldig.\n");
+        res.append(!Repository.queryAddress(rawUser.getStreetAddress()) ? "" : "Addressen er ikke gyldig.\n");
         res.append(rawUser.getCityCode().length() == 4 ? "" : "Ugyldig by kode.\n");
-        res.append(regCheck(textNotNullPattern, email) && !Repository.emailExists(email) ? "" : "Ugyldig email.\n");
+        res.append(regCheck(textNotNullPattern, email) && !Repository.queryEmailExists(email) ? "" : "Ugyldig email.\n");
         res.append(passHash.length() >= 10 && passHash.length() <= 60 ? "" : "Ugyldig passord\n");
 
         return new ValidationResult(res.toString(), res.length() == 0);

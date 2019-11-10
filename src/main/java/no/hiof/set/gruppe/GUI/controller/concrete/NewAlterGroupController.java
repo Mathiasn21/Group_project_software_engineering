@@ -143,7 +143,7 @@ public class NewAlterGroupController extends Controller {
 
     private void queryGroup() {
         try {
-            Repository.addGroup(groupToEdit);
+            Repository.insertGroup(groupToEdit);
         } catch (DataFormatException illegalDataAccess) {
             try { ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_ACCESSING_DATA, illegalDataAccess);
             } catch (IOException e) { e.printStackTrace(); }
@@ -187,7 +187,7 @@ public class NewAlterGroupController extends Controller {
     //Toucha my spaghet?? Trenger refaktorering,
     private void populateListviews(){
         if(!groupIsEditable){
-            avaliableUsersObservableList = FXCollections.observableArrayList(Repository.getAllUsers());
+            avaliableUsersObservableList = FXCollections.observableArrayList(Repository.queryAllUsers());
             chosenUsersObservableList = FXCollections.observableArrayList();
         }
         if(groupIsEditable){

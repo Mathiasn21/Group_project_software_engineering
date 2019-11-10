@@ -54,11 +54,11 @@ class TestingAdminUseCases {
     @Test
     @Order(1)
     void addArrangement() throws IllegalDataAccess, DataFormatException {
-        List<Arrangement> expectedArrangementList = Repository.getUserArrangements(PROTO_USER_ORGANIZER);
+        List<Arrangement> expectedArrangementList = Repository.queryAllUserRelatedArrangements(PROTO_USER_ORGANIZER);
         expectedArrangementList.add(arrangement);
-        Repository.addArrangement(arrangement, PROTO_USER_ORGANIZER);
+        Repository.insertArrangement(arrangement, PROTO_USER_ORGANIZER);
 
-        assertDataIntegrity(expectedArrangementList, Repository.getUserArrangements(PROTO_USER_ORGANIZER));
+        assertDataIntegrity(expectedArrangementList, Repository.queryAllUserRelatedArrangements(PROTO_USER_ORGANIZER));
     }
 
     private void assertDataIntegrity(List<Arrangement> expectedArrangementList, List<Arrangement> userArrangements) {
@@ -72,11 +72,11 @@ class TestingAdminUseCases {
     @Test
     @Order(2)
     void deleteArrangement() throws IllegalDataAccess, DataFormatException {
-        List<Arrangement> expectedArrangementList = Repository.getUserArrangements(PROTO_USER_ORGANIZER);
+        List<Arrangement> expectedArrangementList = Repository.queryAllUserRelatedArrangements(PROTO_USER_ORGANIZER);
         expectedArrangementList.remove(arrangement);
 
         Repository.deleteArrangement(arrangement, PROTO_USER_ADMIN);
-        assertDataIntegrity(expectedArrangementList, Repository.getArrangementsData());
+        assertDataIntegrity(expectedArrangementList, Repository.queryAllArrangements());
     }
 
     //Add new sports

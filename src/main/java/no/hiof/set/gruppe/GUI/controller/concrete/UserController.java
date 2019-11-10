@@ -91,7 +91,7 @@ public class UserController extends Controller {
         myObservableArrangements.add(currentAvailableArrangement);
 
         try {
-            Repository.addUserToArrangement(currentAvailableArrangement, ProtoUser.USER);
+            Repository.insertUserToArrangement(currentAvailableArrangement, ProtoUser.USER);
         } catch (DataFormatException illegalDataAccess) {
             try { ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_ACCESSING_DATA, illegalDataAccess); }
             catch (IOException e) {e.printStackTrace();}
@@ -251,8 +251,8 @@ public class UserController extends Controller {
     //                7.Private Setup Methods            //
     // --------------------------------------------------//
     private void setArrangementListInformation() {
-        List<Arrangement> allArrang = Repository.getArrangementsData();
-        List<Arrangement> userConnectedArrangements = Repository.getUserArrangements(ProtoUser.USER);
+        List<Arrangement> allArrang = Repository.queryAllArrangements();
+        List<Arrangement> userConnectedArrangements = Repository.queryAllUserRelatedArrangements(ProtoUser.USER);
 
         allArrang.removeAll(userConnectedArrangements);
         allArrang.removeIf((arrangement) -> DateTest.TestExpired.execute(arrangement.getStartDate(), arrangement.getEndDate()));

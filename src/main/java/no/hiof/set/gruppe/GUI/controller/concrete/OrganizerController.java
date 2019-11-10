@@ -38,7 +38,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -227,7 +226,7 @@ public class OrganizerController extends Controller {
     }
 
     private void populateListView() {
-        arrangementListObservable = FXCollections.observableArrayList(Repository.getUserArrangements(ProtoUser.ORGANIZER));
+        arrangementListObservable = FXCollections.observableArrayList(Repository.queryAllUserRelatedArrangements(ProtoUser.ORGANIZER));
         arrangementListObservable.sort(ArrangementSort.COMP_DATE_ASC.getComparator());
         setupFilteredList();
         listview.refresh();
@@ -281,7 +280,7 @@ public class OrganizerController extends Controller {
 
         MultipleSelectionModel selModel = listview.getSelectionModel();
         try {
-            Repository.addArrangement(arrangement, ProtoUser.ORGANIZER);
+            Repository.insertArrangement(arrangement, ProtoUser.ORGANIZER);
             arrangementListObservable.add(arrangement);
 
         } catch (IllegalDataAccess illegalDataAccess) {

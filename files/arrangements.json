@@ -1,16 +1,5 @@
 [
   {
-    "ID": "d52665f4-38f1-4b56-b24d-9d760adc7102",
-    "name": "Børres Brokkoli mani",
-    "sport": "Sykkelritt",
-    "address": "Brokkolivegen 28",
-    "startDate": "2019-11-07",
-    "endDate": "2019-11-08",
-    "description": "Masse spising og løing med brokkoli",
-    "participants": 36,
-    "group": false
-  },
-  {
     "ID": "edbbbe0a-468b-4943-86bb-682936015acf",
     "name": "The nerds show",
     "sport": "Annet",
@@ -41,6 +30,17 @@
     "endDate": "2020-08-31",
     "description": "wdawdegsgdtreafrtdhrg",
     "participants": 23,
+    "group": false
+  },
+  {
+    "ID": "d52665f4-38f1-4b56-b24d-9d760adc7102",
+    "name": "Børres Brokkoli mani",
+    "sport": "Sykkelritt",
+    "address": "Brokkolivegen 28",
+    "startDate": "2019-11-11",
+    "endDate": "2019-11-12",
+    "description": "Masse spising og løing med brokkoli",
+    "participants": 36,
     "group": false
   }
 ]

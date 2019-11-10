@@ -72,7 +72,7 @@ public class LoginController extends Controller {
         String password = pass.getText();
 
         try{
-            ProtoUser protoUser = Repository.getUserDetails(new LoginInformation(userName, password));
+            ProtoUser protoUser = Repository.queryUserDetailsWith(new LoginInformation(userName, password));
             closeWindow(logInn);
             openCorrespondingStage(protoUser);
 
