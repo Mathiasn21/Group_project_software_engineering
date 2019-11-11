@@ -9,7 +9,10 @@ package no.hiof.set.gruppe.tests.thirdPartyIntegration;
 //                1.Import Statements                //
 // --------------------------------------------------//
 import no.hiof.set.gruppe.ThirdPartyIntegrations.paymenIntegration.IPaymentIntegration;
+import no.hiof.set.gruppe.ThirdPartyIntegrations.paymenIntegration.KlarnaIntegration;
 import no.hiof.set.gruppe.ThirdPartyIntegrations.paymenIntegration.TicketmasterIntegration;
+import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.io.IOException;
 
@@ -30,17 +33,28 @@ class TestPaymentIntegration {
     //                2.Unit Tests                       //
     // --------------------------------------------------//
 
-    @Test
-    void ticketmaster_Access_Success() throws IOException {
-        IPaymentIntegration paymentIntegration = new TicketmasterIntegration();
+    @ParameterizedTest
+    @ValueSource(ints = {200 /*, 201, 202, 203, 204, 205, 206, 207, 208, 226*/})
+    void ticketmaster_access_success(int number) throws IOException{
 
-        assertEquals(202, ((TicketmasterIntegration) paymentIntegration).connectionResponse());
+        IPaymentIntegration ticketmasterIntegration = new TicketmasterIntegration();
+        assertEquals(number,ticketmasterIntegration.connectionResponse().statusCode);
+    }
+
+    @Test
+    void klarna_access_success() throws IOException{
+        IPaymentIntegration klarnaIntegration = new KlarnaIntegration();
+    }
+
+    @Test
+    void ticketmaster_payment_success(){
+        IPaymentIntegration ticketmasterIntegration = new TicketmasterIntegration();
+
+        assertEquals("Accepted", ticketmasterIntegration.paymentValidation());
     }
 
     @Test
     void transactionSuccess(){
-        IPaymentIntegration paymentIntegration = new TicketmasterIntegration();
-
 
     }
 
