@@ -22,7 +22,8 @@
     "members": [
       "USER5",
       "USER7",
-      "USER9"
+      "USER9",
+      "USER6"
     ]
   },
   {
@@ -42,6 +43,16 @@
       "USER6",
       "USER8",
       "USER4"
+    ]
+  },
+  {
+    "name": "dfkjngkngf",
+    "id": 1,
+    "members": [
+      "USER5",
+      "USER7",
+      "USER9",
+      "USER6"
     ]
   }
 ]

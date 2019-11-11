@@ -28,7 +28,7 @@ import no.hiof.set.gruppe.core.Repository;
 import no.hiof.set.gruppe.core.exceptions.DataFormatException;
 import no.hiof.set.gruppe.core.exceptions.ErrorExceptionHandler;
 import no.hiof.set.gruppe.model.Group;
-import no.hiof.set.gruppe.GUI.controller.model.ViewInformation;
+import no.hiof.set.gruppe.GUI.model.ViewInformation;
 import no.hiof.set.gruppe.model.constantInformation.DummyUsers;
 
 import java.io.IOException;

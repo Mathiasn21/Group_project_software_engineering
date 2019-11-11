@@ -27,7 +27,7 @@ import no.hiof.set.gruppe.GUI.controller.abstractions.Controller;
 import no.hiof.set.gruppe.core.Repository;
 import no.hiof.set.gruppe.core.exceptions.ErrorExceptionHandler;
 import no.hiof.set.gruppe.model.Arrangement;
-import no.hiof.set.gruppe.GUI.controller.model.ViewInformation;
+import no.hiof.set.gruppe.GUI.model.ViewInformation;
 import no.hiof.set.gruppe.model.constantInformation.SportCategory;
 import no.hiof.set.gruppe.model.user.ProtoUser;
 import no.hiof.set.gruppe.core.predicates.DateTest;
