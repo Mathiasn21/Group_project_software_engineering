@@ -3,9 +3,10 @@
     "name": "hoi",
     "id": 1,
     "members": [
-      "USER6",
       "USER8",
-      "USER4"
+      "USER4",
+      "USER1",
+      "USER2"
     ]
   },
   {
@@ -53,6 +54,26 @@
       "USER7",
       "USER9",
       "USER6"
+    ]
+  },
+  {
+    "name": "hoi",
+    "id": 1,
+    "members": [
+      "USER6",
+      "USER8",
+      "USER4",
+      "USER1"
+    ]
+  },
+  {
+    "name": "hoi",
+    "id": 1,
+    "members": [
+      "USER8",
+      "USER4",
+      "USER1",
+      "USER2"
     ]
   }
 ]

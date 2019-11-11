@@ -129,7 +129,7 @@ public class NewAlterGroupController extends Controller {
     private void createNewGroup(){
         if(groupToEdit == null){
             groupToEdit = new Group(inputName.getText(), 1); //ID skal generes automatisk senere
-            groupToEdit.addMulipleMembers(chosenUsersObservableList);
+            groupToEdit.addMultipleMembers(chosenUsersObservableList);
             queryGroup();
         }
     }
@@ -137,7 +137,7 @@ public class NewAlterGroupController extends Controller {
     private void alterGroup(){
         groupToEdit.setMembers(new ArrayList<>());
         groupToEdit.setName(inputName.getText());
-        groupToEdit.addMulipleMembers(chosenUsersObservableList);
+        groupToEdit.addMultipleMembers(chosenUsersObservableList);
         queryGroup();
     }
 
