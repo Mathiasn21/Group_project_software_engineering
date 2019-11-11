@@ -83,8 +83,6 @@ public class LoginController extends Controller {
             openCorrespondingStage(protoUser);
 
         }catch (InvalidLoginInformation invalidLogin){
-            try { ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_LOGIN, invalidLogin); }
-            catch (IOException e) {e.printStackTrace();}
             createAlert(ErrorExceptionHandler.ERROR_LOGIN);
         }
     }
