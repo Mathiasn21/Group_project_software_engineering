@@ -9,8 +9,8 @@ package no.hiof.set.gruppe.tests.unitTesting;
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
-import no.hiof.set.gruppe.exceptions.InvalidLoginInformation;
-import no.hiof.set.gruppe.exceptions.UnableToRegisterUser;
+import no.hiof.set.gruppe.core.exceptions.InvalidLoginInformation;
+import no.hiof.set.gruppe.core.exceptions.UnableToRegisterUser;
 import no.hiof.set.gruppe.core.Repository;
 import no.hiof.set.gruppe.model.user.ILoginInformation;
 import no.hiof.set.gruppe.model.user.LoginInformation;

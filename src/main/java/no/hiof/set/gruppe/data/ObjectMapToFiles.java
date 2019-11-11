@@ -1,7 +1,6 @@
 package no.hiof.set.gruppe.data;
 
-import no.hiof.set.gruppe.exceptions.DataFormatException;
-
+import no.hiof.set.gruppe.core.exceptions.DataFormatException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,11 +19,8 @@ class ObjectMapToFiles<T> {
     static void mutateObjectMapperList(ObjectMapToFiles objectMapToFiles){objectMappers.add(objectMapToFiles);}
 
     static <T> ObjectMapToFiles getCorrespondingMapperGivenType(Class<T[]> t) throws DataFormatException {
-        for(ObjectMapToFiles objectMapper : objectMappers){
-            if(objectMapper.getTypeClass() == t.getComponentType()){
-                return objectMapper;
-            }
-        }
+        for(ObjectMapToFiles objectMapper : objectMappers)
+            if (objectMapper.getTypeClass() == t.getComponentType()) return objectMapper;
         throw new DataFormatException();
     }
 }

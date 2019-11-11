@@ -18,8 +18,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
-import no.hiof.set.gruppe.exceptions.ErrorExceptionHandler;
-import no.hiof.set.gruppe.exceptions.InvalidLoginInformation;
+import no.hiof.set.gruppe.core.exceptions.ErrorExceptionHandler;
+import no.hiof.set.gruppe.core.exceptions.InvalidLoginInformation;
 import no.hiof.set.gruppe.GUI.controller.abstractions.Controller;
 import no.hiof.set.gruppe.core.Repository;
 import no.hiof.set.gruppe.GUI.controller.model.ViewInformation;
@@ -28,7 +28,6 @@ import no.hiof.set.gruppe.model.user.ProtoUser;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 

@@ -1,6 +1,6 @@
 package no.hiof.set.gruppe.GUI.controller.abstractions;
 
-import no.hiof.set.gruppe.exceptions.DataFormatException;
+import no.hiof.set.gruppe.core.exceptions.DataFormatException;
 
 /**
  * Secures that transfer of data objects between controllers is done.

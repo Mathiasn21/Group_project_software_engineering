@@ -1,4 +1,4 @@
-package no.hiof.set.gruppe.exceptions;
+package no.hiof.set.gruppe.core.exceptions;
 
 /**
  * Custom exception representing an illegal data access happening.

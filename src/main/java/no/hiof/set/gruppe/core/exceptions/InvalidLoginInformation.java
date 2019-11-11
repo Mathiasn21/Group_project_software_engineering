@@ -1,4 +1,4 @@
-package no.hiof.set.gruppe.exceptions;
+package no.hiof.set.gruppe.core.exceptions;
 
 public final class InvalidLoginInformation extends Exception {
     public InvalidLoginInformation(){

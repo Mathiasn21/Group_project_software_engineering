@@ -1,4 +1,4 @@
-package no.hiof.set.gruppe.exceptions;
+package no.hiof.set.gruppe.core.exceptions;
 
 import no.hiof.set.gruppe.model.ValidationResult;
 import org.jetbrains.annotations.Contract;
