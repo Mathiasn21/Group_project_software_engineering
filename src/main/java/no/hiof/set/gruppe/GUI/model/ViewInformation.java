@@ -1,4 +1,4 @@
-package no.hiof.set.gruppe.GUI.controller.model;
+package no.hiof.set.gruppe.GUI.model;
 
 /*Guide
  * 1. Import Statements
