@@ -8,9 +8,9 @@ package no.hiof.set.gruppe.tests.thirdPartyIntegration;
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
-import no.hiof.set.gruppe.ThirdPartyIntegrations.paymenIntegration.IPaymentIntegration;
-import no.hiof.set.gruppe.ThirdPartyIntegrations.paymenIntegration.KlarnaIntegration;
-import no.hiof.set.gruppe.ThirdPartyIntegrations.paymenIntegration.TicketmasterIntegration;
+import no.hiof.set.gruppe.thirdPartyIntegrations.paymenIntegration.IPaymentIntegration;
+import no.hiof.set.gruppe.thirdPartyIntegrations.paymenIntegration.KlarnaIntegration;
+import no.hiof.set.gruppe.thirdPartyIntegrations.paymenIntegration.TicketmasterIntegration;
 import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

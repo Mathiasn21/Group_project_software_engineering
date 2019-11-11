@@ -1,4 +1,4 @@
-package no.hiof.set.gruppe.ThirdPartyIntegrations.paymenIntegration;
+package no.hiof.set.gruppe.thirdPartyIntegrations.paymenIntegration;
 
 import com.google.api.client.http.*;
 import com.google.api.client.testing.http.MockHttpTransport;
@@ -17,9 +17,8 @@ public abstract class PaymentIntegration implements IPaymentIntegration {
 
         HttpTransport transport = new MockHttpTransport();
         HttpRequest request = transport.createRequestFactory().buildGetRequest(genericUrl);
-        HttpResponse response = request.execute();
 
-        return response;
+        return request.execute();
     }
 
     public String paymentValidation(){
