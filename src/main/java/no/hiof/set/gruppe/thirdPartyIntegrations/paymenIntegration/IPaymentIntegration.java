@@ -1,6 +1,8 @@
-package no.hiof.set.gruppe.thirdPartyIntegrations.paymenIntegration;
+package no.hiof.set.gruppe.ThirdPartyIntegrations.paymenIntegration;
 
 public interface IPaymentIntegration {
+
+
 
 
 }
