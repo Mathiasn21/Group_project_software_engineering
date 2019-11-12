@@ -37,7 +37,7 @@ class TestPaymentIntegration {
         InputStreamReader r = new InputStreamReader(inputStream);
 
         BufferedReader reader = new BufferedReader(r);
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         String str;
 
         while((str = reader.readLine())!= null){

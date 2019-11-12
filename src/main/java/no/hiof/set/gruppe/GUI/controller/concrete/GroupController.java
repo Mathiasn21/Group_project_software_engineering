@@ -66,8 +66,7 @@ public class GroupController extends Controller {
     //                4.On Action Methods                //
     // --------------------------------------------------//
 
-    //Håndtering av views må endres
-    private void onClicknewGroupBtn(ActionEvent event) {
+    private void onClickNewGroupBtn(ActionEvent event) {
         title = "Ny gruppe";
         name = "NewAlterGroup.fxml";
         createNewView(this);
@@ -136,7 +135,7 @@ public class GroupController extends Controller {
     // --------------------------------------------------//
 
     private void setupActionHandlers() {
-        newGroupBtn.setOnAction(this::onClicknewGroupBtn);
+        newGroupBtn.setOnAction(this::onClickNewGroupBtn);
         deleteBtn.setOnAction(this::onClickDeletBtn);
         editBtn.setOnAction(this::onClickEditBtn);
         groupsListview.setOnMouseClicked(this::onClickGroupsListView);
