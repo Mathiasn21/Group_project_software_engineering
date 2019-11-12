@@ -48,7 +48,7 @@ public class Repository {
     private static List<UserConnectedArrangement> listOfAllUserConnectedArrangements;
     private static final IHandleData handleData = new HandleDataStorage();
 
-    //Preloads data.
+    //Preload data.
     static{
         try{
             listOfAllArrangements = queryDataGivenType(Arrangement[].class);
@@ -148,7 +148,7 @@ public class Repository {
 
         }else if (t instanceof Group){
             Group thatGroup = (Group) t;
-            listOfAllGroups.removeIf((thisGroup) -> thisGroup.getId() == thatGroup.getId());
+            listOfAllGroups.removeIf((thisGroup) -> thisGroup.getId().equals(thatGroup.getId()));
             listOfAllGroups.add(thatGroup);
             storeGroupData();
         }else{throw new DataFormatException();}

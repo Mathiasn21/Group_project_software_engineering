@@ -32,7 +32,7 @@ public class Validation{
     //                2.Local Fields                     //
     // --------------------------------------------------//
     private static final String textNotNullPattern = "(?!^ +$)^.+$";
-    private static final String numPatt = "[0-9]+";
+    private static final String numPattern = "[0-9]+";
 
     private static final int maxNameL = 50;
     private static final int minNameL = 2;
@@ -110,7 +110,7 @@ public class Validation{
      * @return boolean
      */
     public static boolean ofNumber(String num){
-        return regCheck(numPatt, num);
+        return regCheck(numPattern, num);
     }
 
     /**
