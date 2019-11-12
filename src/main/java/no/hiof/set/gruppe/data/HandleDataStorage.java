@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class HandleDataStorage implements IHandleData{
+public class    HandleDataStorage implements IHandleData{
     private static final String arrangementFName = "arrangements.json";
     private static final String userHasArrangements = "userHasArrangements.json";
     private static final String groupsFName = "groups.json";

@@ -34,7 +34,7 @@
                   <Insets bottom="10.0" />
                </VBox.margin>
             </Text>
-            <Text fx:id="adresHeader" layoutX="10.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Adresse" textAlignment="CENTER" underline="true" wrappingWidth="444.0">
+            <Text fx:id="adresHeader" fill="#841fc2" layoutX="10.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Adresse" textAlignment="CENTER" underline="true" wrappingWidth="444.0">
                <font>
                   <Font size="15.0" />
                </font>

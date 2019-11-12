@@ -128,7 +128,7 @@ public class NewAlterGroupController extends Controller {
 
     private void createNewGroup(){
         if(groupToEdit == null){
-            groupToEdit = new Group(inputName.getText(), 1); //ID skal generes automatisk senere
+            groupToEdit = new Group(inputName.getText()); //ID skal generes automatisk senere
             groupToEdit.addMultipleMembers(chosenUsersObservableList);
             queryGroup();
         }
@@ -223,10 +223,12 @@ public class NewAlterGroupController extends Controller {
 
     @Override
     public void setDataFields(Object object) {
-        groupIsEditable = true;
-        setGroupToEdit(object);
-        inputName.setText(groupToEdit.getName());
-        populateListViews();
+        if(object instanceof Group){
+            groupIsEditable = true;
+            setGroupToEdit(object);
+            inputName.setText(groupToEdit.getName());
+            populateListViews();
+        }
     }
 
     @Override

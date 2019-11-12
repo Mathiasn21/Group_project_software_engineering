@@ -179,6 +179,7 @@ public class GroupController extends Controller {
 
     @Override
     public void setDataFields(Object controller) {
+
     }
 
     @Override

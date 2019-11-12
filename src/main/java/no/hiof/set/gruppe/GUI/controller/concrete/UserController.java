@@ -259,7 +259,6 @@ public class UserController extends Controller {
         myObservableArrangements = FXCollections.observableArrayList(userConnectedArrangements);
     }
 
-    //Could be removed?
     private void populateMyArrangementView() {
         myArrangementsView.refresh();
     }
@@ -287,7 +286,6 @@ public class UserController extends Controller {
     }
 
     private void setupToggleBtns() {
-        //Should be extracted
         radioAll.setToggleGroup(radioBtns);
         radioAll.setUserData(DateTest.ALL);
 
