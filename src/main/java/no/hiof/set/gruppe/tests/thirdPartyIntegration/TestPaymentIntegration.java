@@ -11,20 +11,10 @@ package no.hiof.set.gruppe.tests.thirdPartyIntegration;
 import no.hiof.set.gruppe.thirdPartyIntegrations.paymenIntegration.IPaymentIntegration;
 import no.hiof.set.gruppe.thirdPartyIntegrations.paymenIntegration.KlarnaIntegration;
 import no.hiof.set.gruppe.thirdPartyIntegrations.paymenIntegration.TicketmasterIntegration;
-import org.junit.Before;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.io.IOException;
 
-import no.hiof.set.gruppe.model.Arrangement;
-import no.hiof.set.gruppe.core.predicates.ArrangementSort;
-import no.hiof.set.gruppe.core.predicates.DateTest;
-import no.hiof.set.gruppe.core.validations.Validation;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
-import java.time.LocalDate;
-import java.util.Arrays;
+import java.io.*;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class TestPaymentIntegration {
@@ -33,24 +23,29 @@ class TestPaymentIntegration {
     //                2.Unit Tests                       //
     // --------------------------------------------------//
 
-    @ParameterizedTest
-    @ValueSource(ints = {200 /*, 201, 202, 203, 204, 205, 206, 207, 208, 226*/})
-    void ticketmaster_access_success(int number) throws IOException{
-
-        IPaymentIntegration ticketmasterIntegration = new TicketmasterIntegration();
-        assertEquals(number,ticketmasterIntegration.connectionResponse().statusCode);
-    }
 
     @Test
     void klarna_access_success() throws IOException{
         IPaymentIntegration klarnaIntegration = new KlarnaIntegration();
+        assertEquals(200, klarnaIntegration.connectionResponse().statusCode);
     }
 
     @Test
-    void ticketmaster_payment_success(){
-        IPaymentIntegration ticketmasterIntegration = new TicketmasterIntegration();
+    void klarna_payment_accepted() throws IOException{
 
-        assertEquals("Accepted", ticketmasterIntegration.paymentValidation());
+        IPaymentIntegration klarnaIntegration = new KlarnaIntegration();
+
+        InputStream inputStream = klarnaIntegration.connectionResponse().getContent();
+        InputStreamReader r = new InputStreamReader(inputStream);
+
+        BufferedReader reader = new BufferedReader(r);
+        StringBuffer sb = new StringBuffer();
+        String str;
+
+        while((str = reader.readLine())!= null){
+            sb.append(str);
+        }
+        assertEquals("Accepted", sb.toString());
     }
 
     @Test
