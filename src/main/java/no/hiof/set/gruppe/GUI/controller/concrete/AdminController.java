@@ -122,7 +122,6 @@ public class AdminController extends Controller {
 
     private void setCurrentArrangement(){
         currentArrangement = clickedItemFromListView();
-
     }
 
     private void deleteArrangement(){

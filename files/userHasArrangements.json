@@ -8,10 +8,6 @@
     "USERNAME": "Organizer"
   },
   {
-    "ID": "edbbbe0a-468b-4943-86bb-682936015acf",
-    "USERNAME": "Organizer"
-  },
-  {
     "ID": "b727ebf1-4a88-40c9-8eda-1e6ba8b1131d",
     "USERNAME": "Organizer"
   },
@@ -21,6 +17,10 @@
   },
   {
     "ID": "d52665f4-38f1-4b56-b24d-9d760adc7102",
+    "USERNAME": "Organizer"
+  },
+  {
+    "ID": "edbbbe0a-468b-4943-86bb-682936015acf",
     "USERNAME": "Organizer"
   }
 ]
