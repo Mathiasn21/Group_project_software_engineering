@@ -97,7 +97,9 @@ public class UserController extends Controller {
         }
         currentSelectedMyArrangement = currentAvailableArrangement;
         currentAvailableArrangement = null;
-        updateView();
+
+        availableArrangementsListView.refresh();
+        myArrangementsView.refresh();
     }
 
     /**
@@ -335,24 +337,6 @@ public class UserController extends Controller {
         setupActionHandlers();
         setupToggleBtns();
         setTextColors(false);
-    }
-
-    /**
-     * Just refreshes the view
-     */
-    @Override
-    public void updateView(){
-        availableArrangementsListView.refresh();
-        myArrangementsView.refresh();
-    }
-
-    /**
-     * @return Object
-     */
-    @Override
-    @Nullable
-    public Object getDataObject() {
-        return null;
     }
 
     /**

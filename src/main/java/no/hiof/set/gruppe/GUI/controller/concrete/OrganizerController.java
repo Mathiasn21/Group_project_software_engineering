@@ -23,6 +23,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import no.hiof.set.gruppe.GUI.controller.abstractions.ControllerTransferData;
 import no.hiof.set.gruppe.core.predicates.DateTest;
 import no.hiof.set.gruppe.core.exceptions.DataFormatException;
 import no.hiof.set.gruppe.core.exceptions.ErrorExceptionHandler;
@@ -46,7 +47,7 @@ import java.util.ResourceBundle;
  * to the Organizer View
  * @author Gruppe4
  */
-public class OrganizerController extends Controller {
+public class OrganizerController extends ControllerTransferData {
     // --------------------------------------------------//
     //                2.FXML Fields                      //
     // --------------------------------------------------//

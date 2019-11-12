@@ -22,6 +22,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import no.hiof.set.gruppe.GUI.controller.abstractions.Controller;
+import no.hiof.set.gruppe.GUI.controller.abstractions.ControllerTransferData;
 import no.hiof.set.gruppe.core.Repository;
 import no.hiof.set.gruppe.core.exceptions.DataFormatException;
 import no.hiof.set.gruppe.core.exceptions.ErrorExceptionHandler;
@@ -41,7 +42,7 @@ import java.util.ResourceBundle;
  * to the NewAlterGroup View
  * @author Gruppe4
  */
-public class NewAlterGroupController extends Controller {
+public class NewAlterGroupController extends ControllerTransferData {
 
     //Hele klassen skal bli refaktorert
 

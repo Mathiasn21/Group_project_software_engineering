@@ -26,7 +26,6 @@ import no.hiof.set.gruppe.GUI.model.ViewInformation;
 import no.hiof.set.gruppe.model.user.LoginInformation;
 import no.hiof.set.gruppe.model.user.ProtoUser;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -128,24 +127,6 @@ public class LoginController extends Controller {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setUpActionHandlers();
-    }
-
-    /**
-     * @return Object
-     */
-    @Nullable
-    @Override
-    public Object getDataObject() {
-        return null;
-    }
-
-    /**
-     * Does not have a purpose here.
-     * @param object Object
-     */
-    @Override
-    public void setDataFields(Object object) {
-
     }
 
     /**

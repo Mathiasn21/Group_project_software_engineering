@@ -24,6 +24,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import no.hiof.set.gruppe.GUI.controller.abstractions.Controller;
+import no.hiof.set.gruppe.GUI.controller.abstractions.ControllerTransferData;
 import no.hiof.set.gruppe.core.Repository;
 import no.hiof.set.gruppe.core.exceptions.DataFormatException;
 import no.hiof.set.gruppe.core.exceptions.ErrorExceptionHandler;
@@ -40,7 +41,7 @@ import java.util.ResourceBundle;
  * to the Group View
  * @author Gruppe4
  */
-public class GroupController extends Controller {
+public class GroupController extends ControllerTransferData {
 
     // --------------------------------------------------//
     //                2.Local Fields                     //

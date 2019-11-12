@@ -21,7 +21,6 @@ import no.hiof.set.gruppe.core.exceptions.ErrorExceptionHandler;
 import no.hiof.set.gruppe.GUI.controller.abstractions.Controller;
 import no.hiof.set.gruppe.GUI.controller.abstractions.IController;
 import no.hiof.set.gruppe.GUI.controller.abstractions.IControllerDataTransfer;
-import no.hiof.set.gruppe.GUI.controller.abstractions.SetupWindow;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;

@@ -7,7 +7,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import no.hiof.set.gruppe.core.exceptions.DataFormatException;
 import no.hiof.set.gruppe.core.exceptions.ErrorExceptionHandler;
 import no.hiof.set.gruppe.MainJavaFX;
 import no.hiof.set.gruppe.model.Arrangement;
@@ -20,7 +19,7 @@ import java.util.Arrays;
  * This class is the main setup for all other controllers and their logic.
  * Meaning all other controllers must inherit and implement functionality described here.
  */
-public abstract class Controller implements IControllerDataTransfer, Initializable {
+public abstract class Controller implements IController, Initializable {
     private MainJavaFX mainController;
 
     /**
@@ -31,6 +30,9 @@ public abstract class Controller implements IControllerDataTransfer, Initializab
     public void setMainController(MainJavaFX mainController){
         this.mainController = mainController;
     }
+
+    MainJavaFX getMainController() { return mainController; }
+
     @Override
     public void createNewView(Controller controller) {
         boolean errorOccured = true;
@@ -52,17 +54,6 @@ public abstract class Controller implements IControllerDataTransfer, Initializab
             }
         }
     }
-
-    protected void createNewView(IControllerDataTransfer controller, Object object) {
-        mainController.setupWindow(controller, object);
-    }
-
-    public boolean hasNewObject(){
-        return false;
-    }
-
-    @Override
-    public void updateView(){}
 
     /**
      * Creates a alert box for the user, including the given error.
@@ -101,11 +92,6 @@ public abstract class Controller implements IControllerDataTransfer, Initializab
 
     protected void closeWindow(@NotNull Button b) {
         ((Stage)b.getScene().getWindow()).close();
-    }
-
-    @Override
-    public void setDataFields(Object object) throws DataFormatException {
-
     }
 
     protected void colorizeText(boolean tf, Text...t){

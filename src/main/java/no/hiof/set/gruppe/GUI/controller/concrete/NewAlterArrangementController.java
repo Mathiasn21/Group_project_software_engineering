@@ -18,6 +18,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import no.hiof.set.gruppe.GUI.controller.abstractions.Controller;
+import no.hiof.set.gruppe.GUI.controller.abstractions.ControllerTransferData;
 import no.hiof.set.gruppe.model.ValidationResult;
 import no.hiof.set.gruppe.GUI.model.ViewInformation;
 import no.hiof.set.gruppe.core.validations.Validation;
@@ -35,7 +36,7 @@ import java.util.ResourceBundle;
  * @author Gruppe4
  */
 @SuppressWarnings("FieldCanBeLocal")
-public class NewAlterArrangementController extends Controller {
+public class NewAlterArrangementController extends ControllerTransferData {
 
     // --------------------------------------------------//
     //                2.Local Fields                     //

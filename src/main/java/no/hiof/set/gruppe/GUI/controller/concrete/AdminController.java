@@ -22,10 +22,10 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+import no.hiof.set.gruppe.GUI.controller.abstractions.ControllerTransferData;
 import no.hiof.set.gruppe.core.exceptions.DataFormatException;
 import no.hiof.set.gruppe.core.exceptions.ErrorExceptionHandler;
 import no.hiof.set.gruppe.core.exceptions.IllegalDataAccess;
-import no.hiof.set.gruppe.GUI.controller.abstractions.Controller;
 import no.hiof.set.gruppe.core.Repository;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.GUI.model.ViewInformation;
@@ -39,7 +39,7 @@ import java.util.ResourceBundle;
 /**
  * Controls the main logic pertaining to the Admin View
  */
-public class AdminController extends Controller {
+public class AdminController extends ControllerTransferData {
     // --------------------------------------------------//
     //                3.FXML Fields                      //
     // --------------------------------------------------//
