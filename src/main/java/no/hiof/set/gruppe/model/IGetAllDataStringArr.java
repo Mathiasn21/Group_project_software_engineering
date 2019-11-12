@@ -5,6 +5,6 @@ package no.hiof.set.gruppe.model;
  * Ensures easy access and reduced repetition of getters.
  */
 @FunctionalInterface
-public interface IGetAllData {
+public interface IGetAllDataStringArr {
     String[] getAllDataAsStringArr();
 }

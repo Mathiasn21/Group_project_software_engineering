@@ -75,7 +75,7 @@ public class OrganizerController extends ControllerTransferData {
     private FilteredList<Arrangement> filteredList;
     private Arrangement currentArrangement = null;
     private static final ProtoUser PROTO_USER = ProtoUser.ORGANIZER;
-    private final Text[] allTextFields = {arrangementName, arrangementAdress, arrangementDate, arrangementParticipants, arrangementGorI, arrangementSport, arrangementDescription};
+    private Text[] allTextFields;
 
     // --------------------------------------------------//
     //                4.On Action Methods                //
@@ -151,10 +151,7 @@ public class OrganizerController extends ControllerTransferData {
 
     private void setInformationAboutArrangementInView(){
         setTextColors(true);
-        ArrayList<Text> viewFields = viewFields(arrangementName, arrangementSport, arrangementAdress, arrangementDate, arrangementParticipants, arrangementGorI, arrangementDescription);
-        ArrayList<String> data = arrangementData(currentArrangement);
-        for(int i = 0; i < data.size(); i++)
-            viewFields.get(i).setText(data.get(i));
+        Controller.setFieldsWithDataFromObject(currentArrangement, allTextFields);
     }
 
     private void deleteArrangement(){
@@ -258,6 +255,7 @@ public class OrganizerController extends ControllerTransferData {
         populateSportCategories();
         liveSearchUpdate();
         setTextColors(false);
+        allTextFields = new Text[]{arrangementName, arrangementSport, arrangementAdress, arrangementDate, arrangementParticipants, arrangementGorI, arrangementDescription};
     }
 
     /**

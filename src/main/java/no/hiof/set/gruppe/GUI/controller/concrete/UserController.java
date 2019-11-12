@@ -44,17 +44,6 @@ import java.util.*;
  * @author Gruppe4
  */
 public class UserController extends Controller {
-    // --------------------------------------------------//
-    //                2.Local Fields                     //
-    // --------------------------------------------------//
-    private String title = "Bruker";
-    private String name = ProtoUser.USER.getViewName();
-    private ObservableList<Arrangement> myObservableArrangements, availableObservableArrangements;
-    private FilteredList<Arrangement> availableFiltered, myFiltered;
-    private Arrangement currentAvailableArrangement = null;
-    private Arrangement currentSelectedMyArrangement = null;
-    private Arrangement currentSelectedArrangement;
-    private final ToggleGroup radioBtns = new ToggleGroup();
 
     // --------------------------------------------------//
     //                3.FXML Fields                      //
@@ -75,6 +64,20 @@ public class UserController extends Controller {
     private MenuItem logOut, myGroups;
     @FXML
     private Text sportHeader, addressHeader, dateHeader, participantsHeader, gOrIHeader, descriptionHeader;
+
+
+    // --------------------------------------------------//
+    //                2.Local Fields                     //
+    // --------------------------------------------------//
+    private String title = "Bruker";
+    private String name = ProtoUser.USER.getViewName();
+    private ObservableList<Arrangement> myObservableArrangements, availableObservableArrangements;
+    private FilteredList<Arrangement> availableFiltered, myFiltered;
+    private Arrangement currentAvailableArrangement = null;
+    private Arrangement currentSelectedMyArrangement = null;
+    private Arrangement currentSelectedArrangement;
+    private final ToggleGroup radioBtns = new ToggleGroup();
+    private Text[] allTextFields;
 
     // --------------------------------------------------//
     //                4.On Action Methods                //
@@ -170,10 +173,7 @@ public class UserController extends Controller {
     private void setInformationAboutArrangementInView(){
         if(currentSelectedArrangement == null)return;
         setTextColors(true);
-        ArrayList<Text> viewFields = viewFields(arrangementTitle, arrangementSport,arrangementAddress,arrangementDate,arrangementParticipants,arrangementGroup, arrangementDescription);
-        ArrayList<String> data = arrangementData(currentSelectedArrangement);
-        for(int i = 0; i < data.size(); i++)
-            viewFields.get(i).setText(data.get(i));
+        Controller.setFieldsWithDataFromObject(currentSelectedArrangement, allTextFields);
     }
 
     // --------------------------------------------------//
@@ -337,6 +337,7 @@ public class UserController extends Controller {
         setupActionHandlers();
         setupToggleBtns();
         setTextColors(false);
+         allTextFields = new Text[]{arrangementTitle, arrangementSport, arrangementAddress, arrangementDate, arrangementParticipants, arrangementGroup, arrangementDescription};
     }
 
     /**

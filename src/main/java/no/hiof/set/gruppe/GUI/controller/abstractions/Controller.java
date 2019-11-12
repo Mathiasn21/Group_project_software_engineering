@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import no.hiof.set.gruppe.core.exceptions.ErrorExceptionHandler;
 import no.hiof.set.gruppe.MainJavaFX;
 import no.hiof.set.gruppe.model.Arrangement;
+import no.hiof.set.gruppe.model.IGetAllDataStringArr;
 import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -75,19 +76,10 @@ public abstract class Controller implements IController, Initializable {
 
     protected void clearFields(Text... textNodes){ for(Text text : textNodes)text.setText(""); }
 
-    protected ArrayList<String>arrangementData(@NotNull Arrangement a){
-        String[] s = {a.getName(), a.getSport(), a.getAddress(), dateString(a), Integer.toString(a.getParticipants()), groupsOrIndividuals(a), a.getDescription()};
-        return new ArrayList<>(Arrays.asList(s));
-    }
-
-    @NotNull
-    private String groupsOrIndividuals(@NotNull Arrangement arrangement){
-        return arrangement.isGroup() ? "Lagkonkurranse" : "Individuell konkurranse";
-    }
-
-    @NotNull
-    private String dateString(@NotNull Arrangement a){
-        return a.getStartDate().toString() + " til " + a.getEndDate().toString();
+    protected static void setFieldsWithDataFromObject(IGetAllDataStringArr object, Text[] nodes){
+        if(object == null || nodes == null )return;
+        String[] data = object.getAllDataAsStringArr();
+        for(int i = 0; i < nodes.length; i++)nodes[i].setText(data[i]);
     }
 
     protected void closeWindow(@NotNull Button b) {

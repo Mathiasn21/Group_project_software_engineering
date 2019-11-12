@@ -22,7 +22,7 @@ import java.util.UUID;
  * Arrangement holds information about a possible arrangement.
  * @author Gruppe4
  */
-public class Arrangement implements IGetAllData, IGetAllDataRaw{
+public class Arrangement implements IGetAllDataStringArr, IGetAllDataRaw{
 
 
     // --------------------------------------------------//

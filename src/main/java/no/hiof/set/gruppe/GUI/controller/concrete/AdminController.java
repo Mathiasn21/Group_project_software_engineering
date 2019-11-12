@@ -22,6 +22,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+import no.hiof.set.gruppe.GUI.controller.abstractions.Controller;
 import no.hiof.set.gruppe.GUI.controller.abstractions.ControllerTransferData;
 import no.hiof.set.gruppe.core.exceptions.DataFormatException;
 import no.hiof.set.gruppe.core.exceptions.ErrorExceptionHandler;
@@ -33,7 +34,6 @@ import no.hiof.set.gruppe.model.user.ProtoUser;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
@@ -64,8 +64,7 @@ public class AdminController extends ControllerTransferData {
     private String name = "";
     private Arrangement currentArrangement = null;
     private ObservableList<Arrangement> arrangementListObservable;
-    private final Text[] textFields = {arrangementSport, arrangementName, arrangementAdress, arrangementDate, arrangementGorI, arrangementParticipants, arrangementDescription};
-
+    private Text[] textFields;
 
     // --------------------------------------------------//
     //                4.On action Methods                //
@@ -147,10 +146,7 @@ public class AdminController extends ControllerTransferData {
 
     private void setInformationAboutArrangementInView(){
         setTextColors(true);
-        ArrayList<Text> viewFields = viewFields(arrangementName, arrangementSport, arrangementAdress, arrangementDate, arrangementParticipants, arrangementGorI, arrangementDescription);
-        ArrayList<String> data = arrangementData(currentArrangement);
-        for(int i = 0; i < data.size(); i++)
-            viewFields.get(i).setText(data.get(i));
+        Controller.setFieldsWithDataFromObject(currentArrangement, textFields);
     }
 
     // --------------------------------------------------//
@@ -161,6 +157,7 @@ public class AdminController extends ControllerTransferData {
         setupActionHandlers();
         populateListView();
         setTextColors(false);
+        textFields = new Text[]{arrangementName, arrangementSport, arrangementAdress, arrangementDate, arrangementParticipants, arrangementGorI, arrangementDescription};
     }
 
     @Override
