@@ -102,7 +102,7 @@ public class MainJavaFX extends Application implements SetupWindow {
      * @param object     {@link Object}
      */
     public void setupWindow(@NotNull IControllerDataTransfer controller, Object object) {
-        boolean errorOccured = true;
+        boolean errorOccurred = true;
         ErrorExceptionHandler err = null;
         Throwable thrown = null;
         try {
@@ -136,7 +136,7 @@ public class MainJavaFX extends Application implements SetupWindow {
             controller.setMainController(this);
 
             stage.show();
-            errorOccured = false;
+            errorOccurred = false;
 
         } catch (DataFormatException datFormEx) {
             err = ErrorExceptionHandler.ERROR_WRONG_DATA_OBJECT;
@@ -148,7 +148,7 @@ public class MainJavaFX extends Application implements SetupWindow {
 
         } finally {
             try {
-                if (errorOccured && (err != null)) ErrorExceptionHandler.createLogWithDetails(err, thrown);
+                if (errorOccurred && (err != null)) ErrorExceptionHandler.createLogWithDetails(err, thrown);
             } catch (Exception e) {
                 Controller.createAlert(ErrorExceptionHandler.ERROR_LOGGING_ERROR);
             }
