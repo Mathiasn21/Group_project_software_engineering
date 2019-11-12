@@ -20,7 +20,6 @@ public abstract class PaymentIntegration implements IPaymentIntegration {
 
         return request.execute();
     }
-
     public String paymentValidation(){
         return "Accepted";
     }
