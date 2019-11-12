@@ -20,7 +20,6 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.event.EventTarget;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
@@ -42,7 +41,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
@@ -79,7 +77,6 @@ public class OrganizerController extends ControllerTransferData {
     private Arrangement currentArrangement = null;
     private static final ProtoUser PROTO_USER = ProtoUser.ORGANIZER;
     private Text[] allTextFields;
-    private ObjectProperty<EventHandler<ActionEvent>>[] implementsActionEvent;
 
     // --------------------------------------------------//
     //                4.On Action Methods                //
@@ -313,8 +310,7 @@ public class OrganizerController extends ControllerTransferData {
         return new ViewInformation(name, title);
     }
 
-    @Override
-    public void setTextColors(boolean tf) {
+    private void setTextColors(boolean tf) {
         colorizeText(tf, sportHeader, addressHeader, dateHeader, gOrIHeader, participantsHeader, descriptionHeader);
     }
 }

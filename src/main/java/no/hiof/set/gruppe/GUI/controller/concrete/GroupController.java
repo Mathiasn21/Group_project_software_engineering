@@ -23,7 +23,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
-import no.hiof.set.gruppe.GUI.controller.abstractions.Controller;
 import no.hiof.set.gruppe.GUI.controller.abstractions.ControllerTransferData;
 import no.hiof.set.gruppe.core.Repository;
 import no.hiof.set.gruppe.core.exceptions.DataFormatException;
@@ -192,8 +191,7 @@ public class GroupController extends ControllerTransferData {
         return new ViewInformation(name, title);
     }
 
-    @Override
-    public void setTextColors(boolean tf){
+    private void setTextColors(boolean tf){
         colorizeText(tf, groupNameStatic, membersStatic);
     }
 }

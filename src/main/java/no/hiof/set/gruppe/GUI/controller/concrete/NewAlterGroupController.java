@@ -21,7 +21,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import no.hiof.set.gruppe.GUI.controller.abstractions.Controller;
 import no.hiof.set.gruppe.GUI.controller.abstractions.ControllerTransferData;
 import no.hiof.set.gruppe.core.Repository;
 import no.hiof.set.gruppe.core.exceptions.DataFormatException;
@@ -243,8 +242,4 @@ public class NewAlterGroupController extends ControllerTransferData {
         return new ViewInformation(name, title);
     }
 
-    @Override
-    public void setTextColors(boolean tf) {
-
-    }
 }

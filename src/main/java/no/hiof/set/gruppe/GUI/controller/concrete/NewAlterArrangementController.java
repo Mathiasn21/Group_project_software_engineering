@@ -17,7 +17,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import no.hiof.set.gruppe.GUI.controller.abstractions.Controller;
 import no.hiof.set.gruppe.GUI.controller.abstractions.ControllerTransferData;
 import no.hiof.set.gruppe.model.ValidationResult;
 import no.hiof.set.gruppe.GUI.model.ViewInformation;
@@ -240,8 +239,4 @@ public class NewAlterArrangementController extends ControllerTransferData {
         return new ViewInformation(name, title);
     }
 
-    @Override
-    public void setTextColors(boolean tf) {
-
-    }
 }

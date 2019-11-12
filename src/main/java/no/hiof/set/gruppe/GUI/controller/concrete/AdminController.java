@@ -182,8 +182,7 @@ public class AdminController extends ControllerTransferData {
         return new ViewInformation(name, title);
     }
 
-    @Override
-    public void setTextColors(boolean tf) {
+    private void setTextColors(boolean tf) {
         colorizeText(tf, sportHeader, adresHeader, dateHeader, gOrIHeader, participantsHeader, descriptionHeader);
     }
 }

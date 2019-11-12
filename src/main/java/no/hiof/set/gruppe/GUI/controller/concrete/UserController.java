@@ -32,7 +32,6 @@ import no.hiof.set.gruppe.model.constantInformation.SportCategory;
 import no.hiof.set.gruppe.model.user.ProtoUser;
 import no.hiof.set.gruppe.core.predicates.DateTest;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.net.URL;
@@ -349,8 +348,7 @@ public class UserController extends Controller {
         return new ViewInformation(name, title);
     }
 
-    @Override
-    public void setTextColors(boolean tf) {
+    private void setTextColors(boolean tf) {
         colorizeText(tf, sportHeader, addressHeader, dateHeader, participantsHeader, gOrIHeader, descriptionHeader);
     }
 }

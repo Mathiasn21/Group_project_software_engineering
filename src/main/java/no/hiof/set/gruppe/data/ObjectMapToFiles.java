@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 class ObjectMapToFiles<T> {
-    private static List<ObjectMapToFiles> objectMappers = new ArrayList<>();
+    private static final List<ObjectMapToFiles> objectMappers = new ArrayList<>();
     private final Class<T> tClass;
     final String fileName;
 

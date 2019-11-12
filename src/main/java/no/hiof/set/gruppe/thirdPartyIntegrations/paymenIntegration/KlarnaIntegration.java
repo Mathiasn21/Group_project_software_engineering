@@ -11,12 +11,12 @@ import java.io.IOException;
 
 public class KlarnaIntegration implements IPaymentIntegration{
 
-    HttpTransport transport = new MockHttpTransport() {
+    private final HttpTransport transport = new MockHttpTransport() {
         @Override
-        public LowLevelHttpRequest buildGetRequest(String method) throws IOException {
+        public LowLevelHttpRequest buildGetRequest(String method) {
             return new MockLowLevelHttpRequest() {
                 @Override
-                public LowLevelHttpResponse execute() throws IOException {
+                public LowLevelHttpResponse execute() {
                     MockLowLevelHttpResponse response = new MockLowLevelHttpResponse();
                     response.addHeader("custom_header", "value");
                     response.statusCode = 200;

@@ -1,10 +1,6 @@
 package no.hiof.set.gruppe.GUI.controller.abstractions;
 
-import javafx.beans.property.ObjectProperty;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
@@ -36,7 +32,6 @@ public abstract class Controller implements IController, Initializable {
 
     MainJavaFX getMainController() { return mainController; }
 
-    @Override
     public void createNewView(Controller controller) {
         boolean errorOccured = true;
         ErrorExceptionHandler err = null;
