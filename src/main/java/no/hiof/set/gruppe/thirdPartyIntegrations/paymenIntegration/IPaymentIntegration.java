@@ -7,5 +7,4 @@ import java.util.ArrayList;
 public interface IPaymentIntegration {
 
     HttpResponse connectionResponse() throws IOException;
-    String paymentValidation();
 }
