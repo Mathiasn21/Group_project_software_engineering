@@ -17,6 +17,7 @@ import javafx.collections.ObservableList;
 import no.hiof.set.gruppe.model.constantInformation.DummyUsers;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class Group {
 
@@ -24,19 +25,19 @@ public class Group {
     //                2.Local Fields                     //
     // --------------------------------------------------//
     private String name;
-    private int id;
+    private final String ID;
     private ArrayList<DummyUsers> members;
 
     // --------------------------------------------------//
     //                3.Constructors                     //
     // --------------------------------------------------//
     public Group(){
-        this("",0);
+        this("");
     }
 
-    public Group(String name, int id) {
+    public Group(String name) {
         this.name = name;
-        this.id = id;
+        ID = UUID.randomUUID().toString();
         this.members = new ArrayList<>();
     }
 
@@ -58,7 +59,7 @@ public class Group {
         return name;
     }
     public ArrayList<DummyUsers> getMembers() { return members; }
-    public int getId() { return id; }
+    public String getId() { return ID; }
     public String getMembersAsPrettyString(){
         StringBuilder res = new StringBuilder();
         for(DummyUsers member : members) res.append(member).append("\n");
@@ -68,7 +69,6 @@ public class Group {
     // --------------------------------------------------//
     //                6.Public Setter Methods            //
     // --------------------------------------------------//
-    public void setId(int id) { this.id = id; }
     public void setName(String name) { this.name = name; }
     public void setMembers(ArrayList<DummyUsers> member) { this.members = member; }
 

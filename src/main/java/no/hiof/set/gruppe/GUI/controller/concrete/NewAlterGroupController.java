@@ -92,8 +92,6 @@ public class NewAlterGroupController extends Controller {
             if(validateGroupData())return;
             closeWindow(cancel);
         }
-
-
     }
 
     private void onClickCancel(ActionEvent event){
@@ -130,7 +128,7 @@ public class NewAlterGroupController extends Controller {
 
     private void createNewGroup(){
         if(groupToEdit == null){
-            groupToEdit = new Group(inputName.getText(), 1); //ID skal generes automatisk senere
+            groupToEdit = new Group(inputName.getText()); //ID skal generes automatisk senere
             groupToEdit.addMultipleMembers(chosenUsersObservableList);
             queryGroup();
         }
