@@ -92,6 +92,8 @@ public class NewAlterGroupController extends Controller {
             if(validateGroupData())return;
             closeWindow(cancel);
         }
+
+
     }
 
     private void onClickCancel(ActionEvent event){
@@ -223,10 +225,12 @@ public class NewAlterGroupController extends Controller {
 
     @Override
     public void setDataFields(Object object) {
-        groupIsEditable = true;
-        setGroupToEdit(object);
-        inputName.setText(groupToEdit.getName());
-        populateListViews();
+        if(object instanceof Group){
+            groupIsEditable = true;
+            setGroupToEdit(object);
+            inputName.setText(groupToEdit.getName());
+            populateListViews();
+        }
     }
 
     @Override
