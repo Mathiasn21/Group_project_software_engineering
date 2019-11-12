@@ -30,7 +30,7 @@ public class KlarnaIntegration implements IPaymentIntegration{
     };
 
     @NotNull
-    public HttpResponse connectionResponse() throws IOException {
+    public HttpResponse response() throws IOException {
 
         GenericUrl genericUrl = new GenericUrl();
         HttpRequest request = transport.createRequestFactory().buildGetRequest(genericUrl);

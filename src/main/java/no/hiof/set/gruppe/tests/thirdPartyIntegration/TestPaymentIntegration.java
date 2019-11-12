@@ -22,11 +22,10 @@ class TestPaymentIntegration {
     //                2.Unit Tests                       //
     // --------------------------------------------------//
 
-
     @Test
     void klarna_access_success() throws IOException{
         IPaymentIntegration klarnaIntegration = new KlarnaIntegration();
-        assertEquals(200, klarnaIntegration.connectionResponse().statusCode);
+        assertEquals(200, klarnaIntegration.response().statusCode);
     }
 
     @Test
@@ -34,7 +33,7 @@ class TestPaymentIntegration {
 
         IPaymentIntegration klarnaIntegration = new KlarnaIntegration();
 
-        InputStream inputStream = klarnaIntegration.connectionResponse().getContent();
+        InputStream inputStream = klarnaIntegration.response().getContent();
         InputStreamReader r = new InputStreamReader(inputStream);
 
         BufferedReader reader = new BufferedReader(r);
@@ -45,15 +44,5 @@ class TestPaymentIntegration {
             sb.append(str);
         }
         assertEquals("Accepted", sb.toString());
-    }
-
-    @Test
-    void transactionSuccess(){
-
-    }
-
-    @Test
-    void transactionFailed(){
-
     }
 }
