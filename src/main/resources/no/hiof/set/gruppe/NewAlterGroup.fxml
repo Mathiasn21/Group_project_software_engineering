@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="541.0" maxWidth="546.0" minHeight="395.0" minWidth="287.0" prefHeight="541.0" prefWidth="305.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="no.hiof.set.gruppe.controller.concrete.NewAlterGroupController">
+<AnchorPane maxHeight="541.0" maxWidth="546.0" minHeight="395.0" minWidth="287.0" prefHeight="541.0" prefWidth="305.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="no.hiof.set.gruppe.GUI.controller.concrete.NewAlterGroupController">
    <children>
       <ListView fx:id="availableMembers" layoutX="25.0" layoutY="130.0" prefHeight="308.0" prefWidth="112.0" />
       <Button fx:id="addMember" layoutX="29.0" layoutY="447.0" mnemonicParsing="false" text="Legg til medlem" />
@@ -15,7 +15,7 @@
       <Text layoutX="187.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Valgte brukere" />
       <ListView fx:id="chosenMembers" layoutX="170.0" layoutY="130.0" prefHeight="308.0" prefWidth="112.0" />
       <Button fx:id="removeMember" layoutX="182.0" layoutY="447.0" mnemonicParsing="false" text="Fjern medlem" />
-      <TextField fx:id="name" layoutX="79.0" layoutY="70.0" />
+      <TextField fx:id="inputName" layoutX="79.0" layoutY="70.0" promptText="Skriv inn gruppenavn" />
       <Text layoutX="120.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gruppenavn" />
       <Text layoutX="105.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ny gruppe">
          <font>

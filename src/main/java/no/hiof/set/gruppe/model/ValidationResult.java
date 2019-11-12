@@ -9,7 +9,7 @@ package no.hiof.set.gruppe.model;
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
-import no.hiof.set.gruppe.util.Validation;
+import no.hiof.set.gruppe.core.validations.Validation;
 import org.jetbrains.annotations.Contract;
 
 /**

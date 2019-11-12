@@ -18,7 +18,7 @@ import no.hiof.set.gruppe.model.constantInformation.DummyUsers;
 
 import java.util.ArrayList;
 
-public class Group implements IGetAllData {
+public class Group {
 
     // --------------------------------------------------//
     //                2.Local Fields                     //
@@ -47,9 +47,8 @@ public class Group implements IGetAllData {
         members.add(dummyUser);
     }
 
-    public void addMulipleMembers(ObservableList<DummyUsers> userlist){
-        for(DummyUsers user : userlist)
-            members.add(user);
+    public void addMultipleMembers(ObservableList<DummyUsers> userlist){
+        members.addAll(userlist);
     }
 
     // --------------------------------------------------//
@@ -60,6 +59,11 @@ public class Group implements IGetAllData {
     }
     public ArrayList<DummyUsers> getMembers() { return members; }
     public int getId() { return id; }
+    public String getMembersAsPrettyString(){
+        StringBuilder res = new StringBuilder();
+        for(DummyUsers member : members) res.append(member).append("\n");
+        return res.toString();
+    }
 
     // --------------------------------------------------//
     //                6.Public Setter Methods            //
@@ -71,9 +75,6 @@ public class Group implements IGetAllData {
     // --------------------------------------------------//
     //                7.Overridden Methods               //
     // --------------------------------------------------//
-    @Override
-    public String[] getAllDataAsStringArr() { return new String[0]; }
-
     @Override
     public String toString(){
         return name;

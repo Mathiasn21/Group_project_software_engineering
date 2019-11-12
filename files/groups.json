@@ -1,87 +1,30 @@
 [
   {
-    "name": "name",
-    "id": 1,
-    "members": [
-      "USER6",
-      "USER8"
-    ]
-  },
-  {
-    "name": "name",
-    "id": 1,
-    "members": [
-      "USER10",
-      "USER9"
-    ]
-  },
-  {
-    "name": "name",
-    "id": 1,
-    "members": [
-      "USER9",
-      "USER7"
-    ]
-  },
-  {
-    "name": "name",
-    "id": 1,
-    "members": [
-      "USER10",
-      "USER6"
-    ]
-  },
-  {
-    "name": "",
-    "id": 1,
-    "members": [
-      "USER6",
-      "USER10"
-    ]
-  },
-  {
-    "name": "",
-    "id": 1,
-    "members": [
-      "USER4",
-      "USER8"
-    ]
-  },
-  {
-    "name": "pliiis",
-    "id": 1,
-    "members": [
-      "USER6",
-      "USER8",
-      "USER7",
-      "USER4",
-      "USER10"
-    ]
-  },
-  {
-    "name": "",
-    "id": 1,
-    "members": []
-  },
-  {
-    "name": "",
+    "name": "hoi",
     "id": 1,
     "members": [
       "USER8",
-      "USER6",
-      "USER2",
-      "USER10",
-      "USER4"
+      "USER4",
+      "USER1",
+      "USER2"
     ]
   },
   {
-    "name": "blablabla",
+    "name": "fghfghj",
     "id": 1,
     "members": [
-      "USER10",
       "USER6",
+      "USER5"
+    ]
+  },
+  {
+    "name": "dfkjngkngf",
+    "id": 1,
+    "members": [
       "USER5",
-      "USER8"
+      "USER7",
+      "USER9",
+      "USER6"
     ]
   },
   {
@@ -92,6 +35,45 @@
       "USER4",
       "USER8",
       "USER7"
+    ]
+  },
+  {
+    "name": "hoi",
+    "id": 1,
+    "members": [
+      "USER6",
+      "USER8",
+      "USER4"
+    ]
+  },
+  {
+    "name": "dfkjngkngf",
+    "id": 1,
+    "members": [
+      "USER5",
+      "USER7",
+      "USER9",
+      "USER6"
+    ]
+  },
+  {
+    "name": "hoi",
+    "id": 1,
+    "members": [
+      "USER6",
+      "USER8",
+      "USER4",
+      "USER1"
+    ]
+  },
+  {
+    "name": "hoi",
+    "id": 1,
+    "members": [
+      "USER8",
+      "USER4",
+      "USER1",
+      "USER2"
     ]
   }
 ]

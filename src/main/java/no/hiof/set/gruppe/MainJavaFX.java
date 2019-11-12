@@ -16,12 +16,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import no.hiof.set.gruppe.Exceptions.DataFormatException;
-import no.hiof.set.gruppe.Exceptions.ErrorExceptionHandler;
-import no.hiof.set.gruppe.controller.abstractions.Controller;
-import no.hiof.set.gruppe.controller.abstractions.IController;
-import no.hiof.set.gruppe.controller.abstractions.IControllerDataTransfer;
-import no.hiof.set.gruppe.controller.abstractions.SetupWindow;
+import no.hiof.set.gruppe.core.exceptions.DataFormatException;
+import no.hiof.set.gruppe.core.exceptions.ErrorExceptionHandler;
+import no.hiof.set.gruppe.GUI.controller.abstractions.Controller;
+import no.hiof.set.gruppe.GUI.controller.abstractions.IController;
+import no.hiof.set.gruppe.GUI.controller.abstractions.IControllerDataTransfer;
+import no.hiof.set.gruppe.GUI.controller.abstractions.SetupWindow;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -87,7 +87,7 @@ public class MainJavaFX extends Application implements SetupWindow {
         stage.initOwner(this.stage);
         stage.setTitle(controller.getViewInformation().viewTitle);
 
-        //setting next controller
+        //setting mainController on next controller switch
         controller = loader.getController();
         controller.setMainController(this);
 

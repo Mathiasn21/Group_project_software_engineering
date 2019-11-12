@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="603.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="no.hiof.set.gruppe.controller.concrete.GroupController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="603.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="no.hiof.set.gruppe.GUI.controller.concrete.GroupController">
    <children>
       <ListView fx:id="groupsListview" layoutX="12.0" layoutY="94.0" prefHeight="275.0" prefWidth="191.0" />
       <Text layoutX="47.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mine grupper">
@@ -59,6 +59,11 @@
       <Text fx:id="membersStatic" layoutX="421.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Medlemmer" underline="true">
          <font>
             <Font size="18.0" />
+         </font>
+      </Text>
+      <Text fx:id="mainTitle" fill="#4a4a4a" layoutX="450.0" layoutY="12.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Logget inn som Bruker Nåverende status: Gruddeleder" textAlignment="CENTER" wrappingWidth="152.13671875">
+         <font>
+            <Font size="11.0" />
          </font>
       </Text>
    </children>

@@ -1,6 +1,6 @@
 package no.hiof.set.gruppe.model;
 
 @FunctionalInterface
-public interface IGetAllDataRaw{
+interface IGetAllDataRaw{
     String[] getAllStringDataArrRaw();
 }
