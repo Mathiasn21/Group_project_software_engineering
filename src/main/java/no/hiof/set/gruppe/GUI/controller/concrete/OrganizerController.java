@@ -14,10 +14,13 @@ package no.hiof.set.gruppe.GUI.controller.concrete;
 //                1.Import Statements                //
 // --------------------------------------------------//
 
+import javafx.beans.property.ObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.event.EventTarget;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
@@ -76,6 +79,7 @@ public class OrganizerController extends ControllerTransferData {
     private Arrangement currentArrangement = null;
     private static final ProtoUser PROTO_USER = ProtoUser.ORGANIZER;
     private Text[] allTextFields;
+    private ObjectProperty<EventHandler<ActionEvent>>[] implementsActionEvent;
 
     // --------------------------------------------------//
     //                4.On Action Methods                //

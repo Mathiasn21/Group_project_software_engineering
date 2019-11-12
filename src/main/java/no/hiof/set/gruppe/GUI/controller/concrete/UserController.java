@@ -337,7 +337,7 @@ public class UserController extends Controller {
         setupActionHandlers();
         setupToggleBtns();
         setTextColors(false);
-         allTextFields = new Text[]{arrangementTitle, arrangementSport, arrangementAddress, arrangementDate, arrangementParticipants, arrangementGroup, arrangementDescription};
+        allTextFields = new Text[]{arrangementTitle, arrangementSport, arrangementAddress, arrangementDate, arrangementParticipants, arrangementGroup, arrangementDescription};
     }
 
     /**
