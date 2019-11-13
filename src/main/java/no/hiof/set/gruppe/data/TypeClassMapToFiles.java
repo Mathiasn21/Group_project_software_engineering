@@ -18,11 +18,11 @@ class TypeClassMapToFiles<T, V>{
 
     private Class<T> getTypeClass() {return tClass;}
 
-    public V getObject() {return object;}
+    V getObject() {return object;}
 
     static void mutateObjectMapperList(TypeClassMapToFiles... typeClassMapToObject){objectMappers.addAll(Arrays.asList(typeClassMapToObject));}
 
-    public static <T> TypeClassMapToFiles getCorrespondingMapperGivenType(Class<T> t) throws DataFormatException {
+    static <T> TypeClassMapToFiles getCorrespondingMapperGivenType(Class<T> t) throws DataFormatException {
         for(TypeClassMapToFiles objectMapper : objectMappers)
             if (objectMapper.getTypeClass() == t.getComponentType()) return objectMapper;
         throw new DataFormatException();
