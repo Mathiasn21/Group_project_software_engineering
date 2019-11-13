@@ -83,6 +83,14 @@ public class NewAlterGroupController extends ControllerTransferData {
         setGropData();
         if(validateGroupData())return;
         closeWindow(cancel);
+
+        try {if(!createdNewGroup)Repository.mutateObject(groupToEdit);
+        } catch (DataFormatException e) {
+            Throwable throwable = e;
+            try { ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_ACCESSING_DATA, e);
+            } catch (IOException IOException) { throwable = IOException; }
+            createAlert(throwable instanceof DataFormatException ? ErrorExceptionHandler.ERROR_ACCESSING_DATA : ErrorExceptionHandler.ERROR_LOGGING_ERROR);
+        }
     }
 
     private void onClickCancel(ActionEvent event){
