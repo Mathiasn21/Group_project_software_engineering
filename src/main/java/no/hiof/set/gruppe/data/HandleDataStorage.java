@@ -6,7 +6,6 @@ import no.hiof.set.gruppe.core.exceptions.DataFormatException;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.Group;
 import no.hiof.set.gruppe.model.user.UserConnectedArrangement;
-import no.hiof.set.gruppe.util.TypeClassMapToObject;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
@@ -19,29 +18,29 @@ public class    HandleDataStorage implements IHandleData{
     private static final String arrangementFName = "arrangements.json";
     private static final String userHasArrangements = "userHasArrangements.json";
     private static final String groupsFName = "groups.json";
-
     static {
-        TypeClassMapToObject.mutateObjectMapperList(new TypeClassMapToFiles<>(Arrangement.class, arrangementFName));
-        TypeClassMapToObject.mutateObjectMapperList(new TypeClassMapToFiles<>(Group.class, groupsFName));
-        TypeClassMapToObject.mutateObjectMapperList(new TypeClassMapToFiles<>(UserConnectedArrangement.class, userHasArrangements));
+        TypeClassMapToFiles.mutateObjectMapperList(
+                new TypeClassMapToFiles<>(Arrangement.class, arrangementFName),
+                new TypeClassMapToFiles<>(Group.class, groupsFName),
+                new TypeClassMapToFiles<>(UserConnectedArrangement.class, userHasArrangements)
+        );
     }
 
     @Override
     public final <T> void storeDataGivenType(Class<T[]> tClass, T[] tArray) throws DataFormatException {
-        writeToFile(toJson(tClass, tArray), (String) TypeClassMapToObject.getCorrespondingMapperGivenType(tClass).getObject());
+        writeToFile(toJson(tClass, tArray), (String) TypeClassMapToFiles.getCorrespondingMapperGivenType(tClass).getObject());
     }
 
     @Override
     public final <T> List<T> queryAllDataGivenType(Class<T[]> tClassArr) throws IOException, DataFormatException {
-        String jsonFromFile = HandleDataStorage.readFromFile((String) TypeClassMapToObject.getCorrespondingMapperGivenType(tClassArr).getObject());
+        String jsonFromFile = HandleDataStorage.readFromFile((String) TypeClassMapToFiles.getCorrespondingMapperGivenType(tClassArr).getObject());
         return new ArrayList<>(HandleDataStorage.listFromJson(tClassArr, jsonFromFile));
     }
 
-    
     /**
      * Standard method for writing data to a given file.
      * This methods does not append but overwrites!
-     * Utilizes a relative path for top level directory plus a filename.extension
+     * Utilizes a relative path for top level directory, plus filename.extension
      *
      * @param str   String
      * @param fName String
@@ -71,7 +70,7 @@ public class    HandleDataStorage implements IHandleData{
     }
 
     /**
-     * Standard reading from a file. Utilizes a relative path given a filename.extension.
+     * Standard reading from a file. Utilizes a relative path given filename.extension.
      * Files must exist in the top level directory.
      *
      * @param fName String

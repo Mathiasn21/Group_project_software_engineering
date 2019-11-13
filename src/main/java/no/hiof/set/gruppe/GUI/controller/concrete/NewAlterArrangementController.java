@@ -119,7 +119,7 @@ public class NewAlterArrangementController extends ControllerTransferData {
     private void setupComboBoxes(){
         sportComboBoxInput.setItems(FXCollections.observableArrayList(SportCategory.values()));
         groupInput.setItems(FXCollections.observableArrayList(GroupCategory.values()));
-        
+
         sportComboBoxInput.getSelectionModel().select(0);
         groupInput.getSelectionModel().select(0);
     }
@@ -243,8 +243,6 @@ public class NewAlterArrangementController extends ControllerTransferData {
      */
     //new method for returning information about the view
     @Override
-    public ViewInformation getViewInformation() {
-        return new ViewInformation(name, title);
-    }
+    public ViewInformation getViewInformation() { return new ViewInformation(name, title); }
 
 }

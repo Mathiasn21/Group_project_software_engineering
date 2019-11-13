@@ -25,7 +25,6 @@ import no.hiof.set.gruppe.model.user.ILoginInformation;
 import no.hiof.set.gruppe.model.user.ProtoUser;
 import no.hiof.set.gruppe.model.user.RawUser;
 import no.hiof.set.gruppe.model.user.UserConnectedArrangement;
-import no.hiof.set.gruppe.util.TypeClassMapToObject;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -55,12 +54,6 @@ public final class Repository {
             listOfAllArrangements = queryDataGivenType(Arrangement[].class);
             listOfAllUserConnectedArrangements = queryDataGivenType(UserConnectedArrangement[].class);
             listOfAllGroups = queryDataGivenType(Group[].class);
-
-            TypeClassMapToObject.mutateObjectMapperList(
-                    new TypeClassMapToLists(Arrangement[].class, listOfAllArrangements),
-                    new TypeClassMapToLists(UserConnectedArrangement[].class, listOfAllUserConnectedArrangements),
-                    new TypeClassMapToLists(Group[].class, listOfAllGroups)
-            );
 
         }catch (IOException | DataFormatException e){
             try {ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_READING_DATA, e);}
@@ -101,10 +94,6 @@ public final class Repository {
         handleData.storeDataGivenType(UserConnectedArrangement[].class, listOfAllUserConnectedArrangements.toArray(UserConnectedArrangement[]::new));
     }
 
-    private static <T> void storeDataGivenType(Class<T[]> tClass) throws DataFormatException {
-        //handleData.storeDataGivenType(tClass, TypeClassMapToObject.getCorrespondingMapperGivenType(tClass).getObject());
-    }
-
     // --------------------------------------------------//
     //                4.Public Mutators                  //
     // --------------------------------------------------//
@@ -141,15 +130,15 @@ public final class Repository {
         storeGroupData();
     }
 
-    public static <T> void mutateObject(T t)throws DataFormatException {
-        if(t instanceof Arrangement){
-            Arrangement thatArrangement = (Arrangement) t;
+    public static <T> void mutateObject(T thatObject)throws DataFormatException {
+        if(thatObject instanceof Arrangement){
+            Arrangement thatArrangement = (Arrangement) thatObject;
             listOfAllArrangements.removeIf((thisArrangement) -> thisArrangement.getID().equals(thatArrangement.getID()));
             listOfAllArrangements.add(thatArrangement);
             storeArrangementsData();
 
-        }else if (t instanceof Group){
-            Group thatGroup = (Group) t;
+        }else if (thatObject instanceof Group){
+            Group thatGroup = (Group) thatObject;
             listOfAllGroups.removeIf((thisGroup) -> thisGroup.getId().equals(thatGroup.getId()));
             listOfAllGroups.add(thatGroup);
             storeGroupData();
