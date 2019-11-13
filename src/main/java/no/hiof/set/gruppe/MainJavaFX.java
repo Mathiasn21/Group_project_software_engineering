@@ -31,13 +31,10 @@ import java.io.IOException;
  * @author Gruppe4
  */
 public class MainJavaFX extends Application implements SetupWindow {
-
-
     // --------------------------------------------------//
     //                2.Local Fields                     //
     // --------------------------------------------------//
     private Stage stage;
-
     public static void main(String[] args) {
         launch(args);
     }
@@ -79,18 +76,11 @@ public class MainJavaFX extends Application implements SetupWindow {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(MainJavaFX.class.getResource(controller.getViewInformation().viewName));
         Parent editLayout = loader.load();
-
-        Scene editScene = new Scene(editLayout);
-        stage.setScene(editScene);
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.initOwner(this.stage);
-        stage.setTitle(controller.getViewInformation().viewTitle);
+        setupStage(controller, stage, editLayout);
 
         //setting mainController on next controller switch
         controller = loader.getController();
         controller.setMainController(this);
-
-        stage.show();
     }
 
     /**
@@ -112,30 +102,10 @@ public class MainJavaFX extends Application implements SetupWindow {
             loader.setLocation(MainJavaFX.class.getResource(controller.getViewInformation().viewName));
             Parent editLayout = loader.load();
 
-            IControllerDataTransfer oldController = controller;
-            controller = loader.getController();
-            controller.setDataFields(object);
-            IControllerDataTransfer finalController = controller;
-            stage.setOnHidden((Event) -> {
-                if (finalController.hasNewObject()) {
-                    try {
-                        oldController.setDataFields(finalController.getDataObject());
-                    } catch (DataFormatException e) {
-                        e.printStackTrace();
-                    }
-                }
-                oldController.updateView();
-            });
+            controller = handleControllerSpecifics(controller, object, stage, loader);
+            setupStage(controller, stage, editLayout);
 
-            Scene editScene = new Scene(editLayout);
-            stage.setScene(editScene);
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.initOwner(this.stage);
-            stage.setTitle(controller.getViewInformation().viewTitle);
-            stage.setResizable(false);
             controller.setMainController(this);
-
-            stage.show();
             errorOccurred = false;
 
         } catch (DataFormatException datFormEx) {
@@ -153,5 +123,34 @@ public class MainJavaFX extends Application implements SetupWindow {
                 Controller.createAlert(ErrorExceptionHandler.ERROR_LOGGING_ERROR);
             }
         }
+    }
+
+
+    private IControllerDataTransfer handleControllerSpecifics(@NotNull IControllerDataTransfer controller, Object object, Stage stage, FXMLLoader loader) throws DataFormatException {
+        IControllerDataTransfer oldController = controller;
+        controller = loader.getController();
+        controller.setDataFields(object);
+        IControllerDataTransfer finalController = controller;
+        stage.setOnHidden((Event) -> {
+            if (finalController.hasNewObject()) {
+                try {
+                    oldController.setDataFields(finalController.getDataObject());
+                } catch (DataFormatException e) {
+                    e.printStackTrace();
+                }
+            }
+            oldController.updateView();
+        });
+        return controller;
+    }
+    private void setupStage(@NotNull IController controller, Stage stage, Parent editLayout) {
+        Scene editScene = new Scene(editLayout);
+        stage.setScene(editScene);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(this.stage);
+        stage.setTitle(controller.getViewInformation().viewTitle);
+        stage.setResizable(false);
+
+        stage.show();
     }
 }

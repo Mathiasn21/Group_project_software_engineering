@@ -20,7 +20,6 @@ class MainJavaFXTest {
     @Start
     void start(@NotNull Stage stage) throws IOException {
         FXMLLoader loader = new FXMLLoader(MainJavaFX.class.getResource(startView));
-        System.out.println(MainJavaFX.class.getResource(startView));
         Parent editLayout = loader.load();
 
         IController controller = loader.getController();

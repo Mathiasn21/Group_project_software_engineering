@@ -95,7 +95,6 @@ public class NewAlterGroupController extends ControllerTransferData {
 
     private void onClickAvailableMembers(Event event){
         setCurrentUser(availableMembers);
-        System.out.println(availableMembers);
     }
 
     private void onClickChosenMembers (Event event){

@@ -68,6 +68,8 @@ class TestArrangementValidationOf {
         return Stream.of(
                 arguments("", LocalDate.of(2020,10,5), LocalDate.of(2020,10,8)),
                 arguments("ljljlj \00ljljljl", LocalDate.of(2020,10,5), LocalDate.of(2020,10,8)),
+                arguments("\00ljljljl", LocalDate.of(2020,10,5), LocalDate.of(2020,10,8)),
+                arguments("ljljlj\00", LocalDate.of(2020,10,5), LocalDate.of(2020,10,8)),
                 arguments("ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss", LocalDate.of(2020,10,5), LocalDate.of(2020,10,9)),
 
                 arguments("hhhhhhhh", LocalDate.now().minusDays(1), LocalDate.now()),
