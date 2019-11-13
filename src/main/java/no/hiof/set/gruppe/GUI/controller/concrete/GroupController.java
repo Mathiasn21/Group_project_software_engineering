@@ -119,6 +119,7 @@ public class GroupController extends ControllerTransferData {
         if(selectedGroup == null)return;
         setGroupInformation();
         groupsListview.refresh();
+
     }
 
     private void editGroup(){

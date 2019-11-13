@@ -97,7 +97,7 @@ public class Validation{
 
         res.append(group.getName().length() <= maxNameLength ? "" : "Navnet på gruppen er for langt");
         res.append(group.getName().length() >= minNameLength ? "" : "Navnet på gruppen er for kort");
-        res.append(regCheck(textNotNullPattern, group.getName()) ? "" : "Navnet inneholder ugyldige tegn");
+        res.append(regCheck(textNotNullPattern, group.getName()) ? "" : "Navnet inneholder blankt felt");
 
         return  new ValidationResult(res.toString(), res.length() == 0);
     }

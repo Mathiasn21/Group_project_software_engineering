@@ -5,8 +5,6 @@ import com.google.api.client.testing.http.MockHttpTransport;
 import com.google.api.client.testing.http.MockLowLevelHttpRequest;
 import com.google.api.client.testing.http.MockLowLevelHttpResponse;
 import org.jetbrains.annotations.NotNull;
-
-import javax.net.ssl.HttpsURLConnection;
 import java.io.IOException;
 
 public class KlarnaIntegration implements IPaymentIntegration {
