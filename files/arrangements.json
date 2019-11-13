@@ -22,28 +22,6 @@
     "group": false
   },
   {
-    "ID": "edbbbe0a-468b-4943-86bb-682936015acf",
-    "name": "The nerds show",
-    "sport": "Annet",
-    "address": "Smarter than you road 5",
-    "startDate": "2019-11-13",
-    "endDate": "2019-11-14",
-    "description": "Only for nerds, simple minded not allowed.",
-    "participants": 400,
-    "group": false
-  },
-  {
-    "ID": "abcf33e9-2981-4fdd-b89a-7bdde35a2230",
-    "name": "ThisIsNerdy",
-    "sport": "Alle",
-    "address": "NerdStreet - 22",
-    "startDate": "2020-11-09",
-    "endDate": "2020-12-09",
-    "description": "Very Nerdy.",
-    "participants": 400,
-    "group": true
-  },
-  {
     "ID": "b727ebf1-4a88-40c9-8eda-1e6ba8b1131d",
     "name": "Abcds",
     "sport": "Alle",
