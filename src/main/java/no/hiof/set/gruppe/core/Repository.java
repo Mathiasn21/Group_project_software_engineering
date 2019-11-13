@@ -38,7 +38,7 @@ import java.util.List;
  * Interacting with this object is done via the interface IDataHandler.
  * @author Gruppe4
  */
-public class Repository {
+public final class Repository {
 
     // --------------------------------------------------//
     //                2.Local Fields                     //

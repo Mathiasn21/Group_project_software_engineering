@@ -26,12 +26,12 @@ public class    HandleDataStorage implements IHandleData{
     }
 
     @Override
-    public <T> void storeDataGivenType(Class<T[]> tClass, T[] tArray) throws DataFormatException {
+    public final <T> void storeDataGivenType(Class<T[]> tClass, T[] tArray) throws DataFormatException {
         writeToFile(toJson(tClass, tArray), ObjectMapToFiles.getCorrespondingMapperGivenType(tClass).fileName);
     }
 
     @Override
-    public <T> List<T> queryAllDataGivenType(Class<T[]> tClassArr) throws IOException, DataFormatException {
+    public final <T> List<T> queryAllDataGivenType(Class<T[]> tClassArr) throws IOException, DataFormatException {
         String jsonFromFile = HandleDataStorage.readFromFile(ObjectMapToFiles.getCorrespondingMapperGivenType(tClassArr).fileName);
         return new ArrayList<>(HandleDataStorage.listFromJson(tClassArr, jsonFromFile));
     }
