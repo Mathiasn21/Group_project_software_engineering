@@ -149,6 +149,13 @@ public class AdminController extends ControllerTransferData {
         Controller.setFieldsWithDataFromObject(currentArrangement, textFields);
     }
 
+    private void changedView(){
+        currentArrangement = arrangementListView.getSelectionModel().getSelectedItem();
+        if(currentArrangement == null)return;
+        setInformationAboutArrangementInView();
+        arrangementListView.refresh();
+    }
+
     // --------------------------------------------------//
     //                6.Overridden Methods               //
     // --------------------------------------------------//
@@ -162,19 +169,20 @@ public class AdminController extends ControllerTransferData {
 
     @Override
     public void updateView(){
-        currentArrangement = arrangementListView.getSelectionModel().getSelectedItem();
-        setInformationAboutArrangementInView();
-        arrangementListView.refresh();
+
+        if(currentArrangement == null)return;
+        changedView();
     }
 
     @Override
     public Object getDataObject() {
-        return null;
+        currentArrangement = arrangementListView.getSelectionModel().getSelectedItem();
+        return currentArrangement;
     }
 
     @Override
     public void setDataFields(Object object) {
-
+        setInformationAboutArrangementInView();
     }
 
     @Override
