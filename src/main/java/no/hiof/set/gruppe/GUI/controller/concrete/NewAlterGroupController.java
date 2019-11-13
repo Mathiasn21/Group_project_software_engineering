@@ -83,14 +83,7 @@ public class NewAlterGroupController extends ControllerTransferData {
         setGropData();
         if(validateGroupData())return;
         closeWindow(cancel);
-
-        try {if(!createdNewGroup)Repository.mutateObject(groupToEdit);
-        } catch (DataFormatException e) {
-            Throwable throwable = e;
-            try { ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_ACCESSING_DATA, e);
-            } catch (IOException IOException) { throwable = IOException; }
-            createAlert(throwable instanceof DataFormatException ? ErrorExceptionHandler.ERROR_ACCESSING_DATA : ErrorExceptionHandler.ERROR_LOGGING_ERROR);
-        }
+        queryGroup();
     }
 
     private void onClickCancel(ActionEvent event){
@@ -141,12 +134,12 @@ public class NewAlterGroupController extends ControllerTransferData {
     }
 
     private void queryGroup() {
-        try {
-            Repository.insertGroup(groupToEdit);
-        } catch (DataFormatException illegalDataAccess) {
-            try { ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_ACCESSING_DATA, illegalDataAccess);
-            } catch (IOException e) { e.printStackTrace(); }
-            createAlert(ErrorExceptionHandler.ERROR_ACCESSING_DATA);
+        try {if(!createdNewGroup)Repository.mutateObject(groupToEdit);
+        } catch (DataFormatException e) {
+            Throwable throwable = e;
+            try { ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_ACCESSING_DATA, e);
+            } catch (IOException IOException) { throwable = IOException; }
+            createAlert(throwable instanceof DataFormatException ? ErrorExceptionHandler.ERROR_ACCESSING_DATA : ErrorExceptionHandler.ERROR_LOGGING_ERROR);
         }
     }
 
