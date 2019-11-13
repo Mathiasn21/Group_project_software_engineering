@@ -25,6 +25,7 @@ import no.hiof.set.gruppe.model.user.ILoginInformation;
 import no.hiof.set.gruppe.model.user.ProtoUser;
 import no.hiof.set.gruppe.model.user.RawUser;
 import no.hiof.set.gruppe.model.user.UserConnectedArrangement;
+import no.hiof.set.gruppe.util.TypeClassMapToObject;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -55,6 +56,12 @@ public final class Repository {
             listOfAllUserConnectedArrangements = queryDataGivenType(UserConnectedArrangement[].class);
             listOfAllGroups = queryDataGivenType(Group[].class);
 
+            TypeClassMapToObject.mutateObjectMapperList(
+                    new TypeClassMapToLists(Arrangement[].class, listOfAllArrangements),
+                    new TypeClassMapToLists(UserConnectedArrangement[].class, listOfAllUserConnectedArrangements),
+                    new TypeClassMapToLists(Group[].class, listOfAllGroups)
+            );
+
         }catch (IOException | DataFormatException e){
             try {ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_READING_DATA, e);}
             catch (IOException ex) {ex.printStackTrace();}
@@ -81,10 +88,6 @@ public final class Repository {
     // --------------------------------------------------//
     //                4.Private Handle Saving Data       //
     // --------------------------------------------------//
-
-    /**
-     * Stores all arrangements and their user connection
-     */
     private static void storeArrangementsData() throws DataFormatException {
         handleData.storeDataGivenType(Arrangement[].class, listOfAllArrangements.toArray(Arrangement[]::new));
         storeUserArrangements();
@@ -94,14 +97,13 @@ public final class Repository {
         handleData.storeDataGivenType(Group[].class, listOfAllGroups.toArray(Group[]::new));
     }
 
-    /**
-     * Stores all arrangements in buffer to file.json. Called
-     * after every modification of said buffer.
-     */
     private static void storeUserArrangements() throws DataFormatException {
         handleData.storeDataGivenType(UserConnectedArrangement[].class, listOfAllUserConnectedArrangements.toArray(UserConnectedArrangement[]::new));
     }
 
+    private static <T> void storeDataGivenType(Class<T[]> tClass) throws DataFormatException {
+        //handleData.storeDataGivenType(tClass, TypeClassMapToObject.getCorrespondingMapperGivenType(tClass).getObject());
+    }
 
     // --------------------------------------------------//
     //                4.Public Mutators                  //

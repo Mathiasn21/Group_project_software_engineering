@@ -1,16 +1,5 @@
 [
   {
-    "ID": "b727ebf1-4a88-40c9-8eda-1e6ba8b1131d",
-    "name": "Abcds",
-    "sport": "Alle",
-    "address": "dwadwa",
-    "startDate": "2019-11-13",
-    "endDate": "2019-11-14",
-    "description": "dawdaw",
-    "participants": 22,
-    "group": false
-  },
-  {
     "ID": "5dcf3140-b627-4b0b-9993-3a6838358dd3",
     "name": "Øskars Diverse",
     "sport": "Skirenn",
@@ -31,5 +20,16 @@
     "description": "Very Nerdy.",
     "participants": 400,
     "group": true
+  },
+  {
+    "ID": "b727ebf1-4a88-40c9-8eda-1e6ba8b1131d",
+    "name": "dwadawdwadwa",
+    "sport": "Alle",
+    "address": "dwadwa",
+    "startDate": "2019-11-14",
+    "endDate": "2019-11-15",
+    "description": "dawdaw",
+    "participants": 22,
+    "group": false
   }
 ]

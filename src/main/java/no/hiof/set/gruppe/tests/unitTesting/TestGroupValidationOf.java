@@ -27,6 +27,7 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class TestGroupValidationOf {
 
+
     // --------------------------------------------------//
     //                2.Unit Tests                       //
     // --------------------------------------------------//
@@ -65,7 +66,11 @@ class TestGroupValidationOf {
     private static Stream<Arguments> GenIllegalNameAndDates() {
         return Stream.of(
                 arguments(""),
+                arguments("ss"),
                 arguments("\00"),
+                arguments("sss\00"),
+                arguments("\00ssss"),
+                arguments("ssss\00ssss"),
                 arguments("sssssssssssssssssssssssssssssss")
         );
     }
