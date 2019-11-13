@@ -12,7 +12,15 @@
     "USERNAME": "Organizer"
   },
   {
+    "ID": "e54bcc26-962a-49b2-afce-e7e85b374a98",
+    "USERNAME": "Organizer"
+  },
+  {
     "ID": "d52665f4-38f1-4b56-b24d-9d760adc7102",
+    "USERNAME": "Organizer"
+  },
+  {
+    "ID": "2e57da7e-6334-4dc9-be14-17aee9d9ab12",
     "USERNAME": "Organizer"
   },
   {
@@ -26,5 +34,9 @@
   {
     "ID": "b727ebf1-4a88-40c9-8eda-1e6ba8b1131d",
     "USERNAME": "Organizer"
+  },
+  {
+    "ID": "5dcf3140-b627-4b0b-9993-3a6838358dd3",
+    "USERNAME": "ProtoUser"
   }
 ]

@@ -18,6 +18,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import no.hiof.set.gruppe.GUI.controller.abstractions.ControllerTransferData;
+import no.hiof.set.gruppe.core.Repository;
+import no.hiof.set.gruppe.core.exceptions.DataFormatException;
 import no.hiof.set.gruppe.model.ValidationResult;
 import no.hiof.set.gruppe.GUI.model.ViewInformation;
 import no.hiof.set.gruppe.core.validations.Validation;
@@ -84,6 +86,13 @@ public class NewAlterArrangementController extends ControllerTransferData {
         setArrangementData();
         if(validateArrangementData())return;
         closeWindow(cancelBtn);
+        if(!createdNewObject) {
+            try {
+                Repository.mutateObject(arrangementToEdit);
+            } catch (DataFormatException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     /**

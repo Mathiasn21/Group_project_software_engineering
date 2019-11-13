@@ -11,9 +11,7 @@ package no.hiof.set.gruppe.tests.thirdPartyIntegration;
 import no.hiof.set.gruppe.thirdPartyIntegrations.paymenIntegration.IPaymentIntegration;
 import no.hiof.set.gruppe.thirdPartyIntegrations.paymenIntegration.KlarnaIntegration;
 import org.junit.jupiter.api.Test;
-
 import java.io.*;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class TestPaymentIntegration {

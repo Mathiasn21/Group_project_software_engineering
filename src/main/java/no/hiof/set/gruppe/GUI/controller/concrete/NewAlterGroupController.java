@@ -43,8 +43,6 @@ import java.util.ResourceBundle;
  */
 public class NewAlterGroupController extends ControllerTransferData {
 
-    //Hele klassen skal bli refaktorert
-
     // --------------------------------------------------//
     //                2.Local Fields                     //
     // --------------------------------------------------//
@@ -56,7 +54,7 @@ public class NewAlterGroupController extends ControllerTransferData {
     private String grName;
     private int id;
     private ArrayList<DummyUsers>members;
-    private boolean groupIsEditable = false;
+    private boolean createdNewGroup = false;
 
     // --------------------------------------------------//
     //                3.FXML Fields                      //
@@ -82,25 +80,20 @@ public class NewAlterGroupController extends ControllerTransferData {
     }
 
     private void onClickSave(ActionEvent event){
-        if(groupIsEditable){
-            alterGroup();
-            if(validateGroupData())return;
-            closeWindow(cancel);
-        }
-        else{
-            createNewGroup();
-            if(validateGroupData())return;
-            closeWindow(cancel);
-        }
+        getGroupData();
+        setGropData();
+        if(validateGroupData())return;
+        closeWindow(cancel);
     }
 
     private void onClickCancel(ActionEvent event){
+        groupToEdit = null;
+        createdNewGroup = false;
         closeWindow(cancel);
     }
 
     private void onClickAvailableMembers(Event event){
         setCurrentUser(availableMembers);
-        System.out.println(availableMembers);
     }
 
     private void onClickChosenMembers (Event event){
@@ -110,6 +103,20 @@ public class NewAlterGroupController extends ControllerTransferData {
     // --------------------------------------------------//
     //                5.Private Methods                  //
     // --------------------------------------------------//
+
+    private void getGroupData(){
+        grName = inputName.getText();
+        members = new ArrayList<>(chosenUsersObservableList);
+    }
+
+    private void setGropData(){
+        if(groupToEdit == null){
+            groupToEdit = new Group();
+            createdNewGroup = true;
+        }
+        groupToEdit.setName(grName);
+        groupToEdit.setMembers(members);
+    }
 
     private void addChosenMember(){
         if(currentUser == null || checkIfRightList(avaliableUsersObservableList))return;
@@ -124,21 +131,6 @@ public class NewAlterGroupController extends ControllerTransferData {
         chosenUsersObservableList.remove(currentUser);
         avaliableUsersObservableList.add(currentUser);
         currentUser = null;
-    }
-
-    private void createNewGroup(){
-        if(groupToEdit == null){
-            groupToEdit = new Group(inputName.getText()); //ID skal generes automatisk senere
-            groupToEdit.addMultipleMembers(chosenUsersObservableList);
-            queryGroup();
-        }
-    }
-
-    private void alterGroup(){
-        groupToEdit.setMembers(new ArrayList<>());
-        groupToEdit.setName(inputName.getText());
-        groupToEdit.addMultipleMembers(chosenUsersObservableList);
-        queryGroup();
     }
 
     private void queryGroup() {
@@ -178,17 +170,11 @@ public class NewAlterGroupController extends ControllerTransferData {
         chosenMembers.setOnMouseClicked(this::onClickChosenMembers);
     }
 
-    //Toucha my spaghet?? Trenger refaktorering,
-    private void populateListViews(){
-        if(!groupIsEditable){
+    //Toucha my spaghet?? SKAL refaktoreres
+    private void populateListViews(Group group){
+
+            chosenUsersObservableList = FXCollections.observableArrayList(group.getMembers());
             avaliableUsersObservableList = FXCollections.observableArrayList(Repository.queryAllUsers());
-            chosenUsersObservableList = FXCollections.observableArrayList();
-        }
-        if(groupIsEditable){
-
-            chosenUsersObservableList = FXCollections.observableArrayList(getMembersFromGroup());
-
-            avaliableUsersObservableList.removeAll(chosenUsersObservableList);
 
             for(int i = 0; i < avaliableUsersObservableList.size(); i++){
                 for (DummyUsers dummyUser : chosenUsersObservableList) {
@@ -197,19 +183,22 @@ public class NewAlterGroupController extends ControllerTransferData {
                     }
                 }
             }
+
+            availableMembers.setItems(avaliableUsersObservableList);
+            chosenMembers.setItems(chosenUsersObservableList);
         }
-        availableMembers.setItems(avaliableUsersObservableList);
-        chosenMembers.setItems(chosenUsersObservableList);
-    }
 
     private void setCurrentUser(ListView<DummyUsers> list){
         currentUser = list.getSelectionModel().getSelectedItem();
     }
 
-    private void setGroupToEdit(Object object){
-        if(object instanceof Group) {
-            groupToEdit = (Group)object;
-        }
+    private void setAvaliableMembers(){
+        if(groupToEdit != null)return;
+        avaliableUsersObservableList = FXCollections.observableArrayList(Repository.queryAllUsers());
+        chosenUsersObservableList = FXCollections.observableArrayList();
+
+        availableMembers.setItems(avaliableUsersObservableList);
+        chosenMembers.setItems(chosenUsersObservableList);
     }
 
     // --------------------------------------------------//
@@ -217,24 +206,29 @@ public class NewAlterGroupController extends ControllerTransferData {
     // --------------------------------------------------//
 
     @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        setupActionHandlers();
+        setAvaliableMembers();
+    }
+
+    @Override
     public Object getDataObject() {
-        return null;
+        return groupToEdit;
+    }
+
+    @Override
+    public boolean hasNewObject(){
+        return createdNewGroup;
     }
 
     @Override
     public void setDataFields(Object object) {
         if(object instanceof Group){
-            groupIsEditable = true;
-            setGroupToEdit(object);
-            inputName.setText(groupToEdit.getName());
-            populateListViews();
+            Group group = (Group)object;
+            groupToEdit = group;
+            inputName.setText(group.getName());
+            populateListViews(group);
         }
-    }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        populateListViews();
-        setupActionHandlers();
     }
 
     @Override

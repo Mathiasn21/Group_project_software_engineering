@@ -35,7 +35,7 @@ class TestArrangementValidationOf {
      */
     @Test
     void LegalInput() {
-        Arrangement arrangement = new Arrangement("pez","Annet",420,"Hakkebakkeskogen", false, LocalDate.of(2019,12,10).toString(), LocalDate.of(2019,12,11).toString(), "testdwa dawd aw");
+        Arrangement arrangement = new Arrangement("pez1","Annet",420,"Hakkebakkeskogen", false, LocalDate.of(2019,12,10).toString(), LocalDate.of(2019,12,11).toString(), "testdwa dawd aw");
         assertTrue(Validation.ofArrangement(arrangement).IS_VALID);
     }
 
@@ -66,9 +66,14 @@ class TestArrangementValidationOf {
     @Contract(pure = true)
     private static Stream<Arguments> GenIllegalNameAndDates() {
         return Stream.of(
-                arguments("", LocalDate.of(2019,10,9), LocalDate.of(2019,10,8)),
-                arguments("\00", LocalDate.of(2019,10,9), LocalDate.of(2019,10,8)),
-                arguments("ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss", LocalDate.of(2019,10,9), LocalDate.of(2019,10,9))
+                arguments("", LocalDate.of(2020,10,5), LocalDate.of(2020,10,8)),
+                arguments("ljljlj \00ljljljl", LocalDate.of(2020,10,5), LocalDate.of(2020,10,8)),
+                arguments("\00ljljljl", LocalDate.of(2020,10,5), LocalDate.of(2020,10,8)),
+                arguments("ljljlj\00", LocalDate.of(2020,10,5), LocalDate.of(2020,10,8)),
+                arguments("ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss", LocalDate.of(2020,10,5), LocalDate.of(2020,10,9)),
+
+                arguments("hhhhhhhh", LocalDate.now().minusDays(1), LocalDate.now()),
+                arguments("hhhhhhhh", LocalDate.now(), LocalDate.now().minusDays(1))
         );
     }
 }

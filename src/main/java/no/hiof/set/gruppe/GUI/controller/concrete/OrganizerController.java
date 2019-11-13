@@ -129,7 +129,7 @@ public class OrganizerController extends ControllerTransferData {
     private void returnToMainWindow(ActionEvent event) {
         title = "Logg inn";
         name = "Login.fxml";
-        ((Stage)deleteBtn.getScene().getWindow()).close();
+        closeWindow(deleteBtn);
         createNewView(this);
     }
 

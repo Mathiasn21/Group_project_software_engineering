@@ -6,6 +6,7 @@ import no.hiof.set.gruppe.core.exceptions.DataFormatException;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.Group;
 import no.hiof.set.gruppe.model.user.UserConnectedArrangement;
+import no.hiof.set.gruppe.util.TypeClassMapToObject;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
@@ -20,19 +21,19 @@ public class    HandleDataStorage implements IHandleData{
     private static final String groupsFName = "groups.json";
 
     static {
-        ObjectMapToFiles.mutateObjectMapperList(new ObjectMapToFiles<>(Arrangement.class, arrangementFName));
-        ObjectMapToFiles.mutateObjectMapperList(new ObjectMapToFiles<>(Group.class, groupsFName));
-        ObjectMapToFiles.mutateObjectMapperList(new ObjectMapToFiles<>(UserConnectedArrangement.class, userHasArrangements));
+        TypeClassMapToObject.mutateObjectMapperList(new TypeClassMapToFiles<>(Arrangement.class, arrangementFName));
+        TypeClassMapToObject.mutateObjectMapperList(new TypeClassMapToFiles<>(Group.class, groupsFName));
+        TypeClassMapToObject.mutateObjectMapperList(new TypeClassMapToFiles<>(UserConnectedArrangement.class, userHasArrangements));
     }
 
     @Override
-    public <T> void storeDataGivenType(Class<T[]> tClass, T[] tArray) throws DataFormatException {
-        writeToFile(toJson(tClass, tArray), ObjectMapToFiles.getCorrespondingMapperGivenType(tClass).fileName);
+    public final <T> void storeDataGivenType(Class<T[]> tClass, T[] tArray) throws DataFormatException {
+        writeToFile(toJson(tClass, tArray), (String) TypeClassMapToObject.getCorrespondingMapperGivenType(tClass).getObject());
     }
 
     @Override
-    public <T> List<T> queryAllDataGivenType(Class<T[]> tClassArr) throws IOException, DataFormatException {
-        String jsonFromFile = HandleDataStorage.readFromFile(ObjectMapToFiles.getCorrespondingMapperGivenType(tClassArr).fileName);
+    public final <T> List<T> queryAllDataGivenType(Class<T[]> tClassArr) throws IOException, DataFormatException {
+        String jsonFromFile = HandleDataStorage.readFromFile((String) TypeClassMapToObject.getCorrespondingMapperGivenType(tClassArr).getObject());
         return new ArrayList<>(HandleDataStorage.listFromJson(tClassArr, jsonFromFile));
     }
 
