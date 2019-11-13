@@ -71,7 +71,7 @@ public class GroupController extends ControllerTransferData {
     private void onClickNewGroupBtn(ActionEvent event) {
         title = "Ny gruppe";
         name = "NewAlterGroup.fxml";
-        createNewView(this);
+        createNewView(this, null);
     }
 
     private void onClickDeletBtn(ActionEvent event) {
