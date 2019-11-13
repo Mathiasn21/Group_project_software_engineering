@@ -43,8 +43,6 @@ import java.util.ResourceBundle;
  */
 public class NewAlterGroupController extends ControllerTransferData {
 
-    //Hele klassen skal bli refaktorert
-
     // --------------------------------------------------//
     //                2.Local Fields                     //
     // --------------------------------------------------//
@@ -84,6 +82,7 @@ public class NewAlterGroupController extends ControllerTransferData {
     private void onClickSave(ActionEvent event){
         getGroupData();
         setGropData();
+        if(validateGroupData())return;
         closeWindow(cancel);
     }
 
@@ -132,21 +131,6 @@ public class NewAlterGroupController extends ControllerTransferData {
         chosenUsersObservableList.remove(currentUser);
         avaliableUsersObservableList.add(currentUser);
         currentUser = null;
-    }
-
-    private void createNewGroup(){
-        if(groupToEdit == null){
-            groupToEdit = new Group(inputName.getText()); //ID skal generes automatisk senere
-            groupToEdit.addMultipleMembers(chosenUsersObservableList);
-            queryGroup();
-        }
-    }
-
-    private void alterGroup(){
-        groupToEdit.setMembers(new ArrayList<>());
-        groupToEdit.setName(inputName.getText());
-        groupToEdit.addMultipleMembers(chosenUsersObservableList);
-        queryGroup();
     }
 
     private void queryGroup() {
