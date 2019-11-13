@@ -31,7 +31,7 @@ public class Validation{
     // --------------------------------------------------//
     //                2.Local Fields                     //
     // --------------------------------------------------//
-    private static final String textNotNullPattern = "(?!^ +$)^.+$";
+    private static final String textNotNullPattern = "[^\0]+";
     private static final String numPattern = "[0-9]+";
 
     private static final int maxNameL = 50;
@@ -97,7 +97,7 @@ public class Validation{
 
         res.append(group.getName().length() <= maxNameLength ? "" : "Navnet på gruppen er for langt");
         res.append(group.getName().length() >= minNameLength ? "" : "Navnet på gruppen er for kort");
-        res.append(regCheck(textNotNullPattern, group.getName()) ? "" : "Navnet inneholder ugydlige tegn");
+        res.append(regCheck(textNotNullPattern, group.getName()) ? "" : "Navnet inneholder ugyldige tegn");
 
         return  new ValidationResult(res.toString(), res.length() == 0);
     }
