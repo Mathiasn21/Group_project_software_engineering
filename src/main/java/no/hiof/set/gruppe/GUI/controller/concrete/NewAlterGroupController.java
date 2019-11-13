@@ -52,7 +52,6 @@ public class NewAlterGroupController extends ControllerTransferData {
     private DummyUsers currentUser = null;
     private Group groupToEdit;
     private String grName;
-    private int id;
     private ArrayList<DummyUsers>members;
     private boolean createdNewGroup = false;
 
