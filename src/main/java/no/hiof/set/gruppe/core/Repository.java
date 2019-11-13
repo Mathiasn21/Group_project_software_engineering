@@ -152,7 +152,6 @@ public class Repository {
             listOfAllGroups.add(thatGroup);
             storeGroupData();
         }else{throw new DataFormatException();}
-
     }
 
     // --------------------------------------------------//
