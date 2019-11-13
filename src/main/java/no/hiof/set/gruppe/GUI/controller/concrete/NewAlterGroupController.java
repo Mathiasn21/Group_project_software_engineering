@@ -152,10 +152,6 @@ public class NewAlterGroupController extends ControllerTransferData {
         return true;
     }
 
-    private ArrayList<DummyUsers> getMembersFromGroup(){
-        return new ArrayList<>(groupToEdit.getMembers());
-    }
-
     // --------------------------------------------------//
     //                5.Private Setup Methods            //
     // --------------------------------------------------//
