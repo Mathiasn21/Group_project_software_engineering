@@ -32,24 +32,16 @@ public abstract class Controller implements IController, Initializable {
 
     MainJavaFX getMainController() { return mainController; }
 
+    @Override
     public void createNewView(Controller controller) {
-        boolean errorOccured = true;
-        ErrorExceptionHandler err = null;
-        Throwable thrown = null;
-
+        ErrorExceptionHandler err;
         try {
             mainController.setupWindow(controller);
-            errorOccured = false;
-        } catch (IOException e) {
+        } catch (IOException resourceEx) {
             err = ErrorExceptionHandler.ERROR_LOAD_RESOURCE;
-            thrown = e;
-
-        }finally {
-            try {
-                if (errorOccured && (err != null)) ErrorExceptionHandler.createLogWithDetails(err, thrown);
-            } catch (Exception e) {
-                Controller.createAlert(ErrorExceptionHandler.ERROR_LOGGING_ERROR);
-            }
+            try { ErrorExceptionHandler.createLogWithDetails(err, resourceEx);
+            } catch (IOException IOException) {err = ErrorExceptionHandler.ERROR_LOGGING_ERROR;}
+            createAlert(err);
         }
     }
 

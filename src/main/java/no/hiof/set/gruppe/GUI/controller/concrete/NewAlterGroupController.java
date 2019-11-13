@@ -202,12 +202,13 @@ public class NewAlterGroupController extends ControllerTransferData {
     }
 
     private void queryGroup() {
+        ErrorExceptionHandler err;
         try {if(!createdNewGroup)Repository.mutateObject(groupToEdit);
         } catch (DataFormatException e) {
-            Throwable throwable = e;
-            try { ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_ACCESSING_DATA, e);
-            } catch (IOException IOException) { throwable = IOException; }
-            createAlert(throwable instanceof DataFormatException ? ErrorExceptionHandler.ERROR_ACCESSING_DATA : ErrorExceptionHandler.ERROR_LOGGING_ERROR);
+            err = ErrorExceptionHandler.ERROR_WRONG_DATA_OBJECT;
+            try { ErrorExceptionHandler.createLogWithDetails(err, e);
+            } catch (IOException IOException) { err = ErrorExceptionHandler.ERROR_LOGGING_ERROR;}
+            createAlert(err);
         }
     }
 

@@ -18,4 +18,9 @@ public interface IController {
      */
     ViewInformation getViewInformation();
 
+    /**
+     * @param controller {@link Controller}
+     */
+    void createNewView(Controller controller);
+
 }
