@@ -1,47 +1,7 @@
 [
   {
-    "name": "hoi",
-    "ID": "e3a3c0bf-d691-45f8-8163-c195481d581e",
-    "members": [
-      "USER2",
-      "USER3",
-      "USER5",
-      "USER4"
-    ]
-  },
-  {
-    "name": "kyukuyk",
-    "ID": "08f469fc-f30b-4828-9ba1-ec169ef3e12b",
-    "members": [
-      "USER8"
-    ]
-  },
-  {
-    "name": "hei",
-    "ID": "dac47880-9dc6-4e7b-b3ac-9e7bc13dba45",
-    "members": [
-      "USER7",
-      "USER10",
-      "USER6",
-      "USER5",
-      "USER8"
-    ]
-  },
-  {
     "name": "yoo",
     "ID": "cedb4221-4418-4015-b50e-440876893696",
-    "members": []
-  },
-  {
-    "name": "opåopå",
-    "ID": "85219444-e907-4b50-b785-39e798b7d7fc",
-    "members": [
-      "USER7"
-    ]
-  },
-  {
-    "name": "ooooo",
-    "ID": "b6a04841-30d3-44c3-9d31-09309fd5dbc5",
     "members": []
   },
   {
@@ -57,6 +17,65 @@
     "members": [
       "USER7",
       "USER9"
+    ]
+  },
+  {
+    "name": "hoi",
+    "ID": "e3a3c0bf-d691-45f8-8163-c195481d581e",
+    "members": [
+      "USER2",
+      "USER3",
+      "USER5",
+      "USER4"
+    ]
+  },
+  {
+    "name": "opåopå",
+    "ID": "85219444-e907-4b50-b785-39e798b7d7fc",
+    "members": [
+      "USER7",
+      "USER9",
+      "USER6"
+    ]
+  },
+  {
+    "name": "hei",
+    "ID": "dac47880-9dc6-4e7b-b3ac-9e7bc13dba45",
+    "members": [
+      "USER7",
+      "USER10",
+      "USER6",
+      "USER5",
+      "USER8",
+      "USER3",
+      "USER4",
+      "USER6",
+      "USER9",
+      "USER2"
+    ]
+  },
+  {
+    "name": "ooooo",
+    "ID": "b6a04841-30d3-44c3-9d31-09309fd5dbc5",
+    "members": [
+      "USER6",
+      "USER8",
+      "USER7",
+      "USER5",
+      "USER10",
+      "USER3"
+    ]
+  },
+  {
+    "name": "kyukuyk",
+    "ID": "08f469fc-f30b-4828-9ba1-ec169ef3e12b",
+    "members": [
+      "USER8",
+      "USER6",
+      "USER7",
+      "USER9",
+      "USER3",
+      "USER11"
     ]
   }
 ]

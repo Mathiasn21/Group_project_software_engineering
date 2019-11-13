@@ -17,10 +17,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import no.hiof.set.gruppe.GUI.controller.abstractions.ControllerTransferData;
 import no.hiof.set.gruppe.core.Repository;
 import no.hiof.set.gruppe.core.exceptions.DataFormatException;
@@ -94,10 +96,12 @@ public class NewAlterGroupController extends ControllerTransferData {
 
     private void onClickAvailableMembers(Event event){
         setCurrentUser(availableMembers);
+        listViewDoubleClick(availableMembers);
     }
 
     private void onClickChosenMembers (Event event){
         setCurrentUser(chosenMembers);
+        listViewDoubleClick(chosenMembers);
     }
 
     // --------------------------------------------------//
@@ -133,16 +137,6 @@ public class NewAlterGroupController extends ControllerTransferData {
         currentUser = null;
     }
 
-    private void queryGroup() {
-        try {if(!createdNewGroup)Repository.mutateObject(groupToEdit);
-        } catch (DataFormatException e) {
-            Throwable throwable = e;
-            try { ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_ACCESSING_DATA, e);
-            } catch (IOException IOException) { throwable = IOException; }
-            createAlert(throwable instanceof DataFormatException ? ErrorExceptionHandler.ERROR_ACCESSING_DATA : ErrorExceptionHandler.ERROR_LOGGING_ERROR);
-        }
-    }
-
     private boolean validateGroupData(){
         ValidationResult validation = Validation.ofGroup(groupToEdit);
         return !validation.IS_VALID;
@@ -151,6 +145,14 @@ public class NewAlterGroupController extends ControllerTransferData {
     private boolean checkIfRightList(ObservableList<DummyUsers> o) {
         for (DummyUsers user : o) if (currentUser == user) return false;
         return true;
+    }
+
+    private void listViewDoubleClick(ListView listView){
+        listView.setOnMouseClicked(click -> { if(click.getClickCount() == 2) {
+            setCurrentUser(listView);
+            addChosenMember();
+            removeChosenMember();
+        } });
     }
 
     // --------------------------------------------------//
@@ -166,35 +168,47 @@ public class NewAlterGroupController extends ControllerTransferData {
         chosenMembers.setOnMouseClicked(this::onClickChosenMembers);
     }
 
-    //Toucha my spaghet?? SKAL refaktoreres
-    private void populateListViews(Group group){
+    private void populateListView(Group group){
+        chosenUsersObservableList = FXCollections.observableArrayList(group.getMembers());
+        avaliableUsersObservableList = FXCollections.observableArrayList(Repository.queryAllUsers());
+        filterMemberLists();
+        fillListViews();
+    }
 
-            chosenUsersObservableList = FXCollections.observableArrayList(group.getMembers());
-            avaliableUsersObservableList = FXCollections.observableArrayList(Repository.queryAllUsers());
-
-            for(int i = 0; i < avaliableUsersObservableList.size(); i++){
-                for (DummyUsers dummyUser : chosenUsersObservableList) {
-                    if (avaliableUsersObservableList.get(i) == dummyUser) {
-                        avaliableUsersObservableList.remove(avaliableUsersObservableList.get(i));
-                    }
+    private void filterMemberLists(){
+        for(int i = 0; i < avaliableUsersObservableList.size(); i++) {
+            for (DummyUsers dummyUser : chosenUsersObservableList) {
+                if (avaliableUsersObservableList.get(i) == dummyUser) {
+                    avaliableUsersObservableList.remove(avaliableUsersObservableList.get(i));
                 }
             }
-
-            availableMembers.setItems(avaliableUsersObservableList);
-            chosenMembers.setItems(chosenUsersObservableList);
         }
-
-    private void setCurrentUser(ListView<DummyUsers> list){
-        currentUser = list.getSelectionModel().getSelectedItem();
     }
 
     private void setAvaliableMembers(){
         if(groupToEdit != null)return;
         avaliableUsersObservableList = FXCollections.observableArrayList(Repository.queryAllUsers());
         chosenUsersObservableList = FXCollections.observableArrayList();
+        fillListViews();
+    }
 
+    private void fillListViews(){
         availableMembers.setItems(avaliableUsersObservableList);
         chosenMembers.setItems(chosenUsersObservableList);
+    }
+
+    private void setCurrentUser(ListView<DummyUsers> list){
+        currentUser = list.getSelectionModel().getSelectedItem();
+    }
+
+    private void queryGroup() {
+        try {if(!createdNewGroup)Repository.mutateObject(groupToEdit);
+        } catch (DataFormatException e) {
+            Throwable throwable = e;
+            try { ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_ACCESSING_DATA, e);
+            } catch (IOException IOException) { throwable = IOException; }
+            createAlert(throwable instanceof DataFormatException ? ErrorExceptionHandler.ERROR_ACCESSING_DATA : ErrorExceptionHandler.ERROR_LOGGING_ERROR);
+        }
     }
 
     // --------------------------------------------------//
@@ -223,7 +237,7 @@ public class NewAlterGroupController extends ControllerTransferData {
             Group group = (Group)object;
             groupToEdit = group;
             inputName.setText(group.getName());
-            populateListViews(group);
+            populateListView(group);
         }
     }
 
