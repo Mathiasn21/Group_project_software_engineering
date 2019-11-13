@@ -93,7 +93,7 @@ public class Validation{
     public static ValidationResult ofGroup(@NotNull Group group){
         StringBuilder res = new StringBuilder();
         int maxNameLength = 30;
-        int minNameLength = 1;
+        int minNameLength = 3;
 
         res.append(group.getName().length() <= maxNameLength ? "" : "Navnet på gruppen er for langt");
         res.append(group.getName().length() >= minNameLength ? "" : "Navnet på gruppen er for kort");
