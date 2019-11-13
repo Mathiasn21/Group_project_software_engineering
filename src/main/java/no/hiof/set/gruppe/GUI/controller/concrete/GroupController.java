@@ -158,8 +158,6 @@ public class GroupController extends ControllerTransferData {
         members.setText(stringMembers.toString());
     }
 
-
-
     // --------------------------------------------------//
     //                8.Overridden Methods               //
     // --------------------------------------------------//

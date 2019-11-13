@@ -1,4 +1,4 @@
-package no.hiof.set.gruppe.thirdPartyIntegrations.paymenIntegration;
+package no.hiof.set.gruppe.ThirdPartyIntegrations.paymenIntegration;
 
 import com.google.api.client.http.*;
 import com.google.api.client.testing.http.MockHttpTransport;
@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import javax.net.ssl.HttpsURLConnection;
 import java.io.IOException;
 
-public class KlarnaIntegration implements IPaymentIntegration{
+public class KlarnaIntegration implements IPaymentIntegration {
 
     private final HttpTransport transport = new MockHttpTransport() {
         @Override
@@ -37,6 +37,4 @@ public class KlarnaIntegration implements IPaymentIntegration{
 
         return request.execute();
     }
-
-
 }

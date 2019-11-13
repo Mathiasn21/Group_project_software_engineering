@@ -1,4 +1,4 @@
-package no.hiof.set.gruppe.thirdPartyIntegrations.paymenIntegration;
+package no.hiof.set.gruppe.ThirdPartyIntegrations.paymenIntegration;
 
 import com.google.api.client.http.HttpResponse;
 import java.io.IOException;
