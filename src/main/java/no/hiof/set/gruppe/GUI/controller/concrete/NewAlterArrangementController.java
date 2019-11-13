@@ -12,7 +12,6 @@ package no.hiof.set.gruppe.GUI.controller.concrete;
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -48,14 +47,14 @@ public class NewAlterArrangementController extends ControllerTransferData {
     // --------------------------------------------------//
     private final String name = "NewAlterArrangement.fxml";
     private final String title = "Arrangement";
-    private Arrangement arrangementToEdit = null;
     private boolean createdNewObject = false;
+    private boolean group;
+    private Arrangement arrangementToEdit = null;
     private String arrName;
     private String sport;
     private String partic;
     private String desc;
     private String address;
-    private boolean group;
     private LocalDate startDate;
     private LocalDate endDate;
 
@@ -90,6 +89,7 @@ public class NewAlterArrangementController extends ControllerTransferData {
         setArrangementData();
         if(validateArrangementData())return;
         closeWindow(cancelBtn);
+
         try {if(!createdNewObject)Repository.mutateObject(arrangementToEdit);
         } catch (DataFormatException e) {
             Throwable throwable = e;
@@ -111,7 +111,6 @@ public class NewAlterArrangementController extends ControllerTransferData {
     // --------------------------------------------------//
     //                5.Private Methods                  //
     // --------------------------------------------------//
-
     private void setupActionHandlers(){
         saveBtn.setOnAction(this::saveClicked);
         cancelBtn.setOnAction(this::cancelClicked);
@@ -120,6 +119,7 @@ public class NewAlterArrangementController extends ControllerTransferData {
     private void setupComboBoxes(){
         sportComboBoxInput.setItems(FXCollections.observableArrayList(SportCategory.values()));
         groupInput.setItems(FXCollections.observableArrayList(GroupCategory.values()));
+        
         sportComboBoxInput.getSelectionModel().select(0);
         groupInput.getSelectionModel().select(0);
     }
@@ -166,9 +166,8 @@ public class NewAlterArrangementController extends ControllerTransferData {
         ValidationResult result = Validation.ofArrangement(arrangementToEdit);
         if(!result.IS_VALID){
             setErrorField(result.RESULT);
-            return true;
         }
-        return false;
+        return !result.IS_VALID;
     }
 
     private int getSportIndex(){
@@ -211,17 +210,13 @@ public class NewAlterArrangementController extends ControllerTransferData {
      * @return Object
      */
     @Override
-    public Object getDataObject() {
-        return arrangementToEdit;
-    }
+    public Object getDataObject() {return arrangementToEdit;}
 
     /**
      * @return boolean
      */
     @Override
-    public boolean hasNewObject(){
-        return createdNewObject;
-    }
+    public boolean hasNewObject(){return createdNewObject;}
 
     /**
      * Setups the view and its data fields.
