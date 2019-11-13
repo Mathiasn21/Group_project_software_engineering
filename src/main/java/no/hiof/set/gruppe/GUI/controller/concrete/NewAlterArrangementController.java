@@ -12,20 +12,24 @@ package no.hiof.set.gruppe.GUI.controller.concrete;
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import no.hiof.set.gruppe.GUI.controller.abstractions.ControllerTransferData;
+import no.hiof.set.gruppe.GUI.model.ViewInformation;
 import no.hiof.set.gruppe.core.Repository;
 import no.hiof.set.gruppe.core.exceptions.DataFormatException;
-import no.hiof.set.gruppe.model.ValidationResult;
-import no.hiof.set.gruppe.GUI.model.ViewInformation;
+import no.hiof.set.gruppe.core.exceptions.ErrorExceptionHandler;
 import no.hiof.set.gruppe.core.validations.Validation;
 import no.hiof.set.gruppe.model.Arrangement;
+import no.hiof.set.gruppe.model.ValidationResult;
 import no.hiof.set.gruppe.model.constantInformation.GroupCategory;
 import no.hiof.set.gruppe.model.constantInformation.SportCategory;
+
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
@@ -86,12 +90,12 @@ public class NewAlterArrangementController extends ControllerTransferData {
         setArrangementData();
         if(validateArrangementData())return;
         closeWindow(cancelBtn);
-        if(!createdNewObject) {
-            try {
-                Repository.mutateObject(arrangementToEdit);
-            } catch (DataFormatException e) {
-                e.printStackTrace();
-            }
+        try {if(!createdNewObject)Repository.mutateObject(arrangementToEdit);
+        } catch (DataFormatException e) {
+            Throwable throwable = e;
+            try { ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_ACCESSING_DATA, e);
+            } catch (IOException IOException) { throwable = IOException; }
+            createAlert(throwable instanceof DataFormatException ? ErrorExceptionHandler.ERROR_ACCESSING_DATA : ErrorExceptionHandler.ERROR_LOGGING_ERROR);
         }
     }
 
