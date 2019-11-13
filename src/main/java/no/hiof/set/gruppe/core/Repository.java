@@ -153,11 +153,11 @@ public final class Repository {
      * @param protoUser {@link ProtoUser}
      * @throws IllegalDataAccess illegalAccess{@link IllegalDataAccess}
      */
-    public static void deleteArrangement(Arrangement arrangement, ProtoUser protoUser) throws IllegalDataAccess, DataFormatException {
-        if(!AccessValidate.userCanModifyArrangement(arrangement, protoUser))throw new IllegalDataAccess();
+    public static void deleteArrangement(Arrangement thatArrangement, ProtoUser protoUser) throws IllegalDataAccess, DataFormatException {
+        if(!AccessValidate.userCanModifyArrangement(thatArrangement, protoUser))throw new IllegalDataAccess();
 
-        listOfAllArrangements.remove(arrangement);
-        deleteUserConnectedArrangements(arrangement.getID());
+        listOfAllArrangements.removeIf((thisArrangement) -> thisArrangement.getID().equals(thatArrangement.getID()));
+        deleteUserConnectedArrangements(thatArrangement.getID());
         storeArrangementsData();
     }
 

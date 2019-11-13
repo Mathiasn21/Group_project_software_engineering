@@ -47,7 +47,6 @@ class AdminControllerTests extends MainJavaFXTest{
         deleteAddedArrangement(robot);
     }
 
-    //Tests deletion of a arrangement
     private void deleteAddedArrangement(@NotNull FxRobot robot) throws IllegalDataAccess, DataFormatException {
         ListView listView = getListView(robot, "#arrangementListView");
         Arrangement arrangement = (Arrangement) listView.getSelectionModel().getSelectedItem();
