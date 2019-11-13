@@ -89,14 +89,7 @@ public class NewAlterArrangementController extends ControllerTransferData {
         setArrangementData();
         if(validateArrangementData())return;
         closeWindow(cancelBtn);
-
-        try {if(!createdNewObject)Repository.mutateObject(arrangementToEdit);
-        } catch (DataFormatException e) {
-            Throwable throwable = e;
-            try { ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_ACCESSING_DATA, e);
-            } catch (IOException IOException) { throwable = IOException; }
-            createAlert(throwable instanceof DataFormatException ? ErrorExceptionHandler.ERROR_ACCESSING_DATA : ErrorExceptionHandler.ERROR_LOGGING_ERROR);
-        }
+        queryArrangement();
     }
 
     /**
@@ -148,6 +141,16 @@ public class NewAlterArrangementController extends ControllerTransferData {
         arrangementToEdit.setSport(sport);
         arrangementToEdit.setStartDate(startDate.toString());
         arrangementToEdit.setEndDate(endDate.toString());
+    }
+
+    private void queryArrangement(){
+        try {if(!createdNewObject)Repository.mutateObject(arrangementToEdit);
+        } catch (DataFormatException e) {
+            Throwable throwable = e;
+            try { ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_ACCESSING_DATA, e);
+            } catch (IOException IOException) { throwable = IOException; }
+            createAlert(throwable instanceof DataFormatException ? ErrorExceptionHandler.ERROR_ACCESSING_DATA : ErrorExceptionHandler.ERROR_LOGGING_ERROR);
+        }
     }
 
     private boolean checkLengthOfAllFields(){

@@ -1,18 +1,7 @@
 [
   {
-    "ID": "d52665f4-38f1-4b56-b24d-9d760adc7102",
-    "name": "plz",
-    "sport": "Sykkelritt",
-    "address": "Brokkolivegen 28",
-    "startDate": "2019-11-30",
-    "endDate": "2019-12-08",
-    "description": "Masse spising og løing med brokkoli",
-    "participants": 800,
-    "group": true
-  },
-  {
     "ID": "b727ebf1-4a88-40c9-8eda-1e6ba8b1131d",
-    "name": "8uilui",
+    "name": "jadda",
     "sport": "Alle",
     "address": "dwadwa",
     "startDate": "2019-11-14",
