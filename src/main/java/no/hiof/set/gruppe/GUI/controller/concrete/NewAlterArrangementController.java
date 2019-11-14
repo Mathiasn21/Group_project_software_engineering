@@ -2,16 +2,18 @@ package no.hiof.set.gruppe.GUI.controller.concrete;
 
 /*Guide
  * 1. Import Statements
- * 2. Local Fields
- * 3. FXML Fields
+ * 2. FXML Fields
+ * 3. Local fields
  * 4. On Action Methods
- * 5. Private Methods
- * 6. Overridden Methods
+ * 5. Private Functional Methods
+ * 6. Private Setup Methods
+ * 7. Overridden Methods
  * */
 
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -27,7 +29,6 @@ import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.ValidationResult;
 import no.hiof.set.gruppe.model.constantInformation.GroupCategory;
 import no.hiof.set.gruppe.model.constantInformation.SportCategory;
-
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -43,24 +44,9 @@ import java.util.ResourceBundle;
 public class NewAlterArrangementController extends ControllerTransferData {
 
     // --------------------------------------------------//
-    //                2.Local Fields                     //
+    //                2.FXML Fields                      //
     // --------------------------------------------------//
-    private final String name = "NewAlterArrangement.fxml";
-    private final String title = "Arrangement";
-    private boolean createdNewObject = false;
-    private boolean group;
-    private Arrangement arrangementToEdit = null;
-    private String arrName;
-    private String sport;
-    private String partic;
-    private String desc;
-    private String address;
-    private LocalDate startDate;
-    private LocalDate endDate;
 
-    // --------------------------------------------------//
-    //                3.FXML Fields                      //
-    // --------------------------------------------------//
     @FXML
     private TextField nameInput, participantsInput, adressInput;
     @FXML
@@ -73,6 +59,23 @@ public class NewAlterArrangementController extends ControllerTransferData {
     private ComboBox<SportCategory> sportComboBoxInput;
     @FXML
     public Button saveBtn, cancelBtn;
+
+    // --------------------------------------------------//
+    //                3.Local Fields                     //
+    // --------------------------------------------------//
+
+    private final String name = "NewAlterArrangement.fxml";
+    private final String title = "Arrangement";
+    private boolean createdNewObject = false;
+    private boolean group;
+    private Arrangement arrangementToEdit = null;
+    private String arrName;
+    private String sport;
+    private String partic;
+    private String desc;
+    private String address;
+    private LocalDate startDate;
+    private LocalDate endDate;
 
     // --------------------------------------------------//
     //                4.On Action Methods                //
@@ -102,20 +105,8 @@ public class NewAlterArrangementController extends ControllerTransferData {
     }
 
     // --------------------------------------------------//
-    //                5.Private Methods                  //
+    //            5.Private Functional Methods           //
     // --------------------------------------------------//
-    private void setupActionHandlers(){
-        saveBtn.setOnAction(this::saveClicked);
-        cancelBtn.setOnAction(this::cancelClicked);
-    }
-
-    private void setupComboBoxes(){
-        sportComboBoxInput.setItems(FXCollections.observableArrayList(SportCategory.values()));
-        groupInput.setItems(FXCollections.observableArrayList(GroupCategory.values()));
-
-        sportComboBoxInput.getSelectionModel().select(0);
-        groupInput.getSelectionModel().select(0);
-    }
 
     private void getArrangementData(){
         arrName = nameInput.getText();
@@ -126,21 +117,6 @@ public class NewAlterArrangementController extends ControllerTransferData {
         group = groupInput.getSelectionModel().getSelectedItem().isGroup;
         startDate = startDateInput.getValue();
         endDate = endDateInput.getValue();
-    }
-
-    private void setArrangementData(){
-        if(arrangementToEdit == null) {
-            arrangementToEdit = new Arrangement();
-            createdNewObject = true;
-        }
-        arrangementToEdit.setName(arrName);
-        arrangementToEdit.setParticipants(Integer.parseInt(partic));
-        arrangementToEdit.setAddress(address);
-        arrangementToEdit.setDescription(desc);
-        arrangementToEdit.setGruppe(group);
-        arrangementToEdit.setSport(sport);
-        arrangementToEdit.setStartDate(startDate.toString());
-        arrangementToEdit.setEndDate(endDate.toString());
     }
 
     private void queryArrangement(){
@@ -186,6 +162,23 @@ public class NewAlterArrangementController extends ControllerTransferData {
         return 1;
     }
 
+    // --------------------------------------------------//
+    //                6.Private Setup Methods            //
+    // --------------------------------------------------//
+
+    private void setupActionHandlers(){
+        saveBtn.setOnAction(this::saveClicked);
+        cancelBtn.setOnAction(this::cancelClicked);
+    }
+
+    private void setupComboBoxes(){
+        sportComboBoxInput.setItems(FXCollections.observableArrayList(SportCategory.values()));
+        groupInput.setItems(FXCollections.observableArrayList(GroupCategory.values()));
+
+        sportComboBoxInput.getSelectionModel().select(0);
+        groupInput.getSelectionModel().select(0);
+    }
+
     /**
      * @param result String
      */
@@ -196,8 +189,23 @@ public class NewAlterArrangementController extends ControllerTransferData {
         ErrorField.setEditable(false);
     }
 
+    private void setArrangementData(){
+        if(arrangementToEdit == null) {
+            arrangementToEdit = new Arrangement();
+            createdNewObject = true;
+        }
+        arrangementToEdit.setName(arrName);
+        arrangementToEdit.setParticipants(Integer.parseInt(partic));
+        arrangementToEdit.setAddress(address);
+        arrangementToEdit.setDescription(desc);
+        arrangementToEdit.setGruppe(group);
+        arrangementToEdit.setSport(sport);
+        arrangementToEdit.setStartDate(startDate.toString());
+        arrangementToEdit.setEndDate(endDate.toString());
+    }
+
     // --------------------------------------------------//
-    //                6.Overridden Methods               //
+    //                7.Overridden Methods               //
     // --------------------------------------------------//
     /**
      * @param url {@link URL}

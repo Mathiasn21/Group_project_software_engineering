@@ -2,11 +2,13 @@ package no.hiof.set.gruppe.GUI.controller.concrete;
 
 /*Guide
  * 1. Import Statements
- * 2. Local Fields
- * 3. FXML Fields
+ * 2. FXML Fields
+ * 3. Local fields
  * 4. On Action Methods
- * 5. Private Methods
- * 6. Overridden Methods
+ * 5. Private Functional Methods
+ * 6. Private Search Methods
+ * 7. Private Setup Methods
+ * 8. Overridden Methods
  * */
 
 // --------------------------------------------------//
@@ -40,9 +42,11 @@ import java.util.ResourceBundle;
  * Controls the main logic pertaining to the Admin View
  */
 public class AdminController extends ControllerTransferData {
+
     // --------------------------------------------------//
-    //                3.FXML Fields                      //
+    //                2.FXML Fields                      //
     // --------------------------------------------------//
+
      @FXML
      private Button edit, delete;
      @FXML
@@ -56,10 +60,10 @@ public class AdminController extends ControllerTransferData {
      @FXML
      private Text sportHeader, adresHeader, dateHeader, gOrIHeader, participantsHeader, descriptionHeader;
 
+    // --------------------------------------------------//
+    //                3.Local Fields                     //
+    // --------------------------------------------------//
 
-    // --------------------------------------------------//
-    //                2.Local Fields                     //
-    // --------------------------------------------------//
     private String title = "Login";
     private String name = "";
     private Arrangement currentArrangement = null;
@@ -69,6 +73,7 @@ public class AdminController extends ControllerTransferData {
     // --------------------------------------------------//
     //                4.On action Methods                //
     // --------------------------------------------------//
+
     private void onDeleteClick(ActionEvent event){
         if(checkIfLegalArrangement()){
             deleteArrangement();
@@ -90,26 +95,8 @@ public class AdminController extends ControllerTransferData {
     }
 
     // --------------------------------------------------//
-    //                5.Private Methods                  //
+    //                5.Private Functional Methods       //
     // --------------------------------------------------//
-    private void setupActionHandlers(){
-        logOut.setOnAction(this::returnToMainWindow);
-        edit.setOnAction(this::onEditClick);
-        delete.setOnAction(this::onDeleteClick);
-        arrangementListView.setOnMouseClicked(this::onListViewClick);
-    }
-
-    private void returnToMainWindow(ActionEvent event) {
-        title = "Logg inn";
-        name = "Login.fxml";
-        closeWindow(delete);
-        createNewView(this);
-    }
-
-    private void populateListView(){
-        arrangementListObservable = FXCollections.observableArrayList(Repository.queryAllArrangements());
-        arrangementListView.setItems(arrangementListObservable);
-    }
 
     private Arrangement clickedItemFromListView(){
         return arrangementListView.getSelectionModel().getSelectedItem();
@@ -117,10 +104,6 @@ public class AdminController extends ControllerTransferData {
 
     private boolean checkIfLegalArrangement(){
         return clickedItemFromListView() != null && clickedItemFromListView().getStartDate() != null;
-    }
-
-    private void setCurrentArrangement(){
-        currentArrangement = clickedItemFromListView();
     }
 
     private void deleteArrangement(){
@@ -144,11 +127,6 @@ public class AdminController extends ControllerTransferData {
         createNewView(this, currentArrangement);
     }
 
-    private void setInformationAboutArrangementInView(){
-        setTextColors(true);
-        Controller.setFieldsWithDataFromObject(currentArrangement, textFields);
-    }
-
     private void changedView(){
         currentArrangement = arrangementListView.getSelectionModel().getSelectedItem();
         if(currentArrangement == null)return;
@@ -156,9 +134,46 @@ public class AdminController extends ControllerTransferData {
         arrangementListView.refresh();
     }
 
+    private void returnToMainWindow(ActionEvent event) {
+        title = "Logg inn";
+        name = "Login.fxml";
+        closeWindow(delete);
+        createNewView(this);
+    }
+
     // --------------------------------------------------//
-    //                6.Overridden Methods               //
+    //                6.Private Search Methods           //
     // --------------------------------------------------//
+
+    // --------------------------------------------------//
+    //                7.Private setup Methods            //
+    // --------------------------------------------------//
+
+    private void setInformationAboutArrangementInView(){
+        setTextColors(true);
+        Controller.setFieldsWithDataFromObject(currentArrangement, textFields);
+    }
+
+    private void populateListView(){
+        arrangementListObservable = FXCollections.observableArrayList(Repository.queryAllArrangements());
+        arrangementListView.setItems(arrangementListObservable);
+    }
+
+    private void setCurrentArrangement(){
+        currentArrangement = clickedItemFromListView();
+    }
+
+    private void setupActionHandlers(){
+        logOut.setOnAction(this::returnToMainWindow);
+        edit.setOnAction(this::onEditClick);
+        delete.setOnAction(this::onDeleteClick);
+        arrangementListView.setOnMouseClicked(this::onListViewClick);
+    }
+
+    // --------------------------------------------------//
+    //                8.Overridden Methods               //
+    // --------------------------------------------------//
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setupActionHandlers();

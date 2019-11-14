@@ -2,8 +2,8 @@ package no.hiof.set.gruppe.GUI.controller.concrete;
 
 /*Guide
  * 1. Import Statements
- * 2. Local Fields
- * 3. FXML Fields
+ * 2. FXML Fields
+ * 3. Local fields
  * 4. On Action Methods
  * 5. Private Functional Methods
  * 6. Private Search Methods
@@ -45,7 +45,7 @@ import java.util.*;
 public class UserController extends Controller {
 
     // --------------------------------------------------//
-    //                3.FXML Fields                      //
+    //                2.FXML Fields                      //
     // --------------------------------------------------//
     @FXML
     private ListView<Arrangement>availableArrangementsListView, myArrangementsView;
@@ -64,9 +64,8 @@ public class UserController extends Controller {
     @FXML
     private Text sportHeader, addressHeader, dateHeader, participantsHeader, gOrIHeader, descriptionHeader;
 
-
     // --------------------------------------------------//
-    //                2.Local Fields                     //
+    //                3.Local Fields                     //
     // --------------------------------------------------//
     private String title = "Bruker";
     private String name = ProtoUser.USER.getViewName();
@@ -85,7 +84,47 @@ public class UserController extends Controller {
     /**
      * @param actionEvent {@link ActionEvent}
      */
-    private void onJoinClick(ActionEvent actionEvent){
+    private void onClickJoin(ActionEvent actionEvent){
+        join();
+    }
+
+    /**
+     * @param actionEvent {@link ActionEvent}
+     */
+    private void onClickLeave(ActionEvent actionEvent){
+        leave();
+    }
+
+    /**
+     * @param event {@link MouseEvent}
+     */
+    private void onClickAvailableArrangementsListView(MouseEvent event){
+        setCurrentAvailableArrangement();
+    }
+
+    /**
+     * @param event {@link MouseEvent}
+     */
+    private void onClickMyView(MouseEvent event){
+        setCurrentMyArrangement();
+    }
+
+    /**
+     * @param event {@link ActionEvent}
+     */
+    private void onClickLogOut(ActionEvent event) {
+        switchView("Logg inn", "Login.fxml");
+    }
+
+    private void onClickMyGroups(ActionEvent event){
+        switchView("Mine grupper", "Groups.fxml");
+    }
+
+    // --------------------------------------------------//
+    //            5.Private Functional Methods           //
+    // --------------------------------------------------//
+
+    private void join(){
         if(currentAvailableArrangement == null)return;
         availableObservableArrangements.remove(currentAvailableArrangement);
         myObservableArrangements.add(currentAvailableArrangement);
@@ -104,10 +143,7 @@ public class UserController extends Controller {
         myArrangementsView.refresh();
     }
 
-    /**
-     * @param actionEvent {@link ActionEvent}
-     */
-    private void onLeaveClick(ActionEvent actionEvent){
+    private void leave(){
         if(currentSelectedMyArrangement == null)return;
         myObservableArrangements.remove(currentSelectedMyArrangement);
         availableObservableArrangements.add(currentSelectedMyArrangement);
@@ -123,56 +159,11 @@ public class UserController extends Controller {
         currentSelectedMyArrangement = null;
     }
 
-    //onclick could be truncated
-    /**
-     * @param event {@link MouseEvent}
-     */
-    private void onClickListView(MouseEvent event){
-        Arrangement selectedItem = availableArrangementsListView.getSelectionModel().getSelectedItem();
-        if(selectedItem == null){return;}
-        currentAvailableArrangement = selectedItem;
-        currentSelectedArrangement = currentAvailableArrangement;
-        setInformationAboutArrangementInView();
-    }
-
-    /**
-     * @param event {@link MouseEvent}
-     */
-    private void onClickMyView(MouseEvent event){
-        Arrangement selectedItem = myArrangementsView.getSelectionModel().getSelectedItem();
-        if(selectedItem == null)return;
-        currentSelectedMyArrangement = selectedItem;
-        currentSelectedArrangement = currentSelectedMyArrangement;
-
-        if(DateTest.TestExpired.execute(currentSelectedMyArrangement.getStartDate() ,currentSelectedMyArrangement.getEndDate()))leaveBtn.setDisable(true);
-        else leaveBtn.setDisable(false);
-        setInformationAboutArrangementInView();
-    }
-
-    /**
-     * @param event {@link ActionEvent}
-     */
-    private void returnToMainWindow(ActionEvent event) {
-        title = "Logg inn";
-        name = "Login.fxml";
-        closeWindow(joinBtn);
+    private void switchView(String titleParam, String nameParam){
+        title = titleParam;
+        name = nameParam;
+        closeWindow(leaveBtn);
         createNewView(this);
-    }
-
-    private void onClickMyGroups(ActionEvent event){
-        title = "Mine grupper";
-        name = "Groups.fxml";
-        closeWindow(joinBtn);
-        createNewView(this);
-    }
-
-    // --------------------------------------------------//
-    //                5.Private Functional Methods       //
-    // --------------------------------------------------//
-    private void setInformationAboutArrangementInView(){
-        if(currentSelectedArrangement == null)return;
-        setTextColors(true);
-        Controller.setFieldsWithDataFromObject(currentSelectedArrangement, allTextFields);
     }
 
     // --------------------------------------------------//
@@ -197,7 +188,6 @@ public class UserController extends Controller {
         availableArrangementsListView.refresh();
     }
 
-    //could be truncated to one method
     /**
      * Returns a Boolean based on if the Arrangement name contains
      * And is in same category
@@ -210,7 +200,6 @@ public class UserController extends Controller {
         String search = searchAv.getText().toLowerCase();
         return title.contains(search) && categoryMatch(arrangement);
     }
-
 
     /**
      * Returns a Boolean based on match with given search string, as well
@@ -228,7 +217,6 @@ public class UserController extends Controller {
                 predicate.execute(arrangement.getStartDate(), arrangement.getEndDate());
     }
 
-    //should be truncated
     /**
      * @param arrangement {@link Arrangement}
      * @return boolean
@@ -249,6 +237,7 @@ public class UserController extends Controller {
     // --------------------------------------------------//
     //                7.Private Setup Methods            //
     // --------------------------------------------------//
+
     private void setArrangementListInformation() {
         List<Arrangement> allArrang = Repository.queryAllArrangements();
         List<Arrangement> userConnectedArrangements = Repository.queryAllUserRelatedArrangements(ProtoUser.USER);
@@ -276,13 +265,13 @@ public class UserController extends Controller {
     }
 
     private void setupActionHandlers(){
-        availableArrangementsListView.setOnMouseClicked(this::onClickListView);
+        availableArrangementsListView.setOnMouseClicked(this::onClickAvailableArrangementsListView);
         myArrangementsView.setOnMouseClicked(this::onClickMyView);
         searchMy.setOnAction(this::search);
         searchAv.setOnAction(this::searchOrg);
-        joinBtn.setOnAction(this::onJoinClick);
-        leaveBtn.setOnAction(this::onLeaveClick);
-        logOut.setOnAction(this::returnToMainWindow);
+        joinBtn.setOnAction(this::onClickJoin);
+        leaveBtn.setOnAction(this::onClickLeave);
+        logOut.setOnAction(this::onClickLogOut);
         myGroups.setOnAction(this::onClickMyGroups);
     }
 
@@ -320,9 +309,35 @@ public class UserController extends Controller {
         availableSortingOptionsMy.getSelectionModel().select(SportCategory.ALL);
     }
 
+    private void setInformationAboutArrangementInView(){
+        if(currentSelectedArrangement == null)return;
+        setTextColors(true);
+        Controller.setFieldsWithDataFromObject(currentSelectedArrangement, allTextFields);
+    }
+
+    private void setCurrentAvailableArrangement(){
+        Arrangement selectedItem = availableArrangementsListView.getSelectionModel().getSelectedItem();
+        if(selectedItem == null){return;}
+        currentAvailableArrangement = selectedItem;
+        currentSelectedArrangement = currentAvailableArrangement;
+        setInformationAboutArrangementInView();
+    }
+
+    private void setCurrentMyArrangement(){
+        Arrangement selectedItem = myArrangementsView.getSelectionModel().getSelectedItem();
+        if(selectedItem == null)return;
+        currentSelectedMyArrangement = selectedItem;
+        currentSelectedArrangement = currentSelectedMyArrangement;
+
+        if(DateTest.TestExpired.execute(currentSelectedMyArrangement.getStartDate() ,currentSelectedMyArrangement.getEndDate()))leaveBtn.setDisable(true);
+        else leaveBtn.setDisable(false);
+        setInformationAboutArrangementInView();
+    }
+
     // --------------------------------------------------//
     //                8.Overridden Methods               //
     // --------------------------------------------------//
+
     /**
      * @param location {@link URL}
      * @param resources {@link ResourceBundle}
@@ -342,7 +357,6 @@ public class UserController extends Controller {
     /**
      * @return {@link ViewInformation}
      */
-    //new method for returning information about the view
     @Override
     public ViewInformation getViewInformation() {
         return new ViewInformation(name, title);

@@ -2,8 +2,8 @@ package no.hiof.set.gruppe.GUI.controller.concrete;
 
 /*Guide
  * 1. Import Statements
- * 2. Local Fields
- * 3. FXML Fields
+ * 2. FXML Fields
+ * 3. Local fields
  * 4. On Action Methods
  * 5. Private Functional Methods
  * 6. Private Search Methods
@@ -45,14 +45,7 @@ import java.util.ResourceBundle;
 public class GroupController extends ControllerTransferData {
 
     // --------------------------------------------------//
-    //                2.Local Fields                     //
-    // --------------------------------------------------//
-    private String title = "";
-    private String name = "";
-    private ObservableList<Group> groupsList;
-    private Group selectedGroup = null;
-    // --------------------------------------------------//
-    //                3.FXML Fields                      //
+    //                2.FXML Fields                      //
     // --------------------------------------------------//
 
     @FXML
@@ -65,13 +58,20 @@ public class GroupController extends ControllerTransferData {
     private Text members, groupName, groupNameStatic, membersStatic;
 
     // --------------------------------------------------//
+    //                3.Local Fields                     //
+    // --------------------------------------------------//
+
+    private String title = "";
+    private String name = "";
+    private ObservableList<Group> groupsList;
+    private Group selectedGroup = null;
+
+    // --------------------------------------------------//
     //                4.On Action Methods                //
     // --------------------------------------------------//
 
     private void onClickNewGroupBtn(ActionEvent event) {
-        title = "Ny gruppe";
-        name = "NewAlterGroup.fxml";
-        createNewView(this, null);
+        switchToEditView();
     }
 
     private void onClickDeletBtn(ActionEvent event) {
@@ -132,6 +132,13 @@ public class GroupController extends ControllerTransferData {
         name = newName;
         closeWindow(editBtn);
         createNewView(this);
+    }
+
+    private void switchToEditView(){
+        title = "Ny gruppe";
+        name = "NewAlterGroup.fxml";
+        createNewView(this, null);
+        switchView("Ny gruppe","NewAlterGroup.fxml");
     }
 
     // --------------------------------------------------//

@@ -2,8 +2,8 @@ package no.hiof.set.gruppe.GUI.controller.concrete;
 
 /*Guide
  * 1. Import Statements
- * 2. Local Fields
- * 3. FXML Fields
+ * 2. FXML Fields
+ * 3. Local fields
  * 4. On Action Methods
  * 5. Private Functional Methods
  * 6. Private Setup Methods
@@ -46,19 +46,7 @@ import java.util.ResourceBundle;
 public class NewAlterGroupController extends ControllerTransferData {
 
     // --------------------------------------------------//
-    //                2.Local Fields                     //
-    // --------------------------------------------------//
-    private final String name = "NewAlterGroup.fxml";
-    private final String title = "Rediger";
-    private ObservableList<DummyUsers>avaliableUsersObservableList, chosenUsersObservableList;
-    private DummyUsers currentUser = null;
-    private Group groupToEdit;
-    private String grName;
-    private ArrayList<DummyUsers>members;
-    private boolean createdNewGroup = false;
-
-    // --------------------------------------------------//
-    //                3.FXML Fields                      //
+    //                2.FXML Fields                      //
     // --------------------------------------------------//
 
     @FXML
@@ -67,6 +55,19 @@ public class NewAlterGroupController extends ControllerTransferData {
     private ListView<DummyUsers> availableMembers, chosenMembers;
     @FXML
     private Button addMember, removeMember, save, cancel;
+
+    // --------------------------------------------------//
+    //                3.Local Fields                     //
+    // --------------------------------------------------//
+
+    private final String name = "NewAlterGroup.fxml";
+    private final String title = "Rediger";
+    private ObservableList<DummyUsers>avaliableUsersObservableList, chosenUsersObservableList;
+    private DummyUsers currentUser = null;
+    private Group groupToEdit;
+    private String grName;
+    private ArrayList<DummyUsers>members;
+    private boolean createdNewGroup = false;
 
     // --------------------------------------------------//
     //                4.On Action Methods                //
@@ -105,7 +106,7 @@ public class NewAlterGroupController extends ControllerTransferData {
     }
 
     // --------------------------------------------------//
-    //                5.Private Methods                  //
+    //            5.Private Functional Methods           //
     // --------------------------------------------------//
 
     private void getGroupData(){
@@ -155,8 +156,19 @@ public class NewAlterGroupController extends ControllerTransferData {
         } });
     }
 
+    private void queryGroup() {
+        ErrorExceptionHandler err;
+        try {if(!createdNewGroup)Repository.mutateObject(groupToEdit);
+        } catch (DataFormatException e) {
+            err = ErrorExceptionHandler.ERROR_WRONG_DATA_OBJECT;
+            try { ErrorExceptionHandler.createLogWithDetails(err, e);
+            } catch (IOException IOException) { err = ErrorExceptionHandler.ERROR_LOGGING_ERROR;}
+            createAlert(err);
+        }
+    }
+
     // --------------------------------------------------//
-    //                5.Private Setup Methods            //
+    //                6.Private Setup Methods            //
     // --------------------------------------------------//
 
     private void setupActionHandlers(){
@@ -201,19 +213,8 @@ public class NewAlterGroupController extends ControllerTransferData {
         currentUser = list.getSelectionModel().getSelectedItem();
     }
 
-    private void queryGroup() {
-        ErrorExceptionHandler err;
-        try {if(!createdNewGroup)Repository.mutateObject(groupToEdit);
-        } catch (DataFormatException e) {
-            err = ErrorExceptionHandler.ERROR_WRONG_DATA_OBJECT;
-            try { ErrorExceptionHandler.createLogWithDetails(err, e);
-            } catch (IOException IOException) { err = ErrorExceptionHandler.ERROR_LOGGING_ERROR;}
-            createAlert(err);
-        }
-    }
-
     // --------------------------------------------------//
-    //                6.Overridden Methods               //
+    //                7.Overridden Methods               //
     // --------------------------------------------------//
 
     @Override
