@@ -111,6 +111,7 @@ public class NewAlterGroupController extends ControllerTransferData {
      * @param event {@link Event}
      */
     private void onClickAvailableMembers(Event event){
+        setCurrentUser(availableMembers);
         checkNumberOfClicks(availableMembers);
     }
 
@@ -118,6 +119,7 @@ public class NewAlterGroupController extends ControllerTransferData {
      * @param event {@link Event}
      */
     private void onClickChosenMembers (Event event){
+        setCurrentUser(chosenMembers);
         checkNumberOfClicks(chosenMembers);
     }
 
