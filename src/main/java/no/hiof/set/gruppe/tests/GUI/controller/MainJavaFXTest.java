@@ -17,6 +17,10 @@ import java.io.IOException;
 class MainJavaFXTest {
     private String startView = "Login.fxml";
 
+    /**
+     * @param stage {@link Stage}
+     * @throws IOException
+     */
     @Start
     void start(@NotNull Stage stage) throws IOException {
         FXMLLoader loader = new FXMLLoader(MainJavaFX.class.getResource(startView));
@@ -32,5 +36,8 @@ class MainJavaFXTest {
         stage.show();
     }
 
+    /**
+     * @param name {@link String}
+     */
     void setStartView(String name){startView = name;}
 }

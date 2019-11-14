@@ -113,12 +113,19 @@ class TestSystemFunctionality {
     // --------------------------------------------------//
     //                2.Parameterized Tests              //
     // --------------------------------------------------//
+
+    /**
+     * @param str {@link String}
+     */
     @ParameterizedTest
     @ValueSource(strings = {"1\00", "\00 1", "1s", "s1", "ss'¨¨¨^", "^^^''''"})
     void illegalNumberFormatFromString(String str){
         assertFalse(Validation.ofNumber(str));
     }
 
+    /**
+     * @param str {@link String}
+     */
     @ParameterizedTest
     @ValueSource(strings = {"01", "000", "11", "22222222222"})
     void legalNumberFormatFromString(String str){

@@ -72,7 +72,10 @@ class TestingOrganizerUseCases {
         assertDataIntegrity(expectedList, Repository.queryAllUserRelatedArrangements(PROTO_USER));
     }
 
-
+    /**
+     * @param expectedArrangementList
+     * @param userArrangements
+     */
     private void assertDataIntegrity(List<Arrangement> expectedArrangementList, List<Arrangement> userArrangements) {
         assertTrue(userArrangements.containsAll(expectedArrangementList));
         assertEquals(expectedArrangementList.size(), userArrangements.size());

@@ -86,6 +86,8 @@ public class NewAlterGroupController extends ControllerTransferData {
     }
 
     /**
+     * Only saves the data if input is Valid.
+     * Uses {@link Validation} in order to validate the information.
      * @param event {@link ActionEvent}
      */
     private void onClickSave(ActionEvent event){
@@ -157,6 +159,11 @@ public class NewAlterGroupController extends ControllerTransferData {
         return !validation.IS_VALID;
     }
 
+    /**
+     * Checks which List is clicked.
+     * @param o
+     * @return boolean
+     */
     private boolean checkIfRightList(ObservableList<DummyUsers> o) {
         for (DummyUsers user : o) if (currentUser == user) return false;
         return true;
@@ -178,6 +185,9 @@ public class NewAlterGroupController extends ControllerTransferData {
         });
     }
 
+    /**
+     * Quarries edited group.
+     */
     private void queryGroup() {
         ErrorExceptionHandler err;
         try {if(!createdNewGroup)Repository.mutateObject(groupToEdit);

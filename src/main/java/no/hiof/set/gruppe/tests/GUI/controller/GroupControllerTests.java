@@ -24,6 +24,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(ApplicationExtension.class)
 class GroupControllerTests extends MainJavaFXTest{
 
+    /**
+     * @param stage {@link Stage}
+     * @throws IOException
+     */
     @Start
     void start(@NotNull Stage stage) throws IOException {
         MainJavaFXTest mainJavaFXTest = new MainJavaFXTest();
@@ -56,11 +60,22 @@ class GroupControllerTests extends MainJavaFXTest{
         robot.clickOn("#save");
     }
 
+    /**
+     * @param robot {@link FxRobot}
+     * @param listView {@link ListView}
+     */
     private void clickOnListView(@NotNull FxRobot robot, @NotNull ListView listView) {
         Set<Node> nodeList = listView.lookupAll(".list-cell");
         Node[] arr = nodeList.toArray(Node[]::new);
         robot.clickOn(arr[0]);
     }
 
+    /**
+     * @param robot {@link FxRobot}
+     * @param node {@link String}
+     * @param queryAs {@link Class<T>}
+     * @param <T> {@link Node}
+     * @return <T
+     */
     private <T extends Node> T getNode(FxRobot robot , String node, Class<T> queryAs){ return robot.lookup(node).queryAs(queryAs); }
 }
