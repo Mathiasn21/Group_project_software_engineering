@@ -96,13 +96,11 @@ public class NewAlterGroupController extends ControllerTransferData {
     }
 
     private void onClickAvailableMembers(Event event){
-        setCurrentUser(availableMembers);
-        listViewDoubleClick(availableMembers);
+        checkNumberOfClicks(availableMembers);
     }
 
     private void onClickChosenMembers (Event event){
-        setCurrentUser(chosenMembers);
-        listViewDoubleClick(chosenMembers);
+        checkNumberOfClicks(chosenMembers);
     }
 
     // --------------------------------------------------//
@@ -148,12 +146,17 @@ public class NewAlterGroupController extends ControllerTransferData {
         return true;
     }
 
-    private void listViewDoubleClick(ListView listView){
-        listView.setOnMouseClicked(click -> { if(click.getClickCount() == 2) {
-            setCurrentUser(listView);
-            addChosenMember();
-            removeChosenMember();
-        } });
+    private void checkNumberOfClicks(ListView listView){
+        listView.setOnMouseClicked(click -> {
+            if(click.getClickCount() == 2) {
+                setCurrentUser(listView);
+                addChosenMember();
+                removeChosenMember();
+            }
+            if(click.getClickCount() == 1){
+                setCurrentUser(listView);
+            }
+        });
     }
 
     private void queryGroup() {

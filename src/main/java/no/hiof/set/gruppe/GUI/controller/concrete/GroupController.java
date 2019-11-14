@@ -71,7 +71,7 @@ public class GroupController extends ControllerTransferData {
     // --------------------------------------------------//
 
     private void onClickNewGroupBtn(ActionEvent event) {
-        switchToEditView();
+        newGroup();
     }
 
     private void onClickDeletBtn(ActionEvent event) {
@@ -80,7 +80,7 @@ public class GroupController extends ControllerTransferData {
 
     private void onClickEditBtn(ActionEvent event) {
         if(selectedGroup == null)return;
-        editGroup();
+        alterGroup();
     }
 
     private void onClickMyIndividualArrangementsBtn(ActionEvent event) {
@@ -121,10 +121,16 @@ public class GroupController extends ControllerTransferData {
         groupsListview.refresh();
     }
 
-    private void editGroup(){
+    private void alterGroup(){
         title = "Rediger gruppe";
         name = "NewAlterGroup.fxml";
         createNewView(this, selectedGroup);
+    }
+
+    private void newGroup(){
+        title = "Ny gruppe";
+        name = "NewAlterGroup.fxml";
+        createNewView(this);
     }
 
     private void switchView(String newTitle, String newName){
@@ -132,13 +138,6 @@ public class GroupController extends ControllerTransferData {
         name = newName;
         closeWindow(editBtn);
         createNewView(this);
-    }
-
-    private void switchToEditView(){
-        title = "Ny gruppe";
-        name = "NewAlterGroup.fxml";
-        createNewView(this, null);
-        switchView("Ny gruppe","NewAlterGroup.fxml");
     }
 
     // --------------------------------------------------//
