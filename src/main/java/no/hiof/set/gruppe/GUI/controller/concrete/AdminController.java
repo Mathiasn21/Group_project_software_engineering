@@ -74,6 +74,9 @@ public class AdminController extends ControllerTransferData {
     //                4.On action Methods                //
     // --------------------------------------------------//
 
+    /**
+     * @param event {@link ActionEvent}
+     */
     private void onDeleteClick(ActionEvent event){
         if(checkIfLegalArrangement()){
             deleteArrangement();
@@ -81,12 +84,18 @@ public class AdminController extends ControllerTransferData {
         }
     }
 
+    /**
+     * @param event {@link ActionEvent}
+     */
     private void onEditClick(ActionEvent event){
         if(checkIfLegalArrangement()){
             editArrangement();
         }
     }
 
+    /**
+     * @param mouseEvent {@link MouseEvent}
+     */
     private void onListViewClick(MouseEvent mouseEvent){
         if(checkIfLegalArrangement()){
             setCurrentArrangement();
@@ -98,10 +107,16 @@ public class AdminController extends ControllerTransferData {
     //                5.Private Functional Methods       //
     // --------------------------------------------------//
 
+    /**
+     * @return Arrangement
+     */
     private Arrangement clickedItemFromListView(){
         return arrangementListView.getSelectionModel().getSelectedItem();
     }
 
+    /**
+     * @return boolean
+     */
     private boolean checkIfLegalArrangement(){
         return clickedItemFromListView() != null && clickedItemFromListView().getStartDate() != null;
     }
@@ -174,6 +189,10 @@ public class AdminController extends ControllerTransferData {
     //                8.Overridden Methods               //
     // --------------------------------------------------//
 
+    /**
+     * @param location {@link URL}
+     * @param resources {@link ResourceBundle}
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setupActionHandlers();
@@ -182,13 +201,18 @@ public class AdminController extends ControllerTransferData {
         textFields = new Text[]{arrangementName, arrangementSport, arrangementAdress, arrangementDate, arrangementParticipants, arrangementGorI, arrangementDescription};
     }
 
+    /**
+     * Refreshes the view
+     */
     @Override
     public void updateView(){
-
         if(currentArrangement == null)return;
         changedView();
     }
 
+    /**
+     * @return Object
+     */
     @Override
     public Object getDataObject() {
         currentArrangement = arrangementListView.getSelectionModel().getSelectedItem();
@@ -200,11 +224,17 @@ public class AdminController extends ControllerTransferData {
         setInformationAboutArrangementInView();
     }
 
+    /**
+     * @return {@link ViewInformation}
+     */
     @Override
     public ViewInformation getViewInformation() {
         return new ViewInformation(name, title);
     }
 
+    /**
+     * @param tf
+     */
     private void setTextColors(boolean tf) {
         colorizeText(tf, sportHeader, adresHeader, dateHeader, gOrIHeader, participantsHeader, descriptionHeader);
     }

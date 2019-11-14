@@ -116,6 +116,9 @@ public class UserController extends Controller {
         switchView("Logg inn", "Login.fxml");
     }
 
+    /**
+     * @param event {@link ActionEvent}
+     */
     private void onClickMyGroups(ActionEvent event){
         switchView("Mine grupper", "Groups.fxml");
     }
@@ -159,6 +162,10 @@ public class UserController extends Controller {
         currentSelectedMyArrangement = null;
     }
 
+    /**
+     * @param titleParam
+     * @param nameParam
+     */
     private void switchView(String titleParam, String nameParam){
         title = titleParam;
         name = nameParam;
@@ -362,6 +369,9 @@ public class UserController extends Controller {
         return new ViewInformation(name, title);
     }
 
+    /**
+     * @param tf
+     */
     private void setTextColors(boolean tf) {
         colorizeText(tf, sportHeader, addressHeader, dateHeader, participantsHeader, gOrIHeader, descriptionHeader);
     }

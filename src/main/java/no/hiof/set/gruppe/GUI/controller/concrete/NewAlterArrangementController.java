@@ -129,10 +129,16 @@ public class NewAlterArrangementController extends ControllerTransferData {
         }
     }
 
+    /**
+     * @return boolean
+     */
     private boolean checkLengthOfAllFields(){
         return arrName.length() == 0 || sport.length() == 0 || partic.length() == 0 || desc.length() == 0 || address.length() == 0 || startDateInput.getValue() == null || endDateInput.getValue() == null;
     }
 
+    /**
+     * @return boolean
+     */
     private boolean illegalNumberFormat(){
         if(!Validation.ofNumber(partic)){
             setErrorField("Antall deltakere har ikke gyldig nummer format.");
@@ -141,6 +147,9 @@ public class NewAlterArrangementController extends ControllerTransferData {
         return false;
     }
 
+    /**
+     * @return boolean
+     */
     private boolean validateArrangementData(){
         ValidationResult result = Validation.ofArrangement(arrangementToEdit);
         if(!result.IS_VALID){
@@ -149,6 +158,9 @@ public class NewAlterArrangementController extends ControllerTransferData {
         return !result.IS_VALID;
     }
 
+    /**
+     * @return int
+     */
     private int getSportIndex(){
         ObservableList list = FXCollections.observableArrayList(SportCategory.values());
         for(int i = 0; i < list.size(); i++){
@@ -157,6 +169,9 @@ public class NewAlterArrangementController extends ControllerTransferData {
         return 0;
     }
 
+    /**
+     * @return int
+     */
     private int getGroupCategoryIndex(){
         if(arrangementToEdit.isGroup())return 0;
         return 1;
@@ -180,7 +195,7 @@ public class NewAlterArrangementController extends ControllerTransferData {
     }
 
     /**
-     * @param result String
+     * @param result
      */
     private void setErrorField(String result) {
         ErrorField.setText(result);
@@ -252,7 +267,6 @@ public class NewAlterArrangementController extends ControllerTransferData {
     /**
      * @return {@link ViewInformation}
      */
-    //new method for returning information about the view
     @Override
     public ViewInformation getViewInformation() { return new ViewInformation(name, title); }
 

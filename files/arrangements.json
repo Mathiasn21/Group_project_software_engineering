@@ -42,5 +42,27 @@
     "description": "hjghjghj",
     "participants": 345,
     "group": false
+  },
+  {
+    "ID": "f4fd7c4a-6642-499f-a53a-67250143e8f4",
+    "name": "tyjtgh",
+    "sport": "Sykkelritt",
+    "address": "hjhjg",
+    "startDate": "2019-12-08",
+    "endDate": "2019-12-08",
+    "description": "jhkjhk",
+    "participants": 666,
+    "group": true
+  },
+  {
+    "ID": "6649d0cb-b5ff-4ec1-bfd2-3f9561d271ab",
+    "name": "ghjghj",
+    "sport": "Sykkelritt",
+    "address": "jhkjh",
+    "startDate": "2020-11-06",
+    "endDate": "2022-12-16",
+    "description": "jjjjjj",
+    "participants": 888,
+    "group": true
   }
 ]

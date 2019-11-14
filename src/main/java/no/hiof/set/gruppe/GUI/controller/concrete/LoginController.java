@@ -74,6 +74,9 @@ public class LoginController extends Controller {
         login();
     }
 
+    /**
+     * @param event {@link ActionEvent}
+     */
     private void onClickCancel(ActionEvent event){
         closeWindow(cancel);
     }

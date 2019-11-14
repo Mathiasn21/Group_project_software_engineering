@@ -13,16 +13,15 @@ package no.hiof.set.gruppe.GUI.controller.concrete;
     // --------------------------------------------------//
     //                1.Import Statements                //
     // --------------------------------------------------//
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import no.hiof.set.gruppe.GUI.controller.abstractions.ControllerTransferData;
 import no.hiof.set.gruppe.core.Repository;
 import no.hiof.set.gruppe.core.exceptions.DataFormatException;
@@ -32,7 +31,6 @@ import no.hiof.set.gruppe.model.ValidationResult;
 import no.hiof.set.gruppe.GUI.model.ViewInformation;
 import no.hiof.set.gruppe.model.constantInformation.DummyUsers;
 import no.hiof.set.gruppe.core.validations.Validation;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -73,14 +71,23 @@ public class NewAlterGroupController extends ControllerTransferData {
     //                4.On Action Methods                //
     // --------------------------------------------------//
 
+    /**
+     * @param event {@link ActionEvent}
+     */
     private void onClickAddMember(ActionEvent event){
         addChosenMember();
     }
 
+    /**
+     * @param event {@link ActionEvent}
+     */
     private void onClickRemoveMember(ActionEvent event){
         removeChosenMember();
     }
 
+    /**
+     * @param event {@link ActionEvent}
+     */
     private void onClickSave(ActionEvent event){
         getGroupData();
         setGropData();
@@ -89,16 +96,25 @@ public class NewAlterGroupController extends ControllerTransferData {
         queryGroup();
     }
 
+    /**
+     * @param event {@link ActionEvent}
+     */
     private void onClickCancel(ActionEvent event){
         groupToEdit = null;
         createdNewGroup = false;
         closeWindow(cancel);
     }
 
+    /**
+     * @param event {@link Event}
+     */
     private void onClickAvailableMembers(Event event){
         checkNumberOfClicks(availableMembers);
     }
 
+    /**
+     * @param event {@link Event}
+     */
     private void onClickChosenMembers (Event event){
         checkNumberOfClicks(chosenMembers);
     }
@@ -146,15 +162,18 @@ public class NewAlterGroupController extends ControllerTransferData {
         return true;
     }
 
+    /**
+     * @param listView
+     */
     private void checkNumberOfClicks(ListView listView){
         listView.setOnMouseClicked(click -> {
+            if(click.getClickCount() == 1){
+                setCurrentUser(listView);
+            }
             if(click.getClickCount() == 2) {
                 setCurrentUser(listView);
                 addChosenMember();
                 removeChosenMember();
-            }
-            if(click.getClickCount() == 1){
-                setCurrentUser(listView);
             }
         });
     }
@@ -190,6 +209,9 @@ public class NewAlterGroupController extends ControllerTransferData {
         fillListViews();
     }
 
+    /**
+     * Removes already chosen members from available members.
+     */
     private void filterMemberLists(){
         for(int i = 0; i < avaliableUsersObservableList.size(); i++) {
             for (DummyUsers dummyUser : chosenUsersObservableList) {
@@ -220,22 +242,36 @@ public class NewAlterGroupController extends ControllerTransferData {
     //                7.Overridden Methods               //
     // --------------------------------------------------//
 
+    /**
+     * @param location {@link URL}
+     * @param resources {@link ResourceBundle}
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setupActionHandlers();
         setAvaliableMembers();
     }
 
+    /**
+     * @return Object
+     */
     @Override
     public Object getDataObject() {
         return groupToEdit;
     }
 
+    /**
+     * @return boolean
+     */
     @Override
     public boolean hasNewObject(){
         return createdNewGroup;
     }
 
+    /**
+     * Setups the view and its data fields.
+     * @param object Object
+     */
     @Override
     public void setDataFields(Object object) {
         if(object instanceof Group){
@@ -246,6 +282,9 @@ public class NewAlterGroupController extends ControllerTransferData {
         }
     }
 
+    /**
+     * @return {@link ViewInformation}
+     */
     @Override
     public ViewInformation getViewInformation() {
         return new ViewInformation(name, title);

@@ -70,27 +70,45 @@ public class GroupController extends ControllerTransferData {
     //                4.On Action Methods                //
     // --------------------------------------------------//
 
+    /**
+     * @param event {@link ActionEvent}
+     */
     private void onClickNewGroupBtn(ActionEvent event) {
         newGroup();
     }
 
+    /**
+     * @param event {@link ActionEvent}
+     */
     private void onClickDeletBtn(ActionEvent event) {
         deleteGroup();
     }
 
+    /**
+     * @param event {@link ActionEvent}
+     */
     private void onClickEditBtn(ActionEvent event) {
         if(selectedGroup == null)return;
         alterGroup();
     }
 
+    /**
+     * @param event {@link ActionEvent}
+     */
     private void onClickMyIndividualArrangementsBtn(ActionEvent event) {
         switchView("Mine arrangementer","User.fxml");
     }
 
+    /**
+     * @param event {@link ActionEvent}
+     */
     private void onClickLogoutBtn(ActionEvent event) {
         switchView("Logg inn", "Login.fxml");
     }
 
+    /**
+     * @param event {@link ActionEvent}
+     */
     private void onClickGroupsListView(MouseEvent event) {
         changedView();
         groupsListview.refresh();
@@ -177,6 +195,10 @@ public class GroupController extends ControllerTransferData {
     //                8.Overridden Methods               //
     // --------------------------------------------------//
 
+    /**
+     * @param location {@link URL}
+     * @param resources {@link ResourceBundle}
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setupActionHandlers();
@@ -184,12 +206,20 @@ public class GroupController extends ControllerTransferData {
         setTextColors(false);
     }
 
+    /**
+     * @return Object
+     */
     @Override
     public Object getDataObject() {
         selectedGroup = groupsListview.getSelectionModel().getSelectedItem();
         return selectedGroup;
     }
 
+    /**
+     * Handles data setup and interaction from other controllers.
+     * @param object Object
+     * @throws DataFormatException Exception
+     */
     @Override
     public void setDataFields(Object object) throws DataFormatException {
         if(!(object instanceof Group)) throw new DataFormatException();
@@ -211,17 +241,26 @@ public class GroupController extends ControllerTransferData {
         changedView();
     }
 
+    /**
+     * Refreshes the view
+     */
     @Override
     public void updateView(){
         if(selectedGroup == null)return;
         changedView();
     }
 
+    /**
+     * @return {@link ViewInformation}
+     */
     @Override
     public ViewInformation getViewInformation() {
         return new ViewInformation(name, title);
     }
 
+    /**
+     * @param tf
+     */
     private void setTextColors(boolean tf){
         colorizeText(tf, groupNameStatic, membersStatic);
     }
