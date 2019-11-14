@@ -225,13 +225,7 @@ public class NewAlterGroupController extends ControllerTransferData {
      * Removes already chosen members from available members.
      */
     private void filterMemberLists(){
-        for(int i = 0; i < avaliableUsersObservableList.size(); i++) {
-            for (DummyUsers dummyUser : chosenUsersObservableList) {
-                if (avaliableUsersObservableList.get(i) == dummyUser) {
-                    avaliableUsersObservableList.remove(avaliableUsersObservableList.get(i));
-                }
-            }
-        }
+        avaliableUsersObservableList.removeAll(chosenUsersObservableList);
     }
 
     private void setAvaliableMembers(){
