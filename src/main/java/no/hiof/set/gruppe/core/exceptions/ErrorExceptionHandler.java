@@ -2,9 +2,9 @@ package no.hiof.set.gruppe.core.exceptions;
 
 /*Guide
  * 1. Import Statements
- * 2. Constants
- * 3. Instance variables
- * 4. Constructs
+ * 2. Enums
+ * 3. Instance Variables
+ * 4. Constructor
  * 5. Public Methods
  * */
 
@@ -21,7 +21,7 @@ import java.io.PrintStream;
 
 public enum ErrorExceptionHandler {
     // --------------------------------------------------//
-    //                2.Constants                        //
+    //                2.Enums                            //
     // --------------------------------------------------//
     ERROR_MISSING_RESOURCES(2, "Missing resources, please make sure no files are missing."),
     ERROR_OPENING_WINDOW (4, "Could not open window."),
@@ -35,7 +35,7 @@ public enum ErrorExceptionHandler {
     ERROR_LOGIN(13, "ERROR, invalid user information.");
 
     // --------------------------------------------------//
-    //                3.Instance variables               //
+    //                3.Instance Variables               //
     // --------------------------------------------------//
     public final int CODE;
     public final String ERROR_MSG;

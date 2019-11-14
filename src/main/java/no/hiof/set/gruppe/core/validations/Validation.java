@@ -2,9 +2,9 @@ package no.hiof.set.gruppe.core.validations;
 
 /*Guide
  * 1. Import Statements
- * 2. Constants
- * 3. Contracts
- * 4. Public Static Methods
+ * 2. Static Constants
+ * 3. Validation Of Methods
+ * 4. Private Helper Methods
  * */
 
 // --------------------------------------------------//
@@ -29,7 +29,7 @@ import java.util.regex.Pattern;
 public class Validation{
 
     // --------------------------------------------------//
-    //                2.Local Fields                     //
+    //                2.Static Constants                 //
     // --------------------------------------------------//
     private static final String textNotNullPattern = "[^\0]+";
     private static final String numPattern = "[0-9]+";
@@ -38,7 +38,7 @@ public class Validation{
     private static final int minNameL = 2;
 
     // --------------------------------------------------//
-    //                3.Contracts                        //
+    //                3.Validation Of Methods            //
     // --------------------------------------------------//
     /**
      * Validates an arrangement
@@ -102,9 +102,6 @@ public class Validation{
         return  new ValidationResult(res.toString(), res.length() == 0);
     }
 
-    // --------------------------------------------------//
-    //                4.Public Static Methods            //
-    // --------------------------------------------------//
     /**
      * @param num String
      * @return boolean
@@ -113,6 +110,10 @@ public class Validation{
         return regCheck(numPattern, num);
     }
 
+
+    // --------------------------------------------------//
+    //                4.Private Helper Methods           //
+    // --------------------------------------------------//
     /**
      * Tests if number is between two numbers, inclusive both ends.
      * @param min int

@@ -2,8 +2,8 @@ package no.hiof.set.gruppe.core.predicates;
 
 /*Guide
  * 1. Import Statements
- * 2. Constants
- * 3. Contracts
+ * 2. Enums
+ * 3. Helper Methods
  * */
 
 // --------------------------------------------------//
@@ -23,7 +23,7 @@ import java.util.Comparator;
 public enum ArrangementSort {
 
     // --------------------------------------------------//
-    //                2.Constants                        //
+    //                2.Enums                            //
     // --------------------------------------------------//
     COMP_NAME_ASC((ob1, ob2) -> ob1.getName().toLowerCase().compareTo(ob2.getName().toLowerCase())),
     COMP_DATE_ASC((ob1, ob2) -> ob1.getStartDate().compareTo(ob2.getStartDate())),
@@ -33,7 +33,7 @@ public enum ArrangementSort {
     private final Comparator<? super Arrangement> comparator;
 
     // --------------------------------------------------//
-    //                3.Contracts                        //
+    //                3.Helper Methods                   //
     // --------------------------------------------------//
     /**
      * @param comparator {@link Comparator}

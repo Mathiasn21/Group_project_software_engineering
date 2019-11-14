@@ -2,7 +2,7 @@ package no.hiof.set.gruppe.core.validations;
 
 /*Guide
  * 1. Import Statements
- * 2. Contracts
+ * 2. Validations Methods
  * */
 
 // --------------------------------------------------//
@@ -21,7 +21,7 @@ import org.jetbrains.annotations.NotNull;
 public final class AccessValidate {
 
     // --------------------------------------------------//
-    //                2.Contracts                        //
+    //                2.Validations Methods              //
     // --------------------------------------------------//
     /**
      * @param arrangement {@link Arrangement}

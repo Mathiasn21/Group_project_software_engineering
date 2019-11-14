@@ -1,9 +1,9 @@
 package no.hiof.set.gruppe.core;
 /*Guide
  * 1. Import Statements
- * 2. Local Fields
+ * 2. Static Fields
  * 3. Handle Json and File saving
- * 4. Public Mutators
+ * 4. Private Query Data
  * 5. Public Data Removal
  * 6. Public Getters
  * */
@@ -34,14 +34,13 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Main class and logic for handling data, both storage and retrieval.
- * Interacting with this object is done via the interface IDataHandler.
+ * Core Repository for interacting with data.
  * @author Gruppe4
  */
 public final class Repository {
 
     // --------------------------------------------------//
-    //                2.Local Fields                     //
+    //                2.Static Fields                    //
     // --------------------------------------------------//
     private static List<Arrangement> listOfAllArrangements;
     private static List<Group> listOfAllGroups;
@@ -55,6 +54,7 @@ public final class Repository {
             listOfAllUserConnectedArrangements = queryDataGivenType(UserConnectedArrangement[].class);
             listOfAllGroups = queryDataGivenType(Group[].class);
 
+
         }catch (IOException | DataFormatException e){
             try {ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_READING_DATA, e);}
             catch (IOException ex) {ex.printStackTrace();}
@@ -62,37 +62,45 @@ public final class Repository {
     }
 
     // --------------------------------------------------//
-    //                4.Private Handle Reading Data      //
+    //                4.Private Query Data               //
     // --------------------------------------------------//
-    private static void deleteUserConnectedArrangements(String ID){
-        for (int i = 0; i < listOfAllUserConnectedArrangements.size(); i++){
-            UserConnectedArrangement userArr = listOfAllUserConnectedArrangements.get(i);
-            if(userArr.getID().equals(ID)){
-                listOfAllUserConnectedArrangements.remove(userArr);
-                i--;
-            }
-        }
-    }
-
+    /**
+     * @param tClassArr T[].class
+     * @param <T> T
+     * @return List T
+     * @throws IOException IOException
+     * @throws DataFormatException DataFormatException
+     */
     private static <T> List<T> queryDataGivenType(Class<T[]> tClassArr) throws IOException, DataFormatException {
         return handleData.queryAllDataGivenType(tClassArr);
     }
 
+
     // --------------------------------------------------//
-    //                4.Private Handle Saving Data       //
+    //                4.Private Store Data               //
     // --------------------------------------------------//
+    /**
+     * @throws DataFormatException DataFormatException
+     */
     private static void storeArrangementsData() throws DataFormatException {
         handleData.storeDataGivenType(Arrangement[].class, listOfAllArrangements.toArray(Arrangement[]::new));
         storeUserArrangements();
     }
 
+    /**
+     * @throws DataFormatException DataFormatException
+     */
     private static void storeGroupData() throws DataFormatException {
         handleData.storeDataGivenType(Group[].class, listOfAllGroups.toArray(Group[]::new));
     }
 
+    /**
+     * @throws DataFormatException DataFormatException
+     */
     private static void storeUserArrangements() throws DataFormatException {
         handleData.storeDataGivenType(UserConnectedArrangement[].class, listOfAllUserConnectedArrangements.toArray(UserConnectedArrangement[]::new));
     }
+
 
     // --------------------------------------------------//
     //                4.Public Mutators                  //
@@ -105,7 +113,6 @@ public final class Repository {
         listOfAllUserConnectedArrangements.add(new UserConnectedArrangement(arrangement.getID(), protoUser.getName()));
         storeArrangementsData();
     }
-
     /**
      * @param arrangement {@link Arrangement}
      * @param protoUser {@link ProtoUser}
@@ -145,11 +152,21 @@ public final class Repository {
         }else{throw new DataFormatException();}
     }
 
+
     // --------------------------------------------------//
     //                5.Public Data Removal              //
     // --------------------------------------------------//
+    private static void deleteUserConnectedArrangements(String ID){
+        for (int i = 0; i < listOfAllUserConnectedArrangements.size(); i++){
+            UserConnectedArrangement userArr = listOfAllUserConnectedArrangements.get(i);
+            if(userArr.getID().equals(ID)){
+                listOfAllUserConnectedArrangements.remove(userArr);
+                i--;
+            }
+        }
+    }
     /**
-     * @param arrangement {@link Arrangement}
+     * @param thatArrangement {@link Arrangement}
      * @param protoUser {@link ProtoUser}
      * @throws IllegalDataAccess illegalAccess{@link IllegalDataAccess}
      */
