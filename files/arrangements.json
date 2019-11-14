@@ -1,16 +1,5 @@
 [
   {
-    "ID": "d52665f4-38f1-4b56-b24d-9d760adc7102",
-    "name": "Børres BrokkoliThisIsNerdy mani",
-    "sport": "Sykkelritt",
-    "address": "Brokkolivegen NerdStreet - 2228",
-    "startDate": "2020-11-09",
-    "endDate": "2020-12-09",
-    "description": "Masse spising og løing med brokkoliVery Nerdy.",
-    "participants": 36400,
-    "group": false
-  },
-  {
     "ID": "edbbbe0a-468b-4943-86bb-682936015acf",
     "name": "The nerds show",
     "sport": "Annet",
@@ -30,6 +19,17 @@
     "endDate": "2020-09-29",
     "description": "wdawdegsgdtreafrtdhrg",
     "participants": 23,
+    "group": false
+  },
+  {
+    "ID": "d52665f4-38f1-4b56-b24d-9d760adc7102",
+    "name": "Børres Brokkoli Fest",
+    "sport": "Sykkelritt",
+    "address": "Brokkolivegen NerdStreet - 2228",
+    "startDate": "2020-10-26",
+    "endDate": "2020-11-30",
+    "description": "Masse spising av brokkoli",
+    "participants": 36400,
     "group": false
   }
 ]

@@ -1,21 +1,5 @@
 [
   {
-    "name": "hei",
-    "ID": "dac47880-9dc6-4e7b-b3ac-9e7bc13dba45",
-    "members": [
-      "USER7",
-      "USER10",
-      "USER6",
-      "USER5",
-      "USER8",
-      "USER3",
-      "USER4",
-      "USER6",
-      "USER9",
-      "USER2"
-    ]
-  },
-  {
     "name": "ooooo",
     "ID": "b6a04841-30d3-44c3-9d31-09309fd5dbc5",
     "members": [
@@ -75,6 +59,22 @@
     "members": [
       "USER9",
       "USER6",
+      "USER1"
+    ]
+  },
+  {
+    "name": "hei",
+    "ID": "dac47880-9dc6-4e7b-b3ac-9e7bc13dba45",
+    "members": [
+      "USER10",
+      "USER6",
+      "USER5",
+      "USER8",
+      "USER3",
+      "USER4",
+      "USER6",
+      "USER9",
+      "USER2",
       "USER1"
     ]
   }
