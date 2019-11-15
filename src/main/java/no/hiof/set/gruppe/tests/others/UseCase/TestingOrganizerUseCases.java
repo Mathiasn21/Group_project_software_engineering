@@ -42,6 +42,7 @@ class TestingOrganizerUseCases {
             "2019-10-16",
             "Dette varer i hele 1 dager. Og, server null formål.");
     private static final ProtoUser PROTO_USER = ProtoUser.ORGANIZER;
+    private static final Repository repository = new Repository();
 
     // --------------------------------------------------//
     //                3.Unit Tests                       //
@@ -52,11 +53,11 @@ class TestingOrganizerUseCases {
     @Test
     @Order(1)
     void firstAddArrangement() throws IllegalDataAccess, DataFormatException {
-        List<Arrangement> expectedList = Repository.queryAllUserRelatedArrangements(PROTO_USER);
+        List<Arrangement> expectedList = repository.queryAllUserRelatedArrangements(PROTO_USER);
         expectedList.add(arrangement);
-        Repository.insertArrangement(arrangement, PROTO_USER);
+        repository.insertArrangement(arrangement, PROTO_USER);
 
-        assertDataIntegrity(expectedList, Repository.queryAllUserRelatedArrangements(PROTO_USER));
+        assertDataIntegrity(expectedList, repository.queryAllUserRelatedArrangements(PROTO_USER));
     }
 
     /**
@@ -65,11 +66,11 @@ class TestingOrganizerUseCases {
     @Test
     @Order(2)
     void thenDeleteArrangement() throws IllegalDataAccess, DataFormatException {
-        List<Arrangement> expectedList = Repository.queryAllUserRelatedArrangements(PROTO_USER);
+        List<Arrangement> expectedList = repository.queryAllUserRelatedArrangements(PROTO_USER);
         expectedList.remove(arrangement);
-        Repository.deleteArrangement(arrangement, PROTO_USER);
+        repository.deleteArrangement(arrangement, PROTO_USER);
 
-        assertDataIntegrity(expectedList, Repository.queryAllUserRelatedArrangements(PROTO_USER));
+        assertDataIntegrity(expectedList, repository.queryAllUserRelatedArrangements(PROTO_USER));
     }
 
     /**

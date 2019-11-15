@@ -65,6 +65,8 @@ public class GroupController extends ControllerTransferData {
     private String name = "";
     private ObservableList<Group> groupsList;
     private Group selectedGroup = null;
+    private final Repository repository = new Repository();
+
 
     // --------------------------------------------------//
     //                4.On Action Methods                //
@@ -120,7 +122,7 @@ public class GroupController extends ControllerTransferData {
     private void deleteGroup(){
         Group selectedItem = groupsListview.getSelectionModel().getSelectedItem();
         try {
-            Repository.deleteGroup(selectedItem);
+            repository.deleteGroup(selectedItem);
             groupsList.remove(selectedItem);
             clearFields();
             changedView();
@@ -176,7 +178,7 @@ public class GroupController extends ControllerTransferData {
     }
 
     private void populateListView(){
-        groupsList = FXCollections.observableArrayList(Repository.queryAllGroups());
+        groupsList = FXCollections.observableArrayList(repository.queryAllGroups());
         groupsListview.setItems(groupsList);
     }
 
@@ -227,7 +229,7 @@ public class GroupController extends ControllerTransferData {
         SelectionModel model = groupsListview.getSelectionModel();
 
         try {
-            Repository.insertGroup(group);
+            repository.insertGroup(group);
             groupsList.add(group);
 
         } catch (IllegalAccessError illegalAccessError) {

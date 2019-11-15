@@ -34,11 +34,13 @@ class TestingProtoUserUseCases {
     private static final List<Arrangement> userArrangements;
     private static final List<Arrangement> notUserArrangements;
     private static Arrangement arrangementToTest;
+    private static final Repository repository = new Repository();
+
 
     //setup
     static {
-        userArrangements = Repository.queryAllUserRelatedArrangements(PROTO_USER);
-        notUserArrangements = Repository.queryAllArrangements();
+        userArrangements = repository.queryAllUserRelatedArrangements(PROTO_USER);
+        notUserArrangements = repository.queryAllArrangements();
         notUserArrangements.removeAll(userArrangements);
     }
 
@@ -54,8 +56,8 @@ class TestingProtoUserUseCases {
         arrangementToTest = notUserArrangements.get(0);
         userArrangements.add(arrangementToTest);
 
-        Repository.insertUserToArrangement(arrangementToTest, PROTO_USER);
-        assertDataIntegrity(Repository.queryAllUserRelatedArrangements(PROTO_USER));
+        repository.insertUserToArrangement(arrangementToTest, PROTO_USER);
+        assertDataIntegrity(repository.queryAllUserRelatedArrangements(PROTO_USER));
     }
 
      /**
@@ -64,10 +66,10 @@ class TestingProtoUserUseCases {
     @Test
     @Order(2)
     void thenRemoveUserFromArrangement() throws DataFormatException {
-        Repository.deleteUserFromArrangement(arrangementToTest, PROTO_USER);
+        repository.deleteUserFromArrangement(arrangementToTest, PROTO_USER);
         userArrangements.remove(arrangementToTest);
-        Repository.deleteUserFromArrangement(arrangementToTest, PROTO_USER);
-        assertDataIntegrity(Repository.queryAllUserRelatedArrangements(PROTO_USER));
+        repository.deleteUserFromArrangement(arrangementToTest, PROTO_USER);
+        assertDataIntegrity(repository.queryAllUserRelatedArrangements(PROTO_USER));
     }
 
     private void assertDataIntegrity(List<Arrangement> expectedArrangementList) {

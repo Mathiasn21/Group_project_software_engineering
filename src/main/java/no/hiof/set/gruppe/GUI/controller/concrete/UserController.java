@@ -76,6 +76,7 @@ public class UserController extends Controller {
     private Arrangement currentSelectedArrangement;
     private final ToggleGroup radioBtns = new ToggleGroup();
     private Text[] allTextFields;
+    private final Repository repository = new Repository();
 
     // --------------------------------------------------//
     //                4.On Action Methods                //
@@ -133,7 +134,7 @@ public class UserController extends Controller {
         myObservableArrangements.add(currentAvailableArrangement);
 
         try {
-            Repository.insertUserToArrangement(currentAvailableArrangement, ProtoUser.USER);
+            repository.insertUserToArrangement(currentAvailableArrangement, ProtoUser.USER);
         } catch (DataFormatException illegalDataAccess) {
             try { ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_ACCESSING_DATA, illegalDataAccess); }
             catch (IOException e) {e.printStackTrace();}
@@ -152,7 +153,7 @@ public class UserController extends Controller {
         availableObservableArrangements.add(currentSelectedMyArrangement);
 
         try {
-            Repository.deleteUserFromArrangement(currentSelectedMyArrangement, ProtoUser.USER);
+            repository.deleteUserFromArrangement(currentSelectedMyArrangement, ProtoUser.USER);
         } catch (DataFormatException illegalDataAccess) {
             try { ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_ACCESSING_DATA, illegalDataAccess); }
             catch (IOException e) {e.printStackTrace();}
@@ -278,8 +279,8 @@ public class UserController extends Controller {
     // --------------------------------------------------//
 
     private void setArrangementListInformation() {
-        List<Arrangement> allArrang = Repository.queryAllArrangements();
-        List<Arrangement> userConnectedArrangements = Repository.queryAllUserRelatedArrangements(ProtoUser.USER);
+        List<Arrangement> allArrang = repository.queryAllArrangements();
+        List<Arrangement> userConnectedArrangements = repository.queryAllUserRelatedArrangements(ProtoUser.USER);
 
         allArrang.removeAll(userConnectedArrangements);
         allArrang.removeIf((arrangement) -> DateTest.TestExpired.execute(arrangement.getStartDate(), arrangement.getEndDate()));

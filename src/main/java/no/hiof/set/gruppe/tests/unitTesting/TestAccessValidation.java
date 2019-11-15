@@ -34,6 +34,7 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
  * as well as login access.
  */
 class TestAccessValidation {
+    private final Repository repository = new Repository();
 
     // --------------------------------------------------//
     //                2.Unit Tests                       //
@@ -41,14 +42,14 @@ class TestAccessValidation {
     @Test
     void userLoginSuccess() throws InvalidLoginInformation {
         ILoginInformation loginInformation = new LoginInformation("ProtoUser", "Password2");
-        ProtoUser protoUserDetails = Repository.queryUserDetailsWith(loginInformation);
+        ProtoUser protoUserDetails = repository.queryUserDetailsWith(loginInformation);
         assertTrue(userEqualsLoginInformation(protoUserDetails, loginInformation));
     }
 
     @Test
     void userRegister()throws UnableToRegisterUser {
         RawUser rawUser = new RawUser("Bernt", "Åge", "2007-12-03", "1771", "NerdStreet 22", "It_Burns@When_I.PI", "TheInternet22");
-        Repository.insertNewUser(rawUser);
+        repository.insertNewUser(rawUser);
     }
 
     // --------------------------------------------------//
@@ -57,7 +58,7 @@ class TestAccessValidation {
     @ParameterizedTest
     @MethodSource("GenIllegalLoginInformation")
     void userLoginFailed(ILoginInformation loginInformation){
-        assertThrows(InvalidLoginInformation.class, () -> Repository.queryUserDetailsWith(loginInformation));
+        assertThrows(InvalidLoginInformation.class, () -> repository.queryUserDetailsWith(loginInformation));
     }
 
     // --------------------------------------------------//

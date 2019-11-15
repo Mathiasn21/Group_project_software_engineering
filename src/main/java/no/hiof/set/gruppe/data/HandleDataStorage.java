@@ -22,8 +22,7 @@ public class HandleDataStorage implements IHandleData{
     private static final Map<Class<?>, String> objectMapper = new ArrayMap<>();
 
     static{
-        for(int i = 0; i < knownClasskeys.length && knownClasskeys.length == knownDataFiles.length; i++)
-            objectMapper.put(knownClasskeys[i], knownDataFiles[i]);
+        for(int i = 0; i < knownClasskeys.length; i++)objectMapper.put(knownClasskeys[i], knownDataFiles[i]);
     }
 
     @Override

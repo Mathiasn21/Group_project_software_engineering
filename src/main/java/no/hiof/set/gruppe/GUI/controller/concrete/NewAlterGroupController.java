@@ -66,6 +66,8 @@ public class NewAlterGroupController extends ControllerTransferData {
     private String grName;
     private ArrayList<DummyUsers>members;
     private boolean createdNewGroup = false;
+    private final Repository repository = new Repository();
+
 
     // --------------------------------------------------//
     //                4.On Action Methods                //
@@ -192,7 +194,7 @@ public class NewAlterGroupController extends ControllerTransferData {
      */
     private void queryGroup() {
         ErrorExceptionHandler err;
-        try {if(!createdNewGroup)Repository.mutateObject(groupToEdit);
+        try {if(!createdNewGroup)repository.mutateObject(groupToEdit);
         } catch (DataFormatException e) {
             err = ErrorExceptionHandler.ERROR_WRONG_DATA_OBJECT;
             try { ErrorExceptionHandler.createLogWithDetails(err, e);
@@ -216,7 +218,7 @@ public class NewAlterGroupController extends ControllerTransferData {
 
     private void populateListView(Group group){
         chosenUsersObservableList = FXCollections.observableArrayList(group.getMembers());
-        avaliableUsersObservableList = FXCollections.observableArrayList(Repository.queryAllUsers());
+        avaliableUsersObservableList = FXCollections.observableArrayList(repository.queryAllUsers());
         filterMemberLists();
         fillListViews();
     }
@@ -230,7 +232,7 @@ public class NewAlterGroupController extends ControllerTransferData {
 
     private void setAvaliableMembers(){
         if(groupToEdit != null)return;
-        avaliableUsersObservableList = FXCollections.observableArrayList(Repository.queryAllUsers());
+        avaliableUsersObservableList = FXCollections.observableArrayList(repository.queryAllUsers());
         chosenUsersObservableList = FXCollections.observableArrayList();
         fillListViews();
     }

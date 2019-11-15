@@ -76,6 +76,7 @@ public class NewAlterArrangementController extends ControllerTransferData {
     private String address;
     private LocalDate startDate;
     private LocalDate endDate;
+    private final Repository repository = new Repository();
 
     // --------------------------------------------------//
     //                4.On Action Methods                //
@@ -120,7 +121,7 @@ public class NewAlterArrangementController extends ControllerTransferData {
     }
 
     private void queryArrangement(){
-        try {if(!createdNewObject)Repository.mutateObject(arrangementToEdit);
+        try {if(!createdNewObject)repository.mutateObject(arrangementToEdit);
         } catch (DataFormatException e) {
             Throwable throwable = e;
             try { ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_ACCESSING_DATA, e);

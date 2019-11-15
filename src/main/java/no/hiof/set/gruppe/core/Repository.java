@@ -37,7 +37,7 @@ import java.util.List;
  * Core Repository for interacting with data.
  * @author Gruppe4
  */
-public final class Repository {
+public final class Repository implements IRepository{
 
     // --------------------------------------------------//
     //                2.Static Fields                    //
@@ -71,7 +71,7 @@ public final class Repository {
      * @throws IOException IOException
      * @throws DataFormatException DataFormatException
      */
-    private static <T> List<T> queryDataGivenType(Class<T[]> tClassArr) throws IOException, DataFormatException {
+    private static  <T> List<T> queryDataGivenType(Class<T[]> tClassArr) throws IOException, DataFormatException {
         return handleData.queryAllDataGivenType(tClassArr);
     }
 
@@ -82,7 +82,7 @@ public final class Repository {
     /**
      * @throws DataFormatException DataFormatException
      */
-    private static void storeArrangementsData() throws DataFormatException {
+    private void storeArrangementsData() throws DataFormatException {
         handleData.storeDataGivenType(Arrangement[].class, listOfAllArrangements.toArray(Arrangement[]::new));
         storeUserArrangements();
     }
@@ -90,14 +90,14 @@ public final class Repository {
     /**
      * @throws DataFormatException DataFormatException
      */
-    private static void storeGroupData() throws DataFormatException {
+    private void storeGroupData() throws DataFormatException {
         handleData.storeDataGivenType(Group[].class, listOfAllGroups.toArray(Group[]::new));
     }
 
     /**
      * @throws DataFormatException DataFormatException
      */
-    private static void storeUserArrangements() throws DataFormatException {
+    private void storeUserArrangements() throws DataFormatException {
         handleData.storeDataGivenType(UserConnectedArrangement[].class, listOfAllUserConnectedArrangements.toArray(UserConnectedArrangement[]::new));
     }
 
@@ -109,7 +109,7 @@ public final class Repository {
      * @param arrangement {@link Arrangement}
      * @param protoUser {@link ProtoUser}
      */
-    public static void insertUserToArrangement(@NotNull Arrangement arrangement, @NotNull ProtoUser protoUser) throws DataFormatException {
+    public void insertUserToArrangement(@NotNull Arrangement arrangement, @NotNull ProtoUser protoUser) throws DataFormatException {
         listOfAllUserConnectedArrangements.add(new UserConnectedArrangement(arrangement.getID(), protoUser.getName()));
         storeArrangementsData();
     }
@@ -119,7 +119,7 @@ public final class Repository {
      * @param protoUser {@link ProtoUser}
      * @throws IllegalDataAccess IllegalAccess{@link IllegalDataAccess}
      */
-    public static void insertArrangement(Arrangement arrangement, @NotNull ProtoUser protoUser) throws IllegalDataAccess, DataFormatException {
+    public void insertArrangement(Arrangement arrangement, @NotNull ProtoUser protoUser) throws IllegalDataAccess, DataFormatException {
         if(!AccessValidate.userCanCreateArrangement(protoUser))throw new IllegalDataAccess();
 
         listOfAllArrangements.add(arrangement);
@@ -128,17 +128,17 @@ public final class Repository {
     }
 
     @Contract(pure = true)
-    public static void insertNewUser(RawUser rawUser)throws UnableToRegisterUser{
+    public void insertNewUser(RawUser rawUser)throws UnableToRegisterUser{
         ValidationResult result = Validation.ofNewUser(rawUser);
         if(!result.IS_VALID)throw new UnableToRegisterUser(result);
     }
 
-    public static void insertGroup(@NotNull Group group) throws DataFormatException {
+    public void insertGroup(@NotNull Group group) throws DataFormatException {
         listOfAllGroups.add(group);
         storeGroupData();
     }
 
-    public static <T> void mutateObject(T thatObject)throws DataFormatException {
+    public <T> void mutateObject(T thatObject)throws DataFormatException {
         if(thatObject instanceof Arrangement){
             Arrangement thatArrangement = (Arrangement) thatObject;
             listOfAllArrangements.removeIf((thisArrangement) -> thisArrangement.getID().equals(thatArrangement.getID()));
@@ -157,7 +157,7 @@ public final class Repository {
     // --------------------------------------------------//
     //                5.Public Data Removal              //
     // --------------------------------------------------//
-    private static void deleteUserConnectedArrangements(String ID){
+    private void deleteUserConnectedArrangements(String ID){
         for (int i = 0; i < listOfAllUserConnectedArrangements.size(); i++){
             UserConnectedArrangement userArr = listOfAllUserConnectedArrangements.get(i);
             if(userArr.getID().equals(ID)){
@@ -172,7 +172,7 @@ public final class Repository {
      * @param protoUser {@link ProtoUser}
      * @throws IllegalDataAccess illegalAccess{@link IllegalDataAccess}
      */
-    public static void deleteArrangement(Arrangement thatArrangement, ProtoUser protoUser) throws IllegalDataAccess, DataFormatException {
+    public void deleteArrangement(Arrangement thatArrangement, ProtoUser protoUser) throws IllegalDataAccess, DataFormatException {
         if(!AccessValidate.userCanModifyArrangement(thatArrangement, protoUser))throw new IllegalDataAccess();
 
         listOfAllArrangements.removeIf((thisArrangement) -> thisArrangement.getID().equals(thatArrangement.getID()));
@@ -180,7 +180,7 @@ public final class Repository {
         storeArrangementsData();
     }
 
-    public static void deleteGroup(Group group) throws DataFormatException {
+    public void deleteGroup(Group group) throws DataFormatException {
         listOfAllGroups.remove(group);
         storeGroupData();
     }
@@ -189,7 +189,7 @@ public final class Repository {
      * @param arrangement {@link Arrangement}
      * @param protoUser {@link ProtoUser}
      */
-    public static void deleteUserFromArrangement(@NotNull Arrangement arrangement,@NotNull ProtoUser protoUser) throws DataFormatException {
+    public void deleteUserFromArrangement(@NotNull Arrangement arrangement,@NotNull ProtoUser protoUser) throws DataFormatException {
         for(int i = 0; i < listOfAllUserConnectedArrangements.size(); i++){
             UserConnectedArrangement userArrangement = listOfAllUserConnectedArrangements.get(i);
             if(userArrangement.getID().equals(arrangement.getID()) && userArrangement.getUSERNAME().equals(protoUser.getName())){
@@ -209,14 +209,14 @@ public final class Repository {
      */
     @NotNull
     @Contract(" -> new")
-    public static List<Arrangement> queryAllArrangements(){ return new ArrayList<>(listOfAllArrangements); }
+    public List<Arrangement> queryAllArrangements(){ return new ArrayList<>(listOfAllArrangements); }
 
     /**
      * @param protoUser {@link ProtoUser}
      * @return {@link List}
      */
     @NotNull
-    public static List<Arrangement> queryAllUserRelatedArrangements(@NotNull ProtoUser protoUser) {
+    public List<Arrangement> queryAllUserRelatedArrangements(@NotNull ProtoUser protoUser) {
         List<Arrangement> result = new ArrayList<>();
         String userName = protoUser.getName();
 
@@ -233,7 +233,7 @@ public final class Repository {
     }
 
     @NotNull
-    public static ProtoUser queryUserDetailsWith(@NotNull ILoginInformation loginInformation) throws InvalidLoginInformation {
+    public ProtoUser queryUserDetailsWith(@NotNull ILoginInformation loginInformation) throws InvalidLoginInformation {
         String userID = loginInformation.getUserID();
         String passHash = loginInformation.getPassHash();
 
@@ -244,15 +244,11 @@ public final class Repository {
 
     @Contract(" -> new")
     @NotNull
-    public static ArrayList<DummyUsers> queryAllUsers(){
-        return new ArrayList<>(Arrays.asList(DummyUsers.values()));
-    }
+    public ArrayList<DummyUsers> queryAllUsers(){return new ArrayList<>(Arrays.asList(DummyUsers.values()));}
 
     @NotNull
     @Contract(value = " -> new")
-    public static ArrayList<Group> queryAllGroups(){
-       return new ArrayList<>(listOfAllGroups);
-    }
+    public ArrayList<Group> queryAllGroups(){return new ArrayList<>(listOfAllGroups);}
 
     /**
      * This method interacts with an database to check if the address exists.
@@ -261,8 +257,8 @@ public final class Repository {
      * @return boolean
      */
     @Contract(pure = true)
-    public static boolean queryAddress(@NotNull String streetAddress) {return true;}
+    public boolean queryAddress(@NotNull String streetAddress) {return false;}
 
     @Contract(pure = true)
-    public static boolean queryEmailExists(String email) {return false;}
+    public boolean queryEmailExists(String email) {return false;}
 }

@@ -20,6 +20,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public final class AccessValidate {
 
+    private static final Repository repository = new Repository();
     // --------------------------------------------------//
     //                2.Validations Methods              //
     // --------------------------------------------------//
@@ -30,7 +31,7 @@ public final class AccessValidate {
      */
     @Contract(pure = true)
     public static boolean userCanModifyArrangement(@NotNull Arrangement arrangement, @NotNull ProtoUser protoUser){
-        return (protoUser == ProtoUser.ORGANIZER && Repository.queryAllUserRelatedArrangements(protoUser).contains(arrangement)) || protoUser == ProtoUser.ADMIN;
+        return (protoUser == ProtoUser.ORGANIZER && repository.queryAllUserRelatedArrangements(protoUser).contains(arrangement)) || protoUser == ProtoUser.ADMIN;
     }
 
     /**

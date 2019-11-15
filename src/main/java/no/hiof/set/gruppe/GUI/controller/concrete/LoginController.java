@@ -56,6 +56,7 @@ public class LoginController extends Controller {
 
     private String name = "";
     private String title = "";
+    private final Repository repository = new Repository();
 
     // --------------------------------------------------//
     //                4.On action Methods                //
@@ -115,7 +116,7 @@ public class LoginController extends Controller {
         String password = pass.getText();
 
         try{
-            ProtoUser protoUser = Repository.queryUserDetailsWith(new LoginInformation(userName, password));
+            ProtoUser protoUser = repository.queryUserDetailsWith(new LoginInformation(userName, password));
             closeWindow(logInn);
             openCorrespondingStage(protoUser);
 

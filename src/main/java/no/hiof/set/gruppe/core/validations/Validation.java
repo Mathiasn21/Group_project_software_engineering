@@ -36,6 +36,8 @@ public class Validation{
 
     private static final int maxNameL = 50;
     private static final int minNameL = 2;
+    private static final Repository repository = new Repository();
+
 
     // --------------------------------------------------//
     //                3.Validation Of Methods            //
@@ -80,9 +82,9 @@ public class Validation{
         }catch (DateTimeParseException wrongDateFormat){res.append("ERROR, feil dato format.\n");}
 
         res.append(rawUser.getfName().length() <= maxLengthName && rawUser.getlName().length() <= maxLengthName ? "" : "Ulovlig langt navn\n");
-        res.append(!Repository.queryAddress(rawUser.getStreetAddress()) ? "" : "Addressen er ikke gyldig.\n");
+        res.append(!repository.queryAddress(rawUser.getStreetAddress()) ? "" : "Addressen er ikke gyldig.\n");
         res.append(rawUser.getCityCode().length() == 4 ? "" : "Ugyldig by kode.\n");
-        res.append(regCheck(textNotNullPattern, email) && !Repository.queryEmailExists(email) ? "" : "Ugyldig email.\n");
+        res.append(regCheck(textNotNullPattern, email) && !repository.queryEmailExists(email) ? "" : "Ugyldig email.\n");
         res.append(passHash.length() >= 10 && passHash.length() <= 60 ? "" : "Ugyldig passord\n");
 
         return new ValidationResult(res.toString(), res.length() == 0);

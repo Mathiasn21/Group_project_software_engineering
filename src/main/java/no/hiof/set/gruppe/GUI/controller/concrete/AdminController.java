@@ -73,6 +73,7 @@ public class AdminController extends ControllerTransferData {
     private ObservableList<Arrangement> arrangementListObservable;
     private Text[] textFields;
     private FilteredList<Arrangement> filteredArrangements;
+    private final Repository repository = new Repository();
 
     // --------------------------------------------------//
     //                4.On action Methods                //
@@ -131,7 +132,7 @@ public class AdminController extends ControllerTransferData {
 
     private void deleteArrangement(){
         try {
-            Repository.deleteArrangement(currentArrangement, ProtoUser.ADMIN);
+            repository.deleteArrangement(currentArrangement, ProtoUser.ADMIN);
             arrangementListObservable.remove(currentArrangement);
             arrangementListView.refresh();
             clearFields();
@@ -201,7 +202,7 @@ public class AdminController extends ControllerTransferData {
     }
 
     private void populateListView(){
-        arrangementListObservable = FXCollections.observableArrayList(Repository.queryAllArrangements());
+        arrangementListObservable = FXCollections.observableArrayList(repository.queryAllArrangements());
     }
 
     private void setupFilteredListView(){

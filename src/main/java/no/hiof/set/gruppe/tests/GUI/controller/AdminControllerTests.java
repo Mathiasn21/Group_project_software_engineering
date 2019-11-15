@@ -27,6 +27,7 @@ import java.util.Set;
 class AdminControllerTests extends MainJavaFXTest{
 
     private Arrangement currentTestArrangement;
+    private final Repository repository = new Repository();
 
     /**
      * @param stage {@link Stage}
@@ -66,7 +67,7 @@ class AdminControllerTests extends MainJavaFXTest{
         ListView listView = getListView(robot, "#arrangementListView");
         Arrangement arrangement = (Arrangement) listView.getSelectionModel().getSelectedItem();
         robot.clickOn("#delete");
-        Repository.insertArrangement(arrangement, ProtoUser.ORGANIZER);
+        repository.insertArrangement(arrangement, ProtoUser.ORGANIZER);
     }
 
     // --------------------------------------------------//

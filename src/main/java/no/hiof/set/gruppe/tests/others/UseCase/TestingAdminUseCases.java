@@ -34,6 +34,7 @@ class TestingAdminUseCases {
     // --------------------------------------------------//
     private static final ProtoUser PROTO_USER_ADMIN = ProtoUser.ADMIN;
     private static final ProtoUser PROTO_USER_ORGANIZER = ProtoUser.ORGANIZER;
+    private static final Repository repository = new Repository();
     private static final Arrangement arrangement = new Arrangement(
             "Bernts Fantastiske Test",
             "Annet",
@@ -54,11 +55,11 @@ class TestingAdminUseCases {
     @Test
     @Order(1)
     void addArrangement() throws IllegalDataAccess, DataFormatException {
-        List<Arrangement> expectedArrangementList = Repository.queryAllUserRelatedArrangements(PROTO_USER_ORGANIZER);
+        List<Arrangement> expectedArrangementList = repository.queryAllUserRelatedArrangements(PROTO_USER_ORGANIZER);
         expectedArrangementList.add(arrangement);
-        Repository.insertArrangement(arrangement, PROTO_USER_ORGANIZER);
+        repository.insertArrangement(arrangement, PROTO_USER_ORGANIZER);
 
-        assertDataIntegrity(expectedArrangementList, Repository.queryAllUserRelatedArrangements(PROTO_USER_ORGANIZER));
+        assertDataIntegrity(expectedArrangementList, repository.queryAllUserRelatedArrangements(PROTO_USER_ORGANIZER));
     }
 
     /**
@@ -76,22 +77,10 @@ class TestingAdminUseCases {
     @Test
     @Order(2)
     void deleteArrangement() throws IllegalDataAccess, DataFormatException {
-        List<Arrangement> expectedArrangementList = Repository.queryAllUserRelatedArrangements(PROTO_USER_ORGANIZER);
+        List<Arrangement> expectedArrangementList = repository.queryAllUserRelatedArrangements(PROTO_USER_ORGANIZER);
         expectedArrangementList.remove(arrangement);
 
-        Repository.deleteArrangement(arrangement, PROTO_USER_ADMIN);
-        assertDataIntegrity(expectedArrangementList, Repository.queryAllArrangements());
+        repository.deleteArrangement(arrangement, PROTO_USER_ADMIN);
+        assertDataIntegrity(expectedArrangementList, repository.queryAllArrangements());
     }
-
-    //Add new sports
-
-    //Remove sports
-
-    //Remove Users
-
-    //Add users
-
-    //Set PROTO_USER as organizer
-
-    //Remove PROTO_USER as organizer
 }
