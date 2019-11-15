@@ -136,7 +136,7 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <Text fx:id="arrangementDescription" layoutX="399.0" layoutY="470.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="341.60000681877136" />
+      <Text fx:id="arrangementDescription" layoutX="399.0" layoutY="470.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="341.60000681877136" />
       <MenuButton fx:id="menu" layoutX="6.0" layoutY="8.0" mnemonicParsing="false" text="Meny">
          <items>
             <MenuItem fx:id="logOut" mnemonicParsing="false" text="Logg ut" />
