@@ -279,8 +279,9 @@ public final class Repository implements IRepository{
     }
 
     @Override
+    @SuppressWarnings("unchecked")//objectMapper contains explicitly a list containing IBaseEntity
     public <T extends IBaseEntity> void insertData(T iBaseEntity) {
-
+        ((List<IBaseEntity>)objectMapper.get(iBaseEntity.getClass())).add(iBaseEntity);
     }
 
     @Override
