@@ -117,7 +117,6 @@ public class GroupController extends ControllerTransferData {
     // --------------------------------------------------//
     //                5.Private Functional Methods       //
     // --------------------------------------------------//
-
     private void deleteGroup(){
         Group selectedItem = groupsListview.getSelectionModel().getSelectedItem();
         try {
