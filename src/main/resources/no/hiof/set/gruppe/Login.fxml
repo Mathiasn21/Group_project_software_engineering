@@ -76,7 +76,7 @@
                </VBox.margin></Button>
             <HBox alignment="TOP_RIGHT" prefHeight="31.0" prefWidth="594.0">
                <children>
-                  <Button fx:id="cancel" mnemonicParsing="false" prefHeight="25.0" prefWidth="65.0" text="AVSLUTT">
+                  <Button fx:id="cancel" mnemonicParsing="false" prefHeight="27.0" prefWidth="80.0" text="AVSLUTT">
                      <HBox.margin>
                         <Insets left="280.0" top="5.0" />
                      </HBox.margin>
