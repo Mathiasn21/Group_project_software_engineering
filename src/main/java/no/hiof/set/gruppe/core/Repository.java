@@ -12,6 +12,7 @@ package no.hiof.set.gruppe.core;
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
+import com.google.api.client.util.ArrayMap;
 import no.hiof.set.gruppe.core.validations.AccessValidate;
 import no.hiof.set.gruppe.core.validations.Validation;
 import no.hiof.set.gruppe.data.HandleDataStorage;
@@ -26,10 +27,7 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 /**
  * Core Repository for interacting with data.
@@ -44,6 +42,7 @@ public final class Repository implements IRepository{
     private static List<Group> listOfAllGroups;
     private static List<UserConnectedArrangement> listOfAllUserConnectedArrangements;
     private static final IHandleData handleData = new HandleDataStorage();
+    private static final Map<Class<? extends IBaseEntity>, List<? extends IBaseEntity>> objectMapper = new ArrayMap<>();
 
     //Preload data.
     static{
@@ -52,6 +51,9 @@ public final class Repository implements IRepository{
             listOfAllUserConnectedArrangements = queryDataGivenType(UserConnectedArrangement[].class);
             listOfAllGroups = queryDataGivenType(Group[].class);
 
+            objectMapper.put(Arrangement.class, listOfAllArrangements);
+            objectMapper.put(UserConnectedArrangement.class, listOfAllArrangements);
+            objectMapper.put(Group.class, listOfAllArrangements);
 
         }catch (IOException | DataFormatException e){
             try {ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_READING_DATA, e);}
@@ -260,14 +262,10 @@ public final class Repository implements IRepository{
     @Contract(pure = true)
     public boolean queryEmailExists(String email) {return false;}
 
-
     @Override
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("unchecked")//The only possible lists that it returns are the ones already defined in objectMapper
     public <T extends IBaseEntity> List<T> queryAllDataOfGivenType(Class<T> aClass) {
-       System.out.println(aClass.getComponentType());
-       List<T> list = new ArrayList<>();
-       if(aClass == Arrangement.class){list.addAll((Collection<? extends T>) listOfAllArrangements);}
-       return list;
+        return new ArrayList<>((List<T>) objectMapper.get(aClass));
     }
 
     @Override
