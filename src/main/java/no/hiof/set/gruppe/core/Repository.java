@@ -103,7 +103,7 @@ public final class Repository {
 
 
     // --------------------------------------------------//
-    //                4.Public Mutators                  //
+    //                4.Public Insert Queries            //
     // --------------------------------------------------//
     /**
      * @param arrangement {@link Arrangement}
@@ -113,6 +113,7 @@ public final class Repository {
         listOfAllUserConnectedArrangements.add(new UserConnectedArrangement(arrangement.getID(), protoUser.getName()));
         storeArrangementsData();
     }
+
     /**
      * @param arrangement {@link Arrangement}
      * @param protoUser {@link ProtoUser}
@@ -198,8 +199,9 @@ public final class Repository {
         storeArrangementsData();
     }
 
+
     // --------------------------------------------------//
-    //                6.Public Getters                   //
+    //                6.Public Query Data                //
     // --------------------------------------------------//
     /**
      * @return {@link List}

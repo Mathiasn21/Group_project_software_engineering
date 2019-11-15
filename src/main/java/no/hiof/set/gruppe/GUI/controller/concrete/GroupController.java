@@ -2,8 +2,8 @@ package no.hiof.set.gruppe.GUI.controller.concrete;
 
 /*Guide
  * 1. Import Statements
- * 2. Local Fields
- * 3. FXML Fields
+ * 2. FXML Fields
+ * 3. Local fields
  * 4. On Action Methods
  * 5. Private Functional Methods
  * 6. Private Search Methods
@@ -45,14 +45,7 @@ import java.util.ResourceBundle;
 public class GroupController extends ControllerTransferData {
 
     // --------------------------------------------------//
-    //                2.Local Fields                     //
-    // --------------------------------------------------//
-    private String title = "";
-    private String name = "";
-    private ObservableList<Group> groupsList;
-    private Group selectedGroup = null;
-    // --------------------------------------------------//
-    //                3.FXML Fields                      //
+    //                2.FXML Fields                      //
     // --------------------------------------------------//
 
     @FXML
@@ -65,32 +58,57 @@ public class GroupController extends ControllerTransferData {
     private Text members, groupName, groupNameStatic, membersStatic;
 
     // --------------------------------------------------//
+    //                3.Local Fields                     //
+    // --------------------------------------------------//
+
+    private String title = "";
+    private String name = "";
+    private ObservableList<Group> groupsList;
+    private Group selectedGroup = null;
+
+    // --------------------------------------------------//
     //                4.On Action Methods                //
     // --------------------------------------------------//
 
+    /**
+     * @param event {@link ActionEvent}
+     */
     private void onClickNewGroupBtn(ActionEvent event) {
-        title = "Ny gruppe";
-        name = "NewAlterGroup.fxml";
-        createNewView(this, null);
+        newGroup();
     }
 
+    /**
+     * @param event {@link ActionEvent}
+     */
     private void onClickDeletBtn(ActionEvent event) {
         deleteGroup();
     }
 
+    /**
+     * @param event {@link ActionEvent}
+     */
     private void onClickEditBtn(ActionEvent event) {
         if(selectedGroup == null)return;
-        editGroup();
+        alterGroup();
     }
 
+    /**
+     * @param event {@link ActionEvent}
+     */
     private void onClickMyIndividualArrangementsBtn(ActionEvent event) {
         switchView("Mine arrangementer","User.fxml");
     }
 
+    /**
+     * @param event {@link ActionEvent}
+     */
     private void onClickLogoutBtn(ActionEvent event) {
         switchView("Logg inn", "Login.fxml");
     }
 
+    /**
+     * @param event {@link ActionEvent}
+     */
     private void onClickGroupsListView(MouseEvent event) {
         changedView();
         groupsListview.refresh();
@@ -121,10 +139,16 @@ public class GroupController extends ControllerTransferData {
         groupsListview.refresh();
     }
 
-    private void editGroup(){
+    private void alterGroup(){
         title = "Rediger gruppe";
         name = "NewAlterGroup.fxml";
         createNewView(this, selectedGroup);
+    }
+
+    private void newGroup(){
+        title = "Ny gruppe";
+        name = "NewAlterGroup.fxml";
+        createNewView(this);
     }
 
     private void switchView(String newTitle, String newName){
@@ -171,6 +195,11 @@ public class GroupController extends ControllerTransferData {
     // --------------------------------------------------//
     //                8.Overridden Methods               //
     // --------------------------------------------------//
+
+    /**
+     * @param location {@link URL}
+     * @param resources {@link ResourceBundle}
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setupActionHandlers();
@@ -178,12 +207,20 @@ public class GroupController extends ControllerTransferData {
         setTextColors(false);
     }
 
+    /**
+     * @return Object
+     */
     @Override
     public Object getDataObject() {
         selectedGroup = groupsListview.getSelectionModel().getSelectedItem();
         return selectedGroup;
     }
 
+    /**
+     * Handles data setup and interaction from other controllers.
+     * @param object Object
+     * @throws DataFormatException Exception
+     */
     @Override
     public void setDataFields(Object object) throws DataFormatException {
         if(!(object instanceof Group)) throw new DataFormatException();
@@ -204,17 +241,26 @@ public class GroupController extends ControllerTransferData {
         changedView();
     }
 
+    /**
+     * Refreshes the view
+     */
     @Override
     public void updateView(){
         if(selectedGroup == null)return;
         changedView();
     }
 
+    /**
+     * @return {@link ViewInformation}
+     */
     @Override
     public ViewInformation getViewInformation() {
         return new ViewInformation(name, title);
     }
 
+    /**
+     * @param tf
+     */
     private void setTextColors(boolean tf){
         colorizeText(tf, groupNameStatic, membersStatic);
     }

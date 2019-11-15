@@ -9,6 +9,10 @@ import java.io.IOException;
 
 public class KlarnaIntegration implements IPaymentIntegration {
 
+
+    /**
+     * Simulating a Http request.
+     */
     private final HttpTransport transport = new MockHttpTransport() {
         @Override
         public LowLevelHttpRequest buildGetRequest(String method) {
@@ -27,6 +31,11 @@ public class KlarnaIntegration implements IPaymentIntegration {
         }
     };
 
+    /**
+     *
+     * @return HttpRequest
+     * @throws IOException
+     */
     @NotNull
     public HttpResponse response() throws IOException {
 

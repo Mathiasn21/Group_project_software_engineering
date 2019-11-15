@@ -34,13 +34,13 @@ class TestSystemFunctionality {
             "2019-10-16",
             "Dette varer i hele 1 dager. Og, server null formål.");
 
-    /**
-     * Used for testing that data that are used by the application does still exists
-     */
-
     // --------------------------------------------------//
     //                2.Unit Tests                       //
     // --------------------------------------------------//
+
+    /**
+     * Used for testing that data that are used by the application does still exists
+     */
     @Test
     void minimumDataExistsInArrangement(){
         String[] arrangementNeededData = {
@@ -56,7 +56,6 @@ class TestSystemFunctionality {
         assertEquals(0, Arrays.compare(arrangementNeededData, arrangementDataFields));
     }
 
-    //Needs refactoring, maybe
     @Test
     void classDateLegal(){
         LocalDate date1 = LocalDate.of(2019, 10, 15);
@@ -113,12 +112,19 @@ class TestSystemFunctionality {
     // --------------------------------------------------//
     //                2.Parameterized Tests              //
     // --------------------------------------------------//
+
+    /**
+     * @param str {@link String}
+     */
     @ParameterizedTest
     @ValueSource(strings = {"1\00", "\00 1", "1s", "s1", "ss'¨¨¨^", "^^^''''"})
     void illegalNumberFormatFromString(String str){
         assertFalse(Validation.ofNumber(str));
     }
 
+    /**
+     * @param str {@link String}
+     */
     @ParameterizedTest
     @ValueSource(strings = {"01", "000", "11", "22222222222"})
     void legalNumberFormatFromString(String str){

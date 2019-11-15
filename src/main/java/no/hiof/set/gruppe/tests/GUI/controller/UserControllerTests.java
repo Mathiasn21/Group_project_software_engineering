@@ -13,7 +13,6 @@ import org.testfx.api.FxRobot;
 import org.testfx.assertions.api.Assertions;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
-
 import java.io.IOException;
 import java.util.Set;
 
@@ -40,16 +39,29 @@ class UserControllerTests extends MainJavaFXTest{
         }
     }
 
+    /**
+     * @param robot {@link FxRobot}
+     * @param listView {@link ListView}
+     */
     private void clickOnListView(@NotNull FxRobot robot, @NotNull ListView listView) {
         Set<Node> nodeList = listView.lookupAll(".list-cell");
         Node[] arr = nodeList.toArray(Node[]::new);
         robot.clickOn(arr[0]);
     }
 
+    /**
+     * @param robot {@link FxRobot}
+     * @param node {@link String}
+     * @return
+     */
     private ListView getListView(@NotNull FxRobot robot, String node) {
         return robot.lookup(node).queryAs(ListView.class);
     }
 
+    /**
+     * @param robot {@link FxRobot}
+     * @param arrangement {@link Arrangement}
+     */
     private void assertFieldsIsClickedArrangement(@NotNull FxRobot robot, @NotNull Arrangement arrangement) {
         String[] arrangementData = arrangement.getAllDataAsStringArr();
         String[] lookupFields = {

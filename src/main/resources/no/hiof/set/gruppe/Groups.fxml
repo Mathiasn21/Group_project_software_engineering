@@ -43,13 +43,13 @@
             </Button>
          </children>
       </VBox>
-      <Text fx:id="groupName" layoutX="419.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="100.00000366196036">
+      <Text fx:id="groupName" layoutX="326.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="275.00000366196036">
          <font>
-            <Font size="18.0" />
+            <Font size="15.0" />
          </font></Text>
       <Text fx:id="members" layoutX="419.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="99.99999804608524">
          <font>
-            <Font size="15.0" />
+            <Font size="13.0" />
          </font></Text>
       <Text fx:id="groupNameStatic" layoutX="421.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gruppenavn" underline="true">
          <font>

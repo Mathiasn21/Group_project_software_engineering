@@ -61,6 +61,10 @@ class TestingAdminUseCases {
         assertDataIntegrity(expectedArrangementList, Repository.queryAllUserRelatedArrangements(PROTO_USER_ORGANIZER));
     }
 
+    /**
+     * @param expectedArrangementList {@link List}
+     * @param userArrangements {@link List}
+     */
     private void assertDataIntegrity(List<Arrangement> expectedArrangementList, List<Arrangement> userArrangements) {
         assertTrue(userArrangements.containsAll(expectedArrangementList));
         assertEquals(expectedArrangementList.size(), userArrangements.size());

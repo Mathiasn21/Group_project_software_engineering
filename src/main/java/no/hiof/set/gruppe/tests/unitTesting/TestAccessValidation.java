@@ -77,6 +77,11 @@ class TestAccessValidation {
         );
     }
 
+    /**
+     * @param protoUserDetails {@link ProtoUser}
+     * @param loginInformation {@link ILoginInformation}
+     * @return boolean
+     */
     private boolean userEqualsLoginInformation(@NotNull ProtoUser protoUserDetails, @NotNull ILoginInformation loginInformation) {
         return protoUserDetails.getName().equals(loginInformation.getUserID()) && protoUserDetails.getPass().equals(loginInformation.getPassHash());
     }

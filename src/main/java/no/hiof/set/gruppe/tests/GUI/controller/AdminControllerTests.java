@@ -27,6 +27,11 @@ import java.util.Set;
 class AdminControllerTests extends MainJavaFXTest{
 
     private Arrangement currentTestArrangement;
+
+    /**
+     * @param stage {@link Stage}
+     * @throws IOException
+     */
     @Start
     void start(@NotNull Stage stage) throws IOException {
         MainJavaFXTest mainJavaFXTest = new MainJavaFXTest();
@@ -34,6 +39,11 @@ class AdminControllerTests extends MainJavaFXTest{
         mainJavaFXTest.start(stage);
     }
 
+    /**
+     * @param robot
+     * @throws IllegalDataAccess
+     * @throws DataFormatException
+     */
     @Test
     void selectArrangementAndEdit(@NotNull FxRobot robot) throws IllegalDataAccess, DataFormatException {
         selectArrangementTest(robot);
@@ -47,6 +57,11 @@ class AdminControllerTests extends MainJavaFXTest{
         deleteAddedArrangement(robot);
     }
 
+    /**
+     * @param robot {@link FxRobot}
+     * @throws IllegalDataAccess
+     * @throws DataFormatException
+     */
     private void deleteAddedArrangement(@NotNull FxRobot robot) throws IllegalDataAccess, DataFormatException {
         ListView listView = getListView(robot, "#arrangementListView");
         Arrangement arrangement = (Arrangement) listView.getSelectionModel().getSelectedItem();
@@ -57,12 +72,23 @@ class AdminControllerTests extends MainJavaFXTest{
     // --------------------------------------------------//
     //                2.Assertion methods                //
     // --------------------------------------------------//
+
+    /**
+     * @param robot {@link FxRobot}
+     * @param lookupFields {@link String}
+     * @param arrangementData {@link String}
+     */
     private void assertFieldsIsClickedArrangement(@NotNull FxRobot robot, String[] lookupFields, @NotNull String[] arrangementData) {
         for(int i = 0; i < arrangementData.length; i++){
             Assertions.assertThat(robot.lookup(lookupFields[i]).queryAs(Text.class)).hasText(arrangementData[i]);
         }
     }
 
+    /**
+     * @param robot
+     * @param lookupFields
+     * @param arrangementData
+     */
     private void assertFieldsIsClickedArrangement2(@NotNull FxRobot robot, String[] lookupFields, @NotNull String[] arrangementData) {
         for(int i = 0; i < arrangementData.length; i++){
             Assertions.assertThat(robot.lookup(lookupFields[i]).queryAs(TextInputControl.class)).hasText(arrangementData[i]);
@@ -73,6 +99,13 @@ class AdminControllerTests extends MainJavaFXTest{
     // --------------------------------------------------//
     //                2.Helper methods                   //
     // --------------------------------------------------//
+
+    /**
+     * @param datePickerNode
+     * @param robot
+     * @param afterDate
+     * @return LocalDate
+     */
     private LocalDate clickOnDatePicker(@NotNull String datePickerNode, @NotNull FxRobot robot, @NotNull LocalDate afterDate) {
         DatePicker datepicker = robot.lookup(datePickerNode).queryAs(DatePicker.class);
 
@@ -118,12 +151,21 @@ class AdminControllerTests extends MainJavaFXTest{
         robot.clickOn("#saveBtn");
     }
 
+    /**
+     * @param robot
+     * @param listView
+     */
     private void clickOnListView(@NotNull FxRobot robot, @NotNull ListView listView) {
         Set<Node> nodeList = listView.lookupAll(".list-cell");
         Node[] arr = nodeList.toArray(Node[]::new);
         robot.clickOn(arr[0]);
     }
 
+    /**
+     * @param robot
+     * @param node
+     * @return ListView
+     */
     private ListView getListView(@NotNull FxRobot robot, String node) {
         return robot.lookup(node).queryAs(ListView.class);
     }
