@@ -1,5 +1,6 @@
 package no.hiof.set.gruppe.data;
 
+import com.google.api.client.util.ArrayMap;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import no.hiof.set.gruppe.core.exceptions.DataFormatException;
@@ -13,27 +14,28 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public class HandleDataStorage implements IHandleData{
-    private static final String arrangementFName = "arrangements.json";
-    private static final String userHasArrangements = "userHasArrangements.json";
-    private static final String groupsFName = "groups.json";
-    static {
-        TypeClassMapToFiles.mutateObjectMapperList(
-                new TypeClassMapToFiles<>(Arrangement.class, arrangementFName),
-                new TypeClassMapToFiles<>(Group.class, groupsFName),
-                new TypeClassMapToFiles<>(UserConnectedArrangement.class, userHasArrangements)
-        );
+    private static final Class<?>[] knownClasskeys = {Arrangement[].class, UserConnectedArrangement[].class, Group[].class};
+    private static final String[] knownDataFiles = {"arrangements.json", "userHasArrangements.json", "groups.json"};
+    private static final Map<Class<?>, String> objectMapper = new ArrayMap<>();
+
+    static{
+        for(int i = 0; i < knownClasskeys.length && knownClasskeys.length == knownDataFiles.length; i++)
+            objectMapper.put(knownClasskeys[i], knownDataFiles[i]);
     }
 
     @Override
     public final <T> void storeDataGivenType(Class<T[]> tClass, T[] tArray) throws DataFormatException {
-        writeToFile(toJson(tClass, tArray), (String) TypeClassMapToFiles.getCorrespondingMapperGivenType(tClass).getObject());
+        String file = objectMapper.get(tClass);
+        if(file == null)throw new DataFormatException();
+        writeToFile(toJson(tClass, tArray), file);
     }
 
     @Override
-    public final <T> List<T> queryAllDataGivenType(Class<T[]> tClassArr) throws IOException, DataFormatException {
-        String jsonFromFile = HandleDataStorage.readFromFile((String) TypeClassMapToFiles.getCorrespondingMapperGivenType(tClassArr).getObject());
+    public final <T> List<T> queryAllDataGivenType(Class<T[]> tClassArr) throws IOException {
+        String jsonFromFile = HandleDataStorage.readFromFile(objectMapper.get(tClassArr));
         return new ArrayList<>(HandleDataStorage.listFromJson(tClassArr, jsonFromFile));
     }
 

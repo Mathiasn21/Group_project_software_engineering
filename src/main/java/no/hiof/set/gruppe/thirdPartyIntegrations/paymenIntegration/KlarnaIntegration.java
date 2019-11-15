@@ -32,7 +32,6 @@ public class KlarnaIntegration implements IPaymentIntegration {
     };
 
     /**
-     *
      * @return HttpRequest
      * @throws IOException
      */
