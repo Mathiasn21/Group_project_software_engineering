@@ -21,16 +21,14 @@ import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.Group;
 import no.hiof.set.gruppe.model.ValidationResult;
 import no.hiof.set.gruppe.model.constantInformation.DummyUsers;
-import no.hiof.set.gruppe.model.user.ILoginInformation;
-import no.hiof.set.gruppe.model.user.ProtoUser;
-import no.hiof.set.gruppe.model.user.RawUser;
-import no.hiof.set.gruppe.model.user.UserConnectedArrangement;
+import no.hiof.set.gruppe.model.user.*;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -147,7 +145,7 @@ public final class Repository implements IRepository{
 
         }else if (thatObject instanceof Group){
             Group thatGroup = (Group) thatObject;
-            listOfAllGroups.removeIf((thisGroup) -> thisGroup.getId().equals(thatGroup.getId()));
+            listOfAllGroups.removeIf((thisGroup) -> thisGroup.getID().equals(thatGroup.getID()));
             listOfAllGroups.add(thatGroup);
             storeGroupData();
         }else{throw new DataFormatException();}
@@ -261,4 +259,39 @@ public final class Repository implements IRepository{
 
     @Contract(pure = true)
     public boolean queryEmailExists(String email) {return false;}
+
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public <T extends IBaseEntity> List<T> queryAllDataOfGivenType(Class<T> aClass) {
+       System.out.println(aClass.getComponentType());
+       List<T> list = new ArrayList<>();
+       if(aClass == Arrangement.class){list.addAll((Collection<? extends T>) listOfAllArrangements);}
+       return list;
+    }
+
+    @Override
+    public <T extends IBaseEntity, E extends IUser> List<T> queryAllEntityConnectedToUserData(Class<T> aClass, E user) {
+        return null;
+    }
+
+    @Override
+    public <T extends IBaseEntity> T queryDataWithID(String ID, Class<T> aClass) {
+        return null;
+    }
+
+    @Override
+    public <T extends IBaseEntity> void insertData(T iBaseEntity) {
+
+    }
+
+    @Override
+    public <T extends IBaseEntity> void deleteData(T iBaseEntity) {
+
+    }
+
+    @Override
+    public <T extends IBaseEntity> void mutateData(T iBaseEntity) {
+
+    }
 }

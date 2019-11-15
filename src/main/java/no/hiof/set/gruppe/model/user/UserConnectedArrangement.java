@@ -10,8 +10,8 @@ package no.hiof.set.gruppe.model.user;
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
-import no.hiof.set.gruppe.EntityConnectedWithUser;
-import no.hiof.set.gruppe.IBaseEntity;
+import no.hiof.set.gruppe.core.EntityConnectedWithUser;
+import no.hiof.set.gruppe.core.IBaseEntity;
 import org.jetbrains.annotations.Contract;
 
 /**
