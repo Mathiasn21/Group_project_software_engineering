@@ -117,7 +117,6 @@ public class GroupController extends ControllerTransferData {
     // --------------------------------------------------//
     //                5.Private Functional Methods       //
     // --------------------------------------------------//
-
     private void deleteGroup(){
         Group selectedItem = groupsListview.getSelectionModel().getSelectedItem();
         try {
@@ -191,6 +190,7 @@ public class GroupController extends ControllerTransferData {
         members.setText(stringMembers.toString());
     }
 
+
     // --------------------------------------------------//
     //                8.Overridden Methods               //
     // --------------------------------------------------//
@@ -224,7 +224,6 @@ public class GroupController extends ControllerTransferData {
     public void setDataFields(Object object) throws DataFormatException {
         if(!(object instanceof Group)) throw new DataFormatException();
         Group group = (Group) object;
-
         SelectionModel model = groupsListview.getSelectionModel();
 
         try {
