@@ -166,6 +166,7 @@ public final class Repository {
             }
         }
     }
+
     /**
      * @param thatArrangement {@link Arrangement}
      * @param protoUser {@link ProtoUser}
@@ -255,12 +256,12 @@ public final class Repository {
 
     /**
      * This method interacts with an database to check if the address exists.
-     * Temp solution is for it to return true when length is below 50.
+     * Temp solution is for it to return true.
      * @param streetAddress String
      * @return boolean
      */
     @Contract(pure = true)
-    public static boolean queryAddress(@NotNull String streetAddress) {return !(streetAddress.length() < 50);}
+    public static boolean queryAddress(@NotNull String streetAddress) {return true;}
 
     @Contract(pure = true)
     public static boolean queryEmailExists(String email) {return false;}
