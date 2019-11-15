@@ -9,10 +9,13 @@ package no.hiof.set.gruppe.model.constantInformation;
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
+import no.hiof.set.gruppe.IBaseEntity;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
-public enum DummyUsers {
+import java.util.UUID;
+
+public enum DummyUsers implements IBaseEntity {
     // --------------------------------------------------//
     //                2.Constants                        //
     // --------------------------------------------------//
@@ -29,6 +32,7 @@ public enum DummyUsers {
     USER11("Gjær"),
     ;
     private final String user;
+    private final String ID;
 
 
     // --------------------------------------------------//
@@ -40,6 +44,7 @@ public enum DummyUsers {
     @Contract(pure = true)
     DummyUsers (@NotNull String user){
         this.user = user;
+        this.ID = UUID.randomUUID().toString();
     }
 
     /**
@@ -51,4 +56,6 @@ public enum DummyUsers {
         return user;
     }
 
+    @Override
+    public String getID() {return this.ID;}
 }

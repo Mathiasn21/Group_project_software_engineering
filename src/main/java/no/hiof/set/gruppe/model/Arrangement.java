@@ -12,6 +12,7 @@ package no.hiof.set.gruppe.model;
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
+import no.hiof.set.gruppe.IBaseEntity;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
 
@@ -22,7 +23,7 @@ import java.util.UUID;
  * Arrangement holds information about a possible arrangement.
  * @author Gruppe4
  */
-public class Arrangement implements IGetAllDataStringArr {
+public class Arrangement implements IGetAllDataStringArr, IBaseEntity {
 
 
     // --------------------------------------------------//
@@ -90,7 +91,6 @@ public class Arrangement implements IGetAllDataStringArr {
     public String getAddress() {
         return address;
     }
-    public String getID(){return ID;}
     public String getDescription() {return description;}
     /**
      * @return boolean
@@ -162,7 +162,7 @@ public class Arrangement implements IGetAllDataStringArr {
     }
 
     // --------------------------------------------------//
-    //                7.Overridden Contracts            //
+    //                7.Overridden Contracts             //
     // --------------------------------------------------//
     /**
      * @param o {@link Object}
@@ -184,6 +184,8 @@ public class Arrangement implements IGetAllDataStringArr {
                 this.description.equals(that.getDescription());
     }
 
+    @Override
+    public String getID(){return ID;}
 
     /**
      * Returns data in this sequence:
@@ -200,7 +202,5 @@ public class Arrangement implements IGetAllDataStringArr {
      * name, address, participants, description
      * @return String[]
      */
-    public String[] getAllStringDataArrRaw() {
-        return new String[]{name, address, String.valueOf(participants), description};
-    }
+    public String[] getAllStringDataArrRaw() {return new String[]{name, address, String.valueOf(participants), description};}
 }

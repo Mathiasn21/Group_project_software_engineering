@@ -10,13 +10,15 @@ package no.hiof.set.gruppe.model.user;
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
+import no.hiof.set.gruppe.EntityConnectedWithUser;
+import no.hiof.set.gruppe.IBaseEntity;
 import org.jetbrains.annotations.Contract;
 
 /**
  * This class represents information about the connection between
  * a user and a arrangement.
  */
-public class UserConnectedArrangement {
+public class UserConnectedArrangement implements IBaseEntity, EntityConnectedWithUser {
     // --------------------------------------------------//
     //                2.Local Fields                     //
     // --------------------------------------------------//
@@ -61,5 +63,6 @@ public class UserConnectedArrangement {
     /**
      * @return String
      */
+    @Override
     public String getUSERNAME() { return USERNAME; }
 }

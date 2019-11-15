@@ -13,20 +13,21 @@ package no.hiof.set.gruppe.model;
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
-import javafx.collections.ObservableList;
+import no.hiof.set.gruppe.IBaseEntity;
 import no.hiof.set.gruppe.model.constantInformation.DummyUsers;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
-public class Group {
+public class Group implements IBaseEntity {
 
     // --------------------------------------------------//
     //                2.Local Fields                     //
     // --------------------------------------------------//
     private String name;
     private final String ID;
-    private ArrayList<DummyUsers> members;
+    private List<DummyUsers> members;
 
     // --------------------------------------------------//
     //                3.Constructors                     //
@@ -44,11 +45,9 @@ public class Group {
     // --------------------------------------------------//
     //                4.Public Methods                   //
     // --------------------------------------------------//
-    public void addOnemember (DummyUsers dummyUser){
-        members.add(dummyUser);
-    }
+    public void addMember (DummyUsers dummyUser){members.add(dummyUser);}
 
-    public void addMultipleMembers(ObservableList<DummyUsers> userlist){
+    public void addAllMembers(List<DummyUsers> userlist){
         members.addAll(userlist);
     }
 
@@ -58,8 +57,7 @@ public class Group {
     public String getName() {
         return name;
     }
-    public ArrayList<DummyUsers> getMembers() { return members; }
-    public String getId() { return ID; }
+    public List<DummyUsers> getMembers() { return members; }
     public String getMembersAsPrettyString(){
         StringBuilder res = new StringBuilder();
         for(DummyUsers member : members) res.append(member).append("\n");
@@ -79,4 +77,7 @@ public class Group {
     public String toString(){
         return name;
     }
+
+    @Override
+    public String getID() { return ID; }
 }
