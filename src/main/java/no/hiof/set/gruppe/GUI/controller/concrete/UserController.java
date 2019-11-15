@@ -34,6 +34,7 @@ import no.hiof.set.gruppe.model.user.ProtoUser;
 import no.hiof.set.gruppe.core.predicates.DateTest;
 import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.*;
 
@@ -181,9 +182,7 @@ public class UserController extends Controller {
      * @param actionEvent {@link ActionEvent}
      */
     private void search(ActionEvent actionEvent){
-        myFiltered.setPredicate(this::lowerCaseTitleSearchMy);
-        myArrangementsView.setItems(myFiltered);
-        myArrangementsView.refresh();
+        sortAndSearchMy();
     }
 
     /**
@@ -239,6 +238,40 @@ public class UserController extends Controller {
     private boolean categoryMatchMy(Arrangement arrangement) {
         SportCategory category = sortingOptions.getSelectionModel().getSelectedItem();
         return category.equals(SportCategory.ALL) || arrangement.getSport().equals(category.toString());
+    }
+
+    /**
+     * Handles searching for signed up Arrangements
+     */
+    private void sortAndSearchMy(){
+        myFiltered.setPredicate(this::lowerCaseTitleSearchMy);
+        myArrangementsView.setItems(myFiltered);
+        myArrangementsView.refresh();
+    }
+
+    /**
+     * Handles searching for Available Arrangements.
+     */
+    private void sortAndSearchAv(){
+        availableFiltered.setPredicate(this::lowerCaseTitleSearch);
+        availableArrangementsListView.setItems(availableFiltered);
+        availableArrangementsListView.refresh();
+    }
+
+    private void liveSearchUpdateMy(){
+        searchMy.textProperty().addListener(((s) -> searchMyArrangement()));
+    }
+
+    private void liveSearchUpdateAv(){
+        searchAv.textProperty().addListener(((s) -> searchAvArrangement()));
+    }
+
+    private void searchMyArrangement(){
+        sortAndSearchMy();
+    }
+
+    private void searchAvArrangement(){
+        sortAndSearchAv();
     }
 
     // --------------------------------------------------//
@@ -356,6 +389,8 @@ public class UserController extends Controller {
         populateMyArrangementView();
         setupListView();
         setupActionHandlers();
+        liveSearchUpdateMy();
+        liveSearchUpdateAv();
         setupToggleBtns();
         setTextColors(false);
         allTextFields = new Text[]{arrangementTitle, arrangementSport, arrangementAddress, arrangementDate, arrangementParticipants, arrangementGroup, arrangementDescription};
