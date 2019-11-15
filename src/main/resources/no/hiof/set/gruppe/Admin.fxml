@@ -117,7 +117,7 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <Text fx:id="arrangementDescription" layoutX="293.0" layoutY="418.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" wrappingWidth="341.60000681877136" />
+      <Text fx:id="arrangementDescription" layoutX="293.0" layoutY="418.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" textAlignment="CENTER" wrappingWidth="341.60000681877136" />
       <TextField fx:id="search" layoutX="42.0" layoutY="49.0" prefHeight="26.0" prefWidth="171.0" promptText="Søk her" />
       <Text layoutX="10.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Søk" />
       <Button fx:id="edit" layoutY="470.0" mnemonicParsing="false" text="Rediger" />

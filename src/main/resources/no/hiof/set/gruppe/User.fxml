@@ -97,7 +97,7 @@
             <Font size="15.0" />
          </font>
       </Text>
-      <Text fx:id="arrangementDescription" layoutX="291.0" layoutY="516.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="418.5999091863632" />
+      <Text fx:id="arrangementDescription" layoutX="291.0" layoutY="516.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="418.5999091863632" />
       <RadioButton fx:id="radioExp" layoutX="733.0" layoutY="444.0" mnemonicParsing="false" text="Vis utgåtte" />
       <RadioButton fx:id="radioFut" layoutX="733.0" layoutY="464.0" mnemonicParsing="false" text="Vis fremtidige" />
       <RadioButton fx:id="radioOng" layoutX="733.0" layoutY="483.0" mnemonicParsing="false" text="Vis pågående" />
