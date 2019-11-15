@@ -16,6 +16,7 @@ package no.hiof.set.gruppe.GUI.controller.concrete;
 // --------------------------------------------------//
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -32,7 +33,9 @@ import no.hiof.set.gruppe.core.exceptions.IllegalDataAccess;
 import no.hiof.set.gruppe.core.Repository;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.GUI.model.ViewInformation;
+import no.hiof.set.gruppe.model.constantInformation.SportCategory;
 import no.hiof.set.gruppe.model.user.ProtoUser;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.net.URL;
@@ -52,7 +55,7 @@ public class AdminController extends ControllerTransferData {
      @FXML
      private ListView<Arrangement> arrangementListView;
      @FXML
-     private TextField search;
+     private TextField searchInput;
      @FXML
      private Text arrangementSport, arrangementName, arrangementAdress, arrangementDate, arrangementGorI, arrangementParticipants, arrangementDescription;
      @FXML
@@ -69,6 +72,7 @@ public class AdminController extends ControllerTransferData {
     private Arrangement currentArrangement = null;
     private ObservableList<Arrangement> arrangementListObservable;
     private Text[] textFields;
+    private FilteredList<Arrangement> filteredArrangements;
 
     // --------------------------------------------------//
     //                4.On action Methods                //
@@ -91,6 +95,10 @@ public class AdminController extends ControllerTransferData {
         if(checkIfLegalArrangement()){
             editArrangement();
         }
+    }
+
+    private void onLogOutClick(ActionEvent event){
+        returnToMainWindow();
     }
 
     /**
@@ -149,7 +157,7 @@ public class AdminController extends ControllerTransferData {
         arrangementListView.refresh();
     }
 
-    private void returnToMainWindow(ActionEvent event) {
+    private void returnToMainWindow() {
         title = "Logg inn";
         name = "Login.fxml";
         closeWindow(delete);
@@ -159,6 +167,29 @@ public class AdminController extends ControllerTransferData {
     // --------------------------------------------------//
     //                6.Private Search Methods           //
     // --------------------------------------------------//
+
+    /**
+     * @param arrangement
+     * @return boolean
+     */
+    private boolean lowerCaseTitleSearch(@NotNull Arrangement arrangement){
+        String title = arrangement.getName().toLowerCase();
+        String search = searchInput.getText().toLowerCase();
+        return title.contains(search);
+    }
+
+    /**
+     * Handles searching for Arrangements
+     */
+    private void search(){
+        filteredArrangements.setPredicate(this::lowerCaseTitleSearch);
+        arrangementListView.setItems(filteredArrangements);
+        arrangementListView.refresh();
+    }
+
+    private void liveSearchUpdate(){
+        searchInput.textProperty().addListener(((s) -> search()));
+    }
 
     // --------------------------------------------------//
     //                7.Private setup Methods            //
@@ -171,7 +202,13 @@ public class AdminController extends ControllerTransferData {
 
     private void populateListView(){
         arrangementListObservable = FXCollections.observableArrayList(Repository.queryAllArrangements());
-        arrangementListView.setItems(arrangementListObservable);
+    }
+
+    private void setupFilteredListView(){
+        filteredArrangements = arrangementListObservable.filtered(arrangement -> true);
+
+        arrangementListView.setItems(filteredArrangements);
+        arrangementListView.refresh();
     }
 
     private void setCurrentArrangement(){
@@ -179,7 +216,7 @@ public class AdminController extends ControllerTransferData {
     }
 
     private void setupActionHandlers(){
-        logOut.setOnAction(this::returnToMainWindow);
+        logOut.setOnAction(this::onLogOutClick);
         edit.setOnAction(this::onEditClick);
         delete.setOnAction(this::onDeleteClick);
         arrangementListView.setOnMouseClicked(this::onListViewClick);
@@ -195,8 +232,10 @@ public class AdminController extends ControllerTransferData {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        setupActionHandlers();
         populateListView();
+        setupFilteredListView();
+        setupActionHandlers();
+        liveSearchUpdate();
         setTextColors(false);
         textFields = new Text[]{arrangementName, arrangementSport, arrangementAdress, arrangementDate, arrangementParticipants, arrangementGorI, arrangementDescription};
     }

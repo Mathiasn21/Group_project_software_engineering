@@ -34,7 +34,6 @@ import no.hiof.set.gruppe.model.user.ProtoUser;
 import no.hiof.set.gruppe.core.predicates.DateTest;
 import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
-import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.*;
 
@@ -249,6 +248,14 @@ public class UserController extends Controller {
         myArrangementsView.refresh();
     }
 
+    private void liveSearchUpdateMy(){
+        searchMy.textProperty().addListener(((s) -> searchMyArrangement()));
+    }
+
+    private void searchMyArrangement(){
+        sortAndSearchMy();
+    }
+
     /**
      * Handles searching for Available Arrangements.
      */
@@ -258,16 +265,8 @@ public class UserController extends Controller {
         availableArrangementsListView.refresh();
     }
 
-    private void liveSearchUpdateMy(){
-        searchMy.textProperty().addListener(((s) -> searchMyArrangement()));
-    }
-
     private void liveSearchUpdateAv(){
         searchAv.textProperty().addListener(((s) -> searchAvArrangement()));
-    }
-
-    private void searchMyArrangement(){
-        sortAndSearchMy();
     }
 
     private void searchAvArrangement(){
@@ -315,7 +314,7 @@ public class UserController extends Controller {
         myGroups.setOnAction(this::onClickMyGroups);
     }
 
-    private void setupToggleBtns() {
+    private void setupToggleButtons() {
         radioAll.setToggleGroup(radioBtns);
         radioAll.setUserData(DateTest.ALL);
 
@@ -391,7 +390,7 @@ public class UserController extends Controller {
         setupActionHandlers();
         liveSearchUpdateMy();
         liveSearchUpdateAv();
-        setupToggleBtns();
+        setupToggleButtons();
         setTextColors(false);
         allTextFields = new Text[]{arrangementTitle, arrangementSport, arrangementAddress, arrangementDate, arrangementParticipants, arrangementGroup, arrangementDescription};
     }
