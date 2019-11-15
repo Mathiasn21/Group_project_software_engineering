@@ -148,7 +148,7 @@ public class GroupController extends ControllerTransferData {
     private void newGroup(){
         title = "Ny gruppe";
         name = "NewAlterGroup.fxml";
-        createNewView(this);
+        createNewView(this, null);
     }
 
     private void switchView(String newTitle, String newName){

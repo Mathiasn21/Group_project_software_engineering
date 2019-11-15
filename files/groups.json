@@ -6,12 +6,18 @@
       "USER2",
       "USER3",
       "USER10",
-      "USER9",
       "USER2",
       "USER11",
-      "USER8",
-      "USER1",
-      "USER4"
+      "USER4",
+      "USER8"
+    ]
+  },
+  {
+    "name": "jherkgfb",
+    "ID": "48a3802d-e1d1-4820-b4d3-991b3f5a82a1",
+    "members": [
+      "USER4",
+      "USER5"
     ]
   }
 ]
