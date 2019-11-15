@@ -92,7 +92,7 @@ public class NewAlterGroupController extends ControllerTransferData {
      */
     private void onClickSave(ActionEvent event){
         getGroupData();
-        setGropData();
+        setGroupData();
         if(validateGroupData())return;
         closeWindow(cancel);
         queryGroup();
@@ -132,7 +132,7 @@ public class NewAlterGroupController extends ControllerTransferData {
         members = new ArrayList<>(chosenUsersObservableList);
     }
 
-    private void setGropData(){
+    private void setGroupData(){
         if(groupToEdit == null){
             groupToEdit = new Group();
             createdNewGroup = true;

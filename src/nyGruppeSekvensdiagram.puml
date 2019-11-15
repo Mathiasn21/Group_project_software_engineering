@@ -1,0 +1,19 @@
+@startuml
+title Oppretter NY gruppe
+
+actor bruker
+
+bruker -> User.fxml : "Mine grupper" klikket
+User.fxml -> UserController : onClickMyGroups(ActionEvent event)
+UserController -> GroupController : switchView(title,groups.fxml)
+bruker -> GroupController : "Ny gruppe" klikket
+GroupController -> newAlterGroupController : newGroup()
+bruker -> newAlterGroupController : gruppenavn (input)
+bruker -> newAlterGroupController : "Legg til medlem" klikket
+newAlterGroupController -> newAlterGroupController : addChosenMember()
+bruker -> newAlterGroupController : "Lagre" klikket
+newAlterGroupController -> GroupController : onClickSave
+GroupController -> DataHandler : setDataFields(Object)
+
+
+@enduml
