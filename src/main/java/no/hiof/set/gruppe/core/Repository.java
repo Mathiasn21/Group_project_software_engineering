@@ -277,7 +277,6 @@ public final class Repository implements IRepository{
         return new ArrayList<>((List<T>) objectMappedToList.get(aClass));
     }
 
-
     @Override
     @SuppressWarnings("unchecked")//only one possible return type here, as this is mapped from the start
     public <T extends IBaseEntity, E extends IUser> List<T> queryAllEntityConnectedToUserData(Class<T> aClass, E user) {
@@ -298,7 +297,6 @@ public final class Repository implements IRepository{
         }
         return result;
     }
-
 
     @Override
     @SuppressWarnings("unchecked")//only one possible return type here, as this is mapped from the start
@@ -347,11 +345,6 @@ public final class Repository implements IRepository{
         storeData(thatBaseEntity.getClass());
     }
 
-    private <T extends IBaseEntity> void storeData(Class<T> aClass) throws DataFormatException {
-        List<? extends IBaseEntity> list = getList(aClass);
-        handleData.storeDataGivenType(aClass, list);
-    }
-
     @Override
     public <T extends IBaseEntity> void deleteData(T thatBaseEntity, ProtoUser user) throws IllegalDataAccess, DataFormatException {
         if(!AccessValidate.ThatUserCanModifyBaseEntity(thatBaseEntity, user))throw new IllegalDataAccess();
@@ -367,6 +360,11 @@ public final class Repository implements IRepository{
         if(list == null)throw new DataFormatException();
         list.removeIf((thisO) -> thisO.getID().equals(thatO.getID()) && thisO.getUSERNAME().equals(user.getName()));
         storeData(baseEntityMappedToEntity.get(thatO.getClass()));
+    }
+
+    private <T extends IBaseEntity> void storeData(Class<T> aClass) throws DataFormatException {
+        List<? extends IBaseEntity> list = getList(aClass);
+        handleData.storeDataGivenType(aClass, list);
     }
 
     private <T extends IBaseEntity> void deleteAllEntityConnectedToUserData(String ID, Class<T> tClass) throws DataFormatException {
