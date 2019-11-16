@@ -143,6 +143,8 @@ public final class Repository implements IRepository{
         entityList.add(thatBaseEntity);
         storeData(thatBaseEntity.getClass());
     }
+
+
     // --------------------------------------------------//
     //                5.Public Data Removal              //
     // --------------------------------------------------//
