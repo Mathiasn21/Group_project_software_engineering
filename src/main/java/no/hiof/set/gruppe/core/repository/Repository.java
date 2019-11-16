@@ -2,10 +2,10 @@ package no.hiof.set.gruppe.core.repository;
 /*Guide
  * 1. Import Statements
  * 2. Static Fields
- * 3. Handle Json and File saving
- * 4. Private Query Data
+ * 3. Private Query Data
+ * 4. Private Data Handling
  * 5. Public Data Removal
- * 6. Public Getters
+ * 6. Public Query Data
  * */
 
 
@@ -47,7 +47,7 @@ public final class Repository implements IRepository{
     //Preload data.
     static{
         try{
-            List<DummyUsers> listOfDummyusers = Arrays.asList(DummyUsers.values());
+            List<DummyUsers> listOfDummyUsers = Arrays.asList(DummyUsers.values());
             List<Arrangement> listOfAllArrangements = queryDataGivenType(Arrangement.class);
             List<UserConnectedArrangement> listOfAllUserConnectedArrangements = queryDataGivenType(UserConnectedArrangement.class);
             List<Group> listOfAllGroups = queryDataGivenType(Group.class);
@@ -55,7 +55,7 @@ public final class Repository implements IRepository{
             objectMappedToList.put(Arrangement.class, listOfAllArrangements);
             objectMappedToList.put(UserConnectedArrangement.class, listOfAllUserConnectedArrangements);
             objectMappedToList.put(Group.class, listOfAllGroups);
-            objectMappedToList.put(DummyUsers.class, listOfDummyusers);
+            objectMappedToList.put(DummyUsers.class, listOfDummyUsers);
             baseEntityMappedToEntity.put(Arrangement.class, UserConnectedArrangement.class);
 
         }catch (IOException | DataFormatException e){
@@ -91,11 +91,26 @@ public final class Repository implements IRepository{
 
 
     // --------------------------------------------------//
-    //                4.Private Store Data               //
+    //                4.Private Data Handling            //
     // --------------------------------------------------//
     private <T extends IBaseEntity> void storeData(Class<T> aClass) throws DataFormatException {
         List<? extends IBaseEntity> list = getList(aClass);
         handleData.storeDataGivenType(aClass, list);
+    }
+
+    private <T extends IBaseEntity> void deleteAllEntityConnectedToUserData(String ID, Class<T> tClass) throws DataFormatException {
+        Class<? extends EntityConnectedToUser> entity = baseEntityMappedToEntity.get(tClass);
+        List<EntityConnectedToUser> dataConnectedToUsers = getDataConnectedToUsersList(entity);
+        if(dataConnectedToUsers == null) return;
+
+        for (int i = 0; i < dataConnectedToUsers.size(); i++){
+            EntityConnectedToUser data = dataConnectedToUsers.get(i);
+            if(data.getID().equals(ID)){
+                dataConnectedToUsers.remove(data);
+                i--;
+            }
+        }
+        storeData(entity);
     }
 
 
@@ -163,21 +178,6 @@ public final class Repository implements IRepository{
         if(list == null)throw new DataFormatException();
         list.removeIf((thisO) -> thisO.getID().equals(thatO.getID()) && thisO.getUSERNAME().equals(user.getName()));
         storeData(baseEntityMappedToEntity.get(thatO.getClass()));
-    }
-
-    private <T extends IBaseEntity> void deleteAllEntityConnectedToUserData(String ID, Class<T> tClass) throws DataFormatException {
-        Class<? extends EntityConnectedToUser> entity = baseEntityMappedToEntity.get(tClass);
-        List<EntityConnectedToUser> dataConnectedToUsers = getDataConnectedToUsersList(entity);
-        if(dataConnectedToUsers == null) return;
-
-        for (int i = 0; i < dataConnectedToUsers.size(); i++){
-            EntityConnectedToUser data = dataConnectedToUsers.get(i);
-            if(data.getID().equals(ID)){
-                dataConnectedToUsers.remove(data);
-                i--;
-            }
-        }
-        storeData(entity);
     }
 
 
