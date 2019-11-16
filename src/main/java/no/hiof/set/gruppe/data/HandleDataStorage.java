@@ -65,7 +65,7 @@ public class HandleDataStorage implements IHandleData{
      * @return String
      */
     private static String toJson(List<? extends IBaseEntity> list) {
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
         return gson.toJson(list);
     }
 

@@ -11,6 +11,7 @@ package no.hiof.set.gruppe.tests.others.UseCase;
 // --------------------------------------------------//
 import no.hiof.set.gruppe.core.Repository;
 import no.hiof.set.gruppe.core.exceptions.DataFormatException;
+import no.hiof.set.gruppe.core.exceptions.IllegalDataAccess;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.user.ProtoUser;
 import org.junit.jupiter.api.*;
@@ -39,8 +40,8 @@ class TestingProtoUserUseCases {
 
     //setup
     static {
-        userArrangements = repository.queryAllUserRelatedArrangements(PROTO_USER);
-        notUserArrangements = repository.queryAllArrangements();
+        userArrangements = repository.queryAllEntityConnectedToUserData(Arrangement.class, PROTO_USER);
+        notUserArrangements = repository.queryAllDataOfGivenType(Arrangement.class);
         notUserArrangements.removeAll(userArrangements);
     }
 
@@ -52,12 +53,12 @@ class TestingProtoUserUseCases {
       */
     @Test
     @Order(1)
-    void firstAddUserToArrangement() throws DataFormatException {
+    void firstAddUserToArrangement() {
         arrangementToTest = notUserArrangements.get(0);
         userArrangements.add(arrangementToTest);
 
-        repository.insertUserToArrangement(arrangementToTest, PROTO_USER);
-        assertDataIntegrity(repository.queryAllUserRelatedArrangements(PROTO_USER));
+        repository.insertUserRelationToData(arrangementToTest, PROTO_USER);
+        assertDataIntegrity(repository.queryAllEntityConnectedToUserData(Arrangement.class, PROTO_USER));
     }
 
      /**
@@ -66,10 +67,10 @@ class TestingProtoUserUseCases {
     @Test
     @Order(2)
     void thenRemoveUserFromArrangement() throws DataFormatException {
-        repository.deleteUserFromArrangement(arrangementToTest, PROTO_USER);
+        repository.deleteUserConnectionToData(arrangementToTest, PROTO_USER);
         userArrangements.remove(arrangementToTest);
-        repository.deleteUserFromArrangement(arrangementToTest, PROTO_USER);
-        assertDataIntegrity(repository.queryAllUserRelatedArrangements(PROTO_USER));
+        repository.deleteUserConnectionToData(arrangementToTest, PROTO_USER);
+        assertDataIntegrity(repository.queryAllEntityConnectedToUserData(Arrangement.class, PROTO_USER));
     }
 
     private void assertDataIntegrity(List<Arrangement> expectedArrangementList) {

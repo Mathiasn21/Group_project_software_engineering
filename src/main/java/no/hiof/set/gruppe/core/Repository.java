@@ -284,6 +284,7 @@ public final class Repository implements IRepository{
         List<T> result = new ArrayList<>();
         List<IBaseEntity> baseEntityList = getList(aClass);
         List<EntityConnectedToUser> dataConnectedToUsers = getDataConnectedToUsersList(aClass);
+        if(dataConnectedToUsers == null)return new ArrayList<>();
         String userName = user.getName();
 
         outer:for(IBaseEntity baseEntity : baseEntityList){
@@ -357,9 +358,17 @@ public final class Repository implements IRepository{
         deleteAllEntityConnectedToUserData(thatBaseEntity.getID(), thatBaseEntity.getClass());
     }
 
+    @Override
+    public <T extends IBaseEntity, E extends IUser> void deleteUserConnectionToData(T thatO, E user) throws DataFormatException {
+        List<EntityConnectedToUser> list = getDataConnectedToUsersList(thatO.getClass());
+        if(list == null)throw new DataFormatException();
+        list.removeIf((thisO) -> thisO.getID().equals(thatO.getID()) && thisO.getUSERNAME().equals(user.getName()));
+    }
+
     private <T extends IBaseEntity> void deleteAllEntityConnectedToUserData(String ID, Class<T> tClass) {
         Class<? extends EntityConnectedToUser> entity = baseEntityMappedToEntity.get(tClass);
         List<EntityConnectedToUser> dataConnectedToUsers = getDataConnectedToUsersList(entity);
+        if(dataConnectedToUsers == null) return;
 
         for (int i = 0; i < dataConnectedToUsers.size(); i++){
             EntityConnectedToUser data = dataConnectedToUsers.get(i);
@@ -375,9 +384,9 @@ public final class Repository implements IRepository{
         return (List<IBaseEntity>) objectMappedToList.get(thatBaseEntity);
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("unchecked")//Safe duo to that the mapping explicitly state the type indirectly through the mappers
     private <T extends IBaseEntity> List<EntityConnectedToUser> getDataConnectedToUsersList(Class<T> baseEntity) {
         Class<? extends EntityConnectedToUser> entity = baseEntityMappedToEntity.get(baseEntity);
-        return (List<EntityConnectedToUser>) objectMappedToList.get(entity);
+        return (List<EntityConnectedToUser>) objectMappedToList.get(objectMappedToList.get(entity) == null ? baseEntity : entity);
     }
 }

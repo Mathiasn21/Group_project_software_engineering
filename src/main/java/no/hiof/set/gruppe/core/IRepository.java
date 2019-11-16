@@ -17,4 +17,5 @@ public interface IRepository {
 
     <T extends IBaseEntity> void mutateData(T t);
     <T extends IBaseEntity> void deleteData(T t, ProtoUser user) throws IllegalDataAccess;
+    <T extends IBaseEntity, E extends IUser> void deleteUserConnectionToData(T t, E user) throws DataFormatException;
 }

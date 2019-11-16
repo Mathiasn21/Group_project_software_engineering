@@ -55,11 +55,11 @@ class TestingAdminUseCases {
     @Test
     @Order(1)
     void addArrangement() throws IllegalDataAccess, DataFormatException {
-        List<Arrangement> expectedArrangementList = repository.queryAllUserRelatedArrangements(PROTO_USER_ORGANIZER);
+        List<Arrangement> expectedArrangementList = repository.queryAllEntityConnectedToUserData(Arrangement.class, PROTO_USER_ORGANIZER);
         expectedArrangementList.add(arrangement);
         repository.insertArrangement(arrangement, PROTO_USER_ORGANIZER);
 
-        assertDataIntegrity(expectedArrangementList, repository.queryAllUserRelatedArrangements(PROTO_USER_ORGANIZER));
+        assertDataIntegrity(expectedArrangementList, repository.queryAllEntityConnectedToUserData(Arrangement.class, PROTO_USER_ORGANIZER));
     }
 
     /**
@@ -77,10 +77,10 @@ class TestingAdminUseCases {
     @Test
     @Order(2)
     void deleteArrangement() throws IllegalDataAccess, DataFormatException {
-        List<Arrangement> expectedArrangementList = repository.queryAllUserRelatedArrangements(PROTO_USER_ORGANIZER);
+        List<Arrangement> expectedArrangementList = repository.queryAllEntityConnectedToUserData(Arrangement.class, PROTO_USER_ORGANIZER);
         expectedArrangementList.remove(arrangement);
 
-        repository.deleteArrangement(arrangement, PROTO_USER_ADMIN);
+        repository.deleteData(arrangement, PROTO_USER_ADMIN);
         assertDataIntegrity(expectedArrangementList, repository.queryAllArrangements());
     }
 }
