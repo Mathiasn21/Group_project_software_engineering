@@ -72,7 +72,7 @@ class TestingProtoUserUseCases {
     }
 
     private void assertDataIntegrity(List<Arrangement> expectedArrangementList) {
-        assertEquals(userArrangements, expectedArrangementList);
+        assertTrue(userArrangements.containsAll(expectedArrangementList));
         assertEquals(expectedArrangementList.size(), userArrangements.size());
     }
  }
