@@ -58,9 +58,9 @@ class TestSystemFunctionality {
 
     @Test
     void classDateLegal(){
-        LocalDate date1 = LocalDate.of(2019, 10, 15);
-        LocalDate date2 = LocalDate.of(2019, 10, 15);
-        LocalDate date3 = LocalDate.of(2019, 10, 16);
+        LocalDate date1 = LocalDate.now().minusDays(2);
+        LocalDate date2 = LocalDate.now().minusDays(2);
+        LocalDate date3 = LocalDate.now().minusDays(1);
         LocalDate date4 = LocalDate.now().plusDays(1);
         LocalDate date5 = LocalDate.now().plusDays(2);
 
@@ -73,8 +73,8 @@ class TestSystemFunctionality {
     @Test
     void classDateIllegal(){
         LocalDate date1 = LocalDate.now().plusDays(1);
-        LocalDate date2 = LocalDate.of(2019, 10, 15);
-        LocalDate date3 = LocalDate.of(2019, 10, 16);
+        LocalDate date2 = LocalDate.now().minusMonths(1).minusDays(1);
+        LocalDate date3 = LocalDate.now().minusMonths(1);
         LocalDate date4 = LocalDate.now().minusDays(1);
 
         assertFalse(DateTest.TestExpired.execute(date1, date1));
