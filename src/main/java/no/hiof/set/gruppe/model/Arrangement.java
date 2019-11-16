@@ -198,7 +198,7 @@ public class Arrangement implements IGetAllDataStringArr, IBaseEntity {
      */
     @Override
     public String[] getAllDataAsStringArr() {
-        return new String[]{name, sport, address, startDate + " til " + endDate, String.valueOf(participants), group ? "Lagkonkurranse" : "Individuell konkurranse", description};
+        return new String[]{name, sport, address, startDate + " til " + endDate, String.valueOf(participants), getGroup(), description};
     }
 
     /**

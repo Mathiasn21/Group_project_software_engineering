@@ -53,19 +53,4 @@ public class RawUser {
     public String getStreetAddress() {return streetAddress;}
     public String geteMail() {return eMail;}
     public String getPassHash() {return passHash;}
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof RawUser)) return false;
-
-        RawUser that = (RawUser) o;
-
-        if (!fName.equals(that.fName) || !lName.equals(that.lName)) return false;
-        if (!bDate.equals(that.bDate)) return false;
-        if (!cityCode.equals(that.cityCode)) return false;
-        if (!streetAddress.equals(that.streetAddress)) return false;
-        if (!eMail.equals(that.eMail)) return false;
-        return passHash.equals(that.passHash);
-    }
 }

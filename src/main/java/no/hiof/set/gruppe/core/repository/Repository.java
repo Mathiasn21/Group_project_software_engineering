@@ -119,7 +119,7 @@ public final class Repository implements IRepository{
     // --------------------------------------------------//
     @Override
     public <T extends IBaseEntity, E extends IUser> void insertData(T iBaseEntity, E user) throws IllegalDataAccess, DataFormatException {
-        if(!AccessValidate.ThatUserCanCreateNewBaseEntity(user))throw new IllegalDataAccess();
+        if(!AccessValidate.ThatUserCanCreateNewBaseEntity(user, iBaseEntity.getClass()))throw new IllegalDataAccess();
         (getList(iBaseEntity.getClass())).add(iBaseEntity);
 
         Class<? extends EntityConnectedToUser> relation = baseEntityMappedToEntity.get(iBaseEntity.getClass());

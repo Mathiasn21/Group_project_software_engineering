@@ -16,9 +16,7 @@ package no.hiof.set.gruppe.model;
 import no.hiof.set.gruppe.core.repository.IBaseEntity;
 import no.hiof.set.gruppe.model.constantInformation.DummyUsers;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public class Group implements IBaseEntity {
 
@@ -27,7 +25,7 @@ public class Group implements IBaseEntity {
     // --------------------------------------------------//
     private String name;
     private final String ID;
-    private List<DummyUsers> members;
+    private List<DummyUsers> members = new ArrayList<>();
 
     // --------------------------------------------------//
     //                3.Constructors                     //
@@ -36,10 +34,11 @@ public class Group implements IBaseEntity {
         this("");
     }
 
-    public Group(String name) {
+    public Group(String name) {this(name, UUID.randomUUID().toString());}
+    public Group(String name, String ID) {
         this.name = name;
-        ID = UUID.randomUUID().toString();
         this.members = new ArrayList<>();
+        this.ID = ID;
     }
 
     // --------------------------------------------------//
@@ -69,6 +68,7 @@ public class Group implements IBaseEntity {
     // --------------------------------------------------//
     public void setName(String name) { this.name = name; }
     public void setMembers(ArrayList<DummyUsers> member) { this.members = member; }
+    public void removeMembers(DummyUsers ...members){this.members.removeAll(Arrays.asList(members));}
 
     // --------------------------------------------------//
     //                7.Overridden Methods               //
@@ -80,4 +80,16 @@ public class Group implements IBaseEntity {
 
     @Override
     public String getID() { return ID; }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Group)) return false;
+
+        Group group = (Group) o;
+
+        if (!Objects.equals(name, group.name)) return false;
+        if (!Objects.equals(ID, group.ID)) return false;
+        return Objects.equals(members, group.members);
+    }
 }
