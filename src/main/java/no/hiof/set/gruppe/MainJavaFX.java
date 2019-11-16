@@ -64,8 +64,24 @@ public class MainJavaFX extends Application implements SetupWindow {
         stage.setTitle("Logg inn");
         stage.show();
 
-        List<Arrangement> test = new Repository().queryAllEntityConnectedToUserData(Arrangement.class, ProtoUser.ORGANIZER);
-        List<Arrangement> test2 = new Repository().queryAllDataOfGivenType(Arrangement.class);
+        Repository repo = new Repository();
+        List<Arrangement> test = repo.queryAllEntityConnectedToUserData(Arrangement.class, ProtoUser.ORGANIZER);
+        List<Arrangement> test2 = repo.queryAllDataOfGivenType(Arrangement.class);
+        Arrangement arrangement = new Arrangement(
+                "Bernts Fantastiske Test",
+                "Annet",
+                420,
+                "BergOgDalBaneVegen 46",
+                false,
+                "2019-10-15",
+                "2019-10-16",
+                "Dette varer i hele 1 dager. Og, server null formål."
+        );
+        try {
+            repo.insertUserToArrangement(arrangement, ProtoUser.ORGANIZER);
+        } catch (DataFormatException e) {
+            e.printStackTrace();
+        }
     }
 
 

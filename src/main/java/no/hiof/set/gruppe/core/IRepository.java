@@ -12,6 +12,8 @@ public interface IRepository {
     <T extends IBaseEntity> T queryDataWithID(String ID, Class<T> tClass);
 
     <T extends IBaseEntity> void insertData(T t);
+    <T extends IBaseEntity, E extends IUser> void insertUserRelationToData(T t, E user);
+
     <T extends IBaseEntity> void mutateData(T t);
     <T extends IBaseEntity> void deleteData(T t, ProtoUser user) throws IllegalDataAccess;
 }

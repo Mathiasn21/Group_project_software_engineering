@@ -27,6 +27,8 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 /**
@@ -307,13 +309,30 @@ public final class Repository implements IRepository{
     }
 
     @Override
-    public <T extends IBaseEntity> void mutateData(T iBaseEntity) {
-        IBaseEntity entity = queryDataWithID(iBaseEntity.getID(), iBaseEntity.getClass());
+    public <T extends IBaseEntity, E extends IUser> void insertUserRelationToData(T t, E user) {
+        Class<? extends EntityConnectedToUser> connection = baseEntityMappedToEntity.get(t.getClass());
+        List<EntityConnectedToUser> listOfConnections = getDataConnectedToUsersList(t.getClass());
+        Constructor<? extends EntityConnectedToUser> data;
+        try {
+            data = connection.getDeclaredConstructor(String.class, String.class);
+            listOfConnections.add(data.newInstance(t.getID(), user.getName()));
+        } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
+            try {ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_FATAL, e);
+            } catch (IOException ex) { ex.printStackTrace();}
+        }
+    }
+
+    @Override
+    public <T extends IBaseEntity> void mutateData(T thatBaseEntity) {
+        IBaseEntity entity = queryDataWithID(thatBaseEntity.getID(), thatBaseEntity.getClass());
+        List<IBaseEntity> entityList = getList(thatBaseEntity.getClass());
+        entityList.removeIf((thisBaseEntity) -> thisBaseEntity.getID().equals(thatBaseEntity.getID()));
+        entityList.add(thatBaseEntity);
     }
 
     @Override
     public <T extends IBaseEntity> void deleteData(T thatBaseEntity, ProtoUser user) throws IllegalDataAccess {
-        if(!AccessValidate.userCanModifyBaseEntity(thatBaseEntity, user))throw new IllegalDataAccess();
+        if(!AccessValidate.ThatUserCanModifyBaseEntity(thatBaseEntity, user))throw new IllegalDataAccess();
         List<IBaseEntity> list = getList(thatBaseEntity.getClass());
         list.removeIf((thisBaseEntity) -> thisBaseEntity.getID().equals(thatBaseEntity.getID()));
         deleteAllEntityConnectedToUserData(thatBaseEntity.getID(), thatBaseEntity.getClass());

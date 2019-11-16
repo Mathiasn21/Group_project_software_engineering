@@ -44,7 +44,7 @@ public final class AccessValidate {
         return protoUser == ProtoUser.ORGANIZER || protoUser == ProtoUser.ADMIN;
     }
 
-    public static <T extends IBaseEntity> boolean userCanModifyBaseEntity(T thatBaseEntity, ProtoUser user) {
+    public static <T extends IBaseEntity> boolean ThatUserCanModifyBaseEntity(T thatBaseEntity, ProtoUser user) {
         return true;
     }
 }
