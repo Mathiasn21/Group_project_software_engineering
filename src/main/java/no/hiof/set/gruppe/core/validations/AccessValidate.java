@@ -8,6 +8,7 @@ package no.hiof.set.gruppe.core.validations;
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
+import no.hiof.set.gruppe.core.IBaseEntity;
 import no.hiof.set.gruppe.core.Repository;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.user.ProtoUser;
@@ -41,5 +42,9 @@ public final class AccessValidate {
     @Contract(pure = true)
     public static boolean userCanCreateArrangement(@NotNull ProtoUser protoUser){
         return protoUser == ProtoUser.ORGANIZER || protoUser == ProtoUser.ADMIN;
+    }
+
+    public static <T extends IBaseEntity> boolean userCanModifyBaseEntity(T thatBaseEntity, ProtoUser user) {
+        return true;
     }
 }

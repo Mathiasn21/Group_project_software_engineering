@@ -42,7 +42,8 @@ public final class Repository implements IRepository{
     private static List<Group> listOfAllGroups;
     private static List<UserConnectedArrangement> listOfAllUserConnectedArrangements;
     private static final IHandleData handleData = new HandleDataStorage();
-    private static final Map<Class<? extends IBaseEntity>, List<? extends IBaseEntity>> objectMapper = new ArrayMap<>();
+    private static final Map<Class<? extends IBaseEntity>, List<? extends IBaseEntity>> objectMappedToList = new ArrayMap<>();
+    private static final Map<Class<? extends IBaseEntity>, Class<? extends EntityConnectedToUser>> baseEntityMappedToEntity = new ArrayMap<>();
 
     //Preload data.
     static{
@@ -51,9 +52,10 @@ public final class Repository implements IRepository{
             listOfAllUserConnectedArrangements = queryDataGivenType(UserConnectedArrangement[].class);
             listOfAllGroups = queryDataGivenType(Group[].class);
 
-            objectMapper.put(Arrangement.class, listOfAllArrangements);
-            objectMapper.put(UserConnectedArrangement.class, listOfAllArrangements);
-            objectMapper.put(Group.class, listOfAllArrangements);
+            objectMappedToList.put(Arrangement.class, listOfAllArrangements);
+            objectMappedToList.put(UserConnectedArrangement.class, listOfAllUserConnectedArrangements);
+            objectMappedToList.put(Group.class, listOfAllGroups);
+            baseEntityMappedToEntity.put(Arrangement.class, UserConnectedArrangement.class);
 
         }catch (IOException | DataFormatException e){
             try {ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_READING_DATA, e);}
@@ -262,16 +264,37 @@ public final class Repository implements IRepository{
     @Contract(pure = true)
     public boolean queryEmailExists(String email) {return false;}
 
+
+    /////////////////////////////////////////////////////////////////////
+    //                  Creating new repo methods   in progress        //
+    ////////////////////////////////////////////////////////////////////
+
     @Override
     @SuppressWarnings("unchecked")//The only possible lists that it returns are the ones already defined in objectMapper
     public <T extends IBaseEntity> List<T> queryAllDataOfGivenType(Class<T> aClass) {
-        return new ArrayList<>((List<T>) objectMapper.get(aClass));
+        return new ArrayList<>((List<T>) objectMappedToList.get(aClass));
     }
 
     @Override
+    @SuppressWarnings("unchecked")//only one possible return type here, as this is mapped from the start
     public <T extends IBaseEntity, E extends IUser> List<T> queryAllEntityConnectedToUserData(Class<T> aClass, E user) {
-        return null;
+        List<T> result = new ArrayList<>();
+        List<IBaseEntity> baseEntityList = getList(aClass);
+        List<EntityConnectedToUser> dataConnectedToUsers = getDataConnectedToUsersList(aClass);
+        String userName = user.getName();
+
+        outer:for(IBaseEntity baseEntity : baseEntityList){
+            String baseID = baseEntity.getID();
+            for(EntityConnectedToUser data : dataConnectedToUsers){
+                if(userName.equals(data.getUSERNAME()) && baseID.equals(data.getID())){
+                    result.add((T) baseEntity);
+                    continue outer;
+                }
+            }
+        }
+        return result;
     }
+
 
     @Override
     public <T extends IBaseEntity> T queryDataWithID(String ID, Class<T> aClass) {
@@ -279,18 +302,44 @@ public final class Repository implements IRepository{
     }
 
     @Override
-    @SuppressWarnings("unchecked")//objectMapper contains explicitly a list containing IBaseEntity
     public <T extends IBaseEntity> void insertData(T iBaseEntity) {
-        ((List<IBaseEntity>)objectMapper.get(iBaseEntity.getClass())).add(iBaseEntity);
-    }
-
-    @Override
-    public <T extends IBaseEntity> void deleteData(T iBaseEntity) {
-
+        (getList(iBaseEntity.getClass())).add(iBaseEntity);
     }
 
     @Override
     public <T extends IBaseEntity> void mutateData(T iBaseEntity) {
+        IBaseEntity entity = queryDataWithID(iBaseEntity.getID(), iBaseEntity.getClass());
+    }
 
+    @Override
+    public <T extends IBaseEntity> void deleteData(T thatBaseEntity, ProtoUser user) throws IllegalDataAccess {
+        if(!AccessValidate.userCanModifyBaseEntity(thatBaseEntity, user))throw new IllegalDataAccess();
+        List<IBaseEntity> list = getList(thatBaseEntity.getClass());
+        list.removeIf((thisBaseEntity) -> thisBaseEntity.getID().equals(thatBaseEntity.getID()));
+        deleteAllEntityConnectedToUserData(thatBaseEntity.getID(), thatBaseEntity.getClass());
+    }
+
+    private <T extends IBaseEntity> void deleteAllEntityConnectedToUserData(String ID, Class<T> tClass) {
+        Class<? extends EntityConnectedToUser> entity = baseEntityMappedToEntity.get(tClass);
+        List<EntityConnectedToUser> dataConnectedToUsers = getDataConnectedToUsersList(entity);
+
+        for (int i = 0; i < dataConnectedToUsers.size(); i++){
+            EntityConnectedToUser data = dataConnectedToUsers.get(i);
+            if(data.getID().equals(ID)){
+                dataConnectedToUsers.remove(data);
+                i--;
+            }
+        }
+    }
+
+    @SuppressWarnings("unchecked")//objectMapper contains explicitly only List<IBaseEntity>
+    private <T extends IBaseEntity> List<IBaseEntity> getList(Class<T> thatBaseEntity) {
+        return (List<IBaseEntity>) objectMappedToList.get(thatBaseEntity);
+    }
+
+    @SuppressWarnings("unchecked")
+    private <T extends IBaseEntity> List<EntityConnectedToUser> getDataConnectedToUsersList(Class<T> baseEntity) {
+        Class<? extends EntityConnectedToUser> entity = baseEntityMappedToEntity.get(baseEntity);
+        return (List<EntityConnectedToUser>) objectMappedToList.get(entity);
     }
 }

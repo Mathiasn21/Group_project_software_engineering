@@ -10,7 +10,7 @@ package no.hiof.set.gruppe.model.user;
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
-import no.hiof.set.gruppe.core.EntityConnectedWithUser;
+import no.hiof.set.gruppe.core.EntityConnectedToUser;
 import no.hiof.set.gruppe.core.IBaseEntity;
 import org.jetbrains.annotations.Contract;
 
@@ -18,7 +18,7 @@ import org.jetbrains.annotations.Contract;
  * This class represents information about the connection between
  * a user and a arrangement.
  */
-public class UserConnectedArrangement implements IBaseEntity, EntityConnectedWithUser {
+public class UserConnectedArrangement implements IBaseEntity, EntityConnectedToUser {
     // --------------------------------------------------//
     //                2.Local Fields                     //
     // --------------------------------------------------//

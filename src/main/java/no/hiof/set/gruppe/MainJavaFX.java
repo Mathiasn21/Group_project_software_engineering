@@ -24,6 +24,7 @@ import no.hiof.set.gruppe.GUI.controller.abstractions.Controller;
 import no.hiof.set.gruppe.GUI.controller.abstractions.IController;
 import no.hiof.set.gruppe.GUI.controller.abstractions.IControllerDataTransfer;
 import no.hiof.set.gruppe.model.Arrangement;
+import no.hiof.set.gruppe.model.user.ProtoUser;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -62,6 +63,9 @@ public class MainJavaFX extends Application implements SetupWindow {
         stage.setResizable(false);
         stage.setTitle("Logg inn");
         stage.show();
+
+        List<Arrangement> test = new Repository().queryAllEntityConnectedToUserData(Arrangement.class, ProtoUser.ORGANIZER);
+        List<Arrangement> test2 = new Repository().queryAllDataOfGivenType(Arrangement.class);
     }
 
 
