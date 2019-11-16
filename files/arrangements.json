@@ -1,46 +1,68 @@
 [
   {
+    "ID": "83ed73df-7ab6-4bc1-b193-c16c2cdd63ee",
+    "name": "detteKulle showet",
+    "sport": "Alle",
+    "address": "dwadwa",
+    "startDate": "2019-11-17",
+    "endDate": "2019-12-01",
+    "description": "awdawgesa",
+    "participants": 22,
+    "group": true
+  },
+  {
+    "ID": "d52665f4-38f1-4b56-b24d-9d760adc7102",
+    "name": "Børres Brokkoli Fest",
+    "sport": "Sykkelritt",
+    "address": "Brokkolivegen NerdStreet - 2228",
+    "startDate": "2020-08-31",
+    "endDate": "2020-09-28",
+    "description": "Masse spising av brokkoli",
+    "participants": 36400,
+    "group": false
+  },
+  {
     "ID": "edbbbe0a-468b-4943-86bb-682936015acf",
     "name": "The nerds show",
     "sport": "Annet",
     "address": "Smarter than you road 5",
-    "startDate": "2019-11-11",
-    "endDate": "2019-11-12",
+    "startDate": "2019-11-17",
+    "endDate": "2019-11-18",
     "description": "Only for nerds, simple minded not allowed.",
     "participants": 400,
     "group": false
   },
   {
-    "ID": "b727ebf1-4a88-40c9-8eda-1e6ba8b1131d",
-    "name": "Abcds",
+    "ID": "5fb957ac-6774-4264-8bb7-68a0a1c6fb7a",
+    "name": "dwafae",
     "sport": "Alle",
     "address": "dwadwa",
-    "startDate": "2019-11-11",
-    "endDate": "2019-11-12",
+    "startDate": "2019-11-22",
+    "endDate": "2019-11-30",
     "description": "dawdaw",
     "participants": 22,
-    "group": false
+    "group": true
   },
   {
-    "ID": "5dcf3140-b627-4b0b-9993-3a6838358dd3",
-    "name": "Øskars Diverse",
-    "sport": "Skirenn",
-    "address": "testvegen - 2",
-    "startDate": "2020-07-26",
-    "endDate": "2020-07-27",
-    "description": "wdawdegsgdtreafrtdhrg",
-    "participants": 23,
-    "group": false
+    "ID": "b1b1e0fb-9f8d-4dc1-8775-3bceeda9760e",
+    "name": "dasgrs",
+    "sport": "Alle",
+    "address": "dwadwa",
+    "startDate": "2019-11-29",
+    "endDate": "2019-11-30",
+    "description": "dwadwa",
+    "participants": 22,
+    "group": true
   },
   {
-    "ID": "d52665f4-38f1-4b56-b24d-9d760adc7102",
-    "name": "Børres Brokkoli mani",
-    "sport": "Sykkelritt",
-    "address": "Brokkolivegen 28",
-    "startDate": "2019-11-11",
-    "endDate": "2019-11-12",
-    "description": "Masse spising og løing med brokkoli",
-    "participants": 36,
-    "group": false
+    "ID": "e4e0939e-af92-47e4-86e8-6fa64324cc11",
+    "name": "fgesgesra",
+    "sport": "Alle",
+    "address": "dwadwa",
+    "startDate": "2019-11-23",
+    "endDate": "2019-11-30",
+    "description": "dwaefsfa",
+    "participants": 22,
+    "group": true
   }
 ]

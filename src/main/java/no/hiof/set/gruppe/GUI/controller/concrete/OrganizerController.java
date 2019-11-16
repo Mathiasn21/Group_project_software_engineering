@@ -2,14 +2,15 @@ package no.hiof.set.gruppe.GUI.controller.concrete;
 
 /*Guide
  * 1. Import Statements
- * 2. Local Fields
- * 3. FXML Fields
+ * 2. FXML Fields
+ * 3. Local fields
  * 4. On Action Methods
- * 5. Private Methods
+ * 5. Private Functional Methods
  * 6. Private Search Methods
  * 7. Private Setup Methods
  * 8. Overridden Methods
  * */
+
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
@@ -22,23 +23,22 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
-import no.hiof.set.gruppe.core.predicates.DateTest;
+import no.hiof.set.gruppe.GUI.controller.abstractions.Controller;
+import no.hiof.set.gruppe.GUI.controller.abstractions.ControllerTransferData;
+import no.hiof.set.gruppe.GUI.model.ViewInformation;
+import no.hiof.set.gruppe.core.repository.IRepository;
+import no.hiof.set.gruppe.core.repository.Repository;
 import no.hiof.set.gruppe.core.exceptions.DataFormatException;
 import no.hiof.set.gruppe.core.exceptions.ErrorExceptionHandler;
 import no.hiof.set.gruppe.core.exceptions.IllegalDataAccess;
-import no.hiof.set.gruppe.GUI.controller.abstractions.Controller;
-import no.hiof.set.gruppe.core.Repository;
+import no.hiof.set.gruppe.core.predicates.ArrangementSort;
+import no.hiof.set.gruppe.core.predicates.DateTest;
 import no.hiof.set.gruppe.model.Arrangement;
-import no.hiof.set.gruppe.GUI.model.ViewInformation;
 import no.hiof.set.gruppe.model.constantInformation.SportCategory;
 import no.hiof.set.gruppe.model.user.ProtoUser;
-import no.hiof.set.gruppe.core.predicates.ArrangementSort;
 import org.jetbrains.annotations.NotNull;
-
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
@@ -46,20 +46,22 @@ import java.util.ResourceBundle;
  * to the Organizer View
  * @author Gruppe4
  */
-public class OrganizerController extends Controller {
+public class OrganizerController extends ControllerTransferData {
+
     // --------------------------------------------------//
     //                2.FXML Fields                      //
     // --------------------------------------------------//
+
     @FXML
     private Button newArrangementBtn, editBtn, deleteBtn;
     @FXML
-    private Text arrangementName, arrangementAdress, arrangementDate, arrangementParticipants, arrangementGorI, arrangementSport, arrangementDescription;
+    private Text arrangementName, arrangementAddress, arrangementDate, arrangementParticipants, arrangementGorI, arrangementSport, arrangementDescription;
     @FXML
     private TextField arrSearch;
     @FXML
     private ChoiceBox<SportCategory> sortOptions;
     @FXML
-    private ListView<Arrangement>listview;
+    private ListView<Arrangement> listView;
     @FXML
     private MenuItem logOut;
     @FXML
@@ -68,13 +70,15 @@ public class OrganizerController extends Controller {
     // --------------------------------------------------//
     //                3.Local Fields                     //
     // --------------------------------------------------//
+
     private String title = "";
     private String name = "";
     private ObservableList<Arrangement>arrangementListObservable;
     private FilteredList<Arrangement> filteredList;
     private Arrangement currentArrangement = null;
     private static final ProtoUser PROTO_USER = ProtoUser.ORGANIZER;
-    private final Text[] allTextFields = {arrangementName, arrangementAdress, arrangementDate, arrangementParticipants, arrangementGorI, arrangementSport, arrangementDescription};
+    private final IRepository repository = new Repository();
+    private Text[] allTextFields;
 
     // --------------------------------------------------//
     //                4.On Action Methods                //
@@ -92,76 +96,64 @@ public class OrganizerController extends Controller {
      */
     private void onClickListView(MouseEvent mouseEvent) {
         changedView();
-        listview.refresh();
+        listView.refresh();
     }
 
     /**
      * @param event {@link ActionEvent}
      */
-    private void onClick(ActionEvent event) {
-        title = "Ny";
-        name = "NewAlterArrangement.fxml";
-        createNewView(this, null);
+    private void onClickNew(ActionEvent event) {
+        switchView("Ny", "NewAlterArrangement.fxml", null);
     }
 
     /**
      * @param event {@link ActionEvent}
      */
-    private void onEditClick(ActionEvent event){
-        if(listview.getSelectionModel().getSelectedItem() != null){
-            title = "Rediger";
-            name = "NewAlterArrangement.fxml";
-            createNewView(this, currentArrangement);
-        }
+    private void onClickEdit(ActionEvent event){
+        if(listView.getSelectionModel().getSelectedItem() == null)return;
+            switchView("Rediger", "NewAlterArrangement.fxml", currentArrangement);
     }
 
     /**
      * @param event {@link ActionEvent}
      */
-    private void onDelete(ActionEvent event){
-        if(listview.getSelectionModel().getSelectedItem() == null) return;
+    private void onClickDelete(ActionEvent event){
         deleteArrangement();
     }
 
     /**
      * @param event {@link ActionEvent}
      */
-    private void returnToMainWindow(ActionEvent event) {
+    private void onClickLogOut(ActionEvent event) {
+        logOut();
+    }
+
+    // --------------------------------------------------//
+    //            5.Private Functional Methods           //
+    // --------------------------------------------------//
+
+    private void logOut(){
         title = "Logg inn";
         name = "Login.fxml";
-        ((Stage)deleteBtn.getScene().getWindow()).close();
+        closeWindow(deleteBtn);
         createNewView(this);
     }
 
-    private void search(){
-        sortAndSearch();
-    }
-
-    // --------------------------------------------------//
-    //                5.Private Methods                  //
-    // --------------------------------------------------//
     private void changedView(){
-        currentArrangement = listview.getSelectionModel().getSelectedItem();
+        currentArrangement = listView.getSelectionModel().getSelectedItem();
         if(currentArrangement == null)return;
         setInformationAboutArrangementInView();
         checkArrangementDate();
-        listview.refresh();
-    }
-
-    private void setInformationAboutArrangementInView(){
-        setTextColors(true);
-        ArrayList<Text> viewFields = viewFields(arrangementName, arrangementSport, arrangementAdress, arrangementDate, arrangementParticipants, arrangementGorI, arrangementDescription);
-        ArrayList<String> data = arrangementData(currentArrangement);
-        for(int i = 0; i < data.size(); i++)
-            viewFields.get(i).setText(data.get(i));
+        listView.refresh();
     }
 
     private void deleteArrangement(){
-        Arrangement selectedItem = listview.getSelectionModel().getSelectedItem();
+        if(listView.getSelectionModel().getSelectedItem() == null) return;
+        Arrangement selectedItem = listView.getSelectionModel().getSelectedItem();
         try {
-            Repository.deleteArrangement(selectedItem, PROTO_USER);
+            repository.deleteData(selectedItem, PROTO_USER);
             arrangementListObservable.remove(selectedItem);
-            listview.getSelectionModel().selectFirst();
+            listView.getSelectionModel().selectFirst();
             clearFields();
             changedView();
         }
@@ -169,6 +161,25 @@ public class OrganizerController extends Controller {
             try {ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_ACCESSING_DATA, illegalDataAccess); }
             catch (IOException e) {e.printStackTrace();}
             Controller.createAlert(ErrorExceptionHandler.ERROR_ACCESSING_DATA);
+        }
+    }
+
+    private void checkArrangementDate(){
+        boolean test = DateTest.TestExpired.execute(currentArrangement.getStartDate(), currentArrangement.getEndDate());
+        editBtn.setDisable(test);
+        deleteBtn.setDisable(test);
+    }
+
+    private void switchView(String titleParam, String nameParam, Object object){
+        if(object instanceof Arrangement){
+            title = titleParam;
+            name = nameParam;
+            createNewView(this, object);
+        }
+        else{
+            title = titleParam;
+            name = nameParam;
+            createNewView(this, object);
         }
     }
 
@@ -199,48 +210,52 @@ public class OrganizerController extends Controller {
 
     private void sortAndSearch(){
         filteredList.setPredicate(this::lowerCaseTitleSearch);
-        listview.setItems(filteredList);
-        listview.refresh();
+        listView.setItems(filteredList);
+        listView.refresh();
     }
 
     private void liveSearchUpdate(){
         arrSearch.textProperty().addListener(((s) -> search()));
     }
 
+    private void search(){
+        sortAndSearch();
+    }
+
     // --------------------------------------------------//
     //                7.Private Setup Methods            //
     // --------------------------------------------------//
+
     private void setupActionHandlers() {
-        deleteBtn.setOnAction(this::onDelete);
-        editBtn.setOnAction(this::onEditClick);
-        newArrangementBtn.setOnAction(this::onClick);
-        listview.setOnMouseClicked(this::onClickListView);
+        deleteBtn.setOnAction(this::onClickDelete);
+        editBtn.setOnAction(this::onClickEdit);
+        newArrangementBtn.setOnAction(this::onClickNew);
+        listView.setOnMouseClicked(this::onClickListView);
+        logOut.setOnAction(this::onClickLogOut);
         sortOptions.setOnAction(this::sort);
-        logOut.setOnAction(this::returnToMainWindow);
     }
 
     private void setupFilteredList(){
         filteredList = arrangementListObservable.filtered(arrangement -> true);
-        listview.setItems(filteredList);
+        listView.setItems(filteredList);
         arrSearch.setText("");
     }
 
+    private void setInformationAboutArrangementInView(){
+        setTextColors(true);
+        Controller.setFieldsWithDataFromObject(currentArrangement, allTextFields);
+    }
+
     private void populateListView() {
-        arrangementListObservable = FXCollections.observableArrayList(Repository.queryAllUserRelatedArrangements(ProtoUser.ORGANIZER));
+        arrangementListObservable = FXCollections.observableArrayList(repository.queryAllEntityConnectedToUserData(Arrangement.class, ProtoUser.ORGANIZER));
         arrangementListObservable.sort(ArrangementSort.COMP_DATE_ASC.getComparator());
         setupFilteredList();
-        listview.refresh();
+        listView.refresh();
     }
 
     private void populateSportCategories() {
         sortOptions.setItems(FXCollections.observableArrayList(SportCategory.values()));
         sortOptions.getSelectionModel().select(SportCategory.ALL);
-    }
-
-    private void checkArrangementDate(){
-        boolean test = DateTest.TestExpired.execute(currentArrangement.getStartDate(), currentArrangement.getEndDate());
-        editBtn.setDisable(test);
-        deleteBtn.setDisable(test);
     }
 
     // --------------------------------------------------//
@@ -257,6 +272,7 @@ public class OrganizerController extends Controller {
         populateSportCategories();
         liveSearchUpdate();
         setTextColors(false);
+        allTextFields = new Text[]{arrangementName, arrangementSport, arrangementAddress, arrangementDate, arrangementParticipants, arrangementGorI, arrangementDescription};
     }
 
     /**
@@ -278,9 +294,9 @@ public class OrganizerController extends Controller {
         if (!(object instanceof Arrangement)) throw new DataFormatException();
         Arrangement arrangement = (Arrangement) object;
 
-        MultipleSelectionModel selModel = listview.getSelectionModel();
+        MultipleSelectionModel selModel = listView.getSelectionModel();
         try {
-            Repository.insertArrangement(arrangement, ProtoUser.ORGANIZER);
+            repository.insertData(arrangement, ProtoUser.ORGANIZER);
             arrangementListObservable.add(arrangement);
 
         } catch (IllegalDataAccess illegalDataAccess) {
@@ -289,7 +305,7 @@ public class OrganizerController extends Controller {
             Controller.createAlert(ErrorExceptionHandler.ERROR_ACCESSING_DATA);
         }
         if(selModel.getSelectedItem() == null) selModel.selectLast();
-        listview.refresh();
+        listView.refresh();
         changedView();
     }
 
@@ -298,7 +314,7 @@ public class OrganizerController extends Controller {
      */
     @Override
     public Object getDataObject() {
-        currentArrangement = listview.getSelectionModel().getSelectedItem();
+        currentArrangement = listView.getSelectionModel().getSelectedItem();
         return currentArrangement;
     }
 
@@ -310,8 +326,7 @@ public class OrganizerController extends Controller {
         return new ViewInformation(name, title);
     }
 
-    @Override
-    public void setTextColors(boolean tf) {
+    private void setTextColors(boolean tf) {
         colorizeText(tf, sportHeader, addressHeader, dateHeader, gOrIHeader, participantsHeader, descriptionHeader);
     }
 }

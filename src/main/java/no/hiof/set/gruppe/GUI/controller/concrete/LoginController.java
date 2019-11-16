@@ -2,16 +2,18 @@ package no.hiof.set.gruppe.GUI.controller.concrete;
 
 /*Guide
  * 1. Import Statements
- * 2. Local Fields
- * 3. FXML Fields
+ * 2. FXML Fields
+ * 3. Local fields
  * 4. On Action Methods
- * 5. Private Methods
- * 6. Overridden Methods
+ * 5. Private Functional Methods
+ * 6. Private Setup Methods
+ * 7. Overridden Methods
  * */
 
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -21,12 +23,12 @@ import javafx.scene.control.TextField;
 import no.hiof.set.gruppe.core.exceptions.ErrorExceptionHandler;
 import no.hiof.set.gruppe.core.exceptions.InvalidLoginInformation;
 import no.hiof.set.gruppe.GUI.controller.abstractions.Controller;
-import no.hiof.set.gruppe.core.Repository;
+import no.hiof.set.gruppe.core.repository.IRepository;
+import no.hiof.set.gruppe.core.repository.Repository;
 import no.hiof.set.gruppe.GUI.model.ViewInformation;
 import no.hiof.set.gruppe.model.user.LoginInformation;
 import no.hiof.set.gruppe.model.user.ProtoUser;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -35,15 +37,11 @@ import java.util.ResourceBundle;
  * Contains logic corresponding to the login view, currently the main view.
  */
 public class LoginController extends Controller {
-    // --------------------------------------------------//
-    //                2.Local Fields                     //
-    // --------------------------------------------------//
-    private String name = "";
-    private String title = "";
 
     // --------------------------------------------------//
-    //                3.FXML Fields                      //
+    //                2.FXML Fields                      //
     // --------------------------------------------------//
+
     @FXML
     private Menu cheatLogin;
     @FXML
@@ -53,6 +51,13 @@ public class LoginController extends Controller {
     @FXML
     private TextField uName, pass;
 
+    // --------------------------------------------------//
+    //                3.Local Fields                     //
+    // --------------------------------------------------//
+
+    private String name = "";
+    private String title = "";
+    private final IRepository repository = new Repository();
 
     // --------------------------------------------------//
     //                4.On action Methods                //
@@ -60,34 +65,26 @@ public class LoginController extends Controller {
     /**
      * @param event {@link ActionEvent}
      */
-    private void getCorrectCredentials(@NotNull ActionEvent event){
-        ProtoUser protoUser = ProtoUser.USER;
-        MenuItem source = (MenuItem)event.getSource();
-
-        if (source.equals(adminLogin)) protoUser = ProtoUser.ADMIN;
-        else if (source.equals(arrangLogin)) protoUser = ProtoUser.ORGANIZER;
-        applyCredentials(protoUser);
+    public void onClickUser(ActionEvent event){
+        getCorrectCredentials(event);
     }
 
     /**
      * @param event {@link ActionEvent}
      */
-    private void login(ActionEvent event) {
-        String userName = uName.getText();
-        String password = pass.getText();
+    private void onClicklogin(ActionEvent event) {
+        login();
+    }
 
-        try{
-            ProtoUser protoUser = Repository.queryUserDetailsWith(new LoginInformation(userName, password));
-            closeWindow(logInn);
-            openCorrespondingStage(protoUser);
-
-        }catch (InvalidLoginInformation invalidLogin){
-            createAlert(ErrorExceptionHandler.ERROR_LOGIN);
-        }
+    /**
+     * @param event {@link ActionEvent}
+     */
+    private void onClickCancel(ActionEvent event){
+        closeWindow(cancel);
     }
 
     // --------------------------------------------------//
-    //                5.Private Methods                  //
+    //            5.Private Functional Methods           //
     // --------------------------------------------------//
     /**
      * @param protoUser {@link ProtoUser}
@@ -98,6 +95,15 @@ public class LoginController extends Controller {
         createNewView(this);
     }
 
+    private void getCorrectCredentials(@NotNull ActionEvent event){
+        ProtoUser protoUser = ProtoUser.USER;
+        MenuItem source = (MenuItem)event.getSource();
+
+        if (source.equals(adminLogin)) protoUser = ProtoUser.ADMIN;
+        else if (source.equals(arrangLogin)) protoUser = ProtoUser.ORGANIZER;
+        applyCredentials(protoUser);
+    }
+
     /**
      * @param protoUser {@link ProtoUser}
      */
@@ -106,20 +112,34 @@ public class LoginController extends Controller {
         pass.setText(protoUser.getPass());
     }
 
-    private void onClickCancel(ActionEvent event){
-        closeWindow(cancel);
-    }
+    private void login(){
+        String userName = uName.getText();
+        String password = pass.getText();
 
-    private void setUpActionHandlers(){
-        logInn.setOnAction(this::login);
-        cancel.setOnAction(this::onClickCancel);
+        try{
+            ProtoUser protoUser = repository.queryUserDetailsWith(new LoginInformation(userName, password));
+            closeWindow(logInn);
+            openCorrespondingStage(protoUser);
 
-        MenuItem[] credentialsBtns = {adminLogin, arrangLogin, userLogin};
-        for (MenuItem credentialsBtn : credentialsBtns) credentialsBtn.setOnAction(this::getCorrectCredentials);
+        }catch (InvalidLoginInformation invalidLogin){
+            createAlert(ErrorExceptionHandler.ERROR_LOGIN);
+        }
     }
 
     // --------------------------------------------------//
-    //                6.Overridden Methods               //
+    //                6.Private Setup Methods            //
+    // --------------------------------------------------//
+
+    private void setUpActionHandlers(){
+        logInn.setOnAction(this::onClicklogin);
+        cancel.setOnAction(this::onClickCancel);
+
+        MenuItem[] credentialsBtns = {adminLogin, arrangLogin, userLogin};
+        for (MenuItem credentialsBtn : credentialsBtns) credentialsBtn.setOnAction(this::onClickUser);
+    }
+
+    // --------------------------------------------------//
+    //                7.Overridden Methods               //
     // --------------------------------------------------//
     /**
      * @param location {@link URL}
@@ -131,33 +151,10 @@ public class LoginController extends Controller {
     }
 
     /**
-     * @return Object
-     */
-    @Nullable
-    @Override
-    public Object getDataObject() {
-        return null;
-    }
-
-    /**
-     * Does not have a purpose here.
-     * @param object Object
-     */
-    @Override
-    public void setDataFields(Object object) {
-
-    }
-
-    /**
      * @return {@link ViewInformation}
      */
     @Override
     public ViewInformation getViewInformation() {
         return new ViewInformation(name, title);
-    }
-
-    @Override
-    public void setTextColors(boolean tf) {
-
     }
 }

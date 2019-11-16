@@ -1,4 +1,4 @@
-package no.hiof.set.gruppe.tests.others.UseCase;
+package no.hiof.set.gruppe.tests.notGUI.UseCase;
 
 /*Guide
  * 1. Import Statements
@@ -11,7 +11,8 @@ package no.hiof.set.gruppe.tests.others.UseCase;
 // --------------------------------------------------//
 import no.hiof.set.gruppe.core.exceptions.DataFormatException;
 import no.hiof.set.gruppe.core.exceptions.IllegalDataAccess;
-import no.hiof.set.gruppe.core.Repository;
+import no.hiof.set.gruppe.core.repository.IRepository;
+import no.hiof.set.gruppe.core.repository.Repository;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.user.ProtoUser;
 import org.junit.jupiter.api.MethodOrderer;
@@ -34,6 +35,7 @@ class TestingAdminUseCases {
     // --------------------------------------------------//
     private static final ProtoUser PROTO_USER_ADMIN = ProtoUser.ADMIN;
     private static final ProtoUser PROTO_USER_ORGANIZER = ProtoUser.ORGANIZER;
+    private static final IRepository repository = new Repository();
     private static final Arrangement arrangement = new Arrangement(
             "Bernts Fantastiske Test",
             "Annet",
@@ -54,13 +56,17 @@ class TestingAdminUseCases {
     @Test
     @Order(1)
     void addArrangement() throws IllegalDataAccess, DataFormatException {
-        List<Arrangement> expectedArrangementList = Repository.queryAllUserRelatedArrangements(PROTO_USER_ORGANIZER);
+        List<Arrangement> expectedArrangementList = repository.queryAllEntityConnectedToUserData(Arrangement.class, PROTO_USER_ORGANIZER);
         expectedArrangementList.add(arrangement);
-        Repository.insertArrangement(arrangement, PROTO_USER_ORGANIZER);
+        repository.insertData(arrangement, PROTO_USER_ORGANIZER);
 
-        assertDataIntegrity(expectedArrangementList, Repository.queryAllUserRelatedArrangements(PROTO_USER_ORGANIZER));
+        assertDataIntegrity(expectedArrangementList, repository.queryAllEntityConnectedToUserData(Arrangement.class, PROTO_USER_ORGANIZER));
     }
 
+    /**
+     * @param expectedArrangementList {@link List}
+     * @param userArrangements {@link List}
+     */
     private void assertDataIntegrity(List<Arrangement> expectedArrangementList, List<Arrangement> userArrangements) {
         assertTrue(userArrangements.containsAll(expectedArrangementList));
         assertEquals(expectedArrangementList.size(), userArrangements.size());
@@ -72,22 +78,10 @@ class TestingAdminUseCases {
     @Test
     @Order(2)
     void deleteArrangement() throws IllegalDataAccess, DataFormatException {
-        List<Arrangement> expectedArrangementList = Repository.queryAllUserRelatedArrangements(PROTO_USER_ORGANIZER);
+        List<Arrangement> expectedArrangementList = repository.queryAllEntityConnectedToUserData(Arrangement.class, PROTO_USER_ORGANIZER);
         expectedArrangementList.remove(arrangement);
 
-        Repository.deleteArrangement(arrangement, PROTO_USER_ADMIN);
-        assertDataIntegrity(expectedArrangementList, Repository.queryAllArrangements());
+        repository.deleteData(arrangement, PROTO_USER_ADMIN);
+        assertDataIntegrity(expectedArrangementList, repository.queryAllEntityConnectedToUserData(Arrangement.class, PROTO_USER_ORGANIZER));
     }
-
-    //Add new sports
-
-    //Remove sports
-
-    //Remove Users
-
-    //Add users
-
-    //Set PROTO_USER as organizer
-
-    //Remove PROTO_USER as organizer
 }

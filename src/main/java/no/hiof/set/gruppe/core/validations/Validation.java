@@ -2,15 +2,16 @@ package no.hiof.set.gruppe.core.validations;
 
 /*Guide
  * 1. Import Statements
- * 2. Constants
- * 3. Contracts
- * 4. Public Static Methods
+ * 2. Static Constants
+ * 3. Validation Of Methods
+ * 4. Private Helper Methods
  * */
 
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
-import no.hiof.set.gruppe.core.Repository;
+import no.hiof.set.gruppe.core.repository.IRepository;
+import no.hiof.set.gruppe.core.repository.Repository;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.Group;
 import no.hiof.set.gruppe.model.ValidationResult;
@@ -29,16 +30,18 @@ import java.util.regex.Pattern;
 public class Validation{
 
     // --------------------------------------------------//
-    //                2.Local Fields                     //
+    //                2.Static Constants                 //
     // --------------------------------------------------//
-    private static final String textNotNullPattern = "(?!^ +$)^.+$";
-    private static final String numPatt = "[0-9]+";
+    private static final String textNotNullPattern = "[^\0]+";
+    private static final String numPattern = "[0-9]+";
 
     private static final int maxNameL = 50;
     private static final int minNameL = 2;
+    private static final IRepository repository = new Repository();
+
 
     // --------------------------------------------------//
-    //                3.Contracts                        //
+    //                3.Validation Of Methods            //
     // --------------------------------------------------//
     /**
      * Validates an arrangement
@@ -80,9 +83,9 @@ public class Validation{
         }catch (DateTimeParseException wrongDateFormat){res.append("ERROR, feil dato format.\n");}
 
         res.append(rawUser.getfName().length() <= maxLengthName && rawUser.getlName().length() <= maxLengthName ? "" : "Ulovlig langt navn\n");
-        res.append(!Repository.queryAddress(rawUser.getStreetAddress()) ? "" : "Addressen er ikke gyldig.\n");
+        res.append(!repository.queryAddress(rawUser.getStreetAddress()) ? "" : "Addressen er ikke gyldig.\n");
         res.append(rawUser.getCityCode().length() == 4 ? "" : "Ugyldig by kode.\n");
-        res.append(regCheck(textNotNullPattern, email) && !Repository.queryEmailExists(email) ? "" : "Ugyldig email.\n");
+        res.append(regCheck(textNotNullPattern, email) && !repository.queryEmailExists(email) ? "" : "Ugyldig email.\n");
         res.append(passHash.length() >= 10 && passHash.length() <= 60 ? "" : "Ugyldig passord\n");
 
         return new ValidationResult(res.toString(), res.length() == 0);
@@ -93,26 +96,27 @@ public class Validation{
     public static ValidationResult ofGroup(@NotNull Group group){
         StringBuilder res = new StringBuilder();
         int maxNameLength = 30;
-        int minNameLength = 1;
+        int minNameLength = 3;
 
         res.append(group.getName().length() <= maxNameLength ? "" : "Navnet på gruppen er for langt");
         res.append(group.getName().length() >= minNameLength ? "" : "Navnet på gruppen er for kort");
-        res.append(regCheck(textNotNullPattern, group.getName()) ? "" : "Navnet inneholder ugydlige tegn");
+        res.append(regCheck(textNotNullPattern, group.getName()) ? "" : "Navnet inneholder blankt felt");
 
         return  new ValidationResult(res.toString(), res.length() == 0);
     }
 
-    // --------------------------------------------------//
-    //                4.Public Static Methods            //
-    // --------------------------------------------------//
     /**
      * @param num String
      * @return boolean
      */
     public static boolean ofNumber(String num){
-        return regCheck(numPatt, num);
+        return regCheck(numPattern, num);
     }
 
+
+    // --------------------------------------------------//
+    //                4.Private Helper Methods           //
+    // --------------------------------------------------//
     /**
      * Tests if number is between two numbers, inclusive both ends.
      * @param min int

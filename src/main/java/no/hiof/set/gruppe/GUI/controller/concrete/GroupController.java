@@ -2,8 +2,8 @@ package no.hiof.set.gruppe.GUI.controller.concrete;
 
 /*Guide
  * 1. Import Statements
- * 2. Local Fields
- * 3. FXML Fields
+ * 2. FXML Fields
+ * 3. Local fields
  * 4. On Action Methods
  * 5. Private Functional Methods
  * 6. Private Search Methods
@@ -21,15 +21,20 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.SelectionModel;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import no.hiof.set.gruppe.GUI.controller.abstractions.Controller;
-import no.hiof.set.gruppe.core.Repository;
+import no.hiof.set.gruppe.GUI.controller.abstractions.ControllerTransferData;
+import no.hiof.set.gruppe.core.repository.IRepository;
+import no.hiof.set.gruppe.core.repository.Repository;
 import no.hiof.set.gruppe.core.exceptions.DataFormatException;
 import no.hiof.set.gruppe.core.exceptions.ErrorExceptionHandler;
+import no.hiof.set.gruppe.core.exceptions.IllegalDataAccess;
 import no.hiof.set.gruppe.model.Group;
 import no.hiof.set.gruppe.GUI.model.ViewInformation;
 import no.hiof.set.gruppe.model.constantInformation.DummyUsers;
+import no.hiof.set.gruppe.model.user.ProtoUser;
 
 import java.io.IOException;
 import java.net.URL;
@@ -40,17 +45,10 @@ import java.util.ResourceBundle;
  * to the Group View
  * @author Gruppe4
  */
-public class GroupController extends Controller {
+public class GroupController extends ControllerTransferData {
 
     // --------------------------------------------------//
-    //                2.Local Fields                     //
-    // --------------------------------------------------//
-    private String title = "";
-    private String name = "";
-    private ObservableList<Group> groupsList;
-    private Group selectedGroup = null;
-    // --------------------------------------------------//
-    //                3.FXML Fields                      //
+    //                2.FXML Fields                      //
     // --------------------------------------------------//
 
     @FXML
@@ -63,61 +61,98 @@ public class GroupController extends Controller {
     private Text members, groupName, groupNameStatic, membersStatic;
 
     // --------------------------------------------------//
+    //                3.Local Fields                     //
+    // --------------------------------------------------//
+
+    private String title = "";
+    private String name = "";
+    private ObservableList<Group> groupsList;
+    private Group selectedGroup = null;
+    private final IRepository repository = new Repository();
+
+
+    // --------------------------------------------------//
     //                4.On Action Methods                //
     // --------------------------------------------------//
 
-    //Håndtering av views må endres
-    private void onClicknewGroupBtn(ActionEvent event) {
-        title = "Ny gruppe";
-        name = "NewAlterGroup.fxml";
-        createNewView(this);
+    /**
+     * @param event {@link ActionEvent}
+     */
+    private void onClickNewGroupBtn(ActionEvent event) {
+        newGroup();
     }
 
+    /**
+     * @param event {@link ActionEvent}
+     */
     private void onClickDeletBtn(ActionEvent event) {
         deleteGroup();
     }
 
+    /**
+     * @param event {@link ActionEvent}
+     */
     private void onClickEditBtn(ActionEvent event) {
         if(selectedGroup == null)return;
-        editGroup();
+        alterGroup();
     }
 
+    /**
+     * @param event {@link ActionEvent}
+     */
     private void onClickMyIndividualArrangementsBtn(ActionEvent event) {
         switchView("Mine arrangementer","User.fxml");
     }
 
+    /**
+     * @param event {@link ActionEvent}
+     */
     private void onClickLogoutBtn(ActionEvent event) {
         switchView("Logg inn", "Login.fxml");
     }
 
+    /**
+     * @param event {@link ActionEvent}
+     */
     private void onClickGroupsListView(MouseEvent event) {
-        setSelectedGroup();
-        setGroupInformation();
+        changedView();
+        groupsListview.refresh();
     }
 
     // --------------------------------------------------//
     //                5.Private Functional Methods       //
     // --------------------------------------------------//
-    private void setSelectedGroup(){
-        selectedGroup = groupsListview.getSelectionModel().getSelectedItem();
-    }
-
     private void deleteGroup(){
+        Group selectedItem = groupsListview.getSelectionModel().getSelectedItem();
         try {
-            Repository.deleteGroup(selectedGroup);
-        } catch (DataFormatException illegalDataAccess) {
+            repository.deleteData(selectedItem, ProtoUser.USER);
+            groupsList.remove(selectedItem);
+            clearFields();
+            changedView();
+        } catch (DataFormatException | IllegalDataAccess illegalDataAccess) {
             try { ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_ACCESSING_DATA, illegalDataAccess); }
             catch (IOException e) {e.printStackTrace();}
             createAlert(ErrorExceptionHandler.ERROR_ACCESSING_DATA);
         }
-        groupsList.remove(selectedGroup);
+    }
+
+    private void changedView(){
+        selectedGroup = groupsListview.getSelectionModel().getSelectedItem();
+        if(selectedGroup == null)return;
+        setGroupInformation();
         groupsListview.refresh();
     }
 
-    private void editGroup(){
+    private void alterGroup(){
         title = "Rediger gruppe";
         name = "NewAlterGroup.fxml";
         createNewView(this, selectedGroup);
+    }
+
+    private void newGroup(){
+        title = "Ny gruppe";
+        name = "NewAlterGroup.fxml";
+        createNewView(this, null);
     }
 
     private void switchView(String newTitle, String newName){
@@ -136,7 +171,7 @@ public class GroupController extends Controller {
     // --------------------------------------------------//
 
     private void setupActionHandlers() {
-        newGroupBtn.setOnAction(this::onClicknewGroupBtn);
+        newGroupBtn.setOnAction(this::onClickNewGroupBtn);
         deleteBtn.setOnAction(this::onClickDeletBtn);
         editBtn.setOnAction(this::onClickEditBtn);
         groupsListview.setOnMouseClicked(this::onClickGroupsListView);
@@ -146,25 +181,29 @@ public class GroupController extends Controller {
     }
 
     private void populateListView(){
-        groupsList = FXCollections.observableArrayList(Repository.queryAllGroups());
+        groupsList = FXCollections.observableArrayList(repository.queryAllDataOfGivenType(Group.class));
         groupsListview.setItems(groupsList);
     }
 
     private void setGroupInformation(){
-        if(selectedGroup == null)return;
         setTextColors(true);
+
         groupName.setText(selectedGroup.getName());
+
         StringBuilder stringMembers = new StringBuilder();
         for(DummyUsers dummyUsers : selectedGroup.getMembers()) stringMembers.append(dummyUsers).append("\n");
         members.setText(stringMembers.toString());
     }
 
 
-
     // --------------------------------------------------//
     //                8.Overridden Methods               //
     // --------------------------------------------------//
 
+    /**
+     * @param location {@link URL}
+     * @param resources {@link ResourceBundle}
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setupActionHandlers();
@@ -172,27 +211,61 @@ public class GroupController extends Controller {
         setTextColors(false);
     }
 
+    /**
+     * @return Object
+     */
     @Override
     public Object getDataObject() {
-        return null;
+        selectedGroup = groupsListview.getSelectionModel().getSelectedItem();
+        return selectedGroup;
     }
 
+    /**
+     * Handles data setup and interaction from other controllers.
+     * @param object Object
+     * @throws DataFormatException Exception
+     */
     @Override
-    public void setDataFields(Object controller) {
+    public void setDataFields(Object object) throws DataFormatException {
+        if(!(object instanceof Group)) throw new DataFormatException();
+        Group group = (Group) object;
+        SelectionModel model = groupsListview.getSelectionModel();
+
+        try {
+            repository.insertData(group, ProtoUser.USER);
+            groupsList.add(group);
+
+        } catch (IllegalAccessError | IllegalDataAccess illegalAccessError) {
+            try{ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_ACCESSING_DATA, illegalAccessError);}
+            catch (IOException e) {e.printStackTrace();}
+            Controller.createAlert(ErrorExceptionHandler.ERROR_ACCESSING_DATA);
+        }
+        if(model.getSelectedItem() == null) model.selectLast();
+        groupsListview.refresh();
+        changedView();
     }
 
+    /**
+     * Refreshes the view
+     */
     @Override
     public void updateView(){
-        groupsListview.refresh();
+        if(selectedGroup == null)return;
+        changedView();
     }
 
+    /**
+     * @return {@link ViewInformation}
+     */
     @Override
     public ViewInformation getViewInformation() {
         return new ViewInformation(name, title);
     }
 
-    @Override
-    public void setTextColors(boolean tf){
+    /**
+     * @param tf
+     */
+    private void setTextColors(boolean tf){
         colorizeText(tf, groupNameStatic, membersStatic);
     }
 }

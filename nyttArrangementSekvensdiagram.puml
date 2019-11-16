@@ -1,0 +1,17 @@
+@startuml
+
+title Oppretter NYTT arrangement
+
+actor arrangør
+
+arrangør -> Organizer.fxml : "Nytt arrangement" klikket"
+Organizer.fxml -> OrganizerController : onClickNew(ActionEvent event)
+OrganizerController -> NewAlterArrangementController : switchView(title,NewAlterArrangement.fxml)
+NewAlterArrangementController -> NewAlterArrangementController : initialize()
+arrangør -> NewAlterArrangementController : arrangementinformasjon (Input)
+arrangør -> NewAlterArrangementController : "Lagre" klikket
+NewAlterArrangementController -> OrganizerController : savedClicked()
+OrganizerController -> DataHandler : setDataFields(Object)
+
+
+@enduml

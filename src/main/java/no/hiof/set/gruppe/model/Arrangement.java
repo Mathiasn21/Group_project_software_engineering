@@ -12,6 +12,7 @@ package no.hiof.set.gruppe.model;
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
+import no.hiof.set.gruppe.core.repository.IBaseEntity;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
 
@@ -22,7 +23,7 @@ import java.util.UUID;
  * Arrangement holds information about a possible arrangement.
  * @author Gruppe4
  */
-public class Arrangement implements IGetAllData, IGetAllDataRaw{
+public class Arrangement implements IGetAllDataStringArr, IBaseEntity {
 
 
     // --------------------------------------------------//
@@ -62,6 +63,10 @@ public class Arrangement implements IGetAllData, IGetAllDataRaw{
      * @param description String
      */
     public Arrangement(String name, String sport, int participants, String address, boolean gruppe, String startDate, String endDate, String description) {
+        this(UUID.randomUUID().toString(), name, sport, participants, address, gruppe, startDate, endDate, description);
+    }
+
+    public Arrangement(String ID, String name, String sport, int participants, String address, boolean gruppe, String startDate, String endDate, String description){
         this.name = name;
         this.sport = sport;
         this.participants = participants;
@@ -70,7 +75,7 @@ public class Arrangement implements IGetAllData, IGetAllDataRaw{
         this.startDate = startDate;
         this.endDate = endDate;
         this.description = description;
-        ID = UUID.randomUUID().toString();
+        this.ID = ID;
     }
 
     // --------------------------------------------------//
@@ -90,7 +95,6 @@ public class Arrangement implements IGetAllData, IGetAllDataRaw{
     public String getAddress() {
         return address;
     }
-    public String getID(){return ID;}
     public String getDescription() {return description;}
     /**
      * @return boolean
@@ -99,7 +103,6 @@ public class Arrangement implements IGetAllData, IGetAllDataRaw{
         return group;
     }
     public String getGroup(){return group ? "Lagkonkurranse" : "Individuell konkurranse";}
-    public String getDateIntervall() {return startDate + " til " + endDate;}
     // --------------------------------------------------//
     //                5.Public Setter Methods            //
     // --------------------------------------------------//
@@ -163,7 +166,7 @@ public class Arrangement implements IGetAllData, IGetAllDataRaw{
     }
 
     // --------------------------------------------------//
-    //                7.Overridden Contracts            //
+    //                7.Overridden Contracts             //
     // --------------------------------------------------//
     /**
      * @param o {@link Object}
@@ -185,6 +188,8 @@ public class Arrangement implements IGetAllData, IGetAllDataRaw{
                 this.description.equals(that.getDescription());
     }
 
+    @Override
+    public String getID(){return ID;}
 
     /**
      * Returns data in this sequence:
@@ -201,8 +206,5 @@ public class Arrangement implements IGetAllData, IGetAllDataRaw{
      * name, address, participants, description
      * @return String[]
      */
-    @Override
-    public String[] getAllStringDataArrRaw() {
-        return new String[]{name, address, String.valueOf(participants), description};
-    }
+    public String[] getAllStringDataArrRaw() {return new String[]{name, address, String.valueOf(participants), description};}
 }

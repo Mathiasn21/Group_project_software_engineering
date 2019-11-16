@@ -82,7 +82,7 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <Text layoutX="781.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mine Arrangementer" textAlignment="CENTER" wrappingWidth="138.00001001358032">
+      <Text layoutX="781.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mine arrangementer" textAlignment="CENTER" wrappingWidth="138.00001001358032">
          <font>
             <Font size="13.0" />
          </font>
@@ -97,12 +97,12 @@
             <Font size="15.0" />
          </font>
       </Text>
-      <Text fx:id="arrangementDescription" layoutX="291.0" layoutY="516.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="418.5999091863632" />
+      <Text fx:id="arrangementDescription" layoutX="291.0" layoutY="516.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="418.5999091863632" />
       <RadioButton fx:id="radioExp" layoutX="733.0" layoutY="444.0" mnemonicParsing="false" text="Vis utgåtte" />
       <RadioButton fx:id="radioFut" layoutX="733.0" layoutY="464.0" mnemonicParsing="false" text="Vis fremtidige" />
       <RadioButton fx:id="radioOng" layoutX="733.0" layoutY="483.0" mnemonicParsing="false" text="Vis pågående" />
       <ListView fx:id="myArrangementsView" layoutX="728.0" layoutY="151.0" prefHeight="288.0" prefWidth="232.0" />
-      <RadioButton fx:id="radioAll" layoutX="733.0" layoutY="502.0" mnemonicParsing="false" text="Vis Alle" />
+      <RadioButton fx:id="radioAll" layoutX="733.0" layoutY="502.0" mnemonicParsing="false" text="Vis alle" />
       <MenuButton fx:id="menu" layoutX="12.0" layoutY="7.0" mnemonicParsing="false" text="Meny">
          <items>
             <MenuItem fx:id="myGroups" mnemonicParsing="false" text="Mine grupper" />

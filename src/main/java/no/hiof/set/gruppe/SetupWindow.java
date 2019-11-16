@@ -1,4 +1,7 @@
-package no.hiof.set.gruppe.GUI.controller.abstractions;
+package no.hiof.set.gruppe;
+
+import no.hiof.set.gruppe.GUI.controller.abstractions.IController;
+import no.hiof.set.gruppe.GUI.controller.abstractions.IControllerDataTransfer;
 
 import java.io.IOException;
 

@@ -13,41 +13,41 @@ package no.hiof.set.gruppe.model;
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
-import javafx.collections.ObservableList;
+import no.hiof.set.gruppe.core.repository.IBaseEntity;
 import no.hiof.set.gruppe.model.constantInformation.DummyUsers;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
-public class Group {
+public class Group implements IBaseEntity {
 
     // --------------------------------------------------//
     //                2.Local Fields                     //
     // --------------------------------------------------//
     private String name;
-    private int id;
-    private ArrayList<DummyUsers> members;
+    private final String ID;
+    private List<DummyUsers> members;
 
     // --------------------------------------------------//
     //                3.Constructors                     //
     // --------------------------------------------------//
     public Group(){
-        this("",0);
+        this("");
     }
 
-    public Group(String name, int id) {
+    public Group(String name) {
         this.name = name;
-        this.id = id;
+        ID = UUID.randomUUID().toString();
         this.members = new ArrayList<>();
     }
 
     // --------------------------------------------------//
     //                4.Public Methods                   //
     // --------------------------------------------------//
-    public void addOnemember (DummyUsers dummyUser){
-        members.add(dummyUser);
-    }
+    public void addMember (DummyUsers dummyUser){members.add(dummyUser);}
 
-    public void addMultipleMembers(ObservableList<DummyUsers> userlist){
+    public void addAllMembers(List<DummyUsers> userlist){
         members.addAll(userlist);
     }
 
@@ -57,8 +57,7 @@ public class Group {
     public String getName() {
         return name;
     }
-    public ArrayList<DummyUsers> getMembers() { return members; }
-    public int getId() { return id; }
+    public List<DummyUsers> getMembers() { return members; }
     public String getMembersAsPrettyString(){
         StringBuilder res = new StringBuilder();
         for(DummyUsers member : members) res.append(member).append("\n");
@@ -68,7 +67,6 @@ public class Group {
     // --------------------------------------------------//
     //                6.Public Setter Methods            //
     // --------------------------------------------------//
-    public void setId(int id) { this.id = id; }
     public void setName(String name) { this.name = name; }
     public void setMembers(ArrayList<DummyUsers> member) { this.members = member; }
 
@@ -79,4 +77,7 @@ public class Group {
     public String toString(){
         return name;
     }
+
+    @Override
+    public String getID() { return ID; }
 }

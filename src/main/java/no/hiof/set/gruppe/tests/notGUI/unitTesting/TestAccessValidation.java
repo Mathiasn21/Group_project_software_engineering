@@ -1,4 +1,4 @@
-package no.hiof.set.gruppe.tests.unitTesting;
+package no.hiof.set.gruppe.tests.notGUI.unitTesting;
 /*Guide
  * 1. Import Statements
  * 2. Unit Tests
@@ -11,7 +11,8 @@ package no.hiof.set.gruppe.tests.unitTesting;
 // --------------------------------------------------//
 import no.hiof.set.gruppe.core.exceptions.InvalidLoginInformation;
 import no.hiof.set.gruppe.core.exceptions.UnableToRegisterUser;
-import no.hiof.set.gruppe.core.Repository;
+import no.hiof.set.gruppe.core.repository.IRepository;
+import no.hiof.set.gruppe.core.repository.Repository;
 import no.hiof.set.gruppe.model.user.ILoginInformation;
 import no.hiof.set.gruppe.model.user.LoginInformation;
 import no.hiof.set.gruppe.model.user.ProtoUser;
@@ -34,21 +35,24 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
  * as well as login access.
  */
 class TestAccessValidation {
+    private final IRepository repository = new Repository();
 
     // --------------------------------------------------//
     //                2.Unit Tests                       //
     // --------------------------------------------------//
     @Test
     void userLoginSuccess() throws InvalidLoginInformation {
-        ILoginInformation loginInformation = new LoginInformation("ProtoUser", "Password2");
-        ProtoUser protoUserDetails = Repository.queryUserDetailsWith(loginInformation);
-        assertTrue(userEqualsLoginInformation(protoUserDetails, loginInformation));
+        for(ProtoUser user : ProtoUser.values()){
+            ILoginInformation loginInformation = new LoginInformation(user.getName(), user.getPass());
+            ProtoUser protoUserDetails = repository.queryUserDetailsWith(loginInformation);
+            assertTrue(userEqualsLoginInformation(protoUserDetails, loginInformation));
+        }
     }
 
     @Test
     void userRegister()throws UnableToRegisterUser {
         RawUser rawUser = new RawUser("Bernt", "Åge", "2007-12-03", "1771", "NerdStreet 22", "It_Burns@When_I.PI", "TheInternet22");
-        Repository.insertNewUser(rawUser);
+        repository.insertNewUser(rawUser);
     }
 
     // --------------------------------------------------//
@@ -57,7 +61,7 @@ class TestAccessValidation {
     @ParameterizedTest
     @MethodSource("GenIllegalLoginInformation")
     void userLoginFailed(ILoginInformation loginInformation){
-        assertThrows(InvalidLoginInformation.class, () -> Repository.queryUserDetailsWith(loginInformation));
+        assertThrows(InvalidLoginInformation.class, () -> repository.queryUserDetailsWith(loginInformation));
     }
 
     // --------------------------------------------------//
@@ -70,13 +74,33 @@ class TestAccessValidation {
     @NotNull
     @Contract(pure = true)
     private static Stream<Arguments> GenIllegalLoginInformation() {
+        String userPass = ProtoUser.USER.getPass();
+        String userName = ProtoUser.USER.getName();
         return Stream.of(
-                arguments(new LoginInformation("test", "soVerySafePass")),
+                arguments(new LoginInformation("\00", userPass)),
+                arguments(new LoginInformation("\00s", userPass)),
+                arguments(new LoginInformation("s\00", userPass)),
+                arguments(new LoginInformation("\00ssss", userPass)),
+                arguments(new LoginInformation("sssss\00", userPass)),
+                arguments(new LoginInformation("test", userPass)),
+                arguments(new LoginInformation(userName + "\00", userPass)),
+                arguments(new LoginInformation( "\00" + userName, userPass)),
                 arguments(new LoginInformation("\00", "\00")),
-                arguments(new LoginInformation("ProtoUser", "\00"))
+                arguments(new LoginInformation(userName, "\00sssss")),
+                arguments(new LoginInformation(userName, "sssss\00")),
+                arguments(new LoginInformation(userName, "\00s")),
+                arguments(new LoginInformation(userName, "s\00")),
+                arguments(new LoginInformation(userName, userPass + "\00")),
+                arguments(new LoginInformation(userName, "\00" + userPass)),
+                arguments(new LoginInformation(userName, "\00"))
         );
     }
 
+    /**
+     * @param protoUserDetails {@link ProtoUser}
+     * @param loginInformation {@link ILoginInformation}
+     * @return boolean
+     */
     private boolean userEqualsLoginInformation(@NotNull ProtoUser protoUserDetails, @NotNull ILoginInformation loginInformation) {
         return protoUserDetails.getName().equals(loginInformation.getUserID()) && protoUserDetails.getPass().equals(loginInformation.getPassHash());
     }

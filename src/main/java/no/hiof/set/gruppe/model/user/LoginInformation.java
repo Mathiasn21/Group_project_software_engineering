@@ -12,7 +12,7 @@ package no.hiof.set.gruppe.model.user;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
-public final class LoginInformation implements ILoginInformation{
+public final class LoginInformation implements ILoginInformation {
 
     // --------------------------------------------------//
     //                2.Local Fields                     //

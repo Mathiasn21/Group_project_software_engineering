@@ -2,8 +2,8 @@ package no.hiof.set.gruppe.core.predicates;
 
 /*Guide
  * 1. Import Statements
- * 2. Constants
- * 3. Contracts
+ * 2. Enums
+ * 3. Helper Methods
  * */
 
 // --------------------------------------------------//
@@ -22,7 +22,7 @@ import java.time.LocalDate;
 public enum DateTest {
 
     // --------------------------------------------------//
-    //                2.Constants                        //
+    //                2.Enums                            //
     // --------------------------------------------------//
     TestExpired((start, end) -> end.isBefore(LocalDate.now())),
     TestFuture((start, end) -> start.compareTo(LocalDate.now()) >= 0 && end.compareTo(start) >= 0),
@@ -36,7 +36,7 @@ public enum DateTest {
 
 
     // --------------------------------------------------//
-    //                3.Contracts                        //
+    //                3.Helper Methods                   //
     // --------------------------------------------------//
     /**
      * Ensures execution of test.

@@ -1,6 +1,19 @@
 @startuml
-Alice -> Bob: Authentication Request
-Bob --> Alice: Authentication Response
+actor User
+database Database
 
-Alice -> Bob: Another authentication Request
+User -> System: Registrer for gitt arrangement
+System -> System: Valider forespørsel
+
+alt Suksess
+    System -> Database: Lagre registrering
+    alt Suksess
+    Database -> System: Suksess
+    else Error
+    Database -> System: ERROR
+    System -> User: Vis ERROR
+    end
+else ERROR
+    System -> User: Vis ERROR
+end
 @enduml

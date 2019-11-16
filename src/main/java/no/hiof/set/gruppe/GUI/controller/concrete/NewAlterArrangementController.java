@@ -2,28 +2,35 @@ package no.hiof.set.gruppe.GUI.controller.concrete;
 
 /*Guide
  * 1. Import Statements
- * 2. Local Fields
- * 3. FXML Fields
+ * 2. FXML Fields
+ * 3. Local fields
  * 4. On Action Methods
- * 5. Private Methods
- * 6. Overridden Methods
+ * 5. Private Functional Methods
+ * 6. Private Setup Methods
+ * 7. Overridden Methods
  * */
 
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import no.hiof.set.gruppe.GUI.controller.abstractions.Controller;
-import no.hiof.set.gruppe.model.ValidationResult;
+import no.hiof.set.gruppe.GUI.controller.abstractions.ControllerTransferData;
 import no.hiof.set.gruppe.GUI.model.ViewInformation;
+import no.hiof.set.gruppe.core.repository.IRepository;
+import no.hiof.set.gruppe.core.repository.Repository;
+import no.hiof.set.gruppe.core.exceptions.DataFormatException;
+import no.hiof.set.gruppe.core.exceptions.ErrorExceptionHandler;
 import no.hiof.set.gruppe.core.validations.Validation;
 import no.hiof.set.gruppe.model.Arrangement;
+import no.hiof.set.gruppe.model.ValidationResult;
 import no.hiof.set.gruppe.model.constantInformation.GroupCategory;
 import no.hiof.set.gruppe.model.constantInformation.SportCategory;
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
@@ -35,27 +42,12 @@ import java.util.ResourceBundle;
  * @author Gruppe4
  */
 @SuppressWarnings("FieldCanBeLocal")
-public class NewAlterArrangementController extends Controller {
+public class NewAlterArrangementController extends ControllerTransferData {
 
     // --------------------------------------------------//
-    //                2.Local Fields                     //
+    //                2.FXML Fields                      //
     // --------------------------------------------------//
-    private final String name = "NewAlterArrangement.fxml";
-    private final String title = "Arrangement";
-    private Arrangement arrangementToEdit = null;
-    private boolean createdNewObject = false;
-    private String arrName;
-    private String sport;
-    private String partic;
-    private String desc;
-    private String address;
-    private boolean group;
-    private LocalDate startDate;
-    private LocalDate endDate;
 
-    // --------------------------------------------------//
-    //                3.FXML Fields                      //
-    // --------------------------------------------------//
     @FXML
     private TextField nameInput, participantsInput, adressInput;
     @FXML
@@ -68,6 +60,24 @@ public class NewAlterArrangementController extends Controller {
     private ComboBox<SportCategory> sportComboBoxInput;
     @FXML
     public Button saveBtn, cancelBtn;
+
+    // --------------------------------------------------//
+    //                3.Local Fields                     //
+    // --------------------------------------------------//
+
+    private final String name = "NewAlterArrangement.fxml";
+    private final String title = "Arrangement";
+    private boolean createdNewObject = false;
+    private boolean group;
+    private Arrangement arrangementToEdit = null;
+    private String arrName;
+    private String sport;
+    private String partic;
+    private String desc;
+    private String address;
+    private LocalDate startDate;
+    private LocalDate endDate;
+    private final IRepository repository = new Repository();
 
     // --------------------------------------------------//
     //                4.On Action Methods                //
@@ -84,6 +94,7 @@ public class NewAlterArrangementController extends Controller {
         setArrangementData();
         if(validateArrangementData())return;
         closeWindow(cancelBtn);
+        queryArrangement();
     }
 
     /**
@@ -96,20 +107,8 @@ public class NewAlterArrangementController extends Controller {
     }
 
     // --------------------------------------------------//
-    //                5.Private Methods                  //
+    //            5.Private Functional Methods           //
     // --------------------------------------------------//
-
-    private void setupActionHandlers(){
-        saveBtn.setOnAction(this::saveClicked);
-        cancelBtn.setOnAction(this::cancelClicked);
-    }
-
-    private void setupComboBoxes(){
-        sportComboBoxInput.setItems(FXCollections.observableArrayList(SportCategory.values()));
-        groupInput.setItems(FXCollections.observableArrayList(GroupCategory.values()));
-        sportComboBoxInput.getSelectionModel().select(0);
-        groupInput.getSelectionModel().select(0);
-    }
 
     private void getArrangementData(){
         arrName = nameInput.getText();
@@ -120,6 +119,91 @@ public class NewAlterArrangementController extends Controller {
         group = groupInput.getSelectionModel().getSelectedItem().isGroup;
         startDate = startDateInput.getValue();
         endDate = endDateInput.getValue();
+    }
+
+    private void queryArrangement(){
+        try {if(!createdNewObject)repository.mutateData(arrangementToEdit);
+        } catch (DataFormatException e) {
+            Throwable throwable = e;
+            try { ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_ACCESSING_DATA, e);
+            } catch (IOException IOException) { throwable = IOException; }
+            createAlert(throwable instanceof DataFormatException ? ErrorExceptionHandler.ERROR_ACCESSING_DATA : ErrorExceptionHandler.ERROR_LOGGING_ERROR);
+        }
+    }
+
+    /**
+     * @return boolean
+     */
+    private boolean checkLengthOfAllFields(){
+        return arrName.length() == 0 || sport.length() == 0 || partic.length() == 0 || desc.length() == 0 || address.length() == 0 || startDateInput.getValue() == null || endDateInput.getValue() == null;
+    }
+
+    /**
+     * @return boolean
+     */
+    private boolean illegalNumberFormat(){
+        if(!Validation.ofNumber(partic)){
+            setErrorField("Antall deltakere har ikke gyldig nummer format.");
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * @return boolean
+     */
+    private boolean validateArrangementData(){
+        ValidationResult result = Validation.ofArrangement(arrangementToEdit);
+        if(!result.IS_VALID){
+            setErrorField(result.RESULT);
+        }
+        return !result.IS_VALID;
+    }
+
+    /**
+     * @return int
+     */
+    private int getSportIndex(){
+        ObservableList list = FXCollections.observableArrayList(SportCategory.values());
+        for(int i = 0; i < list.size(); i++){
+            if(list.get(i).toString().equals(arrangementToEdit.getSport()))return i;
+        }
+        return 0;
+    }
+
+    /**
+     * @return int
+     */
+    private int getGroupCategoryIndex(){
+        if(arrangementToEdit.isGroup())return 0;
+        return 1;
+    }
+
+    // --------------------------------------------------//
+    //                6.Private Setup Methods            //
+    // --------------------------------------------------//
+
+    private void setupActionHandlers(){
+        saveBtn.setOnAction(this::saveClicked);
+        cancelBtn.setOnAction(this::cancelClicked);
+    }
+
+    private void setupComboBoxes(){
+        sportComboBoxInput.setItems(FXCollections.observableArrayList(SportCategory.values()));
+        groupInput.setItems(FXCollections.observableArrayList(GroupCategory.values()));
+
+        sportComboBoxInput.getSelectionModel().select(0);
+        groupInput.getSelectionModel().select(0);
+    }
+
+    /**
+     * @param result
+     */
+    private void setErrorField(String result) {
+        ErrorField.setText(result);
+        ErrorField.setVisible(true);
+        ErrorField.setDisable(false);
+        ErrorField.setEditable(false);
     }
 
     private void setArrangementData(){
@@ -137,52 +221,8 @@ public class NewAlterArrangementController extends Controller {
         arrangementToEdit.setEndDate(endDate.toString());
     }
 
-    private boolean checkLengthOfAllFields(){
-        return arrName.length() == 0 || sport.length() == 0 || partic.length() == 0 || desc.length() == 0 || address.length() == 0 || startDateInput.getValue() == null || endDateInput.getValue() == null;
-    }
-
-    private boolean illegalNumberFormat(){
-        if(!Validation.ofNumber(partic)){
-            setErrorField("Antall deltakere har ikke gyldig nummer format.");
-            return true;
-        }
-        return false;
-    }
-
-    private boolean validateArrangementData(){
-        ValidationResult result = Validation.ofArrangement(arrangementToEdit);
-        if(!result.IS_VALID){
-            setErrorField(result.RESULT);
-            return true;
-        }
-        return false;
-    }
-
-    private int getSportIndex(){
-        ObservableList list = FXCollections.observableArrayList(SportCategory.values());
-        for(int i = 0; i < list.size(); i++){
-            if(list.get(i).toString().equals(arrangementToEdit.getSport()))return i;
-        }
-        return 0;
-    }
-
-    private int getGroupCategoryIndex(){
-        if(arrangementToEdit.isGroup())return 0;
-        return 1;
-    }
-
-    /**
-     * @param result String
-     */
-    private void setErrorField(String result) {
-        ErrorField.setText(result);
-        ErrorField.setVisible(true);
-        ErrorField.setDisable(false);
-        ErrorField.setEditable(false);
-    }
-
     // --------------------------------------------------//
-    //                6.Overridden Methods               //
+    //                7.Overridden Methods               //
     // --------------------------------------------------//
     /**
      * @param url {@link URL}
@@ -198,17 +238,13 @@ public class NewAlterArrangementController extends Controller {
      * @return Object
      */
     @Override
-    public Object getDataObject() {
-        return arrangementToEdit;
-    }
+    public Object getDataObject() {return arrangementToEdit;}
 
     /**
      * @return boolean
      */
     @Override
-    public boolean hasNewObject(){
-        return createdNewObject;
-    }
+    public boolean hasNewObject(){return createdNewObject;}
 
     /**
      * Setups the view and its data fields.
@@ -233,14 +269,7 @@ public class NewAlterArrangementController extends Controller {
     /**
      * @return {@link ViewInformation}
      */
-    //new method for returning information about the view
     @Override
-    public ViewInformation getViewInformation() {
-        return new ViewInformation(name, title);
-    }
+    public ViewInformation getViewInformation() { return new ViewInformation(name, title); }
 
-    @Override
-    public void setTextColors(boolean tf) {
-
-    }
 }

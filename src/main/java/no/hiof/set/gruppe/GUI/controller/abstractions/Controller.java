@@ -7,20 +7,18 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import no.hiof.set.gruppe.core.exceptions.DataFormatException;
 import no.hiof.set.gruppe.core.exceptions.ErrorExceptionHandler;
 import no.hiof.set.gruppe.MainJavaFX;
-import no.hiof.set.gruppe.model.Arrangement;
+import no.hiof.set.gruppe.model.IGetAllDataStringArr;
 import org.jetbrains.annotations.NotNull;
+
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * This class is the main setup for all other controllers and their logic.
  * Meaning all other controllers must inherit and implement functionality described here.
  */
-public abstract class Controller implements IControllerDataTransfer, Initializable {
+public abstract class Controller implements IController, Initializable {
     private MainJavaFX mainController;
 
     /**
@@ -31,38 +29,21 @@ public abstract class Controller implements IControllerDataTransfer, Initializab
     public void setMainController(MainJavaFX mainController){
         this.mainController = mainController;
     }
+
+    MainJavaFX getMainController() { return mainController; }
+
     @Override
     public void createNewView(Controller controller) {
-        boolean errorOccured = true;
-        ErrorExceptionHandler err = null;
-        Throwable thrown = null;
-
+        ErrorExceptionHandler err;
         try {
             mainController.setupWindow(controller);
-            errorOccured = false;
-        } catch (IOException e) {
+        } catch (IOException resourceEx) {
             err = ErrorExceptionHandler.ERROR_LOAD_RESOURCE;
-            thrown = e;
-
-        }finally {
-            try {
-                if (errorOccured && (err != null)) ErrorExceptionHandler.createLogWithDetails(err, thrown);
-            } catch (Exception e) {
-                Controller.createAlert(ErrorExceptionHandler.ERROR_LOGGING_ERROR);
-            }
+            try { ErrorExceptionHandler.createLogWithDetails(err, resourceEx);
+            } catch (IOException IOException) {err = ErrorExceptionHandler.ERROR_LOGGING_ERROR;}
+            createAlert(err);
         }
     }
-
-    protected void createNewView(IControllerDataTransfer controller, Object object) {
-        mainController.setupWindow(controller, object);
-    }
-
-    public boolean hasNewObject(){
-        return false;
-    }
-
-    @Override
-    public void updateView(){}
 
     /**
      * Creates a alert box for the user, including the given error.
@@ -77,36 +58,15 @@ public abstract class Controller implements IControllerDataTransfer, Initializab
         alert.showAndWait();
     }
 
-    protected ArrayList<Text> viewFields(Text name, Text sport, Text adress, Text date, Text participants, Text groups, Text description){
-        Text[] t = {name, sport, adress, date, participants, groups, description};
-        return new ArrayList<>(Arrays.asList(t));
-    }
-
     protected void clearFields(Text... textNodes){ for(Text text : textNodes)text.setText(""); }
 
-    protected ArrayList<String>arrangementData(@NotNull Arrangement a){
-        String[] s = {a.getName(), a.getSport(), a.getAddress(), dateString(a), Integer.toString(a.getParticipants()), groupsOrIndividuals(a), a.getDescription()};
-        return new ArrayList<>(Arrays.asList(s));
+    protected static void setFieldsWithDataFromObject(IGetAllDataStringArr object, Text[] nodes){
+        if(object == null || nodes == null )return;
+        String[] data = object.getAllDataAsStringArr();
+        for(int i = 0; i < nodes.length; i++)nodes[i].setText(data[i]);
     }
 
-    @NotNull
-    private String groupsOrIndividuals(@NotNull Arrangement arrangement){
-        return arrangement.isGroup() ? "Lagkonkurranse" : "Individuell konkurranse";
-    }
-
-    @NotNull
-    private String dateString(@NotNull Arrangement a){
-        return a.getStartDate().toString() + " til " + a.getEndDate().toString();
-    }
-
-    protected void closeWindow(@NotNull Button b) {
-        ((Stage)b.getScene().getWindow()).close();
-    }
-
-    @Override
-    public void setDataFields(Object object) throws DataFormatException {
-
-    }
+    protected void closeWindow(@NotNull Button b) { ((Stage)b.getScene().getWindow()).close(); }
 
     protected void colorizeText(boolean tf, Text...t){
         Color color = tf ? Color.BLACK : Color.GREY;

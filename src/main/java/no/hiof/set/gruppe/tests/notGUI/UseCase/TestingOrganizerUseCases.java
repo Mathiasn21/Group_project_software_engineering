@@ -1,4 +1,4 @@
-package no.hiof.set.gruppe.tests.others.UseCase;
+package no.hiof.set.gruppe.tests.notGUI.UseCase;
 
 /*Guide
  * 1. Import Statements
@@ -11,7 +11,8 @@ package no.hiof.set.gruppe.tests.others.UseCase;
 // --------------------------------------------------//
 import no.hiof.set.gruppe.core.exceptions.DataFormatException;
 import no.hiof.set.gruppe.core.exceptions.IllegalDataAccess;
-import no.hiof.set.gruppe.core.Repository;
+import no.hiof.set.gruppe.core.repository.IRepository;
+import no.hiof.set.gruppe.core.repository.Repository;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.user.ProtoUser;
 import org.junit.jupiter.api.MethodOrderer;
@@ -42,6 +43,7 @@ class TestingOrganizerUseCases {
             "2019-10-16",
             "Dette varer i hele 1 dager. Og, server null formål.");
     private static final ProtoUser PROTO_USER = ProtoUser.ORGANIZER;
+    private static final IRepository repository = new Repository();
 
     // --------------------------------------------------//
     //                3.Unit Tests                       //
@@ -52,11 +54,11 @@ class TestingOrganizerUseCases {
     @Test
     @Order(1)
     void firstAddArrangement() throws IllegalDataAccess, DataFormatException {
-        List<Arrangement> expectedList = Repository.queryAllUserRelatedArrangements(PROTO_USER);
+        List<Arrangement> expectedList = repository.queryAllEntityConnectedToUserData(Arrangement.class, PROTO_USER);
         expectedList.add(arrangement);
-        Repository.insertArrangement(arrangement, PROTO_USER);
+        repository.insertData(arrangement, PROTO_USER);
 
-        assertDataIntegrity(expectedList, Repository.queryAllUserRelatedArrangements(PROTO_USER));
+        assertDataIntegrity(expectedList, repository.queryAllEntityConnectedToUserData(Arrangement.class, PROTO_USER));
     }
 
     /**
@@ -65,14 +67,17 @@ class TestingOrganizerUseCases {
     @Test
     @Order(2)
     void thenDeleteArrangement() throws IllegalDataAccess, DataFormatException {
-        List<Arrangement> expectedList = Repository.queryAllUserRelatedArrangements(PROTO_USER);
+        List<Arrangement> expectedList = repository.queryAllEntityConnectedToUserData(Arrangement.class, PROTO_USER);
         expectedList.remove(arrangement);
-        Repository.deleteArrangement(arrangement, PROTO_USER);
+        repository.deleteData(arrangement, PROTO_USER);
 
-        assertDataIntegrity(expectedList, Repository.queryAllUserRelatedArrangements(PROTO_USER));
+        assertDataIntegrity(expectedList, repository.queryAllEntityConnectedToUserData(Arrangement.class, PROTO_USER));
     }
 
-
+    /**
+     * @param expectedArrangementList
+     * @param userArrangements
+     */
     private void assertDataIntegrity(List<Arrangement> expectedArrangementList, List<Arrangement> userArrangements) {
         assertTrue(userArrangements.containsAll(expectedArrangementList));
         assertEquals(expectedArrangementList.size(), userArrangements.size());

@@ -14,14 +14,13 @@ public interface IController {
     void setMainController(MainJavaFX mainController);
 
     /**
-     * @param controller {@link Controller}
-     */
-    void createNewView(Controller controller);
-
-    /**
      * @return {@link ViewInformation}
      */
     ViewInformation getViewInformation();
 
-    void setTextColors(boolean tf);
+    /**
+     * @param controller {@link Controller}
+     */
+    void createNewView(Controller controller);
+
 }

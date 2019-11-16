@@ -16,7 +16,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * An enum representing legal users. Just a dummy class
  */
-public enum ProtoUser {
+public enum ProtoUser implements IUser{
     // --------------------------------------------------//
     //                2.Constants                        //
     // --------------------------------------------------//
@@ -48,12 +48,6 @@ public enum ProtoUser {
      * @return String
      */
     @Contract(pure = true)
-    public String getName() {return user;}
-
-    /**
-     * @return String
-     */
-    @Contract(pure = true)
     public String getPass() {return password;}
 
     /**
@@ -62,14 +56,21 @@ public enum ProtoUser {
     @Contract(pure = true)
     public String getViewName() {return viewName;}
 
+
+    /**
+     * @return String
+     */
+    @Contract(pure = true)
+    @Override
+    public String getName() {return user;}
+    // --------------------------------------------------//
+    //                4.Public getter methods            //
+    // --------------------------------------------------//
+
     /**
      * @param userName String
      * @return {@link ProtoUser}
      */
-
-    // --------------------------------------------------//
-    //                4.Public getter methods            //
-    // --------------------------------------------------//
     @Nullable
     public static ProtoUser getUser(String userName){
         for(ProtoUser u: values()) if(u.user.equals(userName))return u;

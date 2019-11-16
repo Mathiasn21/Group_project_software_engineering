@@ -1,7 +1,9 @@
 package no.hiof.set.gruppe.data;
 
+import com.google.api.client.util.ArrayMap;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import no.hiof.set.gruppe.core.repository.IBaseEntity;
 import no.hiof.set.gruppe.core.exceptions.DataFormatException;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.Group;
@@ -9,38 +11,39 @@ import no.hiof.set.gruppe.model.user.UserConnectedArrangement;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public class HandleDataStorage implements IHandleData{
-    private static final String arrangementFName = "arrangements.json";
-    private static final String userHasArrangements = "userHasArrangements.json";
-    private static final String groupsFName = "groups.json";
+    private static final Class<?>[] knownClasskeys = {Arrangement.class, UserConnectedArrangement.class, Group.class};
+    private static final String[] knownDataFiles = {"arrangements.json", "userHasArrangements.json", "groups.json"};
+    private static final Map<Class<?>, String> objectMapper = new ArrayMap<>();
 
-    static {
-        ObjectMapToFiles.mutateObjectMapperList(new ObjectMapToFiles<>(Arrangement.class, arrangementFName));
-        ObjectMapToFiles.mutateObjectMapperList(new ObjectMapToFiles<>(Group.class, groupsFName));
-        ObjectMapToFiles.mutateObjectMapperList(new ObjectMapToFiles<>(UserConnectedArrangement.class, userHasArrangements));
+    static{
+        for(int i = 0; i < knownClasskeys.length; i++)objectMapper.put(knownClasskeys[i], knownDataFiles[i]);
     }
 
     @Override
-    public <T> void storeDataGivenType(Class<T[]> tClass, T[] tArray) throws DataFormatException {
-        writeToFile(toJson(tClass, tArray), ObjectMapToFiles.getCorrespondingMapperGivenType(tClass).fileName);
+    public final <T extends IBaseEntity> void storeDataGivenType(Class<T> aClass, List<? extends IBaseEntity> list) throws DataFormatException {
+        String file = objectMapper.get(aClass);
+        if(file == null)throw new DataFormatException();
+        writeToFile(toJson(list), file);
     }
 
     @Override
-    public <T> List<T> queryAllDataGivenType(Class<T[]> tClassArr) throws IOException, DataFormatException {
-        String jsonFromFile = HandleDataStorage.readFromFile(ObjectMapToFiles.getCorrespondingMapperGivenType(tClassArr).fileName);
+    public final <T> List<T> queryAllDataGivenType(Class<T> tClassArr) throws IOException {
+        String jsonFromFile = HandleDataStorage.readFromFile(objectMapper.get(tClassArr));
         return new ArrayList<>(HandleDataStorage.listFromJson(tClassArr, jsonFromFile));
     }
 
-    
     /**
      * Standard method for writing data to a given file.
      * This methods does not append but overwrites!
-     * Utilizes a relative path for top level directory plus a filename.extension
+     * Utilizes a relative path for top level directory, plus filename.extension
      *
      * @param str   String
      * @param fName String
@@ -58,19 +61,16 @@ public class HandleDataStorage implements IHandleData{
      * Utilizes parametrization combined with generics, in order to
      * convert a given T[] object and its specified Class template to json format.
      *
-     * @param type  ClassT[]
-     * @param array T[]
-     * @param <T>   T
+     * @param list T[]
      * @return String
      */
-    private static <T> String toJson(Class<T[]> type, T[] array) {
-        GsonBuilder gsonBuilder = new GsonBuilder().setPrettyPrinting();
-        Gson gson = gsonBuilder.create();
-        return gson.toJson(array, type);
+    private static String toJson(List<? extends IBaseEntity> list) {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        return gson.toJson(list);
     }
 
     /**
-     * Standard reading from a file. Utilizes a relative path given a filename.extension.
+     * Standard reading from a file. Utilizes a relative path given filename.extension.
      * Files must exist in the top level directory.
      *
      * @param fName String
@@ -99,11 +99,12 @@ public class HandleDataStorage implements IHandleData{
      * @return {@link List}
      */
     @NotNull
-    private static <T> List<T> listFromJson(Class<T[]> type, String jsonTextFromFile) {
+    @SuppressWarnings("unchecked")//Will always be possible otherwise and exception is thrown waaay before this method
+    private static <T> List<T> listFromJson(Class<T> type, String jsonTextFromFile) {
         GsonBuilder gsonBuilder = new GsonBuilder().setPrettyPrinting();
         Gson gson = gsonBuilder.create();
-
-        T[] arrangementArray = gson.fromJson(jsonTextFromFile, type);
+        Class<T[]> arrClass = (Class<T[]>) Array.newInstance(type, 0).getClass();
+        T[] arrangementArray = gson.fromJson(jsonTextFromFile, arrClass);
         return (Arrays.asList(arrangementArray));
     }
 }

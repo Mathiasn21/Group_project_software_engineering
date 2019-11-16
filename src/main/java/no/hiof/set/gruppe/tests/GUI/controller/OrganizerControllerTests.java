@@ -36,7 +36,7 @@ class OrganizerControllerTests extends MainJavaFXTest{
     private String[] arrangementsData;
     private final String[] lookupFields = new String[]{
             "#arrangementName", "#arrangementSport",
-            "#arrangementAdress", "#arrangementDate",
+            "#arrangementAddress", "#arrangementDate",
             "#arrangementParticipants", "#arrangementGorI", "#arrangementDescription"};
 
     @Start
@@ -48,7 +48,7 @@ class OrganizerControllerTests extends MainJavaFXTest{
 
     @Test
     void testCreatingNewArrangement(@NotNull FxRobot robot) {
-        ListView listView = robot.lookup("#listview").queryAs(ListView.class);
+        ListView listView = robot.lookup("#listView").queryAs(ListView.class);
         robot.clickOn("#newArrangementBtn");
         fillOutForm(robot);
         robot.clickOn("#saveBtn");
@@ -63,7 +63,7 @@ class OrganizerControllerTests extends MainJavaFXTest{
     }
 
     void testAlterArrangement(@NotNull FxRobot usingRobot){
-        ListView listView = usingRobot.lookup("#listview").queryAs(ListView.class);
+        ListView listView = usingRobot.lookup("#listView").queryAs(ListView.class);
         listView.getSelectionModel().selectLast();
         usingRobot.clickOn("#editBtn");
         fillOutForm(usingRobot);

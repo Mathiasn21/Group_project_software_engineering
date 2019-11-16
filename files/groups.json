@@ -1,79 +1,11 @@
 [
   {
-    "name": "hoi",
-    "id": 1,
+    "name": "hoihijh",
+    "ID": "999759cd-7764-48c3-a436-1f098b1de814",
     "members": [
-      "USER8",
-      "USER4",
-      "USER1",
-      "USER2"
-    ]
-  },
-  {
-    "name": "fghfghj",
-    "id": 1,
-    "members": [
-      "USER6",
-      "USER5"
-    ]
-  },
-  {
-    "name": "dfkjngkngf",
-    "id": 1,
-    "members": [
-      "USER5",
-      "USER7",
-      "USER9",
-      "USER6"
-    ]
-  },
-  {
-    "name": "heiehi",
-    "id": 1,
-    "members": [
-      "USER10",
-      "USER4",
-      "USER8",
-      "USER7"
-    ]
-  },
-  {
-    "name": "hoi",
-    "id": 1,
-    "members": [
-      "USER6",
-      "USER8",
-      "USER4"
-    ]
-  },
-  {
-    "name": "dfkjngkngf",
-    "id": 1,
-    "members": [
-      "USER5",
-      "USER7",
-      "USER9",
-      "USER6"
-    ]
-  },
-  {
-    "name": "hoi",
-    "id": 1,
-    "members": [
-      "USER6",
-      "USER8",
+      "USER3",
       "USER4",
       "USER1"
-    ]
-  },
-  {
-    "name": "hoi",
-    "id": 1,
-    "members": [
-      "USER8",
-      "USER4",
-      "USER1",
-      "USER2"
     ]
   }
 ]
