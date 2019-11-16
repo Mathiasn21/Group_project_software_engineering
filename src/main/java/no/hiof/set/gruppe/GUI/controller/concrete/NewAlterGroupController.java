@@ -23,7 +23,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import no.hiof.set.gruppe.GUI.controller.abstractions.ControllerTransferData;
-import no.hiof.set.gruppe.core.Repository;
+import no.hiof.set.gruppe.core.repository.Repository;
 import no.hiof.set.gruppe.core.exceptions.DataFormatException;
 import no.hiof.set.gruppe.core.exceptions.ErrorExceptionHandler;
 import no.hiof.set.gruppe.model.Group;

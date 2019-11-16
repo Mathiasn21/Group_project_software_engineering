@@ -1,4 +1,4 @@
-package no.hiof.set.gruppe.core;
+package no.hiof.set.gruppe.core.repository;
 /*Guide
  * 1. Import Statements
  * 2. Static Fields

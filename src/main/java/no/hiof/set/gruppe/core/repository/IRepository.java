@@ -1,4 +1,4 @@
-package no.hiof.set.gruppe.core;
+package no.hiof.set.gruppe.core.repository;
 
 import no.hiof.set.gruppe.core.exceptions.DataFormatException;
 import no.hiof.set.gruppe.core.exceptions.IllegalDataAccess;
