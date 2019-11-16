@@ -1,4 +1,4 @@
-package no.hiof.set.gruppe.tests.others.UseCase;
+package no.hiof.set.gruppe.tests.notGUI.UseCase;
 
 /*Guide
  * 1. Import Statements
@@ -11,7 +11,6 @@ package no.hiof.set.gruppe.tests.others.UseCase;
 // --------------------------------------------------//
 import no.hiof.set.gruppe.core.Repository;
 import no.hiof.set.gruppe.core.exceptions.DataFormatException;
-import no.hiof.set.gruppe.core.exceptions.IllegalDataAccess;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.user.ProtoUser;
 import org.junit.jupiter.api.*;
@@ -53,7 +52,7 @@ class TestingProtoUserUseCases {
       */
     @Test
     @Order(1)
-    void firstAddUserToArrangement() {
+    void firstAddUserToArrangement() throws DataFormatException {
         arrangementToTest = notUserArrangements.get(0);
         userArrangements.add(arrangementToTest);
 
@@ -69,12 +68,11 @@ class TestingProtoUserUseCases {
     void thenRemoveUserFromArrangement() throws DataFormatException {
         repository.deleteUserConnectionToData(arrangementToTest, PROTO_USER);
         userArrangements.remove(arrangementToTest);
-        repository.deleteUserConnectionToData(arrangementToTest, PROTO_USER);
         assertDataIntegrity(repository.queryAllEntityConnectedToUserData(Arrangement.class, PROTO_USER));
     }
 
     private void assertDataIntegrity(List<Arrangement> expectedArrangementList) {
-        Assertions.assertTrue(TestingProtoUserUseCases.userArrangements.containsAll(expectedArrangementList));
-        assertEquals(expectedArrangementList.size(), TestingProtoUserUseCases.userArrangements.size());
+        assertEquals(userArrangements, expectedArrangementList);
+        assertEquals(expectedArrangementList.size(), userArrangements.size());
     }
  }

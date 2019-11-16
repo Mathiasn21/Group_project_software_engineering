@@ -1,4 +1,4 @@
-package no.hiof.set.gruppe.tests.unitTesting;
+package no.hiof.set.gruppe.tests.notGUI.unitTesting;
 
 import no.hiof.set.gruppe.core.validations.Validation;
 import no.hiof.set.gruppe.model.Group;

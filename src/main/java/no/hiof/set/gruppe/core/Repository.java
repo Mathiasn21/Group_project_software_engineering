@@ -324,19 +324,15 @@ public final class Repository implements IRepository{
         }
     }
 
-    private <T extends IBaseEntity> void storeData(Class<T> aClass) throws DataFormatException {
-        List<? extends IBaseEntity> list = getList(aClass);
-        handleData.storeDataGivenType(aClass, list);
-    }
-
     @Override
-    public <T extends IBaseEntity, E extends IUser> void insertUserRelationToData(T t, E user) {
+    public <T extends IBaseEntity, E extends IUser> void insertUserRelationToData(T t, E user) throws DataFormatException {
         Class<? extends EntityConnectedToUser> connection = baseEntityMappedToEntity.get(t.getClass());
         List<EntityConnectedToUser> listOfConnections = getDataConnectedToUsersList(t.getClass());
         Constructor<? extends EntityConnectedToUser> data;
         try {
             data = connection.getDeclaredConstructor(String.class, String.class);
             listOfConnections.add(data.newInstance(t.getID(), user.getName()));
+            storeData(connection);
         } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
             try {ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_FATAL, e);
             } catch (IOException ex) { ex.printStackTrace();}
@@ -344,18 +340,25 @@ public final class Repository implements IRepository{
     }
 
     @Override
-    public <T extends IBaseEntity> void mutateData(T thatBaseEntity) {
+    public <T extends IBaseEntity> void mutateData(T thatBaseEntity) throws DataFormatException {
         List<IBaseEntity> entityList = getList(thatBaseEntity.getClass());
-        entityList.removeIf((thisBaseEntity) -> thisBaseEntity.getID().equals(thatBaseEntity.getID()));
+        entityList.removeIf((thisBaseEntity) -> thisBaseEntity.getID().equals(thatBaseEntity.getID()) || thisBaseEntity.equals(thatBaseEntity));
         entityList.add(thatBaseEntity);
+        storeData(thatBaseEntity.getClass());
+    }
+
+    private <T extends IBaseEntity> void storeData(Class<T> aClass) throws DataFormatException {
+        List<? extends IBaseEntity> list = getList(aClass);
+        handleData.storeDataGivenType(aClass, list);
     }
 
     @Override
-    public <T extends IBaseEntity> void deleteData(T thatBaseEntity, ProtoUser user) throws IllegalDataAccess {
+    public <T extends IBaseEntity> void deleteData(T thatBaseEntity, ProtoUser user) throws IllegalDataAccess, DataFormatException {
         if(!AccessValidate.ThatUserCanModifyBaseEntity(thatBaseEntity, user))throw new IllegalDataAccess();
         List<IBaseEntity> list = getList(thatBaseEntity.getClass());
-        list.removeIf((thisBaseEntity) -> thisBaseEntity.getID().equals(thatBaseEntity.getID()));
+        list.removeIf((thisBaseEntity) -> thisBaseEntity.getID().equals(thatBaseEntity.getID()) || thisBaseEntity.equals(thatBaseEntity));
         deleteAllEntityConnectedToUserData(thatBaseEntity.getID(), thatBaseEntity.getClass());
+        storeData(thatBaseEntity.getClass());
     }
 
     @Override
@@ -363,9 +366,10 @@ public final class Repository implements IRepository{
         List<EntityConnectedToUser> list = getDataConnectedToUsersList(thatO.getClass());
         if(list == null)throw new DataFormatException();
         list.removeIf((thisO) -> thisO.getID().equals(thatO.getID()) && thisO.getUSERNAME().equals(user.getName()));
+        storeData(baseEntityMappedToEntity.get(thatO.getClass()));
     }
 
-    private <T extends IBaseEntity> void deleteAllEntityConnectedToUserData(String ID, Class<T> tClass) {
+    private <T extends IBaseEntity> void deleteAllEntityConnectedToUserData(String ID, Class<T> tClass) throws DataFormatException {
         Class<? extends EntityConnectedToUser> entity = baseEntityMappedToEntity.get(tClass);
         List<EntityConnectedToUser> dataConnectedToUsers = getDataConnectedToUsersList(entity);
         if(dataConnectedToUsers == null) return;
@@ -377,6 +381,7 @@ public final class Repository implements IRepository{
                 i--;
             }
         }
+        storeData(entity);
     }
 
     @SuppressWarnings("unchecked")//objectMapper contains explicitly only List<IBaseEntity>

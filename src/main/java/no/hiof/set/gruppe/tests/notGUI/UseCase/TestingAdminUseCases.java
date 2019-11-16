@@ -1,4 +1,4 @@
-package no.hiof.set.gruppe.tests.others.UseCase;
+package no.hiof.set.gruppe.tests.notGUI.UseCase;
 
 /*Guide
  * 1. Import Statements
@@ -81,6 +81,6 @@ class TestingAdminUseCases {
         expectedArrangementList.remove(arrangement);
 
         repository.deleteData(arrangement, PROTO_USER_ADMIN);
-        assertDataIntegrity(expectedArrangementList, repository.queryAllArrangements());
+        assertDataIntegrity(expectedArrangementList, repository.queryAllEntityConnectedToUserData(Arrangement.class, PROTO_USER_ORGANIZER));
     }
 }

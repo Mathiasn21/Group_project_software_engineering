@@ -13,9 +13,9 @@ public interface IRepository {
     <T extends IBaseEntity> T queryDataWithID(String ID, Class<T> tClass);
 
     <T extends IBaseEntity, E extends IUser> void insertData(T iBaseEntity, E user) throws IllegalDataAccess, DataFormatException;
-    <T extends IBaseEntity, E extends IUser> void insertUserRelationToData(T t, E user);
+    <T extends IBaseEntity, E extends IUser> void insertUserRelationToData(T t, E user) throws DataFormatException;
 
-    <T extends IBaseEntity> void mutateData(T t);
-    <T extends IBaseEntity> void deleteData(T t, ProtoUser user) throws IllegalDataAccess;
+    <T extends IBaseEntity> void mutateData(T t) throws DataFormatException;
+    <T extends IBaseEntity> void deleteData(T t, ProtoUser user) throws IllegalDataAccess, DataFormatException;
     <T extends IBaseEntity, E extends IUser> void deleteUserConnectionToData(T t, E user) throws DataFormatException;
 }

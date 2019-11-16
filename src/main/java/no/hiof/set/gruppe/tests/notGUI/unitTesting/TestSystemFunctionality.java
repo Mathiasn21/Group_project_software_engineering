@@ -1,4 +1,4 @@
-package no.hiof.set.gruppe.tests.unitTesting;
+package no.hiof.set.gruppe.tests.notGUI.unitTesting;
 
 /*Guide
  * 1. Import Statements

@@ -63,6 +63,10 @@ public class Arrangement implements IGetAllDataStringArr, IBaseEntity {
      * @param description String
      */
     public Arrangement(String name, String sport, int participants, String address, boolean gruppe, String startDate, String endDate, String description) {
+        this(UUID.randomUUID().toString(), name, sport, participants, address, gruppe, startDate, endDate, description);
+    }
+
+    public Arrangement(String ID, String name, String sport, int participants, String address, boolean gruppe, String startDate, String endDate, String description){
         this.name = name;
         this.sport = sport;
         this.participants = participants;
@@ -71,7 +75,7 @@ public class Arrangement implements IGetAllDataStringArr, IBaseEntity {
         this.startDate = startDate;
         this.endDate = endDate;
         this.description = description;
-        ID = UUID.randomUUID().toString();
+        this.ID = ID;
     }
 
     // --------------------------------------------------//

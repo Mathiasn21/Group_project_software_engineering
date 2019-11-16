@@ -1,4 +1,4 @@
-package no.hiof.set.gruppe.tests.others.UseCase;
+package no.hiof.set.gruppe.tests.notGUI.UseCase;
 
 /*Guide
  * 1. Import Statements

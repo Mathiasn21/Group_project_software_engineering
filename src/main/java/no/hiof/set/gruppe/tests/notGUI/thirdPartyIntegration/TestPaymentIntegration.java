@@ -1,4 +1,4 @@
-package no.hiof.set.gruppe.tests.thirdPartyIntegration;
+package no.hiof.set.gruppe.tests.notGUI.thirdPartyIntegration;
 
 /*Guide
  * 1. Import Statements
