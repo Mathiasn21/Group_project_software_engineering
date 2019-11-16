@@ -1,18 +1,1 @@
-[
-  {
-    "ID": "7cd44b26-7a52-43f6-b82a-8fe370057c41",
-    "USERNAME": "Organizer"
-  },
-  {
-    "ID": "f4fd7c4a-6642-499f-a53a-67250143e8f4",
-    "USERNAME": "Organizer"
-  },
-  {
-    "ID": "83ed73df-7ab6-4bc1-b193-c16c2cdd63ee",
-    "USERNAME": "Organizer"
-  },
-  {
-    "ID": "d52665f4-38f1-4b56-b24d-9d760adc7102",
-    "USERNAME": "Organizer"
-  }
-]
+[{"ID":"7cd44b26-7a52-43f6-b82a-8fe370057c41","USERNAME":"Organizer"},{"ID":"f4fd7c4a-6642-499f-a53a-67250143e8f4","USERNAME":"Organizer"},{"ID":"83ed73df-7ab6-4bc1-b193-c16c2cdd63ee","USERNAME":"Organizer"},{"ID":"d52665f4-38f1-4b56-b24d-9d760adc7102","USERNAME":"Organizer"},{"ID":"a87124f1-137c-4fdf-b663-37d78be8f67e","USERNAME":"Organizer"}]

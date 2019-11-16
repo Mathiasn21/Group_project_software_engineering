@@ -1,5 +1,6 @@
 package no.hiof.set.gruppe.core;
 
+import no.hiof.set.gruppe.core.exceptions.DataFormatException;
 import no.hiof.set.gruppe.core.exceptions.IllegalDataAccess;
 import no.hiof.set.gruppe.model.user.IUser;
 import no.hiof.set.gruppe.model.user.ProtoUser;
@@ -11,7 +12,7 @@ public interface IRepository {
     <T extends IBaseEntity, E extends IUser> List<T> queryAllEntityConnectedToUserData(Class<T> tClass, E user);
     <T extends IBaseEntity> T queryDataWithID(String ID, Class<T> tClass);
 
-    <T extends IBaseEntity> void insertData(T t);
+    <T extends IBaseEntity, E extends IUser> void insertData(T iBaseEntity, E user) throws IllegalDataAccess, DataFormatException;
     <T extends IBaseEntity, E extends IUser> void insertUserRelationToData(T t, E user);
 
     <T extends IBaseEntity> void mutateData(T t);

@@ -23,6 +23,7 @@ import no.hiof.set.gruppe.core.exceptions.ErrorExceptionHandler;
 import no.hiof.set.gruppe.GUI.controller.abstractions.Controller;
 import no.hiof.set.gruppe.GUI.controller.abstractions.IController;
 import no.hiof.set.gruppe.GUI.controller.abstractions.IControllerDataTransfer;
+import no.hiof.set.gruppe.core.exceptions.IllegalDataAccess;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.user.ProtoUser;
 import org.jetbrains.annotations.NotNull;
@@ -78,9 +79,9 @@ public class MainJavaFX extends Application implements SetupWindow {
                 "Dette varer i hele 1 dager. Og, server null formål."
         );
         try {
-            repo.insertUserToArrangement(arrangement, ProtoUser.ORGANIZER);
-        } catch (DataFormatException e) {
-            e.printStackTrace();
+            repo.insertData(arrangement, ProtoUser.ORGANIZER);
+        } catch (IllegalDataAccess | DataFormatException illegalDataAccess) {
+            illegalDataAccess.printStackTrace();
         }
     }
 

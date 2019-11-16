@@ -11,6 +11,7 @@ package no.hiof.set.gruppe.core.validations;
 import no.hiof.set.gruppe.core.IBaseEntity;
 import no.hiof.set.gruppe.core.Repository;
 import no.hiof.set.gruppe.model.Arrangement;
+import no.hiof.set.gruppe.model.user.IUser;
 import no.hiof.set.gruppe.model.user.ProtoUser;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -44,7 +45,12 @@ public final class AccessValidate {
         return protoUser == ProtoUser.ORGANIZER || protoUser == ProtoUser.ADMIN;
     }
 
-    public static <T extends IBaseEntity> boolean ThatUserCanModifyBaseEntity(T thatBaseEntity, ProtoUser user) {
-        return true;
+    public static <T extends IBaseEntity, E extends IUser> boolean ThatUserCanModifyBaseEntity(T baseEntity, E user) {
+        return (user == ProtoUser.ORGANIZER && repository.queryAllEntityConnectedToUserData(baseEntity.getClass(), user).contains(baseEntity))
+                || user == ProtoUser.ADMIN;
+    }
+
+    public static <T extends IBaseEntity, E extends IUser> boolean ThatUserCanCreateNewBaseEntity(E user) {
+        return user == ProtoUser.ORGANIZER || user == ProtoUser.ADMIN;
     }
 }

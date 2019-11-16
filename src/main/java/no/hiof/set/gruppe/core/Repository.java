@@ -50,9 +50,9 @@ public final class Repository implements IRepository{
     //Preload data.
     static{
         try{
-            listOfAllArrangements = queryDataGivenType(Arrangement[].class);
-            listOfAllUserConnectedArrangements = queryDataGivenType(UserConnectedArrangement[].class);
-            listOfAllGroups = queryDataGivenType(Group[].class);
+            listOfAllArrangements = queryDataGivenType(Arrangement.class);
+            listOfAllUserConnectedArrangements = queryDataGivenType(UserConnectedArrangement.class);
+            listOfAllGroups = queryDataGivenType(Group.class);
 
             objectMappedToList.put(Arrangement.class, listOfAllArrangements);
             objectMappedToList.put(UserConnectedArrangement.class, listOfAllUserConnectedArrangements);
@@ -75,7 +75,7 @@ public final class Repository implements IRepository{
      * @throws IOException IOException
      * @throws DataFormatException DataFormatException
      */
-    private static  <T> List<T> queryDataGivenType(Class<T[]> tClassArr) throws IOException, DataFormatException {
+    private static  <T> List<T> queryDataGivenType(Class<T> tClassArr) throws IOException, DataFormatException {
         return handleData.queryAllDataGivenType(tClassArr);
     }
 
@@ -87,7 +87,7 @@ public final class Repository implements IRepository{
      * @throws DataFormatException DataFormatException
      */
     private void storeArrangementsData() throws DataFormatException {
-        handleData.storeDataGivenType(Arrangement[].class, listOfAllArrangements.toArray(Arrangement[]::new));
+        handleData.storeDataGivenType(Arrangement.class, listOfAllArrangements);
         storeUserArrangements();
     }
 
@@ -95,14 +95,14 @@ public final class Repository implements IRepository{
      * @throws DataFormatException DataFormatException
      */
     private void storeGroupData() throws DataFormatException {
-        handleData.storeDataGivenType(Group[].class, listOfAllGroups.toArray(Group[]::new));
+        handleData.storeDataGivenType(Group.class, listOfAllGroups);
     }
 
     /**
      * @throws DataFormatException DataFormatException
      */
     private void storeUserArrangements() throws DataFormatException {
-        handleData.storeDataGivenType(UserConnectedArrangement[].class, listOfAllUserConnectedArrangements.toArray(UserConnectedArrangement[]::new));
+        handleData.storeDataGivenType(UserConnectedArrangement.class, listOfAllUserConnectedArrangements);
     }
 
 
@@ -277,6 +277,7 @@ public final class Repository implements IRepository{
         return new ArrayList<>((List<T>) objectMappedToList.get(aClass));
     }
 
+
     @Override
     @SuppressWarnings("unchecked")//only one possible return type here, as this is mapped from the start
     public <T extends IBaseEntity, E extends IUser> List<T> queryAllEntityConnectedToUserData(Class<T> aClass, E user) {
@@ -299,13 +300,32 @@ public final class Repository implements IRepository{
 
 
     @Override
+    @SuppressWarnings("unchecked")//only one possible return type here, as this is mapped from the start
     public <T extends IBaseEntity> T queryDataWithID(String ID, Class<T> aClass) {
+        List<IBaseEntity> list = getList(aClass);
+        for (IBaseEntity entity : list)
+            if (entity.getID().equals(ID)) {
+                return (T) entity;
+            }
         return null;
     }
 
     @Override
-    public <T extends IBaseEntity> void insertData(T iBaseEntity) {
+    public <T extends IBaseEntity, E extends IUser> void insertData(T iBaseEntity, E user) throws IllegalDataAccess, DataFormatException {
+        if(!AccessValidate.ThatUserCanCreateNewBaseEntity(user))throw new IllegalDataAccess();
         (getList(iBaseEntity.getClass())).add(iBaseEntity);
+
+        Class<? extends EntityConnectedToUser> relation = baseEntityMappedToEntity.get(iBaseEntity.getClass());
+        storeData(iBaseEntity.getClass());
+        if(relation != null){
+            insertUserRelationToData(iBaseEntity, user);
+            storeData(relation);
+        }
+    }
+
+    private <T extends IBaseEntity> void storeData(Class<T> aClass) throws DataFormatException {
+        List<? extends IBaseEntity> list = getList(aClass);
+        handleData.storeDataGivenType(aClass, list);
     }
 
     @Override
@@ -324,7 +344,6 @@ public final class Repository implements IRepository{
 
     @Override
     public <T extends IBaseEntity> void mutateData(T thatBaseEntity) {
-        IBaseEntity entity = queryDataWithID(thatBaseEntity.getID(), thatBaseEntity.getClass());
         List<IBaseEntity> entityList = getList(thatBaseEntity.getClass());
         entityList.removeIf((thisBaseEntity) -> thisBaseEntity.getID().equals(thatBaseEntity.getID()));
         entityList.add(thatBaseEntity);
