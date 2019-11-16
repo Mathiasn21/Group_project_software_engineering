@@ -10,5 +10,21 @@
   {
     "ID": "83ed73df-7ab6-4bc1-b193-c16c2cdd63ee",
     "USERNAME": "Organizer"
+  },
+  {
+    "ID": "e4e0939e-af92-47e4-86e8-6fa64324cc11",
+    "USERNAME": "Organizer"
+  },
+  {
+    "ID": "b1b1e0fb-9f8d-4dc1-8775-3bceeda9760e",
+    "USERNAME": "ProtoUser"
+  },
+  {
+    "ID": "edbbbe0a-468b-4943-86bb-682936015acf",
+    "USERNAME": "ProtoUser"
+  },
+  {
+    "ID": "e4e0939e-af92-47e4-86e8-6fa64324cc11",
+    "USERNAME": "ProtoUser"
   }
 ]

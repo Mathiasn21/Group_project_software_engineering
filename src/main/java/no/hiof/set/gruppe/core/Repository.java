@@ -40,10 +40,6 @@ public final class Repository implements IRepository{
     // --------------------------------------------------//
     //                2.Static Fields                    //
     // --------------------------------------------------//
-    private static List<Arrangement> listOfAllArrangements;
-    private static List<Group> listOfAllGroups;
-    private static List<UserConnectedArrangement> listOfAllUserConnectedArrangements;
-
     private static final IHandleData handleData = new HandleDataStorage();
     private static final Map<Class<? extends IBaseEntity>, List<? extends IBaseEntity>> objectMappedToList = new ArrayMap<>();
     private static final Map<Class<? extends IBaseEntity>, Class<? extends EntityConnectedToUser>> baseEntityMappedToEntity = new ArrayMap<>();
@@ -51,13 +47,15 @@ public final class Repository implements IRepository{
     //Preload data.
     static{
         try{
-            listOfAllArrangements = queryDataGivenType(Arrangement.class);
-            listOfAllUserConnectedArrangements = queryDataGivenType(UserConnectedArrangement.class);
-            listOfAllGroups = queryDataGivenType(Group.class);
+            List<DummyUsers> listOfDummyusers = Arrays.asList(DummyUsers.values());
+            List<Arrangement> listOfAllArrangements = queryDataGivenType(Arrangement.class);
+            List<UserConnectedArrangement> listOfAllUserConnectedArrangements = queryDataGivenType(UserConnectedArrangement.class);
+            List<Group> listOfAllGroups = queryDataGivenType(Group.class);
 
             objectMappedToList.put(Arrangement.class, listOfAllArrangements);
             objectMappedToList.put(UserConnectedArrangement.class, listOfAllUserConnectedArrangements);
             objectMappedToList.put(Group.class, listOfAllGroups);
+            objectMappedToList.put(DummyUsers.class, listOfDummyusers);
             baseEntityMappedToEntity.put(Arrangement.class, UserConnectedArrangement.class);
 
         }catch (IOException | DataFormatException e){

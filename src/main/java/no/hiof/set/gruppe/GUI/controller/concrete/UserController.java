@@ -134,7 +134,7 @@ public class UserController extends Controller {
         myObservableArrangements.add(currentAvailableArrangement);
 
         try {
-            repository.insertUserToArrangement(currentAvailableArrangement, ProtoUser.USER);
+            repository.insertUserRelationToData(currentAvailableArrangement, ProtoUser.USER);
         } catch (DataFormatException illegalDataAccess) {
             try { ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_ACCESSING_DATA, illegalDataAccess); }
             catch (IOException e) {e.printStackTrace();}
@@ -153,7 +153,7 @@ public class UserController extends Controller {
         availableObservableArrangements.add(currentSelectedMyArrangement);
 
         try {
-            repository.deleteUserFromArrangement(currentSelectedMyArrangement, ProtoUser.USER);
+            repository.deleteUserConnectionToData(currentSelectedMyArrangement, ProtoUser.USER);
         } catch (DataFormatException illegalDataAccess) {
             try { ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_ACCESSING_DATA, illegalDataAccess); }
             catch (IOException e) {e.printStackTrace();}
@@ -279,8 +279,8 @@ public class UserController extends Controller {
     // --------------------------------------------------//
 
     private void setArrangementListInformation() {
-        List<Arrangement> allArrang = repository.queryAllArrangements();
-        List<Arrangement> userConnectedArrangements = repository.queryAllUserRelatedArrangements(ProtoUser.USER);
+        List<Arrangement> allArrang = repository.queryAllDataOfGivenType(Arrangement.class);
+        List<Arrangement> userConnectedArrangements = repository.queryAllEntityConnectedToUserData(Arrangement.class, ProtoUser.USER);
 
         allArrang.removeAll(userConnectedArrangements);
         allArrang.removeIf((arrangement) -> DateTest.TestExpired.execute(arrangement.getStartDate(), arrangement.getEndDate()));

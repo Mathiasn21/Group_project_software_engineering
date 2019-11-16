@@ -150,7 +150,7 @@ public class OrganizerController extends ControllerTransferData {
         if(listView.getSelectionModel().getSelectedItem() == null) return;
         Arrangement selectedItem = listView.getSelectionModel().getSelectedItem();
         try {
-            repository.deleteArrangement(selectedItem, PROTO_USER);
+            repository.deleteData(selectedItem, PROTO_USER);
             arrangementListObservable.remove(selectedItem);
             listView.getSelectionModel().selectFirst();
             clearFields();
@@ -246,7 +246,7 @@ public class OrganizerController extends ControllerTransferData {
     }
 
     private void populateListView() {
-        arrangementListObservable = FXCollections.observableArrayList(repository.queryAllUserRelatedArrangements(ProtoUser.ORGANIZER));
+        arrangementListObservable = FXCollections.observableArrayList(repository.queryAllEntityConnectedToUserData(Arrangement.class, ProtoUser.ORGANIZER));
         arrangementListObservable.sort(ArrangementSort.COMP_DATE_ASC.getComparator());
         setupFilteredList();
         listView.refresh();
@@ -295,7 +295,7 @@ public class OrganizerController extends ControllerTransferData {
 
         MultipleSelectionModel selModel = listView.getSelectionModel();
         try {
-            repository.insertArrangement(arrangement, ProtoUser.ORGANIZER);
+            repository.insertData(arrangement, ProtoUser.ORGANIZER);
             arrangementListObservable.add(arrangement);
 
         } catch (IllegalDataAccess illegalDataAccess) {

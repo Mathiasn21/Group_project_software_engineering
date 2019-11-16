@@ -121,7 +121,7 @@ public class NewAlterArrangementController extends ControllerTransferData {
     }
 
     private void queryArrangement(){
-        try {if(!createdNewObject)repository.mutateObject(arrangementToEdit);
+        try {if(!createdNewObject)repository.mutateData(arrangementToEdit);
         } catch (DataFormatException e) {
             Throwable throwable = e;
             try { ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_ACCESSING_DATA, e);

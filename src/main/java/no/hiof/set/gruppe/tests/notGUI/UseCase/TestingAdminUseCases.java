@@ -57,7 +57,7 @@ class TestingAdminUseCases {
     void addArrangement() throws IllegalDataAccess, DataFormatException {
         List<Arrangement> expectedArrangementList = repository.queryAllEntityConnectedToUserData(Arrangement.class, PROTO_USER_ORGANIZER);
         expectedArrangementList.add(arrangement);
-        repository.insertArrangement(arrangement, PROTO_USER_ORGANIZER);
+        repository.insertData(arrangement, PROTO_USER_ORGANIZER);
 
         assertDataIntegrity(expectedArrangementList, repository.queryAllEntityConnectedToUserData(Arrangement.class, PROTO_USER_ORGANIZER));
     }

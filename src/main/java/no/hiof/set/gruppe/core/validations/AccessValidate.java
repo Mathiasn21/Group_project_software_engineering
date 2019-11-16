@@ -26,31 +26,12 @@ public final class AccessValidate {
     // --------------------------------------------------//
     //                2.Validations Methods              //
     // --------------------------------------------------//
-    /**
-     * @param arrangement {@link Arrangement}
-     * @param protoUser {@link ProtoUser}
-     * @return boolean
-     */
-    @Contract(pure = true)
-    public static boolean userCanModifyArrangement(@NotNull Arrangement arrangement, @NotNull ProtoUser protoUser){
-        return (protoUser == ProtoUser.ORGANIZER && repository.queryAllUserRelatedArrangements(protoUser).contains(arrangement)) || protoUser == ProtoUser.ADMIN;
-    }
-
-    /**
-     * @param protoUser {@link ProtoUser}
-     * @return boolean
-     */
-    @Contract(pure = true)
-    public static boolean userCanCreateArrangement(@NotNull ProtoUser protoUser){
-        return protoUser == ProtoUser.ORGANIZER || protoUser == ProtoUser.ADMIN;
-    }
-
     public static <T extends IBaseEntity, E extends IUser> boolean ThatUserCanModifyBaseEntity(T baseEntity, E user) {
         return (user == ProtoUser.ORGANIZER && repository.queryAllEntityConnectedToUserData(baseEntity.getClass(), user).contains(baseEntity))
                 || user == ProtoUser.ADMIN;
     }
 
-    public static <T extends IBaseEntity, E extends IUser> boolean ThatUserCanCreateNewBaseEntity(E user) {
+    public static <E extends IUser> boolean ThatUserCanCreateNewBaseEntity(E user) {
         return user == ProtoUser.ORGANIZER || user == ProtoUser.ADMIN;
     }
 }

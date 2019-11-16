@@ -132,7 +132,7 @@ public class AdminController extends ControllerTransferData {
 
     private void deleteArrangement(){
         try {
-            repository.deleteArrangement(currentArrangement, ProtoUser.ADMIN);
+            repository.deleteData(currentArrangement, ProtoUser.ADMIN);
             arrangementListObservable.remove(currentArrangement);
             arrangementListView.refresh();
             clearFields();
@@ -202,7 +202,7 @@ public class AdminController extends ControllerTransferData {
     }
 
     private void populateListView(){
-        arrangementListObservable = FXCollections.observableArrayList(repository.queryAllArrangements());
+        arrangementListObservable = FXCollections.observableArrayList(repository.queryAllDataOfGivenType(Arrangement.class));
     }
 
     private void setupFilteredListView(){

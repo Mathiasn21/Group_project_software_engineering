@@ -29,9 +29,11 @@ import no.hiof.set.gruppe.GUI.controller.abstractions.ControllerTransferData;
 import no.hiof.set.gruppe.core.Repository;
 import no.hiof.set.gruppe.core.exceptions.DataFormatException;
 import no.hiof.set.gruppe.core.exceptions.ErrorExceptionHandler;
+import no.hiof.set.gruppe.core.exceptions.IllegalDataAccess;
 import no.hiof.set.gruppe.model.Group;
 import no.hiof.set.gruppe.GUI.model.ViewInformation;
 import no.hiof.set.gruppe.model.constantInformation.DummyUsers;
+import no.hiof.set.gruppe.model.user.ProtoUser;
 
 import java.io.IOException;
 import java.net.URL;
@@ -122,11 +124,11 @@ public class GroupController extends ControllerTransferData {
     private void deleteGroup(){
         Group selectedItem = groupsListview.getSelectionModel().getSelectedItem();
         try {
-            repository.deleteGroup(selectedItem);
+            repository.deleteData(selectedItem, ProtoUser.USER);
             groupsList.remove(selectedItem);
             clearFields();
             changedView();
-        } catch (DataFormatException illegalDataAccess) {
+        } catch (DataFormatException | IllegalDataAccess illegalDataAccess) {
             try { ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_ACCESSING_DATA, illegalDataAccess); }
             catch (IOException e) {e.printStackTrace();}
             createAlert(ErrorExceptionHandler.ERROR_ACCESSING_DATA);
@@ -178,7 +180,7 @@ public class GroupController extends ControllerTransferData {
     }
 
     private void populateListView(){
-        groupsList = FXCollections.observableArrayList(repository.queryAllGroups());
+        groupsList = FXCollections.observableArrayList(repository.queryAllDataOfGivenType(Group.class));
         groupsListview.setItems(groupsList);
     }
 
@@ -229,10 +231,10 @@ public class GroupController extends ControllerTransferData {
         SelectionModel model = groupsListview.getSelectionModel();
 
         try {
-            repository.insertGroup(group);
+            repository.insertData(group, ProtoUser.USER);
             groupsList.add(group);
 
-        } catch (IllegalAccessError illegalAccessError) {
+        } catch (IllegalAccessError | IllegalDataAccess illegalAccessError) {
             try{ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_ACCESSING_DATA, illegalAccessError);}
             catch (IOException e) {e.printStackTrace();}
             Controller.createAlert(ErrorExceptionHandler.ERROR_ACCESSING_DATA);
