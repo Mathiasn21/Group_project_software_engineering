@@ -8,13 +8,10 @@ package no.hiof.set.gruppe.core.validations;
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
-import no.hiof.set.gruppe.core.IBaseEntity;
-import no.hiof.set.gruppe.core.Repository;
-import no.hiof.set.gruppe.model.Arrangement;
+import no.hiof.set.gruppe.core.repository.IBaseEntity;
+import no.hiof.set.gruppe.core.repository.Repository;
 import no.hiof.set.gruppe.model.user.IUser;
 import no.hiof.set.gruppe.model.user.ProtoUser;
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * A class containing methods for testing user

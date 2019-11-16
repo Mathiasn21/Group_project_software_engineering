@@ -3,7 +3,7 @@ package no.hiof.set.gruppe.data;
 import com.google.api.client.util.ArrayMap;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import no.hiof.set.gruppe.core.IBaseEntity;
+import no.hiof.set.gruppe.core.repository.IBaseEntity;
 import no.hiof.set.gruppe.core.exceptions.DataFormatException;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.Group;

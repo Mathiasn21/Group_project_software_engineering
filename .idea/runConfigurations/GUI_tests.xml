@@ -15,7 +15,7 @@
         <option name="ENABLED" value="true" />
       </pattern>
       <pattern>
-        <option name="PATTERN" value="no.hiof.set.gruppe.core.*" />
+        <option name="PATTERN" value="no.hiof.set.gruppe.core.repository.*" />
         <option name="ENABLED" value="true" />
       </pattern>
       <pattern>

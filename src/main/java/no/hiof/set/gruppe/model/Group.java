@@ -13,7 +13,7 @@ package no.hiof.set.gruppe.model;
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
-import no.hiof.set.gruppe.core.IBaseEntity;
+import no.hiof.set.gruppe.core.repository.IBaseEntity;
 import no.hiof.set.gruppe.model.constantInformation.DummyUsers;
 
 import java.util.ArrayList;

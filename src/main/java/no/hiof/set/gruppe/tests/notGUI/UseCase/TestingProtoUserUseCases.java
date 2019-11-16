@@ -9,7 +9,7 @@ package no.hiof.set.gruppe.tests.notGUI.UseCase;
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
-import no.hiof.set.gruppe.core.Repository;
+import no.hiof.set.gruppe.core.repository.Repository;
 import no.hiof.set.gruppe.core.exceptions.DataFormatException;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.user.ProtoUser;
