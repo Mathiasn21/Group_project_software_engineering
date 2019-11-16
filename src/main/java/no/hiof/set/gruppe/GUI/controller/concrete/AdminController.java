@@ -30,6 +30,7 @@ import no.hiof.set.gruppe.GUI.controller.abstractions.ControllerTransferData;
 import no.hiof.set.gruppe.core.exceptions.DataFormatException;
 import no.hiof.set.gruppe.core.exceptions.ErrorExceptionHandler;
 import no.hiof.set.gruppe.core.exceptions.IllegalDataAccess;
+import no.hiof.set.gruppe.core.repository.IRepository;
 import no.hiof.set.gruppe.core.repository.Repository;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.GUI.model.ViewInformation;
@@ -72,7 +73,7 @@ public class AdminController extends ControllerTransferData {
     private ObservableList<Arrangement> arrangementListObservable;
     private Text[] textFields;
     private FilteredList<Arrangement> filteredArrangements;
-    private final Repository repository = new Repository();
+    private final IRepository repository = new Repository();
 
     // --------------------------------------------------//
     //                4.On action Methods                //

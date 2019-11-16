@@ -9,6 +9,7 @@ package no.hiof.set.gruppe.tests.notGUI.UseCase;
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
+import no.hiof.set.gruppe.core.repository.IRepository;
 import no.hiof.set.gruppe.core.repository.Repository;
 import no.hiof.set.gruppe.core.exceptions.DataFormatException;
 import no.hiof.set.gruppe.model.Arrangement;
@@ -34,7 +35,7 @@ class TestingProtoUserUseCases {
     private static final List<Arrangement> userArrangements;
     private static final List<Arrangement> notUserArrangements;
     private static Arrangement arrangementToTest;
-    private static final Repository repository = new Repository();
+    private static final IRepository repository = new Repository();
 
 
     //setup

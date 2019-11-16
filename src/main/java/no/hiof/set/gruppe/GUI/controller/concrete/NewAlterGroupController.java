@@ -23,6 +23,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import no.hiof.set.gruppe.GUI.controller.abstractions.ControllerTransferData;
+import no.hiof.set.gruppe.core.repository.IRepository;
 import no.hiof.set.gruppe.core.repository.Repository;
 import no.hiof.set.gruppe.core.exceptions.DataFormatException;
 import no.hiof.set.gruppe.core.exceptions.ErrorExceptionHandler;
@@ -66,7 +67,7 @@ public class NewAlterGroupController extends ControllerTransferData {
     private String grName;
     private ArrayList<DummyUsers>members;
     private boolean createdNewGroup = false;
-    private final Repository repository = new Repository();
+    private final IRepository repository = new Repository();
 
 
     // --------------------------------------------------//

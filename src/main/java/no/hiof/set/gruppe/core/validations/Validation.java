@@ -10,6 +10,7 @@ package no.hiof.set.gruppe.core.validations;
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
+import no.hiof.set.gruppe.core.repository.IRepository;
 import no.hiof.set.gruppe.core.repository.Repository;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.Group;
@@ -36,7 +37,7 @@ public class Validation{
 
     private static final int maxNameL = 50;
     private static final int minNameL = 2;
-    private static final Repository repository = new Repository();
+    private static final IRepository repository = new Repository();
 
 
     // --------------------------------------------------//

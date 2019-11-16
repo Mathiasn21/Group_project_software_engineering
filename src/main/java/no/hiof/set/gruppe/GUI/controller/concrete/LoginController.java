@@ -23,6 +23,7 @@ import javafx.scene.control.TextField;
 import no.hiof.set.gruppe.core.exceptions.ErrorExceptionHandler;
 import no.hiof.set.gruppe.core.exceptions.InvalidLoginInformation;
 import no.hiof.set.gruppe.GUI.controller.abstractions.Controller;
+import no.hiof.set.gruppe.core.repository.IRepository;
 import no.hiof.set.gruppe.core.repository.Repository;
 import no.hiof.set.gruppe.GUI.model.ViewInformation;
 import no.hiof.set.gruppe.model.user.LoginInformation;
@@ -56,7 +57,7 @@ public class LoginController extends Controller {
 
     private String name = "";
     private String title = "";
-    private final Repository repository = new Repository();
+    private final IRepository repository = new Repository();
 
     // --------------------------------------------------//
     //                4.On action Methods                //

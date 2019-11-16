@@ -25,6 +25,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import no.hiof.set.gruppe.core.exceptions.DataFormatException;
 import no.hiof.set.gruppe.GUI.controller.abstractions.Controller;
+import no.hiof.set.gruppe.core.repository.IRepository;
 import no.hiof.set.gruppe.core.repository.Repository;
 import no.hiof.set.gruppe.core.exceptions.ErrorExceptionHandler;
 import no.hiof.set.gruppe.model.Arrangement;
@@ -76,7 +77,7 @@ public class UserController extends Controller {
     private Arrangement currentSelectedArrangement;
     private final ToggleGroup radioBtns = new ToggleGroup();
     private Text[] allTextFields;
-    private final Repository repository = new Repository();
+    private final IRepository repository = new Repository();
 
     // --------------------------------------------------//
     //                4.On Action Methods                //

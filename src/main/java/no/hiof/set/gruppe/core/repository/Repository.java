@@ -146,6 +146,7 @@ public final class Repository implements IRepository{
     }
 
     @Contract(pure = true)
+    @Override
     public void insertNewUser(RawUser rawUser)throws UnableToRegisterUser{
         ValidationResult result = Validation.ofNewUser(rawUser);
         if(!result.IS_VALID)throw new UnableToRegisterUser(result);
@@ -222,6 +223,7 @@ public final class Repository implements IRepository{
     }
 
     @NotNull
+    @Override
     public ProtoUser queryUserDetailsWith(@NotNull ILoginInformation loginInformation) throws InvalidLoginInformation {
         String userID = loginInformation.getUserID();
         String passHash = loginInformation.getPassHash();
@@ -238,8 +240,10 @@ public final class Repository implements IRepository{
      * @return boolean
      */
     @Contract(pure = true)
+    @Override
     public boolean queryAddress(@NotNull String streetAddress) {return false;}
 
     @Contract(pure = true)
+    @Override
     public boolean queryEmailExists(String email) {return false;}
 }

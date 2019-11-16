@@ -11,6 +11,7 @@ package no.hiof.set.gruppe.tests.notGUI.UseCase;
 // --------------------------------------------------//
 import no.hiof.set.gruppe.core.exceptions.DataFormatException;
 import no.hiof.set.gruppe.core.exceptions.IllegalDataAccess;
+import no.hiof.set.gruppe.core.repository.IRepository;
 import no.hiof.set.gruppe.core.repository.Repository;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.user.ProtoUser;
@@ -34,7 +35,7 @@ class TestingAdminUseCases {
     // --------------------------------------------------//
     private static final ProtoUser PROTO_USER_ADMIN = ProtoUser.ADMIN;
     private static final ProtoUser PROTO_USER_ORGANIZER = ProtoUser.ORGANIZER;
-    private static final Repository repository = new Repository();
+    private static final IRepository repository = new Repository();
     private static final Arrangement arrangement = new Arrangement(
             "Bernts Fantastiske Test",
             "Annet",

@@ -26,6 +26,7 @@ import javafx.scene.text.Text;
 import no.hiof.set.gruppe.GUI.controller.abstractions.Controller;
 import no.hiof.set.gruppe.GUI.controller.abstractions.ControllerTransferData;
 import no.hiof.set.gruppe.GUI.model.ViewInformation;
+import no.hiof.set.gruppe.core.repository.IRepository;
 import no.hiof.set.gruppe.core.repository.Repository;
 import no.hiof.set.gruppe.core.exceptions.DataFormatException;
 import no.hiof.set.gruppe.core.exceptions.ErrorExceptionHandler;
@@ -76,7 +77,7 @@ public class OrganizerController extends ControllerTransferData {
     private FilteredList<Arrangement> filteredList;
     private Arrangement currentArrangement = null;
     private static final ProtoUser PROTO_USER = ProtoUser.ORGANIZER;
-    private final Repository repository = new Repository();
+    private final IRepository repository = new Repository();
     private Text[] allTextFields;
 
     // --------------------------------------------------//

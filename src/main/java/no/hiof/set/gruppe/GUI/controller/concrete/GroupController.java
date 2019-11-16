@@ -26,6 +26,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import no.hiof.set.gruppe.GUI.controller.abstractions.Controller;
 import no.hiof.set.gruppe.GUI.controller.abstractions.ControllerTransferData;
+import no.hiof.set.gruppe.core.repository.IRepository;
 import no.hiof.set.gruppe.core.repository.Repository;
 import no.hiof.set.gruppe.core.exceptions.DataFormatException;
 import no.hiof.set.gruppe.core.exceptions.ErrorExceptionHandler;
@@ -67,7 +68,7 @@ public class GroupController extends ControllerTransferData {
     private String name = "";
     private ObservableList<Group> groupsList;
     private Group selectedGroup = null;
-    private final Repository repository = new Repository();
+    private final IRepository repository = new Repository();
 
 
     // --------------------------------------------------//

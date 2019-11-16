@@ -9,6 +9,7 @@ package no.hiof.set.gruppe.core.validations;
 //                1.Import Statements                //
 // --------------------------------------------------//
 import no.hiof.set.gruppe.core.repository.IBaseEntity;
+import no.hiof.set.gruppe.core.repository.IRepository;
 import no.hiof.set.gruppe.core.repository.Repository;
 import no.hiof.set.gruppe.model.user.IUser;
 import no.hiof.set.gruppe.model.user.ProtoUser;
@@ -19,7 +20,7 @@ import no.hiof.set.gruppe.model.user.ProtoUser;
  */
 public final class AccessValidate {
 
-    private static final Repository repository = new Repository();
+    private static final IRepository repository = new Repository();
     // --------------------------------------------------//
     //                2.Validations Methods              //
     // --------------------------------------------------//

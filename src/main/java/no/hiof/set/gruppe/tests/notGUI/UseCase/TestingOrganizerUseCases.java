@@ -11,6 +11,7 @@ package no.hiof.set.gruppe.tests.notGUI.UseCase;
 // --------------------------------------------------//
 import no.hiof.set.gruppe.core.exceptions.DataFormatException;
 import no.hiof.set.gruppe.core.exceptions.IllegalDataAccess;
+import no.hiof.set.gruppe.core.repository.IRepository;
 import no.hiof.set.gruppe.core.repository.Repository;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.user.ProtoUser;
@@ -42,7 +43,7 @@ class TestingOrganizerUseCases {
             "2019-10-16",
             "Dette varer i hele 1 dager. Og, server null formål.");
     private static final ProtoUser PROTO_USER = ProtoUser.ORGANIZER;
-    private static final Repository repository = new Repository();
+    private static final IRepository repository = new Repository();
 
     // --------------------------------------------------//
     //                3.Unit Tests                       //

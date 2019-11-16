@@ -11,6 +11,7 @@ package no.hiof.set.gruppe.tests.notGUI.unitTesting;
 // --------------------------------------------------//
 import no.hiof.set.gruppe.core.exceptions.InvalidLoginInformation;
 import no.hiof.set.gruppe.core.exceptions.UnableToRegisterUser;
+import no.hiof.set.gruppe.core.repository.IRepository;
 import no.hiof.set.gruppe.core.repository.Repository;
 import no.hiof.set.gruppe.model.user.ILoginInformation;
 import no.hiof.set.gruppe.model.user.LoginInformation;
@@ -34,7 +35,7 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
  * as well as login access.
  */
 class TestAccessValidation {
-    private final Repository repository = new Repository();
+    private final IRepository repository = new Repository();
 
     // --------------------------------------------------//
     //                2.Unit Tests                       //
