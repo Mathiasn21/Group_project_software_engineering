@@ -48,7 +48,7 @@ class TestGroupValidationOf {
      * @param str String
      */
     @ParameterizedTest
-    @MethodSource("GenIllegalNameAndDates")
+    @MethodSource("GenIllegalNames")
     void IllegalInputNamesAndDates(String str) {
         Group group = new Group(str);
         assertFalse(Validation.ofGroup(group).IS_VALID);
@@ -63,7 +63,7 @@ class TestGroupValidationOf {
      */
     @NotNull
     @Contract(pure = true)
-    private static Stream<Arguments> GenIllegalNameAndDates() {
+    private static Stream<Arguments> GenIllegalNames() {
         return Stream.of(
                 arguments(""),
                 arguments("ss"),

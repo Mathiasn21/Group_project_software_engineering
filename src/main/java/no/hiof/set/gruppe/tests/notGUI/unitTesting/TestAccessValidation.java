@@ -42,9 +42,11 @@ class TestAccessValidation {
     // --------------------------------------------------//
     @Test
     void userLoginSuccess() throws InvalidLoginInformation {
-        ILoginInformation loginInformation = new LoginInformation("ProtoUser", "Password2");
-        ProtoUser protoUserDetails = repository.queryUserDetailsWith(loginInformation);
-        assertTrue(userEqualsLoginInformation(protoUserDetails, loginInformation));
+        for(ProtoUser user : ProtoUser.values()){
+            ILoginInformation loginInformation = new LoginInformation(user.getName(), user.getPass());
+            ProtoUser protoUserDetails = repository.queryUserDetailsWith(loginInformation);
+            assertTrue(userEqualsLoginInformation(protoUserDetails, loginInformation));
+        }
     }
 
     @Test
@@ -72,10 +74,25 @@ class TestAccessValidation {
     @NotNull
     @Contract(pure = true)
     private static Stream<Arguments> GenIllegalLoginInformation() {
+        String userPass = ProtoUser.USER.getPass();
+        String userName = ProtoUser.USER.getName();
         return Stream.of(
-                arguments(new LoginInformation("test", "soVerySafePass")),
+                arguments(new LoginInformation("\00", userPass)),
+                arguments(new LoginInformation("\00s", userPass)),
+                arguments(new LoginInformation("s\00", userPass)),
+                arguments(new LoginInformation("\00ssss", userPass)),
+                arguments(new LoginInformation("sssss\00", userPass)),
+                arguments(new LoginInformation("test", userPass)),
+                arguments(new LoginInformation(userName + "\00", userPass)),
+                arguments(new LoginInformation( "\00" + userName, userPass)),
                 arguments(new LoginInformation("\00", "\00")),
-                arguments(new LoginInformation("ProtoUser", "\00"))
+                arguments(new LoginInformation(userName, "\00sssss")),
+                arguments(new LoginInformation(userName, "sssss\00")),
+                arguments(new LoginInformation(userName, "\00s")),
+                arguments(new LoginInformation(userName, "s\00")),
+                arguments(new LoginInformation(userName, userPass + "\00")),
+                arguments(new LoginInformation(userName, "\00" + userPass)),
+                arguments(new LoginInformation(userName, "\00"))
         );
     }
 

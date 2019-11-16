@@ -35,7 +35,7 @@ class TestArrangementValidationOf {
      */
     @Test
     void LegalInput() {
-        Arrangement arrangement = new Arrangement("pez1","Annet",420,"Hakkebakkeskogen", false, LocalDate.of(2019,12,10).toString(), LocalDate.of(2019,12,11).toString(), "testdwa dawd aw");
+        Arrangement arrangement = new Arrangement("pez1","Annet",420,"Hakkebakkeskogen", false, LocalDate.now().plusDays(1).toString(), LocalDate.now().plusDays(1).toString(), "testdwa dawd aw");
         assertTrue(Validation.ofArrangement(arrangement).IS_VALID);
     }
 
