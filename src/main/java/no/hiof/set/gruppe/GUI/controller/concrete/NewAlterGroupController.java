@@ -22,6 +22,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 import no.hiof.set.gruppe.GUI.controller.abstractions.ControllerTransferData;
 import no.hiof.set.gruppe.core.interfaces.IRepository;
 import no.hiof.set.gruppe.core.repository.Repository;
@@ -54,13 +55,15 @@ public class NewAlterGroupController extends ControllerTransferData {
     private ListView<DummyUsers> availableMembers, chosenMembers;
     @FXML
     private Button addMember, removeMember, save, cancel;
+    @FXML
+    private Text viewTitle;
 
     // --------------------------------------------------//
     //                3.Local Fields                     //
     // --------------------------------------------------//
 
     private final String name = "NewAlterGroup.fxml";
-    private final String title = "Rediger";
+    private final String title = "Administrer gruppe";
     private ObservableList<DummyUsers>avaliableUsersObservableList, chosenUsersObservableList;
     private DummyUsers currentUser = null;
     private Group groupToEdit;
@@ -68,7 +71,6 @@ public class NewAlterGroupController extends ControllerTransferData {
     private ArrayList<DummyUsers>members;
     private boolean createdNewGroup = false;
     private final IRepository repository = new Repository();
-
 
     // --------------------------------------------------//
     //                4.On Action Methods                //
@@ -166,7 +168,7 @@ public class NewAlterGroupController extends ControllerTransferData {
 
     /**
      * Checks which List is clicked.
-     * @param o
+     * @param o ObservableList
      * @return boolean
      */
     private boolean checkIfRightList(ObservableList<DummyUsers> o) {
@@ -204,6 +206,10 @@ public class NewAlterGroupController extends ControllerTransferData {
         }
     }
 
+    private void openApplicationWindow(){
+        createNewView(this);
+    }
+
     // --------------------------------------------------//
     //                6.Private Setup Methods            //
     // --------------------------------------------------//
@@ -213,6 +219,7 @@ public class NewAlterGroupController extends ControllerTransferData {
         removeMember.setOnAction(this::onClickRemoveMember);
         save.setOnAction(this::onClickSave);
         cancel.setOnAction(this::onClickCancel);
+
         availableMembers.setOnMouseClicked(this::onClickAvailableMembers);
         chosenMembers.setOnMouseClicked(this::onClickChosenMembers);
     }
@@ -284,6 +291,7 @@ public class NewAlterGroupController extends ControllerTransferData {
     @Override
     public void setDataFields(Object object) {
         if(object instanceof Group){
+            viewTitle.setText("Rediger gruppe");
             Group group = (Group)object;
             groupToEdit = group;
             inputName.setText(group.getName());
