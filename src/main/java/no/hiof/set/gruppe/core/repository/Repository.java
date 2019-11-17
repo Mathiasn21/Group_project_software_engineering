@@ -22,7 +22,6 @@ import no.hiof.set.gruppe.core.exceptions.*;
 import no.hiof.set.gruppe.data.factory.DataFactory;
 import no.hiof.set.gruppe.data.factory.IFactory;
 import no.hiof.set.gruppe.model.Arrangement;
-import no.hiof.set.gruppe.model.Group;
 import no.hiof.set.gruppe.model.ValidationResult;
 import no.hiof.set.gruppe.model.constantInformation.DummyUsers;
 import no.hiof.set.gruppe.model.user.*;
@@ -101,7 +100,7 @@ public final class Repository implements IRepository {
         return (List<IBaseEntity>) objectMappedToList.get(thatBaseEntity);
     }
 
-    @SuppressWarnings("unchecked")//Safe duo to that the mapping explicitly state the type indirectly through the mappers
+    @SuppressWarnings("unchecked")//Safe due to that the mapping is explicitly stated indirectly through the mappers
     private <T extends IBaseEntity> List<EntityConnectedToUser> getDataConnectedToUsersList(Class<T> baseEntity) {
         Class<? extends EntityConnectedToUser> entity = baseEntityMappedToEntity.get(baseEntity);
         return (List<EntityConnectedToUser>) objectMappedToList.get(objectMappedToList.get(entity) == null ? baseEntity : entity);
