@@ -52,7 +52,7 @@ public class GroupController extends ControllerTransferData {
     // --------------------------------------------------//
 
     @FXML
-    private Button newGroupBtn, deleteBtn, editBtn;
+    private Button newGroupBtn, deleteBtn, editBtn, applicationBtn;
     @FXML
     private MenuItem myIndividualArrangementsBtn, logoutBtn;
     @FXML
@@ -69,7 +69,6 @@ public class GroupController extends ControllerTransferData {
     private ObservableList<Group> groupsList;
     private Group selectedGroup = null;
     private final IRepository repository = new Repository();
-
 
     // --------------------------------------------------//
     //                4.On Action Methods                //
@@ -109,6 +108,15 @@ public class GroupController extends ControllerTransferData {
      */
     private void onClickLogoutBtn(ActionEvent event) {
         switchView("Logg inn", "Login.fxml");
+    }
+
+    /**
+     * @param event {@link ActionEvent}
+     */
+    private void onClickCreateApplication(ActionEvent event){
+        name = "ClubApplication.fxml";
+        title = "Klubbsøknad";
+        createNewView(this);
     }
 
     /**
@@ -175,7 +183,7 @@ public class GroupController extends ControllerTransferData {
         deleteBtn.setOnAction(this::onClickDeletBtn);
         editBtn.setOnAction(this::onClickEditBtn);
         groupsListview.setOnMouseClicked(this::onClickGroupsListView);
-
+        applicationBtn.setOnAction(this::onClickCreateApplication);
         myIndividualArrangementsBtn.setOnAction(this::onClickMyIndividualArrangementsBtn);
         logoutBtn.setOnAction(this::onClickLogoutBtn);
     }

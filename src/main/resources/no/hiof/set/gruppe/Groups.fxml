@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="603.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="no.hiof.set.gruppe.GUI.controller.concrete.GroupController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="488.0" prefWidth="603.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="no.hiof.set.gruppe.GUI.controller.concrete.GroupController">
    <children>
       <ListView fx:id="groupsListview" layoutX="12.0" layoutY="94.0" prefHeight="275.0" prefWidth="191.0" />
       <Text layoutX="47.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mine grupper">
@@ -66,5 +66,7 @@
             <Font size="11.0" />
          </font>
       </Text>
+      <Text layoutX="12.0" layoutY="398.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tilhører gruppen din et idrettslag? Send søknad omgjøring til klubb her:" wrappingWidth="109.38042449951172" />
+      <Button fx:id="applicationBtn" layoutX="8.0" layoutY="453.0" mnemonicParsing="false" text="Opprett søknad" />
    </children>
 </AnchorPane>
