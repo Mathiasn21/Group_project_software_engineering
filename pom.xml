@@ -98,6 +98,16 @@
             <artifactId>google-api-client</artifactId>
             <version>1.4.1-beta</version>
         </dependency>
+        <dependency>
+            <groupId>org.reflections</groupId>
+            <artifactId>reflections</artifactId>
+            <version>0.9.11</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>28.1-jre</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

@@ -1,4 +1,4 @@
-package no.hiof.set.gruppe.model;
+package no.hiof.set.gruppe.core.interfaces;
 
 /**
  * Grab all data from a given data object. Formatted into an array

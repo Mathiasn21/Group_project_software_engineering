@@ -1,4 +1,4 @@
-package no.hiof.set.gruppe.model.user;
+package no.hiof.set.gruppe.core.interfaces;
 
 import org.jetbrains.annotations.NotNull;
 

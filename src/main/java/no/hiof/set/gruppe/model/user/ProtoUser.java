@@ -10,13 +10,14 @@ package no.hiof.set.gruppe.model.user;
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
+import no.hiof.set.gruppe.core.interfaces.IUser;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
 
 /**
  * An enum representing legal users. Just a dummy class
  */
-public enum ProtoUser implements IUser{
+public enum ProtoUser implements IUser {
     // --------------------------------------------------//
     //                2.Constants                        //
     // --------------------------------------------------//

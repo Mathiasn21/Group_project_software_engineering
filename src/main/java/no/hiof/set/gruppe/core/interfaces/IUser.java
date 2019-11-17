@@ -1,4 +1,4 @@
-package no.hiof.set.gruppe.model.user;
+package no.hiof.set.gruppe.core.interfaces;
 
 public interface IUser {
     String getName();

@@ -9,7 +9,7 @@ package no.hiof.set.gruppe.model.constantInformation;
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
-import no.hiof.set.gruppe.core.repository.IBaseEntity;
+import no.hiof.set.gruppe.core.interfaces.IBaseEntity;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 

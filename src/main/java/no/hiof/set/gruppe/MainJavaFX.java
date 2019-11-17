@@ -10,17 +10,18 @@ package no.hiof.set.gruppe;
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import no.hiof.set.gruppe.core.exceptions.DataFormatException;
-import no.hiof.set.gruppe.core.exceptions.ErrorExceptionHandler;
 import no.hiof.set.gruppe.GUI.controller.abstractions.Controller;
 import no.hiof.set.gruppe.GUI.controller.abstractions.IController;
 import no.hiof.set.gruppe.GUI.controller.abstractions.IControllerDataTransfer;
+import no.hiof.set.gruppe.core.exceptions.DataFormatException;
+import no.hiof.set.gruppe.core.exceptions.ErrorExceptionHandler;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -58,6 +59,7 @@ public class MainJavaFX extends Application implements SetupWindow {
         stage.setResizable(false);
         stage.setTitle("Logg inn");
         stage.show();
+
     }
 
 

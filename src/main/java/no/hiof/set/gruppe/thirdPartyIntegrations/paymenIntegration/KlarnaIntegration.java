@@ -4,6 +4,7 @@ import com.google.api.client.http.*;
 import com.google.api.client.testing.http.MockHttpTransport;
 import com.google.api.client.testing.http.MockLowLevelHttpRequest;
 import com.google.api.client.testing.http.MockLowLevelHttpResponse;
+import no.hiof.set.gruppe.core.interfaces.IPaymentIntegration;
 import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 

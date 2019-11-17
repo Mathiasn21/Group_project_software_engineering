@@ -9,7 +9,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import no.hiof.set.gruppe.core.exceptions.ErrorExceptionHandler;
 import no.hiof.set.gruppe.MainJavaFX;
-import no.hiof.set.gruppe.model.IGetAllDataStringArr;
+import no.hiof.set.gruppe.core.interfaces.IGetAllDataStringArr;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;

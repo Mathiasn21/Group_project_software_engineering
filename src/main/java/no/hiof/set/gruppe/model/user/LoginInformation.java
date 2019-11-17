@@ -9,6 +9,7 @@ package no.hiof.set.gruppe.model.user;
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
+import no.hiof.set.gruppe.core.interfaces.ILoginInformation;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 

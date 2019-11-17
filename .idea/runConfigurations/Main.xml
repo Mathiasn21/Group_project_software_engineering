@@ -4,7 +4,7 @@
     <module name="gruppe" />
     <extension name="coverage">
       <pattern>
-        <option name="PATTERN" value="no.hiof.set.gruppe.core.repository.*" />
+        <option name="PATTERN" value="no.hiof.set.gruppe.core.interfaces.*" />
         <option name="ENABLED" value="true" />
       </pattern>
     </extension>

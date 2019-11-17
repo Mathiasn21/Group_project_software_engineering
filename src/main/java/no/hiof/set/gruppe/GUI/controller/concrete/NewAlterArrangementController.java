@@ -21,7 +21,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import no.hiof.set.gruppe.GUI.controller.abstractions.ControllerTransferData;
 import no.hiof.set.gruppe.GUI.model.ViewInformation;
-import no.hiof.set.gruppe.core.repository.IRepository;
+import no.hiof.set.gruppe.core.interfaces.IRepository;
 import no.hiof.set.gruppe.core.repository.Repository;
 import no.hiof.set.gruppe.core.exceptions.DataFormatException;
 import no.hiof.set.gruppe.core.exceptions.ErrorExceptionHandler;

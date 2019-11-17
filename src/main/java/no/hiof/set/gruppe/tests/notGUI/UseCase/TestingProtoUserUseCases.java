@@ -12,7 +12,7 @@ package no.hiof.set.gruppe.tests.notGUI.UseCase;
 
 import no.hiof.set.gruppe.core.exceptions.DataFormatException;
 import no.hiof.set.gruppe.core.exceptions.IllegalDataAccess;
-import no.hiof.set.gruppe.core.repository.IRepository;
+import no.hiof.set.gruppe.core.interfaces.IRepository;
 import no.hiof.set.gruppe.core.repository.Repository;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.Group;

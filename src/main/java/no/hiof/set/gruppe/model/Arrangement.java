@@ -12,7 +12,8 @@ package no.hiof.set.gruppe.model;
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
-import no.hiof.set.gruppe.core.repository.IBaseEntity;
+import no.hiof.set.gruppe.core.interfaces.IBaseEntity;
+import no.hiof.set.gruppe.core.interfaces.IGetAllDataStringArr;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
 

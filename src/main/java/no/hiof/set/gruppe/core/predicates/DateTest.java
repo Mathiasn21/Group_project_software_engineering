@@ -9,6 +9,7 @@ package no.hiof.set.gruppe.core.predicates;
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
+import no.hiof.set.gruppe.core.interfaces.DatePredicate;
 import org.jetbrains.annotations.Contract;
 
 import java.time.LocalDate;

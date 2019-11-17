@@ -8,7 +8,7 @@ package no.hiof.set.gruppe.tests.notGUI.thirdPartyIntegration;
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
-import no.hiof.set.gruppe.thirdPartyIntegrations.paymenIntegration.IPaymentIntegration;
+import no.hiof.set.gruppe.core.interfaces.IPaymentIntegration;
 import no.hiof.set.gruppe.thirdPartyIntegrations.paymenIntegration.KlarnaIntegration;
 import org.junit.jupiter.api.Test;
 import java.io.*;

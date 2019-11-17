@@ -7,7 +7,7 @@
         <option name="ENABLED" value="true" />
       </pattern>
       <pattern>
-        <option name="PATTERN" value="no.hiof.set.gruppe.model.*" />
+        <option name="PATTERN" value="no.hiof.set.gruppe.core.interfaces.*" />
         <option name="ENABLED" value="true" />
       </pattern>
       <pattern>

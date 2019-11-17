@@ -1,11 +1,9 @@
-package no.hiof.set.gruppe.core.repository;
+package no.hiof.set.gruppe.core.interfaces;
 
 import no.hiof.set.gruppe.core.exceptions.DataFormatException;
 import no.hiof.set.gruppe.core.exceptions.IllegalDataAccess;
 import no.hiof.set.gruppe.core.exceptions.InvalidLoginInformation;
 import no.hiof.set.gruppe.core.exceptions.UnableToRegisterUser;
-import no.hiof.set.gruppe.model.user.ILoginInformation;
-import no.hiof.set.gruppe.model.user.IUser;
 import no.hiof.set.gruppe.model.user.ProtoUser;
 import no.hiof.set.gruppe.model.user.RawUser;
 

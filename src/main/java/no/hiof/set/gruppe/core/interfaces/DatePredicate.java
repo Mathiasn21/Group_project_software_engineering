@@ -1,4 +1,4 @@
-package no.hiof.set.gruppe.core.predicates;
+package no.hiof.set.gruppe.core.interfaces;
 
 import java.time.LocalDate;
 

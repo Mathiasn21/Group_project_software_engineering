@@ -13,6 +13,7 @@ package no.hiof.set.gruppe.core.repository;
 //                1.Import Statements                //
 // --------------------------------------------------//
 import com.google.api.client.util.ArrayMap;
+import no.hiof.set.gruppe.core.interfaces.*;
 import no.hiof.set.gruppe.core.validations.AccessValidate;
 import no.hiof.set.gruppe.core.validations.Validation;
 import no.hiof.set.gruppe.data.HandleDataStorage;
@@ -35,7 +36,7 @@ import java.util.*;
  * Core Repository for interacting with data.
  * @author Gruppe4
  */
-public final class Repository implements IRepository{
+public final class Repository implements IRepository {
 
     // --------------------------------------------------//
     //                2.Static Fields                    //
