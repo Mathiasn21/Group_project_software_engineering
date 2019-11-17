@@ -210,10 +210,11 @@ public final class Repository implements IRepository {
     @Override
     @SuppressWarnings("unchecked")//only one possible return type here, as this is mapped from the start
     public <T extends IBaseEntity, E extends IUser> List<T> queryAllEntityConnectedToUserData(Class<T> aClass, E user) {
-        List<T> result = new ArrayList<>();
-        List<IBaseEntity> baseEntityList = getList(aClass);
         List<EntityConnectedToUser> dataConnectedToUsers = getDataConnectedToUsersList(aClass);
         if(dataConnectedToUsers == null)return new ArrayList<>();
+
+        List<T> result = new ArrayList<>();
+        List<IBaseEntity> baseEntityList = getList(aClass);
         String userName = user.getName();
 
         outer:for(IBaseEntity baseEntity : baseEntityList){
