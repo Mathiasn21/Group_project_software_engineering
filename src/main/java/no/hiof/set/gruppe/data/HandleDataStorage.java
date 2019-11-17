@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import no.hiof.set.gruppe.core.interfaces.IBaseEntity;
 import no.hiof.set.gruppe.core.exceptions.DataFormatException;
+import no.hiof.set.gruppe.core.interfaces.IHandleData;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.Group;
 import no.hiof.set.gruppe.model.user.UserConnectedArrangement;
@@ -18,7 +19,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-public class HandleDataStorage implements IHandleData{
+public class HandleDataStorage implements IHandleData {
     private static final Class<?>[] knownClasskeys = {Arrangement.class, UserConnectedArrangement.class, Group.class};
     private static final String[] knownDataFiles = {"arrangements.json", "userHasArrangements.json", "groups.json"};
     private static final Map<Class<?>, String> objectMapper = new ArrayMap<>();

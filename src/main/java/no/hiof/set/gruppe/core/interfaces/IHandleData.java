@@ -1,7 +1,7 @@
-package no.hiof.set.gruppe.data;
+package no.hiof.set.gruppe.core.interfaces;
 
-import no.hiof.set.gruppe.core.interfaces.IBaseEntity;
 import no.hiof.set.gruppe.core.exceptions.DataFormatException;
+
 import java.io.IOException;
 import java.util.List;
 

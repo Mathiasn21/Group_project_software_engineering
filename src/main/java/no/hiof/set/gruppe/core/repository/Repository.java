@@ -17,7 +17,7 @@ import no.hiof.set.gruppe.core.interfaces.*;
 import no.hiof.set.gruppe.core.validations.AccessValidate;
 import no.hiof.set.gruppe.core.validations.Validation;
 import no.hiof.set.gruppe.data.HandleDataStorage;
-import no.hiof.set.gruppe.data.IHandleData;
+import no.hiof.set.gruppe.core.interfaces.IHandleData;
 import no.hiof.set.gruppe.core.exceptions.*;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.Group;
