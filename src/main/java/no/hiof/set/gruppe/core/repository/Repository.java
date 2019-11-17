@@ -43,11 +43,11 @@ public final class Repository implements IRepository {
     //                2.Static Fields                    //
     // --------------------------------------------------//
     private static final IHandleData handleData = new HandleDataStorage();
+    private static final IFactory factory = new DataFactory();
     private static final Map<Class<? extends IBaseEntity>, List<? extends IBaseEntity>> objectMappedToList = new ArrayMap<>();
     private static final Map<Class<? extends IBaseEntity>, Class<? extends EntityConnectedToUser>> baseEntityMappedToEntity = new ArrayMap<>();
-    private static final IFactory factory = new DataFactory();
 
-    //Preload data.
+    //Setting up data related to each class, by mapping class to a list containing related data.
     static{
         try{
             Reflections reflections = new Reflections("no.hiof.set.gruppe.model");
