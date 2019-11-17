@@ -31,38 +31,5 @@
     "description": "Only for nerds, simple minded not allowed.",
     "participants": 400,
     "group": false
-  },
-  {
-    "ID": "5fb957ac-6774-4264-8bb7-68a0a1c6fb7a",
-    "name": "dwafae",
-    "sport": "Alle",
-    "address": "dwadwa",
-    "startDate": "2019-11-22",
-    "endDate": "2019-11-30",
-    "description": "dawdaw",
-    "participants": 22,
-    "group": true
-  },
-  {
-    "ID": "b1b1e0fb-9f8d-4dc1-8775-3bceeda9760e",
-    "name": "dasgrs",
-    "sport": "Alle",
-    "address": "dwadwa",
-    "startDate": "2019-11-29",
-    "endDate": "2019-11-30",
-    "description": "dwadwa",
-    "participants": 22,
-    "group": true
-  },
-  {
-    "ID": "e4e0939e-af92-47e4-86e8-6fa64324cc11",
-    "name": "fgesgesra",
-    "sport": "Alle",
-    "address": "dwadwa",
-    "startDate": "2019-11-23",
-    "endDate": "2019-11-30",
-    "description": "dwaefsfa",
-    "participants": 22,
-    "group": true
   }
 ]
