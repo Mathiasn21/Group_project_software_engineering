@@ -44,10 +44,16 @@ public class ClubApplicationController extends Controller {
     //                4.On Action Methods                //
     // --------------------------------------------------//
 
+    /**
+     * @param event {@link ActionEvent}
+     */
     private void onClickCancelBtn(ActionEvent event){
         closeWindow(cancelBtn);
     }
 
+    /**
+     * @param event {@link ActionEvent}
+     */
     private void onClickSendBtn(ActionEvent event){
         closeWindow(sendBtn);
     }
