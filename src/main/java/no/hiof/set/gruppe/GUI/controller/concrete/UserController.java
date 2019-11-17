@@ -23,20 +23,22 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
-import no.hiof.set.gruppe.core.exceptions.DataFormatException;
 import no.hiof.set.gruppe.GUI.controller.abstractions.Controller;
-import no.hiof.set.gruppe.core.interfaces.IRepository;
-import no.hiof.set.gruppe.core.repository.Repository;
-import no.hiof.set.gruppe.core.exceptions.ErrorExceptionHandler;
-import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.GUI.model.ViewInformation;
-import no.hiof.set.gruppe.model.constantInformation.SportCategory;
-import no.hiof.set.gruppe.model.user.ProtoUser;
-import no.hiof.set.gruppe.core.predicates.DateTest;
+import no.hiof.set.gruppe.core.infrastructure.exceptions.DataFormatException;
+import no.hiof.set.gruppe.core.infrastructure.exceptions.ErrorExceptionHandler;
+import no.hiof.set.gruppe.core.interfaces.IRepository;
+import no.hiof.set.gruppe.core.infrastructure.predicates.DateTest;
+import no.hiof.set.gruppe.core.infrastructure.repository.Repository;
+import no.hiof.set.gruppe.core.entities.Arrangement;
+import no.hiof.set.gruppe.core.entities.constantInformation.SportCategory;
+import no.hiof.set.gruppe.core.entities.user.ProtoUser;
 import org.jetbrains.annotations.NotNull;
+
 import java.io.IOException;
 import java.net.URL;
-import java.util.*;
+import java.util.List;
+import java.util.ResourceBundle;
 
 /**
  * This controller controls all functionality and logic pertaining

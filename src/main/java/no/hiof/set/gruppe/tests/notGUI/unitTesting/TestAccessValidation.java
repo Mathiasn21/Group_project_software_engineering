@@ -9,14 +9,15 @@ package no.hiof.set.gruppe.tests.notGUI.unitTesting;
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
-import no.hiof.set.gruppe.core.exceptions.InvalidLoginInformation;
-import no.hiof.set.gruppe.core.exceptions.UnableToRegisterUser;
-import no.hiof.set.gruppe.core.interfaces.IRepository;
-import no.hiof.set.gruppe.core.repository.Repository;
+
+import no.hiof.set.gruppe.core.infrastructure.exceptions.InvalidLoginInformation;
+import no.hiof.set.gruppe.core.infrastructure.exceptions.UnableToRegisterUser;
 import no.hiof.set.gruppe.core.interfaces.ILoginInformation;
-import no.hiof.set.gruppe.model.user.LoginInformation;
-import no.hiof.set.gruppe.model.user.ProtoUser;
-import no.hiof.set.gruppe.model.user.RawUser;
+import no.hiof.set.gruppe.core.interfaces.IRepository;
+import no.hiof.set.gruppe.core.infrastructure.repository.Repository;
+import no.hiof.set.gruppe.DTOs.LoginInformation;
+import no.hiof.set.gruppe.core.entities.user.ProtoUser;
+import no.hiof.set.gruppe.core.entities.user.RawUser;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;

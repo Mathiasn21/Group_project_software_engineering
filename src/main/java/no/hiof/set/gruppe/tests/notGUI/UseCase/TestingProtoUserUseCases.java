@@ -10,14 +10,14 @@ package no.hiof.set.gruppe.tests.notGUI.UseCase;
 //                1.Import Statements                //
 // --------------------------------------------------//
 
-import no.hiof.set.gruppe.core.exceptions.DataFormatException;
-import no.hiof.set.gruppe.core.exceptions.IllegalDataAccess;
+import no.hiof.set.gruppe.core.infrastructure.exceptions.DataFormatException;
+import no.hiof.set.gruppe.core.infrastructure.exceptions.IllegalDataAccess;
 import no.hiof.set.gruppe.core.interfaces.IRepository;
-import no.hiof.set.gruppe.core.repository.Repository;
-import no.hiof.set.gruppe.model.Arrangement;
-import no.hiof.set.gruppe.model.Group;
-import no.hiof.set.gruppe.model.constantInformation.DummyUsers;
-import no.hiof.set.gruppe.model.user.ProtoUser;
+import no.hiof.set.gruppe.core.infrastructure.repository.Repository;
+import no.hiof.set.gruppe.core.entities.Arrangement;
+import no.hiof.set.gruppe.core.entities.Group;
+import no.hiof.set.gruppe.core.entities.constantInformation.DummyUsers;
+import no.hiof.set.gruppe.core.entities.user.ProtoUser;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;

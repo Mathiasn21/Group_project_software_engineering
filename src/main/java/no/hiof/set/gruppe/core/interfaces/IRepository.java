@@ -1,11 +1,11 @@
 package no.hiof.set.gruppe.core.interfaces;
 
-import no.hiof.set.gruppe.core.exceptions.DataFormatException;
-import no.hiof.set.gruppe.core.exceptions.IllegalDataAccess;
-import no.hiof.set.gruppe.core.exceptions.InvalidLoginInformation;
-import no.hiof.set.gruppe.core.exceptions.UnableToRegisterUser;
-import no.hiof.set.gruppe.model.user.ProtoUser;
-import no.hiof.set.gruppe.model.user.RawUser;
+import no.hiof.set.gruppe.core.infrastructure.exceptions.DataFormatException;
+import no.hiof.set.gruppe.core.infrastructure.exceptions.IllegalDataAccess;
+import no.hiof.set.gruppe.core.infrastructure.exceptions.InvalidLoginInformation;
+import no.hiof.set.gruppe.core.infrastructure.exceptions.UnableToRegisterUser;
+import no.hiof.set.gruppe.core.entities.user.ProtoUser;
+import no.hiof.set.gruppe.core.entities.user.RawUser;
 
 import java.util.List;
 

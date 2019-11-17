@@ -1,7 +1,7 @@
 package no.hiof.set.gruppe.tests.notGUI.unitTesting;
 
-import no.hiof.set.gruppe.core.validations.Validation;
-import no.hiof.set.gruppe.model.Group;
+import no.hiof.set.gruppe.core.infrastructure.validations.Validation;
+import no.hiof.set.gruppe.core.entities.Group;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;

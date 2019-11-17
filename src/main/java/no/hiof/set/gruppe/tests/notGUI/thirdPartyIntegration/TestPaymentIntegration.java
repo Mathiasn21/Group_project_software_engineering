@@ -8,11 +8,17 @@ package no.hiof.set.gruppe.tests.notGUI.thirdPartyIntegration;
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
+
 import no.hiof.set.gruppe.core.interfaces.IPaymentIntegration;
 import no.hiof.set.gruppe.thirdPartyIntegrations.paymenIntegration.KlarnaIntegration;
 import org.junit.jupiter.api.Test;
-import java.io.*;
-import static org.junit.jupiter.api.Assertions.*;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TestPaymentIntegration {
 

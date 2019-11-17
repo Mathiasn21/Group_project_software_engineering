@@ -9,15 +9,18 @@ package no.hiof.set.gruppe.tests.notGUI.unitTesting;
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
-import no.hiof.set.gruppe.model.Arrangement;
-import no.hiof.set.gruppe.core.predicates.ArrangementSort;
-import no.hiof.set.gruppe.core.predicates.DateTest;
-import no.hiof.set.gruppe.core.validations.Validation;
+
+import no.hiof.set.gruppe.core.infrastructure.predicates.ArrangementSort;
+import no.hiof.set.gruppe.core.infrastructure.predicates.DateTest;
+import no.hiof.set.gruppe.core.infrastructure.validations.Validation;
+import no.hiof.set.gruppe.core.entities.Arrangement;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+
 import java.time.LocalDate;
 import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class TestSystemFunctionality {

@@ -14,6 +14,7 @@ package no.hiof.set.gruppe.GUI.controller.concrete;
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -27,14 +28,14 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import no.hiof.set.gruppe.GUI.controller.abstractions.Controller;
 import no.hiof.set.gruppe.GUI.controller.abstractions.ControllerTransferData;
-import no.hiof.set.gruppe.core.exceptions.DataFormatException;
-import no.hiof.set.gruppe.core.exceptions.ErrorExceptionHandler;
-import no.hiof.set.gruppe.core.exceptions.IllegalDataAccess;
-import no.hiof.set.gruppe.core.interfaces.IRepository;
-import no.hiof.set.gruppe.core.repository.Repository;
-import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.GUI.model.ViewInformation;
-import no.hiof.set.gruppe.model.user.ProtoUser;
+import no.hiof.set.gruppe.core.infrastructure.exceptions.DataFormatException;
+import no.hiof.set.gruppe.core.infrastructure.exceptions.ErrorExceptionHandler;
+import no.hiof.set.gruppe.core.infrastructure.exceptions.IllegalDataAccess;
+import no.hiof.set.gruppe.core.interfaces.IRepository;
+import no.hiof.set.gruppe.core.infrastructure.repository.Repository;
+import no.hiof.set.gruppe.core.entities.Arrangement;
+import no.hiof.set.gruppe.core.entities.user.ProtoUser;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;

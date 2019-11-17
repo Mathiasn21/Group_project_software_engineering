@@ -4,8 +4,8 @@ import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import no.hiof.set.gruppe.model.Arrangement;
-import no.hiof.set.gruppe.model.user.ProtoUser;
+import no.hiof.set.gruppe.core.entities.Arrangement;
+import no.hiof.set.gruppe.core.entities.user.ProtoUser;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,6 +13,7 @@ import org.testfx.api.FxRobot;
 import org.testfx.assertions.api.Assertions;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
+
 import java.io.IOException;
 import java.util.Set;
 

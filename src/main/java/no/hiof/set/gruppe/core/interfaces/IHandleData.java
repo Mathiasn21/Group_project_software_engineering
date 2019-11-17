@@ -1,6 +1,6 @@
 package no.hiof.set.gruppe.core.interfaces;
 
-import no.hiof.set.gruppe.core.exceptions.DataFormatException;
+import no.hiof.set.gruppe.core.infrastructure.exceptions.DataFormatException;
 
 import java.io.IOException;
 import java.util.List;

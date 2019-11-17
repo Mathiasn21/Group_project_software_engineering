@@ -9,8 +9,9 @@ package no.hiof.set.gruppe.tests.notGUI.unitTesting;
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
-import no.hiof.set.gruppe.core.validations.Validation;
-import no.hiof.set.gruppe.model.Arrangement;
+
+import no.hiof.set.gruppe.core.infrastructure.validations.Validation;
+import no.hiof.set.gruppe.core.entities.Arrangement;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
@@ -18,11 +19,12 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import static org.junit.Assert.*;
-import static org.junit.jupiter.params.provider.Arguments.arguments;
-
 import java.time.LocalDate;
 import java.util.stream.Stream;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class TestArrangementValidationOf {
 

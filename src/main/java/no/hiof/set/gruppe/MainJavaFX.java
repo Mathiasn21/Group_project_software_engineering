@@ -20,8 +20,8 @@ import javafx.stage.Stage;
 import no.hiof.set.gruppe.GUI.controller.abstractions.Controller;
 import no.hiof.set.gruppe.GUI.controller.abstractions.IController;
 import no.hiof.set.gruppe.GUI.controller.abstractions.IControllerDataTransfer;
-import no.hiof.set.gruppe.core.exceptions.DataFormatException;
-import no.hiof.set.gruppe.core.exceptions.ErrorExceptionHandler;
+import no.hiof.set.gruppe.core.infrastructure.exceptions.DataFormatException;
+import no.hiof.set.gruppe.core.infrastructure.exceptions.ErrorExceptionHandler;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;

@@ -1,7 +1,7 @@
 package no.hiof.set.gruppe.GUI.controller.abstractions;
 
-import no.hiof.set.gruppe.MainJavaFX;
 import no.hiof.set.gruppe.GUI.model.ViewInformation;
+import no.hiof.set.gruppe.MainJavaFX;
 
 /**
  * A contract that secures interaction with the {@link MainJavaFX} Controller.

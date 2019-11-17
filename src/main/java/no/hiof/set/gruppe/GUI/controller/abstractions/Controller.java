@@ -7,8 +7,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import no.hiof.set.gruppe.core.exceptions.ErrorExceptionHandler;
 import no.hiof.set.gruppe.MainJavaFX;
+import no.hiof.set.gruppe.core.infrastructure.exceptions.ErrorExceptionHandler;
 import no.hiof.set.gruppe.core.interfaces.IGetAllDataStringArr;
 import org.jetbrains.annotations.NotNull;
 
