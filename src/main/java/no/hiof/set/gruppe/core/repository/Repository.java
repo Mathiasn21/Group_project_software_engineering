@@ -26,6 +26,7 @@ import no.hiof.set.gruppe.model.constantInformation.DummyUsers;
 import no.hiof.set.gruppe.model.user.*;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import org.reflections.Reflections;
 
 import java.io.*;
 import java.lang.reflect.Constructor;
@@ -48,15 +49,16 @@ public final class Repository implements IRepository {
     //Preload data.
     static{
         try{
-            List<DummyUsers> listOfDummyUsers = Arrays.asList(DummyUsers.values());
-            List<Arrangement> listOfAllArrangements = queryDataGivenType(Arrangement.class);
-            List<UserConnectedArrangement> listOfAllUserConnectedArrangements = queryDataGivenType(UserConnectedArrangement.class);
-            List<Group> listOfAllGroups = queryDataGivenType(Group.class);
+            Reflections reflections = new Reflections("no.hiof.set.gruppe.model");
+            Set<Class<? extends IBaseEntity>> clazzes = reflections.getSubTypesOf(IBaseEntity.class);
+            List<Class<? extends IBaseEntity>> testList = new ArrayList<>(clazzes);
 
-            objectMappedToList.put(Arrangement.class, listOfAllArrangements);
-            objectMappedToList.put(UserConnectedArrangement.class, listOfAllUserConnectedArrangements);
-            objectMappedToList.put(Group.class, listOfAllGroups);
-            objectMappedToList.put(DummyUsers.class, listOfDummyUsers);
+            for(int i = 0; i < clazzes.size(); i++){
+                List<? extends IBaseEntity> list1 = queryDataGivenType(testList.get(i));
+                if(list1.size() == 0)continue;
+                objectMappedToList.put(testList.get(i), list1);
+            }
+            objectMappedToList.put(DummyUsers.class, Arrays.asList(DummyUsers.values()));
             baseEntityMappedToEntity.put(Arrangement.class, UserConnectedArrangement.class);
 
         }catch (IOException | DataFormatException e){

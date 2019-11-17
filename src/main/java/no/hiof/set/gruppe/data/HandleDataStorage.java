@@ -37,7 +37,9 @@ public class HandleDataStorage implements IHandleData {
 
     @Override
     public final <T> List<T> queryAllDataGivenType(Class<T> tClassArr) throws IOException {
-        String jsonFromFile = HandleDataStorage.readFromFile(objectMapper.get(tClassArr));
+        String fName = objectMapper.get(tClassArr);
+        if (fName == null)return new ArrayList<>();
+        String jsonFromFile = HandleDataStorage.readFromFile(fName);
         return new ArrayList<>(HandleDataStorage.listFromJson(tClassArr, jsonFromFile));
     }
 
