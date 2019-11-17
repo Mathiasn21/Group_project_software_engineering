@@ -6,14 +6,13 @@ import no.hiof.set.gruppe.data.factory.generators.GenData;
 import no.hiof.set.gruppe.data.factory.generators.GenGroups;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.Group;
-import no.hiof.set.gruppe.model.user.UserConnectedArrangement;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class DataFactory implements IFactory{
-    private static final Class<?>[] knownClasskeys = {Arrangement.class, UserConnectedArrangement.class, Group.class};
+    private static final Class<?>[] knownClasskeys = {Arrangement.class, Group.class};
     private static final GenData[] knownClassGenerators = {new GenArrangements(), new GenGroups()};
     private static final Map<Class<?>, GenData<?>> classMappedToClass = new ArrayMap<>();
     static {

@@ -19,6 +19,8 @@ import no.hiof.set.gruppe.core.validations.Validation;
 import no.hiof.set.gruppe.data.HandleDataStorage;
 import no.hiof.set.gruppe.core.interfaces.IHandleData;
 import no.hiof.set.gruppe.core.exceptions.*;
+import no.hiof.set.gruppe.data.factory.DataFactory;
+import no.hiof.set.gruppe.data.factory.IFactory;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.Group;
 import no.hiof.set.gruppe.model.ValidationResult;
@@ -45,18 +47,22 @@ public final class Repository implements IRepository {
     private static final IHandleData handleData = new HandleDataStorage();
     private static final Map<Class<? extends IBaseEntity>, List<? extends IBaseEntity>> objectMappedToList = new ArrayMap<>();
     private static final Map<Class<? extends IBaseEntity>, Class<? extends EntityConnectedToUser>> baseEntityMappedToEntity = new ArrayMap<>();
+    private static final IFactory factory = new DataFactory();
 
     //Preload data.
     static{
         try{
             Reflections reflections = new Reflections("no.hiof.set.gruppe.model");
             Set<Class<? extends IBaseEntity>> clazzes = reflections.getSubTypesOf(IBaseEntity.class);
-            List<Class<? extends IBaseEntity>> testList = new ArrayList<>(clazzes);
+            List<Class<? extends IBaseEntity>> listOfDataClasses = new ArrayList<>(clazzes);
 
-            for(int i = 0; i < clazzes.size(); i++){
-                List<? extends IBaseEntity> list1 = queryDataGivenType(testList.get(i));
-                if(list1.size() == 0)continue;
-                objectMappedToList.put(testList.get(i), list1);
+            for (Class<? extends IBaseEntity> aClass : listOfDataClasses) {
+                List<? extends IBaseEntity> list = queryDataGivenType(aClass);
+                if (list.size() == 0) {
+                    if (!factory.canGenerateFromClass(aClass)) continue;
+                    list = (queryGenDataGivenType(aClass));
+                }
+                objectMappedToList.put(aClass, list);
             }
             objectMappedToList.put(DummyUsers.class, Arrays.asList(DummyUsers.values()));
             baseEntityMappedToEntity.put(Arrangement.class, UserConnectedArrangement.class);
@@ -79,6 +85,15 @@ public final class Repository implements IRepository {
      */
     private static  <T> List<T> queryDataGivenType(Class<T> tClassArr) throws IOException, DataFormatException {
         return handleData.queryAllDataGivenType(tClassArr);
+    }
+
+    /**
+     * @param tClassArr T[].class
+     * @param <T> T
+     * @return List T
+     */
+    private static  <T> List<T> queryGenDataGivenType(Class<T> tClassArr) {
+        return factory.generateManyTypes(tClassArr, (int) (Math.random()*6));
     }
 
     @SuppressWarnings("unchecked")//objectMapper contains explicitly only List<IBaseEntity>
