@@ -114,9 +114,7 @@ public class GroupController extends ControllerTransferData {
      * @param event {@link ActionEvent}
      */
     private void onClickCreateApplication(ActionEvent event){
-        name = "ClubApplication.fxml";
-        title = "Klubbsøknad";
-        createNewView(this);
+        newApplication();
     }
 
     /**
@@ -161,6 +159,12 @@ public class GroupController extends ControllerTransferData {
         title = "Ny gruppe";
         name = "NewAlterGroup.fxml";
         createNewView(this, null);
+    }
+
+    private void newApplication(){
+        name = "ClubApplication.fxml";
+        title = "Klubbsøknad";
+        createNewView(this);
     }
 
     private void switchView(String newTitle, String newName){
