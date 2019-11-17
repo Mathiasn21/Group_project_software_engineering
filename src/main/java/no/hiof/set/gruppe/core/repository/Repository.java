@@ -23,7 +23,6 @@ import no.hiof.set.gruppe.data.factory.DataFactory;
 import no.hiof.set.gruppe.data.factory.IFactory;
 import no.hiof.set.gruppe.model.Arrangement;
 import no.hiof.set.gruppe.model.ValidationResult;
-import no.hiof.set.gruppe.model.constantInformation.DummyUsers;
 import no.hiof.set.gruppe.model.user.*;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -57,13 +56,13 @@ public final class Repository implements IRepository {
 
             for (Class<? extends IBaseEntity> aClass : listOfDataClasses) {
                 List<? extends IBaseEntity> list = queryDataGivenType(aClass);
+                if(aClass.isEnum())list = Arrays.asList(aClass.getEnumConstants());
                 if (list.size() == 0) {
                     if (!factory.canGenerateFromClass(aClass)) continue;
                     list = (queryGenDataGivenType(aClass));
                 }
                 objectMappedToList.put(aClass, list);
             }
-            objectMappedToList.put(DummyUsers.class, Arrays.asList(DummyUsers.values()));
             baseEntityMappedToEntity.put(Arrangement.class, UserConnectedArrangement.class);
 
         }catch (IOException | DataFormatException e){
