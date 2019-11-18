@@ -1,18 +1,16 @@
 package no.hiof.set.gruppe.tests.GUI.controller;
 
 import javafx.scene.Node;
-import javafx.scene.control.DateCell;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import no.hiof.set.gruppe.core.infrastructure.exceptions.DataFormatException;
-import no.hiof.set.gruppe.core.infrastructure.exceptions.IllegalDataAccess;
-import no.hiof.set.gruppe.core.interfaces.IRepository;
-import no.hiof.set.gruppe.core.infrastructure.repository.Repository;
 import no.hiof.set.gruppe.core.entities.Arrangement;
 import no.hiof.set.gruppe.core.entities.user.ProtoUser;
+import no.hiof.set.gruppe.core.infrastructure.exceptions.DataFormatException;
+import no.hiof.set.gruppe.core.infrastructure.exceptions.IllegalDataAccess;
+import no.hiof.set.gruppe.core.infrastructure.repository.Repository;
+import no.hiof.set.gruppe.core.interfaces.IRepository;
 import no.hiof.set.gruppe.tests.GUI.utils.ClickingUtils;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
@@ -21,8 +19,6 @@ import org.testfx.api.FxRobot;
 import org.testfx.assertions.api.Assertions;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
-import org.testfx.service.query.NodeQuery;
-import org.testfx.util.WaitForAsyncUtils;
 
 import java.io.IOException;
 import java.time.LocalDate;

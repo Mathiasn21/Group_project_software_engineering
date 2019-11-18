@@ -273,12 +273,13 @@ public class OrganizerController extends ControllerTransferData {
         populateSportCategories();
         liveSearchUpdate();
         setTextColors(false);
-        allTextFields = new Text[]{arrangementName, arrangementSport, arrangementAddress, arrangementDate, arrangementParticipants, arrangementGorI, arrangementDescription};
+        allTextFields = new Text[]{
+                arrangementName, arrangementSport, arrangementAddress, arrangementDate,
+                arrangementParticipants, arrangementGorI, arrangementDescription
+        };
     }
 
-    /**
-     * Refreshes the view
-     */
+
     @Override
     public void updateView(){
         if(currentArrangement == null)return;

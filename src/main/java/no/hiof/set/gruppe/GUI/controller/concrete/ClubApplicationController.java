@@ -38,9 +38,6 @@ public class ClubApplicationController extends Controller {
     //                3.Local Fields                     //
     // --------------------------------------------------//
 
-    private final String name = "ClubApplication.fxml";
-    private final String title = "Klubbsøknad";
-
     // --------------------------------------------------//
     //                4.On Action Methods                //
     // --------------------------------------------------//
@@ -90,5 +87,8 @@ public class ClubApplicationController extends Controller {
      * @return {@link ViewInformation}
      */
     @Override
-    public ViewInformation getViewInformation() { return new ViewInformation(name, title); }
+    public ViewInformation getViewInformation() {
+        String title = "Klubbsøknad";
+        String name = "ClubApplication.fxml";
+        return new ViewInformation(name, title); }
 }

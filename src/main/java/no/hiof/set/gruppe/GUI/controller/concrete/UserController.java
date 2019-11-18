@@ -84,6 +84,18 @@ public class UserController extends Controller {
     // --------------------------------------------------//
     //                4.On Action Methods                //
     // --------------------------------------------------//
+    /**
+     * @param event {@link ActionEvent}
+     */
+    private void sort(ActionEvent event){sortAndSearchAv();}
+
+    /**
+     * @param event {@link ActionEvent}
+     */
+    private void sortMy(ActionEvent event){
+        sortAndSearchMy();
+    }
+
 
     /**
      * @param actionEvent {@link ActionEvent}
@@ -231,7 +243,7 @@ public class UserController extends Controller {
      * @return boolean
      */
     private boolean categoryMatch(Arrangement arrangement) {
-        SportCategory category = availableSortingOptionsMy.getSelectionModel().getSelectedItem();
+        SportCategory category = sortingOptions.getSelectionModel().getSelectedItem();
         return category.equals(SportCategory.ALL) || arrangement.getSport().equals(category.toString());
     }
     /**
@@ -239,7 +251,7 @@ public class UserController extends Controller {
      * @return boolean
      */
     private boolean categoryMatchMy(Arrangement arrangement) {
-        SportCategory category = sortingOptions.getSelectionModel().getSelectedItem();
+        SportCategory category = availableSortingOptionsMy.getSelectionModel().getSelectedItem();
         return category.equals(SportCategory.ALL) || arrangement.getSport().equals(category.toString());
     }
 
@@ -312,6 +324,8 @@ public class UserController extends Controller {
         myArrangementsView.setOnMouseClicked(this::onClickMyView);
         searchMy.setOnAction(this::search);
         searchAv.setOnAction(this::searchOrg);
+        sortingOptions.setOnAction(this::sort);
+        availableSortingOptionsMy.setOnAction(this::sortMy);
         joinBtn.setOnAction(this::onClickJoin);
         leaveBtn.setOnAction(this::onClickLeave);
         logOut.setOnAction(this::onClickLogOut);

@@ -27,7 +27,7 @@ import java.util.regex.Pattern;
  * This class handles backend validation of various data classes.
  * @author Gruppe4
  */
-public class Validation{
+public final class Validation{
 
     // --------------------------------------------------//
     //                2.Static Constants                 //
@@ -77,9 +77,8 @@ public class Validation{
 
         String email = rawUser.geteMail();
         String passHash = rawUser.getPassHash();
-        LocalDate bDate;
 
-        try{bDate = LocalDate.parse(rawUser.getbDate());
+        try{LocalDate.parse(rawUser.getbDate());
         }catch (DateTimeParseException wrongDateFormat){res.append("ERROR, feil dato format.\n");}
 
         res.append(rawUser.getfName().length() <= maxLengthName && rawUser.getlName().length() <= maxLengthName ? "" : "Ulovlig langt navn\n");
