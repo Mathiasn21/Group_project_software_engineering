@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(ApplicationExtension.class)
-class GroupControllerTests extends MainJavaFXTest{
+class GroupController extends MainJavaFXTest{
 
     /**
      * @param stage {@link Stage}

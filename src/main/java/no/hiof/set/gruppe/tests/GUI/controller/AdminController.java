@@ -28,7 +28,7 @@ import java.time.LocalDate;
 import java.util.Set;
 
 @ExtendWith(ApplicationExtension.class)
-class AdminControllerTests extends MainJavaFXTest{
+class AdminController extends MainJavaFXTest{
 
     private Arrangement currentTestArrangement;
     private final IRepository repository = new Repository();

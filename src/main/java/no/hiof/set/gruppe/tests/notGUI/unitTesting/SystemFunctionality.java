@@ -23,7 +23,7 @@ import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class TestSystemFunctionality {
+class SystemFunctionality {
     // --------------------------------------------------//
     //                1.Import Statements                //
     // --------------------------------------------------//
@@ -41,11 +41,8 @@ class TestSystemFunctionality {
     //                2.Unit Tests                       //
     // --------------------------------------------------//
 
-    /**
-     * Used for testing that data that are used by the application does still exists
-     */
     @Test
-    void minimumDataExistsInArrangement(){
+    void assert_arrangement_has_requiredData(){
         String[] arrangementNeededData = {
                 arrangement.getName(),
                 arrangement.getSport(),
@@ -60,7 +57,7 @@ class TestSystemFunctionality {
     }
 
     @Test
-    void classDateLegal(){
+    void assert_DateTest_validates_legal_dates(){
         LocalDate date1 = LocalDate.now().minusDays(2);
         LocalDate date2 = LocalDate.now().minusDays(2);
         LocalDate date3 = LocalDate.now().minusDays(1);
@@ -74,7 +71,7 @@ class TestSystemFunctionality {
     }
 
     @Test
-    void classDateIllegal(){
+    void assert_DateTest_validates_illegal_dates(){
         LocalDate date1 = LocalDate.now().plusDays(1);
         LocalDate date2 = LocalDate.now().minusMonths(1).minusDays(1);
         LocalDate date3 = LocalDate.now().minusMonths(1);
@@ -86,7 +83,7 @@ class TestSystemFunctionality {
     }
 
     @Test
-    void arrangementListSorting(){
+    void assert_DateTest_validates_sorts_correct(){
         Arrangement arrangement1 = new Arrangement("a","Annet",101,"BergOgDalBaneVegen 46",false,"2019-10-15","2019-10-16","Formål1");
         Arrangement arrangement2 = new Arrangement("A","Sykkelritt",101,"BergOgDalBaneVegen 46",false,"2019-10-15","2019-10-16","Formål2");
         Arrangement arrangement3 = new Arrangement("B","Annet",99,"BergOgDalBaneVegen 48",true,"2019-10-16","2019-10-17","Formål3");
@@ -120,7 +117,7 @@ class TestSystemFunctionality {
      */
     @ParameterizedTest
     @ValueSource(strings = {"1\00", "\00 1", "\00", "1s", "s1", "ss'¨¨¨^", "^^^''''"})
-    void illegalNumberFormatFromString(String str){
+    void assert_Validation_ofNumber_isIllegal(String str){
         assertFalse(Validation.ofNumber(str));
     }
 
@@ -129,7 +126,7 @@ class TestSystemFunctionality {
      */
     @ParameterizedTest
     @ValueSource(strings = {"01", "000", "11", "22222222222"})
-    void legalNumberFormatFromString(String str){
+    void assert_Validation_ofNumber_isLegal(String str){
         assertTrue(Validation.ofNumber(str));
     }
 

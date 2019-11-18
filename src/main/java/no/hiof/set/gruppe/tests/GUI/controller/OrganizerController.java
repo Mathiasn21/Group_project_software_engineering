@@ -20,7 +20,7 @@ import java.util.Locale;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(ApplicationExtension.class)
-class OrganizerControllerTests extends MainJavaFXTest{
+class OrganizerController extends MainJavaFXTest{
     static{
         Locale.setDefault(Locale.US);
     }

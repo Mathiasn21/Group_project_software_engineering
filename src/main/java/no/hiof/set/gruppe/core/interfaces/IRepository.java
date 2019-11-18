@@ -15,7 +15,7 @@ public interface IRepository {
     boolean queryEmailExists(String email);
     void insertNewUser(RawUser rawUser)throws UnableToRegisterUser;
 
-    <T extends IBaseEntity, E extends IUser> void deleteUserConnectionToData(T t, E user) throws DataFormatException;
+    <T extends IBaseEntity, E extends IUser> void deleteUserRelationToData(T t, E user) throws DataFormatException;
     <T extends IBaseEntity> List<T> queryAllDataOfGivenType(Class<T> aClass);
 
     <T extends IBaseEntity, E extends IUser> List<T> queryAllEntityConnectedToUserData(Class<T> tClass, E user);

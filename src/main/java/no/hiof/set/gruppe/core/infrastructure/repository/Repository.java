@@ -194,7 +194,7 @@ public final class Repository implements IRepository {
     }
 
     @Override
-    public <T extends IBaseEntity, E extends IUser> void deleteUserConnectionToData(T thatO, E user) throws DataFormatException {
+    public <T extends IBaseEntity, E extends IUser> void deleteUserRelationToData(T thatO, E user) throws DataFormatException {
         List<EntityConnectedToUser> list = getDataConnectedToUsersList(thatO.getClass());
         if(list == null)throw new DataFormatException();
         list.removeIf((thisO) -> thisO.getID().equals(thatO.getID()) && thisO.getUSERNAME().equals(user.getName()));

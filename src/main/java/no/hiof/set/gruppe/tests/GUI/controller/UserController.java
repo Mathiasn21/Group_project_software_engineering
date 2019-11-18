@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.util.Set;
 
 @ExtendWith(ApplicationExtension.class)
-class UserControllerTests extends MainJavaFXTest{
+class UserController extends MainJavaFXTest{
     @Start
     void start(@NotNull Stage stage) throws IOException {
         MainJavaFXTest mainJavaFXTest = new MainJavaFXTest();

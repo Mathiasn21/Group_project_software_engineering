@@ -33,7 +33,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * the use cases of a PROTO_USER.
  */
  @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class TestingProtoUserUseCases {
+class ProtoUserUseCases {
     // --------------------------------------------------//
     //                2.Local Fields                     //
     // --------------------------------------------------//
@@ -54,12 +54,9 @@ class TestingProtoUserUseCases {
     // --------------------------------------------------//
     //                3.Single Tests                     //
     // --------------------------------------------------//
-     /**
-      * Testing if adding a new arrangement is possible.
-      */
     @Test
     @Order(1)
-    void firstAddUserToArrangement() throws DataFormatException {
+    void first_insert_userRelation_to_arrangement_and_keepDataIntegrity() throws DataFormatException {
         arrangementToTest = notUserArrangements.get(0);
         userArrangements.add(arrangementToTest);
 
@@ -67,13 +64,11 @@ class TestingProtoUserUseCases {
         assertDataIntegrity(repository.queryAllEntityConnectedToUserData(Arrangement.class, PROTO_USER));
     }
 
-     /**
-      * Testing if removal of PROTO_USER is possible.
-      */
+
     @Test
     @Order(2)
-    void thenRemoveUserFromArrangement() throws DataFormatException {
-        repository.deleteUserConnectionToData(arrangementToTest, PROTO_USER);
+    void then_delete_userRelation_from_arrangement_and_keepDataIntegrity() throws DataFormatException {
+        repository.deleteUserRelationToData(arrangementToTest, PROTO_USER);
         userArrangements.remove(arrangementToTest);
         assertDataIntegrity(repository.queryAllEntityConnectedToUserData(Arrangement.class, PROTO_USER));
     }
@@ -84,7 +79,7 @@ class TestingProtoUserUseCases {
     private static List<Group> expectedGroups = repository.queryAllDataOfGivenType(GroupClazz);
     @Test
     @Order(3)
-    void firstCreateNewGroup() throws DataFormatException, IllegalDataAccess {
+    void first_insert_new_group_and_keepDataIntegrity() throws DataFormatException, IllegalDataAccess {
         expectedGroups.add(group);
         repository.insertData(group, PROTO_USER);
         assertDataIntegrity(expectedGroups, repository.queryAllDataOfGivenType(GroupClazz));
@@ -93,7 +88,7 @@ class TestingProtoUserUseCases {
 
     @Test
     @Order(4)
-    void thenAddNewMembers() throws DataFormatException {
+    void then_mutate_group_with_newMembers_and_keepDataIntegrity() throws DataFormatException {
         DummyUsers[] users = DummyUsers.values();
 
         int number = users.length - 1;
@@ -106,14 +101,14 @@ class TestingProtoUserUseCases {
 
     @Test
     @Order(5)
-    void thenRemoveAddedMembers() throws DataFormatException {
+    void then_mutate_group_with_removedMembers_and_keepDataIntegrity() throws DataFormatException {
         group.removeMembers(group.getMembers().toArray(DummyUsers[]::new));
         executeMutationAndAssertIntegrity();
     }
 
     @Test
     @Order(6)
-    void andLastRemoveCreatedGroup() throws DataFormatException, IllegalDataAccess {
+    void andLast_delete_group_and_keepDataIntegrity() throws DataFormatException, IllegalDataAccess {
         repository.deleteData(group, PROTO_USER);
         expectedGroups.remove(group);
         assertDataIntegrity(expectedGroups, repository.queryAllDataOfGivenType(GroupClazz));

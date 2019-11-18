@@ -35,7 +35,7 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
  * This class is meant for testing validation and security around data access
  * as well as login access.
  */
-class TestAccessValidation {
+class AccessValidation {
     private final IRepository repository = new Repository();
 
     // --------------------------------------------------//

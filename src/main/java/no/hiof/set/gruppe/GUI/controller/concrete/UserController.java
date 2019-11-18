@@ -156,7 +156,7 @@ public class UserController extends Controller {
         availableObservableArrangements.add(currentSelectedMyArrangement);
 
         try {
-            repository.deleteUserConnectionToData(currentSelectedMyArrangement, ProtoUser.USER);
+            repository.deleteUserRelationToData(currentSelectedMyArrangement, ProtoUser.USER);
         } catch (DataFormatException illegalDataAccess) {
             try { ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_ACCESSING_DATA, illegalDataAccess); }
             catch (IOException e) {e.printStackTrace();}

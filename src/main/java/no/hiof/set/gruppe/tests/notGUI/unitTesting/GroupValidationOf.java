@@ -25,7 +25,7 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 //                1.Import Statements                //
 // --------------------------------------------------//
 
-class TestGroupValidationOf {
+class GroupValidationOf {
 
 
     // --------------------------------------------------//

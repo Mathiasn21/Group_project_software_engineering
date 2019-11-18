@@ -31,10 +31,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * the use cases of a organizer.
  */
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class TestingOrganizerUseCases {
+class AdminUseCases {
     // --------------------------------------------------//
-    //                2.Local Fields                      //
+    //                2.Local Fields                     //
     // --------------------------------------------------//
+    private static final ProtoUser PROTO_USER_ADMIN = ProtoUser.ADMIN;
+    private static final ProtoUser PROTO_USER_ORGANIZER = ProtoUser.ORGANIZER;
+    private static final IRepository repository = new Repository();
     private static final Arrangement arrangement = new Arrangement(
             "Bernts Fantastiske Test",
             "Annet",
@@ -43,47 +46,44 @@ class TestingOrganizerUseCases {
             false,
             "2019-10-15",
             "2019-10-16",
-            "Dette varer i hele 1 dager. Og, server null formål.");
-    private static final ProtoUser PROTO_USER = ProtoUser.ORGANIZER;
-    private static final IRepository repository = new Repository();
+            "Dette varer i hele 1 dager. Og, server null formål."
+    );
 
     // --------------------------------------------------//
-    //                3.Unit Tests                       //
+    //                3.Single Tests                     //
     // --------------------------------------------------//
     /**
-     * @throws IllegalDataAccess IllegalDataAccess{@link IllegalDataAccess}
+     * @throws IllegalDataAccess IllegalDateAccess {@link IllegalDataAccess}
      */
     @Test
     @Order(1)
-    void firstAddArrangement() throws IllegalDataAccess, DataFormatException {
-        List<Arrangement> expectedList = repository.queryAllEntityConnectedToUserData(Arrangement.class, PROTO_USER);
-        expectedList.add(arrangement);
-        repository.insertData(arrangement, PROTO_USER);
+    void add_arrangement_and_keepDataIntegrity() throws IllegalDataAccess, DataFormatException {
+        List<Arrangement> expectedArrangementList = repository.queryAllEntityConnectedToUserData(Arrangement.class, PROTO_USER_ORGANIZER);
+        expectedArrangementList.add(arrangement);
+        repository.insertData(arrangement, PROTO_USER_ORGANIZER);
 
-        assertDataIntegrity(expectedList, repository.queryAllEntityConnectedToUserData(Arrangement.class, PROTO_USER));
+        assertDataIntegrity(expectedArrangementList, repository.queryAllEntityConnectedToUserData(Arrangement.class, PROTO_USER_ORGANIZER));
     }
 
     /**
-     * @throws IllegalDataAccess IllegalDataAccess {@link IllegalDataAccess}
+     * @throws IllegalDataAccess IllegalDateAccess {@link IllegalDataAccess}
      */
     @Test
     @Order(2)
-    void thenDeleteArrangement() throws IllegalDataAccess, DataFormatException {
-        List<Arrangement> expectedList = repository.queryAllEntityConnectedToUserData(Arrangement.class, PROTO_USER);
-        expectedList.remove(arrangement);
-        repository.deleteData(arrangement, PROTO_USER);
+    void delete_arrangement_keepDataIntegrity() throws IllegalDataAccess, DataFormatException {
+        List<Arrangement> expectedArrangementList = repository.queryAllEntityConnectedToUserData(Arrangement.class, PROTO_USER_ORGANIZER);
+        expectedArrangementList.remove(arrangement);
 
-        assertDataIntegrity(expectedList, repository.queryAllEntityConnectedToUserData(Arrangement.class, PROTO_USER));
+        repository.deleteData(arrangement, PROTO_USER_ADMIN);
+        assertDataIntegrity(expectedArrangementList, repository.queryAllEntityConnectedToUserData(Arrangement.class, PROTO_USER_ORGANIZER));
     }
 
     /**
-     * @param expectedArrangementList
-     * @param userArrangements
+     * @param expectedArrangementList {@link List}
+     * @param userArrangements {@link List}
      */
     private void assertDataIntegrity(List<Arrangement> expectedArrangementList, List<Arrangement> userArrangements) {
         assertTrue(userArrangements.containsAll(expectedArrangementList));
         assertEquals(expectedArrangementList.size(), userArrangements.size());
     }
-
-    //Send out push notifications
 }
