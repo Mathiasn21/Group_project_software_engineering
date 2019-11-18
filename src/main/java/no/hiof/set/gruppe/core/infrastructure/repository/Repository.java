@@ -68,10 +68,12 @@ public final class Repository implements IRepository {
             baseEntityMappedToEntity.put(Arrangement.class, UserConnectedArrangement.class);
 
         }catch (IOException | DataFormatException e){
-            try {ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_READING_DATA, e);}
+            ErrorExceptionHandler handle = e instanceof DataFormatException ? ErrorExceptionHandler.ERROR_WRONG_DATA_OBJECT : ErrorExceptionHandler.ERROR_READING_DATA;
+            try {ErrorExceptionHandler.createLogWithDetails(handle, e);}
             catch (IOException ex) {ex.printStackTrace();}
         }
     }
+
 
     // --------------------------------------------------//
     //                4.Private Query Data               //
@@ -204,7 +206,7 @@ public final class Repository implements IRepository {
     //                6.Public Query Data                //
     // --------------------------------------------------//
     @Override
-    @SuppressWarnings("unchecked")//The only possible lists that it returns are the ones already defined in objectMapper
+    @SuppressWarnings("unchecked")//The only possible lists that it returns are the ones already defined
     public <T extends IBaseEntity> List<T> queryAllDataOfGivenType(Class<T> aClass) {
         return new ArrayList<>((List<T>) objectMappedToList.get(aClass));
     }
@@ -234,10 +236,7 @@ public final class Repository implements IRepository {
     @SuppressWarnings("unchecked")//only one possible return type here, as this is mapped from the start
     public <T extends IBaseEntity> T queryDataWithID(String ID, Class<T> aClass) {
         List<IBaseEntity> list = getList(aClass);
-        for (IBaseEntity entity : list)
-            if (entity.getID().equals(ID)) {
-                return (T) entity;
-            }
+        for (IBaseEntity entity : list)if (entity.getID().equals(ID)) return (T) entity;
         return null;
     }
 
