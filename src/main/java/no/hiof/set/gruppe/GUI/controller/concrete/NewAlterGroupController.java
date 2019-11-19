@@ -163,7 +163,7 @@ public class NewAlterGroupController extends ControllerTransferData {
     }
 
     private boolean validateGroupData(){
-        ValidationResult validation = Validation.ofGroup(groupToEdit);
+        ValidationResult validation = Validation.of(groupToEdit);
         return !validation.IS_VALID;
     }
 

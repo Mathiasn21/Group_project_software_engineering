@@ -37,7 +37,7 @@ class GroupValidationOf {
     @Test
     void assert_Group_Input_isLegal() {
         Group group = new Group("TestGroup");
-        assertTrue(Validation.ofGroup(group).IS_VALID);
+        assertTrue(Validation.of(group).IS_VALID);
     }
 
     // --------------------------------------------------//
@@ -51,7 +51,7 @@ class GroupValidationOf {
     @MethodSource("GenIllegalNames")
     void assert_Group_Name_isIllegal(String str) {
         Group group = new Group(str);
-        assertFalse(Validation.ofGroup(group).IS_VALID);
+        assertFalse(Validation.of(group).IS_VALID);
     }
 
     // --------------------------------------------------//

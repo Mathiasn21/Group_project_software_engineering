@@ -50,7 +50,7 @@ public final class Validation{
      */
     @NotNull
     @Contract("_ -> new")
-    public static ValidationResult ofArrangement(@NotNull Arrangement arrangement) {
+    public static ValidationResult of(@NotNull Arrangement arrangement) {
         StringBuilder str = new StringBuilder();
         String invalidNum = "Sett inn et gyldig antall deltakere\n";
 
@@ -71,7 +71,7 @@ public final class Validation{
 
     @NotNull
     @Contract("_ -> new")
-    public static ValidationResult ofNewUser(@NotNull RawUser rawUser){
+    public static ValidationResult of(@NotNull RawUser rawUser){
         StringBuilder res = new StringBuilder();
         int maxLengthName = 255;
 
@@ -92,7 +92,7 @@ public final class Validation{
 
     @NotNull
     @Contract("_ -> new")
-    public static ValidationResult ofGroup(@NotNull Group group){
+    public static ValidationResult of(@NotNull Group group){
         StringBuilder res = new StringBuilder();
         int maxNameLength = 30;
         int minNameLength = 3;

@@ -154,7 +154,7 @@ public class NewAlterArrangementController extends ControllerTransferData {
      * @return boolean
      */
     private boolean validateArrangementData(){
-        ValidationResult result = Validation.ofArrangement(arrangementToEdit);
+        ValidationResult result = Validation.of(arrangementToEdit);
         if(!result.IS_VALID){
             setErrorField(result.RESULT);
         }

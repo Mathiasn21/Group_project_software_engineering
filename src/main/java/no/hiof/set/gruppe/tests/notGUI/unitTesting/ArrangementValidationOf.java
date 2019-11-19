@@ -38,7 +38,7 @@ class ArrangementValidationOf {
     @Test
     void assert_Arrangement_Input_isLegal() {
         Arrangement arrangement = new Arrangement("pez1","Annet",420,"Hakkebakkeskogen", false, LocalDate.now().plusDays(1).toString(), LocalDate.now().plusDays(1).toString(), "testdwa dawd aw");
-        assertTrue(Validation.ofArrangement(arrangement).IS_VALID);
+        assertTrue(Validation.of(arrangement).IS_VALID);
     }
 
     // --------------------------------------------------//
@@ -54,7 +54,7 @@ class ArrangementValidationOf {
     @MethodSource("GenIllegalNameAndDates")
     void assert_Arrangement_InputNamesAndDates_isIllegal(String str, @NotNull LocalDate startDate, @NotNull LocalDate endDate) {
         Arrangement arrangement = new Arrangement(str,"Annet",420, str, false, startDate.toString(), endDate.toString(), "test");
-        assertFalse(Validation.ofArrangement(arrangement).IS_VALID);
+        assertFalse(Validation.of(arrangement).IS_VALID);
     }
 
     // --------------------------------------------------//

@@ -168,7 +168,7 @@ public final class Repository implements IRepository {
     @Contract(pure = true)
     @Override
     public void insertNewUser(RawUser rawUser)throws UnableToRegisterUser{
-        ValidationResult result = Validation.ofNewUser(rawUser);
+        ValidationResult result = Validation.of(rawUser);
         if(!result.IS_VALID)throw new UnableToRegisterUser(result);
     }
 
