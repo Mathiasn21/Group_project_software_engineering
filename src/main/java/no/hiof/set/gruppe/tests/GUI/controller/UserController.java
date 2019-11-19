@@ -27,15 +27,15 @@ class UserController extends MainJavaFXTest{
     }
 
     @Test
-    void addAndRemoveUserToFromArrangement(@NotNull FxRobot robot){
+    void add_and_remove_user_on_arrangement(@NotNull FxRobot robot){
         Arrangement arrangement;
         String[] nodes = {"#availableArrangementsListView", "#myArrangementsView"};
         String[] nodeBtns = {"#joinBtn", "#leaveBtn"};
         for(int i = 0; i < nodes.length; i++){
-            ListView listView = getListView(robot, nodes[i]);
-            clickOnListView(robot, listView);
+            ListView listView = get_ListView(robot, nodes[i]);
+            click_on_listView(robot, listView);
             arrangement = (Arrangement) listView.getSelectionModel().getSelectedItem();
-            assertFieldsIsClickedArrangement(robot, arrangement);
+            assert_fields_is_clicked_arrangement(robot, arrangement);
             robot.clickOn(nodeBtns[i]);
         }
     }
@@ -44,7 +44,7 @@ class UserController extends MainJavaFXTest{
      * @param robot {@link FxRobot}
      * @param listView {@link ListView}
      */
-    private void clickOnListView(@NotNull FxRobot robot, @NotNull ListView listView) {
+    private void click_on_listView(@NotNull FxRobot robot, @NotNull ListView listView) {
         Set<Node> nodeList = listView.lookupAll(".list-cell");
         Node[] arr = nodeList.toArray(Node[]::new);
         robot.clickOn(arr[0]);
@@ -55,7 +55,7 @@ class UserController extends MainJavaFXTest{
      * @param node {@link String}
      * @return
      */
-    private ListView getListView(@NotNull FxRobot robot, String node) {
+    private ListView get_ListView(@NotNull FxRobot robot, String node) {
         return robot.lookup(node).queryAs(ListView.class);
     }
 
@@ -63,7 +63,7 @@ class UserController extends MainJavaFXTest{
      * @param robot {@link FxRobot}
      * @param arrangement {@link Arrangement}
      */
-    private void assertFieldsIsClickedArrangement(@NotNull FxRobot robot, @NotNull Arrangement arrangement) {
+    private void assert_fields_is_clicked_arrangement(@NotNull FxRobot robot, @NotNull Arrangement arrangement) {
         String[] arrangementData = arrangement.getAllDataAsStringArr();
         String[] lookupFields = {
                 "#arrangementTitle", "#arrangementSport", "#arrangementAddress",

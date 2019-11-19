@@ -47,41 +47,41 @@ class OrganizerController extends MainJavaFXTest{
     }
 
     @Test
-    void testCreatingNewArrangement(@NotNull FxRobot robot) {
+    void assert_new_arrangement_is_created(@NotNull FxRobot robot) {
         ListView listView = robot.lookup("#listView").queryAs(ListView.class);
         robot.clickOn("#newArrangementBtn");
-        fillOutForm(robot);
+        fill_out_form(robot);
         robot.clickOn("#saveBtn");
 
         arrangementsData = ((Arrangement)listView.getSelectionModel().getSelectedItem()).getAllDataAsStringArr();
-        assertFieldsCorrespondToNewArrangement(robot);
+        assert_fields_correspond_to_new_arrangement(robot);
 
         assertEquals(listView.getSelectionModel().getSelectedItem(), arrangement);
-        testAlterArrangement(robot);
+        assert_arrangement_is_altered(robot);
         assertEquals(listView.getSelectionModel().getSelectedItem(), arrangement);
         robot.clickOn("#deleteBtn");
     }
 
-    void testAlterArrangement(@NotNull FxRobot usingRobot){
+    void assert_arrangement_is_altered(@NotNull FxRobot usingRobot){
         ListView listView = usingRobot.lookup("#listView").queryAs(ListView.class);
         listView.getSelectionModel().selectLast();
         usingRobot.clickOn("#editBtn");
-        fillOutForm(usingRobot);
+        fill_out_form(usingRobot);
         usingRobot.clickOn("#saveBtn");
 
         arrangement = (Arrangement) listView.getSelectionModel().getSelectedItem();
         arrangementsData = arrangement.getAllDataAsStringArr();
-        assertFieldsCorrespondToNewArrangement(usingRobot);
+        assert_fields_correspond_to_new_arrangement(usingRobot);
     }
 
 
-    private void assertFieldsCorrespondToNewArrangement(@NotNull FxRobot robot) {
+    private void assert_fields_correspond_to_new_arrangement(@NotNull FxRobot robot) {
         for(int i = 0; i < arrangementsData.length; i++){
             Assertions.assertThat(robot.lookup(lookupFields[i]).queryAs(Text.class)).hasText(arrangementsData[i]);
         }
     }
 
-    private void fillOutForm(@NotNull FxRobot usingRobot) {
+    private void fill_out_form(@NotNull FxRobot usingRobot) {
         usingRobot.clickOn("#nameInput").write(arrangement.getName());
         usingRobot.clickOn("#participantsInput").write(String.valueOf(arrangement.getParticipants()));
         usingRobot.clickOn("#adressInput").write(arrangement.getAddress());

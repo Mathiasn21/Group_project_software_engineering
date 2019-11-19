@@ -28,18 +28,18 @@ class MainController extends MainJavaFXTest{
 
         for(int i = 0; i < userMenuItems.length; i++){
             robot.clickOn("#cheatLogin");
-            firstAssertUserInformation(userMenuItems[i], users[i], robot);
-            thenAssertLoginHasCorrectWindow(robot, stageTitles[i]);
+            first_assert_user_information(userMenuItems[i], users[i], robot);
+            then_assert_login_has_correct_window(robot, stageTitles[i]);
         }
     }
 
-    private void firstAssertUserInformation(@NotNull String userBtn, @NotNull ProtoUser user, @NotNull FxRobot usingRobot){
+    private void first_assert_user_information(@NotNull String userBtn, @NotNull ProtoUser user, @NotNull FxRobot usingRobot){
         usingRobot.clickOn("#" + userBtn);
         Assertions.assertThat(usingRobot.lookup("#uName").queryAs(TextField.class)).hasText(user.getName());
         Assertions.assertThat(usingRobot.lookup("#pass").queryAs(TextField.class)).hasText(user.getPass());
     }
 
-    private void thenAssertLoginHasCorrectWindow(@NotNull FxRobot usingRobot, String stageTitle) {
+    private void then_assert_login_has_correct_window(@NotNull FxRobot usingRobot, String stageTitle) {
         usingRobot.clickOn("#logInn");
         Assertions.assertThat(usingRobot.lookup("#mainTitle").queryAs(Text.class)).hasText(stageTitle);
         usingRobot.clickOn("#menu");
