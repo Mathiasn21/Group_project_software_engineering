@@ -36,9 +36,9 @@ class GroupController extends MainJavaFXTest{
     }
 
     @Test
-    void selectAndEditGroup(FxRobot robot){
+    void assert_Group_isSelectedAndEdited(FxRobot robot){
         ListView groupListView = getNode(robot, "#groupsListview", ListView.class);
-        clickOnListView(robot, groupListView);
+        click_On_ListView(robot, groupListView);
         Group group = (Group)groupListView.getSelectionModel().getSelectedItem();
         Assertions.assertThat(getNode(robot, "#groupName", Text.class)).hasText(group.getName());
         Assertions.assertThat(getNode(robot, "#members", Text.class)).hasText(group.getMembersAsPrettyString());
@@ -46,7 +46,7 @@ class GroupController extends MainJavaFXTest{
 
         Assertions.assertThat(getNode(robot, "#inputName", TextField.class)).hasText(group.getName());
         ListView availableMembers = getNode(robot, "#availableMembers", ListView.class);
-        clickOnListView(robot, availableMembers);
+        click_On_ListView(robot, availableMembers);
 
         DummyUsers member = (DummyUsers) availableMembers.getSelectionModel().getSelectedItem();
         robot.clickOn("#addMember");
@@ -54,7 +54,7 @@ class GroupController extends MainJavaFXTest{
 
         ListView chosenMembers = getNode(robot, "#chosenMembers", ListView.class);
         assertTrue(chosenMembers.getItems().contains(member));
-        clickOnListView(robot, chosenMembers);
+        click_On_ListView(robot, chosenMembers);
         robot.clickOn("#removeMember");
 
         robot.clickOn("#save");
@@ -64,7 +64,7 @@ class GroupController extends MainJavaFXTest{
      * @param robot {@link FxRobot}
      * @param listView {@link ListView}
      */
-    private void clickOnListView(@NotNull FxRobot robot, @NotNull ListView listView) {
+    private void click_On_ListView(@NotNull FxRobot robot, @NotNull ListView listView) {
         Set<Node> nodeList = listView.lookupAll(".list-cell");
         Node[] arr = nodeList.toArray(Node[]::new);
         robot.clickOn(arr[0]);

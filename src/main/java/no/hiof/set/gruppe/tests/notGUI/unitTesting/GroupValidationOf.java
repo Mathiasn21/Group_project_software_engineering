@@ -35,7 +35,7 @@ class GroupValidationOf {
      * Tests legal inputs
      */
     @Test
-    void LegalInput() {
+    void assert_Group_Input_isLegal() {
         Group group = new Group("TestGroup");
         assertTrue(Validation.ofGroup(group).IS_VALID);
     }
@@ -49,7 +49,7 @@ class GroupValidationOf {
      */
     @ParameterizedTest
     @MethodSource("GenIllegalNames")
-    void IllegalInputNamesAndDates(String str) {
+    void assert_Group_Name_isIllegal(String str) {
         Group group = new Group(str);
         assertFalse(Validation.ofGroup(group).IS_VALID);
     }

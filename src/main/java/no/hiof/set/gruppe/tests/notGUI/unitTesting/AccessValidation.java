@@ -42,7 +42,7 @@ class AccessValidation {
     //                2.Unit Tests                       //
     // --------------------------------------------------//
     @Test
-    void userLoginSuccess() throws InvalidLoginInformation {
+    void checkIf_UserLogin_IsSuccessful() throws InvalidLoginInformation {
         for(ProtoUser user : ProtoUser.values()){
             ILoginInformation loginInformation = new LoginInformation(user.getName(), user.getPass());
             ProtoUser protoUserDetails = repository.queryUserDetailsWith(loginInformation);
@@ -51,7 +51,7 @@ class AccessValidation {
     }
 
     @Test
-    void userRegister()throws UnableToRegisterUser {
+    void assert_UserRegistration_IsSuccessful()throws UnableToRegisterUser {
         RawUser rawUser = new RawUser("Bernt", "Åge", "2007-12-03", "1771", "NerdStreet 22", "It_Burns@When_I.PI", "TheInternet22");
         repository.insertNewUser(rawUser);
     }
@@ -61,7 +61,7 @@ class AccessValidation {
     // --------------------------------------------------//
     @ParameterizedTest
     @MethodSource("GenIllegalLoginInformation")
-    void userLoginFailed(ILoginInformation loginInformation){
+    void checkIf_UserLogin_Failed(ILoginInformation loginInformation){
         assertThrows(InvalidLoginInformation.class, () -> repository.queryUserDetailsWith(loginInformation));
     }
 
