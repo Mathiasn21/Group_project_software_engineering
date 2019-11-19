@@ -26,7 +26,7 @@ class OrganizerController extends MainJavaFXTest{
     }
     private Arrangement arrangement = new Arrangement(
                 "ThisIsNerdy",
-                        "Alle",
+                        "Annet",
                         400,
                         "NerdStreet - 22",
                         true,

@@ -28,6 +28,22 @@ public enum SportCategory {
     private final String category;
 
 
+    /**
+     * Excludes ALL
+     * @return SportCategory
+     */
+    public static SportCategory[] getCategories(){
+        SportCategory[] categories = SportCategory.values();
+        int length = categories.length;
+        SportCategory[] res = new SportCategory[length - 1];
+        for(int i = 0, j = 0; j < res.length; i++){
+            SportCategory category = categories[i];
+            if (category == ALL) continue;
+            res[j] = category;
+            j++;
+        }
+        return res;
+    }
     // --------------------------------------------------//
     //                3.Contracts                        //
     // --------------------------------------------------//

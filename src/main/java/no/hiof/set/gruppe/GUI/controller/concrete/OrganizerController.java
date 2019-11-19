@@ -176,8 +176,7 @@ public class OrganizerController extends ControllerTransferData {
             title = titleParam;
             name = nameParam;
             createNewView(this, object);
-        }
-        else{
+        }else{
             title = titleParam;
             name = nameParam;
             createNewView(this, object);

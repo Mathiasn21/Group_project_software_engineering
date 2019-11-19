@@ -165,7 +165,7 @@ public class NewAlterArrangementController extends ControllerTransferData {
      * @return int
      */
     private int getSportIndex(){
-        ObservableList list = FXCollections.observableArrayList(SportCategory.values());
+        ObservableList<SportCategory> list = FXCollections.observableArrayList(SportCategory.getCategories());
         for(int i = 0; i < list.size(); i++){
             if(list.get(i).toString().equals(arrangementToEdit.getSport()))return i;
         }
@@ -190,7 +190,7 @@ public class NewAlterArrangementController extends ControllerTransferData {
     }
 
     private void setupComboBoxes(){
-        sportComboBoxInput.setItems(FXCollections.observableArrayList(SportCategory.values()));
+        sportComboBoxInput.setItems(FXCollections.observableArrayList(SportCategory.getCategories()));
         groupInput.setItems(FXCollections.observableArrayList(GroupCategory.values()));
 
         sportComboBoxInput.getSelectionModel().select(0);

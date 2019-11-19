@@ -1,11 +1,22 @@
 [
   {
+    "ID": "83ed73df-7ab6-4bc1-b193-c16c2cdd63ee",
+    "name": "detteKulle showet",
+    "sport": "Annet",
+    "address": "dwadwa",
+    "startDate": "2019-11-19",
+    "endDate": "2019-11-25",
+    "description": "awdawgesa",
+    "participants": 22,
+    "group": true
+  },
+  {
     "ID": "d52665f4-38f1-4b56-b24d-9d760adc7102",
     "name": "Børres Brokkoli Fest",
     "sport": "Sykkelritt",
     "address": "Brokkolivegen NerdStreet - 2228",
-    "startDate": "2020-08-31",
-    "endDate": "2020-09-28",
+    "startDate": "2019-11-20",
+    "endDate": "2019-11-21",
     "description": "Masse spising av brokkoli",
     "participants": 36400,
     "group": false
@@ -15,21 +26,10 @@
     "name": "The nerds show",
     "sport": "Annet",
     "address": "Smarter than you road 5",
-    "startDate": "2019-11-17",
-    "endDate": "2019-11-18",
+    "startDate": "2019-11-20",
+    "endDate": "2019-11-21",
     "description": "Only for nerds, simple minded not allowed.",
     "participants": 400,
     "group": false
-  },
-  {
-    "ID": "83ed73df-7ab6-4bc1-b193-c16c2cdd63ee",
-    "name": "detteKulle showet",
-    "sport": "Alle",
-    "address": "dwadwa",
-    "startDate": "2019-11-19",
-    "endDate": "2019-11-25",
-    "description": "awdawgesa",
-    "participants": 22,
-    "group": true
   }
 ]
