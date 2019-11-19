@@ -42,7 +42,7 @@ class AccessValidation {
     //                2.Unit Tests                       //
     // --------------------------------------------------//
     @Test
-    void checkIf_UserLogin_IsSuccessful() throws InvalidLoginInformation {
+    void assert_UserLogin_IsSuccessful() throws InvalidLoginInformation {
         for(ProtoUser user : ProtoUser.values()){
             ILoginInformation loginInformation = new LoginInformation(user.getName(), user.getPass());
             ProtoUser protoUserDetails = repository.queryUserDetailsWith(loginInformation);
@@ -61,7 +61,7 @@ class AccessValidation {
     // --------------------------------------------------//
     @ParameterizedTest
     @MethodSource("GenIllegalLoginInformation")
-    void checkIf_UserLogin_Failed(ILoginInformation loginInformation){
+    void assert_UserLogin_Failed(ILoginInformation loginInformation){
         assertThrows(InvalidLoginInformation.class, () -> repository.queryUserDetailsWith(loginInformation));
     }
 
