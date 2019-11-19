@@ -24,15 +24,17 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Set;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+
 @ExtendWith(ApplicationExtension.class)
 class AdminController extends MainJavaFXTest{
 
     private Arrangement currentTestArrangement;
-    private final IRepository repository = new Repository();
+    private static final IRepository repository = new Repository();
 
     /**
      * @param stage {@link Stage}
-     * @throws IOException
+     * @throws IOException IOException
      */
     @Start
     void start(@NotNull Stage stage) throws IOException {
@@ -42,12 +44,10 @@ class AdminController extends MainJavaFXTest{
     }
 
     /**
-     * @param robot
-     * @throws IllegalDataAccess
-     * @throws DataFormatException
+     * @param robot FxRobot
      */
     @Test
-    void select_Arrangement_AndEdit(@NotNull FxRobot robot) throws IllegalDataAccess, DataFormatException {
+    void select_Arrangement_AndEdit(@NotNull FxRobot robot){
         select_ArrangementTest(robot);
         robot.clickOn("#edit");
         String[] datePickerNodes = {"#startDateInput", "#endDateInput"};
@@ -62,20 +62,17 @@ class AdminController extends MainJavaFXTest{
 
     /**
      * @param robot {@link FxRobot}
-     * @throws IllegalDataAccess
-     * @throws DataFormatException
      */
-    private void delete_PreviouslyAdded_Arrangement(@NotNull FxRobot robot) throws IllegalDataAccess, DataFormatException {
+    private void delete_PreviouslyAdded_Arrangement(@NotNull FxRobot robot) {
         ListView listView = get_ListView(robot, "#arrangementListView");
         Arrangement arrangement = (Arrangement) listView.getSelectionModel().getSelectedItem();
         robot.clickOn("#delete");
-        repository.insertData(arrangement, ProtoUser.ORGANIZER);
+        assertDoesNotThrow(() -> repository.insertData(arrangement, ProtoUser.ORGANIZER));
     }
 
     // --------------------------------------------------//
     //                2.Assertion methods                //
     // --------------------------------------------------//
-
     /**
      * @param robot {@link FxRobot}
      * @param lookupFields {@link String}
