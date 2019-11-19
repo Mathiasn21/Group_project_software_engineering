@@ -72,7 +72,7 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <Text fx:id="gOrIHeader" layoutX="443.0" layoutY="423.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Konkurranseform" underline="true">
+      <Text fx:id="gOrIHeader" layoutX="443.0" layoutY="423.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Påmeldingsform" underline="true">
          <font>
             <Font size="15.0" />
          </font>

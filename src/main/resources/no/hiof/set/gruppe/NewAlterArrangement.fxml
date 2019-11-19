@@ -27,7 +27,7 @@
             <DatePicker fx:id="startDateInput" promptText="Velg startdato" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Slutt dato" />
             <DatePicker fx:id="endDateInput" promptText="Velg sluttdato" />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Konkurranseform" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Påmeldingsform" />
             <ComboBox fx:id="groupInput" prefWidth="150.0" />
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0">
                <children>

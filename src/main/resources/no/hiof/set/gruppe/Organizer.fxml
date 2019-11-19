@@ -79,7 +79,7 @@
             </Text>
             <HBox layoutX="10.0" layoutY="196.0" prefHeight="35.0" prefWidth="448.0">
                <children>
-                  <Text fx:id="gOrIHeader" strokeType="OUTSIDE" strokeWidth="0.0" text="Konkurranseform" textAlignment="CENTER" underline="true" wrappingWidth="222.0">
+                  <Text fx:id="gOrIHeader" strokeType="OUTSIDE" strokeWidth="0.0" text="Påmeldingsform" textAlignment="CENTER" underline="true" wrappingWidth="222.0">
                      <font>
                         <Font size="18.0" />
                      </font>
