@@ -52,23 +52,32 @@ public final class Repository implements IRepository {
     //Setting up data related to each class, by mapping class to a list containing related data.
     static{
         try{
+            //Scans directory for subtypes and maps thoose types to data if data does exist.
             Reflections reflections = new Reflections("no.hiof.set.gruppe.core.entities");
             Set<Class<? extends IBaseEntity>> clazzes = reflections.getSubTypesOf(IBaseEntity.class);
             List<Class<? extends IBaseEntity>> listOfDataClasses = new ArrayList<>(clazzes);
+            List<Class<? extends IBaseEntity>> needToGenDataList = new ArrayList<>();
 
             for (Class<? extends IBaseEntity> aClass : listOfDataClasses) {
                 List<? extends IBaseEntity> list = queryDataGivenType(aClass);
 
                 if(aClass.isEnum())list = Arrays.asList(aClass.getEnumConstants());
-                if (list.size() <= 3 && factory.canGenerateFromClass(aClass)) {
-                    list = (queryGenDataGivenType(aClass));
-                    handleData.storeDataGivenType(aClass, list);
-                }
+                if (list.size() <= 3 && factory.canGenerateFromClass(aClass)) needToGenDataList.add(aClass);
                 objectMappedToList.put(aClass, list);
             }
             baseEntityMappedToEntity.put(Arrangement.class, UserConnectedArrangement.class);
 
-        }catch (IOException | DataFormatException e){
+            //used to generate dummy data
+            IRepository repository = new Repository();
+            for(Class<? extends IBaseEntity> aClass : needToGenDataList){
+                if(factory.canGenerateFromClass(aClass)) {
+                    List<? extends IBaseEntity> list = queryGenDataGivenType(aClass);
+                    IUser user = aClass == Arrangement.class ? ProtoUser.ORGANIZER : ProtoUser.USER;
+                    for (IBaseEntity iBaseEntity : list) repository.insertData(iBaseEntity, user);
+                }
+            }
+
+        }catch (IOException | DataFormatException | IllegalDataAccess e){
             ErrorExceptionHandler handle = e instanceof DataFormatException ? ErrorExceptionHandler.ERROR_WRONG_DATA_OBJECT : ErrorExceptionHandler.ERROR_READING_DATA;
             try {ErrorExceptionHandler.createLogWithDetails(handle, e);}
             catch (IOException ex) {ex.printStackTrace();}

@@ -1,37 +1,37 @@
 [
   {
-    "name": "Avengers",
-    "ID": "86782505-4b42-4954-a1c7-42254f84811a",
+    "name": "Dominators",
+    "ID": "5f8c1e23-5dfa-4269-bc00-86ccf509b134",
     "members": []
   },
   {
-    "name": "Butchers",
-    "ID": "c1a63c1d-b9e9-43b2-9073-f8ecffa44521",
+    "name": "Dominators",
+    "ID": "3fb44e10-5845-4f68-9d59-83058f18bce5",
     "members": []
   },
   {
     "name": "Collision Course",
-    "ID": "8486065e-cc3d-4ef7-9ad4-3a40e312983b",
-    "members": []
-  },
-  {
-    "name": "Chernobyl",
-    "ID": "8f4d09af-8341-4e60-b444-6eb85bb68071",
-    "members": []
-  },
-  {
-    "name": "Avengers",
-    "ID": "013a1ee6-f2f7-4e67-bde6-fdcfe98a50c9",
-    "members": []
-  },
-  {
-    "name": "Black Panthers",
-    "ID": "10899d60-42ec-426d-bae8-d4f4499605f9",
+    "ID": "010b2a91-2b34-4791-ae2d-e1c4439ac30d",
     "members": []
   },
   {
     "name": "Brute Force ",
-    "ID": "c1509499-99c1-4998-ae23-12e5c4a19f27",
+    "ID": "94aa211c-fab6-4153-ac9b-0c90c997d841",
+    "members": []
+  },
+  {
+    "name": "Divide",
+    "ID": "ecd3d916-a1fb-491e-a29c-43139deb2963",
+    "members": []
+  },
+  {
+    "name": "Blitzkrieg",
+    "ID": "5ffddcc5-f5ee-4ee0-a430-679d2a5d2c61",
+    "members": []
+  },
+  {
+    "name": "Defenders",
+    "ID": "1b0e6288-ca63-425f-afc7-c70a51c0dfb5",
     "members": []
   }
 ]
