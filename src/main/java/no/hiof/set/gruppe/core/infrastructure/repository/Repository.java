@@ -58,10 +58,11 @@ public final class Repository implements IRepository {
 
             for (Class<? extends IBaseEntity> aClass : listOfDataClasses) {
                 List<? extends IBaseEntity> list = queryDataGivenType(aClass);
+
                 if(aClass.isEnum())list = Arrays.asList(aClass.getEnumConstants());
-                if (list.size() == 0) {
-                    if (!factory.canGenerateFromClass(aClass)) continue;
+                if (list.size() <= 2 && factory.canGenerateFromClass(aClass)) {
                     list = (queryGenDataGivenType(aClass));
+                    handleData.storeDataGivenType(aClass, list);
                 }
                 objectMappedToList.put(aClass, list);
             }
@@ -95,7 +96,7 @@ public final class Repository implements IRepository {
      * @return List T
      */
     private static  <T> List<T> queryGenDataGivenType(Class<T> tClassArr) {
-        return factory.generateManyTypes(tClassArr, (int) (Math.random()*6));
+        return factory.generateManyTypes(tClassArr, (int) (Math.random()*8));
     }
 
     @SuppressWarnings("unchecked")//objectMapper contains explicitly only List<IBaseEntity>
