@@ -3,8 +3,15 @@ package no.hiof.set.gruppe.tests.GUI.controller;
 import javafx.scene.control.ListView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import no.hiof.set.gruppe.Main;
+import no.hiof.set.gruppe.MainJavaFX;
 import no.hiof.set.gruppe.core.entities.Arrangement;
 import no.hiof.set.gruppe.core.entities.user.ProtoUser;
+import no.hiof.set.gruppe.core.infrastructure.exceptions.DataFormatException;
+import no.hiof.set.gruppe.core.infrastructure.factory.DataFactory;
+import no.hiof.set.gruppe.core.infrastructure.repository.Repository;
+import no.hiof.set.gruppe.core.interfaces.IRepository;
+import no.hiof.set.gruppe.core.interfaces.IUser;
 import no.hiof.set.gruppe.tests.GUI.utils.ClickingUtils;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
@@ -15,6 +22,7 @@ import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Locale;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -24,6 +32,7 @@ class OrganizerController extends MainJavaFXTest{
     static{
         Locale.setDefault(Locale.US);
     }
+
     private Arrangement arrangement = new Arrangement(
                 "ThisIsNerdy",
                         "Annet",
@@ -34,6 +43,7 @@ class OrganizerController extends MainJavaFXTest{
                         "2020-12-09",
                         "Very Nerdy.");
     private String[] arrangementsData;
+    private final IUser ORGANIZER = ProtoUser.ORGANIZER;
     private final String[] lookupFields = new String[]{
             "#arrangementName", "#arrangementSport",
             "#arrangementAddress", "#arrangementDate",
@@ -44,11 +54,13 @@ class OrganizerController extends MainJavaFXTest{
         MainJavaFXTest mainJavaFXTest = new MainJavaFXTest();
         mainJavaFXTest.setStartView(ProtoUser.ORGANIZER.getViewName());
         mainJavaFXTest.start(stage);
+        genDataIfNoneExist(ORGANIZER);
     }
 
     @Test
     void assert_new_arrangement_is_created(@NotNull FxRobot robot) {
         ListView listView = robot.lookup("#listView").queryAs(ListView.class);
+
         robot.clickOn("#newArrangementBtn");
         fill_out_form(robot);
         robot.clickOn("#saveBtn");

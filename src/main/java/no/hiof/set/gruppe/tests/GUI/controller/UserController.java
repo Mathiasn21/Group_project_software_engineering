@@ -4,8 +4,13 @@ import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import no.hiof.set.gruppe.MainJavaFX;
 import no.hiof.set.gruppe.core.entities.Arrangement;
 import no.hiof.set.gruppe.core.entities.user.ProtoUser;
+import no.hiof.set.gruppe.core.infrastructure.exceptions.DataFormatException;
+import no.hiof.set.gruppe.core.infrastructure.factory.DataFactory;
+import no.hiof.set.gruppe.core.interfaces.IRepository;
+import no.hiof.set.gruppe.core.interfaces.IUser;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -19,11 +24,14 @@ import java.util.Set;
 
 @ExtendWith(ApplicationExtension.class)
 class UserController extends MainJavaFXTest{
+    private static final IUser USER = ProtoUser.USER;
+
     @Start
     void start(@NotNull Stage stage) throws IOException {
         MainJavaFXTest mainJavaFXTest = new MainJavaFXTest();
         mainJavaFXTest.setStartView(ProtoUser.USER.getViewName());
         mainJavaFXTest.start(stage);
+        genDataIfNoneExist(USER);
     }
 
     @Test

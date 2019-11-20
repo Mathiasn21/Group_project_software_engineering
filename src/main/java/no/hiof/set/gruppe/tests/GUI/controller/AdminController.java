@@ -22,12 +22,16 @@ import org.testfx.framework.junit5.Start;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Locale;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 @ExtendWith(ApplicationExtension.class)
 class AdminController extends MainJavaFXTest{
+    static{
+        Locale.setDefault(Locale.US);
+    }
 
     private Arrangement currentTestArrangement;
     private static final IRepository repository = new Repository();
