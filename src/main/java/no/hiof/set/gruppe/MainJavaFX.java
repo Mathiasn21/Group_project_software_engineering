@@ -22,6 +22,8 @@ import no.hiof.set.gruppe.GUI.controller.abstractions.IController;
 import no.hiof.set.gruppe.GUI.controller.abstractions.IControllerDataTransfer;
 import no.hiof.set.gruppe.core.infrastructure.exceptions.DataFormatException;
 import no.hiof.set.gruppe.core.infrastructure.exceptions.ErrorExceptionHandler;
+import no.hiof.set.gruppe.core.infrastructure.repository.Repository;
+import no.hiof.set.gruppe.core.interfaces.IRepository;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -39,6 +41,7 @@ public class MainJavaFX extends Application implements SetupWindow {
     public static void main(String[] args) {
         launch(args);
     }
+    private static IRepository repository= new Repository();
 
 
     // --------------------------------------------------//
@@ -155,4 +158,5 @@ public class MainJavaFX extends Application implements SetupWindow {
 
         stage.show();
     }
+    public static IRepository getRepository(){return repository;}
 }

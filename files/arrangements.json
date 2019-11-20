@@ -1,16 +1,5 @@
 [
   {
-    "ID": "83ed73df-7ab6-4bc1-b193-c16c2cdd63ee",
-    "name": "detteKulle showet",
-    "sport": "Annet",
-    "address": "dwadwa",
-    "startDate": "2019-11-19",
-    "endDate": "2019-11-25",
-    "description": "awdawgesa",
-    "participants": 22,
-    "group": true
-  },
-  {
     "ID": "d52665f4-38f1-4b56-b24d-9d760adc7102",
     "name": "Børres Brokkoli Fest",
     "sport": "Sykkelritt",
@@ -22,12 +11,23 @@
     "group": false
   },
   {
+    "ID": "83ed73df-7ab6-4bc1-b193-c16c2cdd63ee",
+    "name": "detteKulle showet",
+    "sport": "Annet",
+    "address": "dwadwa",
+    "startDate": "2019-11-21",
+    "endDate": "2019-11-22",
+    "description": "awdawgesa",
+    "participants": 22,
+    "group": true
+  },
+  {
     "ID": "edbbbe0a-468b-4943-86bb-682936015acf",
     "name": "The nerds show",
     "sport": "Annet",
     "address": "Smarter than you road 5",
-    "startDate": "2019-11-20",
-    "endDate": "2019-11-21",
+    "startDate": "2019-11-21",
+    "endDate": "2019-11-23",
     "description": "Only for nerds, simple minded not allowed.",
     "participants": 400,
     "group": false

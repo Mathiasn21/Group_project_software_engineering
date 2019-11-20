@@ -7,9 +7,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import no.hiof.set.gruppe.Main;
 import no.hiof.set.gruppe.MainJavaFX;
 import no.hiof.set.gruppe.core.infrastructure.exceptions.ErrorExceptionHandler;
 import no.hiof.set.gruppe.core.interfaces.IGetAllDataStringArr;
+import no.hiof.set.gruppe.core.interfaces.IRepository;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -20,6 +22,7 @@ import java.io.IOException;
  */
 public abstract class Controller implements IController, Initializable {
     private MainJavaFX mainController;
+    private IRepository repository;
 
     /**
      * Guaranteed communication with the main controller.
@@ -29,8 +32,6 @@ public abstract class Controller implements IController, Initializable {
     public void setMainController(MainJavaFX mainController){
         this.mainController = mainController;
     }
-
-    MainJavaFX getMainController() { return mainController; }
 
     @Override
     public void createNewView(Controller controller) {
@@ -44,6 +45,14 @@ public abstract class Controller implements IController, Initializable {
             createAlert(err);
         }
     }
+
+    @Override
+    public final void setRepository(IRepository repository){this.repository = repository;}
+
+    @Override
+    public final IRepository getRepository(){return repository;}
+
+    MainJavaFX getMainController() { return mainController; }
 
     /**
      * Creates a alert box for the user, including the given error.

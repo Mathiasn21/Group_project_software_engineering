@@ -21,15 +21,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import no.hiof.set.gruppe.GUI.controller.abstractions.ControllerTransferData;
 import no.hiof.set.gruppe.GUI.model.ViewInformation;
-import no.hiof.set.gruppe.core.infrastructure.exceptions.DataFormatException;
-import no.hiof.set.gruppe.core.infrastructure.exceptions.ErrorExceptionHandler;
-import no.hiof.set.gruppe.core.interfaces.IRepository;
-import no.hiof.set.gruppe.core.infrastructure.repository.Repository;
-import no.hiof.set.gruppe.core.infrastructure.validations.Validation;
+import no.hiof.set.gruppe.MainJavaFX;
 import no.hiof.set.gruppe.core.entities.Arrangement;
 import no.hiof.set.gruppe.core.entities.ValidationResult;
 import no.hiof.set.gruppe.core.entities.constantInformation.GroupCategory;
 import no.hiof.set.gruppe.core.entities.constantInformation.SportCategory;
+import no.hiof.set.gruppe.core.infrastructure.exceptions.DataFormatException;
+import no.hiof.set.gruppe.core.infrastructure.exceptions.ErrorExceptionHandler;
+import no.hiof.set.gruppe.core.infrastructure.validations.Validation;
 
 import java.io.IOException;
 import java.net.URL;
@@ -78,7 +77,6 @@ public class NewAlterArrangementController extends ControllerTransferData {
     private String address;
     private LocalDate startDate;
     private LocalDate endDate;
-    private final IRepository repository = new Repository();
 
     // --------------------------------------------------//
     //                4.On Action Methods                //
@@ -123,7 +121,7 @@ public class NewAlterArrangementController extends ControllerTransferData {
     }
 
     private void queryArrangement(){
-        try {if(!createdNewObject)repository.mutateData(arrangementToEdit);
+        try {if(!createdNewObject)getRepository().mutateData(arrangementToEdit);
         } catch (DataFormatException e) {
             Throwable throwable = e;
             try { ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_ACCESSING_DATA, e);
@@ -231,6 +229,7 @@ public class NewAlterArrangementController extends ControllerTransferData {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
+        setRepository(MainJavaFX.getRepository());
         setupActionHandlers();
         setupComboBoxes();
     }

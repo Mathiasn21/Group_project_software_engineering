@@ -25,14 +25,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import no.hiof.set.gruppe.GUI.controller.abstractions.Controller;
 import no.hiof.set.gruppe.GUI.model.ViewInformation;
-import no.hiof.set.gruppe.core.infrastructure.exceptions.DataFormatException;
-import no.hiof.set.gruppe.core.infrastructure.exceptions.ErrorExceptionHandler;
-import no.hiof.set.gruppe.core.interfaces.IRepository;
-import no.hiof.set.gruppe.core.infrastructure.predicates.DateTest;
-import no.hiof.set.gruppe.core.infrastructure.repository.Repository;
+import no.hiof.set.gruppe.MainJavaFX;
 import no.hiof.set.gruppe.core.entities.Arrangement;
 import no.hiof.set.gruppe.core.entities.constantInformation.SportCategory;
 import no.hiof.set.gruppe.core.entities.user.ProtoUser;
+import no.hiof.set.gruppe.core.infrastructure.exceptions.DataFormatException;
+import no.hiof.set.gruppe.core.infrastructure.exceptions.ErrorExceptionHandler;
+import no.hiof.set.gruppe.core.infrastructure.predicates.DateTest;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -79,7 +78,6 @@ public class UserController extends Controller {
     private Arrangement currentSelectedArrangement;
     private final ToggleGroup radioBtns = new ToggleGroup();
     private Text[] allTextFields;
-    private final IRepository repository = new Repository();
 
     // --------------------------------------------------//
     //                4.On Action Methods                //
@@ -149,7 +147,7 @@ public class UserController extends Controller {
         myObservableArrangements.add(currentAvailableArrangement);
 
         try {
-            repository.insertUserRelationToData(currentAvailableArrangement, ProtoUser.USER);
+            getRepository().insertUserRelationToData(currentAvailableArrangement, ProtoUser.USER);
         } catch (DataFormatException illegalDataAccess) {
             try { ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_ACCESSING_DATA, illegalDataAccess); }
             catch (IOException e) {e.printStackTrace();}
@@ -168,7 +166,7 @@ public class UserController extends Controller {
         availableObservableArrangements.add(currentSelectedMyArrangement);
 
         try {
-            repository.deleteUserRelationToData(currentSelectedMyArrangement, ProtoUser.USER);
+            getRepository().deleteUserRelationToData(currentSelectedMyArrangement, ProtoUser.USER);
         } catch (DataFormatException illegalDataAccess) {
             try { ErrorExceptionHandler.createLogWithDetails(ErrorExceptionHandler.ERROR_ACCESSING_DATA, illegalDataAccess); }
             catch (IOException e) {e.printStackTrace();}
@@ -294,8 +292,8 @@ public class UserController extends Controller {
     // --------------------------------------------------//
 
     private void setArrangementListInformation() {
-        List<Arrangement> allArrang = repository.queryAllDataOfGivenType(Arrangement.class);
-        List<Arrangement> userConnectedArrangements = repository.queryAllEntityConnectedToUserData(Arrangement.class, ProtoUser.USER);
+        List<Arrangement> allArrang = getRepository().queryAllDataOfGivenType(Arrangement.class);
+        List<Arrangement> userConnectedArrangements = getRepository().queryAllEntityConnectedToUserData(Arrangement.class, ProtoUser.USER);
 
         allArrang.removeAll(userConnectedArrangements);
         allArrang.removeIf((arrangement) -> DateTest.TestExpired.execute(arrangement.getStartDate(), arrangement.getEndDate()));
@@ -401,6 +399,7 @@ public class UserController extends Controller {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        setRepository(MainJavaFX.getRepository());
         setArrangementListInformation();
         setSortingOptions();
         populateMyArrangementView();

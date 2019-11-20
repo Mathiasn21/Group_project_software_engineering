@@ -2,6 +2,7 @@ package no.hiof.set.gruppe.GUI.controller.abstractions;
 
 import no.hiof.set.gruppe.GUI.model.ViewInformation;
 import no.hiof.set.gruppe.MainJavaFX;
+import no.hiof.set.gruppe.core.interfaces.IRepository;
 
 /**
  * A contract that secures interaction with the {@link MainJavaFX} Controller.
@@ -14,6 +15,16 @@ public interface IController {
     void setMainController(MainJavaFX mainController);
 
     /**
+     * @param repository {@link IRepository}
+     */
+    void setRepository(IRepository repository);
+
+    /**
+     * @return IRepository {@link IRepository}
+     */
+    IRepository getRepository();
+
+    /**
      * @return {@link ViewInformation}
      */
     ViewInformation getViewInformation();
@@ -22,5 +33,4 @@ public interface IController {
      * @param controller {@link Controller}
      */
     void createNewView(Controller controller);
-
 }

@@ -22,10 +22,9 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import no.hiof.set.gruppe.GUI.controller.abstractions.Controller;
 import no.hiof.set.gruppe.GUI.model.ViewInformation;
+import no.hiof.set.gruppe.MainJavaFX;
 import no.hiof.set.gruppe.core.infrastructure.exceptions.ErrorExceptionHandler;
 import no.hiof.set.gruppe.core.infrastructure.exceptions.InvalidLoginInformation;
-import no.hiof.set.gruppe.core.interfaces.IRepository;
-import no.hiof.set.gruppe.core.infrastructure.repository.Repository;
 import no.hiof.set.gruppe.DTOs.LoginInformation;
 import no.hiof.set.gruppe.core.entities.user.ProtoUser;
 import org.jetbrains.annotations.NotNull;
@@ -57,7 +56,6 @@ public class LoginController extends Controller {
 
     private String name = "";
     private String title = "";
-    private final IRepository repository = new Repository();
 
     // --------------------------------------------------//
     //                4.On action Methods                //
@@ -117,7 +115,7 @@ public class LoginController extends Controller {
         String password = pass.getText();
 
         try{
-            ProtoUser protoUser = repository.queryUserDetailsWith(new LoginInformation(userName, password));
+            ProtoUser protoUser = getRepository().queryUserDetailsWith(new LoginInformation(userName, password));
             closeWindow(logInn);
             openCorrespondingStage(protoUser);
 
@@ -147,6 +145,7 @@ public class LoginController extends Controller {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        setRepository(MainJavaFX.getRepository());
         setUpActionHandlers();
     }
 

@@ -25,14 +25,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import no.hiof.set.gruppe.GUI.controller.abstractions.ControllerTransferData;
 import no.hiof.set.gruppe.GUI.model.ViewInformation;
-import no.hiof.set.gruppe.core.infrastructure.exceptions.DataFormatException;
-import no.hiof.set.gruppe.core.infrastructure.exceptions.ErrorExceptionHandler;
-import no.hiof.set.gruppe.core.interfaces.IRepository;
-import no.hiof.set.gruppe.core.infrastructure.repository.Repository;
-import no.hiof.set.gruppe.core.infrastructure.validations.Validation;
+import no.hiof.set.gruppe.MainJavaFX;
 import no.hiof.set.gruppe.core.entities.Group;
 import no.hiof.set.gruppe.core.entities.ValidationResult;
 import no.hiof.set.gruppe.core.entities.constantInformation.DummyUsers;
+import no.hiof.set.gruppe.core.infrastructure.exceptions.DataFormatException;
+import no.hiof.set.gruppe.core.infrastructure.exceptions.ErrorExceptionHandler;
+import no.hiof.set.gruppe.core.infrastructure.validations.Validation;
 
 import java.io.IOException;
 import java.net.URL;
@@ -71,7 +70,6 @@ public class NewAlterGroupController extends ControllerTransferData {
     private String grName;
     private ArrayList<DummyUsers>members;
     private boolean createdNewGroup = false;
-    private final IRepository repository = new Repository();
 
     // --------------------------------------------------//
     //                4.On Action Methods                //
@@ -198,7 +196,7 @@ public class NewAlterGroupController extends ControllerTransferData {
      */
     private void queryGroup() {
         ErrorExceptionHandler err;
-        try {if(!createdNewGroup)repository.mutateData(groupToEdit);
+        try {if(!createdNewGroup)getRepository().mutateData(groupToEdit);
         } catch (DataFormatException e) {
             err = ErrorExceptionHandler.ERROR_WRONG_DATA_OBJECT;
             try { ErrorExceptionHandler.createLogWithDetails(err, e);
@@ -227,7 +225,7 @@ public class NewAlterGroupController extends ControllerTransferData {
 
     private void populateListView(Group group){
         chosenUsersObservableList = FXCollections.observableArrayList(group.getMembers());
-        avaliableUsersObservableList = FXCollections.observableArrayList(repository.queryAllDataOfGivenType(DummyUsers.class));
+        avaliableUsersObservableList = FXCollections.observableArrayList(getRepository().queryAllDataOfGivenType(DummyUsers.class));
         filterMemberLists();
         fillListViews();
     }
@@ -241,7 +239,7 @@ public class NewAlterGroupController extends ControllerTransferData {
 
     private void setAvaliableMembers(){
         if(groupToEdit != null)return;
-        avaliableUsersObservableList = FXCollections.observableArrayList(repository.queryAllDataOfGivenType(DummyUsers.class));
+        avaliableUsersObservableList = FXCollections.observableArrayList(getRepository().queryAllDataOfGivenType(DummyUsers.class));
         chosenUsersObservableList = FXCollections.observableArrayList();
         fillListViews();
     }
@@ -265,6 +263,7 @@ public class NewAlterGroupController extends ControllerTransferData {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        setRepository(MainJavaFX.getRepository());
         setupActionHandlers();
         setAvaliableMembers();
     }

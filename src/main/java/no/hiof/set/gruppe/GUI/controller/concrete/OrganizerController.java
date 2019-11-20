@@ -26,16 +26,15 @@ import javafx.scene.text.Text;
 import no.hiof.set.gruppe.GUI.controller.abstractions.Controller;
 import no.hiof.set.gruppe.GUI.controller.abstractions.ControllerTransferData;
 import no.hiof.set.gruppe.GUI.model.ViewInformation;
-import no.hiof.set.gruppe.core.infrastructure.exceptions.DataFormatException;
-import no.hiof.set.gruppe.core.infrastructure.exceptions.ErrorExceptionHandler;
-import no.hiof.set.gruppe.core.infrastructure.exceptions.IllegalDataAccess;
-import no.hiof.set.gruppe.core.interfaces.IRepository;
-import no.hiof.set.gruppe.core.infrastructure.predicates.ArrangementSort;
-import no.hiof.set.gruppe.core.infrastructure.predicates.DateTest;
-import no.hiof.set.gruppe.core.infrastructure.repository.Repository;
+import no.hiof.set.gruppe.MainJavaFX;
 import no.hiof.set.gruppe.core.entities.Arrangement;
 import no.hiof.set.gruppe.core.entities.constantInformation.SportCategory;
 import no.hiof.set.gruppe.core.entities.user.ProtoUser;
+import no.hiof.set.gruppe.core.infrastructure.exceptions.DataFormatException;
+import no.hiof.set.gruppe.core.infrastructure.exceptions.ErrorExceptionHandler;
+import no.hiof.set.gruppe.core.infrastructure.exceptions.IllegalDataAccess;
+import no.hiof.set.gruppe.core.infrastructure.predicates.ArrangementSort;
+import no.hiof.set.gruppe.core.infrastructure.predicates.DateTest;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -78,7 +77,6 @@ public class OrganizerController extends ControllerTransferData {
     private FilteredList<Arrangement> filteredList;
     private Arrangement currentArrangement = null;
     private static final ProtoUser PROTO_USER = ProtoUser.ORGANIZER;
-    private final IRepository repository = new Repository();
     private Text[] allTextFields;
 
     // --------------------------------------------------//
@@ -152,7 +150,7 @@ public class OrganizerController extends ControllerTransferData {
         if(listView.getSelectionModel().getSelectedItem() == null) return;
         Arrangement selectedItem = listView.getSelectionModel().getSelectedItem();
         try {
-            repository.deleteData(selectedItem, PROTO_USER);
+            getRepository().deleteData(selectedItem, PROTO_USER);
             arrangementListObservable.remove(selectedItem);
             listView.getSelectionModel().selectFirst();
             clearFields();
@@ -247,7 +245,7 @@ public class OrganizerController extends ControllerTransferData {
     }
 
     private void populateListView() {
-        arrangementListObservable = FXCollections.observableArrayList(repository.queryAllEntityConnectedToUserData(Arrangement.class, ProtoUser.ORGANIZER));
+        arrangementListObservable = FXCollections.observableArrayList(getRepository().queryAllEntityConnectedToUserData(Arrangement.class, ProtoUser.ORGANIZER));
         arrangementListObservable.sort(ArrangementSort.COMP_DATE_ASC.getComparator());
         setupFilteredList();
         listView.refresh();
@@ -267,6 +265,7 @@ public class OrganizerController extends ControllerTransferData {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        setRepository(MainJavaFX.getRepository());
         setupActionHandlers();
         populateListView();
         populateSportCategories();
@@ -297,7 +296,7 @@ public class OrganizerController extends ControllerTransferData {
 
         MultipleSelectionModel selModel = listView.getSelectionModel();
         try {
-            repository.insertData(arrangement, ProtoUser.ORGANIZER);
+            getRepository().insertData(arrangement, ProtoUser.ORGANIZER);
             arrangementListObservable.add(arrangement);
 
         } catch (IllegalDataAccess illegalDataAccess) {

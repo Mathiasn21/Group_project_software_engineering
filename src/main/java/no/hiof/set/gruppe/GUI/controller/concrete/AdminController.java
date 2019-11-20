@@ -29,11 +29,10 @@ import javafx.scene.text.Text;
 import no.hiof.set.gruppe.GUI.controller.abstractions.Controller;
 import no.hiof.set.gruppe.GUI.controller.abstractions.ControllerTransferData;
 import no.hiof.set.gruppe.GUI.model.ViewInformation;
+import no.hiof.set.gruppe.MainJavaFX;
 import no.hiof.set.gruppe.core.infrastructure.exceptions.DataFormatException;
 import no.hiof.set.gruppe.core.infrastructure.exceptions.ErrorExceptionHandler;
 import no.hiof.set.gruppe.core.infrastructure.exceptions.IllegalDataAccess;
-import no.hiof.set.gruppe.core.interfaces.IRepository;
-import no.hiof.set.gruppe.core.infrastructure.repository.Repository;
 import no.hiof.set.gruppe.core.entities.Arrangement;
 import no.hiof.set.gruppe.core.entities.user.ProtoUser;
 import org.jetbrains.annotations.NotNull;
@@ -74,7 +73,6 @@ public class AdminController extends ControllerTransferData {
     private ObservableList<Arrangement> arrangementListObservable;
     private Text[] textFields;
     private FilteredList<Arrangement> filteredArrangements;
-    private final IRepository repository = new Repository();
 
     // --------------------------------------------------//
     //                4.On action Methods                //
@@ -133,7 +131,7 @@ public class AdminController extends ControllerTransferData {
 
     private void deleteArrangement(){
         try {
-            repository.deleteData(currentArrangement, ProtoUser.ADMIN);
+            getRepository().deleteData(currentArrangement, ProtoUser.ADMIN);
             arrangementListObservable.remove(currentArrangement);
             arrangementListView.refresh();
             clearFields();
@@ -203,7 +201,7 @@ public class AdminController extends ControllerTransferData {
     }
 
     private void populateListView(){
-        arrangementListObservable = FXCollections.observableArrayList(repository.queryAllDataOfGivenType(Arrangement.class));
+        arrangementListObservable = FXCollections.observableArrayList(getRepository().queryAllDataOfGivenType(Arrangement.class));
     }
 
     private void setupFilteredListView(){
@@ -234,6 +232,7 @@ public class AdminController extends ControllerTransferData {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        setRepository(MainJavaFX.getRepository());
         populateListView();
         setupFilteredListView();
         setupActionHandlers();

@@ -28,11 +28,10 @@ import javafx.scene.text.Text;
 import no.hiof.set.gruppe.GUI.controller.abstractions.Controller;
 import no.hiof.set.gruppe.GUI.controller.abstractions.ControllerTransferData;
 import no.hiof.set.gruppe.GUI.model.ViewInformation;
+import no.hiof.set.gruppe.MainJavaFX;
 import no.hiof.set.gruppe.core.infrastructure.exceptions.DataFormatException;
 import no.hiof.set.gruppe.core.infrastructure.exceptions.ErrorExceptionHandler;
 import no.hiof.set.gruppe.core.infrastructure.exceptions.IllegalDataAccess;
-import no.hiof.set.gruppe.core.interfaces.IRepository;
-import no.hiof.set.gruppe.core.infrastructure.repository.Repository;
 import no.hiof.set.gruppe.core.entities.Group;
 import no.hiof.set.gruppe.core.entities.constantInformation.DummyUsers;
 import no.hiof.set.gruppe.core.entities.user.ProtoUser;
@@ -69,7 +68,6 @@ public class GroupController extends ControllerTransferData {
     private String name = "";
     private ObservableList<Group> groupsList;
     private Group selectedGroup = null;
-    private final IRepository repository = new Repository();
 
     // --------------------------------------------------//
     //                4.On Action Methods                //
@@ -132,7 +130,7 @@ public class GroupController extends ControllerTransferData {
     private void deleteGroup(){
         Group selectedItem = groupsListview.getSelectionModel().getSelectedItem();
         try {
-            repository.deleteData(selectedItem, ProtoUser.USER);
+            getRepository().deleteData(selectedItem, ProtoUser.USER);
             groupsList.remove(selectedItem);
             clearFields();
             changedView();
@@ -194,7 +192,7 @@ public class GroupController extends ControllerTransferData {
     }
 
     private void populateListView(){
-        groupsList = FXCollections.observableArrayList(repository.queryAllDataOfGivenType(Group.class));
+        groupsList = FXCollections.observableArrayList(getRepository().queryAllDataOfGivenType(Group.class));
         groupsListview.setItems(groupsList);
     }
 
@@ -219,6 +217,7 @@ public class GroupController extends ControllerTransferData {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        setRepository(MainJavaFX.getRepository());
         setupActionHandlers();
         populateListView();
         setTextColors(false);
@@ -245,7 +244,7 @@ public class GroupController extends ControllerTransferData {
         SelectionModel model = groupsListview.getSelectionModel();
 
         try {
-            repository.insertData(group, ProtoUser.USER);
+            getRepository().insertData(group, ProtoUser.USER);
             groupsList.add(group);
 
         } catch (IllegalAccessError | IllegalDataAccess illegalAccessError) {
