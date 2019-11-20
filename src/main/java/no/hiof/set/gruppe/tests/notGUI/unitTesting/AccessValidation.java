@@ -47,18 +47,20 @@ class AccessValidation {
     //                2.Unit Tests                       //
     // --------------------------------------------------//
     @Test
-    void assert_UserLogin_IsSuccessful() throws InvalidLoginInformation {
-        for(ProtoUser user : ProtoUser.values()){
-            ILoginInformation loginInformation = new LoginInformation(user.getName(), user.getPass());
-            ProtoUser protoUserDetails = repository.queryUserDetailsWith(loginInformation);
-            assertTrue(userEqualsLoginInformation(protoUserDetails, loginInformation));
-        }
+    void assert_UserLogin_IsSuccessful() {
+        assertDoesNotThrow(() -> {
+            for (ProtoUser user : ProtoUser.values()) {
+                ILoginInformation loginInformation = new LoginInformation(user.getName(), user.getPass());
+                ProtoUser protoUserDetails = repository.queryUserDetailsWith(loginInformation);
+                assertTrue(userEqualsLoginInformation(protoUserDetails, loginInformation));
+            }
+        });
     }
 
     @Test
-    void assert_UserRegistration_IsSuccessful()throws UnableToRegisterUser {
+    void assert_UserRegistration_IsSuccessful(){
         RawUser rawUser = new RawUser("Bernt", "Åge", "2007-12-03", "1771", "NerdStreet 22", "It_Burns@When_I.PI", "TheInternet22");
-        repository.insertNewUser(rawUser);
+        assertDoesNotThrow(()->repository.insertNewUser(rawUser));
     }
 
     @Test
