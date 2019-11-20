@@ -9,13 +9,11 @@ package no.hiof.set.gruppe.tests.notGUI.UseCase;
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
-
-import no.hiof.set.gruppe.core.infrastructure.exceptions.DataFormatException;
-import no.hiof.set.gruppe.core.infrastructure.exceptions.IllegalDataAccess;
-import no.hiof.set.gruppe.core.interfaces.IRepository;
-import no.hiof.set.gruppe.core.infrastructure.repository.Repository;
 import no.hiof.set.gruppe.core.entities.Arrangement;
 import no.hiof.set.gruppe.core.entities.user.ProtoUser;
+import no.hiof.set.gruppe.core.infrastructure.exceptions.IllegalDataAccess;
+import no.hiof.set.gruppe.core.infrastructure.repository.Repository;
+import no.hiof.set.gruppe.core.interfaces.IRepository;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -65,7 +63,6 @@ class OrganizerUseCases {
         List<Arrangement> expectedList = repository.queryAllEntityConnectedToUserData(Arrangement.class, PROTO_USER);
         expectedList.remove(arrangement);
         assertDoesNotThrow(() -> repository.deleteData(arrangement, PROTO_USER));
-
         assertDataIntegrity(expectedList, repository.queryAllEntityConnectedToUserData(Arrangement.class, PROTO_USER));
     }
 

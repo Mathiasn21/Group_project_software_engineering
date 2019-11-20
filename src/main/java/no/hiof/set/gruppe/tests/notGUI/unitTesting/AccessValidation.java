@@ -10,8 +10,12 @@ package no.hiof.set.gruppe.tests.notGUI.unitTesting;
 //                1.Import Statements                //
 // --------------------------------------------------//
 
+import no.hiof.set.gruppe.core.entities.Arrangement;
+import no.hiof.set.gruppe.core.infrastructure.exceptions.IllegalDataAccess;
 import no.hiof.set.gruppe.core.infrastructure.exceptions.InvalidLoginInformation;
 import no.hiof.set.gruppe.core.infrastructure.exceptions.UnableToRegisterUser;
+import no.hiof.set.gruppe.core.infrastructure.factory.DataFactory;
+import no.hiof.set.gruppe.core.infrastructure.factory.IFactory;
 import no.hiof.set.gruppe.core.interfaces.ILoginInformation;
 import no.hiof.set.gruppe.core.interfaces.IRepository;
 import no.hiof.set.gruppe.core.infrastructure.repository.Repository;
@@ -28,6 +32,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
@@ -55,6 +60,15 @@ class AccessValidation {
         RawUser rawUser = new RawUser("Bernt", "Åge", "2007-12-03", "1771", "NerdStreet 22", "It_Burns@When_I.PI", "TheInternet22");
         repository.insertNewUser(rawUser);
     }
+
+    @Test
+    void assert_deleteData_throws_IllegalDataAccess_WrongUser_access_WrongObject()throws UnableToRegisterUser {
+        IFactory factory = new DataFactory();
+        Arrangement arrangement = factory.generateType(Arrangement.class);
+        assertThrows(IllegalDataAccess.class, () -> repository.insertData(arrangement, ProtoUser.USER));
+        assertThrows(IllegalDataAccess.class, () -> repository.deleteData(arrangement, ProtoUser.USER));
+    }
+
 
     // --------------------------------------------------//
     //                3.Parameterized Tests              //
