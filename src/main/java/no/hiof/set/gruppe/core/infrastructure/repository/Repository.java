@@ -60,7 +60,7 @@ public final class Repository implements IRepository {
                 List<? extends IBaseEntity> list = queryDataGivenType(aClass);
 
                 if(aClass.isEnum())list = Arrays.asList(aClass.getEnumConstants());
-                if (list.size() <= 2 && factory.canGenerateFromClass(aClass)) {
+                if (list.size() <= 3 && factory.canGenerateFromClass(aClass)) {
                     list = (queryGenDataGivenType(aClass));
                     handleData.storeDataGivenType(aClass, list);
                 }
