@@ -17,14 +17,11 @@ import com.google.api.client.util.ArrayMap;
 import no.hiof.set.gruppe.core.infrastructure.exceptions.*;
 import no.hiof.set.gruppe.core.interfaces.*;
 import no.hiof.set.gruppe.core.infrastructure.validations.AccessValidate;
-import no.hiof.set.gruppe.core.infrastructure.validations.Validation;
 import no.hiof.set.gruppe.data.HandleDataStorage;
 import no.hiof.set.gruppe.core.infrastructure.factory.DataFactory;
 import no.hiof.set.gruppe.core.infrastructure.factory.IFactory;
 import no.hiof.set.gruppe.core.entities.Arrangement;
-import no.hiof.set.gruppe.core.entities.ValidationResult;
 import no.hiof.set.gruppe.core.entities.user.ProtoUser;
-import no.hiof.set.gruppe.core.entities.user.RawUser;
 import no.hiof.set.gruppe.core.entities.UserConnectedArrangement;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -175,12 +172,6 @@ public final class Repository implements IRepository {
         }
     }
 
-    @Contract(pure = true)
-    @Override
-    public void insertNewUser(RawUser rawUser)throws UnableToRegisterUser{
-        ValidationResult result = Validation.of(rawUser);
-        if(!result.IS_VALID)throw new UnableToRegisterUser(result);
-    }
 
     @Override
     public <T extends IBaseEntity> void mutateData(T thatBaseEntity) throws DataFormatException {
@@ -260,18 +251,4 @@ public final class Repository implements IRepository {
         if(protoUser == null || !protoUser.getName().equals(userID) || !protoUser.getPass().equals(passHash)) throw new InvalidLoginInformation();
         return protoUser;
     }
-
-    /**
-     * This method interacts with an database to check if the address exists.
-     * Temp solution is for it to return true.
-     * @param streetAddress String
-     * @return boolean
-     */
-    @Contract(pure = true)
-    @Override
-    public boolean queryAddress(@NotNull String streetAddress) {return false;}
-
-    @Contract(pure = true)
-    @Override
-    public boolean queryEmailExists(String email) {return false;}
 }

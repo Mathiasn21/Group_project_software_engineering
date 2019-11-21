@@ -1,14 +1,19 @@
 package no.hiof.set.gruppe.tests.notGUI.unitTesting;
 
+import no.hiof.set.gruppe.core.entities.constantInformation.DummyUsers;
+import no.hiof.set.gruppe.core.infrastructure.factory.DataFactory;
+import no.hiof.set.gruppe.core.infrastructure.factory.IFactory;
 import no.hiof.set.gruppe.core.infrastructure.validations.Validation;
 import no.hiof.set.gruppe.core.entities.Group;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.Arrays;
 import java.util.stream.Stream;
 
 import static org.junit.Assert.assertFalse;
@@ -26,7 +31,7 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 // --------------------------------------------------//
 
 class GroupValidationOf {
-
+private static IFactory factory = new DataFactory();
 
     // --------------------------------------------------//
     //                2.Unit Tests                       //
@@ -34,9 +39,9 @@ class GroupValidationOf {
     /**
      * Tests legal inputs
      */
-    @Test
-    void assert_Group_Input_isLegal() {
-        Group group = new Group("TestGroup");
+    @RepeatedTest(value = 15)
+    void assert_factory_Input_isLegal() {
+        Group group = factory.generateType(Group.class);
         assertTrue(Validation.of(group).IS_VALID);
     }
 
@@ -51,6 +56,7 @@ class GroupValidationOf {
     @MethodSource("GenIllegalNames")
     void assert_Group_Name_isIllegal(String str) {
         Group group = new Group(str);
+        group.addAllMembers(Arrays.asList(DummyUsers.values()));
         assertFalse(Validation.of(group).IS_VALID);
     }
 

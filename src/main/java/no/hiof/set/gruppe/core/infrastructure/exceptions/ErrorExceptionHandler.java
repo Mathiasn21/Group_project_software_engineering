@@ -3,9 +3,10 @@ package no.hiof.set.gruppe.core.infrastructure.exceptions;
 /*Guide
  * 1. Import Statements
  * 2. Enums
- * 3. Instance Variables
- * 4. Constructor
- * 5. Public Methods
+ * 3. Static Variables
+ * 4. Instance Variables
+ * 5. Constructor
+ * 6. Public Methods
  * */
 
 
@@ -35,15 +36,20 @@ public enum ErrorExceptionHandler {
     ERROR_LOGIN(13, "ERROR, invalid user information.");
 
     // --------------------------------------------------//
-    //                3.Instance Variables               //
+    //                3.Static Variables                 //
+    // --------------------------------------------------//
+    public static final String LOGS = "./logs/";
+
+
+    // --------------------------------------------------//
+    //                4.Instance Variables               //
     // --------------------------------------------------//
     public final int CODE;
     public final String ERROR_MSG;
 
 
-
     // --------------------------------------------------//
-    //                4.Constructor                      //
+    //                5.Constructor                      //
     // --------------------------------------------------//
     /**
      * @param code int
@@ -57,7 +63,7 @@ public enum ErrorExceptionHandler {
 
 
     // --------------------------------------------------//
-    //                5.Public methods                   //
+    //                6.Public methods                   //
     // --------------------------------------------------//
     /**
      * Tries to create a log given error. Failing to do so
@@ -67,7 +73,7 @@ public enum ErrorExceptionHandler {
      * @throws IOException IOException
      */
     public static void createLogWithDetails(@NotNull ErrorExceptionHandler errMsg, @NotNull Throwable error ) throws IOException {
-        File log = new File("./logs/" + errMsg.CODE + "-" + System.currentTimeMillis() + ".txt");
+        File log = new File(LOGS + errMsg.CODE + "-" + System.currentTimeMillis() + ".txt");
         error.printStackTrace(new PrintStream(log));
     }
 }

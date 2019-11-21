@@ -10,17 +10,16 @@ package no.hiof.set.gruppe.core.infrastructure.validations;
 // --------------------------------------------------//
 //                1.Import Statements                //
 // --------------------------------------------------//
-import no.hiof.set.gruppe.core.interfaces.IRepository;
-import no.hiof.set.gruppe.core.infrastructure.repository.Repository;
+
 import no.hiof.set.gruppe.core.entities.Arrangement;
 import no.hiof.set.gruppe.core.entities.Group;
 import no.hiof.set.gruppe.core.entities.ValidationResult;
-import no.hiof.set.gruppe.core.entities.user.RawUser;
+import no.hiof.set.gruppe.core.infrastructure.repository.Repository;
+import no.hiof.set.gruppe.core.interfaces.IRepository;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.util.regex.Pattern;
 
 /**
@@ -67,27 +66,6 @@ public final class Validation{
         str.append(LocalDate.now().isBefore(startDate) && (startDate.isBefore(endDate) || startDate.isEqual(endDate)) ? "" : "Sett inn gyldige datoer.\n");
         str.append(isBetween(participantsMin, participantsMax, arrangement.getParticipants()) ? "" : invalidNum);
         return new ValidationResult(str.toString(), str.length() == 0);
-    }
-
-    @NotNull
-    @Contract("_ -> new")
-    public static ValidationResult of(@NotNull RawUser rawUser){
-        StringBuilder res = new StringBuilder();
-        int maxLengthName = 255;
-
-        String email = rawUser.geteMail();
-        String passHash = rawUser.getPassHash();
-
-        try{LocalDate.parse(rawUser.getbDate());
-        }catch (DateTimeParseException wrongDateFormat){res.append("ERROR, feil dato format.\n");}
-
-        res.append(rawUser.getfName().length() <= maxLengthName && rawUser.getlName().length() <= maxLengthName ? "" : "Ulovlig langt navn\n");
-        res.append(!repository.queryAddress(rawUser.getStreetAddress()) ? "" : "Addressen er ikke gyldig.\n");
-        res.append(rawUser.getCityCode().length() == 4 ? "" : "Ugyldig by kode.\n");
-        res.append(regCheck(textNotNullPattern, email) && !repository.queryEmailExists(email) ? "" : "Ugyldig email.\n");
-        res.append(passHash.length() >= 10 && passHash.length() <= 60 ? "" : "Ugyldig passord\n");
-
-        return new ValidationResult(res.toString(), res.length() == 0);
     }
 
     @NotNull

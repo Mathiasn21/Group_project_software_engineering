@@ -13,7 +13,6 @@ package no.hiof.set.gruppe.tests.notGUI.unitTesting;
 import no.hiof.set.gruppe.core.entities.Arrangement;
 import no.hiof.set.gruppe.core.infrastructure.exceptions.IllegalDataAccess;
 import no.hiof.set.gruppe.core.infrastructure.exceptions.InvalidLoginInformation;
-import no.hiof.set.gruppe.core.infrastructure.exceptions.UnableToRegisterUser;
 import no.hiof.set.gruppe.core.infrastructure.factory.DataFactory;
 import no.hiof.set.gruppe.core.infrastructure.factory.IFactory;
 import no.hiof.set.gruppe.core.interfaces.ILoginInformation;
@@ -21,7 +20,6 @@ import no.hiof.set.gruppe.core.interfaces.IRepository;
 import no.hiof.set.gruppe.core.infrastructure.repository.Repository;
 import no.hiof.set.gruppe.DTOs.LoginInformation;
 import no.hiof.set.gruppe.core.entities.user.ProtoUser;
-import no.hiof.set.gruppe.core.entities.user.RawUser;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
@@ -47,7 +45,7 @@ class AccessValidation {
     //                2.Unit Tests                       //
     // --------------------------------------------------//
     @Test
-    void assert_UserLogin_IsSuccessful() {
+    void assert_Repository_UserLogin_IsSuccessful() {
         assertDoesNotThrow(() -> {
             for (ProtoUser user : ProtoUser.values()) {
                 ILoginInformation loginInformation = new LoginInformation(user.getName(), user.getPass());
@@ -58,26 +56,19 @@ class AccessValidation {
     }
 
     @Test
-    void assert_UserRegistration_IsSuccessful(){
-        RawUser rawUser = new RawUser("Bernt", "Åge", "2007-12-03", "1771", "NerdStreet 22", "It_Burns@When_I.PI", "TheInternet22");
-        assertDoesNotThrow(()->repository.insertNewUser(rawUser));
-    }
-
-    @Test
-    void assert_deleteData_throws_IllegalDataAccess_WrongUser_access_WrongObject()throws UnableToRegisterUser {
+    void assert_Repository_deleteData_throws_IllegalDataAccess_WrongUser_access_WrongObject(){
         IFactory factory = new DataFactory();
         Arrangement arrangement = factory.generateType(Arrangement.class);
         assertThrows(IllegalDataAccess.class, () -> repository.insertData(arrangement, ProtoUser.USER));
         assertThrows(IllegalDataAccess.class, () -> repository.deleteData(arrangement, ProtoUser.USER));
     }
 
-
     // --------------------------------------------------//
     //                3.Parameterized Tests              //
     // --------------------------------------------------//
     @ParameterizedTest
     @MethodSource("GenIllegalLoginInformation")
-    void assert_UserLogin_Failed(ILoginInformation loginInformation){
+    void assert_Repository_UserLogin_Failed(ILoginInformation loginInformation){
         assertThrows(InvalidLoginInformation.class, () -> repository.queryUserDetailsWith(loginInformation));
     }
 
@@ -112,6 +103,8 @@ class AccessValidation {
                 arguments(new LoginInformation(userName, "\00"))
         );
     }
+
+
 
     /**
      * @param protoUserDetails {@link ProtoUser}
