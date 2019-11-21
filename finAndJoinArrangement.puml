@@ -1,12 +1,12 @@
 @startuml
-actor User
+actor Bruker
 participant Grensesnitt
 participant System
 database Database
 
-User -> Grensesnitt: Bli med på valgt arrangement
+Bruker -> Grensesnitt: Bli med på valgt arrangement
 activate Grensesnitt
-Grensesnitt -> System: Registrer bruker for gitt arrangement
+Grensesnitt -> System: Registrer Bruker for gitt arrangement
 activate System
 System -> System: Valider forespørsel
 
@@ -15,8 +15,8 @@ alt Suksess
     activate Database
     alt Suksess
     Database -> System: Suksess
-    System --> User: send push notifikasjon
-    System --> User: Send verifikasjons mail
+    System --> Bruker: send push notifikasjon
+    System --> Bruker: Send verifikasjons mail
     System -> Grensesnitt: Send godkjent melding
     System -> Grensesnitt: Vis godkjent melding
 
@@ -24,12 +24,12 @@ alt Suksess
     Database -> System: ERROR
     deactivate Database
     System -> Grensesnitt: Send ERROR
-    Grensesnitt -> User: Vis ERROR
+    Grensesnitt -> Bruker: Vis ERROR
     end
 else ERROR
     System -> Grensesnitt: Send ERROR
     deactivate System
-    Grensesnitt -> User: Vis ERROR
+    Grensesnitt -> Bruker: Vis ERROR
     deactivate Grensesnitt
 end
 @enduml

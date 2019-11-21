@@ -1,0 +1,33 @@
+@startuml
+actor Arrangør
+participant Grensesnitt
+participant System
+database Database
+
+Arrangør -> Grensesnitt: Fyll ut informasjon og send
+activate Arrangør
+activate Grensesnitt
+Grensesnitt -> System: Send inn informasjon
+activate System
+System -> System: Valider informasjon
+
+alt Suksess
+System -> Database: Lagre data
+activate Database
+    alt Suksess
+    Database -> System: Send konfirmasjon
+    System --> Arrangør: Send konfirmasjons mail
+    System -> Grensesnitt: Send konfirmasjons melding
+    Grensesnitt -> Arrangør: Vis konfirmasjons melding
+    else ERROR
+    Database -> System: Send ERROR melding
+    deactivate Database
+    end
+else ERROR
+System -> Grensesnitt: Send ERROR melding
+deactivate System
+Grensesnitt -> Arrangør: Vis ERROR melding
+deactivate Grensesnitt
+end
+deactivate Arrangør
+@enduml
