@@ -55,25 +55,14 @@
     "group": true
   },
   {
-    "ID": "e33b265f-622e-40b5-b44b-cead91994394",
-    "name": "LANd",
-    "sport": "Maraton",
-    "address": "Pallet Town",
-    "startDate": "2019-11-23",
-    "endDate": "2019-11-24",
-    "description": "tempor nibh dignissim dui dico graeci discere sollicitudin has conubia expetendis morbi litora ultrices sollicitudin tibique inani expetenda vidisse dolores graeci iudicabit mauris dapibus ultrices simul fusce euripidis odio minim brute omnesque himenaeos an iaculis petentium tale integer congue",
-    "participants": 71,
-    "group": true
-  },
-  {
-    "ID": "27d9ac10-9565-4ba6-9215-9176a3b83c31",
-    "name": "ThisIsNerdy",
+    "ID": "caf8f81f-3577-452b-81d3-e2befba4958f",
+    "name": "Bernts Fantastiske Test",
     "sport": "Annet",
-    "address": "NerdStreet - 22",
-    "startDate": "2020-11-09",
-    "endDate": "2020-12-09",
-    "description": "Very Nerdy.",
-    "participants": 400,
+    "address": "BergOgDalBaneVegen 46",
+    "startDate": "2019-11-07",
+    "endDate": "2019-11-08",
+    "description": "eros ridiculus natum pro facilis curabitur periculis elementum ipsum te lectus donec facilisi utamur solum tacimates nobis velit etiam habemus nunc dis cursus patrioque consetetur aliquip accumsan ornare ridiculus suspendisse conubia disputationi salutatus etiam tempus utinam taciti",
+    "participants": 158,
     "group": true
   }
 ]
