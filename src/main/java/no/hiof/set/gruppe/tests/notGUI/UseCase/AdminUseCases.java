@@ -12,6 +12,7 @@ package no.hiof.set.gruppe.tests.notGUI.UseCase;
 
 import no.hiof.set.gruppe.core.infrastructure.exceptions.DataFormatException;
 import no.hiof.set.gruppe.core.infrastructure.exceptions.IllegalDataAccess;
+import no.hiof.set.gruppe.core.infrastructure.factory.DataFactory;
 import no.hiof.set.gruppe.core.interfaces.IRepository;
 import no.hiof.set.gruppe.core.infrastructure.repository.Repository;
 import no.hiof.set.gruppe.core.entities.Arrangement;
@@ -57,11 +58,18 @@ class AdminUseCases {
      */
     @Test
     @Order(1)
-    void add_arrangement_and_keepDataIntegrity() throws IllegalDataAccess, DataFormatException {
-        List<Arrangement> expectedArrangementList = repository.queryAllEntityConnectedToUserData(Arrangement.class, PROTO_USER_ORGANIZER);
-        expectedArrangementList.add(arrangement);
-        repository.insertData(arrangement, PROTO_USER_ORGANIZER);
+    void mutate_arrangement_and_keepDataIntegrity() throws IllegalDataAccess, DataFormatException {
+        Arrangement genArrangement = new DataFactory().generateType(Arrangement.class);
 
+        List<Arrangement> expectedArrangementList = repository.queryAllEntityConnectedToUserData(Arrangement.class, PROTO_USER_ORGANIZER);
+        expectedArrangementList.add(genArrangement);
+        repository.insertData(genArrangement, PROTO_USER_ORGANIZER);
+
+        genArrangement.setName(arrangement.getName());
+        genArrangement.setAddress(arrangement.getAddress());
+        genArrangement.setSport(arrangement.getSport());
+        
+        repository.mutateData(genArrangement);
         assertDataIntegrity(expectedArrangementList, repository.queryAllEntityConnectedToUserData(Arrangement.class, PROTO_USER_ORGANIZER));
     }
 

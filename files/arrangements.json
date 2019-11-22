@@ -64,5 +64,16 @@
     "description": "tempus duo dignissim quis qualisque ornare luptatum sententiae periculis antiopam equidem ornare justo repudiandae definitiones viverra",
     "participants": 63,
     "group": true
+  },
+  {
+    "ID": "caf8f81f-3577-452b-81d3-e2befba4958f",
+    "name": "Bernts Fantastiske Test",
+    "sport": "Annet",
+    "address": "BergOgDalBaneVegen 46",
+    "startDate": "2019-11-07",
+    "endDate": "2019-11-08",
+    "description": "eros ridiculus natum pro facilis curabitur periculis elementum ipsum te lectus donec facilisi utamur solum tacimates nobis velit etiam habemus nunc dis cursus patrioque consetetur aliquip accumsan ornare ridiculus suspendisse conubia disputationi salutatus etiam tempus utinam taciti",
+    "participants": 158,
+    "group": true
   }
 ]
