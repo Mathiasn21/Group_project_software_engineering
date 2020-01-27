@@ -1,11 +1,6 @@
 [
   {
     "name": "Dominators",
-    "ID": "5f8c1e23-5dfa-4269-bc00-86ccf509b134",
-    "members": []
-  },
-  {
-    "name": "Dominators",
     "ID": "3fb44e10-5845-4f68-9d59-83058f18bce5",
     "members": []
   },
@@ -32,6 +27,11 @@
   {
     "name": "Defenders",
     "ID": "1b0e6288-ca63-425f-afc7-c70a51c0dfb5",
+    "members": []
+  },
+  {
+    "name": "Dominators",
+    "ID": "5f8c1e23-5dfa-4269-bc00-86ccf509b134",
     "members": []
   }
 ]

@@ -1,9 +1,5 @@
 [
   {
-    "ID": "bd1c4ace-93dc-4114-99ee-cd090bb41169",
-    "USERNAME": "Organizer"
-  },
-  {
     "ID": "da14afbc-671e-4e84-816d-54ca346a50cd",
     "USERNAME": "Organizer"
   },
@@ -26,5 +22,13 @@
   {
     "ID": "caf8f81f-3577-452b-81d3-e2befba4958f",
     "USERNAME": "Organizer"
+  },
+  {
+    "ID": "bd1c4ace-93dc-4114-99ee-cd090bb41169",
+    "USERNAME": "Organizer"
+  },
+  {
+    "ID": "d79f2b7a-d03f-40bb-abd7-9630b9d40fcc",
+    "USERNAME": "ProtoUser"
   }
 ]

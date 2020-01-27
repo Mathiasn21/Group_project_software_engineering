@@ -1,16 +1,5 @@
 [
   {
-    "ID": "bd1c4ace-93dc-4114-99ee-cd090bb41169",
-    "name": "BlogFeline",
-    "sport": "Alle",
-    "address": "Bella Vista",
-    "startDate": "2019-11-19",
-    "endDate": "2019-11-06",
-    "description": "amet eirmod fusce diam equidem inceptos prodesset ubique phasellus animal molestiae tortor id vix noster eloquentiam dictas dicta ac eu homero auctor nulla enim fusce eum cetero",
-    "participants": 2,
-    "group": true
-  },
-  {
     "ID": "da14afbc-671e-4e84-816d-54ca346a50cd",
     "name": "BlogFeline",
     "sport": "Sykkelritt",
@@ -63,6 +52,17 @@
     "endDate": "2019-11-08",
     "description": "eros ridiculus natum pro facilis curabitur periculis elementum ipsum te lectus donec facilisi utamur solum tacimates nobis velit etiam habemus nunc dis cursus patrioque consetetur aliquip accumsan ornare ridiculus suspendisse conubia disputationi salutatus etiam tempus utinam taciti",
     "participants": 158,
+    "group": true
+  },
+  {
+    "ID": "bd1c4ace-93dc-4114-99ee-cd090bb41169",
+    "name": "BlogFeline",
+    "sport": "Annet",
+    "address": "Bella Vista",
+    "startDate": "2020-01-25",
+    "endDate": "2020-01-26",
+    "description": "amet eirmod fusce diam equidem inceptos prodesset ubique phasellus animal molestiae tortor id vix noster eloquentiam dictas dicta ac eu homero auctor nulla enim fusce eum cetero",
+    "participants": 2,
     "group": true
   }
 ]
