@@ -3,13 +3,13 @@ package no.hiof.set.gruppe.data;
 import com.google.api.client.util.ArrayMap;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import no.hiof.set.gruppe.DTOs.LoginInformation;
-import no.hiof.set.gruppe.core.infrastructure.exceptions.DataFormatException;
-import no.hiof.set.gruppe.core.interfaces.IBaseEntity;
-import no.hiof.set.gruppe.core.interfaces.IHandleData;
 import no.hiof.set.gruppe.core.entities.Arrangement;
 import no.hiof.set.gruppe.core.entities.Group;
 import no.hiof.set.gruppe.core.entities.UserConnectedArrangement;
+import no.hiof.set.gruppe.core.infrastructure.exceptions.DataFormatException;
+import no.hiof.set.gruppe.core.interfaces.IBaseEntity;
+import no.hiof.set.gruppe.core.interfaces.IHandleData;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
@@ -36,6 +36,8 @@ public class HandleDataStorage implements IHandleData {
         writeToFile(toJson(list), file);
     }
 
+    @NotNull
+    @Contract("_ -> new")
     @Override
     public final <T> List<T> queryAllDataGivenType(Class<T> tClassArr) throws IOException {
         String fName = objectMapper.get(tClassArr);
